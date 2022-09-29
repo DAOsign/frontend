@@ -1,8 +1,7 @@
 import React, {useState} from 'react'
 import type { NextPage } from 'next'
+const Hash = require('ipfs-only-hash')
 import Head from 'next/head'
-import Image from 'next/image'
-import Script from 'next/script'
 import styles from '../styles/Home.module.css'
 
 const Home: NextPage = () => {
@@ -21,8 +20,12 @@ const Home: NextPage = () => {
       };
     }
   }
-  console.log(file);
-  
+
+  const ipfs= async () => {
+    const hash = await Hash.of(file)
+    console.log(hash);
+  }
+
   return (
     <div className={styles.container}>
       <Head>
@@ -38,6 +41,7 @@ const Home: NextPage = () => {
                <div className='textUpload'>или перетащите его сюда</div>
           </div>
      </form>
+      {file &&  <button style={{ marginTop: '50px'}} type='button' onClick={ipfs}>hash ipfs</button>}
       </main>
       <footer className={styles.footer}>
       </footer>
