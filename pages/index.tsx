@@ -5,24 +5,17 @@ import Head from 'next/head'
 import styles from '../styles/Home.module.css'
 
 const Home: NextPage = () => {
-  const [file, setFile] = useState<any>()
+  const [bytes, setBytes] = useState<Uint8Array>()
 
-  function readFile(target : any) {
-    let file = target.files[0];
-    let reader = new FileReader();
-    reader.readAsText(file);
-    reader.onload = function() {
-      setFile(reader.result)
-    };
-    if(reader.error) {
-      reader.onerror = function() {
-      console.log(reader.error);
-      };
-    }
+  async function readFile(target : any) {
+    let file = target.files[0] as File;
+    const buffer = await file.arrayBuffer()
+    const bytes = new Uint8Array(buffer) 
+    setBytes(bytes)
   }
 
   const ipfs= async () => {
-    const hash = await Hash.of(file)
+    const hash = await Hash.of(bytes)
     console.log(hash);
   }
 
@@ -41,7 +34,7 @@ const Home: NextPage = () => {
                <div className='textUpload'>или перетащите его сюда</div>
           </div>
      </form>
-      {file &&  <button style={{ marginTop: '50px'}} type='button' onClick={ipfs}>hash ipfs</button>}
+      {bytes &&  <button style={{ marginTop: '50px'}} type='button' onClick={ipfs}>hash ipfs</button>}
       </main>
       <footer className={styles.footer}>
       </footer>
