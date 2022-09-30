@@ -2,6 +2,8 @@ import React, {useState} from 'react'
 import type { NextPage } from 'next'
 const Hash = require('ipfs-only-hash')
 import Head from 'next/head'
+import Image from 'next/image'
+import Example from '../components/Example'
 import styles from '../styles/Home.module.css'
 
 const Home: NextPage = () => {
@@ -27,6 +29,8 @@ const Home: NextPage = () => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <main className={styles.main}>
+       <div style={{width: '200px', height: '100px', margin: '0 auto'}}>Daos</div>
+       <Example/>
        <div style={{ height: '50px'}}>Daos</div>
        <form id="upload-container" method="POST" action="send.php">
           <div>
