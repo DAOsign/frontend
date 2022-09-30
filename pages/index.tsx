@@ -1,6 +1,7 @@
 import type { NextPage } from 'next'
 import Head from 'next/head'
 import Image from 'next/image'
+import Example from '../components/Example'
 import styles from '../styles/Home.module.css'
 
 const Home: NextPage = () => {
@@ -13,6 +14,7 @@ const Home: NextPage = () => {
       </Head>
       <main className={styles.main}>
        <div style={{width: '200px', height: '100px', margin: '0 auto'}}>Daos</div>
+       <Example/>
       </main>
       <footer className={styles.footer}>
       </footer>
