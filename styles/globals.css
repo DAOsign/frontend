@@ -69,3 +69,28 @@ body {
 .textUpload{
   margin-top: 20px;
 }
+.popap{
+  width: 500px;
+  height: 500px;
+  background-color: #e0f2f7;
+  border-radius: 5px;
+  padding: 20px;
+}
+.popap .close{
+  border-radius: 5px;
+  padding: 0 5px;
+  color: white;
+  background-color: black;
+  display: block;
+  margin-left: auto;
+  margin-bottom: 20px;
+}
+.popap .buttons > button {
+  width: 100%;
+  margin-bottom: 30px;
+}
+.popap .buttons{
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+}

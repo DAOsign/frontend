@@ -29,7 +29,7 @@ export const LockContext = createContext<LockContext>({});
 interface State {
   isLoading: Boolean;
   isAuthenticated: Boolean;
-  //provider: ProviderType | null;
+  // provider: ProviderType | null;
 }
 
 const name = "lock";
@@ -39,7 +39,8 @@ const LockProvider = (props?: Partial<ProviderProps<LockContext>>) => {
     isLoading: true,
     isAuthenticated: false,
   });
-
+  console.log(props);
+  
   const lockInstanceRef = useRef<Lock>(new Lock(options.connectors));
   const lockInstance = lockInstanceRef.current;
 
@@ -49,7 +50,8 @@ const LockProvider = (props?: Partial<ProviderProps<LockContext>>) => {
     connector: ConnectorType = "injected"
   ): Promise<ProviderType> {
     const lockConnector = lockInstance.getConnector(connector);
-
+    console.log(connector);
+    
     const localProvider = (await lockConnector.connect()) as null | any;
 
     if (localProvider !== null) {
