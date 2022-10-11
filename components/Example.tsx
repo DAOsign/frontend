@@ -27,12 +27,16 @@ export default function Example() {
   console.log("res", res);
  }
 
- const connectGnosis = async () => {
-  const res = await lock.login("gnosis");
-  const _res = await lock.login("injected");
-  console.log("res", res,  '_res', _res );
+ const connectStargazer = async () => {
+  const res = await lock.login("portis");
+  console.log("res", res );
  }
-
+ const connectrWalletlink = async () => {
+  const res = await lock.login("walletlink");
+  console.log("res", res );
+ }
+ 
+ 
   const logout = () => {
     lock.logout();
   };
@@ -49,7 +53,8 @@ export default function Example() {
        <div className="buttons">
          <button type="button" onClick={connectMetamask}>Metamask</button>
          <button type="button" onClick={connectWallet}>Connect Wallet</button>
-         <button type="button" onClick={connectGnosis}>Connect Gnosis</button>
+         <button type="button" onClick={connectStargazer}> connect Portis Walet</button>
+         <button type="button" onClick={connectrWalletlink}>Connect Coinbase Wallet</button>
        </div>
       </div>
       }
