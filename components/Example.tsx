@@ -4,7 +4,7 @@ import { useLock } from "../hooks/useLock";
 export default function Example() {
   const [visible, setVisible] = useState<boolean>()
   const lock = useLock();
-
+  
   const getProvider = () => {
     console.log("provider", lock.provider);
   };
@@ -29,12 +29,8 @@ export default function Example() {
 
  const connectGnosis = async () => {
   const res = await lock.login("gnosis");
-  console.log("res", res);
- }
-
- const connectStargazer = async () => {
-  const res = await lock.login("stargazer");
-  console.log("res", res);
+  const _res = await lock.login("injected");
+  console.log("res", res,  '_res', _res );
  }
 
   const logout = () => {
@@ -54,7 +50,6 @@ export default function Example() {
          <button type="button" onClick={connectMetamask}>Metamask</button>
          <button type="button" onClick={connectWallet}>Connect Wallet</button>
          <button type="button" onClick={connectGnosis}>Connect Gnosis</button>
-         <button type="button" onClick={connectStargazer}>Connect Gnosis</button>
        </div>
       </div>
       }
