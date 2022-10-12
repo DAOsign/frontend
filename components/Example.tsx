@@ -1,10 +1,18 @@
-import React, { useState } from "react";
+import { log } from "console";
+import React, { useEffect, useState } from "react";
 import { useLock } from "../hooks/useLock";
 
 export default function Example() {
   const [visible, setVisible] = useState<boolean>()
+  const [address, setAddres] = useState<string>()
   const lock = useLock();
+  console.log(lock);
+  console.log(address);
   
+  useEffect(() => {
+    setAddres(lock?.provider?.safe?.safeAddress || lock?.provider?.selectedAddress || lock?.provider?.accounts[0] || '')
+  },[lock])
+
   const getProvider = () => {
     console.log("provider", lock.provider);
   };
@@ -27,10 +35,6 @@ export default function Example() {
   console.log("res", res);
  }
 
- const connectStargazer = async () => {
-  const res = await lock.login("portis");
-  console.log("res", res );
- }
  const connectrWalletlink = async () => {
   const res = await lock.login("walletlink");
   console.log("res", res );
@@ -48,12 +52,13 @@ export default function Example() {
           ? "Loading..."
           : `Authenticated: ${String(lock.isAuthenticated)}`}
       </div>
+      <div>Address === {address}
+      </div>
      { visible &&   <div className="popap">
          <button className="close" type="button" onClick={() => setVisible(false)}>close</button>
        <div className="buttons">
          <button type="button" onClick={connectMetamask}>Metamask</button>
          <button type="button" onClick={connectWallet}>Connect Wallet</button>
-         <button type="button" onClick={connectStargazer}> connect Portis Walet</button>
          <button type="button" onClick={connectrWalletlink}>Connect Coinbase Wallet</button>
        </div>
       </div>
