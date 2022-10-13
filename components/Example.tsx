@@ -21,24 +21,13 @@ export default function Example() {
     console.log("lock", lock.lockClient);
   };
 
-  const login = async () => {
+  const showLoginModal = async () => {
     setVisible(true)
   };
-
-  const connectMetamask = async () => {
-    const res = await lock.login("injected");
-    console.log("res", res);
-  }
-
- const connectWallet = async () => {
-  const res = await lock.login("walletconnect");
-  console.log("res", res);
- }
-
- const connectrWalletlink = async () => {
-  const res = await lock.login("walletlink");
-  console.log("res", res );
- }
+const connect = async (name: any) => {
+    const res = await lock.login(name);
+    console.log("res", res );
+}
  
  
   const logout = () => {
@@ -54,17 +43,17 @@ export default function Example() {
       </div>
       <div>Address === {address}
       </div>
-     { visible &&   <div className="popap">
+     { visible &&   <div className="popup">
          <button className="close" type="button" onClick={() => setVisible(false)}>close</button>
        <div className="buttons">
-         <button type="button" onClick={connectMetamask}>Metamask</button>
-         <button type="button" onClick={connectWallet}>Connect Wallet</button>
-         <button type="button" onClick={connectrWalletlink}>Connect Coinbase Wallet</button>
+         <button type="button" onClick={() => connect('injected')}>Metamask</button>
+         <button type="button" onClick={() => connect('walletconnect')}>Connect Wallet</button>
+         <button type="button" onClick={() => connect('walletlink')}>Connect Coinbase Wallet</button>
        </div>
       </div>
       }
       <br />
-      <button onClick={login}>Login</button>
+      <button onClick={showLoginModal}>Login</button>
       <br />
       <button onClick={logout}>Logout</button>
       <br />
