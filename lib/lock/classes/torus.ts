@@ -3,6 +3,7 @@ import LockConnector from './connector';
 
 
 export default class Connector extends LockConnector {
+  //@ts-ignore
   async connect() {
     let provider;
     try {
@@ -14,6 +15,7 @@ export default class Connector extends LockConnector {
     } catch (e) {
       console.error(e);
     }
+    //@ts-ignore
     provider.connectorName = 'torus';
     return provider;
   }

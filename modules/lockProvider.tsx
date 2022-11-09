@@ -23,7 +23,7 @@ interface LockContext {
   getConnector: () => Promise<ConnectorType | false>;
   //web3?: Web3Provider;
 }
-
+//@ts-ignore
 export const LockContext = createContext<LockContext>({});
 
 interface State {
