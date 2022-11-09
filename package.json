@@ -9,11 +9,13 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@emotion/react": "^11.10.5",
     "@snapshot-labs/lock": "^0.1.1011",
     "ipfs-only-hash": "^4.0.0",
     "next": "12.3.1",
     "react": "18.2.0",
-    "react-dom": "18.2.0"
+    "react-dom": "18.2.0",
+    "theme-ui": "^0.15.3"
   },
   "devDependencies": {
     "@types/node": "18.7.23",

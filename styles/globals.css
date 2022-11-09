@@ -15,6 +15,15 @@ a {
   box-sizing: border-box;
 }
 
+@font-face {
+  font-family: 'InterMedium';
+  src: url('../fonts/Inter-Medium.ttf');
+}
+@font-face {
+  font-family: 'InterBold';
+  src: url('../fonts/Inter-Bold.ttf');
+}
+
 @media (prefers-color-scheme: dark) {
   html {
     color-scheme: dark;
