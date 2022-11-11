@@ -4,7 +4,9 @@ import Head from 'next/head'
 import Connect from '../components/Connect'
 import Footer from '../components/Footer'
 import Logo from '../components/Logo'
+import Header from '../components/Header/Header'
 import { Container } from 'theme-ui'
+import CreateAgreement from '../components/CreateAgreement'
 
 const Home: NextPage = () => {
   return (
@@ -14,9 +16,11 @@ const Home: NextPage = () => {
       <meta name="description" content="Dao-Sign" />
       <link rel="icon" href="/favicon.ico" />
     </Head>
-    <Logo/>
-    <Connect/>
-    <Footer/>
+    <Header/>
+    <CreateAgreement/>
+    {/* <Logo/> */}
+    {/* <Connect/> */}
+    {/* <Footer/> */}
   </Container>
   )
 }

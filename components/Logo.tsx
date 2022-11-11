@@ -3,10 +3,10 @@ import { Flex, Box, Text, Input, Button } from 'theme-ui'
 import iconsObj from "../assets/icons";
 import Icon from "./icon";
 
-export default function Logo() {
+export default function Logo({margin = '0 auto'}) {
   return (
-  <div style={{maxWidth: '150px', margin: '0 auto'}}>
-    <Flex sx={{justifyContent: 'space-between' }}>
+  <div style={{maxWidth: '150px', margin}}>
+    <Flex sx={{justifyContent: 'space-between' , cursor: 'pointer' }}>
        <Box>
          <Icon src={iconsObj.logoIcon}/>
        </Box>

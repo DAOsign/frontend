@@ -24,6 +24,8 @@ import plusCircle from '../img/svg/plusCircle.svg'
 import checkboxOn from '../img/svg/checkboxOn.svg'
 import chevronUp from '../img/svg/chevronUp.svg'
 import published from '../img/svg/published.svg'
+import privateIcon from '../img/svg/private.svg'
+import publicIcon from '../img/svg/public.svg'
 import calendar from '../img/svg/calendar.svg'
 import settings from '../img/svg/settings.svg'
 import download from '../img/svg/download.svg'
@@ -57,8 +59,7 @@ import prof from '../img/svg/prof.svg'
 import mail from '../img/svg/mail.svg'
 import ink from '../img/svg/ink.svg'
 
-// import private from '../img/svg/private.svg'
-// import public from '../img/svg/public.svg'
+
 
 
 import {IconsMapper} from './icons.types';
@@ -78,6 +79,7 @@ const iconsObj: IconsMapper = {
     trashPrimary,
     bookmarkVote,
     chevronRight,
+    privateIcon,
     checkboxOff,
     chevronDown,
     layersThree,
@@ -88,6 +90,7 @@ const iconsObj: IconsMapper = {
     infoCircle,
     checkboxOn,
     plusCircle,
+    publicIcon,
     chevronUp,
     published,
     logoIcon,

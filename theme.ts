@@ -2,6 +2,15 @@ import type { Theme } from 'theme-ui'
 
 export const theme: Theme = {
   forms: {
+    label: {
+      fontFamily: 'InterMedium',
+      fontStyle: 'normal',
+      fontWeight: 400,
+      fontSize: '12px',
+      lineHeight: '160%',
+      color:' #212121',
+      opacity: 0.5,
+    },
     input : {
      height: '50px',
      width: '345px',
@@ -14,7 +23,7 @@ export const theme: Theme = {
      opacity: 0.5,
      border: 'unset',
      paddingX: '20px'
-    }
+    },
   },
   buttons: {
      primary: {
@@ -134,6 +143,13 @@ export const theme: Theme = {
       fontSize: '14px',
       color: '#212121',
       opacity: 0.5,
+    },
+    largeTextBold: {
+      fontFamily: 'InterBold',
+      fontWeight: 700,
+      lineHeight: '24px',
+      fontSize: '20px',
+      color: '#212121',
     },
     secondary: {
       fontFamily: 'InterMedium',

@@ -14,12 +14,14 @@ export interface IconsMapper extends Record<string, unknown> {
     bookmarkVote: Icon;
     chevronRight: Icon;
     checkboxOff: Icon;
+    privateIcon: Icon;
     chevronDown: Icon;
     layersThree: Icon;
     checkCircle: Icon;
     shareFourth: Icon;
     fieldResize: Icon;
     chevronLeft: Icon;
+    publicIcon: Icon;
     infoCircle: Icon;
     checkboxOn: Icon;
     plusCircle: Icon;
