@@ -1,18 +1,6 @@
 import type { Theme } from 'theme-ui'
 
 export const theme: Theme = {
-  cards: {
-   connect: {
-     width: '550px',
-     height: '390px',
-     background: 'rgba(255, 255, 255, 0.24)',
-     backdropFilter: 'blur(6px)',
-     borderRadius: '10px',
-     paddingTop: '32px',
-     paddingX: '80px',
-     textAlign: 'center'
-   }
-  },
   forms: {
     input : {
      height: '50px',
