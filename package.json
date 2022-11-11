@@ -10,7 +10,7 @@
   },
   "dependencies": {
     "@emotion/react": "^11.10.5",
-    "@snapshot-labs/lock": "^0.1.1011",
+    "@snapshot-labs/lock": "github:snapshot-labs/lock",
     "ipfs-only-hash": "^4.0.0",
     "next": "12.3.1",
     "react": "18.2.0",
