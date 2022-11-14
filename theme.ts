@@ -13,7 +13,8 @@ export const theme: Theme = {
       opacity: 0.5,
       alignItems: 'center',
       height: '20px',
-      cursor: 'pointer'
+      cursor: 'pointer',
+      display: 'block'
     },
     input : {
      height: '50px',
@@ -25,7 +26,8 @@ export const theme: Theme = {
      fontStyle: 'normal',
      color: '#212121',
      opacity: 0.5,
-     border: 'unset',
+     border: 'unset', 
+     display: 'block',
      paddingX: '20px',
     },
   },
@@ -67,7 +69,7 @@ export const theme: Theme = {
       justifyContent: 'space-around',
       alignItems: 'center',
       height: '50px',
-      width: '155px',
+      width: '165px',
       borderRadius: '80px',
       border: 'unset',
       backgroundColor: 'inherit',
@@ -169,12 +171,29 @@ export const theme: Theme = {
       color: '#212121',
       opacity: 0.5,
     },
+    smallTextBold : {
+      fontFamily: 'InterBold',
+      fontWeight: 700,
+      lineHeight: '22.4px',
+      fontSize: '14px',
+      display: 'block',
+      color: '#212121',
+    },
     largeTextBold: {
       fontFamily: 'InterBold',
       fontWeight: 700,
       lineHeight: '24px',
+      display: 'block',
       fontSize: '20px',
       color: '#212121',
+    },
+    overscript: {
+      fontFamily: 'InterRegular',
+      fontWeight: 400,
+      lineHeight: '19.2px',
+      fontSize: '12px',
+      color: '#212121',
+      display: 'block'
     },
     normalTextMedium: {
       fontFamily: 'InterMedium',
@@ -191,6 +210,10 @@ export const theme: Theme = {
       lineHeight: '15px',
       color: '#212121',
       opacity: 0.5
+    },
+    link: {
+      color: '#CA5CF2',
+      cursor: 'pointer'
     }
   },
 }
