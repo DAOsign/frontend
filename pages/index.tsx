@@ -5,6 +5,7 @@ import Connect from '../components/Connect'
 import Footer from '../components/Footer'
 import Logo from '../components/Logo'
 import { Container } from 'theme-ui'
+import Sign from '../components/Sign'
 
 const Home: NextPage = () => {
   return (
@@ -15,6 +16,7 @@ const Home: NextPage = () => {
       <link rel="icon" href="/favicon.ico" />
     </Head>
     <Logo/>
+    <Sign/>
     <Connect/>
     <Footer/>
   </Container>
