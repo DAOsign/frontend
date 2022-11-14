@@ -6,6 +6,7 @@ import fileSecondarysvg from '../img/svg/fileSecondarysvg.svg'
 import arrowNarrowLeft from '../img/svg/arrowNarrowLeft.svg'
 import proofSecondary from '../img/svg/proofSecondary.svg'
 import phoneSecondary from '../img/svg/phoneSecondary.svg'
+import arrowLeftPink from '../img/svg/arrowLeftPink.svg'
 import calendarMinus from '../img/svg/calendarMinus.svg'
 import alertTriangle from '../img/svg/alertTriangle.svg'
 import calendarCheck from '../img/svg/calendarCheck.svg'
@@ -76,6 +77,7 @@ const iconsObj: IconsMapper = {
     calendarMinus,
     alertTriangle,
     calendarCheck,
+    arrowLeftPink,
     trashPrimary,
     bookmarkVote,
     chevronRight,

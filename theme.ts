@@ -6,10 +6,14 @@ export const theme: Theme = {
       fontFamily: 'InterMedium',
       fontStyle: 'normal',
       fontWeight: 400,
+      maxWidth: '150px',
       fontSize: '12px',
       lineHeight: '160%',
       color:' #212121',
       opacity: 0.5,
+      alignItems: 'center',
+      height: '20px',
+      cursor: 'pointer'
     },
     input : {
      height: '50px',
@@ -22,7 +26,7 @@ export const theme: Theme = {
      color: '#212121',
      opacity: 0.5,
      border: 'unset',
-     paddingX: '20px'
+     paddingX: '20px',
     },
   },
   buttons: {
@@ -57,6 +61,27 @@ export const theme: Theme = {
       marginRight: 'auto',
       cursor: 'pointer',
       textAlign: 'center'
+     },
+     back: {
+      display: 'flex',
+      justifyContent: 'space-around',
+      alignItems: 'center',
+      height: '50px',
+      width: '155px',
+      borderRadius: '80px',
+      border: 'unset',
+      backgroundColor: 'inherit',
+      fontStyle: 'normal',
+      fontWeight: 400,
+      fontSize: '12px',
+      lineHeight: '160%',
+      color: '#CA5CF2',
+      fontFamily: 'InterMedium',
+      marginLeft: 'auto',
+      marginRight: 0,
+      cursor: 'pointer',
+      textAlign: 'center',
+      px: 0,
      }
   },
   fonts: {
@@ -151,6 +176,13 @@ export const theme: Theme = {
       fontSize: '20px',
       color: '#212121',
     },
+    normalTextMedium: {
+      fontFamily: 'InterMedium',
+      fontWeight: 500,
+      lineHeight: '25.6px',
+      fontSize: '16px',
+      color: '#212121',
+    },
     secondary: {
       fontFamily: 'InterMedium',
       fontStyle: 'normal',
@@ -158,7 +190,7 @@ export const theme: Theme = {
       fontSize: '12px',
       lineHeight: '15px',
       color: '#212121',
-      opacity: 0.5,
+      opacity: 0.5
     }
   },
 }

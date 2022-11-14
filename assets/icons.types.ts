@@ -13,6 +13,7 @@ export interface IconsMapper extends Record<string, unknown> {
     trashPrimary: Icon;
     bookmarkVote: Icon;
     chevronRight: Icon;
+    arrowLeftPink:Icon;
     checkboxOff: Icon;
     privateIcon: Icon;
     chevronDown: Icon;
