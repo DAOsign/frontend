@@ -18,7 +18,8 @@ const rightSide = {
     border: '1px solid #EDEDF3',
     borderRadius: '12px',
     paddingX: '25px',
-    maxHeight: '515px',
+    maxHeight: '590px',
+    paddingBottom: '32px',
     paddingTop: '52px',
 } as ThemeUIStyleObject;
 

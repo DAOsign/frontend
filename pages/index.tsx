@@ -7,7 +7,6 @@ import Logo from '../components/Logo'
 import Header from '../components/Header/Header'
 import { Container } from 'theme-ui'
 import CreateAgreement from '../components/CreateAgreement'
-import TextEditor from '../components/TextEditor'
 
 const Home: NextPage = () => {
   return (
@@ -17,9 +16,8 @@ const Home: NextPage = () => {
       <meta name="description" content="Dao-Sign" />
       <link rel="icon" href="/favicon.ico" />
     </Head>
-    <TextEditor/>
-    {/* <Header/> */}
-    {/* <CreateAgreement/> */}
+    <Header/>
+    <CreateAgreement/>
     {/* <Logo/> */}
     {/* <Connect/> */}
     {/* <Footer/> */}
@@ -29,9 +27,6 @@ const Home: NextPage = () => {
 
 export default Home
 
-// const Hash = require('ipfs-only-hash')
-
-// const [bytes, setBytes] = useState<Uint8Array>()
 
 // import Example from '../components/Example'
 // import styles from '../styles/Home.module.css'

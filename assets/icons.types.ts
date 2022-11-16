@@ -60,6 +60,7 @@ export interface IconsMapper extends Record<string, unknown> {
     mail: Icon;
     user: Icon;
     ink: Icon;
+    m: Icon;
 }
 
 interface Icon {

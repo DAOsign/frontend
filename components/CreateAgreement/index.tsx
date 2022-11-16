@@ -1,6 +1,7 @@
 import React, {useState} from 'react'
 import StepOne from './Steps/StepOne'
 import StepTwo from './Steps/StepTwo'
+import StepThree from './Steps/StepThree'
 import {Button, Container, Flex, Text } from 'theme-ui'
 import LeftSide from './LeftSide'
 import {rightSide, leftSide} from './styles'
@@ -10,7 +11,8 @@ export default function CreateAgreement() {
 
     const steps = {
        1: <StepOne/>,
-       2: <StepTwo/>
+       2: <StepTwo/>,
+       3: <StepThree/>,
     }
 
     return (

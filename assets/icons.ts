@@ -59,7 +59,7 @@ import send from '../img/svg/send.svg'
 import prof from '../img/svg/prof.svg'
 import mail from '../img/svg/mail.svg'
 import ink from '../img/svg/ink.svg'
-
+import m from '../img/svg/m.svg'
 
 
 
@@ -127,6 +127,7 @@ const iconsObj: IconsMapper = {
     Bell,
     mail,
     user,
+    m
 };
 
 export default iconsObj;

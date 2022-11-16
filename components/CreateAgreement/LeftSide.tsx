@@ -50,6 +50,10 @@ export default function LeftSide (prop: LeftSideoProp) {
        sx={{variant: 'buttons.secondary', ...fW, mt:'60px'}} 
        type='button'>{prop.step > 1 ? 'Back' : 'Cancel'}
     </Button>
+    {prop.step === 2 && <Button 
+       sx={{variant: 'buttons.secondary', ...fW, mt:'20px'}} 
+       type='button'>Save Draft
+    </Button>}
     <Button 
        onClick={() => prop.setStep(prop.step + 1)}
        sx={{variant: 'buttons.primary', ...fW, mt:'20px'}} 
