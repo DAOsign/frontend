@@ -1,4 +1,14 @@
 import { ThemeUIStyleObject } from "theme-ui";
+const containerSides = {
+    maxWidth: '1200px', 
+    justifyContent: 'space-between', 
+    margin: '40px auto 0', 
+    textAlign: 'center',
+    '@media screen and (max-width: 1200px)': {
+        flexDirection: 'column',
+        mt: '270px'
+       },
+} as ThemeUIStyleObject;
 
 const leftSide = {
     maxWidth: '776px',
@@ -8,7 +18,13 @@ const leftSide = {
     borderRadius: '12px',
     paddingX :'128px',
     paddingBottom: '60px',
-    paddingTop: '60px'
+    paddingTop: '60px',
+    '@media screen and (max-width: 1200px)': {
+       maxWidth: '672px',
+       paddingX :'100px',
+       borderBottom: 'none',
+       borderRadius: '12px 12px 0 0'
+       },
 } as ThemeUIStyleObject;
 
 const rightSide = {
@@ -21,6 +37,17 @@ const rightSide = {
     maxHeight: '590px',
     paddingBottom: '32px',
     paddingTop: '52px',
+    '@media screen and (max-width: 1200px)': {
+        maxWidth: '672px',
+        width: '100%',
+        paddingX :'100px',
+        borderTop: 'none',
+        borderRadius: '0 0 12px 12px',
+        height: 'initial',
+        minHeight: 'unset',
+        pb: '72px',
+        pt: 0
+        },
 } as ThemeUIStyleObject;
 
 const container = {
@@ -51,7 +78,12 @@ const flex = {
 const leftSideItem = {
     textAlign: 'left', 
     maxWidth: '230px', 
-    ml: '16px'
+    ml: '16px',
+    '@media screen and (max-width: 1200px)': {
+        ml: 0,
+        textAlign: 'center',
+        mt: '12px'
+    },
 } as ThemeUIStyleObject;
 
 const item = {
@@ -90,12 +122,62 @@ const fW = {
     width:  '100%'
 }
 
+const containerButtons = {
+  '@media screen and (max-width: 1200px)': {
+    '& > button:first-child' : {
+        mt: 0
+       }
+     },
+} as ThemeUIStyleObject;
+
+const secondaryTitleStep = {
+    variant: 'text.overscript',  
+    opacity: 0.5,
+    '@media screen and (max-width: 1200px)': {
+        maxWidth: '128px'
+       },
+} as ThemeUIStyleObject;
+
+const stepsContainer = {
+  '@media screen and (max-width: 1200px)': {
+      position: 'absolute',
+      maxWidth: '672px',
+      width: '100%',
+      height: '202px',
+      alignItems: 'center',
+      top: '104px',
+      display: 'flex',
+      transform: 'translate(-50%, 0)',
+      left: '50%',
+      backgroundColor: '#FFFFFF',
+      border: '1px solid #EDEDF3',
+      borderRadius: '12px',
+      justifyContent: 'space-around'
+    },
+} as ThemeUIStyleObject;
+
+const stepStyle = {
+    mt: '56px', 
+    alignItems: 'center',
+    textAlign: 'left',
+    '@media screen and (max-width: 1200px)': {
+       mt: 0,
+       flexDirection: 'column',
+       textAlign: 'center'
+      },
+} as ThemeUIStyleObject;
+
 export {
     inputCreactAgreement,
+    secondaryTitleStep,
+    containerButtons,
     secondaryTitle,
+    stepsContainer,
+    containerSides,
     leftSideItem,
-    container,
     stepNumber,
+    container,
+    stepStyle,
     rightSide,
     leftSide,
     card,

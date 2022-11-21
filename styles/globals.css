@@ -17,6 +17,7 @@ a {
 #__next {
   width: 100%;
 }
+
 .file {
   opacity: 0;
   width: 100%;
@@ -47,6 +48,14 @@ a {
 }
 .w-md-editor-toolbar li > button {
   color: #212121 !important;
+  width: 40px;
+}
+.w-md-editor-toolbar li:nth-child(4),
+.w-md-editor-toolbar li:nth-child(6) {
+ display: none;
+}
+.w-md-editor-toolbar-divider {
+  display: none !important;
 }
 .w-md-editor-toolbar > ul:last-child {
   display: none;
@@ -72,4 +81,155 @@ label> div {
 body {
   min-height: 100vh;
   background-color: #EDEDF3;
+}
+
+
+/* @keyframes logo  {
+  0%   { 
+    width: 100%;
+    height: 200px;
+    overflow: hidden;
+    position: relative;
+  }
+  100% { 
+    width: initial; 
+    position: relative;
+  }
+} */
+
+@keyframes text  {
+  0%   { opacity: 0;}
+  20%  { opacity: 0;}
+  40%  { opacity: 0;}
+  60%  { opacity: 0;}
+  80%  { opacity: 0;}
+  100% { opacity: 1;}
+}
+@keyframes d  {
+  0%   { 
+    opacity: 0;
+    width: 500px;
+    position: absolute;
+    right: -100%;
+  }
+  5%  { 
+    right: 53.2%;
+    opacity: 1;
+    width: 140px;
+  }
+  40%  {    
+    opacity: 1;
+    width: 140px;
+    height: 160px; 
+  }
+  60%  {    
+    opacity: 1;
+    width: 140px;
+    height: 160px; 
+  }
+  90%  {    
+    opacity: 1;
+    width: 140px;
+    height: 160px; 
+  }
+  100% {
+    opacity: 1;
+    width: 140px;
+    height: 160px; 
+  }
+}
+
+@keyframes a  {
+  0%   { 
+    opacity: 0;
+    position: absolute;
+    width: 500px;
+    right: -200%;
+  }
+  13%   { 
+    opacity: 0;
+    position: absolute;
+    width: 500px;
+    right: -130%;
+  }
+  15%  { 
+    opacity: 1;
+    width: 140px;
+    right: 20%;
+  }
+  30%  {    
+    opacity: 1;
+    width: 140px;
+    height: 160px; 
+  }
+  60%  {    
+    opacity: 1;
+    width: 140px;
+    height: 160px; 
+  }
+  90%  {    
+    opacity: 1;
+    width: 140px;
+    height: 160px; 
+  }
+  100% {
+    opacity: 1;
+    width: 140px;
+    height: 160px; 
+  }
+}
+
+@keyframes o  {
+  0%   { 
+    opacity: 0;
+    position: absolute;
+    width: 500px;
+    right: -200%;
+  }
+  24%   { 
+    opacity: 0;
+    position: absolute;
+    width: 500px;
+    right: -150%;
+  }
+  25%  { 
+    opacity: 1;
+    width: 140px;
+    right: -10%;
+  }
+  30%  {    
+    opacity: 1;
+    width: 140px;
+    height: 160px; 
+  }
+  60%  {    
+    opacity: 1;
+    width: 140px;
+    height: 160px; 
+  }
+  90%  {    
+    opacity: 1;
+    width: 140px;
+    height: 160px; 
+  }
+  100% {
+    opacity: 1;
+    width: 140px;
+    height: 160px; 
+  }
+}
+
+@keyframes connect {
+  0%   { 
+    display: none;
+    opacity: 0;
+  }
+  20%  { opacity: 0;}
+  40%  { opacity: 0;}
+  60%  { opacity: 0;}
+  80%  { 
+    display: block;
+    opacity: 1;
+  }
+  100% { opacity: 1;}
 }

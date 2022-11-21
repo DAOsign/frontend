@@ -1,13 +1,11 @@
 import React, { useEffect, useState } from "react";
 import { useLock } from "../../hooks/useLock";
 import { Button, Container, Heading, Text } from "theme-ui";
-import styles from "./styles";
+import {title, container} from "./styles";
 
-export default function Connect() {
-  const [address, setAddres] = useState<string>();
+export default function Connect({setAddres}: any) {
   const lock = useLock();
   console.log(lock);
-  console.log(address);
 
   useEffect(() => {
     setAddres(lock?.provider?.safe?.safeAddress || lock?.provider?.selectedAddress || lock?.provider?.accounts[0] || "");
@@ -19,8 +17,8 @@ export default function Connect() {
   };
 
   return (
-    <Container sx={styles}>
-      <Heading sx={{ variant: "text.h2", mb: "40px" }} as="h1">
+    <Container sx={container}>
+      <Heading  sx={title}>
         Connect a Wallet
       </Heading>
       <Button type="button" variant="primary" onClick={() => connect("injected")}>

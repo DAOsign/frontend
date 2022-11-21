@@ -2,9 +2,9 @@ import React, {useState} from 'react'
 import StepOne from './Steps/StepOne'
 import StepTwo from './Steps/StepTwo'
 import StepThree from './Steps/StepThree'
-import {Button, Container, Flex, Text } from 'theme-ui'
+import {Container, Flex, Text } from 'theme-ui'
 import LeftSide from './LeftSide'
-import {rightSide, leftSide} from './styles'
+import {rightSide, leftSide, containerSides} from './styles'
 
 export default function CreateAgreement() {
     const [step, setStep] = useState(1)
@@ -16,7 +16,7 @@ export default function CreateAgreement() {
     }
 
     return (
-       <Flex sx={{maxWidth: '1200px', justifyContent: 'space-between', margin: '40px auto 0', textAlign: 'center' }}>
+       <Flex sx={containerSides}>
          <Container sx={leftSide}>
          <Text sx={{variant: 'text.h2', mb: '40px', display: 'inline-block'}}> Create New Agreement</Text>
            {steps[step]}

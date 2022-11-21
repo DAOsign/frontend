@@ -1,17 +1,18 @@
 import React from "react";
-import { Flex, Text } from 'theme-ui'
+import { Container, Flex, Text } from 'theme-ui'
 import iconsObj from "../../assets/icons";
 import {formatAddress} from '../../utils/formats'
+import {container} from './styles'
 import Icon from "../icon";
-import Logo from "../Logo";
+import Logo from "../Logo/Logo";
 
 
-export default function Footer() {
+export default function Header({address}: any) {
   return (
-  <div style={{width: '100%', height: '80px', paddingLeft: '40px', paddingRight: '40px', backgroundColor: '#FFFFFF', paddingTop: '16px', position: 'fixed', top: 0}}>
+  <Container sx={container}>
     <Flex sx={{justifyContent: 'space-between' }}>
       <Logo margin='0 0 auto 0'/>
-      <Flex sx={{alignItems: 'center'}}>
+      <Flex sx={{alignItems: 'center', flexDirection: 'row'}}>
         <div style={{width: '44px', height: '44px', borderRadius: '50%', backgroundColor: '#F7F7FB', textAlign:'center', paddingTop: '9px', cursor: 'pointer'}}> 
           <Icon src={iconsObj.Bell}/>
         </div>
@@ -20,11 +21,11 @@ export default function Footer() {
             {/* <Icon src={iconsObj.Bell}/> */}
             </div>
             <Text>
-              {formatAddress('0x131A7213eCa51E2393e71eF1fDb240F8CC75DDcb')}
+              {formatAddress(address)}
             </Text>
         </Flex>
       </Flex>
     </Flex>
-  </div>
+  </Container>
   );
 }
