@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import React, { useEffect, useState } from "react";
 import { useLock } from "../../hooks/useLock";
 import { Button, Container, Heading, Text } from "theme-ui";
