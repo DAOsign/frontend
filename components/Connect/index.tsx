@@ -1,13 +1,12 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import React, { useEffect, useState } from "react";
 import { useLock } from "../../hooks/useLock";
 import { Button, Container, Heading, Text } from "theme-ui";
-import styles from "./styles";
+import {title, container} from "./styles";
 
-export default function Connect() {
-  const [address, setAddres] = useState<string>();
+export default function Connect({setAddres}: any) {
   const lock = useLock();
   console.log(lock);
-  console.log(address);
 
   useEffect(() => {
     setAddres(lock?.provider?.safe?.safeAddress || lock?.provider?.selectedAddress || lock?.provider?.accounts[0] || "");
@@ -19,8 +18,8 @@ export default function Connect() {
   };
 
   return (
-    <Container sx={styles}>
-      <Heading sx={{ variant: "text.h2", mb: "40px" }} as="h1">
+    <Container sx={container}>
+      <Heading  sx={title}>
         Connect a Wallet
       </Heading>
       <Button type="button" variant="primary" onClick={() => connect("injected")}>
@@ -38,49 +37,3 @@ export default function Connect() {
     </Container>
   );
 }
-
-//   const getProvider = () => {
-//     console.log("provider", lock.provider);
-//   };
-
-//   const getLock = () => {
-//     console.log("lock", lock.lockClient);
-//   };
-
-//   const showLoginModal = async () => {
-//     setVisible(true)
-//   };
-
-//   const logout = () => {
-//     lock.logout();
-//   };
-
-// <div>
-//   <div>
-//     {lock.isLoading
-//       ? "Loading..."
-//       : `Authenticated: ${String(lock.isAuthenticated)}`}
-//   </div>
-//   <div>Address === {address}
-//   </div>
-//  { visible &&   <div className="popup">
-//      <button className="close" type="button" onClick={() => setVisible(false)}>close</button>
-//    <div className="buttons">
-//      <button type="button" onClick={() => connect('injected')}>Metamask</button>
-//      <button type="button" onClick={() => connect('walletconnect')}>Connect Wallet</button>
-//      <button type="button" onClick={() => connect('walletlink')}>Connect Coinbase Wallet</button>
-//    </div>
-//   </div>
-//   }
-//   <br />
-//   <button onClick={showLoginModal}>Login</button>
-//   <br />
-//   <button onClick={logout}>Logout</button>
-//   <br />
-//   <br />
-//   <button disabled={!lock.isAuthenticated} onClick={getProvider}>
-//     Log Provider
-//   </button>
-//   <br />
-//   <button onClick={getLock}>Log Lock</button>
-// </div>

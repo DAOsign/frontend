@@ -6,6 +6,7 @@ import fileSecondarysvg from '../img/svg/fileSecondarysvg.svg'
 import arrowNarrowLeft from '../img/svg/arrowNarrowLeft.svg'
 import proofSecondary from '../img/svg/proofSecondary.svg'
 import phoneSecondary from '../img/svg/phoneSecondary.svg'
+import arrowLeftPink from '../img/svg/arrowLeftPink.svg'
 import calendarMinus from '../img/svg/calendarMinus.svg'
 import alertTriangle from '../img/svg/alertTriangle.svg'
 import calendarCheck from '../img/svg/calendarCheck.svg'
@@ -24,6 +25,8 @@ import plusCircle from '../img/svg/plusCircle.svg'
 import checkboxOn from '../img/svg/checkboxOn.svg'
 import chevronUp from '../img/svg/chevronUp.svg'
 import published from '../img/svg/published.svg'
+import privateIcon from '../img/svg/private.svg'
+import publicIcon from '../img/svg/public.svg'
 import calendar from '../img/svg/calendar.svg'
 import settings from '../img/svg/settings.svg'
 import download from '../img/svg/download.svg'
@@ -56,9 +59,8 @@ import send from '../img/svg/send.svg'
 import prof from '../img/svg/prof.svg'
 import mail from '../img/svg/mail.svg'
 import ink from '../img/svg/ink.svg'
+import m from '../img/svg/m.svg'
 
-// import private from '../img/svg/private.svg'
-// import public from '../img/svg/public.svg'
 
 
 import {IconsMapper} from './icons.types';
@@ -75,9 +77,11 @@ const iconsObj: IconsMapper = {
     calendarMinus,
     alertTriangle,
     calendarCheck,
+    arrowLeftPink,
     trashPrimary,
     bookmarkVote,
     chevronRight,
+    privateIcon,
     checkboxOff,
     chevronDown,
     layersThree,
@@ -88,6 +92,7 @@ const iconsObj: IconsMapper = {
     infoCircle,
     checkboxOn,
     plusCircle,
+    publicIcon,
     chevronUp,
     published,
     logoIcon,
@@ -122,6 +127,7 @@ const iconsObj: IconsMapper = {
     Bell,
     mail,
     user,
+    m
 };
 
 export default iconsObj;

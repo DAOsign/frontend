@@ -2,6 +2,20 @@ import type { Theme } from 'theme-ui'
 
 export const theme: Theme = {
   forms: {
+    label: {
+      fontFamily: 'InterMedium',
+      fontStyle: 'normal',
+      fontWeight: 400,
+      maxWidth: '150px',
+      fontSize: '12px',
+      lineHeight: '160%',
+      color:' #212121',
+      opacity: 0.5,
+      alignItems: 'center',
+      height: '20px',
+      cursor: 'pointer',
+      display: 'block'
+    },
     input : {
      height: '50px',
      width: '345px',
@@ -12,9 +26,10 @@ export const theme: Theme = {
      fontStyle: 'normal',
      color: '#212121',
      opacity: 0.5,
-     border: 'unset',
-     paddingX: '20px'
-    }
+     border: 'unset', 
+     display: 'block',
+     paddingX: '20px',
+    },
   },
   buttons: {
      primary: {
@@ -48,6 +63,45 @@ export const theme: Theme = {
       marginRight: 'auto',
       cursor: 'pointer',
       textAlign: 'center'
+     },
+     back: {
+      display: 'flex',
+      justifyContent: 'space-around',
+      alignItems: 'center',
+      height: '40px',
+      width: '165px',
+      borderRadius: '80px',
+      border: 'unset',
+      backgroundColor: 'inherit',
+      fontStyle: 'normal',
+      fontWeight: 400,
+      fontSize: '12px',
+      lineHeight: '160%',
+      color: '#CA5CF2',
+      fontFamily: 'InterMedium',
+      marginLeft: 'auto',
+      marginRight: 0,
+      cursor: 'pointer',
+      textAlign: 'center',
+      px: 0,
+      pb: 0,
+     },
+     itemsBtn: {
+      display: 'flex',
+      justifyContent: 'space-around',
+      alignItems: 'center',
+      fontFamily: 'Inter',
+      fontStyle: 'normal',
+      fontWeight: 700,
+      fontSize: '14px',
+      lineHeight: '160%',
+      color: '#212121',
+      background: '#F7F7FB',
+      borderRadius: '90px',
+      height: '32px',
+      pl: '14px',
+      m: '0 5px 0 0',
+      width: 'initial',
      }
   },
   fonts: {
@@ -135,6 +189,37 @@ export const theme: Theme = {
       color: '#212121',
       opacity: 0.5,
     },
+    smallTextBold : {
+      fontFamily: 'InterBold',
+      fontWeight: 700,
+      lineHeight: '22.4px',
+      fontSize: '14px',
+      display: 'block',
+      color: '#212121',
+    },
+    largeTextBold: {
+      fontFamily: 'InterBold',
+      fontWeight: 700,
+      lineHeight: '24px',
+      display: 'block',
+      fontSize: '20px',
+      color: '#212121',
+    },
+    overscript: {
+      fontFamily: 'InterRegular',
+      fontWeight: 400,
+      lineHeight: '19.2px',
+      fontSize: '12px',
+      color: '#212121',
+      display: 'block'
+    },
+    normalTextMedium: {
+      fontFamily: 'InterMedium',
+      fontWeight: 500,
+      lineHeight: '25.6px',
+      fontSize: '16px',
+      color: '#212121',
+    },
     secondary: {
       fontFamily: 'InterMedium',
       fontStyle: 'normal',
@@ -142,7 +227,11 @@ export const theme: Theme = {
       fontSize: '12px',
       lineHeight: '15px',
       color: '#212121',
-      opacity: 0.5,
+      opacity: 0.5
+    },
+    link: {
+      color: '#CA5CF2',
+      cursor: 'pointer'
     }
   },
 }

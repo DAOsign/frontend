@@ -13,13 +13,16 @@ export interface IconsMapper extends Record<string, unknown> {
     trashPrimary: Icon;
     bookmarkVote: Icon;
     chevronRight: Icon;
+    arrowLeftPink:Icon;
     checkboxOff: Icon;
+    privateIcon: Icon;
     chevronDown: Icon;
     layersThree: Icon;
     checkCircle: Icon;
     shareFourth: Icon;
     fieldResize: Icon;
     chevronLeft: Icon;
+    publicIcon: Icon;
     infoCircle: Icon;
     checkboxOn: Icon;
     plusCircle: Icon;
@@ -57,6 +60,7 @@ export interface IconsMapper extends Record<string, unknown> {
     mail: Icon;
     user: Icon;
     ink: Icon;
+    m: Icon;
 }
 
 interface Icon {
