@@ -4,7 +4,7 @@ import iconsObj from "../../assets/icons";
 import {formatAddress} from '../../utils/formats'
 import {container} from './styles'
 import Icon from "../icon";
-import Logo from "../Logo/Logo";
+import {Logo} from "../Logo/Logo";
 
 
 export default function Header({address}: any) {

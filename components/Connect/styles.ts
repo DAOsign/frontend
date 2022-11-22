@@ -1,6 +1,10 @@
 import { ThemeUIStyleObject } from "theme-ui";
 
 const container = {
+  position: 'absolute',
+  top: '70%',
+  left: '50%',
+  transform: 'translate(-50%, 0)',
   animation: 'connect 6s 1 linear',
   width: '387px',
   mt: '50px',
