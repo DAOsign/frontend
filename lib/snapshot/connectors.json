@@ -9,7 +9,7 @@
       "network": "1",
       "options": {
         "rpc": {
-          "1": "https://rpc.brovider.xyz/1",
+          "1": "https://mainnet.infura.io/v3/a2bdb60cad374dbc9a560323a6222e62",
           "4": "https://rpc.brovider.xyz/4",
           "42": "https://rpc.brovider.xyz/42",
           "10": "https://rpc.brovider.xyz/10"
