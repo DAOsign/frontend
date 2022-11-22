@@ -4,32 +4,14 @@ import { useLock } from "../../hooks/useLock";
 
 export default function Sign() {
   const [value, setValue] = useState<string>("");
-  const { provider } = useLock();
+  const { provider, sign } = useLock();
 
   const handleSign = async () => {
     console.log(provider);
+    sign(value)
   };
 
-  const signMetamask = async () => {
-    const signature = await provider.request({
-      method: "personal_sign",
-      params: [provider?.selectedAddress, value],
-    });
-  };
 
-  const signCoinbase = async () => {
-    await window.coinbaseSolana.connect();
-    const signature = await window.coinbaseSolana.signMessage(value);
-    console.log("signature", signature);
-  };
-
-  const signWalletConnect = async () => {
-    const res = await provider.request({
-      method: "eth_sign",
-      params: [provider?.accounts[0], value],
-    });
-    console.log(res)
-  };
 
   return (
     <Box>

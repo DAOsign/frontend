@@ -20,6 +20,7 @@ interface LockContext {
   lockClient: Lock;
   login: (connector: ConnectorType) => Promise<ProviderType>;
   logout: () => Promise<void>;
+  sign: (message: string) => Promise<string>;
   getConnector: () => Promise<ConnectorType | false>;
   //web3?: Web3Provider;
 }
@@ -39,19 +40,19 @@ const LockProvider = (props?: Partial<ProviderProps<LockContext>>) => {
     isLoading: true,
     isAuthenticated: false,
   });
-  console.log(props);
-  
+
   const lockInstanceRef = useRef<Lock>(new Lock(options.connectors));
   const lockInstance = lockInstanceRef.current;
 
   const providerRef = useRef<ProviderType>();
+  const provider = providerRef.current;
 
   async function login(
     connector: ConnectorType = "injected"
   ): Promise<ProviderType> {
     const lockConnector = lockInstance.getConnector(connector);
-    console.log(connector);
-    
+    console.log("connector", connector);
+
     const localProvider = (await lockConnector.connect()) as null | any;
 
     if (localProvider !== null) {
@@ -79,6 +80,39 @@ const LockProvider = (props?: Partial<ProviderProps<LockContext>>) => {
       providerRef.current = undefined;
     }
   }
+
+  async function sign(value: string): Promise<string> {
+    const connector = await getConnector();
+
+    if (!connector) return ""; //TODO throw error
+    console.log("connector", connector);
+    switch (connector) {
+      // Metamask
+      case "injected": {
+        return await provider.request({
+          method: "personal_sign",
+          params: [provider?.selectedAddress, value],
+        });
+      }
+      // Walletconnect
+      case "walletconnect": {
+        return await provider.request({
+          method: "eth_sign",
+          params: [provider?.accounts[0], value],
+        });
+      }
+      // Coinbase
+      case "walletlink": {
+        return await provider.request({
+          method: "personal_sign",
+          params: [value, provider?._addresses[0]],
+        });
+      }
+    }
+
+    return connector;
+  }
+  console.log("provider", provider);
 
   async function getConnector(): Promise<ConnectorType | false> {
     const connector = localStorage.getItem(
@@ -125,6 +159,7 @@ const LockProvider = (props?: Partial<ProviderProps<LockContext>>) => {
         lockClient: lockInstance,
         login,
         logout,
+        sign,
         getConnector,
       }}
     />
