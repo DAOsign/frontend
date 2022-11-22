@@ -1,6 +1,7 @@
 import React, {useState} from "react";
 import { Container, Flex, Input, Text, Button } from 'theme-ui'
 import {card, item, inputCreactAgreement, secondaryTitle, container} from "../styles";
+import {uniqueId} from '../../../../utils/formats'
 import iconsObj from "../../../../assets/icons";
 import Icon from "../../../icon";
 
@@ -9,12 +10,6 @@ export default function StepThree() {
   const [signersValue, setSignersValue] = useState('')
   const [observers, setObservers] = useState<Array<{value: string, id: number}>>([])
   const [observersValue, setObserversValue] = useState('')
-
-  function uniqueId() {
-    let first: number = (Math.random() * 46656) | 0
-    let second: number = (Math.random() * 46656) | 0
-    return first + second
-}
 
   console.log(signers, observers);
 
