@@ -1,7 +1,7 @@
 import React from 'react'
-import Icon from '../icon/index'
+import Icon from '../../icon/index'
 import { Container, Flex, Text, Button, Box } from 'theme-ui'
-import iconsObj from '../../assets/icons';
+import iconsObj from '../../../assets/icons';
 import {
    stepNumber, 
    leftSideItem, 
