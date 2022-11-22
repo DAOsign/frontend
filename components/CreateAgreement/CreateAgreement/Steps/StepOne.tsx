@@ -1,8 +1,8 @@
 import React, {useState} from "react";
 import { Container, Flex, Input, Text, Button } from 'theme-ui'
 import {card, item, inputCreactAgreement, secondaryTitle, container} from "../styles";
-import iconsObj from "../../../assets/icons";
-import Icon from "../../icon";
+import iconsObj from "../../../../assets/icons";
+import Icon from "../../../icon";
 
 
 
