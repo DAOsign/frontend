@@ -1,10 +1,10 @@
 import React, { useState} from "react";
 import { Container, Flex, Text, Radio, Label, Box , Button} from 'theme-ui'
-import Icon from '../../icon/index'
-import Image from "next/image";
+import Icon from '../../../icon/index'
 import {card, flex} from '../styles'
-import iconsObj from "../../../assets/icons";
-import TextEditor from '../../TextEditor/index'
+import iconsObj from "../../../../assets/icons";
+import TextEditor from '../../../TextEditor/index'
+
 const Hash = require('ipfs-only-hash')
 
 const agreementLocations = [{
