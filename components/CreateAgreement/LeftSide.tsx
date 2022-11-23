@@ -10,6 +10,7 @@ import {
   leftSideItem, 
   stepNumber, 
   stepStyle, 
+  box,
   fW, 
   } from './styles'
 
@@ -34,8 +35,7 @@ export default function LeftSide (prop: LeftSideoProp) {
               <Text sx={secondaryTitleStep}>Enter title and privacy ot the agreement</Text>
           </Container>
       </Flex>
-      <Container sx={{maxWidth:'2px', height:'2px',border:'dashed'}}>
- </Container>
+      <Container sx={box}></Container>
       <Flex sx={stepStyle}>
           <Box sx={{...stepNumber, backgroundColor: (prop.step > 1 ?  '#CA5CF2' : '#EDEDF3')}}>
           {
@@ -50,6 +50,7 @@ export default function LeftSide (prop: LeftSideoProp) {
               <Text sx={secondaryTitleStep}>Enter agreement content</Text>
           </Container>
       </Flex>
+     <Container sx={box}></Container>
       <Flex  sx={stepStyle}>
       <Box sx={{...stepNumber, backgroundColor: (prop.step > 2 ?  '#CA5CF2' : '#EDEDF3')}}>
       <Text sx={{variant: 'text.normalTextBold', color: '#fff'}}>3</Text>

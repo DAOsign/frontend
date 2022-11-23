@@ -259,11 +259,12 @@ const stepsContainer = {
         maxWidth: '343px',
         width: '100%',
         height: '179px',
+        padding:'0 5px'
       },
 } as ThemeUIStyleObject;
 
 const stepStyle = {
-    mt: '56px', 
+   // mt: '56px', 
     alignItems: 'center',
     textAlign: 'left',
     '@media screen and (max-width: 1200px)': {
@@ -286,6 +287,22 @@ const uploadBtn = {
   
 } as ThemeUIStyleObject;
    
+const box ={
+    width:'100px',
+    height:'32px',
+    borderLeft:'2px dashed #EDEDF3',
+    borderTop:'none',
+    margin: '12px 25px 12px',
+
+      '@media screen and (max-width: 1200px)': {
+        width:'15%',
+        margin:'0 0 40px',
+        borderTop:'2px dashed #EDEDF3',
+        borderLeft:'none'
+    },
+
+} as ThemeUIStyleObject;
+
 export {
     inputCreactAgreement,
     imageUploadContainer,
@@ -309,5 +326,6 @@ export {
     title,
     item,
     flex,
+    box,
     fW
 }
