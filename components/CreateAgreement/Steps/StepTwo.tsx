@@ -1,8 +1,7 @@
 import React, { useState} from "react";
 import { Container, Flex, Text, Radio, Label, Box , Button} from 'theme-ui'
 import Icon from '../../icon/index'
-import Image from "next/image";
-import {card, flex} from '../styles'
+import {card, itemRadio, primaryTitleItem, imageUploadContainer, uploadText, uploadTextMobile, uploadBtn} from '../styles'
 import iconsObj from "../../../assets/icons";
 import TextEditor from '../../TextEditor/index'
 const Hash = require('ipfs-only-hash')
@@ -43,19 +42,19 @@ const ipfs= async () => {
 }
 
   return <Container>
-    <Flex sx={{alignItems: 'center'}}>
+    <Flex sx={{alignItems: 'center', position: 'relative'}}>
     <Text sx={{variant: 'forms.label', minWidth: '200px'}}>Upload agreement</Text>
     <Button onClick={() => {
       setCloud(!cloud)
       setRdioValue('cloud')
     }}  
-      sx={{variant: 'buttons.back'}}>
+      sx={{variant: 'buttons.back', ...uploadBtn}}>
         <Icon style={{display: 'block'}} src={iconsObj.arrowLeftPink}/>
         <Text sx={{display: 'block'}}>Choose another method</Text>
     </Button>
     </Flex>
    <form id="upload-container" method="POST" action="send.php">
-      <Box sx={{textAlign: 'center', border:'1px dashed #D8D8E2', borderRadius: '12px', position: 'relative',   width: '440px',  height: '140px'}}>
+      <Box sx={imageUploadContainer}>
           <input 
             lang='en' 
             onChange={({target}) => readFile(target)} 
@@ -68,9 +67,12 @@ const ipfs= async () => {
            ? <Text sx={{variant: 'text.smallTextMedium', opacity: 1, display: 'block' }}>{name}
              {bytes && <button style={{ marginTop: '50px', zIndex: 10, marginLeft: '5px' }} type='button' onClick={ipfs}>hash ipfs</button>}
            </Text> 
-           : <Text sx={{variant: 'text.smallTextMedium', opacity: 1, mt: '48px', display: 'block'}}>Upload Agreement file using Drag & Drop  <br/> or 
+           : <>
+           <Text sx={uploadText}>Upload Agreement file using Drag & Drop  <br/> or 
            <span style={{color: '#CA5CF2'}}>  Choose File</span>
           </Text>
+          <Text sx={uploadTextMobile}>Choose File</Text>
+          </>
           }
       </Box>
   </form>
@@ -98,12 +100,7 @@ export default function StepTwo() {
         {agreementLocations.map(el => {
           return <Label 
             key={el?.name} 
-            sx={{
-              justifyContent: 'space-between',
-              width: 'inherit', 
-              opacity: 1, 
-              ...flex, 
-            }}  
+            sx={itemRadio}  
             onClick={() => setRdioValue(el.value)}>
           <Icon width='16px' src={radioValue === el.value ? iconsObj.radioOn : iconsObj.radioOff}/>
           <Radio 
@@ -127,7 +124,7 @@ return  (<> {cloud ? <Flex sx={{justifyContent: 'space-between'}}>
         <div style={{width: '50px', height: '50px', margin: '0 auto'}}>
             <Icon width='50px' height='50px' src={iconsObj.uploadCloudPrimary}/>
         </div>
-        <Text sx={{variant: 'text.largeTextBold', lineHeight: '120%', mt:'24px', mb:'20px'}}>Upload Agreement</Text>
+        <Text sx={{...primaryTitleItem, mb:'12px', mt: '24px'}}>Upload Agreement</Text>
         <Text sx={{variant: 'text.smallTextMedium', maxWidth: '160px', opacity: 1}}>
           Upload file of a type PDF, DOCX, TXT
         </Text>
@@ -136,7 +133,7 @@ return  (<> {cloud ? <Flex sx={{justifyContent: 'space-between'}}>
         <div style={{width: '50px', height: '50px', margin: '0 auto'}}>
             <Icon width='50px' height='50px' src={iconsObj.fileSecondarysvg}/>
         </div>
-        <Text sx={{variant: 'text.largeTextBold', mb:'20px',  mt:'24px'}}>Enter Agreement</Text>
+        <Text sx={{...primaryTitleItem, mb:'12px', mt: '24px'}}>Enter Agreement</Text>
         <Text sx={{variant: 'text.smallTextMedium', maxWidth: '160px' , opacity: 1}}>
             Enter Text or Markdown content for the Agreement
         </Text>

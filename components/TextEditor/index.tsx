@@ -16,10 +16,10 @@ const TextEditor = ({setCloud, cloud}: any) => {
 
     return <div style={{ position: 'relative'}}>
     <Flex sx={{alignItems: 'center'}}>
-        <Text sx={{variant: 'forms.label', minWidth: '200px'}}>Enter agreement description</Text>
-        <Button onClick={() => setCloud(!cloud)}  sx={{variant: 'buttons.back'}}>
+        <Text sx={{variant: 'forms.label', minWidth: '170px'}}>Enter agreement description</Text>
+        <Button onClick={() => setCloud(!cloud)}  sx={{variant: 'buttons.back', height: '30px', pt: 0}}>
             <Icon style={{display: 'block'}} src={iconsObj.arrowLeftPink}/>
-            <Text sx={{display: 'block'}}>Choose another privacy</Text>
+            <Text sx={{display: 'block', fontSize: '10px'}}>Choose another privacy</Text>
         </Button>
     </Flex>
     <MDEditor

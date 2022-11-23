@@ -45,7 +45,10 @@ export const theme: Theme = {
       display: 'block',
       marginLeft: 'auto',
       marginRight: 'auto',
-      cursor: 'pointer'
+      cursor: 'pointer',
+      '@media screen and (max-width: 375px)': {
+        width: '100%',
+        },
      },
      secondary: {
       height: '50px',
@@ -62,7 +65,10 @@ export const theme: Theme = {
       marginLeft: 'auto',
       marginRight: 'auto',
       cursor: 'pointer',
-      textAlign: 'center'
+      textAlign: 'center',
+      '@media screen and (max-width: 375px)': {
+        width: '100%',
+        },
      },
      back: {
       display: 'flex',

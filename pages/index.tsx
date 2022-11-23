@@ -26,7 +26,7 @@ const Home: NextPage = () => {
       <CreateAgreement/> 
       </>
     }
-    {/* <Footer/> */}
+    <Footer/>
   </Container>
   )
 }
