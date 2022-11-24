@@ -16,10 +16,12 @@ import trashPrimary from '../img/svg/trashPrimary.svg'
 import chevronDown from '../img/svg/chevronDown.svg'
 import chevronLeft from '../img/svg/chevronLeft.svg'
 import fieldResize from '../img/svg/fieldResize.svg'
+import iconSetting from '../img/svg/iconSetting.svg'
 import shareFourth from '../img/svg/shareFourth.svg'
 import layersThree from '../img/svg/layersThree.svg'
 import checkboxOff from '../img/svg/checkboxOff.svg'
 import checkCircle from '../img/svg/checkCircle.svg'
+import ellipseGreen from '../img/svg/ellipseGreen.svg'
 import infoCircle from '../img/svg/infoCircle.svg'
 import plusCircle from '../img/svg/plusCircle.svg'
 import checkboxOn from '../img/svg/checkboxOn.svg'
@@ -27,6 +29,7 @@ import chevronUp from '../img/svg/chevronUp.svg'
 import published from '../img/svg/published.svg'
 import privateIcon from '../img/svg/private.svg'
 import publicIcon from '../img/svg/public.svg'
+import iconExit  from '../img/svg/iconExit.svg'
 import calendar from '../img/svg/calendar.svg'
 import settings from '../img/svg/settings.svg'
 import download from '../img/svg/download.svg'
@@ -56,6 +59,7 @@ import done from '../img/svg/done.svg'
 import edit from '../img/svg/edit.svg'
 import plus from '../img/svg/plus.svg'
 import send from '../img/svg/send.svg'
+import iconSix from '../img/svg/icon6.svg'
 import prof from '../img/svg/prof.svg'
 import mail from '../img/svg/mail.svg'
 import ink from '../img/svg/ink.svg'
@@ -84,12 +88,14 @@ const iconsObj: IconsMapper = {
     privateIcon,
     checkboxOff,
     chevronDown,
+    ellipseGreen,
     layersThree,
     checkCircle,
     shareFourth,
     fieldResize,
     chevronLeft,
     infoCircle,
+    iconSetting,
     checkboxOn,
     plusCircle,
     publicIcon,
@@ -104,6 +110,8 @@ const iconsObj: IconsMapper = {
     download,
     twitter,
     radioOn,
+    iconSix,
+    iconExit,
     pending,
     verify,
     github,

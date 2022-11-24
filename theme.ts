@@ -108,8 +108,26 @@ export const theme: Theme = {
       pl: '14px',
       m: '0 5px 0 0',
       width: 'initial',
-     }
-  },
+     },
+     userBtn:{
+     display: 'flex',   
+     flexDirection:'row',
+     justifyContent: 'center',
+     alignItems: 'center',
+     fontFamily: 'Inter',
+     fontStyle: 'normal',
+     fontWeight: 700,
+     fontSize: '16px',
+     lineHeight: '25.6px',
+     color: '#212121',
+     background: '#FFFFFF',
+     borderRadius: '80px',
+     height: '26px',
+     width: 'initial',
+     border: '2px solid #EDEDF3'
+
+     },
+    },
   fonts: {
     fontMedium: 'InterMedium',
     fontBold: 'InterBold',
@@ -194,6 +212,14 @@ export const theme: Theme = {
       fontSize: '14px',
       color: '#212121',
       opacity: 0.5,
+    },
+    smallTextMediumUser:{
+      fontFamily: 'InterMedium',
+      fontWeight: 500,
+      lineHeight: '22.4px',
+      fontSize: '14px',
+      color: '#212121',
+      opacity: 1,
     },
     smallTextBold : {
       fontFamily: 'InterBold',

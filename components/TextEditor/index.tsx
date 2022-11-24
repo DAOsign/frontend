@@ -27,6 +27,7 @@ const TextEditor = ({setCloud, cloud}: any) => {
         onChange={(e) => setValue(e || '')}
         preview="edit"
         autoFocus
+
       />
       <Box sx={{position: 'absolute', right: '5px', backgroundColor: 'inherit', bottom: '35px', pointerEvents: 'none', cursor: 'pointer'}} >
         <Icon width='30px' height='30px' style={{opacity: 0.3}} src={iconsObj.fieldResize}/>
