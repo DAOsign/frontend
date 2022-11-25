@@ -64,6 +64,7 @@ export interface IconsMapper extends Record<string, unknown> {
     send: Icon;
     Bell: Icon;
     mail: Icon;
+    menu: Icon;
     user: Icon;
     ink: Icon;
     m: Icon;

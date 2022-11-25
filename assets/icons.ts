@@ -61,6 +61,7 @@ import user from '../img/svg/user.svg'
 import done from '../img/svg/done.svg'
 import edit from '../img/svg/edit.svg'
 import plus from '../img/svg/plus.svg'
+import menu from '../img/svg/menu.svg'
 import send from '../img/svg/send.svg'
 import prof from '../img/svg/prof.svg'
 import mail from '../img/svg/mail.svg'
@@ -137,6 +138,7 @@ const iconsObj: IconsMapper = {
     prof,
     send,
     Bell,
+    menu,
     mail,
     user,
     m

@@ -23,7 +23,10 @@ marginRight:'20px',
 },
 '@media screen and (max-width: 768px)': {
   width: '100%',
-  flexDirection: 'column'
+  minWidth: '343px',
+  flexDirection: 'column',
+  minHeight: '292px',
+  px: '16px'
 }
 } as ThemeUIStyleObject;
 
@@ -40,18 +43,22 @@ const iconExit = {
 } as ThemeUIStyleObject;
 
 const userFoto = {  
- width: '124px', 
- height: '124px',
- left: '76px',
- top: '28px',
- mt:'28px',
- mb:'12px',
- backgroundColor: 'grey',
- border:'grey',
- borderRadius: '50%',
- '@media screen and (max-width: 1200px)': {
-    m: 0
-}
+  width: '124px', 
+  height: '124px',
+  left: '76px',
+  top: '28px',
+  mt:'28px',
+  mb:'12px',
+  backgroundColor: 'grey',
+  border:'grey',
+  borderRadius: '50%',
+  '@media screen and (max-width: 1200px)': {
+      m: 0
+  },
+  '@media screen and (max-width: 768px)': {
+    width: '80px', 
+    height: '80px',
+  }
 } as ThemeUIStyleObject;
 
  const text = {
@@ -104,7 +111,8 @@ const userFoto = {
   width: '130px',
   height: '130px',
   '@media screen and (max-width: 1200px)': {
-    m: '0  0 0 auto'
+    m: '0 auto 0',
+    bottom: '5px'
   }
  } as ThemeUIStyleObject;
 
@@ -112,6 +120,10 @@ const userFoto = {
   variant: 'buttons.userBtn', 
   opacity: 1 , 
   height: '46px',
+  '@media screen and (max-width: 768px)':  {
+   maxWidth: 'unset',
+   width: '90%'
+   }
  } as ThemeUIStyleObject;
 
  const improveBtnContainer = { 
@@ -119,8 +131,15 @@ const userFoto = {
     position: 'absolute',
     bottom: '24px',
     left: '168px',
-    width: 'unset'
-  }
+    width: 'unset',
+  },
+  '@media screen and (max-width: 768px)':  {
+    position: 'absolute',
+    bottom: '24px',
+    left: '50%',
+    transform: 'translate(-50%, 0)',
+    width: '100%',
+   }
  } as ThemeUIStyleObject;
 
 const infoContainer = {

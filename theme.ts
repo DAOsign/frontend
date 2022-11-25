@@ -32,6 +32,20 @@ export const theme: Theme = {
     },
   },
   buttons: {
+     grey: {
+      width: '310px',
+      height: '50px',
+      background: '#FFFFFF',
+      border:' 2px solid #EDEDF3',
+      borderRadius: '80px',
+      fontFamily: 'InterBold',
+      fontStyle: 'normal',
+      fontWeight: 700,
+      fontSize: '16px',
+      lineHeight: '160%',
+      textAlign: 'center',
+      color: '#212121',
+     },
      primary: {
       width: '225px',
       height: '50px',
