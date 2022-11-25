@@ -54,7 +54,7 @@ const publickMethod = (setStep: any, step: boolean) => {
   </Flex>
   <Flex sx={item}>
      <Icon src={iconsObj.globe}/>
-     <Container sx={{textAlign: 'left', maxWidth: '290px', ml: '6px'}}>
+     <Container sx={{textAlign: 'left', maxWidth: '290px', ml: '6px', pr: '5px'}}>
          <Text sx={{variant: 'text.smallTextBold', mb: '3px'}}>Published</Text>
          <Text sx={secondaryTitle}>Public and available on the your {' '}
          <Text sx={{variant: 'text.link'}}>public signature profile</Text>
