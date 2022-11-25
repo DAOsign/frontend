@@ -158,15 +158,98 @@ const fotoContainer = {
  }
 } as ThemeUIStyleObject;
 
+const inputMyAgreement  = {
+  backgroundColor: '#FFFFFF', 
+  borderRadius: '62px',
+  width: '345px',
+
+} as ThemeUIStyleObject;
+
+const headerContainer  = {
+  flexDirection:'row',
+  alignItems:'baseline',
+  mt:'38px',
+
+  '@media screen and (max-width: 768px)': {
+   flexDirection:'column'
+  },
+ 
+} as ThemeUIStyleObject;
+
+const agreementConteiner ={
+   mt:'23px',
+   flexDirection:'column', 
+   background:'white', 
+   border:'1px solid #EDEDF3',
+   borderRadius:'12px',
+   p:'20px 24px 20px 24px'
+
+} as ThemeUIStyleObject;
+
+const iconMenuAgreement ={
+  display: 'none',
+   ml: '16px',
+   width: '32px',
+   height: '32px',
+   borderRadius:'50%',
+   backgroundColor: '#EDEDF3',
+   textAlign:'center', 
+   padding: '4px 0 0 0',
+   cursor: 'poiner',
+   '@media screen and (max-width: 768px)': {
+    display: 'block'
+   },
+
+} as ThemeUIStyleObject;
+
+const greyAgrBtn = {
+   padding:'0',
+   width: '63px',
+   height: '32px',
+   background: '#EDEDF3',
+   borderRadius: '52px',
+   fontFamily: 'InterBold',
+   fontStyle: 'normal',
+   fontWeight: 700,
+   fontSize: '14px',
+   lineHeight: '160%',
+   textAlign: 'center',
+   color: '#212121',
+  } as ThemeUIStyleObject;
+
+  const textContainer = {
+    justifyContent:'flex-end',
+    '@media screen and (max-width: 768px)': {
+     justifyContent: 'center',
+     alignItems:'center',
+     border:'1px solid #EDEDF3',
+     borderRadius:'62px',
+     height:'50px',
+     mt:'10px'
+
+     },
+  } as ThemeUIStyleObject;
+
+  const newAgreementBtn ={
+
+  }
+
+
 export  {
   normalTextBoldGreen,
   improveBtnContainer,
+  agreementConteiner,
+  iconMenuAgreement,
+  inputMyAgreement,
   percentContainer,
+  headerContainer,
   containerSides,
   infoContainer,
   fotoContainer,
+  textContainer,
   improveBtn,
   container,
+  greyAgrBtn,
   noContent,
   userFoto,
   iconExit,

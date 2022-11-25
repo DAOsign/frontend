@@ -1,9 +1,11 @@
-import React ,{useState}from "react"
+import React from 'react'
 import UserCard from './UserCard'
 import {Flex,Button,Text, Container} from 'theme-ui'
 import {title,containerSides, noContent} from './styles'
 import Icon from '../icon/index'
 import iconsObj from "../../assets/icons"
+import HeaderAgreement from './HeaderAgreement'
+import ItemMyAgreement from './ItemMyAgreement'
 
 
 export default function  MyAgreement ({address} : any){
@@ -18,12 +20,18 @@ export default function  MyAgreement ({address} : any){
                 type='button'>+ New Agreement
             </Button>
           </Flex>
-          <Container sx={{textAlign: 'center'}}>
+          <HeaderAgreement/>
+          { false ? 
+           <Container sx={{textAlign: 'center'}}>
               <Flex sx={noContent}>
                   <Icon  src={iconsObj.portfile}/>
               </Flex>
               <Text sx={{variant: 'text.normalTextBold'}}>{`You don't have any agreements yet`}</Text>
-          </Container>
+           </Container>
+           :
+           <ItemMyAgreement/>
+          }
+       
         </Container>
       </Flex>
     )
