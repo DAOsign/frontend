@@ -1,10 +1,13 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { useLock } from "../../hooks/useLock";
 import { Button, Container, Heading, Text } from "theme-ui";
-import {title, container} from "./styles";
+import { title, container } from "./styles";
+import { useQuery, useMutation } from "urql";
+import { allUsers } from "../../modules/graphql/queries";
+import { login as loginMutation } from "../../modules/graphql/mutations";
 
-export default function Connect({setAddres}: any) {
+export default function Connect({ setAddres }: any) {
   const lock = useLock();
   console.log(lock);
 
@@ -12,16 +15,35 @@ export default function Connect({setAddres}: any) {
     setAddres(lock?.provider?.safe?.safeAddress || lock?.provider?.selectedAddress || lock?.provider?.accounts[0] || "");
   }, [lock]);
 
+  const payloadToSign = useRef("");
+
+  const [, login] = useMutation(loginMutation);
+
+  const onAfterConnect = async () => {
+    login({ address: await lock.getSignerAddress(), signature: "" }).then((res) => console.log(res));
+    //const signature = await lock.sign("");
+  };
+
   const connect = async (name: any) => {
     const res = await lock.login(name);
+    onAfterConnect();
     console.log("res", res);
   };
 
+  useEffect(() => {
+    //ToDo move to fetch utils
+    const getPayload = async () => {
+      return "";
+    };
+
+    getPayload().then((res) => {
+      payloadToSign.current = res;
+    });
+  }, []);
+
   return (
     <Container sx={container}>
-      <Heading  sx={title}>
-        Connect a Wallet
-      </Heading>
+      <Heading sx={title}>Connect a Wallet</Heading>
       <Button type="button" variant="primary" onClick={() => connect("injected")}>
         MetaMask
       </Button>

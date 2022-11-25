@@ -1,17 +1,11 @@
-import {
-  createContext,
-  ProviderProps,
-  useCallback,
-  useEffect,
-  useRef,
-  useState,
-} from "react";
+import { createContext, ProviderProps, useCallback, useEffect, useRef, useState } from "react";
 
 import { Lock } from "../lib/lock";
 import options, { ConnectorType } from "../lib/snapshot/options";
 import { getInjected } from "../lib/lock/utils";
+import type WalletConnectProvider from "@walletconnect/web3-provider";
 
-type ProviderType = any;
+type ProviderType = WalletConnectProvider | any;
 
 interface LockContext {
   isLoading: Boolean;
@@ -19,6 +13,7 @@ interface LockContext {
   provider?: ProviderType;
   lockClient: Lock;
   login: (connector: ConnectorType) => Promise<ProviderType>;
+  getSignerAddress: () => Promise<string>;
   logout: () => Promise<void>;
   sign: (message: string) => Promise<string>;
   getConnector: () => Promise<ConnectorType | false>;
@@ -47,9 +42,7 @@ const LockProvider = (props?: Partial<ProviderProps<LockContext>>) => {
   const providerRef = useRef<ProviderType>();
   const provider = providerRef.current;
 
-  async function login(
-    connector: ConnectorType = "injected"
-  ): Promise<ProviderType> {
+  async function login(connector: ConnectorType = "injected"): Promise<ProviderType> {
     const lockConnector = lockInstance.getConnector(connector);
     console.log("connector", connector);
 
@@ -79,6 +72,28 @@ const LockProvider = (props?: Partial<ProviderProps<LockContext>>) => {
       setState((state) => ({ ...state, isAuthenticated: false }));
       providerRef.current = undefined;
     }
+  }
+
+  async function getSignerAddress() {
+    const connector = await getConnector();
+
+    if (!connector) return ""; //TODO throw error
+
+    switch (connector) {
+      // Metamask
+      case "injected": {
+        return "";
+      }
+      // Walletconnect
+      case "walletconnect": {
+        return (provider as WalletConnectProvider).accounts[0];
+      }
+      // Coinbase
+      case "walletlink": {
+        return "";
+      }
+    }
+    return "";
   }
 
   async function sign(value: string): Promise<string> {
@@ -112,17 +127,13 @@ const LockProvider = (props?: Partial<ProviderProps<LockContext>>) => {
 
     return connector;
   }
-  console.log("provider", provider);
 
   async function getConnector(): Promise<ConnectorType | false> {
-    const connector = localStorage.getItem(
-      `_${name}.connector`
-    ) as ConnectorType;
+    const connector = localStorage.getItem(`_${name}.connector`) as ConnectorType;
     if (connector) {
-      const lockConnector = lockInstance.getConnector(
-        connector as ConnectorType
-      );
+      const lockConnector = lockInstance.getConnector(connector as ConnectorType);
       const isLoggedIn = await lockConnector.isLoggedIn();
+
       return isLoggedIn ? connector : false;
     }
     return false;
@@ -158,6 +169,7 @@ const LockProvider = (props?: Partial<ProviderProps<LockContext>>) => {
         provider: providerRef.current,
         lockClient: lockInstance,
         login,
+        getSignerAddress,
         logout,
         sign,
         getConnector,
