@@ -19,9 +19,10 @@ import fieldResize from '../img/svg/fieldResize.svg'
 import iconSetting from '../img/svg/iconSetting.svg'
 import shareFourth from '../img/svg/shareFourth.svg'
 import layersThree from '../img/svg/layersThree.svg'
+import ellipseGreen from '../img/svg/ellipseGreen.svg'
 import checkboxOff from '../img/svg/checkboxOff.svg'
 import checkCircle from '../img/svg/checkCircle.svg'
-import ellipseGreen from '../img/svg/ellipseGreen.svg'
+import greyPercent from '../img/svg/greyPercent.svg'
 import infoCircle from '../img/svg/infoCircle.svg'
 import plusCircle from '../img/svg/plusCircle.svg'
 import checkboxOn from '../img/svg/checkboxOn.svg'
@@ -36,6 +37,7 @@ import download from '../img/svg/download.svg'
 import facebook from '../img/svg/facebook.svg'
 import logoIcon from '../img/svg/logoIcon.svg'
 import telegram from '../img/svg/telegram.svg'
+import portfile from '../img/svg/portfile.svg'
 import radioOff from '../img/svg/radioOff.svg'
 import radioOn from '../img/svg/radioOn.svg'
 import pending from '../img/svg/pending.svg'
@@ -45,6 +47,7 @@ import github from '../img/svg/github.svg'
 import wallet from '../img/svg/wallet.svg'
 import xClose from '../img/svg/xClose.svg'
 import verify from '../img/svg/verify.svg'
+import iconSix from '../img/svg/icon6.svg'
 import world from '../img/svg/world.svg'
 import email from '../img/svg/email.svg'
 import globe from '../img/svg/globe.svg'
@@ -59,7 +62,6 @@ import done from '../img/svg/done.svg'
 import edit from '../img/svg/edit.svg'
 import plus from '../img/svg/plus.svg'
 import send from '../img/svg/send.svg'
-import iconSix from '../img/svg/icon6.svg'
 import prof from '../img/svg/prof.svg'
 import mail from '../img/svg/mail.svg'
 import ink from '../img/svg/ink.svg'
@@ -85,6 +87,7 @@ const iconsObj: IconsMapper = {
     trashPrimary,
     bookmarkVote,
     chevronRight,
+    greyPercent,
     privateIcon,
     checkboxOff,
     chevronDown,
@@ -101,6 +104,7 @@ const iconsObj: IconsMapper = {
     publicIcon,
     chevronUp,
     published,
+    portfile,
     logoIcon,
     settings,
     telegram,

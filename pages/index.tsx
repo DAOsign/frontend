@@ -8,8 +8,8 @@ import Header from '../components/Header/Header'
 import { Container } from 'theme-ui'
 import CreateAgreement from '../components/CreateAgreement'
 import {animateContainer} from '../components/Logo/styles'
-import UserCard from '../components/CreateAgreement/MyAgreement/UserCard'
-import MyAgreement from '../components/CreateAgreement/MyAgreement'
+import UserCard from '../components/MyAgreement/UserCard'
+import MyAgreement from '../components/MyAgreement'
 
 const Home: NextPage = () => {
   const [address, setAddres] = useState<string>('');
@@ -26,7 +26,7 @@ const Home: NextPage = () => {
       </Container> : <>
       <Header address={address || ''}/> 
       {/* <CreateAgreement/>  */}
-      <MyAgreement/>
+      <MyAgreement address={address || ''}/>
       </>
     }
  {/*   <Footer/>*/}
