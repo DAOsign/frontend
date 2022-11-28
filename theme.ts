@@ -32,6 +32,7 @@ export const theme: Theme = {
     },
   },
   buttons: {
+<<<<<<< HEAD
     grey: {
       width: "310px",
       height: "50px",
@@ -94,6 +95,70 @@ export const theme: Theme = {
       border: "unset",
       backgroundColor: "inherit",
       fontStyle: "normal",
+=======
+     grey: {
+      width: '310px',
+      height: '50px',
+      background: '#FFFFFF',
+      border:' 2px solid #EDEDF3',
+      borderRadius: '80px',
+      fontFamily: 'InterBold',
+      fontStyle: 'normal',
+      fontWeight: 700,
+      fontSize: '16px',
+      lineHeight: '160%',
+      textAlign: 'center',
+      color: '#212121',
+     },
+     primary: {
+      width: '225px',
+      height: '50px',
+      borderRadius: '40px',
+      backgroundColor: '#CA5CF2',
+      color: '#fff',
+      fontSize: '16px',
+      lineHeight: '25.6px',
+      fontFamily: 'InterBold',
+      fontWeight: 700,
+      display: 'block',
+      marginLeft: 'auto',
+      marginRight: 'auto',
+      cursor: 'pointer',
+      '@media screen and (max-width: 375px)': {
+        width: '100%',
+        },
+     },
+     secondary: {
+      height: '50px',
+      width: '165px',
+      borderRadius: '80px',
+      border: '2px solid #CA5CF2',
+      backgroundColor: 'inherit',
+      color: '#CA5CF2',
+      fontSize: '16px',
+      lineHeight: '160%',
+      fontFamily: 'InterBold',
+      fontWeight: 700,
+      display: 'block',
+      marginLeft: 'auto',
+      marginRight: 'auto',
+      cursor: 'pointer',
+      textAlign: 'center',
+      '@media screen and (max-width: 375px)': {
+        width: '100%',
+        },
+     },
+     back: {
+      display: 'flex',
+      justifyContent: 'space-around',
+      alignItems: 'center',
+      height: '40px',
+      width: '165px',
+      borderRadius: '80px',
+      border: 'unset',
+      backgroundColor: 'inherit',
+      fontStyle: 'normal',
+>>>>>>> 3cd6dc35758ab2c422d2171a3e30abd7cdcd9291
       fontWeight: 400,
       fontSize: "12px",
       lineHeight: "160%",
@@ -113,6 +178,7 @@ export const theme: Theme = {
       fontFamily: "Inter",
       fontStyle: "normal",
       fontWeight: 700,
+<<<<<<< HEAD
       fontSize: "14px",
       lineHeight: "160%",
       color: "#212121",
@@ -141,6 +207,37 @@ export const theme: Theme = {
       border: "2px solid #EDEDF3",
     },
   },
+=======
+      fontSize: '14px',
+      lineHeight: '160%',
+      color: '#212121',
+      background: '#F7F7FB',
+      borderRadius: '90px',
+      height: '32px',
+      pl: '14px',
+      m: '0 5px 0 0',
+      width: 'initial',
+     },
+     userBtn:{
+     display: 'flex',   
+     flexDirection:'row',
+     justifyContent: 'center',
+     alignItems: 'center',
+     fontFamily: 'Inter',
+     fontStyle: 'normal',
+     fontWeight: 700,
+     fontSize: '16px',
+     lineHeight: '25.6px',
+     color: '#212121',
+     background: '#FFFFFF',
+     borderRadius: '80px',
+     height: '26px',
+     width: 'initial',
+     border: '2px solid #EDEDF3'
+
+     },
+    },
+>>>>>>> 3cd6dc35758ab2c422d2171a3e30abd7cdcd9291
   fonts: {
     fontMedium: "InterMedium",
     fontBold: "InterBold",
@@ -226,6 +323,7 @@ export const theme: Theme = {
       color: "#212121",
       opacity: 0.5,
     },
+<<<<<<< HEAD
     smallTextMediumUser: {
       fontFamily: "InterMedium",
       fontWeight: 500,
@@ -236,6 +334,18 @@ export const theme: Theme = {
     },
     smallTextBold: {
       fontFamily: "InterBold",
+=======
+    smallTextMediumUser:{
+      fontFamily: 'InterMedium',
+      fontWeight: 500,
+      lineHeight: '22.4px',
+      fontSize: '14px',
+      color: '#212121',
+      opacity: 1,
+    },
+    smallTextBold : {
+      fontFamily: 'InterBold',
+>>>>>>> 3cd6dc35758ab2c422d2171a3e30abd7cdcd9291
       fontWeight: 700,
       lineHeight: "22.4px",
       fontSize: "14px",

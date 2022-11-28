@@ -5,6 +5,7 @@ import iconsObj from "../../assets/icons";
 import {
   secondaryTitleStep,
   primaryTitleItem,
+<<<<<<< HEAD
   containerButtons,
   stepsContainer,
   leftSideItem,
@@ -13,6 +14,17 @@ import {
   box,
   fW,
 } from "./styles";
+=======
+  containerButtons, 
+  stepsContainer, 
+  leftSideItem, 
+  stepNumber, 
+  stepStyle, 
+  box,
+  fW, 
+  } from './styles'
+
+>>>>>>> 3cd6dc35758ab2c422d2171a3e30abd7cdcd9291
 
 interface LeftSideoProp {
   step: number;
@@ -30,6 +42,7 @@ export default function LeftSide(prop: LeftSideoProp) {
               <Text sx={{ variant: "text.normalTextBold", color: "#fff" }}>1</Text>
             )}
           </Box>
+<<<<<<< HEAD
 
           <Container sx={leftSideItem}>
             <Text sx={primaryTitleItem}>Privacy</Text>
@@ -70,6 +83,37 @@ export default function LeftSide(prop: LeftSideoProp) {
             <Text sx={secondaryTitleStep}>Add signers and observers</Text>
           </Container>
         </Flex>
+=======
+       
+          <Container sx={leftSideItem}>
+              <Text sx={primaryTitleItem}>Privacy</Text>
+              <Text sx={secondaryTitleStep}>Enter title and privacy ot the agreement</Text>
+          </Container>
+      </Flex>
+      <Container sx={box}></Container>
+      <Flex sx={stepStyle}>
+          <Box sx={{...stepNumber, backgroundColor: (prop.step > 1 ?  '#CA5CF2' : '#EDEDF3')}}>
+          {
+            prop.step > 2 ? 
+            <Icon src={iconsObj.done}/>
+            :
+            <Text sx={{variant: 'text.normalTextBold', color: '#fff'}}>2</Text>
+            }
+          </Box>
+          <Container sx={leftSideItem}>
+              <Text sx={primaryTitleItem}>Content</Text>
+              <Text sx={secondaryTitleStep}>Enter agreement content</Text>
+          </Container>
+      </Flex>
+     <Container sx={box}></Container>
+      <Flex  sx={stepStyle}>
+      <Box sx={{...stepNumber, backgroundColor: (prop.step > 2 ?  '#CA5CF2' : '#EDEDF3')}}>
+      <Text sx={{variant: 'text.normalTextBold', color: '#fff'}}>3</Text>
+      </Box>
+      <Container sx={leftSideItem}>
+          <Text sx={primaryTitleItem}>Signers</Text>
+          <Text sx={secondaryTitleStep}>Add signers and observers</Text>
+>>>>>>> 3cd6dc35758ab2c422d2171a3e30abd7cdcd9291
       </Container>
       <Container sx={containerButtons}>
         <Button

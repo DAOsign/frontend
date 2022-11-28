@@ -14,7 +14,10 @@
   "dependencies": {
     "@emotion/react": "^11.10.5",
     "@snapshot-labs/lock": "github:snapshot-labs/lock",
+<<<<<<< HEAD
     "graphql": "^16.6.0",
+=======
+>>>>>>> 3cd6dc35758ab2c422d2171a3e30abd7cdcd9291
     "@uiw/react-md-editor": "^3.19.7",
     "ipfs-only-hash": "^4.0.0",
     "next": "12.3.1",

@@ -1,5 +1,6 @@
 import { ThemeUIStyleObject } from "theme-ui";
 const containerSides = {
+<<<<<<< HEAD
   maxWidth: "1200px",
   justifyContent: "space-between",
   margin: "40px auto 0",
@@ -71,9 +72,85 @@ const itemRadio = {
       display: "none",
     },
   },
+=======
+    maxWidth: '1200px', 
+    justifyContent: 'space-between', 
+    margin: '40px auto 0', 
+    textAlign: 'center',
+    '@media screen and (max-width: 1200px)': {
+        flexDirection: 'column',
+        mt: '270px'
+       },
+    '@media screen and (max-width: 768px)': {
+        flexDirection: 'column',
+        mt: '220px'
+    }
+>>>>>>> 3cd6dc35758ab2c422d2171a3e30abd7cdcd9291
 } as ThemeUIStyleObject;
 
+const primaryTitleItem = {
+    variant: 'text.largeTextBold',
+    '@media screen and (max-width: 768px)': {
+        variant: 'text.smallTextBold'
+        },
+}as ThemeUIStyleObject;
+
+const imageUploadContainer = {
+    textAlign: 'center', 
+    border:'1px dashed #D8D8E2', 
+    borderRadius: '12px', 
+    position: 'relative',   
+    width: '440px',  
+    height: '140px',
+    '@media screen and (max-width: 768px)': {
+       width: '124px', 
+       height: '46px',
+       border: '2px solid #EDEDF3',
+       borderRadius: '80px',
+       mt: '10px'
+    },
+
+}as ThemeUIStyleObject;
+
+const uploadText = {
+    variant: 'text.smallTextMedium', 
+    display: 'block',
+    opacity: 1, 
+    mt: '48px', 
+    '@media screen and (max-width: 768px)': {
+       display: 'none'
+     },
+}as ThemeUIStyleObject;
+
+const uploadTextMobile = {
+    display: 'none',
+    '@media screen and (max-width: 768px)': {
+       display: 'inline-block',
+       mt: '10px',
+       variant: 'text.normalTextBold'
+     },
+}as ThemeUIStyleObject;
+
+const itemRadio = {
+    justifyContent: 'space-between',
+    width: 'inherit', 
+    opacity: 1, 
+    display: 'flex',
+    alignItem: 'center',
+    '&:nth-child(3)':  {
+    opacity: '0.5',
+    pointerEvents: 'none'
+    },
+    '@media screen and (max-width: 768px)': {
+        '&:nth-child(3)':  {
+            display: 'none',
+        }
+     },
+ 
+}as ThemeUIStyleObject;
+
 const leftSide = {
+<<<<<<< HEAD
   maxWidth: "776px",
   minHeight: "550px",
   background: "#FFFFFF",
@@ -162,6 +239,97 @@ const card = {
     maxWidth: "150px",
     px: "12px",
   },
+=======
+    maxWidth: '776px',
+    minHeight: '550px',
+    background: '#FFFFFF',
+    border: '1px solid #EDEDF3',
+    borderRadius: '12px',
+    paddingX :'128px',
+    paddingBottom: '60px',
+    paddingTop: '60px',
+    '@media screen and (max-width: 1200px)': {
+       maxWidth: '672px',
+       paddingX :'100px',
+       borderBottom: 'none',
+       minHeight: '300px',
+       borderRadius: '12px 12px 0 0'
+       },
+    '@media screen and (max-width: 768px)': {
+       maxWidth: '343px',
+       paddingX :'16px',
+       minHeight: '300px',
+       },
+} as ThemeUIStyleObject;
+
+const title = {
+    variant: 'text.h2', 
+    mb: '40px', 
+    display: 'inline-block',
+    '@media screen and (max-width: 768px)': {
+       variant: 'text.h4'
+    },
+} as ThemeUIStyleObject;
+
+const rightSide = {
+    maxWidth: '360px',
+    minHeight: '550px',
+    background: '#FFFFFF',
+    border: '1px solid #EDEDF3',
+    borderRadius: '12px',
+    paddingX: '25px',
+    maxHeight: '590px',
+    paddingBottom: '32px',
+    paddingTop: '52px',
+    '@media screen and (max-width: 1200px)': {
+        maxWidth: '672px',
+        width: '100%',
+        paddingX :'100px',
+        borderTop: 'none',
+        borderRadius: '0 0 12px 12px',
+        height: 'initial',
+        minHeight: 'unset',
+        pb: '72px',
+        pt: 0
+        },
+    '@media screen and (max-width: 768px)': {
+        maxWidth: '343px',
+        paddingX :'16px',
+        pb: '40px',
+        pt: 0
+        },
+} as ThemeUIStyleObject;
+
+const container = {
+    border: '2px solid #F7F7FB', 
+    borderRadius: '8px', 
+    px: '32px',
+    py: '24px',
+    '@media screen and (max-width: 768px)': {
+        maxWidth: '343px',
+        paddingX :'16px',
+        pb: '40px',
+        pt: 0
+        },
+} as ThemeUIStyleObject;
+
+const card = {
+    textAlign: 'center', 
+    border: '2px solid #F7F7FB', 
+    borderRadius: '8px', 
+    px:'24px', 
+    pt: '20px', 
+    pb: '27px',
+    maxWidth: '210px',
+    m: 0,
+    cursor: 'pointer',
+    minHeight: '230px',
+    '@media screen and (max-width: 768px)': {
+       maxWidth: '150px',
+       px:'12px', 
+    },
+  
+>>>>>>> 3cd6dc35758ab2c422d2171a3e30abd7cdcd9291
 } as ThemeUIStyleObject;
 
 const flex = {
@@ -216,6 +384,7 @@ const fW = {
 };
 
 const containerButtons = {
+<<<<<<< HEAD
   "@media screen and (max-width: 1200px)": {
     "& > button:first-child": {
       mt: 0,
@@ -322,3 +491,114 @@ export {
   box,
   fW,
 };
+=======
+
+  '@media screen and (max-width: 1200px)': {
+    '& > button:first-child' : {
+        mt: 0
+       }
+     },
+} as ThemeUIStyleObject;
+
+const secondaryTitleStep = {
+    variant: 'text.overscript',  
+    opacity: 0.5,
+    '@media screen and (max-width: 1200px)': {
+        maxWidth: '128px'
+      },
+    '@media screen and (max-width: 768px)': {
+       maxWidth: '88px'
+      },
+} as ThemeUIStyleObject;
+
+const stepsContainer = {
+  '@media screen and (max-width: 1200px)': {
+      position: 'absolute',
+      maxWidth: '672px',
+      width: '100%',
+      height: '202px',
+      alignItems: 'center',
+      top: '104px',
+      display: 'flex',
+      transform: 'translate(-50%, 0)',
+      left: '50%',
+      backgroundColor: '#FFFFFF',
+      border: '1px solid #EDEDF3',
+      borderRadius: '12px',
+      justifyContent: 'space-around'
+    },
+    '@media screen and (max-width: 768px)': {
+        maxWidth: '343px',
+        width: '100%',
+        height: '179px',
+        padding:'0 5px'
+      },
+} as ThemeUIStyleObject;
+
+const stepStyle = {
+   // mt: '56px', 
+    alignItems: 'center',
+    textAlign: 'left',
+    '@media screen and (max-width: 1200px)': {
+       mt: 0,
+       flexDirection: 'column',
+       textAlign: 'center'
+      },
+    '@media screen and (max-width: 768px)': {
+        height: '100%',
+        pt: '24px'
+    },
+} as ThemeUIStyleObject;
+
+const uploadBtn = {
+   '@media screen and (max-width: 768px)': {
+       position: 'absolute',
+       right: 0,
+       top: '30px'
+   },
+  
+} as ThemeUIStyleObject;
+   
+const box ={
+    width:'100px',
+    height:'32px',
+    borderLeft:'2px dashed #EDEDF3',
+    borderTop:'none',
+    margin: '12px 25px 12px',
+
+      '@media screen and (max-width: 1200px)': {
+        width:'15%',
+        margin:'0 0 40px',
+        borderTop:'2px dashed #EDEDF3',
+        borderLeft:'none'
+    },
+
+} as ThemeUIStyleObject;
+
+export {
+    inputCreactAgreement,
+    imageUploadContainer,
+    secondaryTitleStep,
+    containerButtons,
+    primaryTitleItem,
+    uploadTextMobile,
+    secondaryTitle,
+    stepsContainer,
+    containerSides,
+    leftSideItem,
+    stepNumber,
+    container,
+    itemRadio,
+    uploadText,
+    stepStyle,
+    rightSide,
+    uploadBtn,
+    leftSide,
+    card,
+    title,
+    item,
+    flex,
+    box,
+    fW
+}
+>>>>>>> 3cd6dc35758ab2c422d2171a3e30abd7cdcd9291

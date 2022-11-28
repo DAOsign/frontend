@@ -2,10 +2,17 @@ html,
 body {
   padding: 0;
   margin: 0;
+<<<<<<< HEAD
   font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen, Ubuntu, Cantarell,
     Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
   background-image: url("../img/svg/Splash\ compressed.jpg");
   background-position: top right;
+=======
+  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
+    Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+   background-image:   url('../img/svg/Splash\ compressed.jpg');
+   background-position: top right;
+>>>>>>> 3cd6dc35758ab2c422d2171a3e30abd7cdcd9291
 }
 
 a {
@@ -51,6 +58,12 @@ a {
 .w-md-editor-toolbar li > button {
   color: #212121 !important;
   width: 40px;
+  
+}
+@media screen and (max-width: 768px) {
+  .w-md-editor-toolbar li > button {
+    width: 20px !important;
+  }
 }
 @media screen and (max-width: 768px) {
   .w-md-editor-toolbar li > button {
@@ -290,7 +303,19 @@ body {
 }
 
 @keyframes connect {
+<<<<<<< HEAD
   0% {
+=======
+  0%   { 
+     opacity: 0;
+     position: absolute;
+     top: 150%;
+     left: 50%;
+     transform: translate(-50%, 0);
+     pointer-events: none;
+  }
+  20%  { 
+>>>>>>> 3cd6dc35758ab2c422d2171a3e30abd7cdcd9291
     opacity: 0;
     position: absolute;
     top: 150%;
