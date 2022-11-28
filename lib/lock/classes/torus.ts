@@ -1,6 +1,6 @@
-const get = () => import(/* webpackChunkName: "torus" */ '@toruslabs/torus-embed');
-import LockConnector from './connector';
-
+const get = () =>
+  import(/* webpackChunkName: "torus" */ "@toruslabs/torus-embed");
+import LockConnector from "./connector";
 
 export default class Connector extends LockConnector {
   //@ts-ignore
@@ -16,7 +16,7 @@ export default class Connector extends LockConnector {
       console.error(e);
     }
     //@ts-ignore
-    provider.connectorName = 'torus';
+    provider.connectorName = "torus";
     return provider;
   }
 }

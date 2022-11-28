@@ -1,6 +1,5 @@
-const get = () => import(/* webpackChunkName: "portis" */ '@portis/web3/umd');
-import LockConnector from './connector';
-
+const get = () => import(/* webpackChunkName: "portis" */ "@portis/web3/umd");
+import LockConnector from "./connector";
 
 export default class Connector extends LockConnector {
   async connect() {
@@ -15,7 +14,7 @@ export default class Connector extends LockConnector {
     } catch (e) {
       console.error(e);
     }
-    provider.connectorName = 'portis';
+    provider.connectorName = "portis";
     return provider;
   }
 }

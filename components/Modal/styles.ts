@@ -1,10 +1,10 @@
 import { ThemeUIStyleObject } from "theme-ui";
 
 export default {
-  position: 'absolute',
+  position: "absolute",
   width: "500px",
-  left: '50%',
-  transform: 'translate(-50%, 150px)',
+  left: "50%",
+  transform: "translate(-50%, 150px)",
   height: "307px",
   background: "white",
   backdropFilter: "blur(6px)",

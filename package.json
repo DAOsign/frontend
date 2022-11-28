@@ -6,6 +6,8 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
+    "prettier:check": "npx prettier --check .",
+    "prettier:fix": "npx prettier --write .",
     "lint": "next lint",
     "codegen": "graphql-codegen --config codegen.ts"
   },
@@ -23,6 +25,7 @@
     "urql": "^3.0.3"
   },
   "devDependencies": {
+    "@coinbase/wallet-sdk": "^3.6.0",
     "@graphql-codegen/cli": "^2.14.0",
     "@graphql-codegen/client-preset": "^1.1.5",
     "@graphql-codegen/typescript": "^2.8.2",
@@ -34,6 +37,8 @@
     "@walletconnect/web3-provider": "^1.8.0",
     "eslint": "8.24.0",
     "eslint-config-next": "12.3.1",
+    "eslint-config-prettier": "^8.5.0",
+    "prettier": "^2.8.0",
     "typescript": "4.8.4",
     "walletconnect": "^1.7.8"
   }

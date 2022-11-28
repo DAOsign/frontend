@@ -1,14 +1,14 @@
-import LockConnector from './connector';
+import LockConnector from "./connector";
 
 export default class Connector extends LockConnector {
   async connect() {
     let provider;
     try {
-      let CoinbaseWalletSDK = await import(
-        "@coinbase/wallet-sdk"!
-      )
-      if (CoinbaseWalletSDK.default) CoinbaseWalletSDK = CoinbaseWalletSDK.default;
-      if (CoinbaseWalletSDK.default) CoinbaseWalletSDK = CoinbaseWalletSDK.default;
+      let CoinbaseWalletSDK = await import("@coinbase/wallet-sdk"!);
+      if (CoinbaseWalletSDK.default)
+        CoinbaseWalletSDK = CoinbaseWalletSDK.default;
+      if (CoinbaseWalletSDK.default)
+        CoinbaseWalletSDK = CoinbaseWalletSDK.default;
       const walletSDK = new CoinbaseWalletSDK(this.options);
       provider = walletSDK.makeWeb3Provider(
         this.options.ethJsonrpcUrl,
@@ -19,23 +19,23 @@ export default class Connector extends LockConnector {
       console.error(e);
       return;
     }
-    provider.connectorName = 'walletlink';
+    provider.connectorName = "walletlink";
     return provider;
   }
 
   logout() {
     if (localStorage) {
       localStorage.removeItem(
-        '-walletlink:https://www.walletlink.org:session:id'
+        "-walletlink:https://www.walletlink.org:session:id"
       );
       localStorage.removeItem(
-        '-walletlink:https://www.walletlink.org:session:secret'
+        "-walletlink:https://www.walletlink.org:session:secret"
       );
       localStorage.removeItem(
-        '-walletlink:https://www.walletlink.org:session:linked'
+        "-walletlink:https://www.walletlink.org:session:linked"
       );
       localStorage.removeItem(
-        '-walletlink:https://www.walletlink.org:Addresses'
+        "-walletlink:https://www.walletlink.org:Addresses"
       );
     }
     return;

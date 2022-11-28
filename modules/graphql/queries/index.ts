@@ -1,4 +1,4 @@
-import { graphql } from '../gql'
+import { graphql } from "../gql";
 
 export const allUsers = graphql(`
   query allUsers($first: Int!) {
@@ -12,4 +12,4 @@ export const allUsers = graphql(`
       twitterVerificationSig
     }
   }
-`)
+`);

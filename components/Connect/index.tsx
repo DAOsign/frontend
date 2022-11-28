@@ -1,59 +1,77 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import React, { useEffect, useRef, useState } from "react";
-import { useLock } from "../../hooks/useLock";
+import React from "react";
 import { Button, Container, Heading, Text } from "theme-ui";
 import { title, container } from "./styles";
-import { useQuery, useMutation } from "urql";
-import { allUsers } from "../../modules/graphql/queries";
+import { useWeb3 } from "../../hooks/useWeb3";
+import { useMutation } from "urql";
 import { login as loginMutation } from "../../modules/graphql/mutations";
 
-export default function Connect({ setAddres }: any) {
-  const lock = useLock();
-  console.log(lock);
+export default function Connect() {
+  const { login, sign } = useWeb3();
 
-  useEffect(() => {
-    setAddres(lock?.provider?.safe?.safeAddress || lock?.provider?.selectedAddress || lock?.provider?.accounts[0] || "");
-  }, [lock]);
-
-  const payloadToSign = useRef("");
-
-  const [, login] = useMutation(loginMutation);
-
-  const onAfterConnect = async () => {
-    login({ address: await lock.getSignerAddress(), signature: "" }).then((res) => console.log(res));
-    //const signature = await lock.sign("");
-  };
+  const [, loginRequest] = useMutation(loginMutation);
 
   const connect = async (name: any) => {
-    const res = await lock.login(name);
-    onAfterConnect();
-    console.log("res", res);
+    login(name).then((res) => {
+      onAfterConnect(res.account);
+    });
   };
 
-  useEffect(() => {
-    //ToDo move to fetch utils
-    const getPayload = async () => {
-      return "";
-    };
+  const onAfterConnect = async (account: string) => {
+    if (account) {
+      if (localStorage.getItem("token")) return;
+      const res = await loginRequest({ address: account });
 
-    getPayload().then((res) => {
-      payloadToSign.current = res;
-    });
-  }, []);
+      if (res.data) {
+        const payload = res.data.login.payload;
+        if (payload) {
+          const signature = await sign(payload);
+
+          const tokenRes = await loginRequest({
+            address: account,
+            signature: signature,
+          });
+
+          if (tokenRes.data) {
+            const token = tokenRes.data.login.token;
+            if (token) {
+              console.log(token);
+              localStorage.setItem("token", token);
+            }
+          }
+        }
+      }
+    }
+  };
 
   return (
     <Container sx={container}>
       <Heading sx={title}>Connect a Wallet</Heading>
-      <Button type="button" variant="primary" onClick={() => connect("injected")}>
+      <Button
+        type="button"
+        variant="primary"
+        onClick={() => connect("injected")}
+      >
         MetaMask
       </Button>
-      <Button type="button" variant="primary" onClick={() => connect("walletconnect")}>
+      <Button
+        type="button"
+        variant="primary"
+        onClick={() => connect("walletconnect")}
+      >
         Wallet Connect
       </Button>
-      <Button type="button" variant="primary" onClick={() => connect("walletlink")}>
+      <Button
+        type="button"
+        variant="primary"
+        onClick={() => connect("walletlink")}
+      >
         Coinbase Wallet
       </Button>
-      <Text variant="secondary" sx={{ maxWidth: "220px", display: "inline-block" }}>
+      <Text
+        variant="secondary"
+        sx={{ maxWidth: "220px", display: "inline-block" }}
+      >
         By connecting a wallet, you agree to our Terms of Service
       </Text>
     </Container>

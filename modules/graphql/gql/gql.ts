@@ -1,6 +1,6 @@
 /* eslint-disable */
-import * as types from './graphql';
-import { TypedDocumentNode as DocumentNode } from '@graphql-typed-document-node/core';
+import * as types from "./graphql";
+import { TypedDocumentNode as DocumentNode } from "@graphql-typed-document-node/core";
 
 /**
  * Map of all GraphQL operations in the project.
@@ -13,18 +13,24 @@ import { TypedDocumentNode as DocumentNode } from '@graphql-typed-document-node/
  * Therefore it is highly recommended to use the babel-plugin for production.
  */
 const documents = {
-    "\n  mutation login($address: String!, $signature: String) {\n    login(address: $address, signature: $signature) {\n      message\n      payload\n      token\n    }\n  }\n": types.LoginDocument,
-    "\n  query allUsers($first: Int!) {\n    users {\n      userId\n      name\n      bio\n      phone\n      email\n      twitterVerificationCode\n      twitterVerificationSig\n    }\n  }\n": types.AllUsersDocument,
+  "\n  mutation login($address: String!, $signature: String) {\n    login(address: $address, signature: $signature) {\n      message\n      payload\n      token\n    }\n  }\n":
+    types.LoginDocument,
+  "\n  query allUsers($first: Int!) {\n    users {\n      userId\n      name\n      bio\n      phone\n      email\n      twitterVerificationCode\n      twitterVerificationSig\n    }\n  }\n":
+    types.AllUsersDocument,
 };
 
 /**
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
-export function graphql(source: "\n  mutation login($address: String!, $signature: String) {\n    login(address: $address, signature: $signature) {\n      message\n      payload\n      token\n    }\n  }\n"): (typeof documents)["\n  mutation login($address: String!, $signature: String) {\n    login(address: $address, signature: $signature) {\n      message\n      payload\n      token\n    }\n  }\n"];
+export function graphql(
+  source: "\n  mutation login($address: String!, $signature: String) {\n    login(address: $address, signature: $signature) {\n      message\n      payload\n      token\n    }\n  }\n"
+): typeof documents["\n  mutation login($address: String!, $signature: String) {\n    login(address: $address, signature: $signature) {\n      message\n      payload\n      token\n    }\n  }\n"];
 /**
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
-export function graphql(source: "\n  query allUsers($first: Int!) {\n    users {\n      userId\n      name\n      bio\n      phone\n      email\n      twitterVerificationCode\n      twitterVerificationSig\n    }\n  }\n"): (typeof documents)["\n  query allUsers($first: Int!) {\n    users {\n      userId\n      name\n      bio\n      phone\n      email\n      twitterVerificationCode\n      twitterVerificationSig\n    }\n  }\n"];
+export function graphql(
+  source: "\n  query allUsers($first: Int!) {\n    users {\n      userId\n      name\n      bio\n      phone\n      email\n      twitterVerificationCode\n      twitterVerificationSig\n    }\n  }\n"
+): typeof documents["\n  query allUsers($first: Int!) {\n    users {\n      userId\n      name\n      bio\n      phone\n      email\n      twitterVerificationCode\n      twitterVerificationSig\n    }\n  }\n"];
 
 /**
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
@@ -37,11 +43,12 @@ export function graphql(source: "\n  query allUsers($first: Int!) {\n    users {
  *
  * The query argument is unknown!
  * Please regenerate the types.
-**/
+ **/
 export function graphql(source: string): unknown;
 
 export function graphql(source: string) {
   return (documents as any)[source] ?? {};
 }
 
-export type DocumentType<TDocumentNode extends DocumentNode<any, any>> = TDocumentNode extends DocumentNode<  infer TType,  any>  ? TType  : never;
+export type DocumentType<TDocumentNode extends DocumentNode<any, any>> =
+  TDocumentNode extends DocumentNode<infer TType, any> ? TType : never;
