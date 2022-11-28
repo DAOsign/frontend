@@ -39,5 +39,5 @@ const title = {
 
 export {
   container,
-  title
+  title,
 }

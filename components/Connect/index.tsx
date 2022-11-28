@@ -18,22 +18,22 @@ export default function Connect({setAddres}: any) {
   };
 
   return (
-    <Container sx={container}>
-      <Heading  sx={title}>
-        Connect a Wallet
-      </Heading>
-      <Button type="button" variant="primary" onClick={() => connect("injected")}>
-        MetaMask
-      </Button>
-      <Button type="button" variant="primary" onClick={() => connect("walletconnect")}>
-        Wallet Connect
-      </Button>
-      <Button type="button" variant="primary" onClick={() => connect("walletlink")}>
-        Coinbase Wallet
-      </Button>
-      <Text variant="secondary" sx={{ maxWidth: "220px", display: "inline-block" }}>
-        By connecting a wallet, you agree to our Terms of Service
-      </Text>
-    </Container>
+      <Container sx={container}>
+        <Heading  sx={title}>
+          Connect a Wallet
+        </Heading>
+        <Button type="button" variant="primary" onClick={() => connect("injected")}>
+          MetaMask
+        </Button>
+        <Button type="button" variant="primary" onClick={() => connect("walletconnect")}>
+          Wallet Connect
+        </Button>
+        <Button type="button" variant="primary" onClick={() => connect("walletlink")}>
+          Coinbase Wallet
+        </Button>
+        <Text variant="secondary" sx={{ maxWidth: "220px", display: "inline-block" }}>
+          By connecting a wallet, you agree to our Terms of Service
+        </Text>
+      </Container>
   );
 }

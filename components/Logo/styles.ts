@@ -56,6 +56,7 @@ const animateContainer = {
     position: 'relative',
     top: 0,
     animation: 'animateLogo 6s 1 linear',
+    paddingTop: '80px',
  } as ThemeUIStyleObject;
 
 

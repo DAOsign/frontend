@@ -85,7 +85,6 @@ const leftSide = {
     paddingBottom: '60px',
     paddingTop: '60px',
     '@media screen and (max-width: 1200px)': {
-       maxWidth: '672px',
        paddingX :'100px',
        borderBottom: 'none',
        minHeight: '300px',
@@ -118,7 +117,6 @@ const rightSide = {
     paddingBottom: '32px',
     paddingTop: '52px',
     '@media screen and (max-width: 1200px)': {
-        maxWidth: '672px',
         width: '100%',
         paddingX :'100px',
         borderTop: 'none',
@@ -242,7 +240,6 @@ const secondaryTitleStep = {
 const stepsContainer = {
   '@media screen and (max-width: 1200px)': {
       position: 'absolute',
-      maxWidth: '672px',
       width: '100%',
       height: '202px',
       alignItems: 'center',

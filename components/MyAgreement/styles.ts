@@ -11,7 +11,6 @@ minWidth: '275px',
 height:'430px',
 marginRight:'20px',
 '@media screen and (max-width: 1200px)': {
-  maxWidth:'672px',
   flexDirection: 'row',
   width: '100%',
   height:'172px',
@@ -20,7 +19,7 @@ marginRight:'20px',
   mx: 'auto',
   pl: '24px',
   pr: '60px'
-},
+}, 
 '@media screen and (max-width: 768px)': {
   width: '100%',
   minWidth: '343px',
@@ -90,7 +89,12 @@ const userFoto = {
   '@media screen and (max-width: 1200px)': {
       flexDirection: 'column',
       px: '24px'
-  }
+  },
+  '@media screen and (max-width: 768px)': {
+    flexDirection: 'column',
+    px: '16px'
+}
+
  } as ThemeUIStyleObject;
 
  const noContent = {
@@ -111,7 +115,11 @@ const userFoto = {
   width: '130px',
   height: '130px',
   '@media screen and (max-width: 1200px)': {
-    m: '0 auto 0',
+    m: '0  0 0 auto',
+    bottom: '5px'
+  },
+  '@media screen and (max-width: 768px)': {
+    m: '0  auto 0 ',
     bottom: '5px'
   }
  } as ThemeUIStyleObject;
@@ -154,14 +162,17 @@ const fotoContainer = {
    flexDirection: 'column',
    '@media screen and (max-width: 1200px)': {
      flexDirection :'row',
-
  }
 } as ThemeUIStyleObject;
 
 const inputMyAgreement  = {
   backgroundColor: '#FFFFFF', 
   borderRadius: '62px',
-  width: '345px',
+  maxWidth: '345px',
+  width: '100%',
+  '@media screen and (max-width: 768px)': {
+    maxWidth:'unset'
+   },
 
 } as ThemeUIStyleObject;
 
@@ -169,11 +180,9 @@ const headerContainer  = {
   flexDirection:'row',
   alignItems:'baseline',
   mt:'38px',
-
   '@media screen and (max-width: 768px)': {
    flexDirection:'column'
   },
- 
 } as ThemeUIStyleObject;
 
 const agreementConteiner ={
@@ -187,7 +196,6 @@ const agreementConteiner ={
 } as ThemeUIStyleObject;
 
 const iconMenuAgreement ={
-  display: 'none',
    ml: '16px',
    width: '32px',
    height: '32px',
@@ -197,14 +205,14 @@ const iconMenuAgreement ={
    padding: '4px 0 0 0',
    cursor: 'poiner',
    '@media screen and (max-width: 768px)': {
-    display: 'block'
-   },
+    display: 'block',
+   }, 
 
 } as ThemeUIStyleObject;
 
 const greyAgrBtn = {
-   padding:'0',
-   width: '63px',
+   py:'0',
+   px: '16',
    height: '32px',
    background: '#EDEDF3',
    borderRadius: '52px',
@@ -215,6 +223,11 @@ const greyAgrBtn = {
    lineHeight: '160%',
    textAlign: 'center',
    color: '#212121',
+   width: 'initial',
+   '@media screen and (max-width: 768px)': {
+    mx: 0,
+    mb: '16px'
+    },
   } as ThemeUIStyleObject;
 
   const textContainer = {
@@ -226,14 +239,36 @@ const greyAgrBtn = {
      borderRadius:'62px',
      height:'50px',
      mt:'10px'
-
      },
   } as ThemeUIStyleObject;
+    
+  const btnText = {
+    display: 'inline-block',
+    ml: '10px',
+    '@media screen and (max-width: 768px)': {
+      display: 'none'
+      },
+  } as ThemeUIStyleObject;
 
-  const newAgreementBtn ={
+  const btn = {
+    variant: 'buttons.primary', 
+    alignItems: 'center',
+    display: 'flex',
+    ml: 'auto', 
+    mr: 0,
+    '@media screen and (max-width: 768px)': {
+      width: '50px',
+      height: '50px',
+      borderRadius: '50%',
+      },
+  } as ThemeUIStyleObject;
 
-  }
-
+  const headerItem = {
+    justifyContent:'space-between',
+    '@media screen and (max-width: 768px)': {
+       flexDirection: 'column-reverse',
+      },
+  } as ThemeUIStyleObject;
 
 export  {
   normalTextBoldGreen,
@@ -248,11 +283,14 @@ export  {
   fotoContainer,
   textContainer,
   improveBtn,
-  container,
   greyAgrBtn,
+  headerItem,
+  container,
   noContent,
-  userFoto,
   iconExit,
+  userFoto,
+  btnText,
   title,
   text,
+  btn
 }
