@@ -10,13 +10,17 @@ export default function CreateAgreement() {
   const [titleInput, setTitleInput] = useState('')
   const [step, setStep] = useState(1)
   const [valueTextEditor, setvalueTextEditor] = useState<string>("");
+  const [signersValue, setSignersValue] = useState('')
+  const [observersValue, setObserversValue] = useState('')
+
 
   
 
     const steps = {
        1: <StepOne title={titleInput} setTitle={setTitleInput}/>,
        2: <StepTwo valueTextEditor={valueTextEditor} setvalueTextEditor={setvalueTextEditor}/>,
-       3: <StepThree/>,
+       3: <StepThree signersValue={signersValue} setSignersValue={setSignersValue} 
+           observersValue={observersValue} setObserversValue={setObserversValue}/>,
     }
 
     return (

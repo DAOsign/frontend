@@ -5,11 +5,11 @@ import {uniqueId} from '../../../utils/formats'
 import iconsObj from "../../../assets/icons";
 import Icon from "../../icon";
 
-export default function StepThree() {
+  export default function StepThree({signersValue,setSignersValue,observersValue,setObserversValue}: any) {
   const [signers, setSigners] = useState<Array<{value: string, id: number}>>([])
-  const [signersValue, setSignersValue] = useState('')
+  //const [signersValue, setSignersValue] = useState('')
   const [observers, setObservers] = useState<Array<{value: string, id: number}>>([])
-  const [observersValue, setObserversValue] = useState('')
+  //const [observersValue, setObserversValue] = useState('')
 
   console.log(signers, observers);
 

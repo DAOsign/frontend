@@ -55,7 +55,7 @@ const ipfs= async () => {
     </Flex>
    <form id="upload-container" method="POST" action="send.php">
       <Box sx={imageUploadContainer}>
-          <input 
+          <input
             lang='en' 
             onChange={({target}) => readFile(target)} 
             className='file' 
