@@ -1,24 +1,14 @@
 import React, { useState } from "react";
 import { Container, Flex, Input, Text, Button } from "theme-ui";
-import {
-  card,
-  item,
-  inputCreactAgreement,
-  secondaryTitle,
-  container,
-} from "../styles";
+import { card, item, inputCreactAgreement, secondaryTitle, container } from "../styles";
 import { uniqueId } from "../../../../utils/formats";
 import iconsObj from "../../../../assets/icons";
 import Icon from "../../../icon";
 
 export default function StepThree() {
-  const [signers, setSigners] = useState<Array<{ value: string; id: number }>>(
-    []
-  );
+  const [signers, setSigners] = useState<Array<{ value: string; id: number }>>([]);
   const [signersValue, setSignersValue] = useState("");
-  const [observers, setObservers] = useState<
-    Array<{ value: string; id: number }>
-  >([]);
+  const [observers, setObservers] = useState<Array<{ value: string; id: number }>>([]);
   const [observersValue, setObserversValue] = useState("");
 
   console.log(signers, observers);
@@ -34,12 +24,7 @@ export default function StepThree() {
               key={el.id}
             >
               <Text sx={{ mr: "3px" }}>{el.value}</Text>
-              <Icon
-                style={{ opacity: 0.5 }}
-                width="13px"
-                height="11px"
-                src={iconsObj.plusCircle}
-              />
+              <Icon style={{ opacity: 0.5 }} width="13px" height="11px" src={iconsObj.plusCircle} />
             </Button>
           );
         })}
@@ -49,12 +34,10 @@ export default function StepThree() {
 
   const onSubmit = (name: string) => {
     if (name === "signers") {
-      if (signersValue)
-        setSigners([...signers, { value: signersValue, id: uniqueId() }]);
+      if (signersValue) setSigners([...signers, { value: signersValue, id: uniqueId() }]);
       setSignersValue("");
     } else {
-      if (observersValue)
-        setObservers([...observers, { value: observersValue, id: uniqueId() }]);
+      if (observersValue) setObservers([...observers, { value: observersValue, id: uniqueId() }]);
       setObserversValue("");
     }
   };
@@ -72,12 +55,7 @@ export default function StepThree() {
       <Flex>
         <Text sx={{ variant: "forms.label", ml: "3px", maxWidth: "unset" }}>
           Signers (ENS name, adderes or email)
-          <Icon
-            width="12px"
-            height="12px"
-            style={{ opacity: 0.5 }}
-            src={iconsObj.infoCircle}
-          />
+          <Icon width="12px" height="12px" style={{ opacity: 0.5 }} src={iconsObj.infoCircle} />
         </Text>
         <Button
           onClick={() => onSubmit("signers")}
@@ -99,12 +77,7 @@ export default function StepThree() {
       <Flex sx={{ mt: "24px" }}>
         <Text sx={{ variant: "forms.label", ml: "3px", maxWidth: "unset" }}>
           Observers (ENS name or adderess)
-          <Icon
-            width="12px"
-            height="12px"
-            style={{ opacity: 0.5 }}
-            src={iconsObj.infoCircle}
-          />
+          <Icon width="12px" height="12px" style={{ opacity: 0.5 }} src={iconsObj.infoCircle} />
         </Text>
         <Button
           onClick={() => onSubmit("observers")}
@@ -132,12 +105,7 @@ export default function StepThree() {
         }}
       >
         Minimal Signer Score
-        <Icon
-          width="12px"
-          height="12px"
-          style={{ opacity: 0.5 }}
-          src={iconsObj.infoCircle}
-        />
+        <Icon width="12px" height="12px" style={{ opacity: 0.5 }} src={iconsObj.infoCircle} />
       </Text>
     </Container>
   );

@@ -10,9 +10,13 @@ import CreateAgreement from "../components/CreateAgreement";
 import { animateContainer } from "../components/Logo/styles";
 import { useWeb3 } from "../hooks/useWeb3";
 
+import MyAgreement from "../components/MyAgreement";
+import MobileMenu from "../components/Header/MobileMenu";
+
 const Home: NextPage = () => {
   const { account, authLoading } = useWeb3();
 
+  const [visible, setVisible] = useState(false);
   return (
     <Container sx={{ width: "100%", paddingTop: "80px" }}>
       <Head>
@@ -30,7 +34,9 @@ const Home: NextPage = () => {
       ) : (
         <>
           <Header address={account || ""} />
-          <CreateAgreement />
+          {visible && <MobileMenu address={account} />}
+          {/* <CreateAgreement/>  */}
+          <MyAgreement address={account} />
         </>
       )}
       {/* <Footer/> */}

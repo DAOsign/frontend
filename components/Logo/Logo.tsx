@@ -51,10 +51,7 @@ export function Logo({ margin = "0 auto" }) {
               <Icon width="28px" height="28px" src={iconsObj.oLogo} />
             </Box>
           </Flex>
-          <Text
-            color="#CA5CF2"
-            sx={{ ...text, position: "static", animation: "unset" }}
-          >
+          <Text color="#CA5CF2" sx={{ ...text, position: "static", animation: "unset" }}>
             sign
           </Text>
         </Box>

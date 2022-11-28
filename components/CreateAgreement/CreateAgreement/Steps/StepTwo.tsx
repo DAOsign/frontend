@@ -55,9 +55,7 @@ const UploadLocalAgreement = ({
   return (
     <Container>
       <Flex sx={{ alignItems: "center" }}>
-        <Text sx={{ variant: "forms.label", minWidth: "200px" }}>
-          Upload agreement
-        </Text>
+        <Text sx={{ variant: "forms.label", minWidth: "200px" }}>Upload agreement</Text>
         <Button
           onClick={() => {
             setCloud(!cloud);
@@ -132,13 +130,7 @@ export default function StepTwo() {
 
   const variantsAgreement = {
     cloud: <CloudContent setCloud={setCloud} cloud={cloud} />,
-    local: (
-      <UploadLocalAgreement
-        setCloud={setCloud}
-        cloud={cloud}
-        setRdioValue={setRdioValue}
-      />
-    ),
+    local: <UploadLocalAgreement setCloud={setCloud} cloud={cloud} setRdioValue={setRdioValue} />,
   };
 
   return (
@@ -153,12 +145,7 @@ export default function StepTwo() {
         }}
       >
         Agreement location{" "}
-        <Icon
-          width="12px"
-          height="12px"
-          style={{ opacity: 0.5 }}
-          src={iconsObj.infoCircle}
-        />
+        <Icon width="12px" height="12px" style={{ opacity: 0.5 }} src={iconsObj.infoCircle} />
       </Text>
       <Box as="form" onSubmit={(e) => e.preventDefault()}>
         <Flex sx={{ mb: "24px", justifyContent: "space-between" }}>
@@ -176,20 +163,10 @@ export default function StepTwo() {
               >
                 <Icon
                   width="16px"
-                  src={
-                    radioValue === el.value
-                      ? iconsObj.radioOn
-                      : iconsObj.radioOff
-                  }
+                  src={radioValue === el.value ? iconsObj.radioOn : iconsObj.radioOff}
                 />
-                <Radio
-                  sx={{ boxShadow: "none" }}
-                  name="letter"
-                  value={el.value}
-                />
-                <Text sx={{ ml: "5px", variant: "text.normalTextMedium" }}>
-                  {el.name}
-                </Text>
+                <Radio sx={{ boxShadow: "none" }} name="letter" value={el.value} />
+                <Text sx={{ ml: "5px", variant: "text.normalTextMedium" }}>{el.name}</Text>
               </Label>
             );
           })}
@@ -200,28 +177,15 @@ export default function StepTwo() {
   );
 }
 
-const CloudContent = ({
-  setCloud,
-  cloud,
-}: {
-  setCloud: any;
-  cloud: boolean;
-}) => {
+const CloudContent = ({ setCloud, cloud }: { setCloud: any; cloud: boolean }) => {
   return (
     <>
       {" "}
       {cloud ? (
         <Flex sx={{ justifyContent: "space-between" }}>
-          <Container
-            onClick={() => setCloud(!cloud)}
-            sx={{ ...card, cursor: "pointer" }}
-          >
+          <Container onClick={() => setCloud(!cloud)} sx={{ ...card, cursor: "pointer" }}>
             <div style={{ width: "50px", height: "50px", margin: "0 auto" }}>
-              <Icon
-                width="50px"
-                height="50px"
-                src={iconsObj.uploadCloudPrimary}
-              />
+              <Icon width="50px" height="50px" src={iconsObj.uploadCloudPrimary} />
             </div>
             <Text
               sx={{
@@ -243,20 +207,11 @@ const CloudContent = ({
               Upload file of a type PDF, DOCX, TXT
             </Text>
           </Container>
-          <Container
-            onClick={() => setCloud(!cloud)}
-            sx={{ ...card, cursor: "pointer" }}
-          >
+          <Container onClick={() => setCloud(!cloud)} sx={{ ...card, cursor: "pointer" }}>
             <div style={{ width: "50px", height: "50px", margin: "0 auto" }}>
-              <Icon
-                width="50px"
-                height="50px"
-                src={iconsObj.fileSecondarysvg}
-              />
+              <Icon width="50px" height="50px" src={iconsObj.fileSecondarysvg} />
             </div>
-            <Text
-              sx={{ variant: "text.largeTextBold", mb: "20px", mt: "24px" }}
-            >
+            <Text sx={{ variant: "text.largeTextBold", mb: "20px", mt: "24px" }}>
               Enter Agreement
             </Text>
             <Text

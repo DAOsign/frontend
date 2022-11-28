@@ -3,20 +3,21 @@ import Icon from "../icon/index";
 import { Container, Flex, Text, Button, Box } from "theme-ui";
 import iconsObj from "../../assets/icons";
 import {
-  stepNumber,
-  leftSideItem,
-  fW,
+  secondaryTitleStep,
+  primaryTitleItem,
   containerButtons,
   stepsContainer,
+  leftSideItem,
+  stepNumber,
   stepStyle,
-  secondaryTitleStep,
+  box,
+  fW,
 } from "./styles";
 
 interface LeftSideoProp {
   step: number;
   setStep: any;
 }
-
 export default function LeftSide(prop: LeftSideoProp) {
   return (
     <>
@@ -26,18 +27,16 @@ export default function LeftSide(prop: LeftSideoProp) {
             {prop.step > 1 ? (
               <Icon src={iconsObj.done} />
             ) : (
-              <Text sx={{ variant: "text.normalTextBold", color: "#fff" }}>
-                1
-              </Text>
+              <Text sx={{ variant: "text.normalTextBold", color: "#fff" }}>1</Text>
             )}
           </Box>
+
           <Container sx={leftSideItem}>
-            <Text sx={{ variant: "text.largeTextBold" }}>Privacy</Text>
-            <Text sx={secondaryTitleStep}>
-              Enter title and privacy ot the agreement
-            </Text>
+            <Text sx={primaryTitleItem}>Privacy</Text>
+            <Text sx={secondaryTitleStep}>Enter title and privacy ot the agreement</Text>
           </Container>
         </Flex>
+        <Container sx={box}></Container>
         <Flex sx={stepStyle}>
           <Box
             sx={{
@@ -48,16 +47,15 @@ export default function LeftSide(prop: LeftSideoProp) {
             {prop.step > 2 ? (
               <Icon src={iconsObj.done} />
             ) : (
-              <Text sx={{ variant: "text.normalTextBold", color: "#fff" }}>
-                2
-              </Text>
+              <Text sx={{ variant: "text.normalTextBold", color: "#fff" }}>2</Text>
             )}
           </Box>
           <Container sx={leftSideItem}>
-            <Text sx={{ variant: "text.largeTextBold" }}>Content</Text>
+            <Text sx={primaryTitleItem}>Content</Text>
             <Text sx={secondaryTitleStep}>Enter agreement content</Text>
           </Container>
         </Flex>
+        <Container sx={box}></Container>
         <Flex sx={stepStyle}>
           <Box
             sx={{
@@ -65,12 +63,10 @@ export default function LeftSide(prop: LeftSideoProp) {
               backgroundColor: prop.step > 2 ? "#CA5CF2" : "#EDEDF3",
             }}
           >
-            <Text sx={{ variant: "text.normalTextBold", color: "#fff" }}>
-              3
-            </Text>
+            <Text sx={{ variant: "text.normalTextBold", color: "#fff" }}>3</Text>
           </Box>
           <Container sx={leftSideItem}>
-            <Text sx={{ variant: "text.largeTextBold" }}>Signers</Text>
+            <Text sx={primaryTitleItem}>Signers</Text>
             <Text sx={secondaryTitleStep}>Add signers and observers</Text>
           </Container>
         </Flex>
@@ -84,10 +80,7 @@ export default function LeftSide(prop: LeftSideoProp) {
           {prop.step > 1 ? "Back" : "Cancel"}
         </Button>
         {prop.step === 2 && (
-          <Button
-            sx={{ variant: "buttons.secondary", ...fW, mt: "20px" }}
-            type="button"
-          >
+          <Button sx={{ variant: "buttons.secondary", ...fW, mt: "20px" }} type="button">
             Save Draft
           </Button>
         )}

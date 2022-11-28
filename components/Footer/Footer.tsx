@@ -54,9 +54,7 @@ export default function Footer() {
             >
               About
             </Text>
-            <Text sx={{ variant: "text.smallTextMedium", display: "block" }}>
-              Terms of Service
-            </Text>
+            <Text sx={{ variant: "text.smallTextMedium", display: "block" }}>Terms of Service</Text>
           </Box>
           <Box>
             <Text sx={socialTitle}>Resources</Text>
@@ -78,9 +76,7 @@ export default function Footer() {
             >
               Discussion
             </Text>
-            <Text sx={{ variant: "text.smallTextMedium", display: "block" }}>
-              Support
-            </Text>
+            <Text sx={{ variant: "text.smallTextMedium", display: "block" }}>Support</Text>
           </Box>
           <Box>
             <Text sx={socialTitle}>Join Community</Text>

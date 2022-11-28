@@ -9,31 +9,23 @@ import { Text, Button, Flex, Box } from "theme-ui";
 const TextEditor = ({ setCloud, cloud }: any) => {
   const [value, setValue] = useState<string>("");
 
-  const MDEditor = dynamic(
-    () => import("@uiw/react-md-editor").then((mod) => mod.default),
-    { ssr: false }
-  );
+  const MDEditor = dynamic(() => import("@uiw/react-md-editor").then((mod) => mod.default), {
+    ssr: false,
+  });
 
   return (
     <div style={{ position: "relative" }}>
       <Flex sx={{ alignItems: "center" }}>
-        <Text sx={{ variant: "forms.label", minWidth: "200px" }}>
-          Enter agreement description
-        </Text>
+        <Text sx={{ variant: "forms.label", minWidth: "170px" }}>Enter agreement description</Text>
         <Button
           onClick={() => setCloud(!cloud)}
-          sx={{ variant: "buttons.back" }}
+          sx={{ variant: "buttons.back", height: "30px", pt: 0 }}
         >
           <Icon style={{ display: "block" }} src={iconsObj.arrowLeftPink} />
-          <Text sx={{ display: "block" }}>Choose another privacy</Text>
+          <Text sx={{ display: "block", fontSize: "10px" }}>Choose another privacy</Text>
         </Button>
       </Flex>
-      <MDEditor
-        value={value}
-        onChange={(e) => setValue(e || "")}
-        preview="edit"
-        autoFocus
-      />
+      <MDEditor value={value} onChange={(e) => setValue(e || "")} preview="edit" autoFocus />
       <Box
         sx={{
           position: "absolute",
@@ -44,12 +36,7 @@ const TextEditor = ({ setCloud, cloud }: any) => {
           cursor: "pointer",
         }}
       >
-        <Icon
-          width="30px"
-          height="30px"
-          style={{ opacity: 0.3 }}
-          src={iconsObj.fieldResize}
-        />
+        <Icon width="30px" height="30px" style={{ opacity: 0.3 }} src={iconsObj.fieldResize} />
       </Box>
       <Flex
         sx={{

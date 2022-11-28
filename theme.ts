@@ -32,6 +32,20 @@ export const theme: Theme = {
     },
   },
   buttons: {
+    grey: {
+      width: "310px",
+      height: "50px",
+      background: "#FFFFFF",
+      border: " 2px solid #EDEDF3",
+      borderRadius: "80px",
+      fontFamily: "InterBold",
+      fontStyle: "normal",
+      fontWeight: 700,
+      fontSize: "16px",
+      lineHeight: "160%",
+      textAlign: "center",
+      color: "#212121",
+    },
     primary: {
       width: "225px",
       height: "50px",
@@ -46,6 +60,9 @@ export const theme: Theme = {
       marginLeft: "auto",
       marginRight: "auto",
       cursor: "pointer",
+      "@media screen and (max-width: 375px)": {
+        width: "100%",
+      },
     },
     secondary: {
       height: "50px",
@@ -63,6 +80,9 @@ export const theme: Theme = {
       marginRight: "auto",
       cursor: "pointer",
       textAlign: "center",
+      "@media screen and (max-width: 375px)": {
+        width: "100%",
+      },
     },
     back: {
       display: "flex",
@@ -102,6 +122,23 @@ export const theme: Theme = {
       pl: "14px",
       m: "0 5px 0 0",
       width: "initial",
+    },
+    userBtn: {
+      display: "flex",
+      flexDirection: "row",
+      justifyContent: "center",
+      alignItems: "center",
+      fontFamily: "Inter",
+      fontStyle: "normal",
+      fontWeight: 700,
+      fontSize: "16px",
+      lineHeight: "25.6px",
+      color: "#212121",
+      background: "#FFFFFF",
+      borderRadius: "80px",
+      height: "26px",
+      width: "initial",
+      border: "2px solid #EDEDF3",
     },
   },
   fonts: {
@@ -188,6 +225,14 @@ export const theme: Theme = {
       fontSize: "14px",
       color: "#212121",
       opacity: 0.5,
+    },
+    smallTextMediumUser: {
+      fontFamily: "InterMedium",
+      fontWeight: 500,
+      lineHeight: "22.4px",
+      fontSize: "14px",
+      color: "#212121",
+      opacity: 1,
     },
     smallTextBold: {
       fontFamily: "InterBold",

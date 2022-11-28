@@ -1,8 +1,7 @@
 import React, { ImgHTMLAttributes } from "react";
 import Image from "next/image";
 
-export interface IconProps
-  extends Omit<ImgHTMLAttributes<HTMLImageElement>, "src"> {
+export interface IconProps extends Omit<ImgHTMLAttributes<HTMLImageElement>, "src"> {
   src: Icon;
 }
 

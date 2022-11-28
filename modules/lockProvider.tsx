@@ -108,13 +108,9 @@ const LockProvider = (props?: Partial<ProviderProps<LockContext>>) => {
   }
 
   async function getConnector(): Promise<ConnectorType | false> {
-    const connector = localStorage.getItem(
-      `_${name}.connector`
-    ) as ConnectorType;
+    const connector = localStorage.getItem(`_${name}.connector`) as ConnectorType;
     if (connector) {
-      const lockConnector = lockInstanceRef.current.getConnector(
-        connector as ConnectorType
-      );
+      const lockConnector = lockInstanceRef.current.getConnector(connector as ConnectorType);
       const isLoggedIn = await lockConnector.isLoggedIn();
 
       return isLoggedIn ? connector : false;
