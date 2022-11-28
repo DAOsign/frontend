@@ -7,11 +7,15 @@ import LeftSide from './LeftSide'
 import {rightSide, leftSide, containerSides, title} from './styles'
 
 export default function CreateAgreement() {
-    const [step, setStep] = useState(1)
+  const [titleInput, setTitleInput] = useState('')
+  const [step, setStep] = useState(1)
+  const [valueTextEditor, setvalueTextEditor] = useState<string>("");
+
+  
 
     const steps = {
-       1: <StepOne/>,
-       2: <StepTwo/>,
+       1: <StepOne title={titleInput} setTitle={setTitleInput}/>,
+       2: <StepTwo valueTextEditor={valueTextEditor} setvalueTextEditor={setvalueTextEditor}/>,
        3: <StepThree/>,
     }
 

@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, {useEffect, useState} from "react";
 import { Container, Flex, Input, Text, Button } from 'theme-ui'
 import {card, item, inputCreactAgreement, secondaryTitle, container} from "../styles";
 import iconsObj from "../../../assets/icons";
@@ -7,12 +7,13 @@ import Icon from "../../icon";
 
 
 
-export default function StepOne() {
+export default function StepOne({title, setTitle}: any) {
 const [step, setStep] = useState(true)
+
   return (
     <Container sx={{maxWidth: '440px', textAlign: 'left'}}>
     <Text sx={{variant: 'forms.label', ml: '3px'}}>Title</Text>
-    <Input sx={{variant: 'forms.input', ...inputCreactAgreement}}/>
+    <Input value={title} onChange ={e => setTitle(e.target.value)} name ='form'  sx={{variant: 'forms.input', ...inputCreactAgreement}}/>
     <Text sx={{variant: 'forms.label', margin:'24px auto 3px 2px'}}>Agreement privacy</Text>
     {step ? chooseMethod(setStep, step) : publickMethod(setStep, step)}
     </Container>

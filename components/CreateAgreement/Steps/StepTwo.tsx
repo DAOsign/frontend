@@ -80,12 +80,12 @@ const ipfs= async () => {
   </Container>
 }
 
-export default function StepTwo() {
+export default function StepTwo({valueTextEditor, setvalueTextEditor}: any) {
   const [cloud, setCloud] = useState(true)
   const [radioValue, setRdioValue] = useState('cloud')
 
    const variantsAgreement = {
-    'cloud': <CloudContent setCloud={setCloud} cloud={cloud}/>,
+    'cloud': <CloudContent valueTextEditor={valueTextEditor} setvalueTextEditor={setvalueTextEditor} setCloud={setCloud} cloud={cloud}/>,
     'local': <UploadLocalAgreement setCloud={setCloud} cloud={cloud} setRdioValue={setRdioValue}/>
    }
 
@@ -118,7 +118,8 @@ export default function StepTwo() {
   );
 }
 
-const CloudContent = ({setCloud, cloud}: {setCloud: any, cloud: boolean}) => {
+const CloudContent = ({setCloud, cloud, setvalueTextEditor, valueTextEditor}: 
+  {setCloud: any, cloud: boolean, valueTextEditor: string, setvalueTextEditor:any}) => {
 return  (<> {cloud ? <Flex sx={{justifyContent: 'space-between'}}> 
     <Container onClick={() => setCloud(!cloud)}  sx={{...card, cursor: 'pointer'}}>
         <div style={{width: '50px', height: '50px', margin: '0 auto'}}>
@@ -140,6 +141,6 @@ return  (<> {cloud ? <Flex sx={{justifyContent: 'space-between'}}>
     </Container>
   </Flex>
   :
-  <TextEditor setCloud={setCloud} cloud={cloud}/>}
+  <TextEditor valueTextEditor={valueTextEditor} setvalueTextEditor={setvalueTextEditor}  setCloud={setCloud} cloud={cloud}/>}
 </>)
 }

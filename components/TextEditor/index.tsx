@@ -4,10 +4,10 @@ import "@uiw/react-md-editor/markdown-editor.css";
 import "@uiw/react-markdown-preview/markdown.css";
 import iconsObj from '../../assets/icons'
 import Icon from '../icon'
-import {Text, Button, Flex, Box} from 'theme-ui'
+import {Text, Button, Flex, Box, Input} from 'theme-ui'
 
-const TextEditor = ({setCloud, cloud}: any) => {
-    const [value, setValue] = useState<string>("");
+const TextEditor = ({valueTextEditor, setvalueTextEditor, cloud, setCloud}: any ) => {
+
 
     const MDEditor = dynamic(
         () => import("@uiw/react-md-editor").then((mod) => mod.default),
@@ -22,9 +22,9 @@ const TextEditor = ({setCloud, cloud}: any) => {
             <Text sx={{display: 'block', fontSize: '10px'}}>Choose another privacy</Text>
         </Button>
     </Flex>
-    <MDEditor
-        value={value}
-        onChange={(e) => setValue(e || '')}
+    <MDEditor 
+        value={valueTextEditor}
+        onChange= {(e) => setvalueTextEditor(e || '')}
         preview="edit"
         autoFocus
 
