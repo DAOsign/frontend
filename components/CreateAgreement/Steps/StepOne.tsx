@@ -41,7 +41,6 @@ const chooseMethod = (setStep: any, step: boolean) => {
   );
 };
 
-<<<<<<< HEAD
 const publicMethod = (setStep: any, step: boolean) => {
   return (
     <Container sx={container}>
@@ -85,44 +84,3 @@ const publicMethod = (setStep: any, step: boolean) => {
     </Container>
   );
 };
-=======
-const publickMethod = (setStep: any, step: boolean) => {
- return <Container sx={container}>
-  <Flex sx={{alignItems: 'center'}}> 
-     <Text sx={{variant: 'text.largeTextBold'}}>Public</Text> 
-     <Button onClick={() => setStep(!step)} sx={{variant: 'buttons.back'}}>
-        <Icon style={{display: 'block'}} src={iconsObj.arrowLeftPink}/>
-        <Text sx={{display: 'block'}}>Choose another privacy</Text>
-     </Button>
-  </Flex>
-  <Flex sx={item}>
-     <Icon src={iconsObj.globe}/>
-     <Container sx={{textAlign: 'left', maxWidth: '290px', ml: '6px', pr: '5px'}}>
-         <Text sx={{variant: 'text.smallTextBold', mb: '3px'}}>Published</Text>
-         <Text sx={secondaryTitle}>Public and available on the your {' '}
-         <Text sx={{variant: 'text.link'}}>public signature profile</Text>
-         </Text>
-     </Container>
-  </Flex>
-  <Flex sx={item}>
-     <Icon src={iconsObj.proofSecondary}/>
-     <Container sx={{textAlign: 'left', maxWidth: '295px', ml: '6px'}}>
-         <Text sx={{variant: 'text.smallTextBold', mb: '3px'}}>Proof  Only</Text>
-         <Text sx={secondaryTitle}>
-           Public Proof of Agreement available on your Public signature profile, 
-           but agreement content is hidden.
-         </Text>
-     </Container>
-  </Flex>
-  <Flex sx={item}>
-     <Icon src={iconsObj.ink}/>
-     <Container sx={{textAlign: 'left', maxWidth: '290px', ml: '6px'}}>
-         <Text sx={{variant: 'text.smallTextBold', mb: '3px'}}>Anyone with Link</Text>
-         <Text sx={secondaryTitle}>Public, but only available with an {' '}
-           <Text sx={{variant: 'text.link'}} >agreement share link</Text>
-         </Text>
-     </Container>
-  </Flex>
- </Container>
-}
->>>>>>> 3cd6dc35758ab2c422d2171a3e30abd7cdcd9291

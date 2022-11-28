@@ -13,7 +13,6 @@ const container = {
 } as ThemeUIStyleObject;
 
 const addresContainer = {
-<<<<<<< HEAD
   alignItems: "center",
   backgroundColor: "#F7F7FB",
   height: "44px",
@@ -42,37 +41,3 @@ const iconMenu = {
 } as ThemeUIStyleObject;
 
 export { addresContainer, container, iconMenu };
-=======
-    alignItems: 'center',  
-    backgroundColor: '#F7F7FB', 
-    height: '44px', 
-    paddingX: '12px', 
-    borderRadius: '80px', 
-    ml: '20px', 
-    cursor: 'pointer',
-    '@media screen and (max-width: 768px)': {
-        display: 'none'
-       },
-} as ThemeUIStyleObject;
-
-const iconMenu = {
-   display: 'none',
-   ml: '16px',
-   width: '42px',
-   height: '42px',
-   borderRadius:'50%',
-   backgroundColor: '#F7F7FB',
-   textAlign:'center', 
-   padding: '9px 0 0 0',
-   cursor: 'poiner',
-   '@media screen and (max-width: 768px)': {
-    display: 'block'
-   },
-} as ThemeUIStyleObject;
-
-export {
-    addresContainer,
-    container,
-    iconMenu
-}
->>>>>>> 3cd6dc35758ab2c422d2171a3e30abd7cdcd9291
