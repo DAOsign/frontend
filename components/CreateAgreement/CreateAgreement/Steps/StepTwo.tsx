@@ -1,17 +1,10 @@
 import React, { useState } from "react";
 import { Container, Flex, Text, Radio, Label, Box, Button } from "theme-ui";
-import Icon from "../../icon/index";
-import {
-  card,
-  itemRadio,
-  primaryTitleItem,
-  imageUploadContainer,
-  uploadText,
-  uploadTextMobile,
-  uploadBtn,
-} from "../styles";
-import iconsObj from "../../../assets/icons";
-import TextEditor from "../../TextEditor/index";
+import Icon from "../../../icon/index";
+import { card, flex } from "../styles";
+import iconsObj from "../../../../assets/icons";
+import TextEditor from "../../../TextEditor/index";
+
 const Hash = require("ipfs-only-hash");
 
 const agreementLocations = [
@@ -61,21 +54,30 @@ const UploadLocalAgreement = ({
 
   return (
     <Container>
-      <Flex sx={{ alignItems: "center", position: "relative" }}>
+      <Flex sx={{ alignItems: "center" }}>
         <Text sx={{ variant: "forms.label", minWidth: "200px" }}>Upload agreement</Text>
         <Button
           onClick={() => {
             setCloud(!cloud);
             setRdioValue("cloud");
           }}
-          sx={{ variant: "buttons.back", ...uploadBtn }}
+          sx={{ variant: "buttons.back" }}
         >
           <Icon style={{ display: "block" }} src={iconsObj.arrowLeftPink} />
           <Text sx={{ display: "block" }}>Choose another method</Text>
         </Button>
       </Flex>
       <form id="upload-container" method="POST" action="send.php">
-        <Box sx={imageUploadContainer}>
+        <Box
+          sx={{
+            textAlign: "center",
+            border: "1px dashed #D8D8E2",
+            borderRadius: "12px",
+            position: "relative",
+            width: "440px",
+            height: "140px",
+          }}
+        >
           <input
             lang="en"
             onChange={({ target }) => readFile(target)}
@@ -85,7 +87,13 @@ const UploadLocalAgreement = ({
             name="file"
           />
           {name ? (
-            <Text sx={{ variant: "text.smallTextMedium", opacity: 1, display: "block" }}>
+            <Text
+              sx={{
+                variant: "text.smallTextMedium",
+                opacity: 1,
+                display: "block",
+              }}
+            >
               {name}
               {bytes && (
                 <button
@@ -98,13 +106,17 @@ const UploadLocalAgreement = ({
               )}
             </Text>
           ) : (
-            <>
-              <Text sx={uploadText}>
-                Upload Agreement file using Drag & Drop <br /> or
-                <span style={{ color: "#CA5CF2" }}> Choose File</span>
-              </Text>
-              <Text sx={uploadTextMobile}>Choose File</Text>
-            </>
+            <Text
+              sx={{
+                variant: "text.smallTextMedium",
+                opacity: 1,
+                mt: "48px",
+                display: "block",
+              }}
+            >
+              Upload Agreement file using Drag & Drop <br /> or
+              <span style={{ color: "#CA5CF2" }}> Choose File</span>
+            </Text>
           )}
         </Box>
       </form>
@@ -112,30 +124,25 @@ const UploadLocalAgreement = ({
   );
 };
 
-export default function StepTwo({
-  valueTextEditor,
-  setvalueTextEditor,
-  setRdioValue,
-  radioValue,
-}: any) {
+export default function StepTwo() {
   const [cloud, setCloud] = useState(true);
+  const [radioValue, setRdioValue] = useState("cloud");
 
   const variantsAgreement = {
-    cloud: (
-      <CloudContent
-        valueTextEditor={valueTextEditor}
-        setvalueTextEditor={setvalueTextEditor}
-        setCloud={setCloud}
-        cloud={cloud}
-      />
-    ),
+    cloud: <CloudContent setCloud={setCloud} cloud={cloud} />,
     local: <UploadLocalAgreement setCloud={setCloud} cloud={cloud} setRdioValue={setRdioValue} />,
   };
 
   return (
     <Container sx={{ maxWidth: "440px", textAlign: "left" }}>
       <Text
-        sx={{ variant: "forms.label", mr: "auto", display: "block", maxWidth: "150px", mb: "5px" }}
+        sx={{
+          variant: "forms.label",
+          mr: "auto",
+          display: "block",
+          maxWidth: "150px",
+          mb: "5px",
+        }}
       >
         Agreement location{" "}
         <Icon width="12px" height="12px" style={{ opacity: 0.5 }} src={iconsObj.infoCircle} />
@@ -144,7 +151,16 @@ export default function StepTwo({
         <Flex sx={{ mb: "24px", justifyContent: "space-between" }}>
           {agreementLocations.map((el) => {
             return (
-              <Label key={el?.name} sx={itemRadio} onClick={() => setRdioValue(el.value)}>
+              <Label
+                key={el?.name}
+                sx={{
+                  justifyContent: "space-between",
+                  width: "inherit",
+                  opacity: 1,
+                  ...flex,
+                }}
+                onClick={() => setRdioValue(el.value)}
+              >
                 <Icon
                   width="16px"
                   src={radioValue === el.value ? iconsObj.radioOn : iconsObj.radioOff}
@@ -161,27 +177,33 @@ export default function StepTwo({
   );
 }
 
-const CloudContent = ({
-  setCloud,
-  cloud,
-  setvalueTextEditor,
-  valueTextEditor,
-}: {
-  setCloud: any;
-  cloud: boolean;
-  valueTextEditor: string;
-  setvalueTextEditor: any;
-}) => {
+const CloudContent = ({ setCloud, cloud }: { setCloud: any; cloud: boolean }) => {
   return (
     <>
+      {" "}
       {cloud ? (
         <Flex sx={{ justifyContent: "space-between" }}>
           <Container onClick={() => setCloud(!cloud)} sx={{ ...card, cursor: "pointer" }}>
             <div style={{ width: "50px", height: "50px", margin: "0 auto" }}>
               <Icon width="50px" height="50px" src={iconsObj.uploadCloudPrimary} />
             </div>
-            <Text sx={{ ...primaryTitleItem, mb: "12px", mt: "24px" }}>Upload Agreement</Text>
-            <Text sx={{ variant: "text.smallTextMedium", maxWidth: "160px", opacity: 1 }}>
+            <Text
+              sx={{
+                variant: "text.largeTextBold",
+                lineHeight: "120%",
+                mt: "24px",
+                mb: "20px",
+              }}
+            >
+              Upload Agreement
+            </Text>
+            <Text
+              sx={{
+                variant: "text.smallTextMedium",
+                maxWidth: "160px",
+                opacity: 1,
+              }}
+            >
               Upload file of a type PDF, DOCX, TXT
             </Text>
           </Container>
@@ -189,19 +211,22 @@ const CloudContent = ({
             <div style={{ width: "50px", height: "50px", margin: "0 auto" }}>
               <Icon width="50px" height="50px" src={iconsObj.fileSecondarysvg} />
             </div>
-            <Text sx={{ ...primaryTitleItem, mb: "12px", mt: "24px" }}>Enter Agreement</Text>
-            <Text sx={{ variant: "text.smallTextMedium", maxWidth: "160px", opacity: 1 }}>
+            <Text sx={{ variant: "text.largeTextBold", mb: "20px", mt: "24px" }}>
+              Enter Agreement
+            </Text>
+            <Text
+              sx={{
+                variant: "text.smallTextMedium",
+                maxWidth: "160px",
+                opacity: 1,
+              }}
+            >
               Enter Text or Markdown content for the Agreement
             </Text>
           </Container>
         </Flex>
       ) : (
-        <TextEditor
-          valueTextEditor={valueTextEditor}
-          setvalueTextEditor={setvalueTextEditor}
-          setCloud={setCloud}
-          cloud={cloud}
-        />
+        <TextEditor setCloud={setCloud} cloud={cloud} />
       )}
     </>
   );

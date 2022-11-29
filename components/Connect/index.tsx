@@ -1,25 +1,47 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import React, { useEffect, useState } from "react";
-import { useLock } from "../../hooks/useLock";
+import React from "react";
 import { Button, Container, Heading, Text } from "theme-ui";
 import { title, container } from "./styles";
+import { useWeb3 } from "../../hooks/useWeb3";
+import { useMutation } from "urql";
+import { login as loginMutation } from "../../modules/graphql/mutations";
 
-export default function Connect({ setAddres }: any) {
-  const lock = useLock();
-  console.log(lock);
+export default function Connect() {
+  const { login, sign } = useWeb3();
 
-  useEffect(() => {
-    setAddres(
-      lock?.provider?.safe?.safeAddress ||
-        lock?.provider?.selectedAddress ||
-        lock?.provider?.accounts[0] ||
-        ""
-    );
-  }, [lock]);
+  const [, loginRequest] = useMutation(loginMutation);
 
   const connect = async (name: any) => {
-    const res = await lock.login(name);
-    console.log("res", res);
+    login(name).then((res) => {
+      onAfterConnect(res.account);
+    });
+  };
+
+  const onAfterConnect = async (account: string) => {
+    if (account) {
+      if (localStorage.getItem("token")) return;
+      const res = await loginRequest({ address: account });
+
+      if (res.data) {
+        const payload = res.data.login.payload;
+        if (payload) {
+          const signature = await sign(payload);
+
+          const tokenRes = await loginRequest({
+            address: account,
+            signature: signature,
+          });
+
+          if (tokenRes.data) {
+            const token = tokenRes.data.login.token;
+            if (token) {
+              console.log(token);
+              localStorage.setItem("token", token);
+            }
+          }
+        }
+      }
+    }
   };
 
   return (

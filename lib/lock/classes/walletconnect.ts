@@ -1,16 +1,16 @@
-import LockConnector from './connector';
-
+import LockConnector from "./connector";
 
 export default class Connector extends LockConnector {
   async connect() {
-  let provider;
+    let provider;
     try {
-      
       let WalletConnectProvider = await import(
         "@walletconnect/web3-provider/dist/umd/index.min.js"!
       );
-      if (WalletConnectProvider?.default) WalletConnectProvider = WalletConnectProvider.default;
-      if (WalletConnectProvider?.default) WalletConnectProvider = WalletConnectProvider.default;
+      if (WalletConnectProvider?.default)
+        WalletConnectProvider = WalletConnectProvider.default;
+      if (WalletConnectProvider?.default)
+        WalletConnectProvider = WalletConnectProvider.default;
       provider = new WalletConnectProvider(this.options);
       await provider.enable();
     } catch (e) {
@@ -21,10 +21,9 @@ export default class Connector extends LockConnector {
     return provider;
   }
 
-
   logout() {
     if (localStorage) {
-      localStorage.removeItem('walletconnect');
+      localStorage.removeItem("walletconnect");
     }
     return;
   }

@@ -1,10 +1,22 @@
-import { createContext, ProviderProps, useCallback, useEffect, useRef, useState } from "react";
+import {
+  createContext,
+  MutableRefObject,
+  ProviderProps,
+  useCallback,
+  useEffect,
+  useRef,
+  useState,
+} from "react";
 
 import { Lock } from "../lib/lock";
 import options, { ConnectorType } from "../lib/snapshot/options";
 import { getInjected } from "../lib/lock/utils";
+import type WalletConnectProvider from "@walletconnect/web3-provider";
+import type { CoinbaseWalletProvider } from "@coinbase/wallet-sdk/dist/provider/CoinbaseWalletProvider";
 
-type ProviderType = any;
+import { Web3Provider } from "@ethersproject/providers";
+
+type ProviderType = WalletConnectProvider | any;
 
 interface LockContext {
   isLoading: Boolean;
@@ -12,10 +24,9 @@ interface LockContext {
   provider?: ProviderType;
   lockClient: Lock;
   login: (connector: ConnectorType) => Promise<ProviderType>;
+  getSignerAddress: () => Promise<string>;
   logout: () => Promise<void>;
-  sign: (message: string) => Promise<string>;
   getConnector: () => Promise<ConnectorType | false>;
-  //web3?: Web3Provider;
 }
 //@ts-ignore
 export const LockContext = createContext<LockContext>({});
@@ -35,14 +46,13 @@ const LockProvider = (props?: Partial<ProviderProps<LockContext>>) => {
   });
 
   const lockInstanceRef = useRef<Lock>(new Lock(options.connectors));
-  const lockInstance = lockInstanceRef.current;
 
   const providerRef = useRef<ProviderType>();
-  const provider = providerRef.current;
 
-  async function login(connector: ConnectorType = "injected"): Promise<ProviderType> {
-    const lockConnector = lockInstance.getConnector(connector);
-    console.log("connector", connector);
+  async function login(
+    connector: ConnectorType = "injected"
+  ): Promise<MutableRefObject<ProviderType>> {
+    const lockConnector = lockInstanceRef.current.getConnector(connector);
 
     const localProvider = (await lockConnector.connect()) as null | any;
 
@@ -51,6 +61,7 @@ const LockProvider = (props?: Partial<ProviderProps<LockContext>>) => {
     }
     if (providerRef.current) {
       localStorage.setItem(`_${name}.connector`, connector);
+
       setState((state) => ({
         ...state,
         isAuthenticated: true,
@@ -63,7 +74,7 @@ const LockProvider = (props?: Partial<ProviderProps<LockContext>>) => {
   async function logout() {
     const connector = await getConnector();
     if (connector) {
-      const lockConnector = lockInstance.getConnector(connector);
+      const lockConnector = lockInstanceRef.current.getConnector(connector);
       await lockConnector.logout();
       localStorage.removeItem(`_${name}.connector`);
       //isAuthenticatedRef.current = false;
@@ -72,44 +83,36 @@ const LockProvider = (props?: Partial<ProviderProps<LockContext>>) => {
     }
   }
 
-  async function sign(value: string): Promise<string> {
+  async function getSignerAddress() {
     const connector = await getConnector();
 
     if (!connector) return ""; //TODO throw error
-    console.log("connector", connector);
+
     switch (connector) {
       // Metamask
       case "injected": {
-        return await provider.request({
-          method: "personal_sign",
-          params: [provider?.selectedAddress, value],
-        });
+        return providerRef.current?.selectedAddress;
       }
       // Walletconnect
       case "walletconnect": {
-        return await provider.request({
-          method: "eth_sign",
-          params: [provider?.accounts[0], value],
-        });
+        return (providerRef.current as WalletConnectProvider)?.accounts[0];
       }
       // Coinbase
       case "walletlink": {
-        return await provider.request({
-          method: "personal_sign",
-          params: [value, provider?._addresses[0]],
-        });
+        return (providerRef.current as CoinbaseWalletProvider)?.request({
+          method: "eth_requestAccounts",
+        })[0];
       }
     }
-
-    return connector;
+    return "";
   }
-  console.log("provider", provider);
 
   async function getConnector(): Promise<ConnectorType | false> {
     const connector = localStorage.getItem(`_${name}.connector`) as ConnectorType;
     if (connector) {
-      const lockConnector = lockInstance.getConnector(connector as ConnectorType);
+      const lockConnector = lockInstanceRef.current.getConnector(connector as ConnectorType);
       const isLoggedIn = await lockConnector.isLoggedIn();
+
       return isLoggedIn ? connector : false;
     }
     return false;
@@ -143,10 +146,10 @@ const LockProvider = (props?: Partial<ProviderProps<LockContext>>) => {
       value={{
         ...state,
         provider: providerRef.current,
-        lockClient: lockInstance,
+        lockClient: lockInstanceRef.current,
         login,
+        getSignerAddress,
         logout,
-        sign,
         getConnector,
       }}
     />

@@ -1,0 +1,208 @@
+import { createContext, ProviderProps, useRef } from "react";
+import { useEffect, useState } from "react";
+import { Web3Provider } from "@ethersproject/providers";
+import networks from "../lib/snapshot/networks.json";
+import { formatUnits } from "@ethersproject/units";
+import { useLock } from "../hooks/useLock";
+import { ConnectorType } from "../lib/snapshot/options";
+
+interface AuthProps {}
+
+interface AuthContext {
+  login: (connector: ConnectorType) => Promise<any>;
+  logout: any;
+  account: string | null;
+  authLoading: boolean;
+  sign: any;
+}
+
+type ChainId = keyof typeof networks;
+
+interface Web3State {
+  account: string | null;
+  network: typeof networks[ChainId];
+  authLoading: boolean;
+  walletConnectType: string | null;
+  profile: null;
+  //isTrezor: boolean;
+}
+
+const defaultNetwork = (process.env.NEXT_PUBLIC_DEFAULT_NETWORK ||
+  Object.keys(networks)[0]) as ChainId;
+
+export const AuthContext = createContext<AuthContext>({
+  account: null,
+  authLoading: false,
+  login: async () => {},
+  logout: () => null,
+  sign: () => null,
+});
+
+const AuthProvider = (props?: Partial<ProviderProps<AuthProps>>) => {
+  const [state, setState] = useState<Web3State>({
+    account: null,
+    network: networks[defaultNetwork],
+    authLoading: false,
+    walletConnectType: null,
+    profile: null,
+    //isTrezor: false,
+  });
+
+  const auth = useLock();
+
+  const web3ProviderRef = useRef<Web3Provider>();
+
+  async function login(connector?: ConnectorType) {
+    if (!connector) {
+      const loadedConnector = await auth.getConnector();
+      if (!loadedConnector) return;
+      connector = loadedConnector || "injected";
+    }
+    setState((state) => ({ ...state, authLoading: true }));
+
+    const provider = await auth.login(connector);
+
+    if (provider) {
+      web3ProviderRef.current = new Web3Provider(provider, "any");
+
+      const loadedState = await loadProvider(provider);
+
+      setState((state) => ({ ...state, ...loadedState, authLoading: false }));
+      return loadedState;
+    }
+    const newState = { ...state, authLoading: false };
+    setState((state) => ({ ...state, newState }));
+    return newState;
+  }
+
+  function logout() {
+    auth.logout();
+    setState((state) => ({ ...state, account: "" }));
+  }
+
+  async function loadProvider(provider: Web3Provider) {
+    const loadedState: Partial<Web3State> = {};
+    try {
+      //@ts-ignore TODO
+      if (provider?.removeAllListeners && provider?.isTorus) {
+        provider.removeAllListeners();
+        console.log("remove listeners", provider?.removeAllListeners);
+      }
+      if (provider?.on) {
+        provider.on("chainChanged", async (chainId: string) => {
+          handleChainChanged(formatUnits(chainId, 0) as ChainId);
+        });
+        provider.on("accountsChanged", async (accounts: string[]) => {
+          if (accounts.length !== 0) {
+            loadedState.account = accounts[0];
+            //setState((state) => ({ ...state, account: accounts[0] }));
+
+            await login();
+          }
+        });
+        // auth.provider.on('disconnect', async () => {});
+      }
+
+      let network,
+        accounts: string[] | undefined = [];
+      try {
+        //TODO check https://github.com/snapshot-labs/lock/blob/master/connectors/torus.ts
+        //@ts-ignore
+        const connector = provider?.connectorName;
+        if (web3ProviderRef.current) {
+          if (connector === "gnosis") {
+            const { chainId: safeChainId, safeAddress } =
+              //@ts-ignore
+              web3ProviderRef.current.provider.safe;
+
+            network = { chainId: safeChainId };
+            accounts = [safeAddress];
+          } else {
+            [network, accounts] = await Promise.all([
+              web3ProviderRef.current!.getNetwork(),
+              web3ProviderRef.current!.listAccounts(),
+            ]);
+          }
+        }
+      } catch (e) {
+        console.error(e);
+      }
+      //console.log("Network", network);
+      // console.log("Accounts", accounts);
+      handleChainChanged(network?.chainId);
+      const acc = accounts && accounts?.length > 0 ? accounts[0] : null;
+
+      /*       setState((state) => ({
+        ...state,
+        account: acc,
+        //@ts-ignore
+        walletConnectType: provider.value?.wc?.peerMeta?.name || null,
+    })); */
+
+      loadedState.account = acc;
+      loadedState.walletConnectType =
+        //@ts-ignore
+        provider.value?.wc?.peerMeta?.name || null;
+    } catch (e) {
+      console.log("ERROR load web3", e);
+      //setState((state) => ({ ...state, account: "" }));
+      loadedState.account = "";
+
+      //return Promise.reject(e);
+    }
+    const newState = { ...state, ...loadedState };
+
+    return newState;
+  }
+
+  function handleChainChanged(chainId: ChainId) {
+    let network = networks[chainId];
+    if (!network) {
+      network = {
+        ...networks[defaultNetwork],
+        chainId: Number(chainId),
+        name: "Unknown",
+        network: "unknown",
+        //@ts-ignore
+        unknown: true,
+      };
+    }
+    setState((state) => ({ ...state, network: network }));
+  }
+
+  async function sign(value: string): Promise<string> {
+    const signer = web3ProviderRef.current!.getSigner();
+
+    if (!signer) {
+      throw Error("No signer in Web3Provider");
+    }
+    try {
+      const signature = await signer.signMessage(value);
+      return signature;
+    } catch (e) {
+      console.error(e);
+    }
+    return "";
+  }
+
+  useEffect(() => {
+    login();
+  }, []); // eslint-disable-line react-hooks/exhaustive-deps
+
+  return (
+    <AuthContext.Provider
+      {...props}
+      value={{
+        login,
+        logout,
+        sign,
+        //loadProvider,
+        //handleChainChanged,
+        //web3: state,
+        ...state,
+      }}
+    />
+  );
+};
+
+export default AuthProvider;

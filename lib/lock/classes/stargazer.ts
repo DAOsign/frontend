@@ -1,31 +1,30 @@
-import LockConnector from './connector';
-
+import LockConnector from "./connector";
 
 export default class Connector extends LockConnector {
-  getProvider(){
-    const walletProvider = window['stargazer'];
+  getProvider() {
+    const walletProvider = window["stargazer"];
 
-    if(!walletProvider){
+    if (!walletProvider) {
       return null;
     }
 
-    return walletProvider.getProvider('ethereum');
+    return walletProvider.getProvider("ethereum");
   }
 
   async connect() {
     const provider = this.getProvider();
 
-    if(!provider){
+    if (!provider) {
       return;
     }
-    
-    try{
+
+    try {
       await provider.activate();
-    }catch(e){
+    } catch (e) {
       console.error(e);
       return;
     }
-    
+
     return provider;
   }
 

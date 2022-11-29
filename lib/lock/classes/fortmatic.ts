@@ -1,6 +1,5 @@
-const get = () => import(/* webpackChunkName: "fortmatic" */ 'fortmatic');
-import LockConnector from './connector';
-
+const get = () => import(/* webpackChunkName: "fortmatic" */ "fortmatic");
+import LockConnector from "./connector";
 
 export default class Connector extends LockConnector {
   async connect() {
@@ -16,7 +15,7 @@ export default class Connector extends LockConnector {
       console.error(e);
       return;
     }
-    provider.connectorName = 'fortmatic';
+    provider.connectorName = "fortmatic";
     return provider;
   }
 }

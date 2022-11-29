@@ -1,43 +1,25 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { Container, Flex, Input, Text, Button } from "theme-ui";
 import { card, item, inputCreactAgreement, secondaryTitle, container } from "../styles";
-import iconsObj from "../../../assets/icons";
-import Icon from "../../icon";
+import iconsObj from "../../../../assets/icons";
+import Icon from "../../../icon";
 
-export default function StepOne({
-  title,
-  setTitle,
-  methodAgreementAccess,
-  setMethodAgreementAccess,
-}: any) {
-  const [step, setStep] = useState(false);
+export default function StepOne() {
+  const [step, setStep] = useState(true);
   return (
     <Container sx={{ maxWidth: "440px", textAlign: "left" }}>
       <Text sx={{ variant: "forms.label", ml: "3px" }}>Title</Text>
-      <Input
-        value={title}
-        onChange={(e) => setTitle(e.target.value)}
-        name="form"
-        sx={{ variant: "forms.input", ...inputCreactAgreement }}
-      />
+      <Input sx={{ variant: "forms.input", ...inputCreactAgreement }} />
       <Text sx={{ variant: "forms.label", margin: "24px auto 3px 2px" }}>Agreement privacy</Text>
-      {methodAgreementAccess !== "public" || step
-        ? chooseMethod(setMethodAgreementAccess, setStep, step)
-        : publicMethod(step, setStep)}
+      {step ? chooseMethod(setStep, step) : publickMethod(setStep, step)}
     </Container>
   );
 }
 
-const chooseMethod = (setMethodAgreementAccess: any, stepStep: any, step: boolean) => {
+const chooseMethod = (setStep: any, step: boolean) => {
   return (
     <Flex sx={{ justifyContent: "space-between" }}>
-      <Container
-        sx={card}
-        onClick={() => {
-          setMethodAgreementAccess("public");
-          stepStep(!step);
-        }}
-      >
+      <Container sx={card} onClick={() => setStep(!step)}>
         <div style={{ margin: "0 auto" }}>
           <Icon width="50px" height="50px" src={iconsObj.publicIcon} />
         </div>
@@ -46,7 +28,7 @@ const chooseMethod = (setMethodAgreementAccess: any, stepStep: any, step: boolea
           Accessed Publicly based on sharing opionts
         </Text>
       </Container>
-      <Container sx={card} onClick={() => setMethodAgreementAccess("private")}>
+      <Container sx={card}>
         <div style={{ width: "50px", height: "50px", margin: "0 auto" }}>
           <Icon width="50px" height="50px" src={iconsObj.privateIcon} />
         </div>
@@ -59,7 +41,7 @@ const chooseMethod = (setMethodAgreementAccess: any, stepStep: any, step: boolea
   );
 };
 
-const publicMethod = (step: boolean, setStep: any) => {
+const publickMethod = (setStep: any, step: boolean) => {
   return (
     <Container sx={container}>
       <Flex sx={{ alignItems: "center" }}>
@@ -71,7 +53,7 @@ const publicMethod = (step: boolean, setStep: any) => {
       </Flex>
       <Flex sx={item}>
         <Icon src={iconsObj.globe} />
-        <Container sx={{ textAlign: "left", maxWidth: "290px", ml: "6px", pr: "5px" }}>
+        <Container sx={{ textAlign: "left", maxWidth: "290px", ml: "6px" }}>
           <Text sx={{ variant: "text.smallTextBold", mb: "3px" }}>Published</Text>
           <Text sx={secondaryTitle}>
             Public and available on the your{" "}
