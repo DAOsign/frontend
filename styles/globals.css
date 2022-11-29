@@ -2,10 +2,8 @@ html,
 body {
   padding: 0;
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
-    Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
-   background-image:   url('../img/svg/Splash\ compressed.jpg');
-   background-position: top right;
+  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen, Ubuntu, Cantarell,
+    Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
 }
 
 a {
@@ -19,7 +17,11 @@ a {
 #__next {
   width: 100%;
 }
-
+.bg {
+  height: 100vh;
+  background-image: url(../img/svg/Splash\ compressed.jpg);
+  background-position: top right;
+}
 .file {
   opacity: 0;
   width: 100%;
@@ -35,12 +37,12 @@ a {
 .w-md-editor {
   border: unset;
   box-shadow: unset !important;
-  background-color: #F7F7FB !important;
+  background-color: #f7f7fb !important;
 }
 .w-md-editor-toolbar {
   box-shadow: unset !important;
-  background-color: #F7F7FB !important;
-  border-bottom: 1px solid #D8D8E2 !important;
+  background-color: #f7f7fb !important;
+  border-bottom: 1px solid #d8d8e2 !important;
 }
 .w-md-editor-bar {
   opacity: 0;
@@ -51,7 +53,6 @@ a {
 .w-md-editor-toolbar li > button {
   color: #212121 !important;
   width: 40px;
-  
 }
 @media screen and (max-width: 768px) {
   .w-md-editor-toolbar li > button {
@@ -60,7 +61,7 @@ a {
 }
 .w-md-editor-toolbar li:nth-child(4),
 .w-md-editor-toolbar li:nth-child(6) {
- display: none;
+  display: none;
 }
 .w-md-editor-toolbar-divider {
   display: none !important;
@@ -69,46 +70,45 @@ a {
   display: none;
 }
 @font-face {
-  font-family: 'InterRegular';
-  src: url('../fonts/Inter-Regular.ttf');
+  font-family: "InterRegular";
+  src: url("../fonts/Inter-Regular.ttf");
 }
 @font-face {
-  font-family: 'InterMedium';
-  src: url('../fonts/Inter-Medium.ttf');
+  font-family: "InterMedium";
+  src: url("../fonts/Inter-Medium.ttf");
 }
 @font-face {
-  font-family: 'InterBold';
-  src: url('../fonts/Inter-Bold.ttf');
+  font-family: "InterBold";
+  src: url("../fonts/Inter-Bold.ttf");
 }
 
-label> div {
-   opacity: 0;
-   position: absolute;
- }
+label > div {
+  opacity: 0;
+  position: absolute;
+}
 
 body {
   min-height: 100vh;
-  background-color: #EDEDF3;
+  background-color: #ededf3;
 }
 
-
-@keyframes text  {
-  0%   { 
+@keyframes text {
+  0% {
     opacity: 0;
   }
-  20%  { 
+  20% {
     opacity: 0;
   }
-  40%  {
-     opacity: 0;
+  40% {
+    opacity: 0;
   }
-  40%  { 
+  40% {
     opacity: 0;
     left: 45%;
     font-size: 32px;
     bottom: -50%;
   }
-  45%  { 
+  45% {
     opacity: 1;
     left: 5%;
     font-size: 32px;
@@ -120,55 +120,55 @@ body {
     font-size: 32px;
     bottom: -50%;
   }
-  75% { 
+  75% {
     left: 35%;
     font-size: 32px;
     bottom: -50%;
   }
-  90% { 
+  90% {
     left: 35%;
     font-size: 32px;
     bottom: -50%;
   }
-  98% { 
+  98% {
     left: 35%;
     font-size: 28px;
     bottom: -50%;
   }
-  100% { 
+  100% {
     left: 38%;
     font-size: 24px;
     bottom: -23%;
   }
 }
-@keyframes d  {
-  0%   { 
+@keyframes d {
+  0% {
     opacity: 0;
     width: 500px;
     position: absolute;
     height: 140px;
     right: -100%;
   }
-  5%  { 
+  5% {
     right: 53.2%;
     opacity: 1;
     width: 140px;
     height: 140px;
   }
-  40%  {    
+  40% {
     opacity: 1;
     width: 140px;
     height: 140px;
     right: 53.2%;
-    height: 160px; 
+    height: 160px;
   }
-  65%  {    
+  65% {
     opacity: 1;
     width: 140px;
     height: 140px;
     right: 53.2%;
   }
-  75%  {    
+  75% {
     opacity: 1;
     width: 140px;
     height: 140px;
@@ -184,50 +184,50 @@ body {
     opacity: 1;
     width: 54px;
     height: 54px;
-    right: 46.2%,
+    right: 46.2%;
   }
 }
 
-@keyframes a  {
-  0%   { 
+@keyframes a {
+  0% {
     opacity: 0;
     position: absolute;
     width: 500px;
     height: 140px;
     right: -200%;
   }
-  13%   { 
+  13% {
     opacity: 0;
     position: absolute;
     width: 500px;
     height: 140px;
     right: -130%;
   }
-  15%  { 
+  15% {
     opacity: 1;
     width: 140px;
     height: 140px;
     right: 20%;
   }
-  30%  {    
+  30% {
     opacity: 1;
     width: 140px;
     height: 140px;
     right: 20%;
   }
-  65%  {    
+  65% {
     opacity: 1;
     width: 140px;
-    height: 160px; 
+    height: 160px;
     right: 20%;
   }
-  75%  {    
+  75% {
     opacity: 1;
     width: 140px;
     height: 140px;
     right: -16%;
   }
-  90%  {    
+  90% {
     opacity: 1;
     width: 140px;
     height: 140px;
@@ -241,43 +241,43 @@ body {
   }
 }
 
-@keyframes o  {
-  0%   { 
+@keyframes o {
+  0% {
     opacity: 0;
     position: absolute;
     width: 500px;
     right: -200%;
   }
-  24%   { 
+  24% {
     opacity: 0;
     position: absolute;
     width: 500px;
     right: -150%;
   }
-  25%  { 
+  25% {
     opacity: 1;
     width: 140px;
     right: -10%;
   }
-  30%  {    
-    opacity: 1;
-    width: 140px;
-    height: 140px;
-    right: -10%;
-  }
-  65%  {    
+  30% {
     opacity: 1;
     width: 140px;
     height: 140px;
     right: -10%;
   }
-  75%  {    
+  65% {
+    opacity: 1;
+    width: 140px;
+    height: 140px;
+    right: -10%;
+  }
+  75% {
     opacity: 1;
     width: 140px;
     height: 140px;
     right: -55%;
   }
-  90%  {    
+  90% {
     opacity: 1;
     width: 140px;
     height: 140px;
@@ -292,34 +292,36 @@ body {
 }
 
 @keyframes connect {
-  0%   { 
-     opacity: 0;
-     position: absolute;
-     top: 150%;
-     left: 50%;
-     transform: translate(-50%, 0);
-     pointer-events: none;
+  0% {
+    opacity: 0;
+    position: absolute;
+    top: 150%;
+    left: 50%;
+    transform: translate(-50%, 0);
+    pointer-events: none;
   }
-  20%  { 
+  20% {
     opacity: 0;
     position: absolute;
     top: 150%;
     left: 50%;
     transform: translate(-50%, 0);
   }
-  40%  { opacity: 0;
+  40% {
+    opacity: 0;
     position: absolute;
     top: 150%;
     left: 50%;
     transform: translate(-50%, 0);
   }
-  85%  { opacity: 0;
+  85% {
+    opacity: 0;
     position: absolute;
     top: 150%;
     left: 50%;
     transform: translate(-50%, 0);
   }
-  95%  { 
+  95% {
     opacity: 1;
     position: absolute;
     top: 150%;
@@ -327,7 +329,7 @@ body {
     transform: translate(-50%, 0);
     pointer-events: none;
   }
-  100% { 
+  100% {
     top: 70%;
     opacity: 1;
     position: absolute;
@@ -335,24 +337,29 @@ body {
 }
 
 @keyframes iconLogo {
-  0%   { 
+  0% {
     opacity: 0;
     left: 10%;
     z-index: 1;
   }
-  20%  { opacity: 0;}
-  40%  { opacity: 0;}
-  65%  {
+  20% {
+    opacity: 0;
+  }
+  40% {
+    opacity: 0;
+  }
+  65% {
     width: 200px;
     left: 10%;
-    opacity: 0;}
-  75%  { 
+    opacity: 0;
+  }
+  75% {
     opacity: 1;
     left: -10%;
     width: 125px;
     z-index: 1;
   }
-  90%  { 
+  90% {
     opacity: 1;
     left: -10%;
     z-index: 1;
@@ -364,17 +371,17 @@ body {
 }
 
 .animateLogo {
-  width: 300px; 
-  height: 100px; 
-  margin: 0 auto; 
+  width: 300px;
+  height: 100px;
+  margin: 0 auto;
   position: relative;
 }
 
 @keyframes animateLogo {
-  0%   { 
+  0% {
     top: 200px;
   }
-  90%  { 
+  90% {
     top: 200px;
   }
   100% {

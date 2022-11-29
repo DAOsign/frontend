@@ -2,9 +2,9 @@
 const nextConfig = {
   reactStrictMode: true,
   swcMinify: true,
-}
-const removeImports = require('next-remove-imports')();
+};
+const removeImports = require("next-remove-imports")();
 
 module.exports = removeImports({
-  ...nextConfig
+  ...nextConfig,
 });
