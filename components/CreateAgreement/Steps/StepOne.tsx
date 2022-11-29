@@ -16,7 +16,7 @@ export default function StepOne({
       <Text sx={{ variant: "forms.label", ml: "3px" }}>Title</Text>
       <Input
         value={title}
-        onChange={(e) => setTitle(e.target.value)}
+        onChange={e => setTitle(e.target.value)}
         name="form"
         sx={{ variant: "forms.input", ...inputCreactAgreement }}
       />

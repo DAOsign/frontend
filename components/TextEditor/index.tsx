@@ -6,7 +6,7 @@ import iconsObj from "../../assets/icons";
 import Icon from "../icon";
 import { Text, Button, Flex, Box } from "theme-ui";
 
-const MDEditor = dynamic(() => import("@uiw/react-md-editor").then((mod) => mod.default), {
+const MDEditor = dynamic(() => import("@uiw/react-md-editor").then(mod => mod.default), {
   ssr: false,
 });
 
@@ -27,7 +27,7 @@ const TextEditor = ({ valueTextEditor, setvalueTextEditor, cloud, setCloud }: an
       </Flex>
       <MDEditor
         value={valueTextEditor}
-        onChange={(e) => setvalueTextEditor(e || "")}
+        onChange={e => setvalueTextEditor(e || "")}
         preview="edit"
         autoFocus
       />

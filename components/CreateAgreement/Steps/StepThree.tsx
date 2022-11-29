@@ -48,10 +48,10 @@ export default function StepThree({
   const onDelete = (el: any, name: string) => {
     if (name === "signers") {
       //@ts-ignore
-      setSigners(signers.filter((e) => e.id !== el.id));
+      setSigners(signers.filter(e => e.id !== el.id));
     } else {
       //@ts-ignore
-      setObservers(observers.filter((e) => e.id !== el.id));
+      setObservers(observers.filter(e => e.id !== el.id));
     }
   };
 
@@ -76,7 +76,7 @@ export default function StepThree({
       </Flex>
       <Input
         value={signersValue}
-        onChange={(e) => setSignersValue(e.target.value)}
+        onChange={e => setSignersValue(e.target.value)}
         sx={{ variant: "forms.input", ...inputCreactAgreement, mb: "8px" }}
       />
       {items(signers, "signers")}
@@ -99,7 +99,7 @@ export default function StepThree({
       </Flex>
       <Input
         value={observersValue}
-        onChange={(e) => setObserversValue(e.target.value)}
+        onChange={e => setObserversValue(e.target.value)}
         sx={{ variant: "forms.input", ...inputCreactAgreement, mb: "8px" }}
       />
       {items(observers, "observers")}

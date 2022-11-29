@@ -12,7 +12,7 @@ export default function Connect() {
   const [, loginRequest] = useMutation(loginMutation);
 
   const connect = async (name: any) => {
-    login(name).then((res) => {
+    login(name).then(res => {
       onAfterConnect(res.account);
     });
   };

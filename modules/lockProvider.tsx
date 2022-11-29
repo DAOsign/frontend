@@ -62,7 +62,7 @@ const LockProvider = (props?: Partial<ProviderProps<LockContext>>) => {
     if (providerRef.current) {
       localStorage.setItem(`_${name}.connector`, connector);
 
-      setState((state) => ({
+      setState(state => ({
         ...state,
         isAuthenticated: true,
       }));
@@ -78,7 +78,7 @@ const LockProvider = (props?: Partial<ProviderProps<LockContext>>) => {
       await lockConnector.logout();
       localStorage.removeItem(`_${name}.connector`);
       //isAuthenticatedRef.current = false;
-      setState((state) => ({ ...state, isAuthenticated: false }));
+      setState(state => ({ ...state, isAuthenticated: false }));
       providerRef.current = undefined;
     }
   }
@@ -121,7 +121,7 @@ const LockProvider = (props?: Partial<ProviderProps<LockContext>>) => {
   const onAppLoad = useCallback(() => {
     // Auto connect if previous session was connected
     if (window?.parent === window)
-      getConnector().then((connector) => {
+      getConnector().then(connector => {
         if (connector) return login(connector);
       });
 
@@ -130,7 +130,7 @@ const LockProvider = (props?: Partial<ProviderProps<LockContext>>) => {
 
     const injected = getInjected();
     // edge case if MM and CBW are both installed
-    setState((state) => ({ ...state, isLoading: false }));
+    setState(state => ({ ...state, isLoading: false }));
     if (injected?.id === "metamask") return;
     // Auto connect when coinbase wallet is detected
     if (injected?.id === "coinbase") return login("injected");
