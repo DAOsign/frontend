@@ -1,11 +1,13 @@
+/** @jsxImportSource theme-ui */
 import React from "react";
 import UserCard from "./UserCard";
-import { Flex, Button, Text, Container } from "theme-ui";
+import { Flex, Button, Text, Container, Link } from "theme-ui";
 import { title, containerSides, noContent, btnText, btn } from "./styles";
 import Icon from "../icon/index";
 import iconsObj from "../../assets/icons";
 import HeaderAgreement from "./HeaderAgreement";
 import ItemMyAgreement from "./ItemMyAgreement";
+import NextLink from "next/link";
 
 export default function MyAgreement({ address }: any) {
   return (
@@ -16,7 +18,9 @@ export default function MyAgreement({ address }: any) {
           <Text sx={title}>My Agreement</Text>
           <Button sx={btn} type="button">
             <Icon src={iconsObj.plus} />
-            <Text sx={btnText}>New Agreement</Text>
+            <NextLink href={"/create"}>
+              <Link sx={btnText}>New Agreement</Link>
+            </NextLink>
           </Button>
         </Flex>
         <HeaderAgreement />
