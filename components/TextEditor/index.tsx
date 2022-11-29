@@ -10,7 +10,7 @@ const MDEditor = dynamic(() => import("@uiw/react-md-editor").then((mod) => mod.
   ssr: false,
 });
 
-const TextEditor = ({ setCloud, cloud }: any) => {
+const TextEditor = ({ valueTextEditor, setvalueTextEditor, cloud, setCloud }: any) => {
   const [value, setValue] = useState<string>("");
 
   return (
@@ -25,7 +25,12 @@ const TextEditor = ({ setCloud, cloud }: any) => {
           <Text sx={{ display: "block", fontSize: "10px" }}>Choose another privacy</Text>
         </Button>
       </Flex>
-      <MDEditor value={value} onChange={(e) => setValue(e || "")} preview="live" autoFocus />
+      <MDEditor
+        value={valueTextEditor}
+        onChange={(e) => setvalueTextEditor(e || "")}
+        preview="edit"
+        autoFocus
+      />
       <Box
         sx={{
           position: "absolute",

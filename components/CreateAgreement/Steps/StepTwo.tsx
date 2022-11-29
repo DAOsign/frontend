@@ -112,12 +112,23 @@ const UploadLocalAgreement = ({
   );
 };
 
-export default function StepTwo() {
+export default function StepTwo({
+  valueTextEditor,
+  setvalueTextEditor,
+  setRdioValue,
+  radioValue,
+}: any) {
   const [cloud, setCloud] = useState(true);
-  const [radioValue, setRdioValue] = useState("cloud");
 
   const variantsAgreement = {
-    cloud: <CloudContent setCloud={setCloud} cloud={cloud} />,
+    cloud: (
+      <CloudContent
+        valueTextEditor={valueTextEditor}
+        setvalueTextEditor={setvalueTextEditor}
+        setCloud={setCloud}
+        cloud={cloud}
+      />
+    ),
     local: <UploadLocalAgreement setCloud={setCloud} cloud={cloud} setRdioValue={setRdioValue} />,
   };
 
@@ -150,7 +161,17 @@ export default function StepTwo() {
   );
 }
 
-const CloudContent = ({ setCloud, cloud }: { setCloud: any; cloud: boolean }) => {
+const CloudContent = ({
+  setCloud,
+  cloud,
+  setvalueTextEditor,
+  valueTextEditor,
+}: {
+  setCloud: any;
+  cloud: boolean;
+  valueTextEditor: string;
+  setvalueTextEditor: any;
+}) => {
   return (
     <>
       {" "}
@@ -176,7 +197,12 @@ const CloudContent = ({ setCloud, cloud }: { setCloud: any; cloud: boolean }) =>
           </Container>
         </Flex>
       ) : (
-        <TextEditor setCloud={setCloud} cloud={cloud} />
+        <TextEditor
+          valueTextEditor={valueTextEditor}
+          setvalueTextEditor={setvalueTextEditor}
+          setCloud={setCloud}
+          cloud={cloud}
+        />
       )}
     </>
   );
