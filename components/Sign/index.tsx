@@ -8,10 +8,8 @@ export default function Sign() {
 
   const handleSign = async () => {
     console.log(provider);
-    sign(value)
+    sign(value);
   };
-
-
 
   return (
     <Box>
