@@ -1,11 +1,4 @@
-import {
-  createContext,
-  ProviderProps,
-  useCallback,
-  useEffect,
-  useRef,
-  useState,
-} from "react";
+import { createContext, ProviderProps, useCallback, useEffect, useRef, useState } from "react";
 
 import { Lock } from "../lib/lock";
 import options, { ConnectorType } from "../lib/snapshot/options";
@@ -47,9 +40,7 @@ const LockProvider = (props?: Partial<ProviderProps<LockContext>>) => {
   const providerRef = useRef<ProviderType>();
   const provider = providerRef.current;
 
-  async function login(
-    connector: ConnectorType = "injected"
-  ): Promise<ProviderType> {
+  async function login(connector: ConnectorType = "injected"): Promise<ProviderType> {
     const lockConnector = lockInstance.getConnector(connector);
     console.log("connector", connector);
 
@@ -115,13 +106,9 @@ const LockProvider = (props?: Partial<ProviderProps<LockContext>>) => {
   console.log("provider", provider);
 
   async function getConnector(): Promise<ConnectorType | false> {
-    const connector = localStorage.getItem(
-      `_${name}.connector`
-    ) as ConnectorType;
+    const connector = localStorage.getItem(`_${name}.connector`) as ConnectorType;
     if (connector) {
-      const lockConnector = lockInstance.getConnector(
-        connector as ConnectorType
-      );
+      const lockConnector = lockInstance.getConnector(connector as ConnectorType);
       const isLoggedIn = await lockConnector.isLoggedIn();
       return isLoggedIn ? connector : false;
     }

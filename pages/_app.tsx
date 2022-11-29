@@ -1,14 +1,13 @@
 import type { AppProps } from "next/app";
 import LockProvider from "../modules/lockProvider";
-import { ThemeProvider } from 'theme-ui'
-import { theme } from '../theme'
+import { ThemeProvider } from "theme-ui";
+import { theme } from "../theme";
 import "../styles/globals.css";
-
 
 function MyApp({ Component, pageProps }: AppProps) {
   return (
     <LockProvider>
-     <ThemeProvider theme={theme}>
+      <ThemeProvider theme={theme}>
         <Component {...pageProps} />
       </ThemeProvider>
     </LockProvider>
