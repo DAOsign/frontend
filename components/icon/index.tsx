@@ -12,8 +12,8 @@ interface Icon {
 }
 
 function Icon({ src, className = "", alt = "", ...others }: IconProps) {
-  //@ts-ignore
   return (
+    //@ts-ignore
     <Image
       width={src.width}
       height={src.height}
