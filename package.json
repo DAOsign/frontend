@@ -15,6 +15,7 @@
     "@emotion/react": "^11.10.5",
     "@snapshot-labs/lock": "github:snapshot-labs/lock",
     "@uiw/react-md-editor": "^3.19.7",
+    "draft-js": "^0.11.7",
     "eslint-config-prettier": "^8.5.0",
     "graphql": "^16.6.0",
     "ipfs-only-hash": "^4.0.0",
@@ -23,6 +24,7 @@
     "prettier": "^2.8.0",
     "react": "18.2.0",
     "react-dom": "18.2.0",
+    "react-draft-wysiwyg": "^1.15.0",
     "theme-ui": "^0.15.3",
     "urql": "^3.0.3"
   },
@@ -36,6 +38,7 @@
     "@types/node": "18.7.23",
     "@types/react": "18.0.21",
     "@types/react-dom": "18.0.6",
+    "@types/react-draft-wysiwyg": "^1.13.4",
     "@walletconnect/web3-provider": "^1.8.0",
     "eslint": "8.24.0",
     "eslint-config-next": "12.3.1",
