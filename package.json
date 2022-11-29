@@ -14,6 +14,7 @@
     "@emotion/react": "^11.10.5",
     "@snapshot-labs/lock": "github:snapshot-labs/lock",
     "@uiw/react-md-editor": "^3.19.7",
+    "eslint-config-prettier": "^8.5.0",
     "ipfs-only-hash": "^4.0.0",
     "next": "12.3.1",
     "next-remove-imports": "^1.0.8",
