@@ -15,7 +15,7 @@ function MyApp({ Component, pageProps }: AppProps) {
     <GraphqlProvider value={client}>
       <LockProvider>
         <AuthProvider>
-          <ThemeProvider theme={theme}>
+          <ThemeProvider >
             <Component {...pageProps} />
           </ThemeProvider>
         </AuthProvider>
