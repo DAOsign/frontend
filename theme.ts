@@ -63,6 +63,9 @@ export const theme: Theme = {
       '@media screen and (max-width: 375px)': {
         width: '100%',
         },
+      '&:disabled': {
+        opacity: 0.8
+      }
      },
      secondary: {
       height: '50px',

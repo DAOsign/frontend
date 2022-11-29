@@ -7,23 +7,28 @@ import Icon from "../../icon";
 
 
 
-export default function StepOne({title, setTitle}: any) {
-const [step, setStep] = useState(true)
-
+export default function StepOne({title, setTitle, methodAgreementAccess, setMethodAgreementAccess}: any) {
+  const [step, setStep] = useState(false)
   return (
     <Container sx={{maxWidth: '440px', textAlign: 'left'}}>
     <Text sx={{variant: 'forms.label', ml: '3px'}}>Title</Text>
     <Input value={title} onChange ={e => setTitle(e.target.value)} name ='form'  sx={{variant: 'forms.input', ...inputCreactAgreement}}/>
     <Text sx={{variant: 'forms.label', margin:'24px auto 3px 2px'}}>Agreement privacy</Text>
-    {step ? chooseMethod(setStep, step) : publickMethod(setStep, step)}
+    {methodAgreementAccess !== 'public' || step ? 
+     chooseMethod(setMethodAgreementAccess, setStep, step) : 
+     publickMethod(step, setStep)
+    }
     </Container>
   );
 }
 
 
-const chooseMethod = (setStep: any, step: boolean) => {
+const chooseMethod = (setMethodAgreementAccess:any, stepStep: any, step: boolean) => {
   return  <Flex sx={{justifyContent: 'space-between'}}> 
-  <Container sx={card} onClick={() => setStep(!step)}>
+      <Container sx={card} onClick={() => {
+        setMethodAgreementAccess('public')
+        stepStep(!step)
+      }}>
       <div style={{margin: '0 auto'}}>
           <Icon width='50px'  height='50px' src={iconsObj.publicIcon}/>
       </div>
@@ -32,7 +37,7 @@ const chooseMethod = (setStep: any, step: boolean) => {
             Accessed Publicly based on sharing opionts
       </Text>
   </Container>
-  <Container sx={card}>
+  <Container sx={card}  onClick={() => setMethodAgreementAccess('private')}>
       <div style={{width: '50px', height: '50px', margin: '0 auto'}}>
           <Icon width='50px' height='50px' src={iconsObj.privateIcon}/>
       </div>
@@ -44,7 +49,7 @@ const chooseMethod = (setStep: any, step: boolean) => {
 </Flex>
 }
 
-const publickMethod = (setStep: any, step: boolean) => {
+const publickMethod = (step: boolean, setStep: any) => {
  return <Container sx={container}>
   <Flex sx={{alignItems: 'center'}}> 
      <Text sx={{variant: 'text.largeTextBold'}}>Public</Text> 

@@ -1,4 +1,4 @@
-import React, {useState} from 'react'
+import React, {useEffect, useState} from 'react'
 import StepOne from './Steps/StepOne'
 import StepTwo from './Steps/StepTwo'
 import StepThree from './Steps/StepThree'
@@ -12,15 +12,37 @@ export default function CreateAgreement() {
   const [valueTextEditor, setvalueTextEditor] = useState<string>("");
   const [signersValue, setSignersValue] = useState('')
   const [observersValue, setObserversValue] = useState('')
-
-
+  const [methodAgreementAccess, setMethodAgreementAccess] = useState('')
+  const [radioValue, setRdioValue] = useState('cloud')
+  const [fileInput, setFileInput] = useState<any>()
+  const [signers, setSigners] = useState<Array<{value: string, id: number}>>([])
+  const [observers, setObservers] = useState<Array<{value: string, id: number}>>([])
   
-
     const steps = {
-       1: <StepOne title={titleInput} setTitle={setTitleInput}/>,
-       2: <StepTwo valueTextEditor={valueTextEditor} setvalueTextEditor={setvalueTextEditor}/>,
-       3: <StepThree signersValue={signersValue} setSignersValue={setSignersValue} 
-           observersValue={observersValue} setObserversValue={setObserversValue}/>,
+       1: <StepOne 
+            setMethodAgreementAccess={setMethodAgreementAccess}
+            methodAgreementAccess={methodAgreementAccess} 
+            setTitle={setTitleInput}
+            title={titleInput} 
+           />,
+       2: <StepTwo 
+            setvalueTextEditor={setvalueTextEditor}
+            valueTextEditor={valueTextEditor} 
+            setFileInput={setFileInput}
+            setRdioValue={setRdioValue}  
+            radioValue={radioValue} 
+            fileInput={fileInput}
+            />,
+       3: <StepThree 
+            setObserversValue={setObserversValue}
+            setSignersValue={setSignersValue} 
+            observersValue={observersValue} 
+            signersValue={signersValue} 
+            setObservers={setObservers}
+            setSigners={setSigners}
+            observers={observers}
+            signers={signers}
+          />,
     }
 
     return (
@@ -30,7 +52,16 @@ export default function CreateAgreement() {
            {steps[step]}
          </Container>
          <Container sx={rightSide}>
-           <LeftSide step={step} setStep={setStep}/>
+           <LeftSide 
+            methodAgreementAccess={methodAgreementAccess} 
+            valueTextEditor={valueTextEditor} 
+            radioValue={radioValue}
+            observers={observers}
+            title={titleInput} 
+            setStep={setStep}
+            signers={signers}
+            step={step}
+            />
          </Container>
        </Flex>
     )

@@ -1,19 +1,22 @@
 import React, {useState} from "react";
 import { Container, Flex, Input, Text, Button } from 'theme-ui'
-import {card, item, inputCreactAgreement, secondaryTitle, container} from "../styles";
+import {inputCreactAgreement} from "../styles";
 import {uniqueId} from '../../../utils/formats'
 import iconsObj from "../../../assets/icons";
 import Icon from "../../icon";
 
-  export default function StepThree({signersValue,setSignersValue,observersValue,setObserversValue}: any) {
-  const [signers, setSigners] = useState<Array<{value: string, id: number}>>([])
-  //const [signersValue, setSignersValue] = useState('')
-  const [observers, setObservers] = useState<Array<{value: string, id: number}>>([])
-  //const [observersValue, setObserversValue] = useState('')
-
-  console.log(signers, observers);
-
-
+  export default function StepThree({
+    setObserversValue, 
+    setSignersValue,
+    observersValue, 
+    setObservers,
+    signersValue, 
+    setObserver, 
+    observers,
+    setSigners,
+    signers, 
+    }
+     : any) {
  const items = (array: any, name: string) => {
     return <Flex>
       {array.map((el: any )=> {
@@ -37,12 +40,13 @@ import Icon from "../../icon";
   
   const onDelete = (el: any, name: string) => {
     if(name === 'signers') { 
+      //@ts-ignore
       setSigners(signers.filter(e => e.id !==  el.id))
     } else {
+      //@ts-ignore
       setObservers(observers.filter(e => e.id !==  el.id))
     }
   }
-
 
   return (
     <Container sx={{maxWidth: '440px', textAlign: 'left'}}>
