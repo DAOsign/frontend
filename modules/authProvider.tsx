@@ -58,7 +58,7 @@ const AuthProvider = (props?: Partial<ProviderProps<AuthProps>>) => {
       if (!loadedConnector) return;
       connector = loadedConnector || "injected";
     }
-    setState((state) => ({ ...state, authLoading: true }));
+    setState(state => ({ ...state, authLoading: true }));
 
     const provider = await auth.login(connector);
 
@@ -67,17 +67,17 @@ const AuthProvider = (props?: Partial<ProviderProps<AuthProps>>) => {
 
       const loadedState = await loadProvider(provider);
 
-      setState((state) => ({ ...state, ...loadedState, authLoading: false }));
+      setState(state => ({ ...state, ...loadedState, authLoading: false }));
       return loadedState;
     }
     const newState = { ...state, authLoading: false };
-    setState((state) => ({ ...state, newState }));
+    setState(state => ({ ...state, newState }));
     return newState;
   }
 
   function logout() {
     auth.logout();
-    setState((state) => ({ ...state, account: "" }));
+    setState(state => ({ ...state, account: "" }));
   }
 
   async function loadProvider(provider: Web3Provider) {
@@ -167,7 +167,7 @@ const AuthProvider = (props?: Partial<ProviderProps<AuthProps>>) => {
         unknown: true,
       };
     }
-    setState((state) => ({ ...state, network: network }));
+    setState(state => ({ ...state, network: network }));
   }
 
   async function sign(value: string): Promise<string> {

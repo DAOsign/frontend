@@ -147,9 +147,9 @@ export default function StepTwo() {
         Agreement location{" "}
         <Icon width="12px" height="12px" style={{ opacity: 0.5 }} src={iconsObj.infoCircle} />
       </Text>
-      <Box as="form" onSubmit={(e) => e.preventDefault()}>
+      <Box as="form" onSubmit={e => e.preventDefault()}>
         <Flex sx={{ mb: "24px", justifyContent: "space-between" }}>
-          {agreementLocations.map((el) => {
+          {agreementLocations.map(el => {
             return (
               <Label
                 key={el?.name}
