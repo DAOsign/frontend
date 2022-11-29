@@ -20,13 +20,7 @@ export default function Footer() {
     <Container sx={footer}>
       <Flex sx={container}>
         <Box sx={leftSide}>
-          <Text
-            sx={{
-              variant: "text.normalTextBold",
-              display: "inline-block",
-              mb: "8px",
-            }}
-          >
+          <Text sx={{ variant: "text.normalTextBold", display: "inline-block", mb: "8px" }}>
             Get the latest updates
           </Text>
           <Input placeholder="Your Email" sx={inputFooter} />
@@ -36,44 +30,18 @@ export default function Footer() {
         </Box>
         <Flex sx={rightSide}>
           <Box>
-            <Text
-              sx={{
-                variant: "text.normalTextBold",
-                display: "inline-block",
-                mb: "12px",
-              }}
-            >
+            <Text sx={{ variant: "text.normalTextBold", display: "inline-block", mb: "12px" }}>
               DaoSign
             </Text>
-            <Text
-              sx={{
-                variant: "text.smallTextMedium",
-                display: "block",
-                mb: "4px",
-              }}
-            >
-              About
-            </Text>
+            <Text sx={{ variant: "text.smallTextMedium", display: "block", mb: "4px" }}>About</Text>
             <Text sx={{ variant: "text.smallTextMedium", display: "block" }}>Terms of Service</Text>
           </Box>
           <Box>
             <Text sx={socialTitle}>Resources</Text>
-            <Text
-              sx={{
-                variant: "text.smallTextMedium",
-                display: "block",
-                mb: "4px",
-              }}
-            >
+            <Text sx={{ variant: "text.smallTextMedium", display: "block", mb: "4px" }}>
               GitHub
             </Text>
-            <Text
-              sx={{
-                variant: "text.smallTextMedium",
-                display: "block",
-                mb: "4px",
-              }}
-            >
+            <Text sx={{ variant: "text.smallTextMedium", display: "block", mb: "4px" }}>
               Discussion
             </Text>
             <Text sx={{ variant: "text.smallTextMedium", display: "block" }}>Support</Text>
@@ -95,14 +63,7 @@ export default function Footer() {
       </Flex>
       <Text sx={footerText}>
         © Copywriting 2022. Created with ❤️ by
-        <a
-          href="#"
-          style={{
-            color: "#CA5CF2",
-            display: "inline-block",
-            marginLeft: "5px",
-          }}
-        >
+        <a href="#" style={{ color: "#CA5CF2", display: "inline-block", marginLeft: "5px" }}>
           CIDT
         </a>
       </Text>

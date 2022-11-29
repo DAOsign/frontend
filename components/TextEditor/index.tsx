@@ -6,12 +6,12 @@ import iconsObj from "../../assets/icons";
 import Icon from "../icon";
 import { Text, Button, Flex, Box } from "theme-ui";
 
-const TextEditor = ({ setCloud, cloud }: any) => {
-  const [value, setValue] = useState<string>("");
+const MDEditor = dynamic(() => import("@uiw/react-md-editor").then((mod) => mod.default), {
+  ssr: false,
+});
 
-  const MDEditor = dynamic(() => import("@uiw/react-md-editor").then((mod) => mod.default), {
-    ssr: false,
-  });
+const TextEditor = ({ valueTextEditor, setvalueTextEditor, cloud, setCloud }: any) => {
+  const [value, setValue] = useState<string>("");
 
   return (
     <div style={{ position: "relative" }}>
@@ -25,7 +25,12 @@ const TextEditor = ({ setCloud, cloud }: any) => {
           <Text sx={{ display: "block", fontSize: "10px" }}>Choose another privacy</Text>
         </Button>
       </Flex>
-      <MDEditor value={value} onChange={(e) => setValue(e || "")} preview="edit" autoFocus />
+      <MDEditor
+        value={valueTextEditor}
+        onChange={(e) => setvalueTextEditor(e || "")}
+        preview="edit"
+        autoFocus
+      />
       <Box
         sx={{
           position: "absolute",

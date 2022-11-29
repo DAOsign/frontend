@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import { Container, Flex, Text, Radio, Label, Box, Button } from "theme-ui";
 import Icon from "../../icon/index";
-import Image from "next/image";
 import {
   card,
   itemRadio,
@@ -13,7 +12,6 @@ import {
 } from "../styles";
 import iconsObj from "../../../assets/icons";
 import TextEditor from "../../TextEditor/index";
-
 const Hash = require("ipfs-only-hash");
 
 const agreementLocations = [
@@ -87,13 +85,7 @@ const UploadLocalAgreement = ({
             name="file"
           />
           {name ? (
-            <Text
-              sx={{
-                variant: "text.smallTextMedium",
-                opacity: 1,
-                display: "block",
-              }}
-            >
+            <Text sx={{ variant: "text.smallTextMedium", opacity: 1, display: "block" }}>
               {name}
               {bytes && (
                 <button
@@ -120,25 +112,30 @@ const UploadLocalAgreement = ({
   );
 };
 
-export default function StepTwo() {
+export default function StepTwo({
+  valueTextEditor,
+  setvalueTextEditor,
+  setRdioValue,
+  radioValue,
+}: any) {
   const [cloud, setCloud] = useState(true);
-  const [radioValue, setRdioValue] = useState("cloud");
 
   const variantsAgreement = {
-    cloud: <CloudContent setCloud={setCloud} cloud={cloud} />,
+    cloud: (
+      <CloudContent
+        valueTextEditor={valueTextEditor}
+        setvalueTextEditor={setvalueTextEditor}
+        setCloud={setCloud}
+        cloud={cloud}
+      />
+    ),
     local: <UploadLocalAgreement setCloud={setCloud} cloud={cloud} setRdioValue={setRdioValue} />,
   };
 
   return (
     <Container sx={{ maxWidth: "440px", textAlign: "left" }}>
       <Text
-        sx={{
-          variant: "forms.label",
-          mr: "auto",
-          display: "block",
-          maxWidth: "150px",
-          mb: "5px",
-        }}
+        sx={{ variant: "forms.label", mr: "auto", display: "block", maxWidth: "150px", mb: "5px" }}
       >
         Agreement location{" "}
         <Icon width="12px" height="12px" style={{ opacity: 0.5 }} src={iconsObj.infoCircle} />
@@ -160,15 +157,23 @@ export default function StepTwo() {
         </Flex>
       </Box>
       <Box>{variantsAgreement[radioValue]}</Box>
-      <Box>{variantsAgreement[radioValue]}</Box>
     </Container>
   );
 }
 
-const CloudContent = ({ setCloud, cloud }: { setCloud: any; cloud: boolean }) => {
+const CloudContent = ({
+  setCloud,
+  cloud,
+  setvalueTextEditor,
+  valueTextEditor,
+}: {
+  setCloud: any;
+  cloud: boolean;
+  valueTextEditor: string;
+  setvalueTextEditor: any;
+}) => {
   return (
     <>
-      {" "}
       {cloud ? (
         <Flex sx={{ justifyContent: "space-between" }}>
           <Container onClick={() => setCloud(!cloud)} sx={{ ...card, cursor: "pointer" }}>
@@ -176,13 +181,7 @@ const CloudContent = ({ setCloud, cloud }: { setCloud: any; cloud: boolean }) =>
               <Icon width="50px" height="50px" src={iconsObj.uploadCloudPrimary} />
             </div>
             <Text sx={{ ...primaryTitleItem, mb: "12px", mt: "24px" }}>Upload Agreement</Text>
-            <Text
-              sx={{
-                variant: "text.smallTextMedium",
-                maxWidth: "160px",
-                opacity: 1,
-              }}
-            >
+            <Text sx={{ variant: "text.smallTextMedium", maxWidth: "160px", opacity: 1 }}>
               Upload file of a type PDF, DOCX, TXT
             </Text>
           </Container>
@@ -191,19 +190,18 @@ const CloudContent = ({ setCloud, cloud }: { setCloud: any; cloud: boolean }) =>
               <Icon width="50px" height="50px" src={iconsObj.fileSecondarysvg} />
             </div>
             <Text sx={{ ...primaryTitleItem, mb: "12px", mt: "24px" }}>Enter Agreement</Text>
-            <Text
-              sx={{
-                variant: "text.smallTextMedium",
-                maxWidth: "160px",
-                opacity: 1,
-              }}
-            >
+            <Text sx={{ variant: "text.smallTextMedium", maxWidth: "160px", opacity: 1 }}>
               Enter Text or Markdown content for the Agreement
             </Text>
           </Container>
         </Flex>
       ) : (
-        <TextEditor setCloud={setCloud} cloud={cloud} />
+        <TextEditor
+          valueTextEditor={valueTextEditor}
+          setvalueTextEditor={setvalueTextEditor}
+          setCloud={setCloud}
+          cloud={cloud}
+        />
       )}
     </>
   );

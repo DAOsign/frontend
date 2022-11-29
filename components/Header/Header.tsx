@@ -31,9 +31,6 @@ export default function Header({ address, visible, setVisible }: any) {
             {visible ? <Icon src={iconsObj.xClose} /> : <Icon src={iconsObj.menu} />}
           </Button>
         </Flex>
-        <Button onClick={() => setVisible(!visible)} type="button" sx={iconMenu}>
-          {visible ? <Icon src={iconsObj.xClose} /> : <Icon src={iconsObj.menu} />}
-        </Button>
       </Flex>
     </Container>
   );

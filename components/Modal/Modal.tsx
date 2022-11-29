@@ -34,23 +34,13 @@ export default function Modal() {
           Are You Sure?
         </Heading>
         <Text
-          sx={{
-            variant: "text.smallTextMedium",
-            opacity: 1,
-            mb: "60px",
-            display: "inline-block",
-          }}
+          sx={{ variant: "text.smallTextMedium", opacity: 1, mb: "60px", display: "inline-block" }}
         >
           All unsaved data will be lost
         </Text>
         <Flex>
           <Button
-            sx={{
-              variant: "buttons.secondary",
-              width: "100px",
-              border: "unset",
-              opacity: 0.5,
-            }}
+            sx={{ variant: "buttons.secondary", width: "100px", border: "unset", opacity: 0.5 }}
           >
             Apply
           </Button>

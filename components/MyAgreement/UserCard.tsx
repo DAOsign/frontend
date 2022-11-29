@@ -27,13 +27,7 @@ export default function UserCard({ address }: any) {
       <Flex sx={fotoContainer}>
         <Container sx={userFoto}></Container>
         <Flex sx={infoContainer}>
-          <Text
-            sx={{
-              variant: "text.largeTextBold",
-              display: "block",
-              textAlign: "center",
-            }}
-          >
+          <Text sx={{ variant: "text.largeTextBold", display: "block", textAlign: "center" }}>
             Ralph Edwards
           </Text>
           <Flex sx={{ justifyContent: "center", marginBottom: "24px", mt: "4px" }}>

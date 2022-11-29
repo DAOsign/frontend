@@ -4,8 +4,6 @@ body {
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen, Ubuntu, Cantarell,
     Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
-  background-image: url("../img/svg/Splash\ compressed.jpg");
-  background-position: top right;
 }
 
 a {
@@ -19,7 +17,11 @@ a {
 #__next {
   width: 100%;
 }
-
+.bg {
+  height: 100vh;
+  background-image: url(../img/svg/Splash\ compressed.jpg);
+  background-position: top right;
+}
 .file {
   opacity: 0;
   width: 100%;
@@ -51,11 +53,6 @@ a {
 .w-md-editor-toolbar li > button {
   color: #212121 !important;
   width: 40px;
-}
-@media screen and (max-width: 768px) {
-  .w-md-editor-toolbar li > button {
-    width: 20px !important;
-  }
 }
 @media screen and (max-width: 768px) {
   .w-md-editor-toolbar li > button {
@@ -302,13 +299,6 @@ body {
     left: 50%;
     transform: translate(-50%, 0);
     pointer-events: none;
-  }
-  20% {
-    opacity: 0;
-    position: absolute;
-    top: 150%;
-    left: 50%;
-    transform: translate(-50%, 0);
   }
   20% {
     opacity: 0;

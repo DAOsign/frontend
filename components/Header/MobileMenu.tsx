@@ -12,13 +12,7 @@ const MobileMenu = ({ address }: any) => {
         <Flex>
           <Container sx={foto}></Container>
           <Container sx={{ maxWidth: "190px", m: "0 0 0 16px" }}>
-            <Text
-              sx={{
-                variant: "text.largeTextBold",
-                display: "block",
-                textAlign: "left",
-              }}
-            >
+            <Text sx={{ variant: "text.largeTextBold", display: "block", textAlign: "left" }}>
               Ralph Edwards
             </Text>
             <Flex sx={{ justifyContent: "left", marginBottom: "24px", mt: "4px" }}>
