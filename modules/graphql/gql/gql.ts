@@ -15,8 +15,10 @@ import { TypedDocumentNode as DocumentNode } from "@graphql-typed-document-node/
 const documents = {
   "\n  mutation login($address: String!, $signature: String) {\n    login(address: $address, signature: $signature) {\n      message\n      payload\n      token\n    }\n  }\n":
     types.LoginDocument,
-  "\n  query allUsers($first: Int!) {\n    users {\n      userId\n      name\n      bio\n      phone\n      email\n      twitterVerificationCode\n      twitterVerificationSig\n    }\n  }\n":
-    types.AllUsersDocument,
+  "\n  query Users {\n    users {\n      users {\n        name\n        bio\n        email\n        phone\n        twitterVerificationCode\n        twitterVerificationSig\n      }\n    }\n  }\n":
+    types.UsersDocument,
+  "\n  query Agreements($authorWallet: String) {\n    agreements(authorWallet: $authorWallet) {\n      agreements {\n        title\n        content\n        agreementLocation {\n          name\n          isActive\n        }\n        agreementPrivacy {\n          name\n        }\n        agreementFile {\n          filePath\n          createdAt\n        }\n        authorWallet {\n          address\n          user {\n            name\n            email\n            phone\n            twitterVerificationCode\n            twitterVerificationSig\n            bio\n          }\n        }\n        observers {\n          email\n          wallet {\n            address\n            user {\n              name\n            }\n          }\n        }\n        agreementStatus {\n          name\n        }\n      }\n      count\n    }\n  }\n":
+    types.AgreementsDocument,
 };
 
 /**
@@ -29,8 +31,14 @@ export function graphql(
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
 export function graphql(
-  source: "\n  query allUsers($first: Int!) {\n    users {\n      userId\n      name\n      bio\n      phone\n      email\n      twitterVerificationCode\n      twitterVerificationSig\n    }\n  }\n"
-): typeof documents["\n  query allUsers($first: Int!) {\n    users {\n      userId\n      name\n      bio\n      phone\n      email\n      twitterVerificationCode\n      twitterVerificationSig\n    }\n  }\n"];
+  source: "\n  query Users {\n    users {\n      users {\n        name\n        bio\n        email\n        phone\n        twitterVerificationCode\n        twitterVerificationSig\n      }\n    }\n  }\n"
+): typeof documents["\n  query Users {\n    users {\n      users {\n        name\n        bio\n        email\n        phone\n        twitterVerificationCode\n        twitterVerificationSig\n      }\n    }\n  }\n"];
+/**
+ * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ */
+export function graphql(
+  source: "\n  query Agreements($authorWallet: String) {\n    agreements(authorWallet: $authorWallet) {\n      agreements {\n        title\n        content\n        agreementLocation {\n          name\n          isActive\n        }\n        agreementPrivacy {\n          name\n        }\n        agreementFile {\n          filePath\n          createdAt\n        }\n        authorWallet {\n          address\n          user {\n            name\n            email\n            phone\n            twitterVerificationCode\n            twitterVerificationSig\n            bio\n          }\n        }\n        observers {\n          email\n          wallet {\n            address\n            user {\n              name\n            }\n          }\n        }\n        agreementStatus {\n          name\n        }\n      }\n      count\n    }\n  }\n"
+): typeof documents["\n  query Agreements($authorWallet: String) {\n    agreements(authorWallet: $authorWallet) {\n      agreements {\n        title\n        content\n        agreementLocation {\n          name\n          isActive\n        }\n        agreementPrivacy {\n          name\n        }\n        agreementFile {\n          filePath\n          createdAt\n        }\n        authorWallet {\n          address\n          user {\n            name\n            email\n            phone\n            twitterVerificationCode\n            twitterVerificationSig\n            bio\n          }\n        }\n        observers {\n          email\n          wallet {\n            address\n            user {\n              name\n            }\n          }\n        }\n        agreementStatus {\n          name\n        }\n      }\n      count\n    }\n  }\n"];
 
 /**
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.

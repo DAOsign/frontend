@@ -3,8 +3,10 @@ import { Flex, Text, Box, Button } from "theme-ui";
 import Icon from "../icon/index";
 import iconsObj from "../../assets/icons";
 import { agreementConteiner, iconMenuAgreement, greyAgrBtn, headerItem } from "./styles";
+import { AgreementLocation } from "../../modules/graphql/gql/graphql";
+import { Agreement } from "../../types";
 
-export default function ItemMyAgreement() {
+export default function AgreementItem({ title, agreementStatus, signers, observers }: Agreement) {
   return (
     <Flex sx={agreementConteiner}>
       <Flex sx={headerItem}>
@@ -24,16 +26,14 @@ export default function ItemMyAgreement() {
           </Box>
         </Flex>
       </Flex>
-      <Text sx={{ variant: "text.largeTextBold", pt: "12px" }}>
-        Minim mollit non deserunt ullamco
-      </Text>
+      <Text sx={{ variant: "text.largeTextBold", pt: "12px" }}>{title}</Text>
       <Flex sx={{ pt: "8px" }}>
         <Text sx={{ variant: "text. smallTextMedium", opacity: "0.5", mr: "6px" }}>Signers:</Text>
-        <Text sx={{ variant: "text.smallTextMediumUser", mr: "20px" }}>0</Text>
+        <Text sx={{ variant: "text.smallTextMediumUser", mr: "20px" }}>{signers.length}</Text>
         <Text sx={{ variant: "text. smallTextMedium", opacity: "0.5", mr: "6px" }}>Signed:</Text>
         <Text sx={{ variant: "text.smallTextMediumUser", mr: "20px" }}>0</Text>
         <Text sx={{ variant: "text. smallTextMedium", opacity: "0.5", mr: "6px" }}>Observers:</Text>
-        <Text sx={{ variant: "text.smallTextMediumUser", mr: "20px" }}>0</Text>
+        <Text sx={{ variant: "text.smallTextMediumUser", mr: "20px" }}>{observers.length}</Text>
       </Flex>
     </Flex>
   );

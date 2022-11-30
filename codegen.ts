@@ -1,7 +1,8 @@
 import { CodegenConfig } from "@graphql-codegen/cli";
+require("dotenv").config();
 
 const config: CodegenConfig = {
-  schema: "http://localhost:3000/graphql",
+  schema: process.env.NEXT_PUBLIC_GRAPHQL_ENDPOINT,
   documents: ["src/**/*.tsx", "**/queries/*.ts", "**/mutations/*.ts"],
   ignoreNoDocuments: true, // for better experience with the watcher
   generates: {

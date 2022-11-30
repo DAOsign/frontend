@@ -2,15 +2,9 @@
 import { TypedDocumentNode as DocumentNode } from "@graphql-typed-document-node/core";
 export type Maybe<T> = T | null;
 export type InputMaybe<T> = Maybe<T>;
-export type Exact<T extends { [key: string]: unknown }> = {
-  [K in keyof T]: T[K];
-};
-export type MakeOptional<T, K extends keyof T> = Omit<T, K> & {
-  [SubKey in K]?: Maybe<T[SubKey]>;
-};
-export type MakeMaybe<T, K extends keyof T> = Omit<T, K> & {
-  [SubKey in K]: Maybe<T[SubKey]>;
-};
+export type Exact<T extends { [key: string]: unknown }> = { [K in keyof T]: T[K] };
+export type MakeOptional<T, K extends keyof T> = Omit<T, K> & { [SubKey in K]?: Maybe<T[SubKey]> };
+export type MakeMaybe<T, K extends keyof T> = Omit<T, K> & { [SubKey in K]: Maybe<T[SubKey]> };
 /** All built-in and custom scalars, mapped to their actual values */
 export type Scalars = {
   ID: string;
@@ -18,10 +12,13 @@ export type Scalars = {
   Boolean: boolean;
   Int: number;
   Float: number;
+  /** The javascript `Date` as string. Type represents date and time as the ISO Date string. */
+  DateTime: any;
 };
 
 export type Agreement = {
   __typename?: "Agreement";
+  agreementFile?: Maybe<AgreementFile>;
   agreementId: Scalars["ID"];
   agreementLocation: AgreementLocation;
   agreementLocationId: Scalars["Int"];
@@ -32,7 +29,26 @@ export type Agreement = {
   authorWallet: Wallet;
   authorWalletId: Scalars["Int"];
   content: Scalars["String"];
+  observers: Array<Observer>;
+  signers: Array<Signer>;
   title: Scalars["String"];
+};
+
+export type AgreementFile = {
+  __typename?: "AgreementFile";
+  agreementFileId: Scalars["ID"];
+  agreementId: Scalars["Int"];
+  createdAt: Scalars["DateTime"];
+  filePath: Scalars["String"];
+};
+
+export type AgreementInvitation = {
+  __typename?: "AgreementInvitation";
+  agreement: Agreement;
+  agreementId: Scalars["Int"];
+  agreementInvitationId: Scalars["ID"];
+  email?: Maybe<Scalars["String"]>;
+  role: Scalars["Int"];
 };
 
 export type AgreementLocation = {
@@ -48,10 +64,33 @@ export type AgreementPrivacy = {
   name: Scalars["String"];
 };
 
+export type AgreementSignature = {
+  __typename?: "AgreementSignature";
+  agreementId: Scalars["Int"];
+  agreementSignatureId: Scalars["ID"];
+  createdAt: Scalars["DateTime"];
+  signature?: Maybe<Scalars["String"]>;
+  signatureCid?: Maybe<Scalars["String"]>;
+  signedAt?: Maybe<Scalars["DateTime"]>;
+  signerId: Scalars["Int"];
+};
+
 export type AgreementStatus = {
   __typename?: "AgreementStatus";
   agreementStatusId: Scalars["ID"];
   name: Scalars["String"];
+};
+
+export type GetAgreementsResponse = {
+  __typename?: "GetAgreementsResponse";
+  agreements: Array<Agreement>;
+  count: Scalars["Int"];
+};
+
+export type GetUsersResponse = {
+  __typename?: "GetUsersResponse";
+  count: Scalars["Int"];
+  users: Array<User>;
 };
 
 export type LoginResponse = {
@@ -68,9 +107,21 @@ export type LogoutResponse = {
 
 export type Mutation = {
   __typename?: "Mutation";
+  addAgreement?: Maybe<Agreement>;
   login: LoginResponse;
   logout: LogoutResponse;
   updateUser: User;
+};
+
+export type MutationAddAgreementArgs = {
+  agreementFilePath?: InputMaybe<Scalars["String"]>;
+  agreementLocation: Scalars["String"];
+  agreementPrivacy: Scalars["String"];
+  content: Scalars["String"];
+  isReadyToSign?: InputMaybe<Scalars["Boolean"]>;
+  observers?: InputMaybe<Array<Scalars["String"]>>;
+  signers?: InputMaybe<Array<Scalars["String"]>>;
+  title: Scalars["String"];
 };
 
 export type MutationLoginArgs = {
@@ -84,22 +135,100 @@ export type MutationUpdateUserArgs = {
   phone?: InputMaybe<Scalars["String"]>;
 };
 
+export type Observer = {
+  __typename?: "Observer";
+  agreementId: Scalars["Int"];
+  email?: Maybe<Scalars["String"]>;
+  observerId: Scalars["ID"];
+  wallet?: Maybe<Wallet>;
+  walletId?: Maybe<Scalars["Int"]>;
+};
+
 export type Query = {
   __typename?: "Query";
-  agreements: Array<Agreement>;
+  agreement?: Maybe<Agreement>;
+  agreementInvitation?: Maybe<AgreementInvitation>;
+  agreementLocation?: Maybe<AgreementLocation>;
+  agreementLocations: Array<AgreementLocation>;
+  agreementPrivacies: Array<AgreementPrivacy>;
+  agreementPrivacy?: Maybe<AgreementPrivacy>;
+  agreementStatus?: Maybe<AgreementStatus>;
+  agreementStatuses: Array<AgreementStatus>;
+  agreements: GetAgreementsResponse;
   me?: Maybe<User>;
+  observer?: Maybe<Observer>;
+  signer?: Maybe<Signer>;
   user?: Maybe<User>;
-  users: Array<User>;
+  users: GetUsersResponse;
   wallet?: Maybe<Wallet>;
   wallets: Array<Wallet>;
 };
 
+export type QueryAgreementArgs = {
+  agreementId: Scalars["Int"];
+};
+
+export type QueryAgreementInvitationArgs = {
+  agreementInvitationId: Scalars["Int"];
+};
+
+export type QueryAgreementLocationArgs = {
+  agreementLocationId: Scalars["Int"];
+};
+
+export type QueryAgreementPrivacyArgs = {
+  agreementPrivacyId: Scalars["Int"];
+};
+
+export type QueryAgreementStatusArgs = {
+  agreementStatusId: Scalars["Int"];
+};
+
+export type QueryAgreementsArgs = {
+  authorWallet?: InputMaybe<Scalars["String"]>;
+  filterBy?: InputMaybe<Scalars["String"]>;
+  search?: InputMaybe<Scalars["String"]>;
+  skip?: InputMaybe<Scalars["Int"]>;
+  sortByField?: InputMaybe<Scalars["String"]>;
+  sortByOrder?: InputMaybe<Scalars["String"]>;
+  take?: InputMaybe<Scalars["Int"]>;
+};
+
+export type QueryObserverArgs = {
+  observerId: Scalars["Int"];
+};
+
+export type QuerySignerArgs = {
+  signerId: Scalars["Int"];
+};
+
 export type QueryUserArgs = {
-  userId: Scalars["Float"];
+  userId: Scalars["Int"];
+};
+
+export type QueryUsersArgs = {
+  search?: InputMaybe<Scalars["String"]>;
+  skip?: InputMaybe<Scalars["Int"]>;
+  take?: InputMaybe<Scalars["Int"]>;
 };
 
 export type QueryWalletArgs = {
   walletId: Scalars["Float"];
+};
+
+export type QueryWalletsArgs = {
+  isExactSearch?: InputMaybe<Scalars["Boolean"]>;
+  search?: InputMaybe<Scalars["String"]>;
+};
+
+export type Signer = {
+  __typename?: "Signer";
+  agreementId: Scalars["Int"];
+  email?: Maybe<Scalars["String"]>;
+  signature?: Maybe<AgreementSignature>;
+  signerId: Scalars["ID"];
+  wallet?: Maybe<Wallet>;
+  walletId?: Maybe<Scalars["Int"]>;
 };
 
 export type User = {
@@ -111,12 +240,14 @@ export type User = {
   twitterVerificationCode?: Maybe<Scalars["String"]>;
   twitterVerificationSig?: Maybe<Scalars["String"]>;
   userId: Scalars["ID"];
+  wallets: Array<Wallet>;
 };
 
 export type Wallet = {
   __typename?: "Wallet";
   address: Scalars["String"];
   networkId: Scalars["Int"];
+  user: User;
   userId: Scalars["Int"];
   walletId: Scalars["ID"];
 };
@@ -136,22 +267,65 @@ export type LoginMutation = {
   };
 };
 
-export type AllUsersQueryVariables = Exact<{
-  first: Scalars["Int"];
+export type UsersQueryVariables = Exact<{ [key: string]: never }>;
+
+export type UsersQuery = {
+  __typename?: "Query";
+  users: {
+    __typename?: "GetUsersResponse";
+    users: Array<{
+      __typename?: "User";
+      name?: string | null;
+      bio?: string | null;
+      email?: string | null;
+      phone?: string | null;
+      twitterVerificationCode?: string | null;
+      twitterVerificationSig?: string | null;
+    }>;
+  };
+};
+
+export type AgreementsQueryVariables = Exact<{
+  authorWallet?: InputMaybe<Scalars["String"]>;
 }>;
 
-export type AllUsersQuery = {
+export type AgreementsQuery = {
   __typename?: "Query";
-  users: Array<{
-    __typename?: "User";
-    userId: string;
-    name?: string | null;
-    bio?: string | null;
-    phone?: string | null;
-    email?: string | null;
-    twitterVerificationCode?: string | null;
-    twitterVerificationSig?: string | null;
-  }>;
+  agreements: {
+    __typename?: "GetAgreementsResponse";
+    count: number;
+    agreements: Array<{
+      __typename?: "Agreement";
+      title: string;
+      content: string;
+      agreementLocation: { __typename?: "AgreementLocation"; name: string; isActive: boolean };
+      agreementPrivacy: { __typename?: "AgreementPrivacy"; name: string };
+      agreementFile?: { __typename?: "AgreementFile"; filePath: string; createdAt: any } | null;
+      authorWallet: {
+        __typename?: "Wallet";
+        address: string;
+        user: {
+          __typename?: "User";
+          name?: string | null;
+          email?: string | null;
+          phone?: string | null;
+          twitterVerificationCode?: string | null;
+          twitterVerificationSig?: string | null;
+          bio?: string | null;
+        };
+      };
+      observers: Array<{
+        __typename?: "Observer";
+        email?: string | null;
+        wallet?: {
+          __typename?: "Wallet";
+          address: string;
+          user: { __typename?: "User"; name?: string | null };
+        } | null;
+      }>;
+      agreementStatus: { __typename?: "AgreementStatus"; name: string };
+    }>;
+  };
 };
 
 export const LoginDocument = {
@@ -164,24 +338,15 @@ export const LoginDocument = {
       variableDefinitions: [
         {
           kind: "VariableDefinition",
-          variable: {
-            kind: "Variable",
-            name: { kind: "Name", value: "address" },
-          },
+          variable: { kind: "Variable", name: { kind: "Name", value: "address" } },
           type: {
             kind: "NonNullType",
-            type: {
-              kind: "NamedType",
-              name: { kind: "Name", value: "String" },
-            },
+            type: { kind: "NamedType", name: { kind: "Name", value: "String" } },
           },
         },
         {
           kind: "VariableDefinition",
-          variable: {
-            kind: "Variable",
-            name: { kind: "Name", value: "signature" },
-          },
+          variable: { kind: "Variable", name: { kind: "Name", value: "signature" } },
           type: { kind: "NamedType", name: { kind: "Name", value: "String" } },
         },
       ],
@@ -195,18 +360,12 @@ export const LoginDocument = {
               {
                 kind: "Argument",
                 name: { kind: "Name", value: "address" },
-                value: {
-                  kind: "Variable",
-                  name: { kind: "Name", value: "address" },
-                },
+                value: { kind: "Variable", name: { kind: "Name", value: "address" } },
               },
               {
                 kind: "Argument",
                 name: { kind: "Name", value: "signature" },
-                value: {
-                  kind: "Variable",
-                  name: { kind: "Name", value: "signature" },
-                },
+                value: { kind: "Variable", name: { kind: "Name", value: "signature" } },
               },
             ],
             selectionSet: {
@@ -223,26 +382,13 @@ export const LoginDocument = {
     },
   ],
 } as unknown as DocumentNode<LoginMutation, LoginMutationVariables>;
-export const AllUsersDocument = {
+export const UsersDocument = {
   kind: "Document",
   definitions: [
     {
       kind: "OperationDefinition",
       operation: "query",
-      name: { kind: "Name", value: "allUsers" },
-      variableDefinitions: [
-        {
-          kind: "VariableDefinition",
-          variable: {
-            kind: "Variable",
-            name: { kind: "Name", value: "first" },
-          },
-          type: {
-            kind: "NonNullType",
-            type: { kind: "NamedType", name: { kind: "Name", value: "Int" } },
-          },
-        },
-      ],
+      name: { kind: "Name", value: "Users" },
       selectionSet: {
         kind: "SelectionSet",
         selections: [
@@ -252,18 +398,20 @@ export const AllUsersDocument = {
             selectionSet: {
               kind: "SelectionSet",
               selections: [
-                { kind: "Field", name: { kind: "Name", value: "userId" } },
-                { kind: "Field", name: { kind: "Name", value: "name" } },
-                { kind: "Field", name: { kind: "Name", value: "bio" } },
-                { kind: "Field", name: { kind: "Name", value: "phone" } },
-                { kind: "Field", name: { kind: "Name", value: "email" } },
                 {
                   kind: "Field",
-                  name: { kind: "Name", value: "twitterVerificationCode" },
-                },
-                {
-                  kind: "Field",
-                  name: { kind: "Name", value: "twitterVerificationSig" },
+                  name: { kind: "Name", value: "users" },
+                  selectionSet: {
+                    kind: "SelectionSet",
+                    selections: [
+                      { kind: "Field", name: { kind: "Name", value: "name" } },
+                      { kind: "Field", name: { kind: "Name", value: "bio" } },
+                      { kind: "Field", name: { kind: "Name", value: "email" } },
+                      { kind: "Field", name: { kind: "Name", value: "phone" } },
+                      { kind: "Field", name: { kind: "Name", value: "twitterVerificationCode" } },
+                      { kind: "Field", name: { kind: "Name", value: "twitterVerificationSig" } },
+                    ],
+                  },
                 },
               ],
             },
@@ -272,4 +420,153 @@ export const AllUsersDocument = {
       },
     },
   ],
-} as unknown as DocumentNode<AllUsersQuery, AllUsersQueryVariables>;
+} as unknown as DocumentNode<UsersQuery, UsersQueryVariables>;
+export const AgreementsDocument = {
+  kind: "Document",
+  definitions: [
+    {
+      kind: "OperationDefinition",
+      operation: "query",
+      name: { kind: "Name", value: "Agreements" },
+      variableDefinitions: [
+        {
+          kind: "VariableDefinition",
+          variable: { kind: "Variable", name: { kind: "Name", value: "authorWallet" } },
+          type: { kind: "NamedType", name: { kind: "Name", value: "String" } },
+        },
+      ],
+      selectionSet: {
+        kind: "SelectionSet",
+        selections: [
+          {
+            kind: "Field",
+            name: { kind: "Name", value: "agreements" },
+            arguments: [
+              {
+                kind: "Argument",
+                name: { kind: "Name", value: "authorWallet" },
+                value: { kind: "Variable", name: { kind: "Name", value: "authorWallet" } },
+              },
+            ],
+            selectionSet: {
+              kind: "SelectionSet",
+              selections: [
+                {
+                  kind: "Field",
+                  name: { kind: "Name", value: "agreements" },
+                  selectionSet: {
+                    kind: "SelectionSet",
+                    selections: [
+                      { kind: "Field", name: { kind: "Name", value: "title" } },
+                      { kind: "Field", name: { kind: "Name", value: "content" } },
+                      {
+                        kind: "Field",
+                        name: { kind: "Name", value: "agreementLocation" },
+                        selectionSet: {
+                          kind: "SelectionSet",
+                          selections: [
+                            { kind: "Field", name: { kind: "Name", value: "name" } },
+                            { kind: "Field", name: { kind: "Name", value: "isActive" } },
+                          ],
+                        },
+                      },
+                      {
+                        kind: "Field",
+                        name: { kind: "Name", value: "agreementPrivacy" },
+                        selectionSet: {
+                          kind: "SelectionSet",
+                          selections: [{ kind: "Field", name: { kind: "Name", value: "name" } }],
+                        },
+                      },
+                      {
+                        kind: "Field",
+                        name: { kind: "Name", value: "agreementFile" },
+                        selectionSet: {
+                          kind: "SelectionSet",
+                          selections: [
+                            { kind: "Field", name: { kind: "Name", value: "filePath" } },
+                            { kind: "Field", name: { kind: "Name", value: "createdAt" } },
+                          ],
+                        },
+                      },
+                      {
+                        kind: "Field",
+                        name: { kind: "Name", value: "authorWallet" },
+                        selectionSet: {
+                          kind: "SelectionSet",
+                          selections: [
+                            { kind: "Field", name: { kind: "Name", value: "address" } },
+                            {
+                              kind: "Field",
+                              name: { kind: "Name", value: "user" },
+                              selectionSet: {
+                                kind: "SelectionSet",
+                                selections: [
+                                  { kind: "Field", name: { kind: "Name", value: "name" } },
+                                  { kind: "Field", name: { kind: "Name", value: "email" } },
+                                  { kind: "Field", name: { kind: "Name", value: "phone" } },
+                                  {
+                                    kind: "Field",
+                                    name: { kind: "Name", value: "twitterVerificationCode" },
+                                  },
+                                  {
+                                    kind: "Field",
+                                    name: { kind: "Name", value: "twitterVerificationSig" },
+                                  },
+                                  { kind: "Field", name: { kind: "Name", value: "bio" } },
+                                ],
+                              },
+                            },
+                          ],
+                        },
+                      },
+                      {
+                        kind: "Field",
+                        name: { kind: "Name", value: "observers" },
+                        selectionSet: {
+                          kind: "SelectionSet",
+                          selections: [
+                            { kind: "Field", name: { kind: "Name", value: "email" } },
+                            {
+                              kind: "Field",
+                              name: { kind: "Name", value: "wallet" },
+                              selectionSet: {
+                                kind: "SelectionSet",
+                                selections: [
+                                  { kind: "Field", name: { kind: "Name", value: "address" } },
+                                  {
+                                    kind: "Field",
+                                    name: { kind: "Name", value: "user" },
+                                    selectionSet: {
+                                      kind: "SelectionSet",
+                                      selections: [
+                                        { kind: "Field", name: { kind: "Name", value: "name" } },
+                                      ],
+                                    },
+                                  },
+                                ],
+                              },
+                            },
+                          ],
+                        },
+                      },
+                      {
+                        kind: "Field",
+                        name: { kind: "Name", value: "agreementStatus" },
+                        selectionSet: {
+                          kind: "SelectionSet",
+                          selections: [{ kind: "Field", name: { kind: "Name", value: "name" } }],
+                        },
+                      },
+                    ],
+                  },
+                },
+                { kind: "Field", name: { kind: "Name", value: "count" } },
+              ],
+            },
+          },
+        ],
+      },
+    },
+  ],
+} as unknown as DocumentNode<AgreementsQuery, AgreementsQueryVariables>;
