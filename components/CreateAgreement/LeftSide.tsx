@@ -1,6 +1,7 @@
 import React, { useCallback } from "react";
 import Icon from "../icon/index";
 import { Container, Flex, Text, Button, Box } from "theme-ui";
+import { useCreateAgreement } from "../../hooks/useCreateAgreement";
 import iconsObj from "../../assets/icons";
 import {
   secondaryTitleStep,
@@ -17,32 +18,25 @@ import {
 interface LeftSideoProp {
   step: number;
   setStep: any;
-  title: string;
-  methodAgreementAccess: any;
-  radioValue: string;
-  valueTextEditor: string;
-  observers: any;
-  signers: any;
 }
 
-export default function LeftSide({
-  methodAgreementAccess,
-  valueTextEditor,
-  radioValue,
-  observers,
-  setStep,
-  signers,
-  title,
-  step,
-}: LeftSideoProp) {
+export default function LeftSide({ setStep, step }: LeftSideoProp) {
+  const { state } = useCreateAgreement();
+
   const value = useCallback(() => {
     return {
-      1: !title || !methodAgreementAccess,
-      2: radioValue === "cloud" ? !valueTextEditor : false,
-      3: !observers.length || !signers.length,
+      1: !state.title || !state.agreementPrivacy,
+      2: state.agreementLocation === "cloud" ? !state.textEditorValue : false,
+      3: !state.observers.length || !state.signers.length,
     };
-  }, [radioValue, title, methodAgreementAccess, valueTextEditor, observers, signers]);
-  console.log(observers, !observers.length && !signers.length, step, value()[step]);
+  }, [
+    state.agreementLocation,
+    state.agreementPrivacy,
+    state.textEditorValue,
+    state.observers,
+    state.signers,
+    state.title,
+  ]);
 
   return (
     <>

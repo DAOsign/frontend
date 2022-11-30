@@ -4,18 +4,10 @@ import { inputCreactAgreement } from "../styles";
 import { uniqueId } from "../../../utils/formats";
 import iconsObj from "../../../assets/icons";
 import Icon from "../../icon";
+import { useCreateAgreement } from "../../../hooks/useCreateAgreement";
 
-export default function StepThree({
-  setObserversValue,
-  setSignersValue,
-  observersValue,
-  setObservers,
-  signersValue,
-  setObserver,
-  observers,
-  setSigners,
-  signers,
-}: any) {
+export default function StepThree() {
+  const { state, setStateCreateAgreement } = useCreateAgreement();
   const items = (array: any, name: string) => {
     return (
       <Flex>
@@ -37,11 +29,19 @@ export default function StepThree({
 
   const onSubmit = (name: string) => {
     if (name === "signers") {
-      if (signersValue) setSigners([...signers, { value: signersValue, id: uniqueId() }]);
-      setSignersValue("");
+      if (state.signersValue) {
+        setStateCreateAgreement("signers", [
+          ...state.signers,
+          { value: state.signersValue, id: uniqueId() },
+        ]);
+      }
     } else {
-      if (observersValue) setObservers([...observers, { value: observersValue, id: uniqueId() }]);
-      setObserversValue("");
+      if (state.observersValue) {
+        setStateCreateAgreement("observers", [
+          ...state.observers,
+          { value: state.observersValue, id: uniqueId() },
+        ]);
+      }
     }
   };
 
@@ -75,11 +75,11 @@ export default function StepThree({
         </Button>
       </Flex>
       <Input
-        value={signersValue}
-        onChange={e => setSignersValue(e.target.value)}
+        value={state.signersValue}
+        onChange={e => setStateCreateAgreement("signersValue", e.target.value)}
         sx={{ variant: "forms.input", ...inputCreactAgreement, mb: "8px" }}
       />
-      {items(signers, "signers")}
+      {items(state.signers, "x")}
       <Flex sx={{ mt: "24px" }}>
         <Text sx={{ variant: "forms.label", ml: "3px", maxWidth: "unset" }}>
           Observers (ENS name or adderess)
@@ -98,11 +98,11 @@ export default function StepThree({
         </Button>
       </Flex>
       <Input
-        value={observersValue}
-        onChange={e => setObserversValue(e.target.value)}
+        value={state.observersValue}
+        onChange={e => setStateCreateAgreement("observersValue", e.target.value)}
         sx={{ variant: "forms.input", ...inputCreactAgreement, mb: "8px" }}
       />
-      {items(observers, "observers")}
+      {items(state.observers, "observers")}
     </Container>
   );
 }

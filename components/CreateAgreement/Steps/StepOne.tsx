@@ -1,41 +1,38 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { Container, Flex, Input, Text, Button } from "theme-ui";
 import { card, item, inputCreactAgreement, secondaryTitle, container } from "../styles";
+import { useCreateAgreement } from "../../../hooks/useCreateAgreement";
 import iconsObj from "../../../assets/icons";
 import Icon from "../../icon";
 
-export default function StepOne({
-  title,
-  setTitle,
-  methodAgreementAccess,
-  setMethodAgreementAccess,
-}: any) {
+export default function StepOne() {
   const [step, setStep] = useState(false);
+  const { state, setStateCreateAgreement } = useCreateAgreement();
+
   return (
     <Container sx={{ maxWidth: "440px", textAlign: "left" }}>
       <Text sx={{ variant: "forms.label", ml: "3px" }}>Title</Text>
       <Input
-        value={title}
-        onChange={e => setTitle(e.target.value)}
+        value={state.title}
+        onChange={e => setStateCreateAgreement("title", e.target.value)}
         name="form"
         sx={{ variant: "forms.input", ...inputCreactAgreement }}
       />
       <Text sx={{ variant: "forms.label", margin: "24px auto 3px 2px" }}>Agreement privacy</Text>
-      {methodAgreementAccess !== "public" || step
-        ? chooseMethod(setMethodAgreementAccess, setStep, step)
-        : publicMethod(step, setStep)}
+      {!state.agreementPrivacy || step ? <ChooseMethod setStep={setStep} /> : <PublicMethod />}
     </Container>
   );
 }
 
-const chooseMethod = (setMethodAgreementAccess: any, stepStep: any, step: boolean) => {
+const ChooseMethod = ({ setStep }: { setStep: React.Dispatch<React.SetStateAction<boolean>> }) => {
+  const { setStateCreateAgreement } = useCreateAgreement();
   return (
     <Flex sx={{ justifyContent: "space-between" }}>
       <Container
         sx={card}
         onClick={() => {
-          setMethodAgreementAccess("public");
-          stepStep(!step);
+          setStateCreateAgreement("agreementPrivacy", "public");
+          setStep(step => !step);
         }}
       >
         <div style={{ margin: "0 auto" }}>
@@ -46,7 +43,7 @@ const chooseMethod = (setMethodAgreementAccess: any, stepStep: any, step: boolea
           Accessed Publicly based on sharing opionts
         </Text>
       </Container>
-      <Container sx={card} onClick={() => setMethodAgreementAccess("private")}>
+      <Container sx={card} onClick={() => setStateCreateAgreement("agreementPrivacy", "private")}>
         <div style={{ width: "50px", height: "50px", margin: "0 auto" }}>
           <Icon width="50px" height="50px" src={iconsObj.privateIcon} />
         </div>
@@ -59,12 +56,16 @@ const chooseMethod = (setMethodAgreementAccess: any, stepStep: any, step: boolea
   );
 };
 
-const publicMethod = (step: boolean, setStep: any) => {
+const PublicMethod = () => {
+  const { setStateCreateAgreement } = useCreateAgreement();
   return (
     <Container sx={container}>
       <Flex sx={{ alignItems: "center" }}>
         <Text sx={{ variant: "text.largeTextBold" }}>Public</Text>
-        <Button onClick={() => setStep(!step)} sx={{ variant: "buttons.back" }}>
+        <Button
+          onClick={() => setStateCreateAgreement("agreementPrivacy", "")}
+          sx={{ variant: "buttons.back" }}
+        >
           <Icon style={{ display: "block" }} src={iconsObj.arrowLeftPink} />
           <Text sx={{ display: "block" }}>Choose another privacy</Text>
         </Button>

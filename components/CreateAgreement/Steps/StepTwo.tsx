@@ -12,6 +12,7 @@ import {
 } from "../styles";
 import iconsObj from "../../../assets/icons";
 import TextEditor from "../../TextEditor/index";
+import { useCreateAgreement } from "../../../hooks/useCreateAgreement";
 const Hash = require("ipfs-only-hash");
 
 const agreementLocations = [
@@ -33,17 +34,11 @@ const agreementLocations = [
   },
 ];
 
-const UploadLocalAgreement = ({
-  setCloud,
-  cloud,
-  setRdioValue,
-}: {
-  setCloud: any;
-  cloud: boolean;
-  setRdioValue: any;
-}) => {
+const UploadLocalAgreement = ({ setCloud, cloud }: { setCloud: any; cloud: boolean }) => {
   const [bytes, setBytes] = useState<Uint8Array>();
   const [name, setName] = useState("");
+  const { state, setStateCreateAgreement } = useCreateAgreement();
+
   async function readFile(target: any) {
     let file = target.files[0] as File;
     if (target.files[0]) {
@@ -66,7 +61,7 @@ const UploadLocalAgreement = ({
         <Button
           onClick={() => {
             setCloud(!cloud);
-            setRdioValue("cloud");
+            setStateCreateAgreement("agreementLocation", "cloud");
           }}
           sx={{ variant: "buttons.back", ...uploadBtn }}
         >
@@ -112,25 +107,15 @@ const UploadLocalAgreement = ({
   );
 };
 
-export default function StepTwo({
-  valueTextEditor,
-  setvalueTextEditor,
-  setRdioValue,
-  radioValue,
-}: any) {
+export default function StepTwo() {
   const [cloud, setCloud] = useState(true);
 
   const variantsAgreement = {
-    cloud: (
-      <CloudContent
-        valueTextEditor={valueTextEditor}
-        setvalueTextEditor={setvalueTextEditor}
-        setCloud={setCloud}
-        cloud={cloud}
-      />
-    ),
-    local: <UploadLocalAgreement setCloud={setCloud} cloud={cloud} setRdioValue={setRdioValue} />,
+    cloud: <CloudContent setCloud={setCloud} cloud={cloud} />,
+    local: <UploadLocalAgreement setCloud={setCloud} cloud={cloud} />,
   };
+
+  const { state, setStateCreateAgreement } = useCreateAgreement();
 
   return (
     <Container sx={{ maxWidth: "440px", textAlign: "left" }}>
@@ -144,10 +129,17 @@ export default function StepTwo({
         <Flex sx={{ mb: "24px", justifyContent: "space-between" }}>
           {agreementLocations.map(el => {
             return (
-              <Label key={el?.name} sx={itemRadio} onClick={() => setRdioValue(el.value)}>
+              <Label
+                key={el?.name}
+                sx={itemRadio}
+                onClick={() => {
+                  console.log(el.value);
+                  setStateCreateAgreement("agreementLocation", el.value);
+                }}
+              >
                 <Icon
                   width="16px"
-                  src={radioValue === el.value ? iconsObj.radioOn : iconsObj.radioOff}
+                  src={state.agreementLocation === el.value ? iconsObj.radioOn : iconsObj.radioOff}
                 />
                 <Radio sx={{ boxShadow: "none" }} name="letter" value={el.value} />
                 <Text sx={{ ml: "5px", variant: "text.normalTextMedium" }}>{el.name}</Text>
@@ -156,22 +148,12 @@ export default function StepTwo({
           })}
         </Flex>
       </Box>
-      <Box>{variantsAgreement[radioValue]}</Box>
+      <Box>{variantsAgreement[state.agreementLocation]}</Box>
     </Container>
   );
 }
 
-const CloudContent = ({
-  setCloud,
-  cloud,
-  setvalueTextEditor,
-  valueTextEditor,
-}: {
-  setCloud: any;
-  cloud: boolean;
-  valueTextEditor: string;
-  setvalueTextEditor: any;
-}) => {
+const CloudContent = ({ setCloud, cloud }: { setCloud: any; cloud: boolean }) => {
   return (
     <>
       {cloud ? (
@@ -196,12 +178,7 @@ const CloudContent = ({
           </Container>
         </Flex>
       ) : (
-        <TextEditor
-          valueTextEditor={valueTextEditor}
-          setvalueTextEditor={setvalueTextEditor}
-          setCloud={setCloud}
-          cloud={cloud}
-        />
+        <TextEditor setCloud={setCloud} cloud={cloud} />
       )}
     </>
   );

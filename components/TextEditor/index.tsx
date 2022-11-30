@@ -6,6 +6,7 @@ import iconsObj from "../../assets/icons";
 import Icon from "../icon";
 import { Text, Button, Flex, Box } from "theme-ui";
 import "react-draft-wysiwyg/dist/react-draft-wysiwyg.css";
+import { useCreateAgreement } from "../../hooks/useCreateAgreement";
 
 //TODO add styles and configure. ref -  https://github.com/jpuri/react-draft-wysiwyg
 
@@ -13,7 +14,8 @@ const Editor = dynamic(() => import("react-draft-wysiwyg").then(res => res.Edito
   ssr: false,
 });
 
-const TextEditor = ({ valueTextEditor, setvalueTextEditor, cloud, setCloud }: any) => {
+const TextEditor = ({ cloud, setCloud }: any) => {
+  const { state, setStateCreateAgreement } = useCreateAgreement();
   return (
     <div style={{ position: "relative" }}>
       <Flex sx={{ alignItems: "center" }}>
@@ -26,7 +28,7 @@ const TextEditor = ({ valueTextEditor, setvalueTextEditor, cloud, setCloud }: an
           <Text sx={{ display: "block", fontSize: "10px" }}>Choose another privacy</Text>
         </Button>
       </Flex>
-      <Editor onChange={setvalueTextEditor} />
+      <Editor onChange={e => setStateCreateAgreement("textEditorValue", e)} />
       <Box
         sx={{
           position: "absolute",
