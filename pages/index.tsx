@@ -8,7 +8,7 @@ import { Container, Spinner } from "theme-ui";
 import { animateContainer } from "../components/Logo/styles";
 import { useWeb3 } from "../hooks/useWeb3";
 
-import MyAgreement from "../components/MyAgreement";
+import AgreementsList from "../components/AgreementsList";
 import MobileMenu from "../components/Header/MobileMenu";
 
 const Home: NextPage = () => {
@@ -34,7 +34,7 @@ const Home: NextPage = () => {
           <Header address={account || ""} />
           {visible && <MobileMenu address={account} />}
           {/* <CreateAgreement/>  */}
-          <MyAgreement address={account} />
+          <AgreementsList address={account} />
         </>
       )}
       {/* <Footer/> */}

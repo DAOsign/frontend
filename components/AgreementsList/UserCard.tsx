@@ -17,8 +17,6 @@ import {
 } from "./styles";
 
 export default function UserCard({ address }: any) {
-  console.log(address);
-
   return (
     <Flex sx={container}>
       <Box sx={iconExit}>
