@@ -74,7 +74,7 @@ const itemRadio = {
 } as ThemeUIStyleObject;
 
 const leftSide = {
-  maxWidth: "776px",
+  maxWidth: "672px",
   minHeight: "550px",
   background: "#FFFFFF",
   border: "1px solid #EDEDF3",
@@ -83,6 +83,8 @@ const leftSide = {
   paddingBottom: "60px",
   paddingTop: "60px",
   "@media screen and (max-width: 1200px)": {
+    width: "100%",
+    maxWidth: "672px",
     paddingX: "100px",
     borderBottom: "none",
     minHeight: "300px",
@@ -105,7 +107,7 @@ const title = {
 } as ThemeUIStyleObject;
 
 const rightSide = {
-  maxWidth: "360px",
+  maxWidth: "364px",
   minHeight: "550px",
   background: "#FFFFFF",
   border: "1px solid #EDEDF3",
@@ -116,6 +118,7 @@ const rightSide = {
   paddingTop: "52px",
   "@media screen and (max-width: 1200px)": {
     width: "100%",
+    maxWidth: "672px",
     paddingX: "100px",
     borderTop: "none",
     borderRadius: "0 0 12px 12px",
@@ -236,6 +239,7 @@ const stepsContainer = {
   "@media screen and (max-width: 1200px)": {
     position: "absolute",
     width: "100%",
+    maxWidth: "672px",
     height: "202px",
     alignItems: "center",
     top: "104px",
@@ -248,8 +252,8 @@ const stepsContainer = {
     justifyContent: "space-around",
   },
   "@media screen and (max-width: 768px)": {
-    maxWidth: "343px",
     width: "100%",
+    maxWidth: "343px",
     height: "179px",
     padding: "0 5px",
   },

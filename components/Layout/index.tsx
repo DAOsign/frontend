@@ -1,11 +1,13 @@
-import React from "react";
+import React, {useState} from "react";
 import Head from "next/head";
 import { Container, Spinner } from "theme-ui";
 import Header from "../Header/Header";
 import { useWeb3 } from "../../hooks/useWeb3";
+import MobileMenu from "../Header/MobileMenu";
 
 export default function Layout({ children }: React.PropsWithChildren) {
   const { account } = useWeb3();
+  const [visible, setVisible] = useState(false)
   return (
     <Container sx={{ width: "100%", paddingTop: "80px" }}>
       <Head>
@@ -14,7 +16,8 @@ export default function Layout({ children }: React.PropsWithChildren) {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <Header address={account || ""} />
+      <Header visible={visible} setVisible={setVisible} address={account || ""} />
+      {visible && <MobileMenu address={account || ''}/>}
       {children}
       {/* <Footer/> */}
     </Container>

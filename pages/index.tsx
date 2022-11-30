@@ -31,9 +31,8 @@ const Home: NextPage = () => {
         </Container>
       ) : (
         <>
-          <Header address={account || ""} />
-          {visible && <MobileMenu address={account} />}
-          {/* <CreateAgreement/>  */}
+          <Header setVisible={setVisible} visible={visible} address={account || ""} />
+          {visible && <MobileMenu address={account || ""} />}
           <AgreementsList address={account} />
         </>
       )}

@@ -7,6 +7,7 @@ import Icon from "../icon";
 import { Logo } from "../Logo/Logo";
 
 export default function Header({ address, visible, setVisible }: any) {
+  console.log(visible, setVisible)
   return (
     <Container sx={container}>
       <Flex sx={{ justifyContent: "space-between" }}>
