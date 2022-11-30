@@ -18,19 +18,19 @@ const Hash = require("ipfs-only-hash");
 const agreementLocations = [
   {
     name: "Cloud",
-    value: "cloud",
+    value: "Cloud",
   },
   {
     name: "Public IPFS",
-    value: "publicIPFS",
+    value: "Public IPFS",
   },
   {
     name: "Private IPFS",
-    value: "privateIPFS",
+    value: "Private IPFS",
   },
   {
     name: "Local",
-    value: "local",
+    value: "Local",
   },
 ];
 
@@ -61,7 +61,7 @@ const UploadLocalAgreement = ({ setCloud, cloud }: { setCloud: any; cloud: boole
         <Button
           onClick={() => {
             setCloud(!cloud);
-            setStateCreateAgreement("agreementLocation", "cloud");
+            setStateCreateAgreement("agreementLocation", "Cloud");
           }}
           sx={{ variant: "buttons.back", ...uploadBtn }}
         >
@@ -111,8 +111,8 @@ export default function StepTwo() {
   const [cloud, setCloud] = useState(true);
 
   const variantsAgreement = {
-    cloud: <CloudContent setCloud={setCloud} cloud={cloud} />,
-    local: <UploadLocalAgreement setCloud={setCloud} cloud={cloud} />,
+    Cloud: <CloudContent setCloud={setCloud} cloud={cloud} />,
+    Local: <UploadLocalAgreement setCloud={setCloud} cloud={cloud} />,
   };
 
   const { state, setStateCreateAgreement } = useCreateAgreement();
@@ -178,7 +178,7 @@ const CloudContent = ({ setCloud, cloud }: { setCloud: any; cloud: boolean }) =>
           </Container>
         </Flex>
       ) : (
-        <TextEditor setCloud={setCloud} cloud={cloud} />
+        <TextEditor />
       )}
     </>
   );

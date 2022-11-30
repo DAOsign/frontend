@@ -8,7 +8,7 @@ import { useCreateAgreement } from "../../../hooks/useCreateAgreement";
 
 export default function StepThree() {
   const { state, setStateCreateAgreement } = useCreateAgreement();
-  const items = (array: any, name: string) => {
+  const items = (array: any, name: "signers" | "observers") => {
     return (
       <Flex>
         {array.map((el: any) => {
@@ -45,14 +45,8 @@ export default function StepThree() {
     }
   };
 
-  const onDelete = (el: any, name: string) => {
-    if (name === "signers") {
-      //@ts-ignore
-      setSigners(signers.filter(e => e.id !== el.id));
-    } else {
-      //@ts-ignore
-      setObservers(observers.filter(e => e.id !== el.id));
-    }
+  const onDelete = (el: any, key: "signers" | "observers") => {
+    setStateCreateAgreement(key, [...state[key].filter(e => e.id !== el.id)]);
   };
 
   return (
@@ -79,7 +73,7 @@ export default function StepThree() {
         onChange={e => setStateCreateAgreement("signersValue", e.target.value)}
         sx={{ variant: "forms.input", ...inputCreactAgreement, mb: "8px" }}
       />
-      {items(state.signers, "x")}
+      {items(state.signers, "signers")}
       <Flex sx={{ mt: "24px" }}>
         <Text sx={{ variant: "forms.label", ml: "3px", maxWidth: "unset" }}>
           Observers (ENS name or adderess)

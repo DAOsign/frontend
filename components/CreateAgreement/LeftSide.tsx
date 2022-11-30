@@ -1,4 +1,5 @@
 import React, { useCallback } from "react";
+import { useRouter } from "next/router";
 import Icon from "../icon/index";
 import { Container, Flex, Text, Button, Box } from "theme-ui";
 import { useCreateAgreement } from "../../hooks/useCreateAgreement";
@@ -14,6 +15,8 @@ import {
   box,
   fW,
 } from "./styles";
+import { useMutation } from "urql";
+import { addAgreementMutation } from "../../modules/graphql/mutations";
 
 interface LeftSideoProp {
   step: number;
@@ -22,11 +25,11 @@ interface LeftSideoProp {
 
 export default function LeftSide({ setStep, step }: LeftSideoProp) {
   const { state } = useCreateAgreement();
-
+  const { push } = useRouter();
   const value = useCallback(() => {
     return {
       1: !state.title || !state.agreementPrivacy,
-      2: state.agreementLocation === "cloud" ? !state.textEditorValue : false,
+      2: state.agreementLocation === "Cloud" ? !state.textEditorValue : false,
       3: !state.observers.length || !state.signers.length,
     };
   }, [
@@ -37,6 +40,25 @@ export default function LeftSide({ setStep, step }: LeftSideoProp) {
     state.signers,
     state.title,
   ]);
+  const [{ fetching: addingAgreement }, addAgreement] = useMutation(addAgreementMutation);
+
+  const handleCreateAgreement = async () => {
+    await addAgreement({
+      title: state.title,
+      agreementLocation: state.agreementLocation,
+      content: JSON.stringify(state.textEditorValue),
+      agreementPrivacy: state.agreementPrivacy,
+      signers: state.signers.map(s => s.value),
+      observers: state.observers.map(o => o.value),
+    }).then(res => {
+      if (res.error) {
+        console.error(res.error);
+      }
+      if (res.data?.addAgreement?.title) {
+        push("/agreements");
+      }
+    });
+  };
 
   return (
     <>
@@ -91,14 +113,26 @@ export default function LeftSide({ setStep, step }: LeftSideoProp) {
         <Button sx={{ variant: "buttons.secondary", ...fW, mt: "20px" }} type="button">
           Save Draft
         </Button>
-        <Button
-          disabled={value()[step]}
-          onClick={() => setStep(step + 1)}
-          sx={{ variant: "buttons.primary", ...fW, mt: "20px" }}
-          type="button"
-        >
-          Next Step
-        </Button>
+        {step === 3 ? (
+          <Button
+            onClick={handleCreateAgreement}
+            disabled={addingAgreement}
+            variant="primary"
+            sx={{ ...fW, mt: "20px" }}
+            type="button"
+          >
+            Create Agreement
+          </Button>
+        ) : (
+          <Button
+            disabled={value()[step]}
+            onClick={() => setStep(step + 1)}
+            sx={{ variant: "buttons.primary", ...fW, mt: "20px" }}
+            type="button"
+          >
+            Next Step
+          </Button>
+        )}
       </Container>
     </>
   );

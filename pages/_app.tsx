@@ -10,8 +10,11 @@ const client = createClient({
   url: String(process.env.NEXT_PUBLIC_GRAPHQL_ENDPOINT),
   fetchOptions: () => {
     //TODO handle jwt token
-    const token = localStorage.getItem("token");
-    return { headers: { authorization: token || "" } };
+    let token = "";
+    if (typeof window !== "undefined") {
+      token = localStorage.getItem("token") || "";
+    }
+    return { headers: { authorization: token } };
   },
 });
 

@@ -6,7 +6,7 @@ import iconsObj from "../../../assets/icons";
 import Icon from "../../icon";
 
 export default function StepOne() {
-  const [step, setStep] = useState(false);
+  const [privacy, setPrivacy] = useState(false);
   const { state, setStateCreateAgreement } = useCreateAgreement();
 
   return (
@@ -19,12 +19,18 @@ export default function StepOne() {
         sx={{ variant: "forms.input", ...inputCreactAgreement }}
       />
       <Text sx={{ variant: "forms.label", margin: "24px auto 3px 2px" }}>Agreement privacy</Text>
-      {!state.agreementPrivacy || step ? <ChooseMethod setStep={setStep} /> : <PublicMethod />}
+      {!state.agreementPrivacy ? (
+        <ChooseMethod />
+      ) : state.agreementPrivacy === "Public" ? (
+        <PublicMethod />
+      ) : (
+        <PublicMethod />
+      )}
     </Container>
   );
 }
 
-const ChooseMethod = ({ setStep }: { setStep: React.Dispatch<React.SetStateAction<boolean>> }) => {
+const ChooseMethod = () => {
   const { setStateCreateAgreement } = useCreateAgreement();
   return (
     <Flex sx={{ justifyContent: "space-between" }}>
@@ -32,7 +38,6 @@ const ChooseMethod = ({ setStep }: { setStep: React.Dispatch<React.SetStateActio
         sx={card}
         onClick={() => {
           setStateCreateAgreement("agreementPrivacy", "public");
-          setStep(step => !step);
         }}
       >
         <div style={{ margin: "0 auto" }}>

@@ -15,7 +15,7 @@ export const allUsers = graphql(`
   }
 `);
 
-export const agreements = graphql(`
+export const agreementsMutation = graphql(`
   query Agreements($authorWallet: String) {
     agreements(authorWallet: $authorWallet) {
       agreements {
@@ -41,6 +41,15 @@ export const agreements = graphql(`
             twitterVerificationCode
             twitterVerificationSig
             bio
+          }
+        }
+        signers {
+          email
+          wallet {
+            address
+            user {
+              name
+            }
           }
         }
         observers {

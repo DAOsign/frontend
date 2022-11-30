@@ -267,6 +267,27 @@ export type LoginMutation = {
   };
 };
 
+export type AddAgreementMutationVariables = Exact<{
+  agreementPrivacy: Scalars["String"];
+  agreementLocation: Scalars["String"];
+  content: Scalars["String"];
+  title: Scalars["String"];
+  signers?: InputMaybe<Array<Scalars["String"]> | Scalars["String"]>;
+  observers?: InputMaybe<Array<Scalars["String"]> | Scalars["String"]>;
+  isReadyToSign?: InputMaybe<Scalars["Boolean"]>;
+  agreementFilePath?: InputMaybe<Scalars["String"]>;
+}>;
+
+export type AddAgreementMutation = {
+  __typename?: "Mutation";
+  addAgreement?: {
+    __typename?: "Agreement";
+    title: string;
+    content: string;
+    authorWallet: { __typename?: "Wallet"; address: string };
+  } | null;
+};
+
 export type UsersQueryVariables = Exact<{ [key: string]: never }>;
 
 export type UsersQuery = {
@@ -314,6 +335,15 @@ export type AgreementsQuery = {
           bio?: string | null;
         };
       };
+      signers: Array<{
+        __typename?: "Signer";
+        email?: string | null;
+        wallet?: {
+          __typename?: "Wallet";
+          address: string;
+          user: { __typename?: "User"; name?: string | null };
+        } | null;
+      }>;
       observers: Array<{
         __typename?: "Observer";
         email?: string | null;
@@ -382,6 +412,148 @@ export const LoginDocument = {
     },
   ],
 } as unknown as DocumentNode<LoginMutation, LoginMutationVariables>;
+export const AddAgreementDocument = {
+  kind: "Document",
+  definitions: [
+    {
+      kind: "OperationDefinition",
+      operation: "mutation",
+      name: { kind: "Name", value: "AddAgreement" },
+      variableDefinitions: [
+        {
+          kind: "VariableDefinition",
+          variable: { kind: "Variable", name: { kind: "Name", value: "agreementPrivacy" } },
+          type: {
+            kind: "NonNullType",
+            type: { kind: "NamedType", name: { kind: "Name", value: "String" } },
+          },
+        },
+        {
+          kind: "VariableDefinition",
+          variable: { kind: "Variable", name: { kind: "Name", value: "agreementLocation" } },
+          type: {
+            kind: "NonNullType",
+            type: { kind: "NamedType", name: { kind: "Name", value: "String" } },
+          },
+        },
+        {
+          kind: "VariableDefinition",
+          variable: { kind: "Variable", name: { kind: "Name", value: "content" } },
+          type: {
+            kind: "NonNullType",
+            type: { kind: "NamedType", name: { kind: "Name", value: "String" } },
+          },
+        },
+        {
+          kind: "VariableDefinition",
+          variable: { kind: "Variable", name: { kind: "Name", value: "title" } },
+          type: {
+            kind: "NonNullType",
+            type: { kind: "NamedType", name: { kind: "Name", value: "String" } },
+          },
+        },
+        {
+          kind: "VariableDefinition",
+          variable: { kind: "Variable", name: { kind: "Name", value: "signers" } },
+          type: {
+            kind: "ListType",
+            type: {
+              kind: "NonNullType",
+              type: { kind: "NamedType", name: { kind: "Name", value: "String" } },
+            },
+          },
+        },
+        {
+          kind: "VariableDefinition",
+          variable: { kind: "Variable", name: { kind: "Name", value: "observers" } },
+          type: {
+            kind: "ListType",
+            type: {
+              kind: "NonNullType",
+              type: { kind: "NamedType", name: { kind: "Name", value: "String" } },
+            },
+          },
+        },
+        {
+          kind: "VariableDefinition",
+          variable: { kind: "Variable", name: { kind: "Name", value: "isReadyToSign" } },
+          type: { kind: "NamedType", name: { kind: "Name", value: "Boolean" } },
+        },
+        {
+          kind: "VariableDefinition",
+          variable: { kind: "Variable", name: { kind: "Name", value: "agreementFilePath" } },
+          type: { kind: "NamedType", name: { kind: "Name", value: "String" } },
+        },
+      ],
+      selectionSet: {
+        kind: "SelectionSet",
+        selections: [
+          {
+            kind: "Field",
+            name: { kind: "Name", value: "addAgreement" },
+            arguments: [
+              {
+                kind: "Argument",
+                name: { kind: "Name", value: "agreementPrivacy" },
+                value: { kind: "Variable", name: { kind: "Name", value: "agreementPrivacy" } },
+              },
+              {
+                kind: "Argument",
+                name: { kind: "Name", value: "agreementLocation" },
+                value: { kind: "Variable", name: { kind: "Name", value: "agreementLocation" } },
+              },
+              {
+                kind: "Argument",
+                name: { kind: "Name", value: "content" },
+                value: { kind: "Variable", name: { kind: "Name", value: "content" } },
+              },
+              {
+                kind: "Argument",
+                name: { kind: "Name", value: "title" },
+                value: { kind: "Variable", name: { kind: "Name", value: "title" } },
+              },
+              {
+                kind: "Argument",
+                name: { kind: "Name", value: "signers" },
+                value: { kind: "Variable", name: { kind: "Name", value: "signers" } },
+              },
+              {
+                kind: "Argument",
+                name: { kind: "Name", value: "observers" },
+                value: { kind: "Variable", name: { kind: "Name", value: "observers" } },
+              },
+              {
+                kind: "Argument",
+                name: { kind: "Name", value: "isReadyToSign" },
+                value: { kind: "Variable", name: { kind: "Name", value: "isReadyToSign" } },
+              },
+              {
+                kind: "Argument",
+                name: { kind: "Name", value: "agreementFilePath" },
+                value: { kind: "Variable", name: { kind: "Name", value: "agreementFilePath" } },
+              },
+            ],
+            selectionSet: {
+              kind: "SelectionSet",
+              selections: [
+                { kind: "Field", name: { kind: "Name", value: "title" } },
+                { kind: "Field", name: { kind: "Name", value: "content" } },
+                {
+                  kind: "Field",
+                  name: { kind: "Name", value: "authorWallet" },
+                  selectionSet: {
+                    kind: "SelectionSet",
+                    selections: [{ kind: "Field", name: { kind: "Name", value: "address" } }],
+                  },
+                },
+              ],
+            },
+          },
+        ],
+      },
+    },
+  ],
+} as unknown as DocumentNode<AddAgreementMutation, AddAgreementMutationVariables>;
 export const UsersDocument = {
   kind: "Document",
   definitions: [
@@ -514,6 +686,36 @@ export const AgreementsDocument = {
                                     name: { kind: "Name", value: "twitterVerificationSig" },
                                   },
                                   { kind: "Field", name: { kind: "Name", value: "bio" } },
+                                ],
+                              },
+                            },
+                          ],
+                        },
+                      },
+                      {
+                        kind: "Field",
+                        name: { kind: "Name", value: "signers" },
+                        selectionSet: {
+                          kind: "SelectionSet",
+                          selections: [
+                            { kind: "Field", name: { kind: "Name", value: "email" } },
+                            {
+                              kind: "Field",
+                              name: { kind: "Name", value: "wallet" },
+                              selectionSet: {
+                                kind: "SelectionSet",
+                                selections: [
+                                  { kind: "Field", name: { kind: "Name", value: "address" } },
+                                  {
+                                    kind: "Field",
+                                    name: { kind: "Name", value: "user" },
+                                    selectionSet: {
+                                      kind: "SelectionSet",
+                                      selections: [
+                                        { kind: "Field", name: { kind: "Name", value: "name" } },
+                                      ],
+                                    },
+                                  },
                                 ],
                               },
                             },

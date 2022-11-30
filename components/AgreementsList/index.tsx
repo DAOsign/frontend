@@ -9,7 +9,7 @@ import HeaderAgreement from "./HeaderAgreement";
 import ItemMyAgreement from "./AgreementItem";
 import NextLink from "next/link";
 import { useQuery } from "urql";
-import { agreements as agreementsQuery } from "../../modules/graphql/queries";
+import { agreementsMutation } from "../../modules/graphql/queries";
 import { useWeb3 } from "../../hooks/useWeb3";
 import AgreementItem from "./AgreementItem";
 import { toAgreement } from "../../utils/typeUtils";
@@ -18,7 +18,7 @@ import { Agreement as AgreementRespone } from "../../modules/graphql/gql/graphql
 export default function AgreementsList({ address }: any) {
   const { account } = useWeb3();
   const [{ data, fetching: agreementsLoading, error }] = useQuery({
-    query: agreementsQuery,
+    query: agreementsMutation,
     variables: { authorWallet: account },
   });
 
@@ -36,7 +36,7 @@ export default function AgreementsList({ address }: any) {
       <UserCard address={address} />
       <Container>
         <Flex>
-          <Text sx={title}>My Agreement</Text>
+          <Text sx={title}>My Agreements</Text>
           <Button sx={btn} type="button">
             <Icon src={iconsObj.plus} />
             <NextLink href={"/create"}>

@@ -1,8 +1,9 @@
 import { useState, createContext, ProviderProps } from "react";
+import { AgreementLocation, AgreementPrivacy } from "../types";
 
 interface CreateAgrementContext {
   state: State;
-  setStateCreateAgreement: (key: string, value: any) => void;
+  setStateCreateAgreement: (key: keyof State, value: any) => void;
 }
 
 //@ts-ignore
@@ -10,13 +11,13 @@ export const CreateAggrementContext = createContext<CreateAgrementContext>({});
 
 interface State {
   title: string;
-  agreementPrivacy: string;
+  agreementPrivacy: AgreementPrivacy;
   textEditorValue: string;
-  agreementLocation: string;
+  agreementLocation: AgreementLocation;
   observersValue: string;
   signersValue: string;
-  observers: [];
-  signers: [];
+  observers: { id: number; value: string }[];
+  signers: { id: number; value: string }[];
 }
 
 const CreateAgreementProvider = (props?: Partial<ProviderProps<CreateAgrementContext>>) => {
@@ -24,14 +25,14 @@ const CreateAgreementProvider = (props?: Partial<ProviderProps<CreateAgrementCon
     agreementPrivacy: "",
     title: "",
     textEditorValue: "",
-    agreementLocation: "cloud",
+    agreementLocation: "Local",
     signersValue: "",
     observersValue: "",
     observers: [],
     signers: [],
   });
 
-  const setStateCreateAgreement = (key: string, value: any) => {
+  const setStateCreateAgreement = (key: keyof State, value: any) => {
     setState({ ...state, [key]: value });
   };
 

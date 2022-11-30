@@ -14,14 +14,14 @@ const Editor = dynamic(() => import("react-draft-wysiwyg").then(res => res.Edito
   ssr: false,
 });
 
-const TextEditor = ({ cloud, setCloud }: any) => {
+const TextEditor = () => {
   const { state, setStateCreateAgreement } = useCreateAgreement();
   return (
     <div style={{ position: "relative" }}>
       <Flex sx={{ alignItems: "center" }}>
         <Text sx={{ variant: "forms.label", minWidth: "170px" }}>Enter agreement description</Text>
         <Button
-          onClick={() => setCloud(!cloud)}
+          //onClick={() => setCloud(!cloud)}
           sx={{ variant: "buttons.back", height: "30px", pt: 0 }}
         >
           <Icon style={{ display: "block" }} src={iconsObj.arrowLeftPink} />

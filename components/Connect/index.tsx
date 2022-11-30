@@ -4,7 +4,7 @@ import { Button, Container, Heading, Text } from "theme-ui";
 import { title, container } from "./styles";
 import { useWeb3 } from "../../hooks/useWeb3";
 import { useMutation } from "urql";
-import { login as loginMutation } from "../../modules/graphql/mutations";
+import { loginMutation } from "../../modules/graphql/mutations";
 
 export default function Connect() {
   const { login, sign } = useWeb3();

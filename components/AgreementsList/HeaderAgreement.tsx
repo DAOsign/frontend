@@ -5,7 +5,7 @@ import { inputMyAgreement, headerContainer, textContainer } from "./styles";
 export default function HeaderAgreement() {
   return (
     <Flex sx={headerContainer}>
-      <Input sx={{ variant: "forms.input", ...inputMyAgreement }} />
+      <Input sx={{ variant: "forms.input", ...inputMyAgreement }} placeholder="Search" />
       <Container>
         <Flex sx={textContainer}>
           <Text sx={{ variant: "text.normalTextMedium", opacity: "0.5" }}>Filter by:</Text>
