@@ -17,6 +17,7 @@ const documents = {
     types.LoginDocument,
   "\n  mutation AddAgreement(\n    $agreementPrivacy: String!\n    $agreementLocation: String!\n    $content: String!\n    $title: String!\n    $signers: [String!]\n    $observers: [String!]\n    $isReadyToSign: Boolean\n    $agreementFilePath: String\n  ) {\n    addAgreement(\n      agreementPrivacy: $agreementPrivacy\n      agreementLocation: $agreementLocation\n      content: $content\n      title: $title\n      signers: $signers\n      observers: $observers\n      isReadyToSign: $isReadyToSign\n      agreementFilePath: $agreementFilePath\n    ) {\n      title\n      content\n      authorWallet {\n        address\n      }\n    }\n  }\n":
     types.AddAgreementDocument,
+  "\n  mutation Mutation {\n    logout {\n      message\n    }\n  }\n": types.MutationDocument,
   "\n  query Users {\n    users {\n      users {\n        name\n        bio\n        email\n        phone\n        twitterVerificationCode\n        twitterVerificationSig\n      }\n    }\n  }\n":
     types.UsersDocument,
   "\n  query Agreements($authorWallet: String) {\n    agreements(authorWallet: $authorWallet) {\n      agreements {\n        title\n        content\n        agreementLocation {\n          name\n          isActive\n        }\n        agreementPrivacy {\n          name\n        }\n        agreementFile {\n          filePath\n          createdAt\n        }\n        authorWallet {\n          address\n          user {\n            name\n            email\n            phone\n            twitterVerificationCode\n            twitterVerificationSig\n            bio\n          }\n        }\n        signers {\n          email\n          wallet {\n            address\n            user {\n              name\n            }\n          }\n        }\n        observers {\n          email\n          wallet {\n            address\n            user {\n              name\n            }\n          }\n        }\n        agreementStatus {\n          name\n        }\n      }\n      count\n    }\n  }\n":
@@ -35,6 +36,12 @@ export function graphql(
 export function graphql(
   source: "\n  mutation AddAgreement(\n    $agreementPrivacy: String!\n    $agreementLocation: String!\n    $content: String!\n    $title: String!\n    $signers: [String!]\n    $observers: [String!]\n    $isReadyToSign: Boolean\n    $agreementFilePath: String\n  ) {\n    addAgreement(\n      agreementPrivacy: $agreementPrivacy\n      agreementLocation: $agreementLocation\n      content: $content\n      title: $title\n      signers: $signers\n      observers: $observers\n      isReadyToSign: $isReadyToSign\n      agreementFilePath: $agreementFilePath\n    ) {\n      title\n      content\n      authorWallet {\n        address\n      }\n    }\n  }\n"
 ): typeof documents["\n  mutation AddAgreement(\n    $agreementPrivacy: String!\n    $agreementLocation: String!\n    $content: String!\n    $title: String!\n    $signers: [String!]\n    $observers: [String!]\n    $isReadyToSign: Boolean\n    $agreementFilePath: String\n  ) {\n    addAgreement(\n      agreementPrivacy: $agreementPrivacy\n      agreementLocation: $agreementLocation\n      content: $content\n      title: $title\n      signers: $signers\n      observers: $observers\n      isReadyToSign: $isReadyToSign\n      agreementFilePath: $agreementFilePath\n    ) {\n      title\n      content\n      authorWallet {\n        address\n      }\n    }\n  }\n"];
+/**
+ * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ */
+export function graphql(
+  source: "\n  mutation Mutation {\n    logout {\n      message\n    }\n  }\n"
+): typeof documents["\n  mutation Mutation {\n    logout {\n      message\n    }\n  }\n"];
 /**
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */

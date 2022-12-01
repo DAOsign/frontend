@@ -39,3 +39,11 @@ export const addAgreementMutation = graphql(`
     }
   }
 `);
+
+export const logoutMutation = graphql(`
+  mutation Mutation {
+    logout {
+      message
+    }
+  }
+`);

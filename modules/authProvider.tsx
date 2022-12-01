@@ -5,15 +5,19 @@ import networks from "../lib/snapshot/networks.json";
 import { formatUnits } from "@ethersproject/units";
 import { useLock } from "../hooks/useLock";
 import { ConnectorType } from "../lib/snapshot/options";
+import { clearToken, getToken, setToken } from "../utils/token";
+import { useMutation } from "urql";
+import { loginMutation } from "./graphql/mutations";
+import { useRouter } from "next/router";
 
 interface AuthProps {}
 
 interface AuthContext {
-  login: (connector: ConnectorType) => Promise<any>;
-  logout: any;
+  login: (connector?: ConnectorType) => Promise<any>;
+  logout: () => void;
   account: string | null;
   authLoading: boolean;
-  sign: any;
+  sign: (message: string) => Promise<string>;
 }
 
 type ChainId = keyof typeof networks;
@@ -34,8 +38,8 @@ export const AuthContext = createContext<AuthContext>({
   account: null,
   authLoading: false,
   login: async () => {},
-  logout: () => null,
-  sign: () => null,
+  logout: () => {},
+  sign: async () => "",
 });
 
 const AuthProvider = (props?: Partial<ProviderProps<AuthProps>>) => {
@@ -47,34 +51,82 @@ const AuthProvider = (props?: Partial<ProviderProps<AuthProps>>) => {
     profile: null,
     //isTrezor: false,
   });
+  const { push } = useRouter();
+  const [, loginRequest] = useMutation(loginMutation);
 
   const auth = useLock();
+
+  const loginStarted = useRef(false);
 
   const web3ProviderRef = useRef<Web3Provider>();
 
   async function login(connector?: ConnectorType) {
+    // Prevent double loginRequest due to react dev useEffect[] runs twice
+    if (loginStarted.current) return;
+    loginStarted.current = true;
+
+    const hasToken = Boolean(getToken());
     if (!connector) {
       const loadedConnector = await auth.getConnector();
-      if (!loadedConnector) return;
+      if (!loadedConnector || !hasToken) {
+        clearToken();
+        push("/connect");
+        loginStarted.current = false;
+        return;
+      }
       connector = loadedConnector || "injected";
     }
     setState(state => ({ ...state, authLoading: true }));
 
     const provider = await auth.login(connector);
 
-    if (provider) {
-      web3ProviderRef.current = new Web3Provider(provider, "any");
-
-      const loadedState = await loadProvider(provider);
-
-      setState(state => ({ ...state, ...loadedState, authLoading: false }));
-      return loadedState;
+    if (!provider) {
+      const newState = { ...state, authLoading: false };
+      setState(state => ({ ...state, newState }));
+      return newState;
     }
-    const newState = { ...state, authLoading: false };
-    setState(state => ({ ...state, newState }));
-    return newState;
+
+    web3ProviderRef.current = new Web3Provider(provider, "any");
+
+    const loadedState = await loadProvider(provider);
+
+    if (!loadedState.account) return;
+    await onAfterConnect(loadedState.account);
+
+    setState(state => ({ ...state, ...loadedState, authLoading: false }));
+    loginStarted.current = false;
+
+    return loadedState;
   }
 
+  const onAfterConnect = async (account: string) => {
+    if (account) {
+      const currentToken = getToken();
+
+      if (currentToken) return;
+      const res = await loginRequest({ address: account });
+
+      if (res.data) {
+        const payload = res.data.login.payload;
+        if (payload) {
+          const signature = await sign(payload);
+
+          const tokenRes = await loginRequest({
+            address: account,
+            signature: signature,
+          });
+
+          if (tokenRes.data) {
+            const token = tokenRes.data.login.token;
+            if (token) {
+              setToken(token);
+              push("/");
+            }
+          }
+        }
+      }
+    }
+  };
   function logout() {
     auth.logout();
     setState(state => ({ ...state, account: "" }));

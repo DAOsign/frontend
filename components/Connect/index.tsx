@@ -1,48 +1,34 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import React from "react";
+import React, { useEffect, useRef } from "react";
 import { Button, Container, Heading, Text } from "theme-ui";
 import { title, container } from "./styles";
 import { useWeb3 } from "../../hooks/useWeb3";
-import { useMutation } from "urql";
-import { loginMutation } from "../../modules/graphql/mutations";
+import { getToken } from "../../utils/token";
+import { useRouter } from "next/router";
+import { useLock } from "../../hooks/useLock";
 
 export default function Connect() {
-  const { login, sign } = useWeb3();
-
-  const [, loginRequest] = useMutation(loginMutation);
-
+  const { login } = useWeb3();
+  const { getConnector } = useLock();
+  const { push } = useRouter();
   const connect = async (name: any) => {
-    login(name).then(res => {
-      onAfterConnect(res.account);
-    });
+    login(name);
   };
 
-  const onAfterConnect = async (account: string) => {
-    if (account) {
-      if (localStorage.getItem("token")) return;
-      const res = await loginRequest({ address: account });
+  const initStarted = useRef(false);
 
-      if (res.data) {
-        const payload = res.data.login.payload;
-        if (payload) {
-          const signature = await sign(payload);
-
-          const tokenRes = await loginRequest({
-            address: account,
-            signature: signature,
-          });
-
-          if (tokenRes.data) {
-            const token = tokenRes.data.login.token;
-            if (token) {
-              console.log(token);
-              localStorage.setItem("token", token);
-            }
-          }
-        }
+  useEffect(() => {
+    const init = async () => {
+      if (initStarted.current) return;
+      initStarted.current = true;
+      const currentToken = getToken();
+      const connector = await getConnector();
+      if (currentToken && connector) {
+        push("/");
       }
-    }
-  };
+    };
+    init();
+  }, []);
 
   return (
     <Container sx={container}>

@@ -5,26 +5,36 @@ import LockProvider from "../modules/lockProvider";
 import AuthProvider from "../modules/authProvider";
 import { theme } from "../theme";
 import "../styles/globals.css";
+import { getToken } from "../utils/token";
+import Layout from "../components/Layout";
 
 const client = createClient({
   url: String(process.env.NEXT_PUBLIC_GRAPHQL_ENDPOINT),
   fetchOptions: () => {
-    //TODO handle jwt token
-    let token = "";
-    if (typeof window !== "undefined") {
-      token = localStorage.getItem("token") || "";
-    }
+    let token = getToken() || "";
     return { headers: { authorization: token } };
   },
 });
 
 function MyApp({ Component, pageProps }: AppProps) {
+  const Page = () => {
+    //@ts-ignore
+    const hasLayout = !Component?.noLayout;
+    return hasLayout ? (
+      <Layout>
+        <Component {...pageProps} />
+      </Layout>
+    ) : (
+      <Component {...pageProps} />
+    );
+  };
+
   return (
     <GraphqlProvider value={client}>
       <LockProvider>
         <AuthProvider>
           <ThemeProvider theme={theme}>
-            <Component {...pageProps} />
+            <Page />
           </ThemeProvider>
         </AuthProvider>
       </LockProvider>

@@ -288,6 +288,13 @@ export type AddAgreementMutation = {
   } | null;
 };
 
+export type MutationMutationVariables = Exact<{ [key: string]: never }>;
+
+export type MutationMutation = {
+  __typename?: "Mutation";
+  logout: { __typename?: "LogoutResponse"; message: string };
+};
+
 export type UsersQueryVariables = Exact<{ [key: string]: never }>;
 
 export type UsersQuery = {
@@ -554,6 +561,29 @@ export const AddAgreementDocument = {
     },
   ],
 } as unknown as DocumentNode<AddAgreementMutation, AddAgreementMutationVariables>;
+export const MutationDocument = {
+  kind: "Document",
+  definitions: [
+    {
+      kind: "OperationDefinition",
+      operation: "mutation",
+      name: { kind: "Name", value: "Mutation" },
+      selectionSet: {
+        kind: "SelectionSet",
+        selections: [
+          {
+            kind: "Field",
+            name: { kind: "Name", value: "logout" },
+            selectionSet: {
+              kind: "SelectionSet",
+              selections: [{ kind: "Field", name: { kind: "Name", value: "message" } }],
+            },
+          },
+        ],
+      },
+    },
+  ],
+} as unknown as DocumentNode<MutationMutation, MutationMutationVariables>;
 export const UsersDocument = {
   kind: "Document",
   definitions: [

@@ -1,44 +1,13 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import type { NextPage } from "next";
-import Head from "next/head";
-import Connect from "../components/Connect";
-import { LogoAnimate } from "../components/Logo/Logo";
-import Header from "../components/Header/Header";
-import { Container, Spinner } from "theme-ui";
-import { animateContainer } from "../components/Logo/styles";
 import { useWeb3 } from "../hooks/useWeb3";
 
 import AgreementsList from "../components/AgreementsList";
-import MobileMenu from "../components/Header/MobileMenu";
 
 const Home: NextPage = () => {
-  const { account, authLoading } = useWeb3();
-  const [visible, setVisible] = useState(false);
+  const { account } = useWeb3();
 
-  return (
-    <Container sx={{ width: "100%", paddingTop: "80px" }}>
-      <Head>
-        <title>Dao-Sign</title>
-        <meta name="description" content="Dao-Sign" />
-        <link rel="icon" href="/favicon.ico" />
-      </Head>
-      {authLoading ? (
-        <Spinner /> //@TODO add loading state
-      ) : !account ? (
-        <Container sx={animateContainer}>
-          <LogoAnimate />
-          <Connect />
-        </Container>
-      ) : (
-        <>
-          <Header setVisible={setVisible} visible={visible} address={account || ""} />
-          {visible && <MobileMenu address={account || ""} />}
-          <AgreementsList address={account} />
-        </>
-      )}
-      {/* <Footer/> */}
-    </Container>
-  );
+  return <AgreementsList address={account} />;
 };
 
 export default Home;
