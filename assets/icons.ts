@@ -38,6 +38,7 @@ import facebook from "../img/svg/facebook.svg";
 import logoIcon from "../img/svg/logoIcon.svg";
 import telegram from "../img/svg/telegram.svg";
 import portfile from "../img/svg/portfile.svg";
+import pinkPlus from "../img/svg/pinkPlus.svg";
 import radioOff from "../img/svg/radioOff.svg";
 import radioOn from "../img/svg/radioOn.svg";
 import pending from "../img/svg/pending.svg";
@@ -103,6 +104,7 @@ const iconsObj: IconsMapper = {
   publicIcon,
   chevronUp,
   published,
+  pinkPlus,
   portfile,
   logoIcon,
   settings,

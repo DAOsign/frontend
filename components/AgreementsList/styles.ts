@@ -86,6 +86,7 @@ const containerSides = {
   maxWidth: "1200px",
   justifyContent: "space-between",
   margin: "46px auto 0",
+  paddingTop: "80px",
   "@media screen and (max-width: 1200px)": {
     flexDirection: "column",
     px: "24px",
@@ -120,6 +121,8 @@ const percentContainer = {
   "@media screen and (max-width: 768px)": {
     m: "0  auto 0 ",
     bottom: "5px",
+    width: "100px",
+    height: "100px",
   },
 } as ThemeUIStyleObject;
 

@@ -12,6 +12,7 @@ import {
   leftSide,
   aboutUs,
   footer,
+  icon
 } from "./styles";
 import Icon from "../icon";
 
@@ -49,11 +50,21 @@ export default function Footer() {
           <Box>
             <Text sx={socialTitle}>Join Community</Text>
             <Flex sx={iconContainer}>
-              <Icon src={iconsObj.github} />
-              <Icon src={iconsObj.twitter} />
-              <Icon src={iconsObj.facebook} />
-              <Icon src={iconsObj.world} />
-              <Icon src={iconsObj.telegram} />
+              <Box sx={icon}>
+                <Icon src={iconsObj.github} />
+              </Box>
+              <Box sx={icon}>
+                 <Icon  width={24} height={24}  src={iconsObj.twitter} />
+              </Box>
+             <Box sx={icon}>
+               <Icon src={iconsObj.facebook} />
+             </Box>
+              <Box sx={icon}>
+                <Icon src={iconsObj.world} />
+              </Box>
+              <Box sx={icon}>
+                <Icon src={iconsObj.telegram} />
+              </Box>
             </Flex>
             <Button sx={aboutUs} type="button">
               About Us

@@ -65,7 +65,9 @@ const UploadLocalAgreement = ({ setCloud, cloud }: { setCloud: any; cloud: boole
           }}
           sx={{ variant: "buttons.back", ...uploadBtn }}
         >
-          <Icon style={{ display: "block" }} src={iconsObj.arrowLeftPink} />
+          <Box sx={{ width: "14px" }}>
+            <Icon style={{ display: "block" }} src={iconsObj.arrowLeftPink} />
+          </Box>
           <Text sx={{ display: "block" }}>Choose another method</Text>
         </Button>
       </Flex>
@@ -123,27 +125,33 @@ export default function StepTwo() {
         sx={{ variant: "forms.label", mr: "auto", display: "block", maxWidth: "150px", mb: "5px" }}
       >
         Agreement location{" "}
-        <Icon width="12px" height="12px" style={{ opacity: 0.5 }} src={iconsObj.infoCircle} />
+        <Box sx={{ width: "12px", height: "12px", display: "inline-block" }}>
+          <Icon width="12px" height="12px" style={{ opacity: 0.5 }} src={iconsObj.infoCircle} />
+        </Box>
       </Text>
       <Box as="form" onSubmit={e => e.preventDefault()}>
         <Flex sx={{ mb: "24px", justifyContent: "space-between" }}>
           {agreementLocations.map(el => {
             return (
-              <Label
-                key={el?.name}
-                sx={itemRadio}
-                onClick={() => {
-                  console.log(el.value);
-                  setStateCreateAgreement("agreementLocation", el.value);
-                }}
-              >
-                <Icon
-                  width="16px"
-                  src={state.agreementLocation === el.value ? iconsObj.radioOn : iconsObj.radioOff}
-                />
-                <Radio sx={{ boxShadow: "none" }} name="letter" value={el.value} />
-                <Text sx={{ ml: "5px", variant: "text.normalTextMedium" }}>{el.name}</Text>
-              </Label>
+              <Flex sx={{ alignItems: "center" }} key={el?.name}>
+                <Box style={{ width: "15px", height: "15px", cursor: "pointer" }}>
+                  <Icon
+                    src={
+                      state.agreementLocation === el.value ? iconsObj.radioOn : iconsObj.radioOff
+                    }
+                  />
+                </Box>
+                <Label
+                  sx={itemRadio}
+                  onClick={() => {
+                    console.log(el.value);
+                    setStateCreateAgreement("agreementLocation", el.value);
+                  }}
+                >
+                  <Radio sx={{ boxShadow: "none" }} name="letter" value={el.value} />
+                  <Text sx={{ ml: "5px", variant: "text.normalTextMedium" }}>{el.name}</Text>
+                </Label>
+              </Flex>
             );
           })}
         </Flex>

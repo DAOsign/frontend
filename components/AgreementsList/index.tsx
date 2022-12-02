@@ -1,7 +1,7 @@
 /** @jsxImportSource theme-ui */
 import React, { useEffect, useMemo } from "react";
 import UserCard from "./UserCard";
-import { Flex, Button, Text, Container, Link, Spinner } from "theme-ui";
+import { Flex, Button, Text, Container, Link, Spinner, Box } from "theme-ui";
 import { title, containerSides, noContent, btnText, btn } from "./styles";
 import Icon from "../icon/index";
 import iconsObj from "../../assets/icons";
@@ -38,13 +38,15 @@ export default function AgreementsList({ address }: any) {
         <Flex>
           <Text sx={title}>My Agreements</Text>
           <Button sx={btn} type="button">
-            <Icon src={iconsObj.plus} />
+            <Box sx={{ width: "24px", height: "24px" }}>
+              <Icon src={iconsObj.plus} />
+            </Box>
             <NextLink href={"/create"}>
               <Link sx={btnText}>New Agreement</Link>
             </NextLink>
           </Button>
         </Flex>
-        <HeaderAgreement />
+        {agreements.length ? <HeaderAgreement /> : null}
         {agreementsLoading ? (
           <Spinner />
         ) : agreements.length ? (
@@ -52,7 +54,9 @@ export default function AgreementsList({ address }: any) {
         ) : (
           <Container sx={{ textAlign: "center" }}>
             <Flex sx={noContent}>
-              <Icon src={iconsObj.portfile} />
+              <Box sx={{ width: "75px", height: "70px" }}>
+                <Icon src={iconsObj.portfile} />
+              </Box>
             </Flex>
             <Text
               sx={{ variant: "text.normalTextBold" }}

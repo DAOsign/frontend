@@ -79,7 +79,7 @@ const leftSide = {
   background: "#FFFFFF",
   border: "1px solid #EDEDF3",
   borderRadius: "12px",
-  paddingX: "128px",
+  paddingX: "100px",
   paddingBottom: "60px",
   paddingTop: "60px",
   "@media screen and (max-width: 1200px)": {
@@ -295,6 +295,16 @@ const box = {
     borderTop: "2px dashed #EDEDF3",
     borderLeft: "none",
   },
+};
+
+const plus = {
+  width: "29px",
+  height: "38px",
+  position: "absolute",
+  right: "12px",
+  top: "35px",
+  cursor: "pointer",
+  zIndex: 1,
 } as ThemeUIStyleObject;
 
 export {
@@ -319,6 +329,7 @@ export {
   card,
   title,
   item,
+  plus,
   flex,
   box,
   fW,

@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Container, Flex, Text, Button, Link } from "theme-ui";
+import { Container, Flex, Text, Button, Link, Box } from "theme-ui";
 import iconsObj from "../../assets/icons";
 import { formatAddress } from "../../utils/formats";
 import { container, addresContainer, iconMenu } from "./styles";
@@ -33,7 +33,9 @@ export default function Header({ visible, setVisible }: any) {
         </NextLink>
         <Flex sx={{ alignItems: "center", flexDirection: "row" }}>
           <Button type="button" sx={{ ...iconMenu, display: "block" }}>
-            <Icon src={iconsObj.Bell} />
+            <Box sx={{ width: "24px", height: "24px", m: "0 auto" }}>
+              <Icon src={iconsObj.Bell} />
+            </Box>
           </Button>
           <Flex sx={addresContainer}>
             <div
@@ -48,7 +50,15 @@ export default function Header({ visible, setVisible }: any) {
             <Text onClick={handleLogout}>{formatAddress(account!)}</Text>
           </Flex>
           <Button onClick={() => setVisible(!visible)} type="button" sx={iconMenu}>
-            {visible ? <Icon src={iconsObj.xClose} /> : <Icon src={iconsObj.menu} />}
+            {visible ? (
+              <Box sx={{ width: "24px", display: "block", m: "0 auto" }}>
+                <Icon src={iconsObj.xClose} />
+              </Box>
+            ) : (
+              <Box sx={{ width: "24px", display: "block", m: "0 auto" }}>
+                <Icon src={iconsObj.menu} />
+              </Box>
+            )}
           </Button>
         </Flex>
       </Flex>

@@ -33,7 +33,7 @@ const iconMenu = {
   borderRadius: "50%",
   backgroundColor: "#F7F7FB",
   textAlign: "center",
-  padding: "9px 0 0 0",
+  padding: 0,
   cursor: "poiner",
   "@media screen and (max-width: 768px)": {
     display: "block",

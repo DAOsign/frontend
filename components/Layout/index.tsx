@@ -24,7 +24,7 @@ function Layout({ children }: React.PropsWithChildren) {
       <Header visible={visible} setVisible={setVisible} address={account || ""} />
       {visible && <MobileMenu address={account || ""} />}
       {children}
-      {/* <Footer /> */}
+      <Footer />
     </Container>
   );
 }

@@ -37,7 +37,7 @@ export default function UserCard({ address }: any) {
         </Flex>
       </Flex>
       <Container sx={percentContainer}>
-        <Box sx={{ mb: "15px" }}>
+        <Box sx={{ mb: "10px" }}>
           <Icon src={iconsObj.ellipseGreen} />
           {/* <Icon src={iconsObj.greyPercent}/> */}
         </Box>

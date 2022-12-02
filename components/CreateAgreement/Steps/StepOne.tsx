@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Container, Flex, Input, Text, Button } from "theme-ui";
+import { Container, Flex, Input, Text, Button, Box } from "theme-ui";
 import { card, item, inputCreactAgreement, secondaryTitle, container } from "../styles";
 import { useCreateAgreement } from "../../../hooks/useCreateAgreement";
 import iconsObj from "../../../assets/icons";
@@ -40,7 +40,7 @@ const ChooseMethod = () => {
           setStateCreateAgreement("agreementPrivacy", "public");
         }}
       >
-        <div style={{ margin: "0 auto" }}>
+        <div style={{width: '50px', height: '50px', margin: "0 auto" }}>
           <Icon width="50px" height="50px" src={iconsObj.publicIcon} />
         </div>
         <Text sx={{ variant: "text.largeTextBold", mt: "20px" }}>Public</Text>
@@ -71,7 +71,9 @@ const PublicMethod = () => {
           onClick={() => setStateCreateAgreement("agreementPrivacy", "")}
           sx={{ variant: "buttons.back" }}
         >
-          <Icon style={{ display: "block" }} src={iconsObj.arrowLeftPink} />
+          <Box sx={{width: '14px'}}>
+             <Icon style={{ display: "block" }} src={iconsObj.arrowLeftPink} />
+          </Box>
           <Text sx={{ display: "block" }}>Choose another privacy</Text>
         </Button>
       </Flex>

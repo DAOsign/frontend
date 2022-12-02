@@ -17,7 +17,7 @@ const MobileMenu = ({ address }: any) => {
             </Text>
             <Flex sx={{ justifyContent: "left", marginBottom: "24px", mt: "4px" }}>
               <Text sx={{ variant: "text.smallTextMediumUser" }}>{formatAddress(address)}</Text>
-              <Box sx={{ marginLeft: "5px" }}>
+              <Box sx={{ marginLeft: "5px", width: "24px", height: "24px" }}>
                 <Icon style={{ cursor: "pointer" }} src={iconsObj.iconSix} />
               </Box>
             </Flex>

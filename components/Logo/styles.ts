@@ -1,56 +1,60 @@
 import { ThemeUIStyleObject } from "theme-ui";
 
 const container = {
-  animation: "logo 6s 1 linear",
+  animation: "logo 4s 1 linear",
 } as ThemeUIStyleObject;
 
 const logo = {} as ThemeUIStyleObject;
 
 const d = {
-  right: "46.2%",
+  right: "47%",
   position: "absolute",
-  width: "54px",
+  width: "57px",
   height: "54px",
-  animation: "d 6s 1 linear",
+  animation: "d 4s 1 linear",
   zIndex: 2,
 } as ThemeUIStyleObject;
 
 const a = {
   position: "absolute",
-  right: "28%",
-  width: "54px",
+  right: "30%",
+  width: "57px",
   height: "54px",
-  animation: "a 6s 1 linear",
+  animation: "a 4s 1 linear",
   zIndex: 2,
 } as ThemeUIStyleObject;
 
 const o = {
-  right: "11%",
+  right: "14%",
   position: "absolute",
-  width: "54px",
+  width: "57px",
   height: "54px",
-  animation: "o 6s 1 linear",
+  animation: "o 4s 1 linear",
   zIndex: 2,
 } as ThemeUIStyleObject;
 
 const text = {
-  left: "38%",
-  bottom: "23%",
+  height: "30px",
+  display: "block",
+  left: "36%",
+  bottom: "10%",
+  fontSize: "23px",
   position: "absolute",
-  animation: "text 6s 1 linear",
+  animation: "text 4s 1 linear",
 } as ThemeUIStyleObject;
 
 const iconLogo = {
   width: "75px",
+  height: "100px",
   position: "absolute",
   left: "5%",
-  animation: "iconLogo 6s 1 linear",
+  animation: "iconLogo 4s 1 linear",
 } as ThemeUIStyleObject;
 
 const animateContainer = {
   position: "relative",
   top: 0,
-  animation: "animateLogo 6s 1 linear",
+  animation: "animateLogo 4s 1 linear",
   paddingTop: "80px",
 } as ThemeUIStyleObject;
 

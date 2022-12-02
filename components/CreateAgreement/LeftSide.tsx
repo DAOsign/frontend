@@ -66,7 +66,9 @@ export default function LeftSide({ setStep, step }: LeftSideoProp) {
         <Flex sx={{ ...stepStyle, mt: 0 }}>
           <Box sx={stepNumber}>
             {step > 1 ? (
-              <Icon src={iconsObj.done} />
+              <Box sx={{ width: "24px", height: "24px", m: "0 auto" }}>
+                <Icon src={iconsObj.done} />
+              </Box>
             ) : (
               <Text sx={{ variant: "text.normalTextBold", color: "#fff" }}>1</Text>
             )}
@@ -81,7 +83,9 @@ export default function LeftSide({ setStep, step }: LeftSideoProp) {
         <Flex sx={stepStyle}>
           <Box sx={{ ...stepNumber, backgroundColor: step > 1 ? "#CA5CF2" : "#EDEDF3" }}>
             {step > 2 ? (
-              <Icon src={iconsObj.done} />
+              <Box sx={{ width: "20px", height: "20px", m: "0 auto" }}>
+                <Icon src={iconsObj.done} />
+              </Box>
             ) : (
               <Text sx={{ variant: "text.normalTextBold", color: "#fff" }}>2</Text>
             )}

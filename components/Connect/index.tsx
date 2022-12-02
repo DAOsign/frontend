@@ -1,6 +1,6 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, { useEffect, useRef } from "react";
-import { Button, Container, Heading, Text } from "theme-ui";
+import { Button, Container, Heading, Link, Text } from "theme-ui";
 import { title, container } from "./styles";
 import { useWeb3 } from "../../hooks/useWeb3";
 import { getToken } from "../../utils/token";
@@ -43,7 +43,8 @@ export default function Connect() {
         Coinbase Wallet
       </Button>
       <Text variant="secondary" sx={{ maxWidth: "220px", display: "inline-block" }}>
-        By connecting a wallet, you agree to our Terms of Service
+        By connecting a wallet, you agree to our{" "}
+        <Link sx={{ color: "#CA5CF2", cursor: "pointer" }}>Terms of Service</Link>
       </Text>
     </Container>
   );

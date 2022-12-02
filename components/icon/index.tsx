@@ -11,16 +11,17 @@ interface Icon {
   src: string;
 }
 
-function Icon({ src, className = "", alt = "", ...others }: IconProps) {
+function Icon({ src, className = "", alt = "", width, height, ...others }: IconProps) {
   return (
     //@ts-ignore
     <Image
-      width={src.width}
-      height={src.height}
+      layout="responsive"
+      width={width || src.width}
+      height={height || src.height}
+      className={className}
       src={src.src}
       alt={alt}
       {...others}
-      className={className}
     />
   );
 }
