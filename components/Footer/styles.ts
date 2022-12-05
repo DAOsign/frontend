@@ -4,19 +4,17 @@ const footer = {
   marginTop: "135px",
   position: "absolute",
   bottom: 0,
-  px: "15px",
-  pb: "40px",
+  px: "120px",
+  pb: "20px",
   animation: "footer 4s 1 linear",
-  "@media screen and (min-width: 1024px)": {
-    paddingLeft: "120px",
-    paddingRight: "120px",
-  },
-  "@media screen and (min-width: 768px)": {
+  "@media screen and (max-width: 1200px)": {
     paddingLeft: "100px",
+    marginTop: "90px",
     paddingRight: "100px",
   },
   "@media screen and (max-width: 768px)": {
-    bottom: "-30%",
+    paddingLeft: "15px",
+    paddingRight: "15px",
   },
 } as ThemeUIStyleObject;
 
@@ -39,7 +37,7 @@ const leftSide = {
 
 const rightSide = {
   width: "60%",
-  justifyContent: "space-around",
+  justifyContent: "space-between",
   "@media screen and (max-width: 1024px)": {
     mt: "50px",
     width: "100%",

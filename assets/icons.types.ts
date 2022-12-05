@@ -39,13 +39,14 @@ export interface IconsMapper extends Record<string, unknown> {
   calendar: Icon;
   download: Icon;
   portfile: Icon;
+  pinkPlus: Icon;
   logoIcon: Icon;
   twitter: Icon;
   radioOn: Icon;
   iconSix: Icon;
-  pinkPlus: Icon;
   pending: Icon;
   verify: Icon;
+  logOut: Icon;
   github: Icon;
   wallet: Icon;
   search: Icon;
@@ -58,6 +59,7 @@ export interface IconsMapper extends Record<string, unknown> {
   world: Icon;
   award: Icon;
   globe: Icon;
+  frame: Icon;
   plus: Icon;
   done: Icon;
   edit: Icon;

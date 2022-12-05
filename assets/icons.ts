@@ -35,7 +35,7 @@ import calendar from "../img/svg/calendar.svg";
 import settings from "../img/svg/settings.svg";
 import download from "../img/svg/download.svg";
 import facebook from "../img/svg/facebook.svg";
-import logoIcon from "../img/svg/logoIcon.svg";
+import logoIcon from "../img/svg/logo.svg";
 import telegram from "../img/svg/telegram.svg";
 import portfile from "../img/svg/portfile.svg";
 import pinkPlus from "../img/svg/pinkPlus.svg";
@@ -49,6 +49,7 @@ import wallet from "../img/svg/wallet.svg";
 import xClose from "../img/svg/xClose.svg";
 import verify from "../img/svg/verify.svg";
 import iconSix from "../img/svg/icon6.svg";
+import logOut from "../img/svg/logOut.svg";
 import world from "../img/svg/world.svg";
 import email from "../img/svg/email.svg";
 import globe from "../img/svg/globe.svg";
@@ -57,6 +58,7 @@ import dLogo from "../img/svg/dLogo.svg";
 import oLogo from "../img/svg/oLogo.svg";
 import phone from "../img/svg/phone.svg";
 import award from "../img/svg/award.svg";
+import frame from "../img/svg/frame.svg";
 import Bell from "../img/svg/Bell.svg";
 import user from "../img/svg/user.svg";
 import done from "../img/svg/done.svg";
@@ -117,6 +119,7 @@ const iconsObj: IconsMapper = {
   radioOn,
   iconSix,
   iconExit,
+  logOut,
   pending,
   verify,
   github,
@@ -124,6 +127,7 @@ const iconsObj: IconsMapper = {
   phone,
   search,
   xClose,
+  frame,
   email,
   world,
   award,

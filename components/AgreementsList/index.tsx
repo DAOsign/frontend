@@ -2,7 +2,7 @@
 import React, { useEffect, useMemo } from "react";
 import UserCard from "./UserCard";
 import { Flex, Button, Text, Container, Link, Spinner, Box } from "theme-ui";
-import { title, containerSides, noContent, btnText, btn } from "./styles";
+import { title, containerSides, noContent, btnText, btn, iconPlus } from "./styles";
 import Icon from "../icon/index";
 import iconsObj from "../../assets/icons";
 import HeaderAgreement from "./HeaderAgreement";
@@ -14,6 +14,7 @@ import { useWeb3 } from "../../hooks/useWeb3";
 import AgreementItem from "./AgreementItem";
 import { toAgreement } from "../../utils/typeUtils";
 import { Agreement as AgreementRespone } from "../../modules/graphql/gql/graphql";
+import LogOutPopap from "../modalLogaut";
 
 export default function AgreementsList({ address }: any) {
   const { account } = useWeb3();
@@ -38,7 +39,7 @@ export default function AgreementsList({ address }: any) {
         <Flex>
           <Text sx={title}>My Agreements</Text>
           <Button sx={btn} type="button">
-            <Box sx={{ width: "24px", height: "24px" }}>
+            <Box sx={iconPlus}>
               <Icon src={iconsObj.plus} />
             </Box>
             <NextLink href={"/create?step=1"}>

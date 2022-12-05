@@ -312,12 +312,11 @@ const box = {
 };
 
 const plus = {
-  width: "29px",
-  height: "38px",
   position: "absolute",
   right: "12px",
   top: "35px",
   cursor: "pointer",
+  m: "0 auto",
   zIndex: 1,
 } as ThemeUIStyleObject;
 

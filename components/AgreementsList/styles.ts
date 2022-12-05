@@ -28,6 +28,14 @@ const container = {
     px: "16px",
   },
 } as ThemeUIStyleObject;
+const iconPlus = {
+  width: "24px",
+  height: "24px",
+  ml: "20px",
+  "@media screen and (max-width: 768px)": {
+    m: "0 auto",
+  },
+} as ThemeUIStyleObject;
 
 const iconExit = {
   position: "absolute",
@@ -85,8 +93,8 @@ const title = {
 const containerSides = {
   maxWidth: "1200px",
   justifyContent: "space-between",
-  margin: "46px auto 0",
-  paddingTop: "80px",
+  margin: "0 auto 0",
+  paddingTop: "20px",
   "@media screen and (max-width: 1200px)": {
     flexDirection: "column",
     px: "24px",
@@ -255,6 +263,7 @@ const btn = {
   display: "flex",
   ml: "auto",
   mr: 0,
+  p: 0,
   "@media screen and (max-width: 768px)": {
     width: "50px",
     height: "50px",
@@ -285,6 +294,7 @@ export {
   greyAgrBtn,
   headerItem,
   container,
+  iconPlus,
   noContent,
   iconExit,
   userFoto,

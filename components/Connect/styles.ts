@@ -1,13 +1,10 @@
 import { ThemeUIStyleObject } from "theme-ui";
 
 const container = {
-  position: "absolute",
-  top: "70%",
-  left: "50%",
-  transform: "translate(-50%, 0)",
+  bottom: '30px',
   animation: "connect 4s 1 linear",
   width: "387px",
-  mt: "75px",
+  mt: "45px",
   background: "rgba(255, 255, 255, 0.24)",
   backdropFilter: "blur(6px)",
   borderRadius: "10px",

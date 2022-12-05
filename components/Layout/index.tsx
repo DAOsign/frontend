@@ -3,7 +3,7 @@ import Head from "next/head";
 import { Container } from "theme-ui";
 import Header from "../Header/Header";
 import { useWeb3 } from "../../hooks/useWeb3";
-import MobileMenu from "../Header/MobileMenu";
+import HeaderMenu from "../Header/HeaderMenu";
 import Footer from "../Footer/Footer";
 
 function Layout({ children }: React.PropsWithChildren) {
@@ -22,7 +22,7 @@ function Layout({ children }: React.PropsWithChildren) {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <Header visible={visible} setVisible={setVisible} address={account || ""} />
-      {visible && <MobileMenu address={account || ""} />}
+      {visible && <HeaderMenu address={account || ""} />}
       {children}
     </Container>
   );

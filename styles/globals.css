@@ -18,6 +18,8 @@ a {
   width: 100%;
 }
 .bg {
+  position: relative;
+  min-height: 1080px;
   height: 100vh;
   width: 100%;
   background-repeat: no-repeat;
@@ -29,12 +31,7 @@ a {
   background-image: url(../img/svg/Splash\ compressed.jpg);
   background-position: top right;
 }
-@media screen and (max-width: 768px) {
-  .bg {
-    height: 130vh;
-    bottom: -30%;
-  }
-}
+
 .file {
   opacity: 0;
   width: 100%;
@@ -74,6 +71,9 @@ a {
 @media screen and (max-width: 768px) {
   .w-md-editor-toolbar li > button {
     width: 20px !important;
+  }
+  .bg {
+    height: 125vh;
   }
 }
 .w-md-editor-toolbar li:nth-of-type(4),
@@ -123,11 +123,13 @@ body {
     opacity: 0;
     left: 45%;
     font-size: 40px;
+    letter-spacing: 35px;
     bottom: -70%;
   }
   45% {
     opacity: 1;
     left: 5%;
+    letter-spacing: 0;
     font-size: 40px;
     bottom: -70%;
   }
@@ -161,10 +163,11 @@ body {
 @keyframes d {
   0% {
     opacity: 0;
-    width: 500px;
+    width: 350px;
     position: absolute;
-    height: 140px;
-    right: -100%;
+    height: 416px;
+    top: -50%;
+    right: -50%;
   }
   3% {
     opacity: 0;
@@ -173,8 +176,9 @@ body {
   5% {
     right: 53.2%;
     opacity: 1;
+    top: 0;
     width: 140px;
-    height: 140px;
+    height: 160px;
   }
   40% {
     opacity: 1;
@@ -186,19 +190,19 @@ body {
   65% {
     opacity: 1;
     width: 140px;
-    height: 140px;
+    height: 160px;
     right: 53.2%;
   }
   75% {
     opacity: 1;
     width: 140px;
-    height: 140px;
+    height: 160px;
     right: 35%;
   }
   90% {
     opacity: 1;
     width: 140px;
-    height: 140px;
+    height: 160px;
     right: 35%;
   }
   100% {
@@ -213,34 +217,36 @@ body {
   0% {
     opacity: 0;
     position: absolute;
-    width: 500px;
-    height: 140px;
-    right: -200%;
+    top: -50%;
+    width: 350px;
+    height: 432px;
   }
   13% {
     opacity: 0;
     position: absolute;
-    width: 500px;
-    height: 140px;
-    right: -130%;
+    width: 250px;
+    height: 432px;
+    top: -50%;
+    right: -50%;
   }
   15% {
     opacity: 1;
     width: 140px;
-    height: 140px;
-    right: 15%;
+    top: 0;
+    height: 160px;
+    right: 16%;
   }
   30% {
     opacity: 1;
     width: 140px;
     height: 140px;
-    right: 15%;
+    right: 16%;
   }
   65% {
     opacity: 1;
     width: 140px;
     height: 160px;
-    right: 15%;
+    right: 16%;
   }
   75% {
     opacity: 1;
@@ -266,18 +272,23 @@ body {
   0% {
     opacity: 0;
     position: absolute;
-    width: 500px;
-    right: -200%;
+    width: 400px;
+    top: -130%;
+    height: 400px;
+    right: -150%;
   }
   24% {
     opacity: 0;
     position: absolute;
-    width: 500px;
+    width: 400px;
+    top: -130%;
+    height: 400px;
     right: -150%;
   }
   25% {
     opacity: 1;
     width: 140px;
+    top: 0;
     right: -23%;
   }
   30% {
@@ -315,45 +326,29 @@ body {
 @keyframes connect {
   0% {
     opacity: 0;
-    position: absolute;
-    top: 150%;
-    left: 50%;
-    transform: translate(-50%, 0);
+    position: relative;
+    bottom: -150px;
     pointer-events: none;
   }
   20% {
     opacity: 0;
-    position: absolute;
-    top: 150%;
-    left: 50%;
-    transform: translate(-50%, 0);
+    position: relative;
+    bottom: -150px;
   }
   40% {
     opacity: 0;
-    position: absolute;
-    top: 150%;
-    left: 50%;
-    transform: translate(-50%, 0);
+    position: relative;
+    bottom: -150px;
   }
   85% {
     opacity: 0;
-    position: absolute;
-    top: 150%;
-    left: 50%;
-    transform: translate(-50%, 0);
-  }
-  95% {
-    opacity: 1;
-    position: absolute;
-    top: 150%;
-    left: 50%;
-    transform: translate(-50%, 0);
-    pointer-events: none;
+    position: relative;
+    bottom: -150px;
   }
   100% {
-    top: 70%;
+    bottom: 0;
     opacity: 1;
-    position: absolute;
+    position: relative;
   }
 }
 
@@ -421,3 +416,21 @@ body {
     top: 0;
   }
 }
+@keyframes header {
+  0% {
+    right: -100%;
+  }
+  100% {
+    right: 0;
+  }
+}
+@keyframes headerDesctop {
+  0% {
+    right: -100%;
+  }
+  100% {
+    right: 20px;
+  }
+}
+
+
