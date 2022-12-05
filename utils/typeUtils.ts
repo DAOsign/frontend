@@ -1,11 +1,11 @@
 import { Agreement as AgreementResponse } from "../modules/graphql/gql/graphql";
-import { Agreement, AgreementLocation } from "../types";
+import { Agreement, AgreementLocation, AgreementPrivacy } from "../types";
 
 export const toAgreement = (agreement: AgreementResponse): Agreement => {
   return {
     title: agreement.title,
     agreementLocation: agreement.agreementLocation.name as unknown as AgreementLocation,
-    agreementPrivacy: agreement.agreementPrivacy.name,
+    agreementPrivacy: agreement.agreementPrivacy.name as AgreementPrivacy,
     agreementStatus: agreement.agreementStatus.name,
     authorWalletAddress: agreement.authorWallet.address,
     content: agreement.content,

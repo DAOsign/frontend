@@ -48,8 +48,8 @@ a {
   opacity: 1;
 }
 .svgLogo > span {
-   height: 100% !important;
-   width: 100% !important;
+  height: 100% !important;
+  width: 100% !important;
 }
 .w-md-editor {
   border: unset;
@@ -76,8 +76,8 @@ a {
     width: 20px !important;
   }
 }
-.w-md-editor-toolbar li:nth-child(4),
-.w-md-editor-toolbar li:nth-child(6) {
+.w-md-editor-toolbar li:nth-of-type(4),
+.w-md-editor-toolbar li:nth-of-type(6) {
   display: none;
 }
 .w-md-editor-toolbar-divider {
@@ -388,7 +388,7 @@ body {
   }
   100% {
     left: 5%;
-    width: "75px",
+    width: "75px";
   }
 }
 @keyframes footer {

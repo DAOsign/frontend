@@ -1,47 +1,98 @@
-import { useState, createContext, ProviderProps } from "react";
-import { AgreementLocation, AgreementPrivacy } from "../types";
+import { useRouter } from "next/router";
+import { useState, createContext, ProviderProps, useCallback, useEffect, useRef } from "react";
+import { AgreementLocation, AgreementPrivacy, LOCATION_CLOUD } from "../types";
 
-interface CreateAgrementContext {
-  state: State;
-  setStateCreateAgreement: (key: keyof State, value: any) => void;
-}
-
-//@ts-ignore
-export const CreateAggrementContext = createContext<CreateAgrementContext>({});
-
-interface State {
+interface CreationState {
   title: string;
   agreementPrivacy: AgreementPrivacy;
   textEditorValue: string;
   agreementLocation: AgreementLocation;
-  observersValue: string;
-  signersValue: string;
   observers: { id: number; value: string }[];
   signers: { id: number; value: string }[];
 }
+interface CreateAgrementContext {
+  values: CreationState;
+  changeValue: (key: keyof CreationState, value: any) => void;
+}
+
+const DRAFT_STORAGE_KEY = "draftAgreement";
+
+const defaultState: CreationState = {
+  agreementPrivacy: "",
+  title: "",
+  textEditorValue: "",
+  agreementLocation: LOCATION_CLOUD,
+  observers: [],
+  signers: [],
+};
+
+const recoverDraft = (): CreationState => {
+  if (typeof window !== "undefined") {
+    const draft = localStorage.getItem(DRAFT_STORAGE_KEY);
+    if (draft) {
+      return JSON.parse(draft);
+    }
+  }
+  return defaultState;
+};
+
+const saveDraft = (state: CreationState) => {
+  if (typeof window !== "undefined") {
+    localStorage.setItem(DRAFT_STORAGE_KEY, JSON.stringify(state));
+  }
+};
+
+export const clearDraft = () => {
+  if (typeof window !== "undefined") {
+    localStorage.setItem(DRAFT_STORAGE_KEY, "");
+  }
+};
 
 const CreateAgreementProvider = (props?: Partial<ProviderProps<CreateAgrementContext>>) => {
-  const [state, setState] = useState<State>({
-    agreementPrivacy: "",
-    title: "",
-    textEditorValue: "",
-    agreementLocation: "Local",
-    signersValue: "",
-    observersValue: "",
-    observers: [],
-    signers: [],
-  });
+  const [values, setValues] = useState<CreationState>(recoverDraft());
+  const { query, push } = useRouter();
+  const valuesLoadedRef = useRef(false);
 
-  const setStateCreateAgreement = (key: keyof State, value: any) => {
-    setState({ ...state, [key]: value });
+  useEffect(() => {}, []);
+
+  const changeValue = (key: keyof CreationState, value: any) => {
+    setValues(state => {
+      const newState = {
+        ...state,
+        [key]: value,
+      };
+      saveDraft(newState);
+      return newState;
+    });
   };
 
-  return (
-    <CreateAggrementContext.Provider
-      {...props}
-      value={{ state: { ...state }, setStateCreateAgreement }}
-    />
-  );
+  useEffect(() => {
+    if (!valuesLoadedRef.current) {
+      setValues(recoverDraft());
+
+      valuesLoadedRef.current = true;
+
+      if (query.step) {
+        const step = Number(query.step);
+
+        if (step > 1 && (!values.title || !values.agreementPrivacy)) {
+          push({ query: { step: 1 } }, undefined, { shallow: true });
+        }
+        // TODO redirect if step 3 and no textEditorValue or filePath
+        if (step > 2 && (!values.textEditorValue || false)) {
+          push({ query: { step: 2 } }, undefined, { shallow: true });
+        }
+      }
+    }
+    return () => {
+      valuesLoadedRef.current = false;
+    };
+  }, []);
+
+  return <CreateAggrementContext.Provider {...props} value={{ values, changeValue }} />;
 };
+
+//@ts-ignore
+export const CreateAggrementContext = createContext<CreateAgrementContext>({});
 
 export default CreateAgreementProvider;

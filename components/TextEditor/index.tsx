@@ -1,61 +1,87 @@
-import React, { useState } from "react";
+import React, { Suspense, useState } from "react";
 import dynamic from "next/dynamic";
 import "@uiw/react-md-editor/markdown-editor.css";
 import "@uiw/react-markdown-preview/markdown.css";
 import iconsObj from "../../assets/icons";
 import Icon from "../icon";
-import { Text, Button, Flex, Box } from "theme-ui";
-import "react-draft-wysiwyg/dist/react-draft-wysiwyg.css";
+import { Text, Button, Flex, Box, ButtonProps, Spinner } from "theme-ui";
 import { useCreateAgreement } from "../../hooks/useCreateAgreement";
+import styles from "./styles";
 
-//TODO add styles and configure. ref -  https://github.com/jpuri/react-draft-wysiwyg
-
-const Editor = dynamic(() => import("react-draft-wysiwyg").then(res => res.Editor), {
+const MDEditor = dynamic(() => import("@uiw/react-md-editor"), {
   ssr: false,
 });
 
-const TextEditor = () => {
-  const { state, setStateCreateAgreement } = useCreateAgreement();
+const buttonPropsByStatus = (
+  activeTab: "edit" | "preview",
+  tab: "edit" | "preview"
+): ButtonProps => {
+  let props: ButtonProps = {
+    variant: "back",
+    sx: { color: "black", width: "fit-content", p: "0", px: "8px", borderRadius: "0", m: "0" },
+  };
+  if (activeTab === tab) {
+    props.disabled = true;
+    props.className = "active";
+    //@ts-ignore
+    props.sx!.background = "silver";
+  }
+  return props;
+};
+
+const TextEditor = ({ goBack }: { goBack: () => void }) => {
+  const {
+    values: { textEditorValue },
+    changeValue,
+  } = useCreateAgreement();
+
+  const [state, setState] = useState<"edit" | "preview">("edit");
+
+  const handleOnChange = (value?: string) => {
+    changeValue("textEditorValue", value || "");
+  };
+
   return (
-    <div style={{ position: "relative" }}>
+    <Box style={{ position: "relative" }} sx={styles}>
       <Flex sx={{ alignItems: "center" }}>
         <Text sx={{ variant: "forms.label", minWidth: "170px" }}>Enter agreement description</Text>
-        <Button
-          //onClick={() => setCloud(!cloud)}
-          sx={{ variant: "buttons.back", height: "30px", pt: 0 }}
-        >
+        <Button onClick={() => goBack()} sx={{ variant: "buttons.back", height: "30px", pt: 0 }}>
           <Icon style={{ display: "block" }} src={iconsObj.arrowLeftPink} />
-          <Text sx={{ display: "block", fontSize: "10px" }}>Choose another privacy</Text>
+          <Text sx={{ display: "block", fontSize: "10px" }}>{"<"} Choose another method</Text>
         </Button>
       </Flex>
-      <Editor onChange={e => setStateCreateAgreement("textEditorValue", e)} />
-      <Box
-        sx={{
-          position: "absolute",
-          right: "5px",
-          backgroundColor: "inherit",
-          bottom: "35px",
-          pointerEvents: "none",
-          cursor: "pointer",
-        }}
-      >
-        <Icon width="30px" height="30px" style={{ opacity: 0.3 }} src={iconsObj.fieldResize} />
-      </Box>
-      <Flex
-        sx={{
-          backgroundColor: "#EDEDF3",
-          borderRadius: "0 0 8px 8px",
-          height: "32px",
-          alignItems: "center",
-          pl: "12px",
-        }}
-      >
-        <Icon src={iconsObj.m} />{" "}
-        <Text sx={{ variant: "text.overscript", opacity: 0.5, ml: "4px" }}>
-          Markdown is supported
-        </Text>
-      </Flex>
-    </div>
+
+      <Suspense fallback={<Spinner />}>
+        <Flex className="tabsContainer">
+          <Button onClick={() => setState("edit")} {...buttonPropsByStatus(state, "edit")}>
+            Edit
+          </Button>
+          <Button onClick={() => setState("preview")} {...buttonPropsByStatus(state, "preview")}>
+            Preview
+          </Button>
+        </Flex>
+        <MDEditor value={textEditorValue} onChange={val => handleOnChange(val)} preview={state} />
+
+        <Box
+          sx={{
+            position: "absolute",
+            right: "5px",
+            backgroundColor: "inherit",
+            bottom: "35px",
+            pointerEvents: "none",
+            cursor: "pointer",
+          }}
+        >
+          <Icon width="30px" height="30px" style={{ opacity: 0.3 }} src={iconsObj.fieldResize} />
+        </Box>
+        <Flex className="support">
+          <Icon src={iconsObj.m} />
+          <Text sx={{ variant: "text.overscript", opacity: 0.5, ml: "4px" }}>
+            Markdown is supported
+          </Text>
+        </Flex>
+      </Suspense>
+    </Box>
   );
 };
 

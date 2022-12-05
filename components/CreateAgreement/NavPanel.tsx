@@ -1,7 +1,7 @@
-import React, { useCallback } from "react";
+import React, { useCallback, useMemo } from "react";
 import { useRouter } from "next/router";
 import Icon from "../icon/index";
-import { Container, Flex, Text, Button, Box } from "theme-ui";
+import { Container, Flex, Text, Button, Box, ButtonProps } from "theme-ui";
 import { useCreateAgreement } from "../../hooks/useCreateAgreement";
 import iconsObj from "../../assets/icons";
 import {
@@ -17,47 +17,78 @@ import {
 } from "./styles";
 import { useMutation } from "urql";
 import { addAgreementMutation } from "../../modules/graphql/mutations";
+import { LOCATION_CLOUD } from "../../types";
+import { clearDraft } from "../../modules/createAgreementProvider";
 
-interface LeftSideoProp {
-  step: number;
-  setStep: any;
-}
+export default function LeftSide() {
+  const { values } = useCreateAgreement();
+  const { push, query } = useRouter();
 
-export default function LeftSide({ setStep, step }: LeftSideoProp) {
-  const { state } = useCreateAgreement();
-  const { push } = useRouter();
-  const value = useCallback(() => {
-    return {
-      1: !state.title || !state.agreementPrivacy,
-      2: state.agreementLocation === "Cloud" ? !state.textEditorValue : false,
-      3: !state.observers.length || !state.signers.length,
-    };
-  }, [
-    state.agreementLocation,
-    state.agreementPrivacy,
-    state.textEditorValue,
-    state.observers,
-    state.signers,
-    state.title,
-  ]);
+  const step = query?.step ? Number(query.step) : 1;
+
+  const nextStepDisabled = useMemo(() => {
+    switch (step) {
+      case 1:
+        return !values.title || !values.agreementPrivacy;
+      case 2:
+        return values.agreementLocation === LOCATION_CLOUD ? !values.textEditorValue : false;
+      case 3:
+        return !values.observers.length || !values.signers.length;
+    }
+  }, [step, values]);
+
   const [{ fetching: addingAgreement }, addAgreement] = useMutation(addAgreementMutation);
 
   const handleCreateAgreement = async () => {
     await addAgreement({
-      title: state.title,
-      agreementLocation: state.agreementLocation,
-      content: JSON.stringify(state.textEditorValue),
-      agreementPrivacy: state.agreementPrivacy,
-      signers: state.signers.map(s => s.value),
-      observers: state.observers.map(o => o.value),
+      title: values.title,
+      agreementLocation: values.agreementLocation,
+      content: JSON.stringify(values.textEditorValue),
+      agreementPrivacy: values.agreementPrivacy,
+      signers: values.signers.map(s => s.value),
+      observers: values.observers.map(o => o.value),
     }).then(res => {
       if (res.error) {
-        console.error(res.error);
+        //console.error(res.error);
       }
       if (res.data?.addAgreement?.title) {
+        clearDraft();
         push("/agreements");
       }
     });
+  };
+
+  const handleNextStep = () => {
+    push({ query: { step: step + 1 } }, undefined, { shallow: true });
+  };
+  const handlePrevStep = () => {
+    push({ query: { step: step > 1 ? step - 1 : 1 } }, undefined, { shallow: true });
+  };
+
+  const handleCancel = () => {
+    push("/");
+  };
+
+  const ForwardButton = () => {
+    const isFinishButton = step === 3;
+    const props: ButtonProps = {
+      variant: "primary",
+      sx: { ...fW, mt: "20px" },
+      type: "button",
+      onClick: isFinishButton ? handleCreateAgreement : handleNextStep,
+      disabled: isFinishButton ? addingAgreement : nextStepDisabled,
+    };
+    return <Button {...props}>{isFinishButton ? "Create Agreement" : "Next Step"}</Button>;
+  };
+
+  const BackwardButton = () => {
+    const isCancelButton = step <= 1;
+    const props: ButtonProps = {
+      onClick: isCancelButton ? handlePrevStep : handleCancel,
+      sx: { variant: "buttons.secondary", ...fW, mt: "60px" },
+      type: "button",
+    };
+    return <Button {...props}>{isCancelButton ? "Back" : "Cancel"}</Button>;
   };
 
   return (
@@ -107,36 +138,11 @@ export default function LeftSide({ setStep, step }: LeftSideoProp) {
         </Flex>
       </Container>
       <Container sx={containerButtons}>
-        <Button
-          onClick={() => setStep(step > 1 ? step - 1 : 1)}
-          sx={{ variant: "buttons.secondary", ...fW, mt: "60px" }}
-          type="button"
-        >
-          {step > 1 ? "Back" : "Cancel"}
-        </Button>
+        <BackwardButton />
         <Button sx={{ variant: "buttons.secondary", ...fW, mt: "20px" }} type="button">
           Save Draft
         </Button>
-        {step === 3 ? (
-          <Button
-            onClick={handleCreateAgreement}
-            disabled={addingAgreement}
-            variant="primary"
-            sx={{ ...fW, mt: "20px" }}
-            type="button"
-          >
-            Create Agreement
-          </Button>
-        ) : (
-          <Button
-            disabled={value()[step]}
-            onClick={() => setStep(step + 1)}
-            sx={{ variant: "buttons.primary", ...fW, mt: "20px" }}
-            type="button"
-          >
-            Next Step
-          </Button>
-        )}
+        <ForwardButton />
       </Container>
     </>
   );

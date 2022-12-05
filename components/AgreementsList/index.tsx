@@ -41,7 +41,7 @@ export default function AgreementsList({ address }: any) {
             <Box sx={{ width: "24px", height: "24px" }}>
               <Icon src={iconsObj.plus} />
             </Box>
-            <NextLink href={"/create"}>
+            <NextLink href={"/create?step=1"}>
               <Link sx={btnText}>New Agreement</Link>
             </NextLink>
           </Button>

@@ -2,10 +2,10 @@ import { ThemeUIStyleObject } from "theme-ui";
 
 const footer = {
   marginTop: "135px",
-  position: 'absolute',
-  bottom: 0, 
+  position: "absolute",
+  bottom: 0,
   px: "15px",
-  pb: '40px',
+  pb: "40px",
   animation: "footer 4s 1 linear",
   "@media screen and (min-width: 1024px)": {
     paddingLeft: "120px",
@@ -16,7 +16,7 @@ const footer = {
     paddingRight: "100px",
   },
   "@media screen and (max-width: 768px)": {
-    bottom: '-30%',
+    bottom: "-30%",
   },
 } as ThemeUIStyleObject;
 
@@ -84,7 +84,7 @@ const socialTitle = {
 } as ThemeUIStyleObject;
 
 const iconContainer = {
-  height: '30px',
+  height: "30px",
   maxWidth: "170px",
   justifyContent: "space-between",
   opacity: 0.5,
@@ -103,8 +103,8 @@ const aboutUs = {
 
 const iconEmail = {
   position: "absolute",
-  width: '30px',
-  height: '30px',
+  width: "30px",
+  height: "30px",
   top: "44px",
   right: "17px",
   opacity: 0.5,
@@ -117,7 +117,7 @@ const iconEmail = {
   },
 } as ThemeUIStyleObject;
 
-const icon = {height: 24, width: 24,  cursor: 'pointer'} as ThemeUIStyleObject;
+const icon = { height: 24, width: 24, cursor: "pointer" } as ThemeUIStyleObject;
 
 export {
   iconContainer,

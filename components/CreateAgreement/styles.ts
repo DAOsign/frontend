@@ -62,12 +62,12 @@ const itemRadio = {
   opacity: 1,
   display: "flex",
   alignItem: "center",
-  "&:nth-child(3)": {
+  "&:nth-of-type(3)": {
     opacity: "0.5",
     pointerEvents: "none",
   },
   "@media screen and (max-width: 768px)": {
-    "&:nth-child(3)": {
+    "&:nth-of-type(3)": {
       display: "none",
     },
   },
@@ -76,12 +76,17 @@ const itemRadio = {
 const leftSide = {
   maxWidth: "672px",
   minHeight: "550px",
+  transition: ".3s all",
   background: "#FFFFFF",
   border: "1px solid #EDEDF3",
   borderRadius: "12px",
   paddingX: "100px",
   paddingBottom: "60px",
   paddingTop: "60px",
+  maxHeight: "546px",
+  "&.transition": {
+    maxHeight: "795px",
+  },
   "@media screen and (max-width: 1200px)": {
     width: "100%",
     maxWidth: "672px",
@@ -159,9 +164,13 @@ const card = {
   m: 0,
   cursor: "pointer",
   minHeight: "230px",
+  transition: ".3s all",
   "@media screen and (max-width: 768px)": {
     maxWidth: "150px",
     px: "12px",
+  },
+  "&.active": {
+    borderColor: "pink",
   },
 } as ThemeUIStyleObject;
 
@@ -189,6 +198,11 @@ const item = {
   m: 0,
   mb: "10px",
   alignItems: "start",
+  cursor: "pointer",
+  transition: ".3s all",
+  "&.active": {
+    borderColor: "pink",
+  },
 } as ThemeUIStyleObject;
 
 const inputCreactAgreement = {
