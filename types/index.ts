@@ -5,8 +5,8 @@ export const LOCATION_LOCAL = "Local";
 
 export const PRIVACY_PRIVATE = "Private";
 export const PRIVACY_PUBLIC_PUBLISHED = "Published";
-export const PRIVACY_PUBLIC_PROOF_ONLY = "ProofOnly";
-export const PRIVACY_PUBLIC_WITH_LINK = "Link";
+export const PRIVACY_PUBLIC_PROOF_ONLY = "proof_only";
+export const PRIVACY_PUBLIC_WITH_LINK = "with_link";
 
 export const METHOD_UPLOAD = "Upload";
 export const METHOD_ENTER = "Enter";
@@ -29,7 +29,6 @@ export type AgreementLocation =
   | "";
 
 export interface Agreement {
-  agreementFile?: string;
   agreementLocation: AgreementLocation;
   agreementPrivacy: AgreementPrivacy;
   agreementStatus: AgreementStatus;

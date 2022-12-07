@@ -30,81 +30,79 @@ const variants: Variants = {
 export default function PublicMethod({ animateContainer, setPublic }: PublicProps) {
   const { values, changeValue } = useCreateAgreement();
   return (
-    <AnimatePresence initial={false}>
-      <motion.main
-        initial="hidden"
-        animate="enter"
-        exit="exit"
-        variants={variants}
-        transition={{ type: "linear" }}
-      >
-        <Container sx={container}>
-          <Flex sx={{ alignItems: "center" }}>
-            <Text sx={{ variant: "text.largeTextBold" }}>Public</Text>
-            <Button
-              onClick={() => {
-                setPublic(false);
-                animateContainer();
-                changeValue("agreementPrivacy", "");
-              }}
-              sx={{ variant: "buttons.back" }}
-            >
-              <Box sx={{ width: "14px" }}>
-                <Icon style={{ display: "block" }} width="14px" src={iconsObj.arrowLeftPink} />
-              </Box>
-              <Text sx={{ display: "block" }}>Choose another privacy</Text>
-            </Button>
-          </Flex>
-          <Flex
-            sx={item}
-            onClick={() => changeValue("agreementPrivacy", PRIVACY_PUBLIC_PUBLISHED)}
-            className={values.agreementPrivacy === PRIVACY_PUBLIC_PUBLISHED ? "active" : undefined}
+    <motion.main
+      initial="hidden"
+      animate="enter"
+      exit="exit"
+      variants={variants}
+      transition={{ type: "linear" }}
+    >
+      <Container sx={container}>
+        <Flex sx={{ alignItems: "center" }}>
+          <Text sx={{ variant: "text.largeTextBold" }}>Public</Text>
+          <Button
+            onClick={() => {
+              setPublic(false);
+              animateContainer();
+              changeValue("agreementPrivacy", "");
+            }}
+            sx={{ variant: "buttons.back" }}
           >
-            <Box sx={{ width: "20px" }}>
-              <Icon width="100%" height="100%" src={iconsObj.globe} />
+            <Box sx={{ width: "14px" }}>
+              <Icon style={{ display: "block" }} width="14px" src={iconsObj.arrowLeftPink} />
             </Box>
-            <Container sx={{ textAlign: "left", maxWidth: "290px", m: "0", pr: "5px" }}>
-              <Text sx={{ variant: "text.smallTextBold", mb: "3px" }}>Published</Text>
-              <Text sx={secondaryTitle}>
-                Public and available on the your{" "}
-                <Text sx={{ variant: "text.link" }}>public signature profile</Text>
-              </Text>
-            </Container>
-          </Flex>
-          <Flex
-            sx={item}
-            onClick={() => changeValue("agreementPrivacy", PRIVACY_PUBLIC_PROOF_ONLY)}
-            className={values.agreementPrivacy === PRIVACY_PUBLIC_PROOF_ONLY ? "active" : undefined}
-          >
-            <Box sx={{ width: "20px" }}>
-              <Icon src={iconsObj.proofSecondary} />
-            </Box>
-            <Container sx={{ textAlign: "left", maxWidth: "295px", m: "0" }}>
-              <Text sx={{ variant: "text.smallTextBold", mb: "3px" }}>Proof Only</Text>
-              <Text sx={secondaryTitle}>
-                Public Proof of Agreement available on your Public signature profile, but agreement
-                content is hidden.
-              </Text>
-            </Container>
-          </Flex>
-          <Flex
-            sx={item}
-            onClick={() => changeValue("agreementPrivacy", PRIVACY_PUBLIC_WITH_LINK)}
-            className={values.agreementPrivacy === PRIVACY_PUBLIC_WITH_LINK ? "active" : undefined}
-          >
-            <Box sx={{ width: "20px" }}>
-              <Icon src={iconsObj.ink} />
-            </Box>
-            <Container sx={{ textAlign: "left", maxWidth: "290px", m: "0" }}>
-              <Text sx={{ variant: "text.smallTextBold", mb: "3px" }}>Anyone with Link</Text>
-              <Text sx={secondaryTitle}>
-                Public, but only available with an{" "}
-                <Text sx={{ variant: "text.link" }}>agreement share link</Text>
-              </Text>
-            </Container>
-          </Flex>
-        </Container>
-      </motion.main>
-    </AnimatePresence>
+            <Text sx={{ display: "block" }}>Choose another privacy</Text>
+          </Button>
+        </Flex>
+        <Flex
+          sx={item}
+          onClick={() => changeValue("agreementPrivacy", PRIVACY_PUBLIC_PUBLISHED)}
+          className={values.agreementPrivacy === PRIVACY_PUBLIC_PUBLISHED ? "active" : undefined}
+        >
+          <Box sx={{ width: "20px" }}>
+            <Icon width="100%" height="100%" src={iconsObj.globe} />
+          </Box>
+          <Container sx={{ textAlign: "left", maxWidth: "290px", m: "0", pr: "5px" }}>
+            <Text sx={{ variant: "text.smallTextBold", mb: "3px" }}>Published</Text>
+            <Text sx={secondaryTitle}>
+              Public and available on the your{" "}
+              <Text sx={{ variant: "text.link" }}>public signature profile</Text>
+            </Text>
+          </Container>
+        </Flex>
+        <Flex
+          sx={item}
+          onClick={() => changeValue("agreementPrivacy", PRIVACY_PUBLIC_PROOF_ONLY)}
+          className={values.agreementPrivacy === PRIVACY_PUBLIC_PROOF_ONLY ? "active" : undefined}
+        >
+          <Box sx={{ width: "20px" }}>
+            <Icon src={iconsObj.proofSecondary} />
+          </Box>
+          <Container sx={{ textAlign: "left", maxWidth: "295px", m: "0" }}>
+            <Text sx={{ variant: "text.smallTextBold", mb: "3px" }}>Proof Only</Text>
+            <Text sx={secondaryTitle}>
+              Public Proof of Agreement available on your Public signature profile, but agreement
+              content is hidden.
+            </Text>
+          </Container>
+        </Flex>
+        <Flex
+          sx={item}
+          onClick={() => changeValue("agreementPrivacy", PRIVACY_PUBLIC_WITH_LINK)}
+          className={values.agreementPrivacy === PRIVACY_PUBLIC_WITH_LINK ? "active" : undefined}
+        >
+          <Box sx={{ width: "20px" }}>
+            <Icon src={iconsObj.ink} />
+          </Box>
+          <Container sx={{ textAlign: "left", maxWidth: "290px", m: "0" }}>
+            <Text sx={{ variant: "text.smallTextBold", mb: "3px" }}>Anyone with Link</Text>
+            <Text sx={secondaryTitle}>
+              Public, but only available with an{" "}
+              <Text sx={{ variant: "text.link" }}>agreement share link</Text>
+            </Text>
+          </Container>
+        </Flex>
+      </Container>
+    </motion.main>
   );
 }

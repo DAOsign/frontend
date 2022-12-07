@@ -11,6 +11,5 @@ export const toAgreement = (agreement: AgreementResponse): Agreement => {
     content: agreement.content,
     observers: agreement.observers.map(o => o.wallet?.address || "noWallet"),
     signers: agreement.signers?.map(s => s.wallet?.address || "noWallet") || [],
-    agreementFile: agreement.agreementFile?.filePath,
   };
 };

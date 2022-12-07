@@ -17,7 +17,7 @@ import {
 } from "./styles";
 import { useMutation } from "urql";
 import { addAgreementMutation } from "../../modules/graphql/mutations";
-import { LOCATION_CLOUD } from "../../types";
+import { LOCATION_CLOUD, METHOD_ENTER } from "../../types";
 import { clearDraft } from "../../modules/createAgreementProvider";
 
 export default function LeftSide() {
@@ -31,7 +31,9 @@ export default function LeftSide() {
       case 1:
         return !values.title || !values.agreementPrivacy;
       case 2:
-        return values.agreementLocation === LOCATION_CLOUD ? !values.textEditorValue : false;
+        return values.agreementMethod === METHOD_ENTER
+          ? !values.textEditorValue
+          : !values.agreementHash;
       case 3:
         return !values.observers.length || !values.signers.length;
     }
@@ -43,10 +45,13 @@ export default function LeftSide() {
     await addAgreement({
       title: values.title,
       agreementLocation: values.agreementLocation,
-      content: JSON.stringify(values.textEditorValue),
+      content:
+        values.agreementMethod === METHOD_ENTER ? JSON.stringify(values.textEditorValue) : "",
       agreementPrivacy: values.agreementPrivacy,
       signers: values.signers.map(s => s.value),
       observers: values.observers.map(o => o.value),
+      agreementHash: values.agreementHash,
+      agreementFilePath: values.filePath,
     }).then(res => {
       if (res.error) {
         //console.error(res.error);

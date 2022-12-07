@@ -37,9 +37,10 @@ export type Agreement = {
 export type AgreementFile = {
   __typename?: "AgreementFile";
   agreementFileId: Scalars["ID"];
+  agreementHash?: Maybe<Scalars["String"]>;
   agreementId: Scalars["Int"];
   createdAt: Scalars["DateTime"];
-  filePath: Scalars["String"];
+  filePath?: Maybe<Scalars["String"]>;
 };
 
 export type AgreementInvitation = {
@@ -115,6 +116,7 @@ export type Mutation = {
 
 export type MutationAddAgreementArgs = {
   agreementFilePath?: InputMaybe<Scalars["String"]>;
+  agreementHash?: InputMaybe<Scalars["String"]>;
   agreementLocation: Scalars["String"];
   agreementPrivacy: Scalars["String"];
   content: Scalars["String"];
@@ -274,7 +276,7 @@ export type AddAgreementMutationVariables = Exact<{
   title: Scalars["String"];
   signers?: InputMaybe<Array<Scalars["String"]> | Scalars["String"]>;
   observers?: InputMaybe<Array<Scalars["String"]> | Scalars["String"]>;
-  isReadyToSign?: InputMaybe<Scalars["Boolean"]>;
+  agreementHash?: InputMaybe<Scalars["String"]>;
   agreementFilePath?: InputMaybe<Scalars["String"]>;
 }>;
 
@@ -328,7 +330,11 @@ export type AgreementsQuery = {
       content: string;
       agreementLocation: { __typename?: "AgreementLocation"; name: string; isActive: boolean };
       agreementPrivacy: { __typename?: "AgreementPrivacy"; name: string };
-      agreementFile?: { __typename?: "AgreementFile"; filePath: string; createdAt: any } | null;
+      agreementFile?: {
+        __typename?: "AgreementFile";
+        filePath?: string | null;
+        createdAt: any;
+      } | null;
       authorWallet: {
         __typename?: "Wallet";
         address: string;
@@ -483,8 +489,8 @@ export const AddAgreementDocument = {
         },
         {
           kind: "VariableDefinition",
-          variable: { kind: "Variable", name: { kind: "Name", value: "isReadyToSign" } },
-          type: { kind: "NamedType", name: { kind: "Name", value: "Boolean" } },
+          variable: { kind: "Variable", name: { kind: "Name", value: "agreementHash" } },
+          type: { kind: "NamedType", name: { kind: "Name", value: "String" } },
         },
         {
           kind: "VariableDefinition",
@@ -531,8 +537,8 @@ export const AddAgreementDocument = {
               },
               {
                 kind: "Argument",
-                name: { kind: "Name", value: "isReadyToSign" },
-                value: { kind: "Variable", name: { kind: "Name", value: "isReadyToSign" } },
+                name: { kind: "Name", value: "agreementHash" },
+                value: { kind: "Variable", name: { kind: "Name", value: "agreementHash" } },
               },
               {
                 kind: "Argument",

@@ -1,6 +1,13 @@
 import { useRouter } from "next/router";
 import { useState, createContext, ProviderProps, useCallback, useEffect, useRef } from "react";
-import { AgreementLocation, AgreementMethod, AgreementPrivacy, LOCATION_CLOUD } from "../types";
+import {
+  AgreementLocation,
+  AgreementMethod,
+  AgreementPrivacy,
+  LOCATION_CLOUD,
+  METHOD_ENTER,
+  METHOD_UPLOAD,
+} from "../types";
 
 interface CreationState {
   title: string;
@@ -9,6 +16,7 @@ interface CreationState {
   textEditorValue: string;
   agreementLocation: AgreementLocation;
   filePath?: string;
+  agreementHash?: string;
   observers: { id: number; value: string }[];
   signers: { id: number; value: string }[];
 }
@@ -25,6 +33,7 @@ const defaultState: CreationState = {
   textEditorValue: "",
   agreementLocation: LOCATION_CLOUD,
   agreementMethod: "",
+  agreementHash: "",
   filePath: "",
   observers: [],
   signers: [],
@@ -66,7 +75,7 @@ const CreateAgreementProvider = (props?: Partial<ProviderProps<CreateAgrementCon
         [key]: value,
         agreementLocation:
           key === "agreementPrivacy"
-            ? ""
+            ? LOCATION_CLOUD
             : key === "agreementLocation"
             ? value
             : state.agreementLocation,
@@ -89,7 +98,11 @@ const CreateAgreementProvider = (props?: Partial<ProviderProps<CreateAgrementCon
           push({ query: { step: 1 } }, undefined, { shallow: true });
         }
         // TODO redirect if step 3 and no textEditorValue or filePath
-        if (step > 2 && (!values.textEditorValue || false)) {
+        if (
+          step > 2 &&
+          ((values.agreementMethod === METHOD_ENTER && !values.textEditorValue) ||
+            (values.agreementMethod === METHOD_UPLOAD && !values.agreementHash))
+        ) {
           push({ query: { step: 2 } }, undefined, { shallow: true });
         }
       }

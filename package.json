@@ -16,6 +16,7 @@
     "@emotion/react": "^11.10.5",
     "@snapshot-labs/lock": "github:snapshot-labs/lock",
     "@uiw/react-md-editor": "^3.19.7",
+    "axios": "^1.2.1",
     "draft-js": "^0.11.7",
     "eslint-config-prettier": "^8.5.0",
     "framer-motion": "^7.6.17",

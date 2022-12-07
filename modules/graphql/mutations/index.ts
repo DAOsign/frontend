@@ -18,7 +18,7 @@ export const addAgreementMutation = graphql(`
     $title: String!
     $signers: [String!]
     $observers: [String!]
-    $isReadyToSign: Boolean
+    $agreementHash: String
     $agreementFilePath: String
   ) {
     addAgreement(
@@ -28,7 +28,7 @@ export const addAgreementMutation = graphql(`
       title: $title
       signers: $signers
       observers: $observers
-      isReadyToSign: $isReadyToSign
+      agreementHash: $agreementHash
       agreementFilePath: $agreementFilePath
     ) {
       title

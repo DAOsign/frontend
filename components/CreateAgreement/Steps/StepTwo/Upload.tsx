@@ -1,22 +1,29 @@
-import React, { useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { Text, Box, Flex } from "theme-ui";
 import iconsObj from "../../../../assets/icons";
 import Icon from "../../../icon";
 import { imageUploadContainer, uploadText, uploadTextMobile } from "../../styles";
 import dynamic from "next/dynamic";
+import { useCreateAgreement } from "../../../../hooks/useCreateAgreement";
+import { uploadFile } from "../../../../modules/rest";
+const Hash = require("ipfs-only-hash");
 
 const FileViewer = dynamic(() => import("@cyntler/react-doc-viewer"), {
   ssr: false,
 });
 
-const Hash = require("ipfs-only-hash");
-
 const getIconByType = (type: string) => {
   return iconsObj.fileSvg;
 };
 
+const calculateIpfsHash = async (file: File) => {
+  const buffer = await file.arrayBuffer();
+  const bytes = new Uint8Array(buffer);
+  return await Hash.of(bytes);
+};
+
 export default function Upload() {
-  //const [bytes, setBytes] = useState<Uint8Array>();
+  const { values, changeValue } = useCreateAgreement();
   const [file, setFile] = useState<File>();
 
   async function readFile(target: any) {
@@ -24,15 +31,60 @@ export default function Upload() {
 
     if (file) {
       setFile(file);
-      //const buffer = await file.arrayBuffer();
-      //const bytes = new Uint8Array(buffer);
-      // setBytes(bytes);
+      try {
+        const hash = await calculateIpfsHash(file);
+        if (hash) {
+          changeValue("agreementHash", hash);
+
+          changeValue("filePath", window.URL.createObjectURL(file));
+        }
+      } catch (e) {
+        console.error(e);
+      }
+      try {
+        const res = await uploadFile(file);
+        "fileLink" in res && changeValue("filePath", res.fileLink);
+      } catch (e) {
+        console.error(e);
+      }
     }
   }
 
-  /* const ipfs = async () => {
-    const hash = await Hash.of(bytes);
-  }; */
+  //clear agreement hash on file changed ?
+  useEffect(() => {
+    if (!file) {
+      changeValue("agreementHash", "");
+    }
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [file]);
+
+  const prevAgreementLocation = useRef(values.agreementLocation);
+
+  /* Restore file   
+  useEffect(() => {
+    if (values.filePath) {
+      console.log(values.filePath);
+
+      axios({
+        url: values.filePath, //your url
+        method: "GET",
+        responseType: "blob", // important
+      }).then(res => {
+        console.log("axios res", res);
+        const file = new File([res], "resotred");
+        setFile(file);
+        console.log("file", file);
+      });
+    }
+  }, []); */
+
+  useEffect(() => {
+    if (prevAgreementLocation.current != values.agreementLocation) {
+      setFile(undefined);
+      prevAgreementLocation.current = values.agreementLocation;
+    }
+  }, [values.agreementLocation]);
 
   return (
     <form id="upload-container">
@@ -65,7 +117,7 @@ export default function Upload() {
         <Flex sx={{ justifyContent: "space-between", height: "26px" }}>
           <Flex sx={{ gap: "8px", alignItems: "center" }}>
             <Box sx={{ width: "18px" }}>
-              <Icon src={getIconByType(file?.type || "pdf")} />
+              <Icon src={getIconByType(file?.type)} />
             </Box>
             <Text sx={{ fontFamily: "InterMedium", fontWeight: "500", lineHeight: "160%" }}>
               {file?.name}
