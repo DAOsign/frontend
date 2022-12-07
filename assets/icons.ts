@@ -5,6 +5,7 @@ import togglePrimaryLeft from "../img/svg/togglePrimaryLeft.svg";
 import fileSecondarysvg from "../img/svg/fileSecondarysvg.svg";
 import arrowNarrowLeft from "../img/svg/arrowNarrowLeft.svg";
 import proofSecondary from "../img/svg/proofSecondary.svg";
+import LostConnection from "../img/svg/LostConnection.svg";
 import phoneSecondary from "../img/svg/phoneSecondary.svg";
 import arrowLeftPink from "../img/svg/arrowLeftPink.svg";
 import calendarMinus from "../img/svg/calendarMinus.svg";
@@ -66,6 +67,7 @@ import edit from "../img/svg/edit.svg";
 import plus from "../img/svg/plus.svg";
 import menu from "../img/svg/menu.svg";
 import send from "../img/svg/send.svg";
+import error from "../img/svg/404.svg";
 import prof from "../img/svg/prof.svg";
 import mail from "../img/svg/mail.svg";
 import ink from "../img/svg/ink.svg";
@@ -83,6 +85,7 @@ const iconsObj: IconsMapper = {
   fileSecondarysvg,
   arrowNarrowLeft,
   proofSecondary,
+  LostConnection,
   phoneSecondary,
   calendarMinus,
   alertTriangle,
@@ -137,6 +140,7 @@ const iconsObj: IconsMapper = {
   dLogo,
   oLogo,
   globe,
+  error,
   plus,
   done,
   edit,

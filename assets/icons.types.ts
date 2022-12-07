@@ -7,13 +7,15 @@ export interface IconsMapper extends Record<string, unknown> {
   arrowNarrowLeft: Icon;
   proofSecondary: Icon;
   phoneSecondary: Icon;
-  calendarMinus: Icon;
+  LostConnection: Icon;
   alertTriangle: Icon;
+  arrowLeftPink: Icon;
+  calendarMinus: Icon;
   calendarCheck: Icon;
   trashPrimary: Icon;
   bookmarkVote: Icon;
   chevronRight: Icon;
-  arrowLeftPink: Icon;
+  ellipseGreen: Icon;
   greyPercent: Icon;
   checkboxOff: Icon;
   privateIcon: Icon;
@@ -21,7 +23,6 @@ export interface IconsMapper extends Record<string, unknown> {
   layersThree: Icon;
   checkCircle: Icon;
   iconSetting: Icon;
-  ellipseGreen: Icon;
   shareFourth: Icon;
   fieldResize: Icon;
   chevronLeft: Icon;
@@ -30,8 +31,8 @@ export interface IconsMapper extends Record<string, unknown> {
   checkboxOn: Icon;
   plusCircle: Icon;
   chevronUp: Icon;
-  iconExit: Icon;
   published: Icon;
+  iconExit: Icon;
   settings: Icon;
   telegram: Icon;
   radioOff: Icon;
@@ -52,6 +53,7 @@ export interface IconsMapper extends Record<string, unknown> {
   search: Icon;
   xClose: Icon;
   phone: Icon;
+  error: Icon;
   email: Icon;
   oLogo: Icon;
   dLogo: Icon;

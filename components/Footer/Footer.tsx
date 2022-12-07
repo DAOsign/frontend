@@ -16,9 +16,9 @@ import {
 } from "./styles";
 import Icon from "../icon";
 
-export default function Footer() {
+export default function Footer({ animationNotVisible }: any) {
   return (
-    <Container sx={footer}>
+    <Container sx={{ ...footer, animation: animationNotVisible ? "unset" : "footer 4s 1 linear" }}>
       <Flex sx={container}>
         <Box sx={leftSide}>
           <Text sx={{ variant: "text.normalTextBold", display: "inline-block", mb: "8px" }}>
