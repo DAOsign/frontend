@@ -3,30 +3,29 @@ import { Container, Flex, Text } from "theme-ui";
 import Icon from "../../../icon/index";
 import { card, primaryTitleItem } from "../../styles";
 import iconsObj from "../../../../assets/icons";
-import TextEditor from "../../../TextEditor/index";
+import TextEditor from "../../TextEditor/index";
 import { useCreateAgreement } from "../../../../hooks/useCreateAgreement";
 import { withFade } from "../..";
-import Upload from "./Upload";
+import UploadLocalAgreement from "./UploadLocal";
+import { METHOD_ENTER, METHOD_UPLOAD } from "../../../../types";
 
-const Hash = require("ipfs-only-hash");
+export default function ChooseAgreementMethod() {
+  const { values, changeValue } = useCreateAgreement();
 
-type CloudVariant = "enter" | "upload" | null;
-
-export default function CloudContent() {
-  const { values } = useCreateAgreement();
-  const [variant, setVariant] = useState<CloudVariant>(values.textEditorValue ? "enter" : null);
-
-  const getCloudContent = () => {
-    switch (variant) {
-      case "enter":
-        return withFade(<TextEditor goBack={() => setVariant(null)} />, 1);
-      case "upload": {
-        return withFade(<Upload />, 2);
+  const renderMethods = () => {
+    switch (values.agreementMethod) {
+      case METHOD_ENTER:
+        return withFade(<TextEditor />, 1);
+      case METHOD_UPLOAD: {
+        return withFade(<UploadLocalAgreement />, 2);
       }
       default:
         return withFade(
           <Flex sx={{ justifyContent: "space-between" }}>
-            <Container onClick={() => setVariant("upload")} sx={{ ...card, cursor: "pointer" }}>
+            <Container
+              onClick={() => changeValue("agreementMethod", METHOD_UPLOAD)}
+              sx={{ ...card, cursor: "pointer" }}
+            >
               <div style={{ width: "50px", height: "50px", margin: "0 auto" }}>
                 <Icon width="50px" height="50px" src={iconsObj.uploadCloudPrimary} />
               </div>
@@ -36,7 +35,10 @@ export default function CloudContent() {
               </Text>
             </Container>
 
-            <Container onClick={() => setVariant("enter")} sx={{ ...card, cursor: "pointer" }}>
+            <Container
+              onClick={() => changeValue("agreementMethod", METHOD_ENTER)}
+              sx={{ ...card, cursor: "pointer" }}
+            >
               <div style={{ width: "50px", height: "50px", margin: "0 auto" }}>
                 <Icon width="50px" height="50px" src={iconsObj.fileSecondarysvg} />
               </div>
@@ -51,5 +53,5 @@ export default function CloudContent() {
     }
   };
 
-  return getCloudContent();
+  return renderMethods();
 }

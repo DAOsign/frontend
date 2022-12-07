@@ -8,6 +8,9 @@ export const PRIVACY_PUBLIC_PUBLISHED = "Published";
 export const PRIVACY_PUBLIC_PROOF_ONLY = "ProofOnly";
 export const PRIVACY_PUBLIC_WITH_LINK = "Link";
 
+export const METHOD_UPLOAD = "Upload";
+export const METHOD_ENTER = "Enter";
+
 export type AgreementStatus = string;
 export type AgreementPrivacy =
   | typeof PRIVACY_PRIVATE
@@ -16,11 +19,14 @@ export type AgreementPrivacy =
   | typeof PRIVACY_PUBLIC_WITH_LINK
   | "";
 
+export type AgreementMethod = typeof METHOD_UPLOAD | typeof METHOD_ENTER | "";
+
 export type AgreementLocation =
   | typeof LOCATION_CLOUD
   | typeof LOCATION_PUBLIC_IPFS
   | typeof LOCATION_PRIVATE_IPFS
-  | typeof LOCATION_LOCAL;
+  | typeof LOCATION_LOCAL
+  | "";
 
 export interface Agreement {
   agreementFile?: string;

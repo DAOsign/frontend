@@ -70,6 +70,8 @@ import prof from "../img/svg/prof.svg";
 import mail from "../img/svg/mail.svg";
 import ink from "../img/svg/ink.svg";
 import m from "../img/svg/m.svg";
+import drag from "../img/svg/drag.svg";
+import fileSvg from "../img/svg/file_svg.svg";
 
 import { IconsMapper } from "./icons.types";
 
@@ -146,6 +148,8 @@ const iconsObj: IconsMapper = {
   mail,
   user,
   m,
+  drag,
+  fileSvg,
 };
 
 export default iconsObj;

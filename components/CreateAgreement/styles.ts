@@ -28,12 +28,26 @@ const imageUploadContainer = {
   position: "relative",
   width: "440px",
   height: "140px",
+  mb: "2px",
+  overflow: "hidden",
   "@media screen and (max-width: 768px)": {
     width: "124px",
     height: "46px",
     border: "2px solid #EDEDF3",
     borderRadius: "80px",
     mt: "10px",
+  },
+  "&.uploaded": {
+    borderStyle: "solid",
+  },
+  "[id='proxy-renderer']": {
+    overflow: "hidden",
+  },
+  "[id='txt-renderer']": {
+    p: "15px",
+  },
+  "[id='pdf-controls']": {
+    display: "none",
   },
 } as ThemeUIStyleObject;
 
@@ -83,7 +97,7 @@ const leftSide = {
   paddingX: "100px",
   paddingBottom: "60px",
   paddingTop: "60px",
-  maxHeight: "546px",
+  maxHeight: "fit-content",
   "&.transition": {
     maxHeight: "795px",
   },
@@ -200,6 +214,7 @@ const item = {
   alignItems: "start",
   cursor: "pointer",
   transition: ".3s all",
+  gap: "10px",
   "&.active": {
     borderColor: "pink",
   },
@@ -316,6 +331,7 @@ const plus = {
   right: "12px",
   top: "35px",
   cursor: "pointer",
+  width: "24px",
   m: "0 auto",
   zIndex: 1,
 } as ThemeUIStyleObject;

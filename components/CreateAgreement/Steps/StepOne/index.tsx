@@ -50,7 +50,6 @@ export default function StepOne({ animateContainer }: Props) {
       <Input
         value={values.title}
         onChange={e => changeValue("title", e.target.value)}
-        name="form"
         sx={{ variant: "forms.input", ...inputCreactAgreement }}
       />
       <Text sx={{ variant: "forms.label", margin: "24px auto 3px 2px" }}>Agreement privacy</Text>

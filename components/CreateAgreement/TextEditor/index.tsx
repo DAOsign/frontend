@@ -2,10 +2,10 @@ import React, { Suspense, useState } from "react";
 import dynamic from "next/dynamic";
 import "@uiw/react-md-editor/markdown-editor.css";
 import "@uiw/react-markdown-preview/markdown.css";
-import iconsObj from "../../assets/icons";
-import Icon from "../icon";
+import iconsObj from "../../../assets/icons";
+import Icon from "../../icon";
 import { Text, Button, Flex, Box, ButtonProps, Spinner } from "theme-ui";
-import { useCreateAgreement } from "../../hooks/useCreateAgreement";
+import { useCreateAgreement } from "../../../hooks/useCreateAgreement";
 import styles from "./styles";
 
 const MDEditor = dynamic(() => import("@uiw/react-md-editor"), {
@@ -29,7 +29,7 @@ const buttonPropsByStatus = (
   return props;
 };
 
-const TextEditor = ({ goBack }: { goBack: () => void }) => {
+const TextEditor = () => {
   const {
     values: { textEditorValue },
     changeValue,
@@ -45,7 +45,10 @@ const TextEditor = ({ goBack }: { goBack: () => void }) => {
     <Box style={{ position: "relative" }} sx={styles}>
       <Flex sx={{ alignItems: "center" }}>
         <Text sx={{ variant: "forms.label", minWidth: "170px" }}>Enter agreement description</Text>
-        <Button onClick={() => goBack()} sx={{ variant: "buttons.back", height: "30px", pt: 0 }}>
+        <Button
+          onClick={() => changeValue("agreementMethod", "")}
+          sx={{ variant: "buttons.back", height: "30px", pt: 0 }}
+        >
           <Icon style={{ display: "block" }} src={iconsObj.arrowLeftPink} />
           <Text sx={{ display: "block", fontSize: "10px" }}>{"<"} Choose another method</Text>
         </Button>
@@ -60,7 +63,12 @@ const TextEditor = ({ goBack }: { goBack: () => void }) => {
             Preview
           </Button>
         </Flex>
-        <MDEditor value={textEditorValue} onChange={val => handleOnChange(val)} preview={state} />
+        <MDEditor
+          value={textEditorValue}
+          onChange={val => handleOnChange(val)}
+          preview={state}
+          hideToolbar={state === "preview"}
+        />
 
         <Box
           sx={{

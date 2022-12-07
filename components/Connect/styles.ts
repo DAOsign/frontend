@@ -1,7 +1,7 @@
 import { ThemeUIStyleObject } from "theme-ui";
 
 const container = {
-  bottom: '30px',
+  bottom: "30px",
   animation: "connect 4s 1 linear",
   width: "387px",
   mt: "45px",

@@ -4,7 +4,6 @@ import Icon from "../../../icon/index";
 import { uploadBtn } from "../../styles";
 import iconsObj from "../../../../assets/icons";
 import { useCreateAgreement } from "../../../../hooks/useCreateAgreement";
-import { LOCATION_CLOUD } from "../../../../types";
 import Upload from "./Upload";
 
 export default function UploadLocalAgreement() {
@@ -15,7 +14,7 @@ export default function UploadLocalAgreement() {
         <Text sx={{ variant: "forms.label", minWidth: "200px" }}>Upload agreement</Text>
         <Button
           onClick={() => {
-            changeValue("agreementLocation", LOCATION_CLOUD);
+            changeValue("agreementMethod", "");
           }}
           sx={{ variant: "buttons.back", ...uploadBtn }}
         >

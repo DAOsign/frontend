@@ -1,4 +1,5 @@
-import React, { useRef, useState } from "react";
+import React, { useRef } from "react";
+import dynamic from "next/dynamic";
 import { Container, Flex, Input, Text, Button, Box } from "theme-ui";
 import { inputCreactAgreement, plus } from "../../styles";
 import { uniqueId } from "../../../../utils/formats";
@@ -7,47 +8,47 @@ import Icon from "../../../icon";
 import { useCreateAgreement } from "../../../../hooks/useCreateAgreement";
 import { useWeb3 } from "../../../../hooks/useWeb3";
 import { useMemo } from "react";
+import TagList, { ParticipantType } from "./TagList";
+import styles from "./styles";
+
+const validateUser = (value: string) => {
+  const isEmail = value.includes("@");
+  const isEns = value.includes(".eth");
+  const isAddress = value.startsWith("0x");
+  if (!isEmail && !isEns && !isAddress) {
+    return false;
+  }
+  if (isEmail) {
+    return String(value)
+      .toLowerCase()
+      .match(
+        /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+      );
+  }
+  if (isEns) {
+    const match = value.match(
+      /[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_\+.~#?&//=]*)?/
+    );
+    return match;
+  }
+  if (isAddress) {
+    return value.match(/^0x[a-fA-F0-9]{40}$/);
+  }
+};
 
 export default function StepThree() {
   const { values, changeValue } = useCreateAgreement();
   const { account } = useWeb3();
-  const items = (array: any, name: "signers" | "observers") => {
-    return (
-      <Flex sx={{ flexWrap: "wrap", gap: "4px" }}>
-        {array.map((el: any) => {
-          return (
-            <Box
-              onClick={() => onDelete(el, name)}
-              sx={{
-                variant: "buttons.itemsBtn",
-                p: "5px 9px 5px 14px",
-                width: "fit-content",
-                gap: "4px",
-              }}
-              key={el.id}
-            >
-              <Text
-                sx={{
-                  fontFamily: "InterRegular",
-                }}
-              >
-                {el.value}
-              </Text>
-              <Box sx={{ width: "13px", height: "11px" }}>
-                <Icon style={{ opacity: 0.5 }} src={iconsObj.plusCircle} />
-              </Box>
-            </Box>
-          );
-        })}
-      </Flex>
-    );
-  };
 
   const signerInputRef = useRef<HTMLInputElement>();
   const observerInputRef = useRef<HTMLInputElement>();
 
   const addSigner = (value?: string) => {
     if (value && signerInputRef.current) {
+      if (!validateUser(value)) {
+        signerInputRef.current.className = `${signerInputRef.current.className + " error"}`;
+        return;
+      }
       changeValue("signers", [...values.signers, { value: value, id: uniqueId() }]);
       signerInputRef.current.value = "";
     }
@@ -55,6 +56,11 @@ export default function StepThree() {
 
   const addObserver = (value?: string) => {
     if (value && observerInputRef.current) {
+      if (!validateUser(value)) {
+        observerInputRef.current.className = `${observerInputRef.current.className + " error"}`;
+        return;
+      }
+
       changeValue("observers", [...values.observers, { value: value, id: uniqueId() }]);
       observerInputRef.current.value = "";
     }
@@ -66,8 +72,12 @@ export default function StepThree() {
     }
   };
 
-  const onDelete = (el: any, key: "signers" | "observers") => {
+  const onDelete = (el: any, key: ParticipantType) => {
     changeValue(key, [...values[key].filter(e => e.id !== el.id)]);
+  };
+
+  const onChangeInputValue: React.ChangeEventHandler<HTMLInputElement> = e => {
+    e.target.className = e.target.className.replaceAll("error", "").trim();
   };
 
   const userAlreadySigner = useMemo(
@@ -80,9 +90,22 @@ export default function StepThree() {
     [values.observers, account]
   );
 
+  const onKeyDown = (e: React.KeyboardEvent<HTMLInputElement>, type: ParticipantType) => {
+    if (e.code === "Enter") {
+      //@ts-ignore
+      const value = e.target.value;
+      if (type === "observers") {
+        addObserver(value);
+      }
+      if (type === "signers") {
+        addSigner(value);
+      }
+    }
+  };
+
   return (
-    <Container sx={{ maxWidth: "440px", textAlign: "left" }}>
-      <Box sx={{ minHeight: "115px" }}>
+    <Container sx={styles}>
+      <Box>
         <Flex sx={{ position: "relative" }}>
           <Text sx={{ variant: "forms.label", ml: "3px", maxWidth: "unset" }}>
             Signers (ENS name, adderes or email)
@@ -109,12 +132,13 @@ export default function StepThree() {
         <Input
           //@ts-ignore
           ref={signerInputRef}
+          onKeyDown={e => onKeyDown(e, "signers")}
+          onChange={onChangeInputValue}
           sx={{ variant: "forms.input", ...inputCreactAgreement, mb: "8px" }}
         />
-
-        {items(values.signers, "signers")}
+        <TagList items={values.signers} type="signers" onDelete={onDelete} />
       </Box>
-      <Box sx={{ minHeight: "115px" }}>
+      <Box>
         <Flex sx={{ mt: "24px", position: "relative" }}>
           <Text sx={{ variant: "forms.label", ml: "3px", maxWidth: "unset" }}>
             Observers (ENS name or adderess)
@@ -141,9 +165,11 @@ export default function StepThree() {
         <Input
           //@ts-ignore
           ref={observerInputRef}
+          onChange={onChangeInputValue}
+          onKeyDown={e => onKeyDown(e, "observers")}
           sx={{ variant: "forms.input", ...inputCreactAgreement, mb: "8px" }}
         />
-        {items(values.observers, "observers")}
+        <TagList items={values.observers} type="observers" onDelete={onDelete} />
       </Box>
     </Container>
   );

@@ -84,11 +84,11 @@ export default function LeftSide() {
   const BackwardButton = () => {
     const isCancelButton = step <= 1;
     const props: ButtonProps = {
-      onClick: isCancelButton ? handlePrevStep : handleCancel,
+      onClick: isCancelButton ? handleCancel : handlePrevStep,
       sx: { variant: "buttons.secondary", ...fW, mt: "60px" },
       type: "button",
     };
-    return <Button {...props}>{isCancelButton ? "Back" : "Cancel"}</Button>;
+    return <Button {...props}>{isCancelButton ? "Cancel" : "Back"}</Button>;
   };
 
   return (

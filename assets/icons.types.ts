@@ -71,6 +71,8 @@ export interface IconsMapper extends Record<string, unknown> {
   user: Icon;
   ink: Icon;
   m: Icon;
+  drag: Icon;
+  fileSvg: Icon;
 }
 
 interface Icon {

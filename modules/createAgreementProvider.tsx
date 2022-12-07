@@ -1,12 +1,14 @@
 import { useRouter } from "next/router";
 import { useState, createContext, ProviderProps, useCallback, useEffect, useRef } from "react";
-import { AgreementLocation, AgreementPrivacy, LOCATION_CLOUD } from "../types";
+import { AgreementLocation, AgreementMethod, AgreementPrivacy, LOCATION_CLOUD } from "../types";
 
 interface CreationState {
   title: string;
   agreementPrivacy: AgreementPrivacy;
+  agreementMethod: AgreementMethod;
   textEditorValue: string;
   agreementLocation: AgreementLocation;
+  filePath?: string;
   observers: { id: number; value: string }[];
   signers: { id: number; value: string }[];
 }
@@ -22,6 +24,8 @@ const defaultState: CreationState = {
   title: "",
   textEditorValue: "",
   agreementLocation: LOCATION_CLOUD,
+  agreementMethod: "",
+  filePath: "",
   observers: [],
   signers: [],
 };
@@ -57,9 +61,15 @@ const CreateAgreementProvider = (props?: Partial<ProviderProps<CreateAgrementCon
 
   const changeValue = (key: keyof CreationState, value: any) => {
     setValues(state => {
-      const newState = {
+      const newState: CreationState = {
         ...state,
         [key]: value,
+        agreementLocation:
+          key === "agreementPrivacy"
+            ? ""
+            : key === "agreementLocation"
+            ? value
+            : state.agreementLocation,
       };
       saveDraft(newState);
       return newState;
@@ -87,6 +97,7 @@ const CreateAgreementProvider = (props?: Partial<ProviderProps<CreateAgrementCon
     return () => {
       valuesLoadedRef.current = false;
     };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return <CreateAggrementContext.Provider {...props} value={{ values, changeValue }} />;
