@@ -66,8 +66,6 @@ const CreateAgreementProvider = (props?: Partial<ProviderProps<CreateAgrementCon
   const { query, push } = useRouter();
   const valuesLoadedRef = useRef(false);
 
-  useEffect(() => {}, []);
-
   const changeValue = (key: keyof CreationState, value: any) => {
     setValues(state => {
       const newState: CreationState = {
@@ -79,6 +77,8 @@ const CreateAgreementProvider = (props?: Partial<ProviderProps<CreateAgrementCon
             : key === "agreementLocation"
             ? value
             : state.agreementLocation,
+        agreementHash:
+          key === "agreementLocation" ? "" : key === "agreementHash" ? value : state.agreementHash,
       };
       saveDraft(newState);
       return newState;
@@ -87,7 +87,7 @@ const CreateAgreementProvider = (props?: Partial<ProviderProps<CreateAgrementCon
 
   useEffect(() => {
     if (!valuesLoadedRef.current) {
-      setValues(recoverDraft());
+      //setValues(recoverDraft());
 
       valuesLoadedRef.current = true;
 

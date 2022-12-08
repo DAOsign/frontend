@@ -29,7 +29,6 @@ const imageUploadContainer = {
   width: "440px",
   height: "140px",
   mb: "2px",
-  overflow: "hidden",
   "@media screen and (max-width: 768px)": {
     width: "124px",
     height: "46px",
@@ -48,6 +47,15 @@ const imageUploadContainer = {
   },
   "[id='pdf-controls']": {
     display: "none",
+  },
+} as ThemeUIStyleObject;
+
+export const previewContainer = {
+  height: "100%",
+  ".preview": {
+    overflow: "hidden",
+    borderRadius: "12px",
+    height: "100%",
   },
 } as ThemeUIStyleObject;
 
