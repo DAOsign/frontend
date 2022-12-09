@@ -5,7 +5,6 @@ const container = {
   animation: "connect 4s 1 linear",
   width: "387px",
   mt: "45px",
-  background: "rgba(255, 255, 255, 0.24)",
   backdropFilter: "blur(6px)",
   borderRadius: "10px",
   paddingTop: "32px",

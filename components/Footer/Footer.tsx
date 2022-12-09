@@ -19,6 +19,7 @@ import Icon from "../icon";
 export default function Footer({ animationNotVisible }: any) {
   const [email, setEmail] = useState("");
   const submit = () => {
+
     const validationEmail =
       /^(([^<>()[\].,;:\s@"]+(\.[^<>()[\].,;:\s@"]+)*)|(".+"))@(([^<>()[\].,;:\s@"]+\.)+[^<>()[\].,;:\s@"]{2,})$/iu;
     if (!validationEmail.test(email)) {
@@ -27,6 +28,7 @@ export default function Footer({ animationNotVisible }: any) {
     }
     console.log("good");
   };
+  
   return (
     <Container sx={{ ...footer, animation: animationNotVisible ? "unset" : "footer 4s 1 linear" }}>
       <Flex sx={container}>
@@ -50,7 +52,7 @@ export default function Footer({ animationNotVisible }: any) {
             <Text sx={{ variant: "text.normalTextBold", display: "inline-block", mb: "12px" }}>
               DaoSign
             </Text>
-            <Text
+            <Text 
               sx={{
                 variant: "text.smallTextMedium",
                 display: "block",
