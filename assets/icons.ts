@@ -22,6 +22,9 @@ import iconSetting from "../img/svg/iconSetting.svg";
 import shareFourth from "../img/svg/shareFourth.svg";
 import layersThree from "../img/svg/layersThree.svg";
 import checkboxOff from "../img/svg/checkboxOff.svg";
+import githubViolet from "../img/svg/githubViolet.svg";
+import twitterViolet from "../img/svg/twitterViolet.svg";
+import facebookViolet from "../img/svg/facebookViolet.svg";
 import checkCircle from "../img/svg/checkCircle.svg";
 import greyPercent from "../img/svg/greyPercent.svg";
 import infoCircle from "../img/svg/infoCircle.svg";
@@ -31,6 +34,7 @@ import chevronUp from "../img/svg/chevronUp.svg";
 import published from "../img/svg/published.svg";
 import privateIcon from "../img/svg/private.svg";
 import publicIcon from "../img/svg/public.svg";
+import worldViolet from "../img/svg/worldViolet.svg";
 import iconExit from "../img/svg/IconExit.svg";
 import calendar from "../img/svg/calendar.svg";
 import settings from "../img/svg/settings.svg";
@@ -74,6 +78,7 @@ import ink from "../img/svg/ink.svg";
 import m from "../img/svg/m.svg";
 import drag from "../img/svg/drag.svg";
 import fileSvg from "../img/svg/file_svg.svg";
+import telegramViolet from "../img/svg/telegramPink.svg";
 
 import { IconsMapper } from "./icons.types";
 
@@ -87,11 +92,16 @@ const iconsObj: IconsMapper = {
   proofSecondary,
   LostConnection,
   phoneSecondary,
+  telegramViolet,
   calendarMinus,
   alertTriangle,
+  facebookViolet,
   calendarCheck,
   arrowLeftPink,
+  twitterViolet,
   trashPrimary,
+  githubViolet,
+  worldViolet,
   bookmarkVote,
   chevronRight,
   greyPercent,

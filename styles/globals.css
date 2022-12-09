@@ -64,13 +64,16 @@ a {
   background-image: url("../img/svg/drag.svg");
   background-size: cover;
 }
-.w-md-editor-bar svg {
+.w-md-editor-bar svg  {
   display: none !important;
 }
 
 .w-md-editor-toolbar li > button {
   color: #212121 !important;
   width: 40px;
+}
+.item :hover {
+  color: #CA5CF2 !important;
 }
 @media screen and (max-width: 768px) {
   .w-md-editor-toolbar li > button {
@@ -112,7 +115,19 @@ body {
   min-height: 100vh;
   background-color: #ededf3;
 }
-
+.first {
+  z-index: 1;
+}
+.second {
+  display: none;
+  z-index: 1;
+}
+.iconFooter:hover  .first  {
+  display: none;
+}
+.iconFooter:hover  .second {
+display: block;
+}
 @keyframes text {
   0% {
     opacity: 0;

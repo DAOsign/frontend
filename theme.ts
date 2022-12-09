@@ -83,6 +83,7 @@ export const theme: Theme = {
       "@media screen and (max-width: 375px)": {
         width: "100%",
       },
+
     },
     back: {
       display: "flex",

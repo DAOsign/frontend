@@ -94,6 +94,11 @@ const iconContainer = {
 
 const aboutUs = {
   variant: "buttons.secondary",
+  cursor: "pointer",
+  "&:hover": {
+    color: "#CA5CF290",
+    borderColor: "#CA5CF290",
+  },
   "@media screen and (max-width: 768px)": {
     width: "100%",
   },
@@ -106,6 +111,7 @@ const iconEmail = {
   top: "44px",
   right: "17px",
   opacity: 0.5,
+  cursor: "pointer",
   "@media screen and (max-width: 1024px)": {
     left: "480px",
   },
@@ -115,7 +121,25 @@ const iconEmail = {
   },
 } as ThemeUIStyleObject;
 
-const icon = { height: 24, width: 24, cursor: "pointer" } as ThemeUIStyleObject;
+const icon = {
+  height: 24,
+  width: 24,
+  cursor: "pointer",
+  "& .first": {
+    zIndex: "1",
+  },
+  "&:hover .first ": {
+    display: "none",
+  },
+  "& .second": {
+    display: "none",
+    zIndex: "1",
+  },
+  "&:hover .second": {
+    display: "block",
+  },
+} as ThemeUIStyleObject;
+
 
 export {
   iconContainer,
