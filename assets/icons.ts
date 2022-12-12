@@ -79,6 +79,11 @@ import m from "../img/svg/m.svg";
 import drag from "../img/svg/drag.svg";
 import fileSvg from "../img/svg/file_svg.svg";
 import telegramViolet from "../img/svg/telegramPink.svg";
+import verificationAnonymous from "../img/svg/verification_anonymous.svg";
+import verificationPseudonymous from "../img/svg/verification_pseudonymous.svg";
+import verificationDigital from "../img/svg/verification_digital.svg";
+import verificationReal from "../img/svg/verification_real.svg";
+import verificationNotarized from "../img/svg/verification_notarized.svg";
 
 import { IconsMapper } from "./icons.types";
 
@@ -164,6 +169,11 @@ const iconsObj: IconsMapper = {
   m,
   drag,
   fileSvg,
+  verificationAnonymous,
+  verificationPseudonymous,
+  verificationDigital,
+  verificationReal,
+  verificationNotarized,
 };
 
 export default iconsObj;

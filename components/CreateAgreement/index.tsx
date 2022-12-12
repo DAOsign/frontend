@@ -3,7 +3,7 @@ import StepOne from "./Steps/StepOne";
 import StepTwo from "./Steps/StepTwo";
 import StepThree from "./Steps/StepThree";
 import { Container, Flex, Text } from "theme-ui";
-import LeftSide from "./NavPanel";
+import NavPanel from "./NavPanel";
 import { rightSide, leftSide, containerSides, title } from "./styles";
 import { motion, Variants } from "framer-motion";
 import { useRouter } from "next/router";
@@ -45,7 +45,7 @@ export default function CreateAgreement() {
         {steps[step]}
       </Container>
       <Container sx={rightSide}>
-        <LeftSide />
+        <NavPanel />
       </Container>
     </Flex>
   );

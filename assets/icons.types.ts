@@ -80,6 +80,11 @@ export interface IconsMapper extends Record<string, unknown> {
   m: Icon;
   drag: Icon;
   fileSvg: Icon;
+  verificationAnonymous: Icon;
+  verificationPseudonymous: Icon;
+  verificationDigital: Icon;
+  verificationReal: Icon;
+  verificationNotarized: Icon;
 }
 
 interface Icon {

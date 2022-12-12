@@ -1,5 +1,12 @@
 import type { Theme } from "theme-ui";
 
+const btnBase = {
+  cursor: "pointer",
+  transition: ".3s all",
+};
+
+const btnPrimaryHoverColor = "#BC4BE4";
+
 export const theme: Theme = {
   forms: {
     label: {
@@ -30,6 +37,11 @@ export const theme: Theme = {
       display: "block",
       paddingX: "20px",
     },
+    checkbox: {
+      width: "18px",
+      height: "18px",
+      border: "2px solid dark",
+    },
   },
   buttons: {
     grey: {
@@ -47,6 +59,7 @@ export const theme: Theme = {
       color: "#212121",
     },
     primary: {
+      ...btnBase,
       width: "225px",
       height: "50px",
       borderRadius: "40px",
@@ -59,12 +72,15 @@ export const theme: Theme = {
       display: "block",
       marginLeft: "auto",
       marginRight: "auto",
-      cursor: "pointer",
+      "&:hover": {
+        bg: btnPrimaryHoverColor,
+      },
       "@media screen and (max-width: 375px)": {
         width: "100%",
       },
     },
     secondary: {
+      ...btnBase,
       height: "50px",
       width: "165px",
       borderRadius: "80px",
@@ -78,12 +94,14 @@ export const theme: Theme = {
       display: "block",
       marginLeft: "auto",
       marginRight: "auto",
-      cursor: "pointer",
       textAlign: "center",
+      "&:hover": {
+        color: btnPrimaryHoverColor,
+        borderColor: btnPrimaryHoverColor,
+      },
       "@media screen and (max-width: 375px)": {
         width: "100%",
       },
-
     },
     back: {
       display: "flex",
@@ -106,7 +124,20 @@ export const theme: Theme = {
       textAlign: "center",
       px: 0,
       pb: 0,
+      "&:hover": {
+        bg: "transparent",
+      },
     },
+    link: {
+      ...btnBase,
+      bg: "transparent",
+      color: "primary",
+      fontWeight: 400,
+      fontSize: "12px",
+      fontFamily: "InterMedium",
+      p: 0,
+    },
+
     itemsBtn: {
       display: "flex",
       justifyContent: "space-around",
@@ -148,7 +179,9 @@ export const theme: Theme = {
   },
   colors: {
     black: "#212121",
+    dark: "#212121",
     pink: "#CA5CF2",
+    primary: "#CA5CF2",
     green: "#44F268",
     red: "#FF5269",
     blue: "#5051F2",

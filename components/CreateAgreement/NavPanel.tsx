@@ -17,10 +17,10 @@ import {
 } from "./styles";
 import { useMutation } from "urql";
 import { addAgreementMutation } from "../../modules/graphql/mutations";
-import { LOCATION_CLOUD, METHOD_ENTER } from "../../types";
+import { METHOD_ENTER } from "../../types";
 import { clearDraft } from "../../modules/createAgreementProvider";
 
-export default function LeftSide() {
+export default function NavPanel() {
   const { values } = useCreateAgreement();
   const { push, query } = useRouter();
 
@@ -90,7 +90,8 @@ export default function LeftSide() {
     const isCancelButton = step <= 1;
     const props: ButtonProps = {
       onClick: isCancelButton ? handleCancel : handlePrevStep,
-      sx: { variant: "buttons.secondary", ...fW, mt: "60px" },
+      sx: { ...fW, mt: "60px" },
+      variant: "secondary",
       type: "button",
     };
     return <Button {...props}>{isCancelButton ? "Cancel" : "Back"}</Button>;
@@ -144,7 +145,7 @@ export default function LeftSide() {
       </Container>
       <Container sx={containerButtons}>
         <BackwardButton />
-        <Button sx={{ variant: "buttons.secondary", ...fW, mt: "20px" }} type="button">
+        <Button variant="secondary" sx={{ ...fW, mt: "20px" }} type="button">
           Save Draft
         </Button>
         <ForwardButton />

@@ -10,6 +10,36 @@ import { useWeb3 } from "../../../../hooks/useWeb3";
 import { useMemo } from "react";
 import TagList, { ParticipantType } from "./TagList";
 import styles from "./styles";
+import VerificationCard from "./VerificationCard";
+
+const verifications = [
+  {
+    title: "Anonymus",
+    img: iconsObj.verificationAnonymous,
+    description: "Wallet Address",
+    checked: true,
+  },
+  {
+    title: "Pseudonymous",
+    img: iconsObj.verificationPseudonymous,
+    description: "Name, Email address, ENS",
+  },
+  {
+    title: "Digital Identify",
+    img: iconsObj.verificationDigital,
+    description: "Social Network Verification",
+  },
+  {
+    title: "Real Identify",
+    img: iconsObj.verificationReal,
+    description: "Real world assets verification",
+  },
+  {
+    title: "Notarized Identity",
+    img: iconsObj.verificationNotarized,
+    description: "KYC verification",
+  },
+];
 
 const validateUser = (value: string) => {
   const isEmail = value.includes("@");
@@ -106,7 +136,7 @@ export default function StepThree() {
   return (
     <Container sx={styles}>
       <Box>
-        <Flex sx={{ position: "relative" }}>
+        <Flex sx={{ position: "relative", justifyContent: "space-between", alignItems: "center" }}>
           <Text sx={{ variant: "forms.label", ml: "3px", maxWidth: "unset" }}>
             Signers (ENS name, adderes or email)
             <Box sx={{ width: "12px", height: "12px", display: "inline-block" }}>
@@ -116,8 +146,8 @@ export default function StepThree() {
           <Button
             onClick={() => addMe("signers")}
             className={userAlreadySigner ? "disabled" : ""}
+            variant="link"
             sx={{
-              variant: "buttons.back",
               justifyContent: "flex-end",
               height: "25px",
               width: "initial",
@@ -139,7 +169,14 @@ export default function StepThree() {
         <TagList items={values.signers} type="signers" onDelete={onDelete} />
       </Box>
       <Box>
-        <Flex sx={{ mt: "24px", position: "relative" }}>
+        <Flex
+          sx={{
+            mt: "24px",
+            position: "relative",
+            justifyContent: "space-between",
+            alignItems: "center",
+          }}
+        >
           <Text sx={{ variant: "forms.label", ml: "3px", maxWidth: "unset" }}>
             Observers (ENS name or adderess)
             <Box sx={{ width: "12px", height: "12px", display: "inline-block" }}>
@@ -149,8 +186,8 @@ export default function StepThree() {
           <Button
             onClick={() => addMe("observers")}
             className={userAlreadyObserver ? "disabled" : ""}
+            variant="link"
             sx={{
-              variant: "buttons.back",
               justifyContent: "flex-end",
               height: "25px",
               width: "initial",
@@ -170,6 +207,11 @@ export default function StepThree() {
           sx={{ variant: "forms.input", ...inputCreactAgreement, mb: "8px" }}
         />
         <TagList items={values.observers} type="observers" onDelete={onDelete} />
+      </Box>
+      <Box sx={{ display: "flex", flexWrap: "wrap", gap: "20px" }}>
+        {verifications.map(verification => (
+          <VerificationCard key={verification.title} {...verification} />
+        ))}
       </Box>
     </Container>
   );
