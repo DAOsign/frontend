@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 /** @jsxImportSource theme-ui */
 import React, { useEffect, useMemo } from "react";
 import UserCard from "./UserCard";

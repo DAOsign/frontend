@@ -1,5 +1,5 @@
 import React from "react";
-import { Button, Container, Flex, Text, Box} from "theme-ui";
+import { Button, Container, Flex, Text, Box } from "theme-ui";
 import { useRouter } from "next/router";
 import iconsObj from "../../assets/icons";
 import Icon from "../icon";
@@ -29,7 +29,7 @@ export default function PageNotFound() {
           <Flex>
             <Text sx={secondText}>{`Sorry, we couldn't find the page you are looking for`}</Text>
           </Flex>
-          <Button onClick={() => push("dashboard")} sx={buttonContainer} type="button">
+          <Button onClick={() => push("/")} sx={buttonContainer} type="button">
             Go Home
           </Button>
         </Flex>

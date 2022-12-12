@@ -64,7 +64,7 @@ a {
   background-image: url("../img/svg/drag.svg");
   background-size: cover;
 }
-.w-md-editor-bar svg  {
+.w-md-editor-bar svg {
   display: none !important;
 }
 
@@ -73,7 +73,7 @@ a {
   width: 40px;
 }
 .item :hover {
-  color: #CA5CF2 !important;
+  color: #ca5cf2 !important;
 }
 @media screen and (max-width: 768px) {
   .w-md-editor-toolbar li > button {
@@ -122,11 +122,11 @@ body {
   display: none;
   z-index: 1;
 }
-.iconFooter:hover  .first  {
+.iconFooter:hover .first {
   display: none;
 }
-.iconFooter:hover  .second {
-display: block;
+.iconFooter:hover .second {
+  display: block;
 }
 @keyframes text {
   0% {
@@ -451,5 +451,3 @@ display: block;
     right: 20px;
   }
 }
-
-

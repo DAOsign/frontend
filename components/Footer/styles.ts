@@ -1,5 +1,16 @@
 import { ThemeUIStyleObject } from "theme-ui";
 
+const errorMessage = {
+  fontFamily: "InterRegular",
+  fontStyle: "normal",
+  fontWeight: 400,
+  fontSize: "12px",
+  lineHeight: "160%",
+  color: "#FF5269",
+  ml: "20px",
+  mt: "4px",
+} as ThemeUIStyleObject;
+
 const footer = {
   marginTop: "135px",
   position: "absolute",
@@ -151,8 +162,10 @@ const iconFooter = {
   mr: "4px",
   ml: "4px",
 } as ThemeUIStyleObject;
+
 export {
   iconContainer,
+  errorMessage,
   socialTitle,
   inputFooter,
   footerText,

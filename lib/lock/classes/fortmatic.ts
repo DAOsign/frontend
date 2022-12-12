@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 const get = () => import(/* webpackChunkName: "fortmatic" */ "fortmatic");
 import LockConnector from "./connector";
 

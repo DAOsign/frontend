@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 import LockConnector from "./connector";
 
 export default class Connector extends LockConnector {

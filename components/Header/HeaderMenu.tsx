@@ -3,7 +3,7 @@ import { Container, Flex, Text, Box, Button } from "theme-ui";
 import { menuContainer, fotoContainer, foto } from "../../styles/styles";
 import Icon from "../icon/index";
 import iconsObj from "../../assets/icons";
-import { formatAddress } from "../../utils/formats";
+import { formatAddress, onCopyClick } from "../../utils/formats";
 import LogOutPopap from "../modalLogaut";
 
 const HeaderMenu = ({ address }: any) => {
@@ -22,7 +22,12 @@ const HeaderMenu = ({ address }: any) => {
               sx={{ justifyContent: "left", alignItems: "center", marginBottom: "24px", mt: "4px" }}
             >
               <Text sx={{ variant: "text.smallTextMediumUser" }}>{formatAddress(address)}</Text>
-              <Box sx={{ marginLeft: "5px", width: "10px", height: "10px" }}>
+              <Box
+                onClick={() => {
+                  onCopyClick(address);
+                }}
+                sx={{ marginLeft: "5px", width: "10px", height: "10px" }}
+              >
                 <Icon style={{ cursor: "pointer" }} src={iconsObj.iconSix} />
               </Box>
             </Flex>

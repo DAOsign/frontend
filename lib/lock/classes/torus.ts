@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 const get = () =>
   import(/* webpackChunkName: "torus" */ "@toruslabs/torus-embed");
 import LockConnector from "./connector";

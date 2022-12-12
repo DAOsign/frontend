@@ -7,3 +7,7 @@ export function uniqueId() {
   let second: number = (Math.random() * 46656) | 0;
   return first + second;
 }
+
+export const onCopyClick = (text: string) => {
+  navigator.clipboard.writeText(`${text}`);
+};

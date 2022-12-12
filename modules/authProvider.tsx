@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 import { createContext, ProviderProps, useRef } from "react";
 import { useEffect, useState } from "react";
 import { Web3Provider } from "@ethersproject/providers";

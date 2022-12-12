@@ -3,6 +3,7 @@ import { Flex, Box, Text, Input, Button, Container } from "theme-ui";
 import iconsObj from "../../assets/icons";
 import {
   iconContainer,
+  errorMessage,
   socialTitle,
   inputFooter,
   footerText,
@@ -19,17 +20,18 @@ import Icon from "../icon";
 
 export default function Footer({ animationNotVisible }: any) {
   const [email, setEmail] = useState("");
-  const submit = () => {
+  const [error, setError] = useState(false);
 
+  const submit = () => {
     const validationEmail =
       /^(([^<>()[\].,;:\s@"]+(\.[^<>()[\].,;:\s@"]+)*)|(".+"))@(([^<>()[\].,;:\s@"]+\.)+[^<>()[\].,;:\s@"]{2,})$/iu;
     if (!validationEmail.test(email)) {
-      console.log("error");
+      setError(true);
       return;
     }
-    console.log("good");
+    setError(false);
   };
-  
+
   return (
     <Container sx={{ ...footer, animation: animationNotVisible ? "unset" : "footer 4s 1 linear" }}>
       <Flex sx={container}>
@@ -38,22 +40,31 @@ export default function Footer({ animationNotVisible }: any) {
             Get the latest updates
           </Text>
           <Input
-            onChange={e => setEmail(e.target.value)}
+            onChange={e => {
+              setError(false);
+              setEmail(e.target.value);
+            }}
             value={email}
             name="emai\prettier\eslint-plugin-prettierl"
             placeholder="Your Email"
-            sx={inputFooter}
+            sx={{
+              ...inputFooter,
+              border: error ? "1px solid #FF5269" : "unset",
+              color: error ? "#FF5269" : "#21212",
+              opacity: error ? 1 : 0.5,
+            }}
           />
           <Box onClick={submit} sx={iconEmail}>
             <Icon src={iconsObj.send} />
           </Box>
+          {error && <Text sx={errorMessage}>*Please enter a valid email address</Text>}
         </Box>
         <Flex sx={rightSide}>
           <Box>
             <Text sx={{ variant: "text.normalTextBold", display: "inline-block", mb: "12px" }}>
               DaoSign
             </Text>
-            <Text 
+            <Text
               sx={{
                 variant: "text.smallTextMedium",
                 display: "block",

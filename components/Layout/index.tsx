@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import React, { useEffect, useState } from "react";
 import Head from "next/head";
 import { Container } from "theme-ui";
@@ -22,7 +23,7 @@ function Layout({ children }: React.PropsWithChildren) {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <Header visible={visible} setVisible={setVisible} address={account || ""} />
-      {visible && <HeaderMenu address={account || ""} />}
+      {visible && <HeaderMenu setVisible={setVisible} address={account || ""} />}
       {children}
     </Container>
   );

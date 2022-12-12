@@ -5,8 +5,6 @@ const btnBase = {
   transition: ".3s all",
 };
 
-const btnPrimaryHoverColor = "#BC4BE4";
-
 export const theme: Theme = {
   forms: {
     label: {
@@ -73,7 +71,7 @@ export const theme: Theme = {
       marginLeft: "auto",
       marginRight: "auto",
       "&:hover": {
-        bg: btnPrimaryHoverColor,
+        opacity: "0.9",
       },
       "@media screen and (max-width: 375px)": {
         width: "100%",
@@ -95,10 +93,6 @@ export const theme: Theme = {
       marginLeft: "auto",
       marginRight: "auto",
       textAlign: "center",
-      "&:hover": {
-        color: btnPrimaryHoverColor,
-        borderColor: btnPrimaryHoverColor,
-      },
       "@media screen and (max-width: 375px)": {
         width: "100%",
       },
@@ -137,7 +131,6 @@ export const theme: Theme = {
       fontFamily: "InterMedium",
       p: 0,
     },
-
     itemsBtn: {
       display: "flex",
       justifyContent: "space-around",

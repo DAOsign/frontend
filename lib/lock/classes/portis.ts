@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 const get = () => import(/* webpackChunkName: "portis" */ "@portis/web3/umd");
 import LockConnector from "./connector";
 
