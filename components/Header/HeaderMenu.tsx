@@ -14,7 +14,7 @@ const HeaderMenu = ({ address }: any) => {
       <Container sx={fotoContainer}>
         <Flex>
           <Container sx={foto}></Container>
-          <Container sx={{ maxWidth: "190px", m: "0 0 0 16px" }}>
+          <Container sx={{ maxWidth: "190px", pl: "16px" }}>
             <Text sx={{ variant: "text.largeTextBold", display: "block", textAlign: "left" }}>
               Ralph Edwards
             </Text>
@@ -28,8 +28,9 @@ const HeaderMenu = ({ address }: any) => {
             </Flex>
           </Container>
         </Flex>
-        <Button sx={{ variant: "buttons.grey", mt: "24px" }}>Copy Share Link</Button>
-        <Button sx={{ variant: "buttons.grey", mt: "16px" }}>My Profile</Button>
+        <Button sx={{ variant: "buttons.grey", mt: "24px", width: "100%" }}>Copy Share Link</Button>
+        <Button sx={{ variant: "buttons.grey", mt: "16px", width: "100%" }}>My Profile</Button>
+        <Button sx={{ variant: "buttons.grey", mt: "16px", width: "100%" }}>Switch Wallet</Button>
         <Box
           sx={{
             width: "341px",
@@ -47,6 +48,7 @@ const HeaderMenu = ({ address }: any) => {
             mt: "50px",
             textAlign: "left",
             border: "none",
+            width: "100%",
           }}
         >
           <Box sx={{ width: "24px", height: "24px", position: "absolute" }}>

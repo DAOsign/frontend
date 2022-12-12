@@ -40,6 +40,7 @@ const secondText = {
   pt: "32px",
   color: "#CA5CF2",
   opacity: "0.5",
+  cursor: "pointer",
 } as ThemeUIStyleObject;
 
 const closeIcon = {

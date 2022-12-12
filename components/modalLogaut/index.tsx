@@ -47,7 +47,9 @@ export default function LogOutPopap({ setVisible }: { setVisible: any }) {
           <Button onClick={handleLogout} sx={btnContainer}>
             Log Out
           </Button>
-          <Text sx={secondText}>Cancel</Text>
+          <Text onClick={() => setVisible(false)} sx={secondText}>
+            Cancel
+          </Text>
         </Flex>
       </Flex>
     </Container>

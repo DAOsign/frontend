@@ -17,7 +17,7 @@ const menuContainer = {
 } as ThemeUIStyleObject;
 
 const fotoContainer = {
-  width: "343px",
+  width: "292px",
   m: "0 auto",
   background: "#FFFFFF",
   border: "1px solid #EDEDF3",
@@ -33,8 +33,8 @@ const fotoContainer = {
 } as ThemeUIStyleObject;
 
 const foto = {
-  width: "80px",
-  height: "80px",
+  width: "60px",
+  height: "60px",
   m: 0,
   borderRadius: "50%",
   backgroundColor: "grey",

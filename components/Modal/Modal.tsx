@@ -44,7 +44,9 @@ export default function Modal() {
           >
             Apply
           </Button>
-          <Button sx={{ variant: "buttons.primary", width: "100px" }}>Cancel</Button>
+          <Button sx={{ variant: "buttons.primary", width: "100px", cursor: "pointer" }}>
+            Cancel
+          </Button>
         </Flex>
       </Container>
     </Container>
