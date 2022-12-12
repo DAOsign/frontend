@@ -87,7 +87,6 @@ const iconContainer = {
   height: "30px",
   maxWidth: "170px",
   justifyContent: "space-between",
-  opacity: 0.5,
   m: "0 auto 25px",
   "@media screen and (max-width: 768px)": {
     m: "0 auto 36px",
@@ -126,7 +125,11 @@ const iconEmail = {
 const icon = {
   height: 24,
   width: 24,
+  opacity: 0.5,
   cursor: "pointer",
+  "&:hover": {
+    opacity: 1,
+  },
   "& .first": {
     zIndex: "1",
   },

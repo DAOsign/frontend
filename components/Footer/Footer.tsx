@@ -61,6 +61,7 @@ export default function Footer({ animationNotVisible }: any) {
                 cursor: "pointer",
                 "&:hover": {
                   color: "#CA5CF2",
+                  opasity: "1",
                 },
               }}
             >
@@ -73,6 +74,7 @@ export default function Footer({ animationNotVisible }: any) {
                 cursor: "pointer",
                 "&:hover": {
                   color: "#CA5CF2",
+                  opasity: "1",
                 },
               }}
             >
@@ -89,6 +91,7 @@ export default function Footer({ animationNotVisible }: any) {
                 cursor: "pointer",
                 "&:hover": {
                   color: "#CA5CF2",
+                  opasity: "1",
                 },
               }}
             >
@@ -102,6 +105,7 @@ export default function Footer({ animationNotVisible }: any) {
                 cursor: "pointer",
                 "&:hover": {
                   color: "#CA5CF2",
+                  opasity: "1",
                 },
               }}
             >
@@ -114,6 +118,7 @@ export default function Footer({ animationNotVisible }: any) {
                 cursor: "pointer",
                 "&:hover": {
                   color: "#CA5CF2",
+                  opasity: "1",
                 },
               }}
             >
