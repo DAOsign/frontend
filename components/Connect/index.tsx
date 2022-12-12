@@ -47,21 +47,6 @@ export default function Connect() {
             animationData={loader}
             loop={true}
           />
-          {
-            <div style={{ marginBottom: "52px" }}>
-              <Text
-                sx={{
-                  variant: "text.normalTextBold",
-                  color: "#CA5CF2",
-                  width: "56px",
-                  height: "26px",
-                  cursor: 'pointer'
-                }}
-              >
-                Cancel
-              </Text>
-            </div>
-          }
         </>
       ) : (
         <>
