@@ -30,6 +30,7 @@ export interface IconsMapper extends Record<string, unknown> {
   shareFourth: Icon;
   fieldResize: Icon;
   chevronLeft: Icon;
+  heartViolet: Icon;
   publicIcon: Icon;
   worldViolet: Icon;
   infoCircle: Icon;

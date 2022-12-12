@@ -54,6 +54,8 @@ const rightSide = {
 } as ThemeUIStyleObject;
 
 const footerText = {
+  display: "flex",
+  alignItems: "baseline",
   "@media screen and (max-width: 1024px)": {
     display: "none",
   },
@@ -140,12 +142,18 @@ const icon = {
   },
 } as ThemeUIStyleObject;
 
-
+const iconFooter = {
+  width: "10px",
+  height: "10px",
+  mr: "4px",
+  ml: "4px",
+} as ThemeUIStyleObject;
 export {
   iconContainer,
   socialTitle,
   inputFooter,
   footerText,
+  iconFooter,
   container,
   rightSide,
   iconEmail,

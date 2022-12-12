@@ -16,6 +16,7 @@ import bookmarkVote from "../img/svg/bookmarkVote.svg";
 import trashPrimary from "../img/svg/trashPrimary.svg";
 import ellipseGreen from "../img/svg/EllipseGreen.svg";
 import chevronDown from "../img/svg/chevronDown.svg";
+import heartViolet from "../img/svg/heartViolet.svg";
 import chevronLeft from "../img/svg/chevronLeft.svg";
 import fieldResize from "../img/svg/fieldResize.svg";
 import iconSetting from "../img/svg/iconSetting.svg";
@@ -107,6 +108,7 @@ const iconsObj: IconsMapper = {
   trashPrimary,
   githubViolet,
   worldViolet,
+  heartViolet,
   bookmarkVote,
   chevronRight,
   greyPercent,

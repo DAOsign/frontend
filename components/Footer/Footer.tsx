@@ -8,6 +8,7 @@ import {
   footerText,
   container,
   rightSide,
+  iconFooter,
   iconEmail,
   leftSide,
   aboutUs,
@@ -196,7 +197,11 @@ export default function Footer({ animationNotVisible }: any) {
         </Flex>
       </Flex>
       <Text sx={footerText}>
-        © Copywriting 2022. Created with ❤️ by
+        © Copywriting 2022. Created with
+        <Box sx={iconFooter}>
+          <Icon src={iconsObj.heartViolet} />
+        </Box>
+        by
         <Text
           onClick={() => {
             window.open("https://consideritdone.tech/", "_blank");
