@@ -1,4 +1,5 @@
 export interface IconsMapper extends Record<string, unknown> {
+  verificationPseudonymous: Icon;
   uploadCloudPrimary: Icon;
   codeSnippetPrimary: Icon;
   togglePrimaryRight: Icon;
@@ -45,6 +46,7 @@ export interface IconsMapper extends Record<string, unknown> {
   facebook: Icon;
   calendar: Icon;
   download: Icon;
+  errorSvg: Icon;
   portfile: Icon;
   pinkPlus: Icon;
   logoIcon: Icon;
@@ -68,6 +70,7 @@ export interface IconsMapper extends Record<string, unknown> {
   award: Icon;
   globe: Icon;
   frame: Icon;
+  alert: Icon;
   plus: Icon;
   done: Icon;
   edit: Icon;
@@ -76,13 +79,13 @@ export interface IconsMapper extends Record<string, unknown> {
   Bell: Icon;
   mail: Icon;
   menu: Icon;
+  good: Icon;
   user: Icon;
   ink: Icon;
   m: Icon;
   drag: Icon;
   fileSvg: Icon;
   verificationAnonymous: Icon;
-  verificationPseudonymous: Icon;
   verificationDigital: Icon;
   verificationReal: Icon;
   verificationNotarized: Icon;

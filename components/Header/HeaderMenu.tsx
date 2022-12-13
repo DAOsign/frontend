@@ -1,8 +1,11 @@
 import React, { useState } from "react";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import { Container, Flex, Text, Box, Button } from "theme-ui";
 import { menuContainer, fotoContainer, foto } from "../../styles/styles";
 import Icon from "../icon/index";
 import iconsObj from "../../assets/icons";
+import { notifSucces } from "../../utils/notification";
 import { formatAddress, onCopyClick } from "../../utils/formats";
 import LogOutPopap from "../modalLogaut";
 
@@ -25,12 +28,14 @@ const HeaderMenu = ({ address }: any) => {
               <Box
                 onClick={() => {
                   onCopyClick(address);
+                  notifSucces("Link copied");
                 }}
                 sx={{ marginLeft: "5px", width: "10px", height: "10px" }}
               >
                 <Icon style={{ cursor: "pointer" }} src={iconsObj.iconSix} />
               </Box>
             </Flex>
+            <ToastContainer icon />
           </Container>
         </Flex>
         <Button sx={{ variant: "buttons.grey", mt: "24px", width: "100%" }}>Copy Share Link</Button>
