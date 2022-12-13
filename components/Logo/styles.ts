@@ -13,6 +13,12 @@ const d = {
   height: "54px",
   animation: "d 4s 1 linear",
   zIndex: 2,
+  "@media screen and (max-width: 768px)": {
+    width: "45px",
+    height: "45px",
+    animation: "dMobile 4s 1 linear",
+    right: "43.2%",
+  },
 } as ThemeUIStyleObject;
 
 const a = {
@@ -22,6 +28,12 @@ const a = {
   height: "54px",
   animation: "a 4s 1 linear",
   zIndex: 2,
+  "@media screen and (max-width: 768px)": {
+    width: "45px",
+    height: "45px",
+    animation: "aMobile 4s 1 linear",
+    right: "30%",
+  },
 } as ThemeUIStyleObject;
 
 const o = {
@@ -31,24 +43,43 @@ const o = {
   height: "54px",
   animation: "o 4s 1 linear",
   zIndex: 2,
+  "@media screen and (max-width: 768px)": {
+    width: "45px",
+    height: "45px",
+    animation: "oMobile 4s 1 linear",
+    right: "16%",
+  },
 } as ThemeUIStyleObject;
 
 const text = {
   height: "30px",
+  fontFamily: "InterMedium",
   display: "block",
   left: "36%",
   bottom: "10%",
   fontSize: "23px",
   position: "absolute",
   animation: "text 4s 1 linear",
+  "@media screen and (max-width: 768px)": {
+    animation: "textMobile 4s 1 linear",
+    left: "43%",
+    fontSize: "21px",
+    bottom: "24px",
+  },
 } as ThemeUIStyleObject;
 
 const iconLogo = {
-  width: "75px",
+  width: "81px",
   height: "100px",
   position: "absolute",
   left: "5%",
   animation: "iconLogo 4s 1 linear",
+  "@media screen and (max-width: 768px)": {
+    animation: "iconLogoMobile 4s 1 linear",
+    width: "65px",
+    height: "65px",
+    left: "19%",
+  },
 } as ThemeUIStyleObject;
 
 const animateContainer = {
