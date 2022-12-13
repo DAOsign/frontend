@@ -107,7 +107,7 @@ export default function NavPanel() {
                 <Icon src={iconsObj.done} />
               </Box>
             ) : (
-              <Text sx={{ variant: "text.normalTextBold", color: "#fff" }}>1</Text>
+              <Text sx={{ variant: "text.normalTextBold", lineHeight: "0", color: "#fff" }}>1</Text>
             )}
           </Box>
 
@@ -124,7 +124,7 @@ export default function NavPanel() {
                 <Icon src={iconsObj.done} />
               </Box>
             ) : (
-              <Text sx={{ variant: "text.normalTextBold", color: "#fff" }}>2</Text>
+              <Text sx={{ variant: "text.normalTextBold", lineHeight: "0", color: "#fff" }}>2</Text>
             )}
           </Box>
           <Container sx={leftSideItem}>
@@ -135,7 +135,7 @@ export default function NavPanel() {
         <Container sx={box}></Container>
         <Flex sx={stepStyle}>
           <Box sx={{ ...stepNumber, backgroundColor: step > 2 ? "#CA5CF2" : "#EDEDF3" }}>
-            <Text sx={{ variant: "text.normalTextBold", color: "#fff" }}>3</Text>
+            <Text sx={{ variant: "text.normalTextBold", lineHeight: "0", color: "#fff" }}>3</Text>
           </Box>
           <Container sx={leftSideItem}>
             <Text sx={primaryTitleItem}>Signers</Text>
