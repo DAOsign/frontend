@@ -9,12 +9,12 @@ import { notifSucces } from "../../utils/notification";
 import { formatAddress, onCopyClick } from "../../utils/formats";
 import LogOutPopap from "../modalLogaut";
 
-const HeaderMenu = ({ address }: any) => {
+const HeaderMenu = ({ address, setVisibleMenu }: any) => {
   const [visible, setVisible] = useState(false);
 
   return (
-    <Container sx={menuContainer}>
-      <Container sx={fotoContainer}>
+    <Container onClick={() => setVisibleMenu(false)} sx={menuContainer}>
+      <Container onClick={e => e.stopPropagation()} sx={fotoContainer}>
         <Flex>
           <Container sx={foto}></Container>
           <Container sx={{ maxWidth: "190px", pl: "16px" }}>

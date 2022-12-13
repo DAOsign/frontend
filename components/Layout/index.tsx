@@ -23,7 +23,9 @@ function Layout({ children }: React.PropsWithChildren) {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <Header visible={visible} setVisible={setVisible} address={account || ""} />
-      {visible && <HeaderMenu setVisible={setVisible} address={account || ""} />}
+      {visible && (
+        <HeaderMenu visibleMenu={visible} setVisibleMenu={setVisible} address={account || ""} />
+      )}
       {children}
     </Container>
   );
