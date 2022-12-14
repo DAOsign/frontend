@@ -28,6 +28,8 @@ export default function ChooseMethod({ animateContainer, setPublic }: PublicProp
         <Container
           sx={card}
           onClick={() => {
+            changeValue("errors", { ...values.errors, agreementPrivacy: null });
+            changeValue("agreementPrivacy", "");
             animateContainer();
             setPublic(true);
           }}

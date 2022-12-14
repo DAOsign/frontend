@@ -66,38 +66,44 @@ const AuthProvider = (props?: Partial<ProviderProps<AuthProps>>) => {
     if (loginStarted.current) return;
     loginStarted.current = true;
 
-    const hasToken = Boolean(getToken());
-    if (!connector) {
-      const loadedConnector = await auth.getConnector();
-      if (!loadedConnector || !hasToken) {
-        clearToken();
-        push("/connect");
-        loginStarted.current = false;
-        return;
+    try {
+      const hasToken = Boolean(getToken());
+      if (!connector) {
+        const loadedConnector = await auth.getConnector();
+        if (!loadedConnector || !hasToken) {
+          clearToken();
+          push("/connect");
+          loginStarted.current = false;
+          return;
+        }
+        connector = loadedConnector || "injected";
       }
-      connector = loadedConnector || "injected";
+      setState(state => ({ ...state, authLoading: true }));
+
+      const provider = await auth.login(connector);
+
+      if (!provider) {
+        const newState = { ...state, authLoading: false };
+        setState(state => ({ ...state, newState }));
+        return newState;
+      }
+
+      web3ProviderRef.current = new Web3Provider(provider, "any");
+
+      const loadedState = await loadProvider(provider);
+
+      if (!loadedState.account) return;
+      await onAfterConnect(loadedState.account);
+
+      setState(state => ({ ...state, ...loadedState, authLoading: false }));
+      loginStarted.current = false;
+
+      return loadedState;
+    } catch (error) {
+      console.error("[Login] error:", error);
+    } finally {
+      loginStarted.current = false;
     }
-    setState(state => ({ ...state, authLoading: true }));
-
-    const provider = await auth.login(connector);
-
-    if (!provider) {
-      const newState = { ...state, authLoading: false };
-      setState(state => ({ ...state, newState }));
-      return newState;
-    }
-
-    web3ProviderRef.current = new Web3Provider(provider, "any");
-
-    const loadedState = await loadProvider(provider);
-
-    if (!loadedState.account) return;
-    await onAfterConnect(loadedState.account);
-
-    setState(state => ({ ...state, ...loadedState, authLoading: false }));
-    loginStarted.current = false;
-
-    return loadedState;
   }
 
   const onAfterConnect = async (account: string) => {

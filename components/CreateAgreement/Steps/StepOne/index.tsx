@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from "react";
 import { Container, Input, Text } from "theme-ui";
-import { inputCreactAgreement } from "../../styles";
+import { inputCreactAgreement, inputCreateAgreementError } from "../../styles";
 import { useCreateAgreement } from "../../../../hooks/useCreateAgreement";
 
 import { AnimatePresence } from "framer-motion";
@@ -11,6 +11,7 @@ import {
 } from "../../../../types";
 import ChooseMethod from "./ChooseMethod";
 import PublicMethod from "./ChoosePublicMethod";
+import FieldErrorMessage from "../../../Form/FieldErrorMessage";
 
 export type AnimateContainer = () => void;
 
@@ -44,14 +45,17 @@ export default function StepOne({ animateContainer }: Props) {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
+  const titleInputErrorStyles = values?.errors?.title ? inputCreateAgreementError : {};
+
   return (
     <Container sx={{ maxWidth: "440px", textAlign: "left" }}>
       <Text sx={{ variant: "forms.label", ml: "3px" }}>Title</Text>
       <Input
         value={values.title}
         onChange={e => changeValue("title", e.target.value)}
-        sx={{ variant: "forms.input", ...inputCreactAgreement }}
+        sx={{ variant: "forms.input", ...inputCreactAgreement, ...titleInputErrorStyles }}
       />
+      <FieldErrorMessage error={values?.errors?.title} />
       <Text sx={{ variant: "forms.label", margin: "24px auto 3px 2px" }}>Agreement privacy</Text>
 
       <AnimatePresence initial={false}>
@@ -61,6 +65,7 @@ export default function StepOne({ animateContainer }: Props) {
           <PublicMethod animateContainer={animateContainer} setPublic={setIsPublic} />
         )}
       </AnimatePresence>
+      <FieldErrorMessage error={values?.errors?.agreementPrivacy} />
     </Container>
   );
 }

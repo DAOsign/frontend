@@ -5,6 +5,11 @@ const btnBase = {
   transition: ".3s all",
 };
 
+const linkBase = {
+  color: "#CA5CF2",
+  cursor: "pointer",
+};
+
 export const theme: Theme = {
   forms: {
     label: {
@@ -34,6 +39,19 @@ export const theme: Theme = {
       border: "unset",
       display: "block",
       paddingX: "20px",
+    },
+    inputError: {
+      fontFamily: "InterMedium",
+      fontStyle: "normal",
+      fontWeight: 400,
+      fontSize: "12px",
+      lineHeight: "160%",
+      color: "#ff5269",
+      display: "block",
+      position: "absolute",
+      left: "0",
+      bottom: "0",
+      marginBottom: "-20px",
     },
     checkbox: {
       width: "18px",
@@ -302,8 +320,13 @@ export const theme: Theme = {
       opacity: 0.5,
     },
     link: {
-      color: "#CA5CF2",
-      cursor: "pointer",
+      ...linkBase,
+    },
+    linkUnderline: {
+      ...linkBase,
+      "&:hover": {
+        textDecoration: "underline",
+      },
     },
   },
 };

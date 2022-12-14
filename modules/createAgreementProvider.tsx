@@ -1,13 +1,22 @@
 import { useRouter } from "next/router";
-import { useState, createContext, ProviderProps, useCallback, useEffect, useRef } from "react";
+import { useState, createContext, ProviderProps, useEffect, useRef } from "react";
 import {
   AgreementLocation,
   AgreementMethod,
   AgreementPrivacy,
+  FieldError,
   LOCATION_CLOUD,
   METHOD_ENTER,
   METHOD_UPLOAD,
 } from "../types";
+
+export interface CreateAgreementFieldErrors {
+  title?: FieldError;
+  agreementPrivacy?: FieldError;
+  agreementFile?: FieldError;
+  observers?: FieldError;
+  signers?: FieldError;
+}
 
 interface CreationState {
   title: string;
@@ -19,6 +28,7 @@ interface CreationState {
   agreementHash?: string;
   observers: { id: number; value: string }[];
   signers: { id: number; value: string }[];
+  errors: CreateAgreementFieldErrors;
 }
 interface CreateAgrementContext {
   values: CreationState;
@@ -37,6 +47,7 @@ const defaultState: CreationState = {
   filePath: "",
   observers: [],
   signers: [],
+  errors: {},
 };
 
 const recoverDraft = (): CreationState => {
@@ -80,7 +91,7 @@ const CreateAgreementProvider = (props?: Partial<ProviderProps<CreateAgrementCon
         agreementHash:
           key === "agreementLocation" ? "" : key === "agreementHash" ? value : state.agreementHash,
       };
-      saveDraft(newState);
+      saveDraft({ ...newState, errors: {} });
       return newState;
     });
   };
@@ -112,6 +123,38 @@ const CreateAgreementProvider = (props?: Partial<ProviderProps<CreateAgrementCon
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+
+  useEffect(() => {
+    setValues(prevState => ({ ...prevState, errors: { ...prevState.errors, title: null } }));
+  }, [values?.title]);
+
+  useEffect(() => {
+    setValues(prevState => ({
+      ...prevState,
+      errors: { ...prevState.errors, agreementPrivacy: null },
+    }));
+  }, [values?.agreementPrivacy]);
+
+  useEffect(() => {
+    setValues(prevState => ({
+      ...prevState,
+      errors: { ...prevState.errors, agreementFile: null },
+    }));
+  }, [values?.agreementMethod, values?.agreementHash, values?.textEditorValue]);
+
+  useEffect(() => {
+    setValues(prevState => ({
+      ...prevState,
+      errors: { ...prevState.errors, signers: null },
+    }));
+  }, [values?.signers]);
+
+  useEffect(() => {
+    setValues(prevState => ({
+      ...prevState,
+      errors: { ...prevState.errors, observers: null },
+    }));
+  }, [values?.observers]);
 
   return <CreateAggrementContext.Provider {...props} value={{ values, changeValue }} />;
 };

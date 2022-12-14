@@ -1,4 +1,4 @@
-import React, { useCallback, useMemo } from "react";
+import React from "react";
 import { useRouter } from "next/router";
 import Icon from "../icon/index";
 import { Container, Flex, Text, Button, Box, ButtonProps } from "theme-ui";
@@ -17,27 +17,51 @@ import {
 } from "./styles";
 import { useMutation } from "urql";
 import { addAgreementMutation } from "../../modules/graphql/mutations";
-import { METHOD_ENTER } from "../../types";
-import { clearDraft } from "../../modules/createAgreementProvider";
+import { METHOD_ENTER, METHOD_UPLOAD } from "../../types";
+import { clearDraft, CreateAgreementFieldErrors } from "../../modules/createAgreementProvider";
+import { isEmpty } from "../../utils/common";
 
 export default function NavPanel() {
-  const { values } = useCreateAgreement();
+  const { values, changeValue } = useCreateAgreement();
   const { push, query } = useRouter();
 
   const step = query?.step ? Number(query.step) : 1;
 
-  const nextStepDisabled = useMemo(() => {
+  const validateFields = (): boolean => {
+    const errors: CreateAgreementFieldErrors = {};
     switch (step) {
       case 1:
-        return !values.title || !values.agreementPrivacy;
+        if (!values.title) {
+          errors.title = "Title can not be blank";
+        }
+        if (!values.agreementPrivacy) {
+          errors.agreementPrivacy = "Agreement Privacy is a required selection";
+        }
+        break;
       case 2:
-        return values.agreementMethod === METHOD_ENTER
-          ? !values.textEditorValue
-          : !values.agreementHash;
+        if (!values.agreementMethod) {
+          errors.agreementFile = "Agreement Description is a required selection";
+        } else if (values.agreementMethod === METHOD_ENTER && !values.textEditorValue) {
+          errors.agreementFile = "Agreement entry is required";
+        } else if (values.agreementMethod === METHOD_UPLOAD && !values.agreementHash) {
+          errors.agreementFile = "Agreement file upload is required";
+        } else if (!values.textEditorValue && !values.agreementHash) {
+          errors.agreementFile = "Agreement Description is a required selection";
+        }
+        break;
       case 3:
-        return !values.observers.length || !values.signers.length;
+        if (!values.signers.length) {
+          errors.signers = "At least one signer is required";
+        }
+        if (!values.observers.length) {
+          errors.observers = "At least one observer is required";
+        }
+        break;
     }
-  }, [step, values]);
+    changeValue("errors", errors);
+
+    return isEmpty(errors);
+  };
 
   const [{ fetching: addingAgreement }, addAgreement] = useMutation(addAgreementMutation);
 
@@ -80,8 +104,17 @@ export default function NavPanel() {
       variant: "primary",
       sx: { ...fW, mt: "20px" },
       type: "button",
-      onClick: isFinishButton ? handleCreateAgreement : handleNextStep,
-      disabled: isFinishButton ? addingAgreement : nextStepDisabled,
+      onClick: () => {
+        const areFieldsValid = validateFields();
+        if (areFieldsValid) {
+          if (isFinishButton) {
+            handleCreateAgreement();
+          } else {
+            handleNextStep();
+          }
+        }
+      },
+      disabled: isFinishButton ? addingAgreement : false,
     };
     return <Button {...props}>{isFinishButton ? "Create Agreement" : "Next Step"}</Button>;
   };

@@ -1,7 +1,7 @@
 import React, { useRef } from "react";
 import dynamic from "next/dynamic";
 import { Container, Flex, Input, Text, Button, Box } from "theme-ui";
-import { inputCreactAgreement, plus } from "../../styles";
+import { inputCreactAgreement, inputCreateAgreementError, plus } from "../../styles";
 import { uniqueId } from "../../../../utils/formats";
 import iconsObj from "../../../../assets/icons";
 import Icon from "../../../icon";
@@ -11,6 +11,7 @@ import { useMemo } from "react";
 import TagList, { ParticipantType } from "./TagList";
 import styles from "./styles";
 import VerificationCard from "./VerificationCard";
+import FieldErrorMessage from "../../../Form/FieldErrorMessage";
 
 const verifications = [
   {
@@ -133,6 +134,9 @@ export default function StepThree() {
     }
   };
 
+  const signersInputErrorStyles = values?.errors?.signers ? inputCreateAgreementError : {};
+  const observersInputErrorStyles = values?.errors?.observers ? inputCreateAgreementError : {};
+
   return (
     <Container sx={styles}>
       <Box>
@@ -164,8 +168,14 @@ export default function StepThree() {
           ref={signerInputRef}
           onKeyDown={e => onKeyDown(e, "signers")}
           onChange={onChangeInputValue}
-          sx={{ variant: "forms.input", ...inputCreactAgreement, mb: "8px" }}
+          sx={{
+            variant: "forms.input",
+            ...inputCreactAgreement,
+            ...signersInputErrorStyles,
+            mb: "8px",
+          }}
         />
+        <FieldErrorMessage error={values?.errors?.signers} />
         <TagList items={values.signers} type="signers" onDelete={onDelete} />
       </Box>
       <Box>
@@ -204,8 +214,14 @@ export default function StepThree() {
           ref={observerInputRef}
           onChange={onChangeInputValue}
           onKeyDown={e => onKeyDown(e, "observers")}
-          sx={{ variant: "forms.input", ...inputCreactAgreement, mb: "8px" }}
+          sx={{
+            variant: "forms.input",
+            ...inputCreactAgreement,
+            ...observersInputErrorStyles,
+            mb: "8px",
+          }}
         />
+        <FieldErrorMessage error={values?.errors?.observers} />
         <TagList items={values.observers} type="observers" onDelete={onDelete} />
       </Box>
       <Box sx={{ display: "flex", flexWrap: "wrap", gap: "20px" }}>

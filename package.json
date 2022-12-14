@@ -14,6 +14,7 @@
   "dependencies": {
     "@cyntler/react-doc-viewer": "^1.10.3",
     "@emotion/react": "^11.10.5",
+    "@metamask/jazzicon": "^2.0.0",
     "@pinata/sdk": "^2.1.0",
     "@snapshot-labs/lock": "github:snapshot-labs/lock",
     "@uiw/react-md-editor": "^3.19.7",

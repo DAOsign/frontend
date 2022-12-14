@@ -40,4 +40,10 @@ const iconMenu = {
   },
 } as ThemeUIStyleObject;
 
-export { addresContainer, container, iconMenu };
+const identiconIcon = {
+  width: "24px",
+  height: "24px",
+  marginRight: "8px",
+} as ThemeUIStyleObject;
+
+export { addresContainer, container, iconMenu, identiconIcon };

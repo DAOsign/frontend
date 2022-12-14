@@ -1,11 +1,12 @@
 import React from "react";
-import { Container, Flex, Text, Button, Box } from "theme-ui";
+import NextLink from "next/link";
+import { Container, Flex, Text, Button, Box, Link } from "theme-ui";
 import { item, secondaryTitle, container } from "../../styles";
 import { useCreateAgreement } from "../../../../hooks/useCreateAgreement";
 import iconsObj from "../../../../assets/icons";
 import Icon from "../../../icon";
 
-import { AnimatePresence, motion, Variants } from "framer-motion";
+import { motion, Variants } from "framer-motion";
 import {
   PRIVACY_PUBLIC_PROOF_ONLY,
   PRIVACY_PUBLIC_PUBLISHED,
@@ -66,7 +67,18 @@ export default function PublicMethod({ animateContainer, setPublic }: PublicProp
             <Text sx={{ variant: "text.smallTextBold", mb: "3px" }}>Published</Text>
             <Text sx={secondaryTitle}>
               Public and available on the your{" "}
-              <Text sx={{ variant: "text.link" }}>public signature profile</Text>
+              <NextLink href={"/"} passHref legacyBehavior prefetch={false}>
+                <Link
+                  sx={{ variant: "text.linkUnderline" }}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  onClick={event => {
+                    event.stopPropagation();
+                  }}
+                >
+                  public signature profile
+                </Link>
+              </NextLink>
             </Text>
           </Container>
         </Flex>
@@ -98,7 +110,18 @@ export default function PublicMethod({ animateContainer, setPublic }: PublicProp
             <Text sx={{ variant: "text.smallTextBold", mb: "3px" }}>Anyone with Link</Text>
             <Text sx={secondaryTitle}>
               Public, but only available with an{" "}
-              <Text sx={{ variant: "text.link" }}>agreement share link</Text>
+              <NextLink href={"/"} passHref legacyBehavior prefetch={false}>
+                <Link
+                  sx={{ variant: "text.linkUnderline" }}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  onClick={event => {
+                    event.stopPropagation();
+                  }}
+                >
+                  agreement share link
+                </Link>
+              </NextLink>
             </Text>
           </Container>
         </Flex>

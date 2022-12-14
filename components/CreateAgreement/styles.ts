@@ -232,6 +232,13 @@ const inputCreactAgreement = {
   backgroundColor: "#F7F7FB",
   borderRadius: "8px",
   width: "100%",
+  transition: "background-color 0.3s, border-color 0.3s",
+} as ThemeUIStyleObject;
+
+const inputCreateAgreementError = {
+  backgroundColor: "#ffafb1",
+  border: "2px solid #ff5269",
+  outline: "none",
 } as ThemeUIStyleObject;
 
 const secondaryTitle = {
@@ -346,6 +353,7 @@ const plus = {
 
 export {
   inputCreactAgreement,
+  inputCreateAgreementError,
   imageUploadContainer,
   secondaryTitleStep,
   containerButtons,

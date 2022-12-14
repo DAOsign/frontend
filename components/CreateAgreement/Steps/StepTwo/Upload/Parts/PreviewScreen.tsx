@@ -4,6 +4,7 @@ import { FileState } from "..";
 import iconsObj from "../../../../../../assets/icons";
 import Icon from "../../../../../icon";
 import { previewContainer } from "../../../../styles";
+import { useCreateAgreement } from "../../../../../../hooks/useCreateAgreement";
 
 const FileViewer = dynamic(() => import("@cyntler/react-doc-viewer"), {
   ssr: false,
@@ -14,6 +15,8 @@ const getIconByFileType = (type: string) => {
 };
 
 const PreviewScreen = ({ file, setFile }: FileState) => {
+  const { changeValue } = useCreateAgreement();
+
   return file ? (
     <Box sx={previewContainer} className="previewContainer">
       <Box className="preview">
@@ -42,7 +45,11 @@ const PreviewScreen = ({ file, setFile }: FileState) => {
         </Flex>
         <Box sx={{ minWidth: "unset" }}>
           <Flex
-            onClick={() => setFile(undefined)}
+            onClick={() => {
+              changeValue("filePath", "");
+              changeValue("agreementHash", "");
+              setFile(undefined);
+            }}
             sx={{
               variant: "text.link",
               fontSize: "12px",

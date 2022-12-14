@@ -1,12 +1,13 @@
-import React, { useState } from "react";
+import React from "react";
 import { Container, Flex, Text, Button, Link, Box } from "theme-ui";
 import iconsObj from "../../assets/icons";
 import { formatAddress } from "../../utils/formats";
-import { container, addresContainer, iconMenu } from "./styles";
+import { container, addresContainer, iconMenu, identiconIcon } from "./styles";
 import Icon from "../icon";
 import { Logo } from "../Logo/Logo";
 import { useWeb3 } from "../../hooks/useWeb3";
 import NextLink from "next/link";
+import Identicon from "../Identicon/Identicon";
 
 export default function Header({ visible, setVisible }: any) {
   const { account } = useWeb3();
@@ -26,15 +27,7 @@ export default function Header({ visible, setVisible }: any) {
             </Box>
           </Button>
           <Flex onClick={() => setVisible(!visible)} sx={addresContainer}>
-            <div
-              style={{
-                width: "24px",
-                height: "24px",
-                borderRadius: "50%",
-                backgroundColor: "#000",
-                marginRight: "8px",
-              }}
-            ></div>
+            <Identicon account={account} size={24} sx={identiconIcon} />
             <Text>{formatAddress(account!)}</Text>
           </Flex>
           <Button onClick={() => setVisible(!visible)} type="button" sx={iconMenu}>

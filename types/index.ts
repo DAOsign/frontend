@@ -38,3 +38,5 @@ export interface Agreement {
   signers: string[];
   title: string;
 }
+
+export type FieldError = string | null | undefined;
