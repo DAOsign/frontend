@@ -17,26 +17,26 @@ a {
 #__next {
   width: 100%;
 }
-.Toastify  .Toastify__toast-container--top-right:first-child  {
- top: 100px;
+.Toastify .Toastify__toast-container--top-right:first-child {
+  top: 100px;
 }
 .Toastify__close-button.Toastify__close-button--light {
   display: none;
 }
 .Toastify__toast-body {
-  font-family: 'InterBold';
+  font-family: "InterBold";
   font-style: normal;
   font-weight: 700;
   font-size: 16px;
   line-height: 160%;
   color: #212121;
 }
-.Toastify__toast.Toastify__toast-theme--light.Toastify__toast--default.Toastify__toast--close-on-click  {
+.Toastify__toast.Toastify__toast-theme--light.Toastify__toast--default.Toastify__toast--close-on-click {
   width: 333px;
   height: 80px;
   right: 30px;
-  background: #FFFFFF;
-  border: 1px solid #EDEDF3;
+  background: #ffffff;
+  border: 1px solid #ededf3;
   box-shadow: 0px 4px 32px rgba(33, 33, 33, 0.16);
   border-radius: 12px;
 }
@@ -337,7 +337,7 @@ body {
     opacity: 1;
     width: 65px;
     height: 65px;
-    right:63.2%;
+    right: 63.2%;
     height: 160px;
   }
   65% {
@@ -365,7 +365,6 @@ body {
     right: 43.2%;
   }
 }
-
 
 @keyframes a {
   0% {
