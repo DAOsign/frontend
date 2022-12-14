@@ -2,9 +2,14 @@ import React from "react";
 import { Flex, Text, Box, Button } from "theme-ui";
 import Icon from "../icon/index";
 import iconsObj from "../../assets/icons";
-import { agreementConteiner, iconMenuAgreement, greyAgrBtn, headerItem } from "./styles";
-import { AgreementLocation } from "../../modules/graphql/gql/graphql";
-import { Agreement } from "../../types";
+import {
+  agreementConteiner,
+  iconMenuAgreement,
+  greyAgrBtn,
+  headerItem,
+  blueAgrBtn,
+} from "./styles";
+import { Agreement, STATUS_READY_TO_SIGN } from "../../types";
 
 export default function AgreementItem({ title, agreementStatus, signers, observers }: Agreement) {
   return (
@@ -20,7 +25,9 @@ export default function AgreementItem({ title, agreementStatus, signers, observe
           <Text sx={{ variant: "text.smallTextMediumUser", ml: "5px" }}>data</Text>
         </Flex>
         <Flex>
-          <Button sx={greyAgrBtn}>Draft</Button>
+          <Button sx={agreementStatus === STATUS_READY_TO_SIGN ? blueAgrBtn : greyAgrBtn}>
+            {agreementStatus}
+          </Button>
           <Box sx={iconMenuAgreement}>
             <Icon src={iconsObj.privateIcon} />
           </Box>

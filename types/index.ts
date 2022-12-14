@@ -11,7 +11,18 @@ export const PRIVACY_PUBLIC_WITH_LINK = "with_link";
 export const METHOD_UPLOAD = "Upload";
 export const METHOD_ENTER = "Enter";
 
-export type AgreementStatus = string;
+export const STATUS_DRAFT = "Draft";
+export const STATUS_READY_TO_SIGN = "Ready to sign";
+export const STATUS_PARTIALLY_SIGNED = "Partially signed";
+export const STATUS_SIGNED = "Signed";
+
+export type AgreementStatus =
+  | typeof STATUS_DRAFT
+  | typeof STATUS_READY_TO_SIGN
+  | typeof STATUS_PARTIALLY_SIGNED
+  | typeof STATUS_SIGNED
+  | "";
+
 export type AgreementPrivacy =
   | typeof PRIVACY_PRIVATE
   | typeof PRIVACY_PUBLIC_PROOF_ONLY

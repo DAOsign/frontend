@@ -27,36 +27,43 @@ export default function NavPanel() {
 
   const step = query?.step ? Number(query.step) : 1;
 
-  const validateFields = (): boolean => {
+  const validateFields = (isSavingDraft: boolean = false): boolean => {
     const errors: CreateAgreementFieldErrors = {};
-    switch (step) {
-      case 1:
-        if (!values.title) {
-          errors.title = "Title can not be blank";
-        }
-        if (!values.agreementPrivacy) {
-          errors.agreementPrivacy = "Agreement Privacy is a required selection";
-        }
-        break;
-      case 2:
-        if (!values.agreementMethod) {
-          errors.agreementFile = "Agreement Description is a required selection";
-        } else if (values.agreementMethod === METHOD_ENTER && !values.textEditorValue) {
-          errors.agreementFile = "Agreement entry is required";
-        } else if (values.agreementMethod === METHOD_UPLOAD && !values.agreementHash) {
-          errors.agreementFile = "Agreement file upload is required";
-        } else if (!values.textEditorValue && !values.agreementHash) {
-          errors.agreementFile = "Agreement Description is a required selection";
-        }
-        break;
-      case 3:
-        if (!values.signers.length) {
-          errors.signers = "At least one signer is required";
-        }
-        if (!values.observers.length) {
-          errors.observers = "At least one observer is required";
-        }
-        break;
+
+    if (isSavingDraft) {
+      if (!values.title) {
+        errors.title = "Title can not be blank";
+      }
+    } else {
+      switch (step) {
+        case 1:
+          if (!values.title) {
+            errors.title = "Title can not be blank";
+          }
+          if (!values.agreementPrivacy) {
+            errors.agreementPrivacy = "Agreement Privacy is a required selection";
+          }
+          break;
+        case 2:
+          if (!values.agreementMethod) {
+            errors.agreementFile = "Agreement Description is a required selection";
+          } else if (values.agreementMethod === METHOD_ENTER && !values.textEditorValue) {
+            errors.agreementFile = "Agreement entry is required";
+          } else if (values.agreementMethod === METHOD_UPLOAD && !values.agreementHash) {
+            errors.agreementFile = "Agreement file upload is required";
+          } else if (!values.textEditorValue && !values.agreementHash) {
+            errors.agreementFile = "Agreement Description is a required selection";
+          }
+          break;
+        case 3:
+          if (!values.signers.length) {
+            errors.signers = "At least one signer is required";
+          }
+          if (!values.observers.length) {
+            errors.observers = "At least one observer is required";
+          }
+          break;
+      }
     }
     changeValue("errors", errors);
 
@@ -65,17 +72,20 @@ export default function NavPanel() {
 
   const [{ fetching: addingAgreement }, addAgreement] = useMutation(addAgreementMutation);
 
-  const handleCreateAgreement = async () => {
+  const handleCreateAgreement = async (isReadyToSign: boolean = true) => {
     await addAgreement({
       title: values.title,
-      agreementLocation: values.agreementLocation,
+      agreementLocation: values.agreementLocation || null,
       content:
-        values.agreementMethod === METHOD_ENTER ? JSON.stringify(values.textEditorValue) : "",
-      agreementPrivacy: values.agreementPrivacy,
+        values.agreementMethod === METHOD_ENTER && values.textEditorValue
+          ? JSON.stringify(values.textEditorValue)
+          : "",
+      agreementPrivacy: values.agreementPrivacy || null,
       signers: values.signers.map(s => s.value),
       observers: values.observers.map(o => o.value),
       agreementHash: values.agreementHash,
       agreementFilePath: values.filePath,
+      isReadyToSign,
     }).then(res => {
       if (res.error) {
         //console.error(res.error);
@@ -85,6 +95,13 @@ export default function NavPanel() {
         push("/agreements");
       }
     });
+  };
+
+  const handleSaveDraft = async () => {
+    const areFieldsValid = validateFields(true);
+    if (areFieldsValid) {
+      return handleCreateAgreement(false);
+    }
   };
 
   const handleNextStep = () => {
@@ -178,7 +195,13 @@ export default function NavPanel() {
       </Container>
       <Container sx={containerButtons}>
         <BackwardButton />
-        <Button variant="secondary" sx={{ ...fW, mt: "20px" }} type="button">
+        <Button
+          variant="secondary"
+          sx={{ ...fW, mt: "20px" }}
+          type="button"
+          onClick={handleSaveDraft}
+          disabled={addingAgreement}
+        >
           Save Draft
         </Button>
         <ForwardButton />

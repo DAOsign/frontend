@@ -217,11 +217,10 @@ const iconMenuAgreement = {
   },
 } as ThemeUIStyleObject;
 
-const greyAgrBtn = {
+const agrBtnBase = {
   py: "0",
   px: "16",
   height: "32px",
-  background: "#EDEDF3",
   borderRadius: "52px",
   fontFamily: "InterBold",
   fontStyle: "normal",
@@ -229,12 +228,23 @@ const greyAgrBtn = {
   fontSize: "14px",
   lineHeight: "160%",
   textAlign: "center",
-  color: "#212121",
   width: "initial",
   "@media screen and (max-width: 768px)": {
     mx: 0,
     mb: "16px",
   },
+} as ThemeUIStyleObject;
+
+const greyAgrBtn = {
+  ...agrBtnBase,
+  background: "#EDEDF3",
+  color: "#212121",
+} as ThemeUIStyleObject;
+
+const blueAgrBtn = {
+  ...agrBtnBase,
+  background: "#5051F2",
+  color: "#ffffff",
 } as ThemeUIStyleObject;
 
 const textContainer = {
@@ -292,6 +302,7 @@ export {
   textContainer,
   improveBtn,
   greyAgrBtn,
+  blueAgrBtn,
   headerItem,
   container,
   iconPlus,

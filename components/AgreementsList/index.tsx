@@ -39,14 +39,14 @@ export default function AgreementsList({ address }: any) {
       <Container>
         <Flex>
           <Text sx={title}>My Agreements</Text>
-          <Button sx={btn} type="button">
-            <Box sx={iconPlus}>
-              <Icon src={iconsObj.plus} />
-            </Box>
-            <NextLink href={"/create?step=1"}>
+          <NextLink href={"/create?step=1"}>
+            <Button sx={btn} type="button">
+              <Box sx={iconPlus}>
+                <Icon src={iconsObj.plus} />
+              </Box>
               <Link sx={btnText}>New Agreement</Link>
-            </NextLink>
-          </Button>
+            </Button>
+          </NextLink>
         </Flex>
         {agreements.length ? <HeaderAgreement /> : null}
         {agreementsLoading ? (
