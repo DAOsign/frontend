@@ -111,6 +111,16 @@ export default function StepThree() {
     e.target.className = e.target.className.replaceAll("error", "").trim();
   };
 
+  const onChangeSignerInputValue: React.ChangeEventHandler<HTMLInputElement> = e => {
+    onChangeInputValue(e);
+    changeValue("errors", { ...values.errors, signers: null });
+  };
+
+  const onChangeObserverInputValue: React.ChangeEventHandler<HTMLInputElement> = e => {
+    onChangeInputValue(e);
+    changeValue("errors", { ...values.errors, observers: null });
+  };
+
   const userAlreadySigner = useMemo(
     () => !values.signers.map(a => a.value).includes(account!),
     [values.signers, account]
@@ -167,7 +177,7 @@ export default function StepThree() {
           //@ts-ignore
           ref={signerInputRef}
           onKeyDown={e => onKeyDown(e, "signers")}
-          onChange={onChangeInputValue}
+          onChange={onChangeSignerInputValue}
           sx={{
             variant: "forms.input",
             ...inputCreactAgreement,
@@ -212,7 +222,7 @@ export default function StepThree() {
         <Input
           //@ts-ignore
           ref={observerInputRef}
-          onChange={onChangeInputValue}
+          onChange={onChangeObserverInputValue}
           onKeyDown={e => onKeyDown(e, "observers")}
           sx={{
             variant: "forms.input",

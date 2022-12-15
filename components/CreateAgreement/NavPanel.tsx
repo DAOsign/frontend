@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { useRouter } from "next/router";
 import Icon from "../icon/index";
 import { Container, Flex, Text, Button, Box, ButtonProps } from "theme-ui";
@@ -20,15 +20,21 @@ import { addAgreementMutation } from "../../modules/graphql/mutations";
 import { METHOD_ENTER, METHOD_UPLOAD } from "../../types";
 import { clearDraft, CreateAgreementFieldErrors } from "../../modules/createAgreementProvider";
 import { isEmpty } from "../../utils/common";
+import { useWeb3 } from "../../hooks/useWeb3";
+import ModalAuthorNotAdded from "../ModalAuthorNotAdded/ModalAuthorNotAdded";
 
 export default function NavPanel() {
   const { values, changeValue } = useCreateAgreement();
   const { push, query } = useRouter();
+  const { account } = useWeb3();
 
   const step = query?.step ? Number(query.step) : 1;
 
+  const [isAuthorNotAddedPopupVisible, setIsAuthorNotAddedPopupVisible] = useState<boolean>(false);
+
   const validateFields = (isSavingDraft: boolean = false): boolean => {
     const errors: CreateAgreementFieldErrors = {};
+    let extraError: string | null = null;
 
     if (isSavingDraft) {
       if (!values.title) {
@@ -62,12 +68,19 @@ export default function NavPanel() {
           if (!values.observers.length) {
             errors.observers = "At least one observer is required";
           }
+          if (
+            !values.signers?.some(signer => signer.value === account) &&
+            !values.observers?.some(observer => observer.value === account)
+          ) {
+            extraError = "Should add yourself as signer or observer";
+            setIsAuthorNotAddedPopupVisible(true);
+          }
           break;
       }
     }
     changeValue("errors", errors);
 
-    return isEmpty(errors);
+    return isEmpty(errors) && !extraError;
   };
 
   const [{ fetching: addingAgreement }, addAgreement] = useMutation(addAgreementMutation);
@@ -206,6 +219,10 @@ export default function NavPanel() {
         </Button>
         <ForwardButton />
       </Container>
+      <ModalAuthorNotAdded
+        isOpen={isAuthorNotAddedPopupVisible}
+        onExit={() => setIsAuthorNotAddedPopupVisible(false)}
+      />
     </>
   );
 }
