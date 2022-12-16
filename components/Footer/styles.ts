@@ -89,7 +89,7 @@ const rightSide = {
 
 const footerText = {
   display: "flex",
-  fontFamily: "Inter",
+  fontFamily: "InterRegular",
   fontStyle: "normal",
   fontWeight: 400,
   fontSize: "12px",
@@ -180,7 +180,7 @@ const icon = {
 } as ThemeUIStyleObject;
 
 const iconFooter = {
-  width: "10px",
+  width: "12px",
   height: "10px",
   mr: "4px",
   ml: "4px",
