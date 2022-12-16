@@ -12,20 +12,38 @@ const errorMessage = {
 } as ThemeUIStyleObject;
 
 const footer = {
-  marginTop: "135px",
-  position: "absolute",
+  marginTop: "124px",
+  left: "50%",
   bottom: 0,
   px: "120px",
+  maxWidth: "1900px",
+  width: "100%",
   pb: "20px",
   animation: "footer 4s 1 linear",
   "@media screen and (max-width: 1200px)": {
-    paddingLeft: "100px",
-    marginTop: "90px",
-    paddingRight: "100px",
+    px: "120px",
   },
-  "@media screen and (max-width: 768px)": {
-    paddingLeft: "15px",
-    paddingRight: "15px",
+  "@media screen and (max-width: 720px)": {
+    maxWidth: "520px",
+    px: 0,
+  },
+  "@media screen and (min-width: 1200px)": {
+    position: "relative",
+    left: "50%",
+    bottom: 0,
+    mx: 0,
+    transform: "translate(-50%, 0)",
+  },
+} as ThemeUIStyleObject;
+
+const footerItem = {
+  variant: "text.smallTextMedium",
+  display: "block",
+  mb: "4px",
+  cursor: "pointer",
+  "&:hover": {
+    color: "#CA5CF2",
+    opacity: "1",
   },
 } as ThemeUIStyleObject;
 
@@ -33,7 +51,7 @@ const container = {
   justifyContent: "space-between",
   flexDirection: "row",
   pb: "36px",
-  "@media screen and (max-width: 1024px)": {
+  "@media screen and (max-width: 1200px)": {
     flexDirection: "column",
   },
 } as ThemeUIStyleObject;
@@ -41,21 +59,26 @@ const container = {
 const leftSide = {
   flex: "1 1 1 auto",
   position: "relative",
-  "@media screen and (max-width: 768px)": {
+  "@media screen and (max-width: 720px)": {
     textAlign: "center",
+  },
+  "@media screen and (max-width: 600px)": {
+    maxWidth: "343px",
+    ml: "auto",
+    mr: "auto",
   },
 } as ThemeUIStyleObject;
 
 const rightSide = {
   width: "60%",
   justifyContent: "space-between",
-  "@media screen and (max-width: 1024px)": {
+  "@media screen and (max-width: 1200px)": {
     mt: "50px",
     width: "100%",
     flexDirection: "row",
     justifyContent: "space-between",
   },
-  "@media screen and (max-width: 768px)": {
+  "@media screen and (max-width: 720px)": {
     mt: "40px",
     textAlign: "center",
     width: "100%",
@@ -66,6 +89,12 @@ const rightSide = {
 
 const footerText = {
   display: "flex",
+  fontFamily: "Inter",
+  fontStyle: "normal",
+  fontWeight: 400,
+  fontSize: "12px",
+  lineHeight: " 160%",
+  color: "#212121",
   alignItems: "baseline",
   "@media screen and (max-width: 1024px)": {
     display: "none",
@@ -78,10 +107,10 @@ const inputFooter = {
   minWidth: "340px",
   "@media screen and (max-width: 1024px)": {
     minWidth: "unset",
-    maxWidth: "520px",
   },
-  "@media screen and (max-width: 768px)": {
+  "@media screen and (max-width: 720px)": {
     m: "0 auto",
+    minWidth: "303px",
   },
 } as ThemeUIStyleObject;
 
@@ -89,7 +118,7 @@ const socialTitle = {
   variant: "text.normalTextBold",
   display: "inline-block",
   mb: "12px",
-  "@media screen and (max-width: 768px)": {
+  "@media screen and (max-width: 720px)": {
     mt: "40px",
   },
 } as ThemeUIStyleObject;
@@ -99,7 +128,7 @@ const iconContainer = {
   maxWidth: "170px",
   justifyContent: "space-between",
   m: "0 auto 25px",
-  "@media screen and (max-width: 768px)": {
+  "@media screen and (max-width: 720px)": {
     m: "0 auto 36px",
   },
 } as ThemeUIStyleObject;
@@ -111,26 +140,20 @@ const aboutUs = {
     color: "#CA5CF290",
     borderColor: "#CA5CF290",
   },
-  "@media screen and (max-width: 768px)": {
+  "@media screen and (max-width: 720px)": {
     width: "100%",
+    maxWidth: "303px",
   },
 } as ThemeUIStyleObject;
 
 const iconEmail = {
   position: "absolute",
-  width: "30px",
-  height: "30px",
-  top: "44px",
+  width: "15px",
+  height: "15px",
+  top: "52px",
   right: "17px",
   opacity: 0.5,
   cursor: "pointer",
-  "@media screen and (max-width: 1024px)": {
-    left: "480px",
-  },
-  "@media screen and (max-width: 768px)": {
-    width: "30px",
-    left: "70%",
-  },
 } as ThemeUIStyleObject;
 
 const icon = {
@@ -170,6 +193,7 @@ export {
   inputFooter,
   footerText,
   iconFooter,
+  footerItem,
   container,
   rightSide,
   iconEmail,

@@ -63,6 +63,7 @@ import wallet from "../img/svg/wallet.svg";
 import xClose from "../img/svg/xClose.svg";
 import verify from "../img/svg/verify.svg";
 import iconSix from "../img/svg/icon6.svg";
+import birthday from "../img/birthday.png";
 import logOut from "../img/svg/logOut.svg";
 import world from "../img/svg/world.svg";
 import email from "../img/svg/email.svg";
@@ -134,6 +135,7 @@ const iconsObj: IconsMapper = {
   pinkPlus,
   portfile,
   logoIcon,
+  birthday,
   settings,
   telegram,
   radioOff,

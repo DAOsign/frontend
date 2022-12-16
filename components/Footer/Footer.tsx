@@ -7,9 +7,10 @@ import {
   socialTitle,
   inputFooter,
   footerText,
-  container,
-  rightSide,
+  footerItem,
   iconFooter,
+  rightSide,
+  container,
   iconEmail,
   leftSide,
   aboutUs,
@@ -18,7 +19,7 @@ import {
 } from "./styles";
 import Icon from "../icon";
 
-export default function Footer({ animationNotVisible }: any) {
+export default function Footer({ animationNotVisible, setVisible }: any) {
   const [email, setEmail] = useState("");
   const [error, setError] = useState(false);
 
@@ -29,6 +30,8 @@ export default function Footer({ animationNotVisible }: any) {
       setError(true);
       return;
     }
+    setVisible(true);
+    setEmail("");
     setError(false);
   };
 
@@ -57,84 +60,21 @@ export default function Footer({ animationNotVisible }: any) {
           <Box onClick={submit} sx={iconEmail}>
             <Icon src={iconsObj.send} />
           </Box>
-          {error && <Text sx={errorMessage}>*Please enter a valid email address</Text>}
+          {error && <Text sx={errorMessage}>*Please enter valid email</Text>}
         </Box>
         <Flex sx={rightSide}>
           <Box>
             <Text sx={{ variant: "text.normalTextBold", display: "inline-block", mb: "12px" }}>
               DaoSign
             </Text>
-            <Text
-              sx={{
-                variant: "text.smallTextMedium",
-                display: "block",
-                mb: "4px",
-                cursor: "pointer",
-                "&:hover": {
-                  color: "#CA5CF2",
-                  opasity: "1",
-                },
-              }}
-            >
-              About
-            </Text>
-            <Text
-              sx={{
-                variant: "text.smallTextMedium",
-                display: "block",
-                cursor: "pointer",
-                "&:hover": {
-                  color: "#CA5CF2",
-                  opasity: "1",
-                },
-              }}
-            >
-              Terms of Service
-            </Text>
+            <Text sx={footerItem}>About</Text>
+            <Text sx={{ ...footerItem, mb: 0 }}>Terms of Service</Text>
           </Box>
           <Box>
             <Text sx={socialTitle}>Resources</Text>
-            <Text
-              sx={{
-                variant: "text.smallTextMedium",
-                display: "block",
-                mb: "4px",
-                cursor: "pointer",
-                "&:hover": {
-                  color: "#CA5CF2",
-                  opasity: "1",
-                },
-              }}
-            >
-              GitHub
-            </Text>
-            <Text
-              sx={{
-                variant: "text.smallTextMedium",
-                display: "block",
-                mb: "4px",
-                cursor: "pointer",
-                "&:hover": {
-                  color: "#CA5CF2",
-                  opasity: "1",
-                },
-              }}
-            >
-              Discussion
-            </Text>
-            <Text
-              sx={{
-                variant: "text.smallTextMedium",
-                display: "block",
-                cursor: "pointer",
-                "&:hover": {
-                  color: "#CA5CF2",
-                  opasity: "1",
-                },
-              }}
-            >
-              Support
-            </Text>
+            <Text sx={footerItem}>GitHub</Text>
+            <Text sx={footerItem}>Discussion</Text>
+            <Text sx={{ ...footerItem, mb: 0 }}>Support</Text>
           </Box>
           <Box>
             <Text sx={socialTitle}>Join Community</Text>

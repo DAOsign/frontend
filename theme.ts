@@ -29,7 +29,7 @@ export const theme: Theme = {
     input: {
       height: "50px",
       width: "345px",
-      background: "rgba(255, 255, 255, 0.24)",
+      background: "#ffffff90",
       borderRadius: "50px",
       backdropFilter: "blur(6px)",
       fontFamily: "InterMedium",
@@ -39,6 +39,9 @@ export const theme: Theme = {
       border: "unset",
       display: "block",
       paddingX: "20px",
+      "&:focus": {
+        outline: "none",
+      },
     },
     inputError: {
       fontFamily: "InterMedium",

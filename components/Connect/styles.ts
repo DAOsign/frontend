@@ -18,8 +18,8 @@ const container = {
     },
   },
   "@media screen and (max-width: 720px)": {
-    width: "343px",
-    paddingX: "59px",
+    width: "303px",
+    paddingX: "39px",
   },
 } as ThemeUIStyleObject;
 
@@ -33,4 +33,19 @@ const title = {
   },
 } as ThemeUIStyleObject;
 
-export { container, title };
+const link = {
+  color: "#CA5CF2",
+  cursor: "pointer",
+  fontFamily: "InterMedium",
+  fontStyle: "normal",
+  fontWeight: 500,
+  fontSize: "12px",
+  lineHeight: "15px",
+  opacity: 0.5,
+  ml: "5px",
+  "&:hover": {
+    opacity: 1,
+  },
+} as ThemeUIStyleObject;
+
+export { container, title, link };

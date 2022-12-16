@@ -1,7 +1,7 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, { useEffect, useRef, useState } from "react";
 import { Button, Container, Heading, Link, Text } from "theme-ui";
-import { title, container } from "./styles";
+import { title, container, link } from "./styles";
 import { useWeb3 } from "../../hooks/useWeb3";
 import { getToken } from "../../utils/token";
 import { useRouter } from "next/router";
@@ -61,9 +61,9 @@ export default function Connect() {
           </Button>
         </>
       )}
-      <Text variant="secondary" sx={{ maxWidth: "220px", display: "inline-block" }}>
-        By connecting a wallet, you agree to our{" "}
-        <Link sx={{ color: "#CA5CF2", cursor: "pointer" }}>Terms of Service</Link>
+      <Text sx={{ maxWidth: "220px", display: "inline-block" }}>
+        <Text variant="secondary">By connecting a wallet, you agree to our</Text>
+        <Link sx={link}>Terms of Service</Link>
       </Text>
     </Container>
   );

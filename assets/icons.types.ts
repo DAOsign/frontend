@@ -47,6 +47,7 @@ export interface IconsMapper extends Record<string, unknown> {
   calendar: Icon;
   download: Icon;
   errorSvg: Icon;
+  birthday: Icon;
   portfile: Icon;
   pinkPlus: Icon;
   logoIcon: Icon;

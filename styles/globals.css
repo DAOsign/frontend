@@ -45,16 +45,18 @@ a {
 }
 .bg {
   position: relative;
-  min-height: 1080px;
-  height: 100vh;
+  min-height: 900px;
+  height: 100%;
+  overflow: hidden;
   width: 100%;
+  min-height: 100vh;
   background-repeat: no-repeat;
   top: 0;
   background-size: cover;
   top: 0;
   opacity: 1;
   right: 0;
-  background-image: url(../img/svg/Splash\ compressed.jpg);
+  background-image: url(../img/svg/bts.jpg);
   background-position: top right;
 }
 
@@ -100,17 +102,6 @@ a {
 }
 .item :hover {
   color: #ca5cf2 !important;
-}
-@media screen and (max-width: 768px) {
-  .w-md-editor-toolbar li > button {
-    width: 20px !important;
-  }
-  .bg {
-    height: 135vh;
-  }
-  .animateLogo {
-    top: 30px !important;
-  }
 }
 .w-md-editor-toolbar li:nth-of-type(4),
 .w-md-editor-toolbar li:nth-of-type(6) {
