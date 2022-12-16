@@ -21,9 +21,7 @@ export default function Popap({ setVisible }: any) {
             <Icon width={165} height={160} src={iconsObj.birthday} />
           </Box>
           <Text sx={popapTitle}>Thank You For Subscribing</Text>
-          <Text sx={popapText}>
-            You have successfully subscribed to our list. We will let you know when we launch
-          </Text>
+          <Text sx={popapText}>You have successfully subscribed to our list!</Text>
         </Flex>
       </Container>
     </Container>
