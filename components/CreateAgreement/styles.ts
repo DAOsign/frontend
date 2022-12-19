@@ -232,13 +232,17 @@ const inputCreactAgreement = {
   backgroundColor: "#F7F7FB",
   borderRadius: "8px",
   width: "100%",
-  transition: "background-color 0.3s, border-color 0.3s",
+  transition: "border-color 0.3s",
+  border: "2px solid transparent",
 } as ThemeUIStyleObject;
 
 const inputCreateAgreementError = {
-  backgroundColor: "#ffafb1",
-  border: "2px solid #ff5269",
+  borderColor: theme => `${theme?.colors?.red || "red"} !important`,
   outline: "none",
+} as ThemeUIStyleObject;
+
+const inputCreateAgreementWithRightButton = {
+  paddingRight: "41px",
 } as ThemeUIStyleObject;
 
 const secondaryTitle = {
@@ -353,6 +357,7 @@ const plus = {
 
 export {
   inputCreactAgreement,
+  inputCreateAgreementWithRightButton,
   inputCreateAgreementError,
   imageUploadContainer,
   secondaryTitleStep,

@@ -49,12 +49,10 @@ export const theme: Theme = {
       fontWeight: 400,
       fontSize: "12px",
       lineHeight: "160%",
-      color: "#ff5269",
+      color: "red",
       display: "block",
-      position: "absolute",
       left: "0",
       bottom: "0",
-      marginBottom: "-20px",
     },
     checkbox: {
       width: "18px",

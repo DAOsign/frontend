@@ -1,7 +1,12 @@
 import React, { useRef } from "react";
 import dynamic from "next/dynamic";
 import { Container, Flex, Input, Text, Button, Box } from "theme-ui";
-import { inputCreactAgreement, inputCreateAgreementError, plus } from "../../styles";
+import {
+  inputCreactAgreement,
+  inputCreateAgreementError,
+  inputCreateAgreementWithRightButton,
+  plus,
+} from "../../styles";
 import { uniqueId } from "../../../../utils/formats";
 import iconsObj from "../../../../assets/icons";
 import Icon from "../../../icon";
@@ -42,29 +47,53 @@ const verifications = [
   },
 ];
 
-const validateUser = (value: string) => {
-  const isEmail = value.includes("@");
-  const isEns = value.includes(".eth");
-  const isAddress = value.startsWith("0x");
-  if (!isEmail && !isEns && !isAddress) {
-    return false;
-  }
-  if (isEmail) {
-    return String(value)
-      .toLowerCase()
-      .match(
-        /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+const validateUser = (
+  value: string,
+  userRole: "signer" | "observer",
+  addedSigners: { id: number; value: string }[],
+  addedObservers: { id: number; value: string }[]
+): string | null => {
+  let error: string | null = null;
+
+  const userAlreadySigner = addedSigners.some(signer => signer.value === value);
+  const userAlreadyObserver = addedObservers.some(observer => observer.value === value);
+
+  if (userAlreadySigner) {
+    error = userRole === "signer" ? "Signer is already added" : "Already exists as Observer";
+  } else if (userAlreadyObserver) {
+    error = userRole === "signer" ? "Already exists as Signer" : "Observer is already added";
+  } else {
+    const isEmail = value.includes("@");
+    const isEns = value.includes(".eth");
+    const isAddress = value.startsWith("0x");
+    if (!isEmail && !isEns && !isAddress) {
+      error = "Invalid value";
+    } else if (isEmail) {
+      const isValidEmail = String(value)
+        .toLowerCase()
+        .match(
+          /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+        );
+
+      if (!isValidEmail) {
+        error = "Invalid email address";
+      }
+    } else if (isEns) {
+      const isValidEns = value.match(
+        /[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_\+.~#?&//=]*)?/
       );
+      if (!isValidEns) {
+        error = "Invalid ENS name";
+      }
+    } else if (isAddress) {
+      const isValidAddress = value.match(/^0x[a-fA-F0-9]{40}$/);
+      if (!isValidAddress) {
+        error = "Invalid wallet address";
+      }
+    }
   }
-  if (isEns) {
-    const match = value.match(
-      /[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_\+.~#?&//=]*)?/
-    );
-    return match;
-  }
-  if (isAddress) {
-    return value.match(/^0x[a-fA-F0-9]{40}$/);
-  }
+
+  return error;
 };
 
 export default function StepThree() {
@@ -76,8 +105,14 @@ export default function StepThree() {
 
   const addSigner = (value?: string) => {
     if (value && signerInputRef.current) {
-      if (!validateUser(value)) {
-        signerInputRef.current.className = `${signerInputRef.current.className + " error"}`;
+      const validationError: string | null = validateUser(
+        value,
+        "signer",
+        values.signers || [],
+        values.observers || []
+      );
+      if (validationError) {
+        changeValue("errors", { ...values.errors, signers: validationError });
         return;
       }
       changeValue("signers", [...values.signers, { value: value, id: uniqueId() }]);
@@ -87,8 +122,14 @@ export default function StepThree() {
 
   const addObserver = (value?: string) => {
     if (value && observerInputRef.current) {
-      if (!validateUser(value)) {
-        observerInputRef.current.className = `${observerInputRef.current.className + " error"}`;
+      const validationError: string | null = validateUser(
+        value,
+        "observer",
+        values.signers,
+        values.observers
+      );
+      if (validationError) {
+        changeValue("errors", { ...values.errors, observers: validationError });
         return;
       }
 
@@ -98,8 +139,10 @@ export default function StepThree() {
   };
 
   const addMe = (to: "signers" | "observers") => {
-    if (!values[to].map(a => a.value).includes(account!)) {
-      changeValue(to, [...values[to], { value: account, id: uniqueId() }]);
+    if (to === "signers") {
+      addSigner(account!);
+    } else {
+      addObserver(account!);
     }
   };
 
@@ -107,27 +150,21 @@ export default function StepThree() {
     changeValue(key, [...values[key].filter(e => e.id !== el.id)]);
   };
 
-  const onChangeInputValue: React.ChangeEventHandler<HTMLInputElement> = e => {
-    e.target.className = e.target.className.replaceAll("error", "").trim();
-  };
-
   const onChangeSignerInputValue: React.ChangeEventHandler<HTMLInputElement> = e => {
-    onChangeInputValue(e);
     changeValue("errors", { ...values.errors, signers: null });
   };
 
   const onChangeObserverInputValue: React.ChangeEventHandler<HTMLInputElement> = e => {
-    onChangeInputValue(e);
     changeValue("errors", { ...values.errors, observers: null });
   };
 
   const userAlreadySigner = useMemo(
-    () => !values.signers.map(a => a.value).includes(account!),
+    () => values.signers.some(signer => signer.value === account),
     [values.signers, account]
   );
 
   const userAlreadyObserver = useMemo(
-    () => !values.observers.map(a => a.value).includes(account!),
+    () => values.observers.some(observer => observer.value === account),
     [values.observers, account]
   );
 
@@ -151,24 +188,26 @@ export default function StepThree() {
     <Container sx={styles}>
       <Box>
         <Flex sx={{ position: "relative", justifyContent: "space-between", alignItems: "center" }}>
-          <Text sx={{ variant: "forms.label", ml: "3px", maxWidth: "unset" }}>
-            Signers (ENS name, adderes or email)
+          <Text sx={{ variant: "forms.label", ml: "3px", maxWidth: "unset", minHeight: "25px" }}>
+            Signers (ENS name, address or email)
             <Box sx={{ width: "12px", height: "12px", display: "inline-block" }}>
               <Icon style={{ opacity: 0.5 }} src={iconsObj.infoCircle} />
             </Box>
           </Text>
-          <Button
-            onClick={() => addMe("signers")}
-            className={userAlreadySigner ? "disabled" : ""}
-            variant="link"
-            sx={{
-              justifyContent: "flex-end",
-              height: "25px",
-              width: "initial",
-            }}
-          >
-            Add Me
-          </Button>
+          {!userAlreadySigner && !userAlreadyObserver ? (
+            <Button
+              onClick={() => addMe("signers")}
+              className={userAlreadySigner || userAlreadyObserver ? "disabled" : ""}
+              variant="link"
+              sx={{
+                justifyContent: "flex-end",
+                height: "25px",
+                width: "initial",
+              }}
+            >
+              Add Me
+            </Button>
+          ) : null}
           <Box onClick={() => addSigner(signerInputRef.current?.value)} sx={plus}>
             <Icon width="24px" height="24px" style={{ opacity: 0.5 }} src={iconsObj.pinkPlus} />
           </Box>
@@ -181,11 +220,12 @@ export default function StepThree() {
           sx={{
             variant: "forms.input",
             ...inputCreactAgreement,
+            ...inputCreateAgreementWithRightButton,
             ...signersInputErrorStyles,
             mb: "8px",
           }}
         />
-        <FieldErrorMessage error={values?.errors?.signers} />
+        <FieldErrorMessage error={values?.errors?.signers} isAbsolutePosition={false} />
         <TagList items={values.signers} type="signers" onDelete={onDelete} />
       </Box>
       <Box>
@@ -197,24 +237,26 @@ export default function StepThree() {
             alignItems: "center",
           }}
         >
-          <Text sx={{ variant: "forms.label", ml: "3px", maxWidth: "unset" }}>
+          <Text sx={{ variant: "forms.label", ml: "3px", maxWidth: "unset", minHeight: "25px" }}>
             Observers (ENS name or adderess)
             <Box sx={{ width: "12px", height: "12px", display: "inline-block" }}>
               <Icon width="12px" height="12px" style={{ opacity: 0.5 }} src={iconsObj.infoCircle} />
             </Box>
           </Text>
-          <Button
-            onClick={() => addMe("observers")}
-            className={userAlreadyObserver ? "disabled" : ""}
-            variant="link"
-            sx={{
-              justifyContent: "flex-end",
-              height: "25px",
-              width: "initial",
-            }}
-          >
-            Add Me{" "}
-          </Button>
+          {!userAlreadySigner && !userAlreadyObserver ? (
+            <Button
+              onClick={() => addMe("observers")}
+              className={userAlreadySigner || userAlreadyObserver ? "disabled" : ""}
+              variant="link"
+              sx={{
+                justifyContent: "flex-end",
+                height: "25px",
+                width: "initial",
+              }}
+            >
+              Add Me
+            </Button>
+          ) : null}
           <Box onClick={() => addObserver(observerInputRef.current?.value)} sx={plus}>
             <Icon width="24px" height="24px" style={{ opacity: 0.5 }} src={iconsObj.pinkPlus} />
           </Box>
@@ -227,11 +269,12 @@ export default function StepThree() {
           sx={{
             variant: "forms.input",
             ...inputCreactAgreement,
+            ...inputCreateAgreementWithRightButton,
             ...observersInputErrorStyles,
             mb: "8px",
           }}
         />
-        <FieldErrorMessage error={values?.errors?.observers} />
+        <FieldErrorMessage error={values?.errors?.observers} isAbsolutePosition={false} />
         <TagList items={values.observers} type="observers" onDelete={onDelete} />
       </Box>
       <Box sx={{ display: "flex", flexWrap: "wrap", gap: "20px" }}>

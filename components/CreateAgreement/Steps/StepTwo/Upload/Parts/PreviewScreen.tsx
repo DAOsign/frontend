@@ -25,6 +25,14 @@ const PreviewScreen = ({ file, setFile }: FileState) => {
           config={{ header: { disableHeader: true } }}
         />
       </Box>
+      <iframe
+        id="msdoc-iframe"
+        title="msdoc-iframe"
+        src={`https://view.officeapps.live.com/op/embed.aspx?src=${encodeURIComponent(
+          window.URL.createObjectURL(file)
+        )}`}
+        frameBorder="0"
+      />
       <Box sx={{ display: "flex", justifyContent: "space-between", height: "26px", gap: "20px" }}>
         <Flex sx={{ gap: "8px", alignItems: "center" }}>
           <Box sx={{ width: "18px" }}>

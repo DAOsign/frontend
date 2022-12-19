@@ -40,6 +40,9 @@ export default function NavPanel() {
       if (!values.title) {
         errors.title = "Title can not be blank";
       }
+      if (!values.agreementPrivacy) {
+        errors.agreementPrivacy = "Agreement Privacy is a required selection";
+      }
     } else {
       switch (step) {
         case 1:
