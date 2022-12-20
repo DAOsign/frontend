@@ -37,6 +37,7 @@ import greyPercent from "../img/svg/greyPercent.svg";
 import worldViolet from "../img/svg/worldViolet.svg";
 import infoCircle from "../img/svg/infoCircle.svg";
 import plusCircle from "../img/svg/plusCircle.svg";
+import logoHeader from "../img/svg/logoHeader.svg";
 import checkboxOn from "../img/svg/checkboxOn.svg";
 import chevronUp from "../img/svg/chevronUp.svg";
 import published from "../img/svg/published.svg";
@@ -125,8 +126,9 @@ const iconsObj: IconsMapper = {
   shareFourth,
   fieldResize,
   chevronLeft,
-  infoCircle,
   iconSetting,
+  infoCircle,
+  logoHeader,
   checkboxOn,
   plusCircle,
   publicIcon,

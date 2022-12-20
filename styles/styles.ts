@@ -3,16 +3,18 @@ import { ThemeUIStyleObject } from "theme-ui";
 const menuContainer = {
   position: "absolute",
   height: "100vh",
-  backgroundColor: "#F7F7FB90",
+  backgroundColor: "inherit",
   width: "100%",
   zIndex: 2,
   top: 0,
+  left: 0,
+  overflow: "hidden",
   pt: "90px",
-  "@media screen and (min-width: 768px)": {
-    animation: "headerDesctop 0.3s 1 linear",
-    right: "20px",
-    margin: "0 0 0 auto",
-    backgroundColor: "unset",
+  "&.visible": {
+    display: "block",
+  },
+  "&.close": {
+    display: "none",
   },
 } as ThemeUIStyleObject;
 
@@ -23,12 +25,28 @@ const fotoContainer = {
   border: "1px solid #EDEDF3",
   borderRadius: "12px",
   p: "16px 16px 16px 24px",
-  position: "relative",
-  animation: "header 0.3s 1 linear",
-  "@media screen and (min-width: 768px)": {
-    animation: "headerDesctop 0.3s 1 linear",
+  position: "absolute",
+  "&.visible": {
+    position: "fixed",
+    animation: "headerDesctop 0.2s 1 linear",
     right: "20px",
+  },
+  "&.close": {
+    animation: "headerDesctopClose 0.3s 1 linear",
+    right: "-100%",
+  },
+  "@media screen and (max-width: 768px)": {
     margin: "0 0 0 auto",
+    "&.visible": {
+      position: "fixed",
+      animation: "headerMobile 0.2s 1 linear",
+      right: "50%",
+      transform: "translate(50%, 0)",
+    },
+    "&.close": {
+      animation: "headerMobileClose 0.3s 1 linear",
+      right: "-100%",
+    },
   },
 } as ThemeUIStyleObject;
 

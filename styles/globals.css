@@ -133,7 +133,7 @@ label > div {
 
 body {
   min-height: 100vh;
-  background-color: #ededf3;
+  background-color: #F7F7FB;
 }
 .first {
   z-index: 1;
@@ -719,5 +719,31 @@ body {
   }
   100% {
     right: 20px;
+  }
+}
+@keyframes headerDesctopClose {
+  0% {
+    right: 20px;
+  }
+  100% {
+    right: -100%;
+  }
+}
+@keyframes headerMobile {
+  0% {
+    right: -100%;
+  }
+  100% {
+    right: 50%;
+    transform: translate(50%, 0);
+  }
+}
+@keyframes headerMobileClose {
+  0% {
+    right: 50%;
+    transform: translate(50%, 0);
+  }
+  100% {
+    right: -100%;
   }
 }

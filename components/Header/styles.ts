@@ -10,6 +10,13 @@ const container = {
   position: "fixed",
   top: 0,
   zIndex: 10,
+  "@media screen and (max-width: 768px)": {
+    px: "36px",
+  },
+  "@media screen and (max-width: 480px)": {
+    paddingRight: "12px",
+    paddingLeft: "16px",
+  },
 } as ThemeUIStyleObject;
 
 const addresContainer = {

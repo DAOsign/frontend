@@ -1,7 +1,7 @@
 import { ThemeUIStyleObject } from "theme-ui";
 const containerSides = {
   maxWidth: "1200px",
-  justifyContent: "space-between",
+  justifyContent: "center",
   margin: "40px auto 0",
   textAlign: "center",
   "@media screen and (max-width: 1200px)": {
@@ -100,6 +100,8 @@ const leftSide = {
   minHeight: "550px",
   transition: ".3s all",
   background: "#FFFFFF",
+  ml: 0,
+  mr: "20px",
   border: "1px solid #EDEDF3",
   borderRadius: "12px",
   paddingX: "100px",
@@ -116,6 +118,7 @@ const leftSide = {
     borderBottom: "none",
     minHeight: "300px",
     borderRadius: "12px 12px 0 0",
+    mx: "auto",
   },
   "@media screen and (max-width: 768px)": {
     maxWidth: "343px",
@@ -140,11 +143,14 @@ const rightSide = {
   border: "1px solid #EDEDF3",
   borderRadius: "12px",
   paddingX: "25px",
+  ml: "20px",
+  mr: 0,
   maxHeight: "590px",
   paddingBottom: "32px",
   paddingTop: "52px",
   "@media screen and (max-width: 1200px)": {
     width: "100%",
+    mx: "auto",
     maxWidth: "672px",
     paddingX: "100px",
     borderTop: "none",
@@ -237,6 +243,7 @@ const inputCreactAgreement = {
 } as ThemeUIStyleObject;
 
 const inputCreateAgreementError = {
+  backgroundColor: "inherit",
   borderColor: theme => `${theme?.colors?.red || "red"} !important`,
   outline: "none",
 } as ThemeUIStyleObject;
@@ -308,7 +315,6 @@ const stepsContainer = {
 } as ThemeUIStyleObject;
 
 const stepStyle = {
-  // mt: '56px',
   alignItems: "center",
   textAlign: "left",
   "@media screen and (max-width: 1200px)": {

@@ -32,6 +32,7 @@ export default function AgreementsList({ address }: any) {
     () => data?.agreements?.agreements.map(a => toAgreement(a as AgreementRespone)) || [],
     [data]
   );
+  console.log(agreements);
 
   return (
     <Flex sx={containerSides}>

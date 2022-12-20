@@ -97,7 +97,12 @@ const footerText = {
   color: "#212121",
   alignItems: "baseline",
   "@media screen and (max-width: 1024px)": {
-    display: "none",
+    justifyContent: "flex-start",
+    pl: 0,
+  },
+  "@media screen and (max-width: 720px)": {
+    justifyContent: "center",
+    pl: 0,
   },
 } as ThemeUIStyleObject;
 
@@ -105,6 +110,8 @@ const inputFooter = {
   variant: "forms.input",
   width: "100%",
   minWidth: "340px",
+  pr: "40px",
+  textOverflow: "ellipsis",
   "@media screen and (max-width: 1024px)": {
     minWidth: "unset",
   },

@@ -68,6 +68,20 @@ const text = {
   },
 } as ThemeUIStyleObject;
 
+const logoWithoutAnimate = {
+  width: "130px",
+  height: "48px",
+  cursor: "pointer",
+  "@media screen and (max-width: 768px)": {
+    width: "96px",
+    height: "36px",
+  },
+  "@media screen and (max-width: 480px)": {
+    width: "86px",
+    height: "32px",
+  },
+} as ThemeUIStyleObject;
+
 const iconLogo = {
   width: "81px",
   height: "100px",
@@ -89,4 +103,4 @@ const animateContainer = {
   paddingTop: "80px",
 } as ThemeUIStyleObject;
 
-export { animateContainer, container, iconLogo, text, logo, a, d, o };
+export { animateContainer, container, iconLogo, text, logo, a, d, o, logoWithoutAnimate };

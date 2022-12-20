@@ -138,6 +138,7 @@ const improveBtn = {
   variant: "buttons.userBtn",
   opacity: 1,
   height: "46px",
+  px: "45px",
   "@media screen and (max-width: 768px)": {
     maxWidth: "unset",
     width: "90%",
@@ -178,19 +179,24 @@ const fotoContainer = {
 const inputMyAgreement = {
   backgroundColor: "#FFFFFF",
   borderRadius: "62px",
-  maxWidth: "345px",
-  width: "100%",
+  width: "345px",
+  pl: "48px",
+  opacity: 1,
+  variant: "text.normalTextMedium",
   "@media screen and (max-width: 768px)": {
     maxWidth: "unset",
+    width: "100%",
   },
 } as ThemeUIStyleObject;
 
 const headerContainer = {
   flexDirection: "row",
+  position: "relative",
   alignItems: "baseline",
   mt: "38px",
   "@media screen and (max-width: 768px)": {
     flexDirection: "column",
+    position: "static",
   },
 } as ThemeUIStyleObject;
 
@@ -206,15 +212,15 @@ const agreementConteiner = {
 const iconMenuAgreement = {
   ml: "16px",
   width: "32px",
+  display: "flex",
+  alignItems: "center",
+  justifyContent: "center",
   height: "32px",
   borderRadius: "50%",
   backgroundColor: "#EDEDF3",
   textAlign: "center",
-  padding: "4px 0 0 0",
+  padding: "0",
   cursor: "poiner",
-  "@media screen and (max-width: 768px)": {
-    display: "block",
-  },
 } as ThemeUIStyleObject;
 
 const agrBtnBase = {
@@ -248,7 +254,15 @@ const blueAgrBtn = {
 } as ThemeUIStyleObject;
 
 const textContainer = {
-  justifyContent: "flex-end",
+  justifyContent: "center",
+  border: "1px solid #EDEDF3",
+  borderRadius: "62px",
+  height: "51px",
+  ml: "auto",
+  cursor: "pointer",
+  alignItems: "center",
+  position: "relative",
+  maxWidth: "160px",
   "@media screen and (max-width: 768px)": {
     justifyContent: "center",
     alignItems: "center",
@@ -256,6 +270,9 @@ const textContainer = {
     borderRadius: "62px",
     height: "50px",
     mt: "10px",
+    width: "100%",
+    maxWidth: "unset",
+    position: "static",
   },
 } as ThemeUIStyleObject;
 
@@ -288,13 +305,60 @@ const headerItem = {
   },
 } as ThemeUIStyleObject;
 
+const filterItem = {
+  background: "#EDEDF3",
+  borderRadius: "90px",
+  alignItems: "center",
+  pl: "14px",
+  height: "32px",
+  ml: "8px",
+  pr: "10px",
+  mt: "16px",
+} as ThemeUIStyleObject;
+
+const delBth = {
+  width: "13px",
+  height: "13px",
+  display: "block",
+  borderRadius: "50%",
+  border: "1px solid black",
+  ml: "5px",
+  cursor: "pointer",
+} as ThemeUIStyleObject;
+
+const titleItem = {
+  display: "block",
+  variant: "text.smallTextBold",
+} as ThemeUIStyleObject;
+
+const searchContainer = {
+  position: "relative",
+  width: "346px",
+  "@media screen and (max-width: 768px)": {
+    width: "100%",
+  },
+} as ThemeUIStyleObject;
+
+const iconSearchContainer = {
+  position: "absolute",
+  left: "20px",
+  width: "20px",
+  height: "20px",
+  zIndex: 1,
+  opacity: 0.5,
+  top: "50%",
+  transform: "translate(0, -50%)",
+} as ThemeUIStyleObject;
+
 export {
   normalTextBoldGreen,
   improveBtnContainer,
+  iconSearchContainer,
   agreementConteiner,
   iconMenuAgreement,
   inputMyAgreement,
   percentContainer,
+  searchContainer,
   headerContainer,
   containerSides,
   infoContainer,
@@ -302,14 +366,17 @@ export {
   textContainer,
   improveBtn,
   greyAgrBtn,
+  filterItem,
   blueAgrBtn,
   headerItem,
+  titleItem,
   container,
   iconPlus,
   noContent,
   iconExit,
   userFoto,
   btnText,
+  delBth,
   title,
   text,
   btn,

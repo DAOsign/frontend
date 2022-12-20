@@ -39,7 +39,6 @@ export default function UserCard({ address }: any) {
       <Container sx={percentContainer}>
         <Box sx={{ mb: "10px" }}>
           <Icon src={iconsObj.ellipseGreen} />
-          {/* <Icon src={iconsObj.greyPercent}/> */}
         </Box>
         <Container sx={text}>
           <Text sx={{ variant: "text.overscript", opacity: "0.5" }}>Verification Score</Text>
@@ -47,7 +46,7 @@ export default function UserCard({ address }: any) {
         </Container>
       </Container>
       <Container sx={improveBtnContainer}>
-        <Button sx={improveBtn}>Imporove Your Score</Button>
+        <Button sx={improveBtn}>Add Verifications</Button>
       </Container>
     </Flex>
   );

@@ -13,7 +13,7 @@ export default function Header({ visible, setVisible }: any) {
   const { account } = useWeb3();
 
   return (
-    <Container sx={container}>
+    <Container onClick={() => setVisible(false)} sx={container}>
       <Flex sx={{ justifyContent: "space-between" }}>
         <NextLink href={"/"}>
           <Link>
@@ -26,11 +26,24 @@ export default function Header({ visible, setVisible }: any) {
               <Icon src={iconsObj.Bell} />
             </Box>
           </Button>
-          <Flex onClick={() => setVisible(!visible)} sx={addresContainer}>
+          <Flex
+            onClick={e => {
+              e.stopPropagation();
+              setVisible(!visible);
+            }}
+            sx={addresContainer}
+          >
             <Identicon account={account} size={24} sx={identiconIcon} />
             <Text>{formatAddress(account!)}</Text>
           </Flex>
-          <Button onClick={() => setVisible(!visible)} type="button" sx={iconMenu}>
+          <Button
+            onClick={e => {
+              e.stopPropagation();
+              setVisible(!visible);
+            }}
+            type="button"
+            sx={iconMenu}
+          >
             {visible ? (
               <Box sx={{ width: "24px", display: "block", m: "0 auto" }}>
                 <Icon src={iconsObj.xClose} />

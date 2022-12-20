@@ -9,12 +9,20 @@ import { notifSucces } from "../../utils/notification";
 import { formatAddress, onCopyClick } from "../../utils/formats";
 import LogOutPopap from "../modalLogaut";
 
-const HeaderMenu = ({ address, setVisibleMenu }: any) => {
+const HeaderMenu = ({ address, setVisibleMenu, visibleMenu }: any) => {
   const [visible, setVisible] = useState(false);
 
   return (
-    <Container onClick={() => setVisibleMenu(false)} sx={menuContainer}>
-      <Container onClick={e => e.stopPropagation()} sx={fotoContainer}>
+    <Container
+      className={visibleMenu ? "visible" : "close"}
+      onClick={() => setVisibleMenu(false)}
+      sx={menuContainer}
+    >
+      <Container
+        className={visibleMenu ? "visible" : "close"}
+        onClick={e => e.stopPropagation()}
+        sx={fotoContainer}
+      >
         <Flex>
           <Container sx={foto}></Container>
           <Container sx={{ maxWidth: "190px", pl: "16px" }}>
@@ -38,12 +46,20 @@ const HeaderMenu = ({ address, setVisibleMenu }: any) => {
             <ToastContainer icon />
           </Container>
         </Flex>
-        <Button sx={{ variant: "buttons.grey", mt: "24px", width: "100%" }}>Copy Share Link</Button>
+        <Button
+          onClick={() => {
+            onCopyClick(address);
+            notifSucces("Link copied");
+          }}
+          sx={{ variant: "buttons.grey", mt: "24px", width: "100%" }}
+        >
+          Copy Share Link
+        </Button>
         <Button sx={{ variant: "buttons.grey", mt: "16px", width: "100%" }}>My Profile</Button>
         <Button sx={{ variant: "buttons.grey", mt: "16px", width: "100%" }}>Switch Wallet</Button>
         <Box
           sx={{
-            width: "341px",
+            width: "292px",
             height: "2px",
             backgroundColor: "grey",
             position: "absolute",

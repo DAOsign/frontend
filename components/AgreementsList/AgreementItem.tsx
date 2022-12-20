@@ -15,7 +15,7 @@ export default function AgreementItem({ title, agreementStatus, signers, observe
   return (
     <Flex sx={agreementConteiner}>
       <Flex sx={headerItem}>
-        <Flex>
+        <Flex sx={{ alignItems: "center" }}>
           <Box sx={{ width: "12px", height: "12px", opacity: "0.5", ml: "5px" }}>
             <Icon style={{ cursor: "pointer" }} src={iconsObj.calendar} />
           </Box>
@@ -28,9 +28,11 @@ export default function AgreementItem({ title, agreementStatus, signers, observe
           <Button sx={agreementStatus === STATUS_READY_TO_SIGN ? blueAgrBtn : greyAgrBtn}>
             {agreementStatus}
           </Button>
-          <Box sx={iconMenuAgreement}>
-            <Icon src={iconsObj.privateIcon} />
-          </Box>
+          <Flex sx={iconMenuAgreement}>
+            <Box sx={{ width: "20px", height: "20px" }}>
+              <Icon src={iconsObj.privateIcon} />
+            </Box>
+          </Flex>
         </Flex>
       </Flex>
       <Text sx={{ variant: "text.largeTextBold", pt: "12px" }}>{title}</Text>
