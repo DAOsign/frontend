@@ -1,4 +1,4 @@
-import React, { useRef } from "react";
+import React, { useRef, useState } from "react";
 import dynamic from "next/dynamic";
 import { Container, Flex, Input, Text, Button, Box } from "theme-ui";
 import {
@@ -18,12 +18,17 @@ import styles from "./styles";
 import VerificationCard from "./VerificationCard";
 import FieldErrorMessage from "../../../Form/FieldErrorMessage";
 
-const verifications = [
+interface VerificationInfo {
+  title: string;
+  img: Icon;
+  description: string;
+}
+
+const verifications: VerificationInfo[] = [
   {
     title: "Anonymus",
     img: iconsObj.verificationAnonymous,
     description: "Wallet Address",
-    checked: true,
   },
   {
     title: "Pseudonymous",
@@ -59,9 +64,9 @@ const validateUser = (
   const userAlreadyObserver = addedObservers.some(observer => observer.value === value);
 
   if (userAlreadySigner) {
-    error = userRole === "signer" ? "Signer is already added" : "Already exists as Observer";
+    error = userRole === "signer" ? "Signer is already added" : "Already exists as Signer";
   } else if (userAlreadyObserver) {
-    error = userRole === "signer" ? "Already exists as Signer" : "Observer is already added";
+    error = userRole === "signer" ? "Already exists as Observer" : "Observer is already added";
   } else {
     const isEmail = value.includes("@");
     const isEns = value.includes(".eth");
@@ -99,6 +104,10 @@ const validateUser = (
 export default function StepThree() {
   const { values, changeValue } = useCreateAgreement();
   const { account } = useWeb3();
+
+  const [checkedVerifications, setCheckedVerifications] = useState<boolean[]>(
+    Array(verifications.length).fill(false)
+  );
 
   const signerInputRef = useRef<HTMLInputElement>();
   const observerInputRef = useRef<HTMLInputElement>();
@@ -277,10 +286,43 @@ export default function StepThree() {
         <FieldErrorMessage error={values?.errors?.observers} isAbsolutePosition={false} />
         <TagList items={values.observers} type="observers" onDelete={onDelete} />
       </Box>
-      <Box sx={{ display: "flex", flexWrap: "wrap", gap: "20px" }}>
-        {verifications.map(verification => (
-          <VerificationCard key={verification.title} {...verification} />
-        ))}
+      <Box>
+        <Flex
+          sx={{
+            position: "relative",
+            alignItems: "center",
+          }}
+        >
+          <Text
+            sx={{
+              variant: "forms.label",
+              ml: "3px",
+              maxWidth: "unset",
+              minHeight: "25px",
+            }}
+          >
+            Required Signed Verifications
+            <Box sx={{ width: "12px", height: "12px", display: "inline-block" }}>
+              <Icon width="12px" height="12px" style={{ opacity: 0.5 }} src={iconsObj.infoCircle} />
+            </Box>
+          </Text>
+        </Flex>
+        <Box sx={{ display: "flex", flexDirection: "column", gap: "20px" }}>
+          {verifications.map((verification, index) => (
+            <VerificationCard
+              key={verification.title}
+              {...verification}
+              checked={checkedVerifications[index]}
+              onClick={() => {
+                setCheckedVerifications(prevState => [
+                  ...prevState.slice(0, index),
+                  !prevState[index],
+                  ...prevState.slice(index + 1),
+                ]);
+              }}
+            />
+          ))}
+        </Box>
       </Box>
     </Container>
   );

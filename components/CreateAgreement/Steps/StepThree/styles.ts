@@ -1,39 +1,47 @@
 import { ThemeUIStyleObject } from "theme-ui";
 
 export const verificationCardStyles: ThemeUIStyleObject = {
-  p: "15px 19px 21px",
+  p: "12px 12px 12px 23px",
   position: "relative",
-  width: "210px",
-  border: "1px solid #EDEDF3",
+  width: "100%",
+  border: "2px solid #EDEDF3",
   borderRadius: "12px",
+  display: "flex",
   cursor: "pointer",
+  transition: "box-shadow .3s",
+  "&:hover": {
+    boxShadow: "0 0 11px rgba(33,33,33,.2)",
+  },
   ".card_head": {
-    display: "flex",
-    color: "dark",
-    mb: "13px",
-    span: {
-      color: "inherit",
-      fontFamily: "InterMedium",
-    },
-    ".tooltip": {
-      position: "absolute",
-      top: "10px",
-      right: "10px",
-      opacity: ".5",
-      width: "20px",
-      height: "20px",
-      zIndex: "100",
-    },
+    pt: "8px",
+    pb: "6px",
+    alignSelf: "flex-start",
   },
   ".card_body": {
+    color: "dark",
+    alignSelf: "center",
+    py: "6px",
+    pr: "10px",
+    ".title": {
+      fontSize: "16px",
+      fontFamily: "InterBold",
+      fontWeight: 700,
+      lineHeight: "160%",
+    },
+    ".description": {
+      fontSize: "14px",
+      fontFamily: "InterMedium",
+      fontWeight: 500,
+      opacity: "0.5",
+      lineHeight: "160%",
+    },
+  },
+  ".card_tail": {
+    ml: "auto",
+    alignSelf: "center",
     ".image_container": {
       width: "60px",
       height: "60px",
-      m: "0 auto",
-      mb: "12px",
-    },
-    ".description": {
-      textAlign: "center",
     },
   },
 };

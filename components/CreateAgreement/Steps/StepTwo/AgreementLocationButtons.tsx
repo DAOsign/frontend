@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { Flex, Text, Radio, Label, Box } from "theme-ui";
 import Icon from "../../../icon/index";
 import { itemRadio } from "../../styles";
@@ -7,13 +7,10 @@ import { useCreateAgreement } from "../../../../hooks/useCreateAgreement";
 import {
   AgreementLocation,
   LOCATION_CLOUD,
-  LOCATION_LOCAL,
-  LOCATION_PRIVATE_IPFS,
   LOCATION_PUBLIC_IPFS,
   PRIVACY_PRIVATE,
-  PRIVACY_PUBLIC_PUBLISHED,
-  PRIVACY_PUBLIC_WITH_LINK,
 } from "../../../../types";
+import ModalIpfsWarning from "../../../ModalIpfsWarning/ModalIpfsWarning";
 
 const agreementLocations: { name: string; value: AgreementLocation }[] = [
   {
@@ -21,40 +18,24 @@ const agreementLocations: { name: string; value: AgreementLocation }[] = [
     value: LOCATION_CLOUD,
   },
   {
-    name: "Public IPFS",
+    name: "IPFS",
     value: LOCATION_PUBLIC_IPFS,
-  },
-  {
-    name: "Private IPFS",
-    value: LOCATION_PRIVATE_IPFS,
-  },
-  {
-    name: "Local",
-    value: LOCATION_LOCAL,
   },
 ];
 
 export default function AgreementLocationRadioButtons() {
   const { values, changeValue } = useCreateAgreement();
+  const [isIpfsWarningVisible, setIsIpfsWarningVisible] = useState<boolean>(false);
 
-  const validateLocation = (value: AgreementLocation) => {
-    switch (value) {
-      case LOCATION_PUBLIC_IPFS:
-        return values.agreementPrivacy != PRIVACY_PRIVATE;
-      case LOCATION_PRIVATE_IPFS:
-        return false;
-        return (
-          values.agreementPrivacy != PRIVACY_PUBLIC_PUBLISHED &&
-          values.agreementPrivacy != PRIVACY_PUBLIC_WITH_LINK
-        );
-      case LOCATION_LOCAL:
-        return (
-          values.agreementPrivacy != PRIVACY_PUBLIC_PUBLISHED &&
-          values.agreementPrivacy != PRIVACY_PUBLIC_WITH_LINK
-        );
-      default:
-        return true;
+  const onAgreementLocationClick = (location: AgreementLocation) => {
+    if (
+      location === LOCATION_PUBLIC_IPFS &&
+      values.agreementLocation !== LOCATION_PUBLIC_IPFS &&
+      values.agreementPrivacy === PRIVACY_PRIVATE
+    ) {
+      setIsIpfsWarningVisible(true);
     }
+    changeValue("agreementLocation", location);
   };
 
   return (
@@ -68,33 +49,30 @@ export default function AgreementLocationRadioButtons() {
         </Box>
       </Text>
       <Box as="form" onSubmit={e => e.preventDefault()}>
-        <Flex sx={{ mb: "24px", justifyContent: "space-between" }}>
-          {agreementLocations.map(el => {
-            const isDisabled = !validateLocation(el.value);
-            return (
-              <Flex
-                key={el?.name}
-                onClick={() => {
-                  changeValue("agreementLocation", el.value);
-                }}
-                className={`radio${isDisabled ? " disabled" : ""}`}
-              >
-                <Box style={{ width: "15px", height: "15px", cursor: "pointer" }}>
-                  <Icon
-                    src={
-                      values.agreementLocation === el.value ? iconsObj.radioOn : iconsObj.radioOff
-                    }
-                  />
-                </Box>
-                <Label sx={itemRadio}>
-                  <Radio sx={{ boxShadow: "none" }} name="letter" value={el.value} />
-                  <Text sx={{ ml: "5px", variant: "text.normalTextMedium" }}>{el.name}</Text>
-                </Label>
-              </Flex>
-            );
-          })}
+        <Flex sx={{ mb: "24px", display: "flex", gap: "22px" }}>
+          {agreementLocations.map(el => (
+            <Flex
+              key={el?.name}
+              onClick={() => onAgreementLocationClick(el.value)}
+              className="radio"
+            >
+              <Box style={{ width: "15px", height: "15px", cursor: "pointer" }}>
+                <Icon
+                  src={values.agreementLocation === el.value ? iconsObj.radioOn : iconsObj.radioOff}
+                />
+              </Box>
+              <Label sx={itemRadio}>
+                <Radio sx={{ boxShadow: "none" }} name="letter" value={el.value} />
+                <Text sx={{ ml: "5px", variant: "text.normalTextMedium" }}>{el.name}</Text>
+              </Label>
+            </Flex>
+          ))}
         </Flex>
       </Box>
+      <ModalIpfsWarning
+        isOpen={isIpfsWarningVisible}
+        onExit={() => setIsIpfsWarningVisible(false)}
+      />
     </>
   );
 }
