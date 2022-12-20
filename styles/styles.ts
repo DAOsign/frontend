@@ -55,7 +55,6 @@ const foto = {
   height: "60px",
   m: 0,
   borderRadius: "50%",
-  backgroundColor: "grey",
 } as ThemeUIStyleObject;
 
 export { menuContainer, fotoContainer, foto };

@@ -8,6 +8,7 @@ import iconsObj from "../../assets/icons";
 import { notifSucces } from "../../utils/notification";
 import { formatAddress, onCopyClick } from "../../utils/formats";
 import LogOutPopap from "../modalLogaut";
+import Identicon from "../Identicon/Identicon";
 
 const HeaderMenu = ({ address, setVisibleMenu, visibleMenu }: any) => {
   const [visible, setVisible] = useState(false);
@@ -24,7 +25,7 @@ const HeaderMenu = ({ address, setVisibleMenu, visibleMenu }: any) => {
         sx={fotoContainer}
       >
         <Flex>
-          <Container sx={foto}></Container>
+          <Identicon account={address} size={60} sx={foto} />
           <Container sx={{ maxWidth: "190px", pl: "16px" }}>
             <Text sx={{ variant: "text.largeTextBold", display: "block", textAlign: "left" }}>
               Ralph Edwards

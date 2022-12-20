@@ -53,7 +53,7 @@ export default function AgreementsList({ address }: any) {
         {agreementsLoading ? (
           <Spinner />
         ) : agreements.length ? (
-          agreements.map(agr => <AgreementItem key={agr.title} {...agr} />)
+          agreements.map((agr, index) => <AgreementItem key={index} {...agr} />)
         ) : (
           <Container sx={{ textAlign: "center" }}>
             <Flex sx={noContent}>

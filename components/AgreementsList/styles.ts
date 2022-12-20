@@ -50,17 +50,16 @@ const iconExit = {
 } as ThemeUIStyleObject;
 
 const userFoto = {
+  position: "relative",
   width: "124px",
   height: "124px",
   left: "76px",
-  top: "28px",
   mt: "28px",
   mb: "12px",
-  backgroundColor: "grey",
-  border: "grey",
   borderRadius: "50%",
   "@media screen and (max-width: 1200px)": {
     m: 0,
+    left: 0,
   },
   "@media screen and (max-width: 768px)": {
     width: "80px",

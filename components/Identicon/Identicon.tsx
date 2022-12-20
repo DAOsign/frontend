@@ -15,11 +15,13 @@ const Identicon = ({ account, size, sx = {} }: Props) => {
   useEffect(() => {
     if (account && ref.current) {
       ref.current.innerHTML = "";
-      ref.current.appendChild(Jazzicon(size || 16, parseInt(account.slice(2, 10), 16)));
+      const jazzicon: HTMLDivElement = Jazzicon(size || 16, parseInt(account.slice(2, 10), 16));
+      jazzicon.style.borderRadius = "50%";
+      ref.current.appendChild(jazzicon);
     }
   }, [account, size]);
 
-  return account ? <Box ref={ref as any} sx={sx} /> : null;
+  return account ? <Box ref={ref as any} sx={sx} /> : <Box sx={sx} />;
 };
 
 export default Identicon;
