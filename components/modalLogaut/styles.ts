@@ -1,7 +1,7 @@
 import { ThemeUIStyleObject } from "theme-ui";
 
 const container = {
-  position: "absolute",
+  position: "fixed",
   left: "50%",
   transform: "translate(-50%, 50%)",
   width: "500px",
@@ -41,6 +41,14 @@ const secondText = {
   color: "#CA5CF2",
   opacity: "0.5",
   cursor: "pointer",
+  width: "150px",
+  margin: "0 auto",
+  "&:hover": {
+    opacity: 1,
+  },
+  "&:focus": {
+    opacity: 1,
+  },
 } as ThemeUIStyleObject;
 
 const closeIcon = {

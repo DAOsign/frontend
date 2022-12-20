@@ -1,8 +1,9 @@
 import React from "react";
 import { Container, Box, Text, Button, Flex } from "theme-ui";
 import iconsObj from "../../assets/icons";
+import { ToastContainer, toast } from "react-toastify";
 import Icon from "../icon";
-import { formatAddress } from "../../utils/formats";
+import { formatAddress, onCopyClick } from "../../utils/formats";
 import {
   improveBtnContainer,
   normalTextBoldGreen,
@@ -13,10 +14,12 @@ import {
   container,
   userFoto,
   iconExit,
+  iconCopy,
   text,
 } from "./styles";
 import useWindowDimensions from "../../hooks/useWindowDimensions";
 import Identicon from "../Identicon/Identicon";
+import { notifSucces } from "../../utils/notification";
 
 export default function UserCard({ address }: any) {
   const { width } = useWindowDimensions();
@@ -32,11 +35,19 @@ export default function UserCard({ address }: any) {
           <Text sx={{ variant: "text.largeTextBold", display: "block", textAlign: "center" }}>
             Ralph Edwards
           </Text>
-          <Flex sx={{ justifyContent: "center", marginBottom: "24px", mt: "4px" }}>
+          <Flex
+            sx={{ justifyContent: "center", marginBottom: "24px", mt: "4px", alignItems: "center" }}
+          >
             <Text sx={{ variant: "text.smallTextMediumUser" }}>
               {address ? formatAddress(address) : "\u00A0"}
             </Text>
-            <Box sx={{ marginLeft: "5px" }}>
+            <Box
+              onClick={() => {
+                onCopyClick(address);
+                notifSucces("Link copied");
+              }}
+              sx={iconCopy}
+            >
               <Icon style={{ cursor: "pointer" }} src={iconsObj.iconSix} />
             </Box>
           </Flex>
@@ -54,6 +65,7 @@ export default function UserCard({ address }: any) {
       <Container sx={improveBtnContainer}>
         <Button sx={improveBtn}>Add Verifications</Button>
       </Container>
+      <ToastContainer icon />
     </Flex>
   );
 }

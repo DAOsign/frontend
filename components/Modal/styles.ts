@@ -1,5 +1,14 @@
 import { ThemeUIStyleObject } from "theme-ui";
 
+export const btnCancel = {
+  variant: "buttons.primary",
+  width: "100px",
+  cursor: "pointer",
+  "&:hover": {
+    opacity: 1,
+  },
+} as ThemeUIStyleObject;
+
 export default {
   position: "absolute",
   width: "500px",

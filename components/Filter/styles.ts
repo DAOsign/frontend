@@ -52,6 +52,12 @@ const conteinerCheckbox = {
   mt: "8px",
   alignItems: "center",
   cursor: "pointer",
+  "&:hover": {
+    opacity: 1,
+  },
+  "&:focus": {
+    opacity: 1,
+  },
 } as ThemeUIStyleObject;
 
 const icon = {

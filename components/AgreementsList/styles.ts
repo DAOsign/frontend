@@ -40,10 +40,14 @@ const iconPlus = {
 const iconExit = {
   position: "absolute",
   paddingTop: "19px",
-  right: "19px",
-  width: "18px",
-  height: "18px",
-  opasity: "0.5",
+  right: "18px",
+  top: "18px",
+  width: "15px",
+  height: "15px",
+  opacity: "0.5",
+  "&:hover": {
+    opacity: 1,
+  },
   "@media screen and (max-width: 1200px)": {
     pt: "0",
   },
@@ -138,6 +142,7 @@ const improveBtn = {
   opacity: 1,
   height: "46px",
   px: "45px",
+
   "@media screen and (max-width: 768px)": {
     maxWidth: "unset",
     width: "90%",
@@ -262,6 +267,12 @@ const textContainer = {
   alignItems: "center",
   position: "relative",
   maxWidth: "160px",
+  "&:hover": {
+    border: "1px solid #00000040",
+  },
+  "&:focus": {
+    border: "1px solid #00000040",
+  },
   "@media screen and (max-width: 768px)": {
     justifyContent: "center",
     alignItems: "center",
@@ -313,6 +324,15 @@ const filterItem = {
   ml: "8px",
   pr: "10px",
   mt: "16px",
+  "& > div": {
+    opacity: 0.5,
+  },
+  "&:hover": {
+    background: "#E4E4E9",
+  },
+  "&:hover > div": {
+    opacity: 1,
+  },
 } as ThemeUIStyleObject;
 
 const delBth = {
@@ -347,6 +367,19 @@ const iconSearchContainer = {
   opacity: 0.5,
   top: "50%",
   transform: "translate(0, -50%)",
+  "& ~ input:focus": {
+    opacity: 1,
+  },
+} as ThemeUIStyleObject;
+
+const iconCopy = {
+  marginLeft: "5px",
+  width: "10px",
+  height: "10px",
+  opacity: 0.5,
+  "&:hover": {
+    opacity: 1,
+  },
 } as ThemeUIStyleObject;
 
 export {
@@ -374,6 +407,7 @@ export {
   noContent,
   iconExit,
   userFoto,
+  iconCopy,
   btnText,
   delBth,
   title,

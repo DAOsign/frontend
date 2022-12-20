@@ -18,6 +18,16 @@ const menuContainer = {
   },
 } as ThemeUIStyleObject;
 
+const copyIcon = {
+  marginLeft: "5px",
+  width: "10px",
+  opacity: 0.5,
+  height: "10px",
+  "&:hover": {
+    opacity: 1,
+  },
+} as ThemeUIStyleObject;
+
 const fotoContainer = {
   width: "292px",
   m: "0 auto",
@@ -57,4 +67,4 @@ const foto = {
   borderRadius: "50%",
 } as ThemeUIStyleObject;
 
-export { menuContainer, fotoContainer, foto };
+export { menuContainer, fotoContainer, foto, copyIcon };

@@ -2,7 +2,7 @@ import React from "react";
 import { Button, Container, Flex, Heading, Text } from "theme-ui";
 import iconsObj from "../../assets/icons";
 import Icon from "../icon";
-import styles from "./styles";
+import styles, { btnCancel } from "./styles";
 
 export default function Modal() {
   return (
@@ -44,9 +44,7 @@ export default function Modal() {
           >
             Apply
           </Button>
-          <Button sx={{ variant: "buttons.primary", width: "100px", cursor: "pointer" }}>
-            Cancel
-          </Button>
+          <Button sx={btnCancel}>Cancel</Button>
         </Flex>
       </Container>
     </Container>

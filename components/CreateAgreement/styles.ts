@@ -329,6 +329,12 @@ const stepStyle = {
 } as ThemeUIStyleObject;
 
 const uploadBtn = {
+  opacity: 0.5,
+  "&:hover": {
+    background: "unset",
+    backgroundColor: "transparent",
+    opacity: 1,
+  },
   "@media screen and (max-width: 768px)": {
     position: "absolute",
     right: 0,
@@ -361,6 +367,16 @@ const plus = {
   zIndex: 1,
 } as ThemeUIStyleObject;
 
+const btnBack = {
+  variant: "buttons.back",
+  opacity: 0.5,
+  "&:hover": {
+    backgroundColor: "transparent",
+    background: "unset",
+    opacity: 1,
+  },
+} as ThemeUIStyleObject;
+
 export {
   inputCreactAgreement,
   inputCreateAgreementWithRightButton,
@@ -382,6 +398,7 @@ export {
   rightSide,
   uploadBtn,
   leftSide,
+  btnBack,
   card,
   title,
   item,

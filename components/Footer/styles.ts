@@ -97,10 +97,6 @@ const footerText = {
   color: "#212121",
   alignItems: "baseline",
   "@media screen and (max-width: 1024px)": {
-    justifyContent: "flex-start",
-    pl: 0,
-  },
-  "@media screen and (max-width: 720px)": {
     justifyContent: "center",
     pl: 0,
   },
@@ -144,8 +140,10 @@ const aboutUs = {
   variant: "buttons.secondary",
   cursor: "pointer",
   "&:hover": {
-    color: "#CA5CF290",
-    borderColor: "#CA5CF290",
+    color: "#AE4FD0",
+    borderColor: "#AE4FD0",
+    backgroundColor: "transparent",
+    background: "unset",
   },
   "@media screen and (max-width: 720px)": {
     width: "100%",

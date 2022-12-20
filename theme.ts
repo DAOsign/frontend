@@ -33,12 +33,15 @@ export const theme: Theme = {
       borderRadius: "50px",
       backdropFilter: "blur(6px)",
       fontFamily: "InterMedium",
+      border: "1px solid #EDEDF3",
       fontStyle: "normal",
       color: "#212121",
       opacity: 0.5,
-      border: "unset",
       display: "block",
       paddingX: "20px",
+      "&:hover": {
+        border: "1px solid #00000030",
+      },
       "&:focus": {
         outline: "none",
       },
@@ -65,7 +68,7 @@ export const theme: Theme = {
       width: "310px",
       height: "50px",
       background: "#FFFFFF",
-      border: " 2px solid #EDEDF3",
+      border: "2px solid #EDEDF3",
       borderRadius: "80px",
       fontFamily: "InterBold",
       fontStyle: "normal",
@@ -74,6 +77,14 @@ export const theme: Theme = {
       lineHeight: "160%",
       textAlign: "center",
       color: "#212121",
+      "&:hover": {
+        border: "2px solid #ADADB5",
+        background: "#FFFFFF",
+      },
+      "&:focus": {
+        border: "2px solid #ADADB5",
+        background: "#FFFFFF",
+      },
     },
     primary: {
       ...btnBase,
@@ -90,7 +101,13 @@ export const theme: Theme = {
       marginLeft: "auto",
       marginRight: "auto",
       "&:hover": {
-        opacity: "0.9",
+        background: "linear-gradient(0deg, rgba(0, 0, 0, 0.14), rgba(0, 0, 0, 0.14)), #CA5CF2;",
+      },
+      "&:focus": {
+        background: "linear-gradient(0deg, rgba(0, 0, 0, 0.14), rgba(0, 0, 0, 0.14)), #CA5CF2;",
+      },
+      "&:disbled": {
+        opacity: 0.2,
       },
       "@media screen and (max-width: 375px)": {
         width: "100%",
@@ -101,7 +118,7 @@ export const theme: Theme = {
       height: "50px",
       width: "165px",
       borderRadius: "80px",
-      border: "2px solid #CA5CF2",
+      border: "2px solid #CA5CF250",
       backgroundColor: "inherit",
       color: "#CA5CF2",
       fontSize: "16px",
@@ -112,6 +129,12 @@ export const theme: Theme = {
       marginLeft: "auto",
       marginRight: "auto",
       textAlign: "center",
+      "&:hover": {
+        border: "2px solid #AE4FD0",
+      },
+      "&:focus": {
+        border: "2px solid  #AE4FD0",
+      },
       "@media screen and (max-width: 375px)": {
         width: "100%",
       },
@@ -138,7 +161,8 @@ export const theme: Theme = {
       px: 0,
       pb: 0,
       "&:hover": {
-        bg: "transparent",
+        backgroundColor:
+          "linear-gradient(0deg, rgba(0, 0, 0, 0.14), rgba(0, 0, 0, 0.14)), #CA5CF2;",
       },
     },
     link: {
@@ -183,6 +207,14 @@ export const theme: Theme = {
       height: "26px",
       width: "initial",
       border: "2px solid #EDEDF3",
+      "&:hover": {
+        background: "#FFFFFF",
+        border: "2px solid #ADADB5",
+      },
+      "&:focus": {
+        border: "2px solid  #ADADB5",
+        background: "#FFFFFF",
+      },
     },
   },
   fonts: {

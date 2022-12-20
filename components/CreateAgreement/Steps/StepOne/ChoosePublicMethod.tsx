@@ -1,7 +1,7 @@
 import React from "react";
 import NextLink from "next/link";
 import { Container, Flex, Text, Button, Box, Link } from "theme-ui";
-import { item, secondaryTitle, container } from "../../styles";
+import { item, secondaryTitle, container, btnBack } from "../../styles";
 import { useCreateAgreement } from "../../../../hooks/useCreateAgreement";
 import iconsObj from "../../../../assets/icons";
 import Icon from "../../../icon";
@@ -47,7 +47,7 @@ export default function PublicMethod({ animateContainer, setPublic }: PublicProp
               animateContainer();
               changeValue("agreementPrivacy", "");
             }}
-            sx={{ variant: "buttons.back" }}
+            sx={btnBack}
           >
             <Box sx={{ width: "14px" }}>
               <Icon style={{ display: "block" }} width="14px" src={iconsObj.arrowLeftPink} />
