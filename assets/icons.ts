@@ -42,6 +42,7 @@ import checkboxOn from "../img/svg/checkboxOn.svg";
 import chevronUp from "../img/svg/chevronUp.svg";
 import published from "../img/svg/published.svg";
 import privateIcon from "../img/svg/private.svg";
+import pinkArrow from "../img/svg/pinkArrow.svg";
 import publicIcon from "../img/svg/public.svg";
 import iconExit from "../img/svg/IconExit.svg";
 import calendar from "../img/svg/calendar.svg";
@@ -133,6 +134,7 @@ const iconsObj: IconsMapper = {
   plusCircle,
   publicIcon,
   chevronUp,
+  pinkArrow,
   published,
   pinkPlus,
   portfile,

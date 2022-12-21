@@ -162,7 +162,13 @@ export default function Footer({ animationNotVisible, setVisible }: any) {
           onClick={() => {
             window.open("https://consideritdone.tech/", "_blank");
           }}
-          sx={{ cursor: "pointer", color: "#CA5CF2", ml: "5px" }}
+          sx={{
+            cursor: "pointer",
+            color: "#CA5CF2",
+            ml: "5px",
+            opacity: 0.5,
+            "&:hover": { opacity: 1 },
+          }}
         >
           CIDT
         </Text>

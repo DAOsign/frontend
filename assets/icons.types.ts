@@ -39,6 +39,7 @@ export interface IconsMapper extends Record<string, unknown> {
   checkboxOn: Icon;
   plusCircle: Icon;
   chevronUp: Icon;
+  pinkArrow: Icon;
   published: Icon;
   iconExit: Icon;
   settings: Icon;

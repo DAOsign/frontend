@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Container, Flex, Input, Text, Box, Checkbox } from "theme-ui";
 import iconsObj from "../../assets/icons";
+import CheckboxCopmonent from "../Checkbox";
 
 import Icon from "../icon";
 import {
@@ -38,10 +39,10 @@ export default function Filter({ setVisible, onChange, reset, filterOptions }: a
           return (
             <Flex
               onClick={() => onChange(el.id)}
-              sx={{ ...conteinerCheckbox, opacity: el.value ? 1 : 0.5 }}
+              sx={{ ...conteinerCheckbox, opacity: el.value ? 1 : 0.5, position: "relative" }}
               key={el.id}
             >
-              <Checkbox checked={el.value} />
+              <CheckboxCopmonent checked={el.value} />
               <Text sx={text}>{el.name}</Text>
             </Flex>
           );
@@ -51,20 +52,24 @@ export default function Filter({ setVisible, onChange, reset, filterOptions }: a
           return (
             <Flex
               onClick={() => onChange(el.id)}
-              sx={{ ...conteinerCheckbox, opacity: el.value ? 1 : 0.5 }}
+              sx={{ ...conteinerCheckbox, opacity: el.value ? 1 : 0.5, position: "relative" }}
               key={el.id}
             >
-              <Checkbox checked={el.value} />
+              <CheckboxCopmonent checked={el.value} />
               <Text sx={text}>{el.name}</Text>
             </Flex>
           );
         })}
         <Text sx={secondaryTitle}>Signature</Text>
         <Flex
-          sx={{ ...conteinerCheckbox, opacity: filterOptions.signature.value ? 1 : 0.5 }}
+          sx={{
+            ...conteinerCheckbox,
+            opacity: filterOptions.signature.value ? 1 : 0.5,
+            position: "relative",
+          }}
           onClick={() => onChange(filterOptions.signature.id)}
         >
-          <Checkbox checked={filterOptions.signature.value} />
+          <CheckboxCopmonent checked={filterOptions.signature.value} />
           <Text sx={text}>{filterOptions.signature.name}</Text>
         </Flex>
 

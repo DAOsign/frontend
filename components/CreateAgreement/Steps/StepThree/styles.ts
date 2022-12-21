@@ -17,11 +17,15 @@ export const verificationCardStyles: ThemeUIStyleObject = {
     pb: "6px",
     alignSelf: "flex-start",
   },
+  ".card_head > div:first-child": {
+    display: "none",
+  },
   ".card_body": {
     color: "dark",
     alignSelf: "center",
     py: "6px",
     pr: "10px",
+    ml: "56px",
     ".title": {
       fontSize: "16px",
       fontFamily: "InterBold",

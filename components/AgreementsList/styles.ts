@@ -39,7 +39,6 @@ const iconPlus = {
 
 const iconExit = {
   position: "absolute",
-  paddingTop: "19px",
   right: "18px",
   top: "18px",
   width: "15px",
