@@ -27,8 +27,11 @@ const imageUploadContainer = {
   borderRadius: "12px",
   position: "relative",
   width: "440px",
-  height: "140px",
+  height: "280px",
   mb: "2px",
+  display: "flex",
+  alignItems: "center",
+  justifyContent: "center",
   "@media screen and (max-width: 768px)": {
     width: "124px",
     height: "46px",
@@ -43,15 +46,26 @@ const imageUploadContainer = {
     overflow: "hidden",
   },
   "[id='txt-renderer']": {
-    p: "15px",
+    p: "10px",
   },
   "[id='pdf-controls']": {
     display: "none",
+  },
+  "[id='pdf-renderer']": {
+    overflow: "hidden",
+    background: "silver",
+  },
+  "[id='pdf-page-wrapper']": {
+    margin: "0",
+  },
+  ".react-pdf__Document": {
+    m: "0 auto",
   },
 } as ThemeUIStyleObject;
 
 export const previewContainer = {
   height: "100%",
+  width: "100%",
   ".preview": {
     overflow: "hidden",
     borderRadius: "12px",
@@ -63,7 +77,6 @@ const uploadText = {
   variant: "text.smallTextMedium",
   display: "block",
   opacity: 1,
-  mt: "48px",
   "@media screen and (max-width: 768px)": {
     display: "none",
   },

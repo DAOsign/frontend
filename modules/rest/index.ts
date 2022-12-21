@@ -47,7 +47,7 @@ export const restoreCloudFile = async (url: string) => {
 export const restoreIpfsFile = async (hash: string) => {
   return axios
     .get("/api/getFromIpfs", {
-      params: { hash: "QmaNxbQNrJdLzzd8CKRutBjMZ6GXRjvuPepLuNSsfdeJRJ" },
+      params: { hash: hash },
       responseType: "blob",
     })
     .then(res => {

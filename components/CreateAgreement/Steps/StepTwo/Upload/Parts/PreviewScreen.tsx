@@ -5,6 +5,7 @@ import iconsObj from "../../../../../../assets/icons";
 import Icon from "../../../../../icon";
 import { previewContainer } from "../../../../styles";
 import { useCreateAgreement } from "../../../../../../hooks/useCreateAgreement";
+import { Link } from "theme-ui";
 
 const FileViewer = dynamic(() => import("@cyntler/react-doc-viewer"), {
   ssr: false,
@@ -17,6 +18,14 @@ const getIconByFileType = (type: string) => {
 const PreviewScreen = ({ file, setFile }: FileState) => {
   const { changeValue } = useCreateAgreement();
 
+  const getFilePath = () => {
+    if (typeof window !== "undefined" && file) {
+      return window.URL.createObjectURL(file);
+    }
+
+    return "#";
+  };
+
   return file ? (
     <Box sx={previewContainer} className="previewContainer">
       <Box className="preview">
@@ -25,31 +34,29 @@ const PreviewScreen = ({ file, setFile }: FileState) => {
           config={{ header: { disableHeader: true } }}
         />
       </Box>
-      <iframe
-        id="msdoc-iframe"
-        title="msdoc-iframe"
-        src={`https://view.officeapps.live.com/op/embed.aspx?src=${encodeURIComponent(
-          window.URL.createObjectURL(file)
-        )}`}
-        frameBorder="0"
-      />
       <Box sx={{ display: "flex", justifyContent: "space-between", height: "26px", gap: "20px" }}>
         <Flex sx={{ gap: "8px", alignItems: "center" }}>
-          <Box sx={{ width: "18px" }}>
-            <Icon src={getIconByFileType(file?.type)} />
-          </Box>
-          <Text
-            sx={{
-              fontFamily: "InterMedium",
-              fontWeight: "500",
-              lineHeight: "160%",
-              overflow: "hidden",
-              whiteSpace: "nowrap",
-              textOverflow: "ellipsis",
-            }}
+          <Link
+            href={getFilePath()}
+            target={"_blank"}
+            sx={{ display: "flex", alignItems: "center", gap: "8px" }}
           >
-            {file?.name}
-          </Text>
+            <Box sx={{ width: "18px" }}>
+              <Icon src={getIconByFileType(file?.type)} />
+            </Box>
+            <Text
+              sx={{
+                fontFamily: "InterMedium",
+                fontWeight: "500",
+                lineHeight: "160%",
+                overflow: "hidden",
+                whiteSpace: "nowrap",
+                textOverflow: "ellipsis",
+              }}
+            >
+              {file?.name}
+            </Text>
+          </Link>
         </Flex>
         <Box sx={{ minWidth: "unset" }}>
           <Flex
