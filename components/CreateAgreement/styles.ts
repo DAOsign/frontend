@@ -186,6 +186,7 @@ const container = {
   borderRadius: "8px",
   px: "32px",
   py: "24px",
+  position: "relative",
   "@media screen and (max-width: 768px)": {
     maxWidth: "343px",
     paddingX: "16px",
@@ -196,6 +197,7 @@ const container = {
 
 const card = {
   textAlign: "center",
+  position: "absolute",
   border: "2px solid #F7F7FB",
   borderRadius: "8px",
   px: "24px",
@@ -205,6 +207,7 @@ const card = {
   m: 0,
   cursor: "pointer",
   minHeight: "230px",
+  height: "232px",
   transition: ".3s all",
   "@media screen and (max-width: 768px)": {
     maxWidth: "150px",
@@ -212,6 +215,48 @@ const card = {
   },
   "&.active": {
     borderColor: "pink",
+  },
+} as ThemeUIStyleObject;
+
+const rightCard = {
+  ...card,
+  cursor: "pointer",
+  right: 0,
+  width: "210px",
+  height: "232px",
+  "&:hover": {
+    right: "-5px",
+    width: "220px",
+    maxWidth: "220px",
+    height: "242px",
+    top: "-5px",
+  },
+  "&:hover > div": {
+    margin: "0 auto",
+    position: "relative",
+    top: "5px",
+    right: "0",
+  },
+} as ThemeUIStyleObject;
+
+const leftCard = {
+  ...card,
+  cursor: "pointer",
+  left: 0,
+  width: "210px",
+  height: "232px",
+  "&:hover": {
+    left: "-5px",
+    width: "220px",
+    maxWidth: "220px",
+    height: "242px",
+    top: "-5px",
+  },
+  "&:hover > div": {
+    margin: "0 auto",
+    position: "relative",
+    top: "5px",
+    left: "0",
   },
 } as ThemeUIStyleObject;
 
@@ -408,8 +453,10 @@ export {
   itemRadio,
   uploadText,
   stepStyle,
+  rightCard,
   rightSide,
   uploadBtn,
+  leftCard,
   leftSide,
   btnBack,
   card,

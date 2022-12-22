@@ -33,6 +33,17 @@ const tabStyles: ThemeUIStyleObject = {
   ".wmde-markdown": {
     background: "none",
   },
+  ".backBtn": {
+    variant: "buttons.back",
+    height: "30px",
+    opacity: 0.5,
+    pt: 0,
+    "&:hover": {
+      background: "unset",
+      backgroundColor: "transparent",
+      opacity: 1,
+    },
+  },
 };
 
 export default tabStyles;

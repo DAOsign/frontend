@@ -45,18 +45,9 @@ const TextEditor = () => {
     <Box style={{ position: "relative" }} sx={styles}>
       <Flex sx={{ alignItems: "center" }}>
         <Text sx={{ variant: "forms.label", minWidth: "170px" }}>Enter agreement description</Text>
-        <Button
-          onClick={() => changeValue("agreementMethod", "")}
-          sx={{
-            variant: "buttons.back",
-            height: "30px",
-            pt: 0,
-            background: "unset",
-            backgroundColor: "transparent",
-          }}
-        >
+        <Button className="backBtn" onClick={() => changeValue("agreementMethod", "")}>
           <Icon style={{ display: "block" }} src={iconsObj.arrowLeftPink} />
-          <Text sx={{ display: "block", fontSize: "10px" }}>{"<"} Choose another method</Text>
+          <Text sx={{ display: "block", fontSize: "10px" }}>{" < "} Choose another method</Text>
         </Button>
       </Flex>
 

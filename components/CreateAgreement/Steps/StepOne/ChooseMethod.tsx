@@ -1,6 +1,6 @@
 import React from "react";
-import { Container, Flex, Text } from "theme-ui";
-import { card } from "../../styles";
+import { Container, Flex, Text, Box } from "theme-ui";
+import { rightCard, leftCard } from "../../styles";
 import { useCreateAgreement } from "../../../../hooks/useCreateAgreement";
 import iconsObj from "../../../../assets/icons";
 import Icon from "../../../icon";
@@ -24,9 +24,9 @@ export default function ChooseMethod({ animateContainer, setPublic }: PublicProp
       variants={chooseVariants}
       transition={{ type: "linear" }}
     >
-      <Flex sx={{ justifyContent: "space-between" }}>
+      <Container sx={{ position: "relative", height: "242px" }}>
         <Container
-          sx={card}
+          sx={leftCard}
           onClick={() => {
             changeValue("errors", { ...values.errors, agreementPrivacy: null });
             changeValue("agreementPrivacy", "");
@@ -34,28 +34,32 @@ export default function ChooseMethod({ animateContainer, setPublic }: PublicProp
             setPublic(true);
           }}
         >
-          <div style={{ width: "50px", height: "50px", margin: "0 auto" }}>
-            <Icon width="50px" height="50px" src={iconsObj.publicIcon} />
-          </div>
-          <Text sx={{ variant: "text.largeTextBold", mt: "20px" }}>Public</Text>
-          <Text sx={{ variant: "text.overscript", mt: "20px", maxWidth: "160px" }}>
-            Accessed Publicly based on sharing opionts
-          </Text>
+          <Box sx={{ maxWidth: "150px", m: "0 auto" }}>
+            <div style={{ width: "50px", height: "50px", margin: "0 auto" }}>
+              <Icon width="50px" height="50px" src={iconsObj.publicIcon} />
+            </div>
+            <Text sx={{ variant: "text.largeTextBold", mt: "20px" }}>Public</Text>
+            <Text sx={{ variant: "text.overscript", mt: "20px", maxWidth: "160px" }}>
+              Accessed Publicly based on sharing opionts
+            </Text>
+          </Box>
         </Container>
         <Container
-          sx={card}
+          sx={rightCard}
           onClick={() => changeValue("agreementPrivacy", PRIVACY_PRIVATE)}
           className={values.agreementPrivacy === PRIVACY_PRIVATE ? "active" : undefined}
         >
-          <div style={{ width: "50px", height: "50px", margin: "0 auto" }}>
-            <Icon width="50px" height="50px" src={iconsObj.privateIcon} />
-          </div>
-          <Text sx={{ variant: "text.largeTextBold", mt: "20px" }}>Private</Text>
-          <Text sx={{ variant: "text.overscript", mt: "20px", maxWidth: "160px" }}>
-            Accessed only by Signers or Observes
-          </Text>
+          <Box sx={{ maxWidth: "150px", m: "0 auto" }}>
+            <div style={{ width: "50px", height: "50px", margin: "0 auto" }}>
+              <Icon width="50px" height="50px" src={iconsObj.privateIcon} />
+            </div>
+            <Text sx={{ variant: "text.largeTextBold", mt: "20px" }}>Private</Text>
+            <Text sx={{ variant: "text.overscript", mt: "20px", maxWidth: "160px" }}>
+              Accessed only by Signers or Observes
+            </Text>
+          </Box>
         </Container>
-      </Flex>
+      </Container>
     </motion.main>
   );
 }
