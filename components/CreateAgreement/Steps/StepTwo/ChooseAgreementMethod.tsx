@@ -27,7 +27,10 @@ export default function ChooseAgreementMethod() {
         return withFade(
           <>
             <UploadLocalAgreement />
-            <FieldErrorMessage error={values?.errors?.agreementFile} />
+            <FieldErrorMessage
+              error={values?.errors?.agreementFile}
+              sx={values?.file ? { marginBottom: "-45px !important" } : {}}
+            />
           </>,
           2
         );

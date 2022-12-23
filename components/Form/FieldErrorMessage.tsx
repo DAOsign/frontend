@@ -1,13 +1,14 @@
 import React from "react";
 import { FieldError } from "../../types";
-import { Box, Text } from "theme-ui";
+import { Box, Text, ThemeUIStyleObject } from "theme-ui";
 
 interface Props {
   error: FieldError;
   isAbsolutePosition?: boolean;
+  sx?: ThemeUIStyleObject;
 }
 
-function FieldErrorMessage({ error, isAbsolutePosition = true }: Props) {
+function FieldErrorMessage({ error, isAbsolutePosition = true, sx = {} }: Props) {
   return error ? (
     <Box sx={{ position: "relative" }}>
       <Text
@@ -15,6 +16,7 @@ function FieldErrorMessage({ error, isAbsolutePosition = true }: Props) {
           variant: "forms.inputError",
           position: isAbsolutePosition ? "absolute" : "relative",
           marginBottom: isAbsolutePosition ? "-20px" : "0",
+          ...sx,
         }}
       >
         * {error}

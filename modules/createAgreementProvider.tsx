@@ -18,7 +18,7 @@ export interface CreateAgreementFieldErrors {
   signers?: FieldError;
 }
 
-interface CreationState {
+export interface CreationState {
   title: string;
   agreementPrivacy: AgreementPrivacy;
   agreementMethod: AgreementMethod;
@@ -28,6 +28,7 @@ interface CreationState {
   agreementHash?: string;
   observers: { id: number; value: string }[];
   signers: { id: number; value: string }[];
+  file: File | undefined;
   errors: CreateAgreementFieldErrors;
 }
 interface CreateAgrementContext {
@@ -47,6 +48,7 @@ const defaultState: CreationState = {
   filePath: "",
   observers: [],
   signers: [],
+  file: undefined,
   errors: {},
 };
 
@@ -91,7 +93,7 @@ const CreateAgreementProvider = (props?: Partial<ProviderProps<CreateAgrementCon
         agreementHash:
           key === "agreementLocation" ? "" : key === "agreementHash" ? value : state.agreementHash,
       };
-      saveDraft({ ...newState, errors: {} });
+      saveDraft({ ...newState, file: undefined, errors: {} });
       return newState;
     });
   };
@@ -140,7 +142,7 @@ const CreateAgreementProvider = (props?: Partial<ProviderProps<CreateAgrementCon
       ...prevState,
       errors: { ...prevState.errors, agreementFile: null },
     }));
-  }, [values?.agreementMethod, values?.agreementHash, values?.textEditorValue]);
+  }, [values?.agreementMethod, values?.agreementHash, values?.textEditorValue, values?.file]);
 
   useEffect(() => {
     setValues(prevState => ({

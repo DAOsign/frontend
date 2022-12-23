@@ -2,28 +2,34 @@ import React from "react";
 import { Box } from "theme-ui";
 import { PreviewScreen, UploadPaceholder } from "./";
 import { imageUploadContainer } from "../../../../styles";
-import { FileState } from "..";
+import { useCreateAgreement } from "../../../../../../hooks/useCreateAgreement";
 
-const UploadScreen = ({
-  file,
-  setFile,
-  readFile,
-}: FileState & {
-  readFile: (target: EventTarget & HTMLInputElement) => void;
-}) => {
+const UploadScreen = () => {
+  const { values, changeValue } = useCreateAgreement();
+
+  const handleReadFile = (event: React.ChangeEvent<HTMLInputElement>) => {
+    let file = event?.target?.files && (event?.target?.files[0] as File);
+
+    if (file) {
+      changeValue("filePath", "");
+      changeValue("agreementHash", "");
+      changeValue("file", file);
+    }
+  };
+
   return (
     <>
-      <Box sx={imageUploadContainer} className={file ? "uploaded" : undefined}>
+      <Box sx={imageUploadContainer} className={values.file ? "uploaded" : undefined}>
         <input
           lang="en"
-          onChange={({ target }) => readFile(target)}
+          onChange={handleReadFile}
           className="file"
           id="file"
           type="file"
           name="file"
           accept=".txt,.pdf,.doc,.docx"
         />
-        {file ? <PreviewScreen file={file} setFile={setFile} /> : <UploadPaceholder />}
+        {values.file ? <PreviewScreen file={values.file} /> : <UploadPaceholder />}
       </Box>
     </>
   );

@@ -11,7 +11,7 @@ interface checkbox {
 const CheckboxCopmonent = ({ checked }: checkbox) => {
   return (
     <>
-      <Checkbox checked={checked} />
+      <Checkbox defaultChecked={checked} />
       <Box
         sx={{
           border: !checked ? "1.8px solid #21212150" : "1.8px solid #212121",

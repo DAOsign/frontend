@@ -1,27 +1,36 @@
 import React, { useState } from "react";
 import { useRouter } from "next/router";
 import Icon from "../icon/index";
-import { Container, Flex, Text, Button, Box, ButtonProps } from "theme-ui";
+import { Box, Button, ButtonProps, Container, Flex, Spinner, Text } from "theme-ui";
 import { useCreateAgreement } from "../../hooks/useCreateAgreement";
 import iconsObj from "../../assets/icons";
 import {
-  secondaryTitleStep,
-  primaryTitleItem,
-  containerButtons,
-  stepsContainer,
-  leftSideItem,
-  stepNumber,
-  stepStyle,
   box,
+  containerButtons,
   fW,
+  leftSideItem,
+  primaryTitleItem,
+  secondaryTitleStep,
+  stepNumber,
+  stepsContainer,
+  stepStyle,
 } from "./styles";
 import { useMutation } from "urql";
 import { addAgreementMutation } from "../../modules/graphql/mutations";
-import { METHOD_ENTER, METHOD_UPLOAD } from "../../types";
-import { clearDraft, CreateAgreementFieldErrors } from "../../modules/createAgreementProvider";
+import { LOCATION_CLOUD, LOCATION_PUBLIC_IPFS, METHOD_ENTER, METHOD_UPLOAD } from "../../types";
+import {
+  clearDraft,
+  CreateAgreementFieldErrors,
+  CreationState,
+} from "../../modules/createAgreementProvider";
 import { isEmpty } from "../../utils/common";
 import { useWeb3 } from "../../hooks/useWeb3";
 import ModalAuthorNotAdded from "../ModalAuthorNotAdded/ModalAuthorNotAdded";
+import { calculateIpfsHash } from "../../utils/ipfs";
+import { uploadFile, uploadToIpfs } from "../../modules/rest";
+import { notifError } from "../../utils/notification";
+
+const FILE_UPLOAD_ERROR_DEFAULT_MESSAGE = "Failed to upload file";
 
 export default function NavPanel() {
   const { values, changeValue } = useCreateAgreement();
@@ -30,9 +39,10 @@ export default function NavPanel() {
 
   const step = query?.step ? Number(query.step) : 1;
 
+  const [isLoadingNextStep, setIsLoadingNextStep] = useState<boolean>(false);
   const [isAuthorNotAddedPopupVisible, setIsAuthorNotAddedPopupVisible] = useState<boolean>(false);
 
-  const validateFields = (isSavingDraft: boolean = false): boolean => {
+  const validateFields = (values: CreationState, isSavingDraft: boolean = false): boolean => {
     const errors: CreateAgreementFieldErrors = {};
     let extraError: string | null = null;
 
@@ -68,9 +78,6 @@ export default function NavPanel() {
           if (!values.signers.length) {
             errors.signers = "At least one signer is required";
           }
-          if (!values.observers.length) {
-            errors.observers = "At least one observer is required";
-          }
           if (
             !values.signers?.some(signer => signer.value === account) &&
             !values.observers?.some(observer => observer.value === account)
@@ -84,6 +91,45 @@ export default function NavPanel() {
     changeValue("errors", errors);
 
     return isEmpty(errors) && !extraError;
+  };
+
+  const uploadNewFile = async (
+    file: File
+  ): Promise<{ filePath?: string; agreementHash?: string; error?: any }> => {
+    let calculatedIpfsHash: any;
+    try {
+      const hash = await calculateIpfsHash(file);
+      if (hash) {
+        changeValue("agreementHash", hash);
+        calculatedIpfsHash = hash;
+      }
+    } catch (error) {
+      return { error };
+    }
+
+    if (values.agreementLocation === LOCATION_PUBLIC_IPFS) {
+      const uploadResult = await uploadToIpfs(file);
+      if (!uploadResult.IpfsHash) {
+        return { error: uploadResult };
+      }
+      return { agreementHash: calculatedIpfsHash };
+    }
+
+    if (values.agreementLocation === LOCATION_CLOUD) {
+      try {
+        const res = await uploadFile(file);
+        if (res && "fileLink" in res) {
+          changeValue("filePath", res.fileLink);
+          return { filePath: res.fileLink, agreementHash: calculatedIpfsHash };
+        } else {
+          return { error: res };
+        }
+      } catch (error) {
+        return { error };
+      }
+    }
+
+    return { error: { message: "Invalid agreement location" } };
   };
 
   const [{ fetching: addingAgreement }, addAgreement] = useMutation(addAgreementMutation);
@@ -114,7 +160,7 @@ export default function NavPanel() {
   };
 
   const handleSaveDraft = async () => {
-    const areFieldsValid = validateFields(true);
+    const areFieldsValid = validateFields(values, true);
     if (areFieldsValid) {
       return handleCreateAgreement(false);
     }
@@ -124,6 +170,9 @@ export default function NavPanel() {
     push({ query: { step: step + 1 } }, undefined, { shallow: true });
   };
   const handlePrevStep = () => {
+    if (step === 1 && (!values.filePath || !values.agreementHash)) {
+      changeValue("file", undefined);
+    }
     push({ query: { step: step > 1 ? step - 1 : 1 } }, undefined, { shallow: true });
   };
 
@@ -137,19 +186,49 @@ export default function NavPanel() {
       variant: "primary",
       sx: { ...fW, mt: "20px" },
       type: "button",
-      onClick: () => {
-        const areFieldsValid = validateFields();
-        if (areFieldsValid) {
-          if (isFinishButton) {
-            handleCreateAgreement();
-          } else {
-            handleNextStep();
+      onClick: async () => {
+        if (isLoadingNextStep) return;
+
+        setIsLoadingNextStep(true);
+        try {
+          let uploadedFileData: { filePath?: string; agreementHash?: string; error?: any } = {};
+          if (step === 2 && values.file && (!values.filePath || !values.agreementHash)) {
+            uploadedFileData = await uploadNewFile(values.file);
+            if (!uploadedFileData || uploadedFileData.error) {
+              console.error(uploadedFileData.error || new Error(FILE_UPLOAD_ERROR_DEFAULT_MESSAGE));
+              notifError(uploadedFileData.error.message || FILE_UPLOAD_ERROR_DEFAULT_MESSAGE);
+              return;
+            }
           }
+
+          const areFieldsValid = validateFields({ ...values, ...uploadedFileData });
+          if (areFieldsValid) {
+            if (isFinishButton) {
+              await handleCreateAgreement();
+            } else {
+              handleNextStep();
+            }
+          }
+        } catch (error) {
+          console.error(error);
+          notifError(error?.message || FILE_UPLOAD_ERROR_DEFAULT_MESSAGE);
+        } finally {
+          setIsLoadingNextStep(false);
         }
       },
-      disabled: isFinishButton ? addingAgreement : false,
+      disabled: isLoadingNextStep || addingAgreement,
     };
-    return <Button {...props}>{isFinishButton ? "Create Agreement" : "Next Step"}</Button>;
+    return (
+      <Button {...props}>
+        {isLoadingNextStep ? (
+          <Spinner size={12} color="#ffffff" />
+        ) : isFinishButton ? (
+          "Create Agreement"
+        ) : (
+          "Next Step"
+        )}
+      </Button>
+    );
   };
 
   const BackwardButton = () => {
@@ -159,6 +238,7 @@ export default function NavPanel() {
       sx: { ...fW, mt: "60px" },
       variant: "secondary",
       type: "button",
+      disabled: isLoadingNextStep || addingAgreement,
     };
     return <Button {...props}>{isCancelButton ? "Cancel" : "Back"}</Button>;
   };
@@ -216,7 +296,7 @@ export default function NavPanel() {
           sx={{ ...fW, mt: "20px" }}
           type="button"
           onClick={handleSaveDraft}
-          disabled={addingAgreement}
+          disabled={isLoadingNextStep || addingAgreement}
         >
           Save Draft
         </Button>

@@ -1,3 +1,4 @@
+import { useEffect, useState } from "react";
 import dynamic from "next/dynamic";
 import { Flex, Box, Text } from "theme-ui";
 import { FileState } from "..";
@@ -15,29 +16,50 @@ const getIconByFileType = (type: string) => {
   return iconsObj.fileSvg;
 };
 
-const PreviewScreen = ({ file, setFile }: FileState) => {
+const DEFAULT_FILE_PATH = "#";
+
+const FILE_VIEWER_CONFIG = { header: { disableHeader: true } };
+
+interface Document {
+  uri: string;
+  fileName: string;
+}
+
+const PreviewScreen = ({ file }: FileState) => {
   const { changeValue } = useCreateAgreement();
 
-  const getFilePath = () => {
-    if (typeof window !== "undefined" && file) {
-      return window.URL.createObjectURL(file);
-    }
+  const [documents, setDocuments] = useState<Document[]>([]);
 
-    return "#";
+  useEffect(() => {
+    const getDocuments = () => {
+      let filePath;
+      if (typeof window !== "undefined" && file) {
+        filePath = window.URL.createObjectURL(file);
+      } else {
+        filePath = DEFAULT_FILE_PATH;
+      }
+
+      setDocuments([{ uri: filePath, fileName: file?.name || "agreement file" }]);
+    };
+
+    getDocuments();
+  }, [file]);
+
+  const handleDelete = () => {
+    changeValue("filePath", "");
+    changeValue("agreementHash", "");
+    changeValue("file", undefined);
   };
 
   return file ? (
     <Box sx={previewContainer} className="previewContainer">
       <Box className="preview">
-        <FileViewer
-          documents={[{ uri: window.URL.createObjectURL(file), fileName: file.name }]}
-          config={{ header: { disableHeader: true } }}
-        />
+        <FileViewer documents={documents} config={FILE_VIEWER_CONFIG} />
       </Box>
       <Box sx={{ display: "flex", justifyContent: "space-between", height: "26px", gap: "20px" }}>
         <Flex sx={{ gap: "8px", alignItems: "center" }}>
           <Link
-            href={getFilePath()}
+            href={documents[0]?.uri}
             target={"_blank"}
             sx={{ display: "flex", alignItems: "center", gap: "8px" }}
           >
@@ -60,11 +82,7 @@ const PreviewScreen = ({ file, setFile }: FileState) => {
         </Flex>
         <Box sx={{ minWidth: "unset" }}>
           <Flex
-            onClick={() => {
-              changeValue("filePath", "");
-              changeValue("agreementHash", "");
-              setFile(undefined);
-            }}
+            onClick={handleDelete}
             sx={{
               variant: "text.link",
               fontSize: "12px",
