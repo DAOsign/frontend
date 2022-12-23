@@ -37,7 +37,11 @@ export default function Connect() {
 
   return (
     <Container
-      sx={{ ...container, backgroundColor: !loadingConnect ? "rgba(255, 255, 255, 0.24)" : "#fff" }}
+      sx={{
+        ...container,
+        backgroundColor: !loadingConnect ? "rgba(255, 255, 255, 0.24)" : "#fff",
+        mb: loadingConnect ? "226px" : "0",
+      }}
     >
       <Heading sx={title}>Connect a Wallet</Heading>
       {loadingConnect ? (

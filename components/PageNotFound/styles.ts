@@ -2,8 +2,8 @@ import { ThemeUIStyleObject } from "theme-ui";
 const leftSideContainer = {
   maxWidth: "384px",
   minHeight: "372px",
-  pt: "132px",
-  pb: "139px",
+  pt: "51px",
+  pb: "85px",
   textAlign: "left",
   ml: "auto",
   mr: "0",
@@ -12,16 +12,15 @@ const leftSideContainer = {
     pt: "0",
     ml: "auto",
     mr: "auto",
-    //  ml: "52px",
   },
 } as ThemeUIStyleObject;
 
 const rightSideContainer = {
-  paddingTop: "80px",
+  paddingTop: "35px",
   width: "495px",
   height: "442px",
   "@media screen and (max-width: 1024px)": {
-    mt: "100px",
+    mt: "50px",
     mr: "auto",
     width: "356px",
     height: "253px",
@@ -89,14 +88,8 @@ const leftContainer = {
 } as ThemeUIStyleObject;
 
 const footerNotFoundPage = {
-  marginTop: "224px",
+  marginTop: "-124px",
   position: "relative",
-  "@media screen and (max-width: 1024px)": {
-    mt: "300px",
-  },
-  "@media screen and (max-width: 768px)": {
-    mt: "600px",
-  },
 } as ThemeUIStyleObject;
 export {
   leftSideContainer,

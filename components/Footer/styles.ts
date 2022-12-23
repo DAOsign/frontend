@@ -169,18 +169,8 @@ const icon = {
   "&:hover": {
     opacity: 1,
   },
-  "& .first": {
-    zIndex: "1",
-  },
-  "&:hover .first ": {
-    display: "none",
-  },
-  "& .second": {
-    display: "none",
-    zIndex: "1",
-  },
-  "&:hover .second": {
-    display: "block",
+  "&:hover > svg > path": {
+    stroke: "#CA5CF2",
   },
 } as ThemeUIStyleObject;
 

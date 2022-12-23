@@ -12,17 +12,13 @@ import arrowNarrowLeft from "../img/svg/arrowNarrowLeft.svg";
 import proofSecondary from "../img/svg/proofSecondary.svg";
 import LostConnection from "../img/svg/LostConnection.svg";
 import phoneSecondary from "../img/svg/phoneSecondary.svg";
-import facebookViolet from "../img/svg/facebookViolet.svg";
 import arrowLeftPink from "../img/svg/arrowLeftPink.svg";
 import calendarMinus from "../img/svg/calendarMinus.svg";
 import alertTriangle from "../img/svg/alertTriangle.svg";
 import calendarCheck from "../img/svg/calendarCheck.svg";
-import twitterViolet from "../img/svg/twitterViolet.svg";
-import telegramViolet from "../img/svg/telegramPink.svg";
 import chevronRight from "../img/svg/chevronRight.svg";
 import bookmarkVote from "../img/svg/bookmarkVote.svg";
 import trashPrimary from "../img/svg/trashPrimary.svg";
-import githubViolet from "../img/svg/githubViolet.svg";
 import ellipseGreen from "../img/svg/EllipseGreen.svg";
 import chevronDown from "../img/svg/chevronDown.svg";
 import heartViolet from "../img/svg/heartViolet.svg";
@@ -34,7 +30,6 @@ import layersThree from "../img/svg/layersThree.svg";
 import checkboxOff from "../img/svg/checkboxOff.svg";
 import checkCircle from "../img/svg/checkCircle.svg";
 import greyPercent from "../img/svg/greyPercent.svg";
-import worldViolet from "../img/svg/worldViolet.svg";
 import infoCircle from "../img/svg/infoCircle.svg";
 import plusCircle from "../img/svg/plusCircle.svg";
 import logoHeader from "../img/svg/logoHeader.svg";
@@ -104,16 +99,11 @@ const iconsObj: IconsMapper = {
   proofSecondary,
   LostConnection,
   phoneSecondary,
-  telegramViolet,
   calendarMinus,
   alertTriangle,
-  facebookViolet,
   calendarCheck,
   arrowLeftPink,
-  twitterViolet,
   trashPrimary,
-  githubViolet,
-  worldViolet,
   heartViolet,
   bookmarkVote,
   chevronRight,

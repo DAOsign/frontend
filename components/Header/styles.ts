@@ -33,18 +33,22 @@ const addresContainer = {
 } as ThemeUIStyleObject;
 
 const iconMenu = {
+  variant: "buttons.itemsBtn",
   display: "none",
   ml: "16px",
   width: "42px",
   height: "42px",
   borderRadius: "50%",
   backgroundColor: "#F7F7FB",
+  background: "#F7F7FB",
   textAlign: "center",
   padding: 0,
   cursor: "poiner",
   "@media screen and (max-width: 768px)": {
     display: "block",
   },
+  "&:hover": { backgroundColor: "#F7F7FB" },
+  "&:focus": { backgroundColor: "#F7F7FB" },
 } as ThemeUIStyleObject;
 
 const identiconIcon = {
@@ -53,4 +57,9 @@ const identiconIcon = {
   marginRight: "8px",
 } as ThemeUIStyleObject;
 
-export { addresContainer, container, iconMenu, identiconIcon };
+const iconBell = {
+  width: "24px",
+  height: "24px",
+  m: "0 auto",
+} as ThemeUIStyleObject;
+export { addresContainer, container, iconMenu, identiconIcon, iconBell };

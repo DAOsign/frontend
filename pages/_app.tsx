@@ -7,6 +7,7 @@ import { theme } from "../theme";
 import "../styles/globals.css";
 import { getToken } from "../utils/token";
 import Layout from "../components/Layout";
+import "react-toastify/dist/ReactToastify.css";
 
 const client = createClient({
   url: String(process.env.NEXT_PUBLIC_GRAPHQL_ENDPOINT),

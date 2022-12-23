@@ -4,28 +4,30 @@ import { Box, Flex, Text } from "theme-ui";
 import Icon from "../../components/icon/index";
 import iconsObj from "../../assets/icons";
 
-export const notifSucces = (text: string) =>
-  toast(
+const toastList = new Set();
+
+export const notifSucces = (text: string) => {
+  const id = toast(
     <Flex sx={{ alignItems: "center" }}>
+      {" "}
       <Box sx={{ width: "44px", height: "44px", mr: "16px" }}>
-        <Icon src={iconsObj.good} />
+        <Icon src={iconsObj.good} />{" "}
       </Box>
-      {text}
+      {text}{" "}
     </Flex>,
     {
       position: "top-right",
-      autoClose: 2000,
-      hideProgressBar: false,
-      closeOnClick: true,
-      pauseOnHover: true,
-      draggable: true,
-      progress: undefined,
-      theme: "light",
+      autoClose: 3000,
     }
   );
+  setTimeout(() => {
+    toast.dismiss(id);
+  }, 3000);
+  toastList.add(id);
+};
 
-export const notifError = (text: string) =>
-  toast(
+export const notifError = (text: string) => {
+  const id = toast(
     <Flex sx={{ alignItems: "center" }}>
       <Box sx={{ width: "44px", height: "44px", mr: "16px" }}>
         <Icon src={iconsObj.errorSvg} />
@@ -34,18 +36,17 @@ export const notifError = (text: string) =>
     </Flex>,
     {
       position: "top-right",
-      autoClose: 2000,
-      hideProgressBar: false,
-      closeOnClick: true,
-      pauseOnHover: true,
-      draggable: true,
-      progress: undefined,
-      theme: "light",
+      autoClose: 3000,
     }
   );
+  setTimeout(() => {
+    toast.dismiss(id);
+  }, 3000);
+  toastList.add(id);
+};
 
-export const notifWarning = (text: string) =>
-  toast(
+export const notifWarning = (text: string) => {
+  const id = toast(
     <Flex sx={{ alignItems: "center" }}>
       <Box sx={{ width: "44px", height: "44px", mr: "16px" }}>
         <Icon src={iconsObj.alert} />
@@ -54,12 +55,11 @@ export const notifWarning = (text: string) =>
     </Flex>,
     {
       position: "top-right",
-      autoClose: 2000,
-      hideProgressBar: false,
-      closeOnClick: true,
-      pauseOnHover: true,
-      draggable: true,
-      progress: undefined,
-      theme: "light",
+      autoClose: 3000,
     }
   );
+  setTimeout(() => {
+    toast.dismiss(id);
+  }, 3000);
+  toastList.add(id);
+};

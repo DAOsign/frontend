@@ -2,7 +2,7 @@ import React from "react";
 import { Container, Flex, Text, Button, Link, Box } from "theme-ui";
 import iconsObj from "../../assets/icons";
 import { formatAddress } from "../../utils/formats";
-import { container, addresContainer, iconMenu, identiconIcon } from "./styles";
+import { container, addresContainer, iconMenu, identiconIcon, iconBell } from "./styles";
 import Icon from "../icon";
 import { Logo } from "../Logo/Logo";
 import { useWeb3 } from "../../hooks/useWeb3";
@@ -22,7 +22,7 @@ export default function Header({ visible, setVisible }: any) {
         </NextLink>
         <Flex sx={{ alignItems: "center", flexDirection: "row" }}>
           <Button type="button" sx={{ ...iconMenu, display: "block" }}>
-            <Box sx={{ width: "24px", height: "24px", m: "0 auto" }}>
+            <Box sx={iconBell}>
               <Icon src={iconsObj.Bell} />
             </Box>
           </Button>
@@ -45,11 +45,11 @@ export default function Header({ visible, setVisible }: any) {
             sx={iconMenu}
           >
             {visible ? (
-              <Box sx={{ width: "24px", display: "block", m: "0 auto" }}>
+              <Box sx={iconBell}>
                 <Icon src={iconsObj.xClose} />
               </Box>
             ) : (
-              <Box sx={{ width: "24px", display: "block", m: "0 auto" }}>
+              <Box sx={iconBell}>
                 <Icon src={iconsObj.menu} />
               </Box>
             )}

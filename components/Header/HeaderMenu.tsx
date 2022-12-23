@@ -1,6 +1,4 @@
 import React, { useState } from "react";
-import { ToastContainer } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
 import { Container, Flex, Text, Box, Button } from "theme-ui";
 import { menuContainer, fotoContainer, foto, copyIcon } from "../../styles/styles";
 import Icon from "../icon/index";
@@ -44,7 +42,6 @@ const HeaderMenu = ({ address, setVisibleMenu, visibleMenu }: any) => {
                 <Icon style={{ cursor: "pointer" }} src={iconsObj.iconSix} />
               </Box>
             </Flex>
-            <ToastContainer />
           </Container>
         </Flex>
         <Button

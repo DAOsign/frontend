@@ -9,11 +9,8 @@ export interface IconsMapper extends Record<string, unknown> {
   proofSecondary: Icon;
   phoneSecondary: Icon;
   LostConnection: Icon;
-  telegramViolet: Icon;
-  facebookViolet: Icon;
   alertTriangle: Icon;
   arrowLeftPink: Icon;
-  twitterViolet: Icon;
   calendarMinus: Icon;
   calendarCheck: Icon;
   trashPrimary: Icon;
@@ -25,13 +22,11 @@ export interface IconsMapper extends Record<string, unknown> {
   privateIcon: Icon;
   chevronDown: Icon;
   layersThree: Icon;
-  githubViolet: Icon;
   checkCircle: Icon;
   iconSetting: Icon;
   shareFourth: Icon;
   fieldResize: Icon;
   chevronLeft: Icon;
-  worldViolet: Icon;
   heartViolet: Icon;
   publicIcon: Icon;
   logoHeader: Icon;

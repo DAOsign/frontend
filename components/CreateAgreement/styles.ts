@@ -109,7 +109,7 @@ const itemRadio = {
 } as ThemeUIStyleObject;
 
 const leftSide = {
-  maxWidth: "672px",
+  maxWidth: "756px",
   minHeight: "550px",
   transition: ".3s all",
   background: "#FFFFFF",
