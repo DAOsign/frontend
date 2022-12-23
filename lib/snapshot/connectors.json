@@ -22,7 +22,7 @@
     "name": "Coinbase Wallet",
     "network": "1",
     "options": {
-      "appName": "Snapshot",
+      "appName": "DAOsign",
       "darkMode": false,
       "chainId": 1,
       "ethJsonrpcUrl": "https://rpc.brovider.xyz/1"
