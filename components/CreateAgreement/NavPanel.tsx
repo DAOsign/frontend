@@ -16,7 +16,7 @@ import {
   stepStyle,
 } from "./styles";
 import { useMutation } from "urql";
-import { addAgreementMutation } from "../../modules/graphql/mutations";
+import { saveAgreementMutation } from "../../modules/graphql/mutations";
 import { LOCATION_CLOUD, LOCATION_PUBLIC_IPFS, METHOD_ENTER, METHOD_UPLOAD } from "../../types";
 import {
   clearDraft,
@@ -132,10 +132,10 @@ export default function NavPanel() {
     return { error: { message: "Invalid agreement location" } };
   };
 
-  const [{ fetching: addingAgreement }, addAgreement] = useMutation(addAgreementMutation);
+  const [{ fetching: savingAgreement }, saveAgreement] = useMutation(saveAgreementMutation);
 
   const handleCreateAgreement = async (isReadyToSign: boolean = true) => {
-    await addAgreement({
+    await saveAgreement({
       title: values.title,
       agreementLocation: values.agreementLocation || null,
       content:
@@ -152,7 +152,7 @@ export default function NavPanel() {
       if (res.error) {
         //console.error(res.error);
       }
-      if (res.data?.addAgreement?.title) {
+      if (res.data?.saveAgreement?.title) {
         clearDraft();
         push("/agreements");
       }
@@ -216,7 +216,7 @@ export default function NavPanel() {
           setIsLoadingNextStep(false);
         }
       },
-      disabled: isLoadingNextStep || addingAgreement,
+      disabled: isLoadingNextStep || savingAgreement,
     };
     return (
       <Button {...props}>
@@ -238,7 +238,7 @@ export default function NavPanel() {
       sx: { ...fW, mt: "60px" },
       variant: "secondary",
       type: "button",
-      disabled: isLoadingNextStep || addingAgreement,
+      disabled: isLoadingNextStep || savingAgreement,
     };
     return <Button {...props}>{isCancelButton ? "Cancel" : "Back"}</Button>;
   };
@@ -296,7 +296,7 @@ export default function NavPanel() {
           sx={{ ...fW, mt: "20px" }}
           type="button"
           onClick={handleSaveDraft}
-          disabled={isLoadingNextStep || addingAgreement}
+          disabled={isLoadingNextStep || savingAgreement}
         >
           Save Draft
         </Button>

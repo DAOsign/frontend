@@ -10,8 +10,8 @@ export const loginMutation = graphql(`
   }
 `);
 
-export const addAgreementMutation = graphql(`
-  mutation AddAgreement(
+export const saveAgreementMutation = graphql(`
+  mutation SaveAgreement(
     $agreementPrivacy: String
     $agreementLocation: String
     $content: String
@@ -22,7 +22,7 @@ export const addAgreementMutation = graphql(`
     $agreementFilePath: String
     $isReadyToSign: Boolean!
   ) {
-    addAgreement(
+    saveAgreement(
       agreementPrivacy: $agreementPrivacy
       agreementLocation: $agreementLocation
       content: $content

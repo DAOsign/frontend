@@ -108,15 +108,26 @@ export type LogoutResponse = {
 
 export type Mutation = {
   __typename?: "Mutation";
-  addAgreement?: Maybe<Agreement>;
+  deleteAgreement: Scalars["Boolean"];
   login: LoginResponse;
   logout: LogoutResponse;
+  saveAgreement?: Maybe<Agreement>;
   updateUser: User;
 };
 
-export type MutationAddAgreementArgs = {
+export type MutationDeleteAgreementArgs = {
+  agreementId: Scalars["Int"];
+};
+
+export type MutationLoginArgs = {
+  address: Scalars["String"];
+  signature?: InputMaybe<Scalars["String"]>;
+};
+
+export type MutationSaveAgreementArgs = {
   agreementFilePath?: InputMaybe<Scalars["String"]>;
   agreementHash?: InputMaybe<Scalars["String"]>;
+  agreementId?: InputMaybe<Scalars["Int"]>;
   agreementLocation?: InputMaybe<Scalars["String"]>;
   agreementPrivacy?: InputMaybe<Scalars["String"]>;
   content?: InputMaybe<Scalars["String"]>;
@@ -124,11 +135,6 @@ export type MutationAddAgreementArgs = {
   observers?: InputMaybe<Array<Scalars["String"]>>;
   signers?: InputMaybe<Array<Scalars["String"]>>;
   title: Scalars["String"];
-};
-
-export type MutationLoginArgs = {
-  address: Scalars["String"];
-  signature?: InputMaybe<Scalars["String"]>;
 };
 
 export type MutationUpdateUserArgs = {
@@ -269,7 +275,7 @@ export type LoginMutation = {
   };
 };
 
-export type AddAgreementMutationVariables = Exact<{
+export type SaveAgreementMutationVariables = Exact<{
   agreementPrivacy?: InputMaybe<Scalars["String"]>;
   agreementLocation?: InputMaybe<Scalars["String"]>;
   content?: InputMaybe<Scalars["String"]>;
@@ -281,9 +287,9 @@ export type AddAgreementMutationVariables = Exact<{
   isReadyToSign: Scalars["Boolean"];
 }>;
 
-export type AddAgreementMutation = {
+export type SaveAgreementMutation = {
   __typename?: "Mutation";
-  addAgreement?: {
+  saveAgreement?: {
     __typename?: "Agreement";
     title: string;
     content?: string | null;
@@ -430,13 +436,13 @@ export const LoginDocument = {
     },
   ],
 } as unknown as DocumentNode<LoginMutation, LoginMutationVariables>;
-export const AddAgreementDocument = {
+export const SaveAgreementDocument = {
   kind: "Document",
   definitions: [
     {
       kind: "OperationDefinition",
       operation: "mutation",
-      name: { kind: "Name", value: "AddAgreement" },
+      name: { kind: "Name", value: "SaveAgreement" },
       variableDefinitions: [
         {
           kind: "VariableDefinition",
@@ -507,7 +513,7 @@ export const AddAgreementDocument = {
         selections: [
           {
             kind: "Field",
-            name: { kind: "Name", value: "addAgreement" },
+            name: { kind: "Name", value: "saveAgreement" },
             arguments: [
               {
                 kind: "Argument",
@@ -575,7 +581,7 @@ export const AddAgreementDocument = {
       },
     },
   ],
-} as unknown as DocumentNode<AddAgreementMutation, AddAgreementMutationVariables>;
+} as unknown as DocumentNode<SaveAgreementMutation, SaveAgreementMutationVariables>;
 export const MutationDocument = {
   kind: "Document",
   definitions: [
