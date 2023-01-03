@@ -15,7 +15,9 @@ import { useWeb3 } from "../../hooks/useWeb3";
 import AgreementItem from "./AgreementItem";
 import { toAgreement } from "../../utils/typeUtils";
 import { Agreement as AgreementRespone } from "../../modules/graphql/gql/graphql";
-import LogOutPopap from "../modalLogaut";
+// import LogOutPopap from "../modalLogaut";
+import Lottie from "lottie-react";
+import loader from "../../img/json/loader.json";
 
 export default function AgreementsList({ address }: any) {
   const { account } = useWeb3();
@@ -51,7 +53,11 @@ export default function AgreementsList({ address }: any) {
         </Flex>
         {agreements.length ? <HeaderAgreement /> : null}
         {agreementsLoading ? (
-          <Spinner />
+          <Lottie
+            style={{ height: "60px", marginBottom: "52px" }}
+            animationData={loader}
+            loop={true}
+          />
         ) : agreements.length ? (
           agreements.map((agr, index) => <AgreementItem key={index} {...agr} />)
         ) : (
