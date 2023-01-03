@@ -35,11 +35,12 @@ const fotoContainer = {
   border: "1px solid #EDEDF3",
   borderRadius: "12px",
   p: "16px 16px 16px 24px",
+  boxShadow: "0px 4px 40px rgba(0, 0, 0, 0.08)",
   position: "absolute",
   "&.visible": {
     position: "fixed",
     animation: "headerDesctop 0.2s 1 linear",
-    right: "20px",
+    right: "36px",
   },
   "&.close": {
     animation: "headerDesctopClose 0.3s 1 linear",
