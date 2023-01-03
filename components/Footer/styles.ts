@@ -148,6 +148,12 @@ const aboutUs = {
     backgroundColor: "transparent",
     background: "unset",
   },
+  "&:focus": {
+    color: "#AE4FD0",
+    borderColor: "#AE4FD0",
+    backgroundColor: "transparent",
+    background: "unset",
+  },
   "@media screen and (max-width: 720px)": {
     width: "100%",
     maxWidth: "303px",
