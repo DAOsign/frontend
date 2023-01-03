@@ -2,8 +2,10 @@ import React from "react";
 import { Flex, Text, Box } from "theme-ui";
 import iconsObj from "../../../../assets/icons";
 import Icon from "../../../icon";
+import { formatAddress } from "../../../../utils/formats";
 
 export type ParticipantType = "signers" | "observers";
+import { useWeb3 } from "../../../../hooks/useWeb3";
 
 interface TagListProps<T = any> {
   items: T[];
@@ -12,6 +14,7 @@ interface TagListProps<T = any> {
 }
 
 export default function TagList<T = any>({ items, type, onDelete }: TagListProps<T>) {
+  const { account } = useWeb3();
   return (
     <Flex sx={{ flexWrap: "wrap", gap: "4px" }}>
       {items.map((el: any) => {
@@ -32,7 +35,7 @@ export default function TagList<T = any>({ items, type, onDelete }: TagListProps
                 fontFamily: "InterRegular",
               }}
             >
-              {el.value}
+              {el.value === account ? formatAddress(el.value) : el.value}
             </Text>
             <Box sx={{ width: "13px", height: "11px" }}>
               <Icon style={{ opacity: 0.5 }} src={iconsObj.plusCircle} />
