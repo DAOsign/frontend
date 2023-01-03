@@ -54,7 +54,6 @@ export default function Footer({ animationNotVisible, setVisible }: any) {
               ...inputFooter,
               border: error ? "1px solid #FF5269" : "unset",
               color: error ? "#FF5269" : "#21212",
-              opacity: error ? 1 : 0.5,
             }}
           />
           <Box onClick={submit} sx={iconEmail}>
