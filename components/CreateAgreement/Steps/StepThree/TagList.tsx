@@ -20,7 +20,6 @@ export default function TagList<T = any>({ items, type, onDelete }: TagListProps
       {items.map((el: any) => {
         return (
           <Box
-            onClick={() => onDelete(el, type)}
             sx={{
               variant: "buttons.itemsBtn",
               p: "5px 9px 5px 14px",
@@ -37,7 +36,7 @@ export default function TagList<T = any>({ items, type, onDelete }: TagListProps
             >
               {el.value === account ? formatAddress(el.value) : el.value}
             </Text>
-            <Box sx={{ width: "13px", height: "11px" }}>
+            <Box onClick={() => onDelete(el, type)} sx={{ width: "13px", height: "11px" }}>
               <Icon style={{ opacity: 0.5 }} src={iconsObj.plusCircle} />
             </Box>
           </Box>

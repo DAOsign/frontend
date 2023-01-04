@@ -224,18 +224,21 @@ const rightCard = {
   right: 0,
   width: "210px",
   height: "232px",
-  "&:hover": {
-    right: "-5px",
-    width: "220px",
-    maxWidth: "220px",
-    height: "242px",
-    top: "-5px",
-  },
-  "&:hover > div": {
-    margin: "0 auto",
-    position: "relative",
-    top: "5px",
-    right: "0",
+  maxWidth: "210px",
+  "@media screen and (min-width: 768px)": {
+    "&:hover": {
+      right: "-5px",
+      width: "220px",
+      maxWidth: "220px",
+      height: "242px",
+      top: "-5px",
+    },
+    "&:hover > div": {
+      margin: "0 auto",
+      position: "relative",
+      top: "5px",
+      right: "0",
+    },
   },
 } as ThemeUIStyleObject;
 
@@ -245,18 +248,21 @@ const leftCard = {
   left: 0,
   width: "210px",
   height: "232px",
-  "&:hover": {
-    left: "-5px",
-    width: "220px",
-    maxWidth: "220px",
-    height: "242px",
-    top: "-5px",
-  },
-  "&:hover > div": {
-    margin: "0 auto",
-    position: "relative",
-    top: "5px",
-    left: "0",
+  maxWidth: "210px",
+  "@media screen and (min-width: 768px)": {
+    "&:hover": {
+      left: "-5px",
+      width: "220px",
+      maxWidth: "220px",
+      height: "242px",
+      top: "-5px",
+    },
+    "&:hover > div": {
+      margin: "0 auto",
+      position: "relative",
+      top: "5px",
+      left: "0",
+    },
   },
 } as ThemeUIStyleObject;
 
