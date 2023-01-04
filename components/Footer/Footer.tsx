@@ -26,7 +26,7 @@ export default function Footer({ animationNotVisible, setVisible }: any) {
   const submit = () => {
     const validationEmail =
       /^(([^<>()[\].,;:\s@"]+(\.[^<>()[\].,;:\s@"]+)*)|(".+"))@(([^<>()[\].,;:\s@"]+\.)+[^<>()[\].,;:\s@"]{2,})$/iu;
-    if (!validationEmail.test(email)) {
+    if (!validationEmail.test(email.trim())) {
       setError(true);
       return;
     }
