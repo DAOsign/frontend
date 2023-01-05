@@ -44,16 +44,16 @@ const HeaderMenu = ({ address, setVisibleMenu, visibleMenu }: any) => {
             </Flex>
           </Container>
         </Flex>
+        <Button sx={{ variant: "buttons.grey", mt: "24px", width: "100%" }}>My Profile</Button>
         <Button
           onClick={() => {
             onCopyClick(address);
             notifSucces("Link copied");
           }}
-          sx={{ variant: "buttons.grey", mt: "24px", width: "100%" }}
+          sx={{ variant: "buttons.grey", mt: "16px", width: "100%" }}
         >
           Copy Share Link
         </Button>
-        <Button sx={{ variant: "buttons.grey", mt: "16px", width: "100%" }}>My Profile</Button>
         <Button sx={{ variant: "buttons.grey", mt: "16px", width: "100%" }}>Switch Wallet</Button>
         <Box
           sx={{
@@ -70,15 +70,23 @@ const HeaderMenu = ({ address, setVisibleMenu, visibleMenu }: any) => {
           sx={{
             variant: "buttons.grey",
             mt: "50px",
-            textAlign: "left",
             border: "none",
             width: "100%",
+            color: "#CA5CF2",
+            opacity: 0.5,
+            textAlign: "center",
+            "&:hover": {
+              opacity: 1,
+              border: "none",
+              backgroundColor: "#FFFFFF",
+              background: "unset",
+            },
           }}
         >
-          <Box sx={{ width: "24px", height: "24px", position: "absolute" }}>
+          <Box sx={{ width: "24px", height: "24px", position: "absolute", left: "100px" }}>
             <Icon src={iconsObj.logOut} />
           </Box>
-          <Text sx={{ ml: "40px" }}>Log Out</Text>
+          <Text sx={{ ml: "28px" }}>Log Out</Text>
         </Button>
       </Container>
       {visible ? <LogOutPopap setVisible={setVisible} /> : null}
