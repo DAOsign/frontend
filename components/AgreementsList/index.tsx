@@ -15,7 +15,6 @@ import { useWeb3 } from "../../hooks/useWeb3";
 import AgreementItem from "./AgreementItem";
 import { toAgreement } from "../../utils/typeUtils";
 import { Agreement as AgreementRespone } from "../../modules/graphql/gql/graphql";
-// import LogOutPopap from "../modalLogaut";
 import Lottie from "lottie-react";
 import loader from "../../img/json/loader.json";
 
