@@ -105,6 +105,9 @@ const footerText = {
 const inputFooter = {
   variant: "forms.input",
   width: "100%",
+  opacity: "1",
+  background: "rgba(255, 255, 255, 0.24)",
+  backdropFilter: "blur(6px)",
   minWidth: "340px",
   pr: "40px",
   textOverflow: "ellipsis",
@@ -140,6 +143,12 @@ const aboutUs = {
   variant: "buttons.secondary",
   cursor: "pointer",
   "&:hover": {
+    color: "#AE4FD0",
+    borderColor: "#AE4FD0",
+    backgroundColor: "transparent",
+    background: "unset",
+  },
+  "&:focus": {
     color: "#AE4FD0",
     borderColor: "#AE4FD0",
     backgroundColor: "transparent",
