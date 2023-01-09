@@ -32,10 +32,11 @@ export default function CreateAgreement() {
   const { query } = useRouter();
   const [step, setStep] = useState(query?.step ? Number(query.step) : 0);
   const [transitioned, setTransitioned] = useState(false);
+  const [loading, setLoading] = useState(false);
   const steps = {
     1: withFade(<StepOne animateContainer={() => setTransitioned(val => !val)} />, step),
     2: withFade(<StepTwo />, step),
-    3: withFade(<StepThree />, step),
+    3: withFade(<StepThree loading={loading} />, step),
   };
 
   return (
@@ -45,7 +46,7 @@ export default function CreateAgreement() {
         {steps[step]}
       </Container>
       <Container sx={rightSide}>
-        <NavPanel />
+        <NavPanel setLoading={setLoading} />
       </Container>
     </Flex>
   );

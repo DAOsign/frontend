@@ -28,6 +28,7 @@ const container = {
     px: "16px",
   },
 } as ThemeUIStyleObject;
+
 const iconPlus = {
   width: "24px",
   height: "24px",
@@ -197,6 +198,7 @@ const headerContainer = {
   position: "relative",
   alignItems: "baseline",
   mt: "38px",
+  mb: "24px",
   "@media screen and (max-width: 768px)": {
     flexDirection: "column",
     position: "static",
@@ -204,12 +206,34 @@ const headerContainer = {
 } as ThemeUIStyleObject;
 
 const agreementConteiner = {
-  mt: "23px",
   flexDirection: "column",
+  position: "absolute",
   background: "white",
   border: "1px solid #EDEDF3",
   borderRadius: "12px",
   p: "20px 24px 20px 24px",
+  cursor: "pointer",
+  width: "100%",
+  mb: "20px",
+  "@media screen and (min-width: 768px)": {
+    height: "140px",
+    "&:hover": {
+      width: "101%",
+      height: "145px",
+      left: "-5px",
+      top: "-5px",
+    },
+  },
+} as ThemeUIStyleObject;
+
+const agreementConteinerRelative = {
+  position: "relative",
+  height: "160px",
+  width: "100%",
+  flexDirection: "column",
+  "@media screen and (max-width: 768px)": {
+    height: "200px",
+  },
 } as ThemeUIStyleObject;
 
 const iconMenuAgreement = {
@@ -382,6 +406,7 @@ const iconCopy = {
 } as ThemeUIStyleObject;
 
 export {
+  agreementConteinerRelative,
   normalTextBoldGreen,
   improveBtnContainer,
   iconSearchContainer,

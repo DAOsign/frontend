@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Container, Flex, Text, Box, Button } from "theme-ui";
-import { menuContainer, fotoContainer, foto, copyIcon } from "../../styles/styles";
+import { menuContainer, fotoContainer, foto, copyIcon, btnLogaut } from "../../styles/styles";
 import Icon from "../icon/index";
 import iconsObj from "../../assets/icons";
 import { notifSucces } from "../../utils/notification";
@@ -24,13 +24,11 @@ const HeaderMenu = ({ address, setVisibleMenu, visibleMenu }: any) => {
       >
         <Flex>
           <Identicon account={address} size={60} sx={foto} />
-          <Container sx={{ maxWidth: "190px", pl: "16px" }}>
+          <Container sx={{ maxWidth: "150px", ml: "20px" }}>
             <Text sx={{ variant: "text.largeTextBold", display: "block", textAlign: "left" }}>
               Ralph Edwards
             </Text>
-            <Flex
-              sx={{ justifyContent: "left", alignItems: "center", marginBottom: "24px", mt: "4px" }}
-            >
+            <Flex sx={{ justifyContent: "left", alignItems: "center", mt: "4px" }}>
               <Text sx={{ variant: "text.smallTextMediumUser" }}>{formatAddress(address)}</Text>
               <Box
                 onClick={() => {
@@ -44,7 +42,7 @@ const HeaderMenu = ({ address, setVisibleMenu, visibleMenu }: any) => {
             </Flex>
           </Container>
         </Flex>
-        <Button sx={{ variant: "buttons.grey", mt: "24px", width: "100%" }}>My Profile</Button>
+        <Button sx={{ variant: "buttons.grey", mt: "32px", width: "100%" }}>My Profile</Button>
         <Button
           onClick={() => {
             onCopyClick(address);
@@ -61,28 +59,11 @@ const HeaderMenu = ({ address, setVisibleMenu, visibleMenu }: any) => {
             height: "2px",
             backgroundColor: "grey",
             position: "absolute",
-            mt: "32px",
+            mt: "20px",
             left: 0,
           }}
         />
-        <Button
-          onClick={() => setVisible(!visible)}
-          sx={{
-            variant: "buttons.grey",
-            mt: "50px",
-            border: "none",
-            width: "100%",
-            color: "#CA5CF2",
-            opacity: 0.5,
-            textAlign: "center",
-            "&:hover": {
-              opacity: 1,
-              border: "none",
-              backgroundColor: "#FFFFFF",
-              background: "unset",
-            },
-          }}
-        >
+        <Button onClick={() => setVisible(!visible)} sx={btnLogaut}>
           <Box sx={{ width: "24px", height: "24px", position: "absolute", left: "100px" }}>
             <Icon src={iconsObj.logOut} />
           </Box>

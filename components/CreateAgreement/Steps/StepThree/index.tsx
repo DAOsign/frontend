@@ -6,6 +6,7 @@ import {
   inputCreateAgreementError,
   inputCreateAgreementWithRightButton,
   plus,
+  textLoading,
 } from "../../styles";
 import { uniqueId } from "../../../../utils/formats";
 import iconsObj from "../../../../assets/icons";
@@ -17,6 +18,8 @@ import TagList, { ParticipantType } from "./TagList";
 import styles from "./styles";
 import VerificationCard from "./VerificationCard";
 import FieldErrorMessage from "../../../Form/FieldErrorMessage";
+import Lottie from "lottie-react";
+import loader from "../../../../img/json/loader.json";
 
 interface VerificationInfo {
   title: string;
@@ -101,7 +104,7 @@ const validateUser = (
   return error;
 };
 
-export default function StepThree() {
+export default function StepThree({ loading }: { loading: boolean }) {
   const { values, changeValue } = useCreateAgreement();
   const { account } = useWeb3();
 
@@ -195,135 +198,165 @@ export default function StepThree() {
 
   return (
     <Container sx={styles}>
-      <Box>
-        <Flex sx={{ position: "relative", justifyContent: "space-between", alignItems: "center" }}>
-          <Text sx={{ variant: "forms.label", ml: "3px", maxWidth: "unset", minHeight: "25px" }}>
-            Signers (ENS name, address or email)
-            <Box sx={{ width: "12px", height: "12px", display: "inline-block" }}>
-              <Icon style={{ opacity: 0.5 }} src={iconsObj.infoCircle} />
-            </Box>
-          </Text>
-          {!userAlreadySigner && !userAlreadyObserver ? (
-            <Button
-              onClick={() => addMe("signers")}
-              className={userAlreadySigner || userAlreadyObserver ? "disabled" : ""}
-              variant="link"
-              sx={{
-                justifyContent: "flex-end",
-                height: "25px",
-                width: "initial",
-              }}
+      {!loading ? (
+        <>
+          {" "}
+          <Box>
+            <Flex
+              sx={{ position: "relative", justifyContent: "space-between", alignItems: "center" }}
             >
-              Add Me
-            </Button>
-          ) : null}
-          <Box onClick={() => addSigner(signerInputRef.current?.value)} sx={plus}>
-            <Icon width="24px" height="24px" style={{ opacity: 0.5 }} src={iconsObj.pinkPlus} />
-          </Box>
-        </Flex>
-        <Input
-          //@ts-ignore
-          ref={signerInputRef}
-          onKeyDown={e => onKeyDown(e, "signers")}
-          onChange={onChangeSignerInputValue}
-          sx={{
-            variant: "forms.input",
-            ...inputCreactAgreement,
-            ...inputCreateAgreementWithRightButton,
-            ...signersInputErrorStyles,
-            mb: "8px",
-          }}
-        />
-        <FieldErrorMessage error={values?.errors?.signers} isAbsolutePosition={false} />
-        <TagList items={values.signers} type="signers" onDelete={onDelete} />
-      </Box>
-      <Box>
-        <Flex
-          sx={{
-            mt: "24px",
-            position: "relative",
-            justifyContent: "space-between",
-            alignItems: "center",
-          }}
-        >
-          <Text sx={{ variant: "forms.label", ml: "3px", maxWidth: "unset", minHeight: "25px" }}>
-            Observers (ENS name or adderess)
-            <Box sx={{ width: "12px", height: "12px", display: "inline-block" }}>
-              <Icon width="12px" height="12px" style={{ opacity: 0.5 }} src={iconsObj.infoCircle} />
-            </Box>
-          </Text>
-          {!userAlreadySigner && !userAlreadyObserver ? (
-            <Button
-              onClick={() => addMe("observers")}
-              className={userAlreadySigner || userAlreadyObserver ? "disabled" : ""}
-              variant="link"
+              <Text
+                sx={{ variant: "forms.label", ml: "3px", maxWidth: "unset", minHeight: "25px" }}
+              >
+                Signers (ENS name, address or email)
+                <Box sx={{ width: "12px", height: "12px", display: "inline-block" }}>
+                  <Icon style={{ opacity: 0.5 }} src={iconsObj.infoCircle} />
+                </Box>
+              </Text>
+              {!userAlreadySigner && !userAlreadyObserver ? (
+                <Button
+                  onClick={() => addMe("signers")}
+                  className={userAlreadySigner || userAlreadyObserver ? "disabled" : ""}
+                  variant="link"
+                  sx={{
+                    justifyContent: "flex-end",
+                    height: "25px",
+                    width: "initial",
+                  }}
+                >
+                  Add Me
+                </Button>
+              ) : null}
+              <Box onClick={() => addSigner(signerInputRef.current?.value)} sx={plus}>
+                <Icon width="24px" height="24px" style={{ opacity: 0.5 }} src={iconsObj.pinkPlus} />
+              </Box>
+            </Flex>
+            <Input
+              //@ts-ignore
+              ref={signerInputRef}
+              onKeyDown={e => onKeyDown(e, "signers")}
+              onChange={onChangeSignerInputValue}
               sx={{
-                justifyContent: "flex-end",
-                height: "25px",
-                width: "initial",
-              }}
-            >
-              Add Me
-            </Button>
-          ) : null}
-          <Box onClick={() => addObserver(observerInputRef.current?.value)} sx={plus}>
-            <Icon width="24px" height="24px" style={{ opacity: 0.5 }} src={iconsObj.pinkPlus} />
-          </Box>
-        </Flex>
-        <Input
-          //@ts-ignore
-          ref={observerInputRef}
-          onChange={onChangeObserverInputValue}
-          onKeyDown={e => onKeyDown(e, "observers")}
-          sx={{
-            variant: "forms.input",
-            ...inputCreactAgreement,
-            ...inputCreateAgreementWithRightButton,
-            ...observersInputErrorStyles,
-            mb: "8px",
-          }}
-        />
-        <FieldErrorMessage error={values?.errors?.observers} isAbsolutePosition={false} />
-        <TagList items={values.observers} type="observers" onDelete={onDelete} />
-      </Box>
-      <Box>
-        <Flex
-          sx={{
-            position: "relative",
-            alignItems: "center",
-          }}
-        >
-          <Text
-            sx={{
-              variant: "forms.label",
-              ml: "3px",
-              maxWidth: "unset",
-              minHeight: "25px",
-            }}
-          >
-            Required Signed Verifications
-            <Box sx={{ width: "12px", height: "12px", display: "inline-block" }}>
-              <Icon width="12px" height="12px" style={{ opacity: 0.5 }} src={iconsObj.infoCircle} />
-            </Box>
-          </Text>
-        </Flex>
-        <Box sx={{ display: "flex", flexDirection: "column", gap: "20px" }}>
-          {verifications.map((verification, index) => (
-            <VerificationCard
-              key={verification.title}
-              {...verification}
-              checked={checkedVerifications[index]}
-              onClick={() => {
-                setCheckedVerifications(prevState => [
-                  ...prevState.slice(0, index),
-                  !prevState[index],
-                  ...prevState.slice(index + 1),
-                ]);
+                variant: "forms.input",
+                ...inputCreactAgreement,
+                ...inputCreateAgreementWithRightButton,
+                ...signersInputErrorStyles,
+                mb: "8px",
               }}
             />
-          ))}
-        </Box>
-      </Box>
+            <FieldErrorMessage error={values?.errors?.signers} isAbsolutePosition={false} />
+            <TagList items={values.signers} type="signers" onDelete={onDelete} />
+          </Box>
+          <Box>
+            <Flex
+              sx={{
+                mt: "24px",
+                position: "relative",
+                justifyContent: "space-between",
+                alignItems: "center",
+              }}
+            >
+              <Text
+                sx={{ variant: "forms.label", ml: "3px", maxWidth: "unset", minHeight: "25px" }}
+              >
+                Observers (ENS name or adderess)
+                <Box sx={{ width: "12px", height: "12px", display: "inline-block" }}>
+                  <Icon
+                    width="12px"
+                    height="12px"
+                    style={{ opacity: 0.5 }}
+                    src={iconsObj.infoCircle}
+                  />
+                </Box>
+              </Text>
+              {!userAlreadySigner && !userAlreadyObserver ? (
+                <Button
+                  onClick={() => addMe("observers")}
+                  className={userAlreadySigner || userAlreadyObserver ? "disabled" : ""}
+                  variant="link"
+                  sx={{
+                    justifyContent: "flex-end",
+                    height: "25px",
+                    width: "initial",
+                  }}
+                >
+                  Add Me
+                </Button>
+              ) : null}
+              <Box onClick={() => addObserver(observerInputRef.current?.value)} sx={plus}>
+                <Icon width="24px" height="24px" style={{ opacity: 0.5 }} src={iconsObj.pinkPlus} />
+              </Box>
+            </Flex>
+            <Input
+              //@ts-ignore
+              ref={observerInputRef}
+              onChange={onChangeObserverInputValue}
+              onKeyDown={e => onKeyDown(e, "observers")}
+              sx={{
+                variant: "forms.input",
+                ...inputCreactAgreement,
+                ...inputCreateAgreementWithRightButton,
+                ...observersInputErrorStyles,
+                mb: "8px",
+              }}
+            />
+            <FieldErrorMessage error={values?.errors?.observers} isAbsolutePosition={false} />
+            <TagList items={values.observers} type="observers" onDelete={onDelete} />
+          </Box>
+          <Box>
+            <Flex
+              sx={{
+                position: "relative",
+                alignItems: "center",
+              }}
+            >
+              <Text
+                sx={{
+                  variant: "forms.label",
+                  ml: "3px",
+                  maxWidth: "unset",
+                  minHeight: "25px",
+                }}
+              >
+                Required Signed Verifications
+                <Box sx={{ width: "12px", height: "12px", display: "inline-block" }}>
+                  <Icon
+                    width="12px"
+                    height="12px"
+                    style={{ opacity: 0.5 }}
+                    src={iconsObj.infoCircle}
+                  />
+                </Box>
+              </Text>
+            </Flex>
+            <Box sx={{ display: "flex", flexDirection: "column", gap: "20px" }}>
+              {verifications.map((verification, index) => (
+                <VerificationCard
+                  key={verification.title}
+                  {...verification}
+                  checked={checkedVerifications[index]}
+                  onClick={() => {
+                    setCheckedVerifications(prevState => [
+                      ...prevState.slice(0, index),
+                      !prevState[index],
+                      ...prevState.slice(index + 1),
+                    ]);
+                  }}
+                />
+              ))}
+            </Box>
+          </Box>
+        </>
+      ) : (
+        <>
+          <Lottie
+            style={{ height: "60px", marginBottom: "52px" }}
+            animationData={loader}
+            loop={true}
+          />
+          <Text sx={textLoading}> loading... </Text>
+        </>
+      )}
     </Container>
   );
 }

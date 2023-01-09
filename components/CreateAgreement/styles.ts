@@ -184,6 +184,7 @@ const rightSide = {
 const container = {
   border: "2px solid #F7F7FB",
   borderRadius: "8px",
+  height: "490px",
   px: "32px",
   py: "24px",
   position: "relative",
@@ -293,6 +294,15 @@ const item = {
   cursor: "pointer",
   transition: ".3s all",
   gap: "10px",
+  "@media screen and (min-width: 768px)": {
+    "&:hover": {
+      width: "101%",
+      height: "109px",
+      position: "relative",
+      top: "-2px",
+      left: "-2px",
+    },
+  },
   "&.active": {
     borderColor: "pink",
   },
@@ -441,6 +451,19 @@ const btnBack = {
   },
 } as ThemeUIStyleObject;
 
+const textLoading = {
+  textAlign: "center",
+  fontFamily: "InterMedium",
+  fontStyle: "normal",
+  display: "block",
+  fontWeight: 500,
+  fontSize: "16px",
+  lineHeight: "160%",
+  width: "200px",
+  m: "0 auto",
+  color: "#212121",
+} as ThemeUIStyleObject;
+
 export {
   inputCreactAgreement,
   inputCreateAgreementWithRightButton,
@@ -454,6 +477,7 @@ export {
   stepsContainer,
   containerSides,
   leftSideItem,
+  textLoading,
   stepNumber,
   container,
   itemRadio,

@@ -65,7 +65,9 @@ export default function Connect() {
           </Button>
         </>
       )}
-      <Text sx={{ maxWidth: "220px", display: "inline-block" }}>
+      <Text
+        sx={{ maxWidth: "220px", display: "inline-block", lineHeight: "15px", fontSize: "12px" }}
+      >
         <Text variant="secondary">By connecting a wallet, you agree to our</Text>
         <Link sx={link}>Terms of Service</Link>
       </Text>

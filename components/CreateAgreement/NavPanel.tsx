@@ -32,7 +32,7 @@ import { notifError } from "../../utils/notification";
 
 const FILE_UPLOAD_ERROR_DEFAULT_MESSAGE = "Failed to upload file";
 
-export default function NavPanel() {
+export default function NavPanel({ setLoading }: { setLoading: any }) {
   const { values, changeValue } = useCreateAgreement();
   const { push, query } = useRouter();
   const { account } = useWeb3();
@@ -190,6 +190,7 @@ export default function NavPanel() {
         if (isLoadingNextStep) return;
 
         setIsLoadingNextStep(true);
+        setLoading(true);
         try {
           let uploadedFileData: { filePath?: string; agreementHash?: string; error?: any } = {};
           if (step === 2 && values.file && (!values.filePath || !values.agreementHash)) {
@@ -213,6 +214,7 @@ export default function NavPanel() {
           console.error(error);
           notifError(error?.message || FILE_UPLOAD_ERROR_DEFAULT_MESSAGE);
         } finally {
+          setLoading(false);
           setIsLoadingNextStep(false);
         }
       },

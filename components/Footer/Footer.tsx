@@ -38,29 +38,36 @@ export default function Footer({ animationNotVisible, setVisible }: any) {
   return (
     <Container sx={{ ...footer, animation: animationNotVisible ? "unset" : "footer 4s 1 linear" }}>
       <Flex sx={container}>
-        <Box sx={leftSide}>
-          <Text sx={{ variant: "text.normalTextBold", display: "inline-block", mb: "8px" }}>
-            Get the latest updates
-          </Text>
-          <Input
-            onChange={e => {
-              setError(false);
-              setEmail(e.target.value);
-            }}
-            value={email}
-            name="emai\prettier\eslint-plugin-prettierl"
-            placeholder="Your Email"
-            sx={{
-              ...inputFooter,
-              border: error ? "1px solid #FF5269" : "unset",
-              color: error ? "#FF5269" : "#21212",
-            }}
-          />
-          <Box onClick={submit} sx={iconEmail}>
-            <Icon src={iconsObj.send} />
+        <form
+          onSubmit={e => {
+            e.preventDefault();
+            submit();
+          }}
+        >
+          <Box sx={leftSide}>
+            <Text sx={{ variant: "text.normalTextBold", display: "inline-block", mb: "8px" }}>
+              Get the latest updates
+            </Text>
+            <Input
+              onChange={e => {
+                setError(false);
+                setEmail(e.target.value);
+              }}
+              value={email}
+              name="emai\prettier\eslint-plugin-prettierl"
+              placeholder="Your Email"
+              sx={{
+                ...inputFooter,
+                border: error ? "1px solid #FF5269" : "unset",
+                color: error ? "#FF5269" : "#21212",
+              }}
+            />
+            <Box onClick={submit} sx={iconEmail}>
+              <Icon src={iconsObj.send} />
+            </Box>
+            {error && <Text sx={errorMessage}>*Please enter valid email</Text>}
           </Box>
-          {error && <Text sx={errorMessage}>*Please enter valid email</Text>}
-        </Box>
+        </form>
         <Flex sx={rightSide}>
           <Box>
             <Text sx={{ variant: "text.normalTextBold", display: "inline-block", mb: "12px" }}>

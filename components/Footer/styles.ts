@@ -3,6 +3,9 @@ import { ThemeUIStyleObject } from "theme-ui";
 const errorMessage = {
   fontFamily: "InterRegular",
   fontStyle: "normal",
+  position: "absolute",
+  top: "85px",
+  left: 0,
   fontWeight: 400,
   fontSize: "12px",
   lineHeight: "160%",
@@ -12,19 +15,20 @@ const errorMessage = {
 } as ThemeUIStyleObject;
 
 const footer = {
-  marginTop: "124px",
+  marginTop: "138px",
   left: "50%",
   bottom: 0,
   px: "120px",
   maxWidth: "1900px",
   width: "100%",
-  pb: "20px",
+  pb: "40px",
   animation: "footer 4s 1 linear",
   "@media screen and (max-width: 1200px)": {
-    px: "120px",
+    px: "100px",
   },
   "@media screen and (max-width: 720px)": {
     maxWidth: "520px",
+    marginTop: "60px",
     px: 0,
   },
   "@media screen and (min-width: 1200px)": {
@@ -50,7 +54,6 @@ const footerItem = {
 const container = {
   justifyContent: "space-between",
   flexDirection: "row",
-  pb: "36px",
   "@media screen and (max-width: 1200px)": {
     flexDirection: "column",
   },
@@ -70,7 +73,7 @@ const leftSide = {
 } as ThemeUIStyleObject;
 
 const rightSide = {
-  width: "60%",
+  width: "667px",
   justifyContent: "space-between",
   "@media screen and (max-width: 1200px)": {
     mt: "50px",
@@ -99,6 +102,7 @@ const footerText = {
   "@media screen and (max-width: 1024px)": {
     justifyContent: "center",
     pl: 0,
+    mt: "40px",
   },
 } as ThemeUIStyleObject;
 
@@ -133,9 +137,11 @@ const iconContainer = {
   height: "30px",
   maxWidth: "170px",
   justifyContent: "space-between",
-  m: "0 auto 25px",
+  m: "0 auto 28px",
   "@media screen and (max-width: 720px)": {
     m: "0 auto 36px",
+    width: "210px",
+    maxWidth: "unset",
   },
 } as ThemeUIStyleObject;
 
@@ -162,9 +168,9 @@ const aboutUs = {
 
 const iconEmail = {
   position: "absolute",
-  width: "15px",
-  height: "15px",
-  top: "52px",
+  width: "20px",
+  height: "20px",
+  top: "49px",
   right: "17px",
   opacity: 0.5,
   cursor: "pointer",
@@ -180,6 +186,14 @@ const icon = {
   },
   "&:hover > svg > path": {
     stroke: "#CA5CF2",
+  },
+  "@media screen and (max-width: 720px)": {
+    height: 32,
+    width: 32,
+    "& > svg": {
+      height: 32,
+      width: 32,
+    },
   },
 } as ThemeUIStyleObject;
 

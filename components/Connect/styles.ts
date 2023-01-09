@@ -10,7 +10,7 @@ const container = {
   paddingTop: "32px",
   paddingX: "60px",
   textAlign: "center",
-  pb: "28px",
+  pb: "32px",
   button: {
     mb: "12px",
     "&:last-of-type": {
@@ -19,7 +19,7 @@ const container = {
   },
   "@media screen and (max-width: 720px)": {
     width: "303px",
-    paddingX: "39px",
+    paddingX: "35px",
   },
 } as ThemeUIStyleObject;
 
@@ -29,7 +29,7 @@ const title = {
   fontSize: "32px",
   "@media screen and (max-width: 720px)": {
     variant: "text.h2",
-    fontSize: "27px",
+    fontSize: "28px",
   },
 } as ThemeUIStyleObject;
 

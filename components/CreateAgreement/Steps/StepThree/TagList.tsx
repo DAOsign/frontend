@@ -15,6 +15,7 @@ interface TagListProps<T = any> {
 
 export default function TagList<T = any>({ items, type, onDelete }: TagListProps<T>) {
   const { account } = useWeb3();
+
   return (
     <Flex sx={{ flexWrap: "wrap", gap: "4px" }}>
       {items.map((el: any) => {
@@ -34,7 +35,7 @@ export default function TagList<T = any>({ items, type, onDelete }: TagListProps
                 fontFamily: "InterRegular",
               }}
             >
-              {el.value === account ? formatAddress(el.value) : el.value}
+              {el.value.length > 10 ? formatAddress(el.value) : el.value}
             </Text>
             <Box onClick={() => onDelete(el, type)} sx={{ width: "13px", height: "11px" }}>
               <Icon style={{ opacity: 0.5 }} src={iconsObj.plusCircle} />
