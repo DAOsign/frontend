@@ -4,10 +4,13 @@ import Icon from "../../../icon/index";
 import { uploadBtn } from "../../styles";
 import iconsObj from "../../../../assets/icons";
 import { useCreateAgreement } from "../../../../hooks/useCreateAgreement";
+import { useEditAgreement } from "../../../../hooks/useEditAgreement";
 import Upload from "./Upload";
 
-export default function UploadLocalAgreement() {
-  const { changeValue } = useCreateAgreement();
+export default function UploadLocalAgreement({ page }: { page: string }) {
+  const create = useCreateAgreement();
+  const edit = useEditAgreement();
+  const { changeValue } = page === "create" ? create : edit;
 
   return (
     <Container>
@@ -25,7 +28,7 @@ export default function UploadLocalAgreement() {
           <Text sx={{ display: "block" }}>Choose another method</Text>
         </Button>
       </Flex>
-      <Upload />
+      <Upload page={page}/>
     </Container>
   );
 }

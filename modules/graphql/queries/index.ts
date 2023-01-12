@@ -15,10 +15,55 @@ export const allUsers = graphql(`
   }
 `);
 
+export const agreementById = graphql(`
+  query Query($agreementId: Int!) {
+    agreement(agreementId: $agreementId) {
+      agreementFile {
+        agreementFileId
+        agreementHash
+        createdAt
+        filePath
+      }
+      agreementLocation {
+        agreementLocationId
+        isActive
+        name
+      }
+      agreementPrivacy {
+        name
+      }
+      agreementStatus {
+        name
+      }
+      authorWallet {
+        address
+        networkId
+        userId
+        walletId
+      }
+      observers {
+        email
+        observerId
+        wallet {
+          address
+        }
+      }
+      signers {
+        email
+        wallet {
+          address
+        }
+      }
+      title
+      content
+    }
+  }
+`);
 export const agreementsMutation = graphql(`
   query Agreements($authorWallet: String) {
     agreements(authorWallet: $authorWallet) {
       agreements {
+        agreementId
         title
         content
         agreementLocation {

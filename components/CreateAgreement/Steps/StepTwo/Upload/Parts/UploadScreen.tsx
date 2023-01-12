@@ -3,9 +3,12 @@ import { Box } from "theme-ui";
 import { PreviewScreen, UploadPaceholder } from "./";
 import { imageUploadContainer } from "../../../../styles";
 import { useCreateAgreement } from "../../../../../../hooks/useCreateAgreement";
+import { useEditAgreement } from "../../../../../../hooks/useEditAgreement";
 
-const UploadScreen = () => {
-  const { values, changeValue } = useCreateAgreement();
+const UploadScreen = ({ page }: { page: string }) => {
+  const create = useCreateAgreement();
+  const edit = useEditAgreement();
+  const { values, changeValue } = page === "create" ? create : edit;
 
   const handleReadFile = (event: React.ChangeEvent<HTMLInputElement>) => {
     let file = event?.target?.files && (event?.target?.files[0] as File);
@@ -29,7 +32,7 @@ const UploadScreen = () => {
           name="file"
           accept=".txt,.pdf,.doc,.docx"
         />
-        {values.file ? <PreviewScreen file={values.file} /> : <UploadPaceholder />}
+        {values.file ? <PreviewScreen page={page} file={values.file} /> : <UploadPaceholder />}
       </Box>
     </>
   );

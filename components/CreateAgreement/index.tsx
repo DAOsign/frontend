@@ -28,15 +28,18 @@ export const withFade = (component: React.ReactElement, key: number | string) =>
   );
 };
 
-export default function CreateAgreement() {
+export default function CreateAgreement({ page }: { page: string }) {
   const { query } = useRouter();
   const [step, setStep] = useState(query?.step ? Number(query.step) : 0);
   const [transitioned, setTransitioned] = useState(false);
   const [loading, setLoading] = useState(false);
   const steps = {
-    1: withFade(<StepOne animateContainer={() => setTransitioned(val => !val)} />, step),
-    2: withFade(<StepTwo />, step),
-    3: withFade(<StepThree loading={loading} />, step),
+    1: withFade(
+      <StepOne page={page} animateContainer={() => setTransitioned(val => !val)} />,
+      step
+    ),
+    2: withFade(<StepTwo page={page} />, step),
+    3: withFade(<StepThree page={page} loading={loading} />, step),
   };
 
   return (
@@ -46,7 +49,7 @@ export default function CreateAgreement() {
         {steps[step]}
       </Container>
       <Container sx={rightSide}>
-        <NavPanel setLoading={setLoading} />
+        <NavPanel page={page} setLoading={setLoading} />
       </Container>
     </Flex>
   );

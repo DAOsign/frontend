@@ -7,10 +7,9 @@ import { title, containerSides, noContent, btnText, btn, iconPlus } from "./styl
 import Icon from "../icon/index";
 import iconsObj from "../../assets/icons";
 import HeaderAgreement from "./HeaderAgreement";
-import ItemMyAgreement from "./AgreementItem";
 import NextLink from "next/link";
 import { useQuery } from "urql";
-import { agreementsMutation } from "../../modules/graphql/queries";
+import { agreementsMutation, agreementById } from "../../modules/graphql/queries";
 import { useWeb3 } from "../../hooks/useWeb3";
 import AgreementItem from "./AgreementItem";
 import { toAgreement } from "../../utils/typeUtils";
@@ -21,6 +20,7 @@ import loader from "../../img/json/loader.json";
 export default function AgreementsList({ address }: any) {
   const { account } = useWeb3();
   const [{ data, fetching: agreementsLoading, error }] = useQuery({
+    // @ts-ignore
     query: agreementsMutation,
     variables: { authorWallet: account },
   });
@@ -30,10 +30,9 @@ export default function AgreementsList({ address }: any) {
   }, [error]);
 
   const agreements = useMemo(
-    () => data?.agreements?.agreements.map(a => toAgreement(a as AgreementRespone)) || [],
+    () => data?.agreements?.agreements.map((a: any) => toAgreement(a as AgreementRespone)) || [],
     [data]
   );
-  console.log(agreements);
 
   return (
     <Flex sx={containerSides}>
@@ -58,7 +57,7 @@ export default function AgreementsList({ address }: any) {
             loop={true}
           />
         ) : agreements.length ? (
-          agreements.map((agr, index) => <AgreementItem key={index} {...agr} />)
+          agreements.map((agr: any, index: number) => <AgreementItem key={index} {...agr} />)
         ) : (
           <Container sx={{ textAlign: "center" }}>
             <Flex sx={noContent}>

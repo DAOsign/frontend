@@ -231,6 +231,7 @@ const agreementConteinerRelative = {
   height: "160px",
   width: "100%",
   flexDirection: "column",
+  display: "block",
   "@media screen and (max-width: 768px)": {
     height: "200px",
   },

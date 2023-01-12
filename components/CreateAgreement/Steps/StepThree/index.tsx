@@ -12,6 +12,7 @@ import { uniqueId } from "../../../../utils/formats";
 import iconsObj from "../../../../assets/icons";
 import Icon from "../../../icon";
 import { useCreateAgreement } from "../../../../hooks/useCreateAgreement";
+import { useEditAgreement } from "../../../../hooks/useEditAgreement";
 import { useWeb3 } from "../../../../hooks/useWeb3";
 import { useMemo } from "react";
 import TagList, { ParticipantType } from "./TagList";
@@ -63,8 +64,8 @@ const validateUser = (
 ): string | null => {
   let error: string | null = null;
 
-  const userAlreadySigner = addedSigners.some(signer => signer.value === value);
-  const userAlreadyObserver = addedObservers.some(observer => observer.value === value);
+  const userAlreadySigner = addedSigners.some(signer => signer?.value === value);
+  const userAlreadyObserver = addedObservers.some(observer => observer?.value === value);
 
   if (userAlreadySigner) {
     error = userRole === "signer" ? "Signer is already added" : "Already exists as Signer";
@@ -104,8 +105,10 @@ const validateUser = (
   return error;
 };
 
-export default function StepThree({ loading }: { loading: boolean }) {
-  const { values, changeValue } = useCreateAgreement();
+export default function StepThree({ loading, page }: { loading: boolean; page: string }) {
+  const create = useCreateAgreement();
+  const edit = useEditAgreement();
+  const { values, changeValue } = page === "create" ? create : edit;
   const { account } = useWeb3();
 
   const [checkedVerifications, setCheckedVerifications] = useState<boolean[]>(
@@ -171,12 +174,12 @@ export default function StepThree({ loading }: { loading: boolean }) {
   };
 
   const userAlreadySigner = useMemo(
-    () => values.signers.some(signer => signer.value === account),
+    () => values?.signers?.some(signer => signer?.value === account),
     [values.signers, account]
   );
 
   const userAlreadyObserver = useMemo(
-    () => values.observers.some(observer => observer.value === account),
+    () => values?.observers?.some(observer => observer.value === account),
     [values.observers, account]
   );
 
@@ -192,7 +195,6 @@ export default function StepThree({ loading }: { loading: boolean }) {
       }
     }
   };
-
   const signersInputErrorStyles = values?.errors?.signers ? inputCreateAgreementError : {};
   const observersInputErrorStyles = values?.errors?.observers ? inputCreateAgreementError : {};
 

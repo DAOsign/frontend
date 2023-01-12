@@ -5,7 +5,7 @@ import CreateAgreementProvider from "../../modules/createAgreementProvider";
 export default function create() {
   return (
     <CreateAgreementProvider>
-      <CreateAgreement />
+      <CreateAgreement page="create" />
     </CreateAgreementProvider>
   );
 }

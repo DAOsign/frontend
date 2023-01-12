@@ -3,6 +3,7 @@ import { useRouter } from "next/router";
 import Icon from "../icon/index";
 import { Box, Button, ButtonProps, Container, Flex, Spinner, Text } from "theme-ui";
 import { useCreateAgreement } from "../../hooks/useCreateAgreement";
+import { useEditAgreement } from "../../hooks/useEditAgreement";
 import iconsObj from "../../assets/icons";
 import {
   box,
@@ -14,6 +15,7 @@ import {
   stepNumber,
   stepsContainer,
   stepStyle,
+  delBtn,
 } from "./styles";
 import { useMutation } from "urql";
 import { saveAgreementMutation } from "../../modules/graphql/mutations";
@@ -32,8 +34,10 @@ import { notifError } from "../../utils/notification";
 
 const FILE_UPLOAD_ERROR_DEFAULT_MESSAGE = "Failed to upload file";
 
-export default function NavPanel({ setLoading }: { setLoading: any }) {
-  const { values, changeValue } = useCreateAgreement();
+export default function NavPanel({ setLoading, page }: { setLoading: any; page: string }) {
+  const create = useCreateAgreement();
+  const edit = useEditAgreement();
+  const { values, changeValue } = page === "create" ? create : edit;
   const { push, query } = useRouter();
   const { account } = useWeb3();
 
@@ -167,13 +171,17 @@ export default function NavPanel({ setLoading }: { setLoading: any }) {
   };
 
   const handleNextStep = () => {
-    push({ query: { step: step + 1 } }, undefined, { shallow: true });
+    page === "create"
+      ? push({ query: { step: step + 1 } }, undefined, { shallow: true })
+      : push(`/edit/${query.id}?step=${step + 1}`);
   };
   const handlePrevStep = () => {
     if (step === 1 && (!values.filePath || !values.agreementHash)) {
       changeValue("file", undefined);
     }
-    push({ query: { step: step > 1 ? step - 1 : 1 } }, undefined, { shallow: true });
+    page === "create"
+      ? push({ query: { step: step > 1 ? step - 1 : 1 } }, undefined, { shallow: true })
+      : push(`/edit/${query.id}?step=${step - 1}`);
   };
 
   const handleCancel = () => {
@@ -225,7 +233,11 @@ export default function NavPanel({ setLoading }: { setLoading: any }) {
         {isLoadingNextStep ? (
           <Spinner size={12} color="#ffffff" />
         ) : isFinishButton ? (
-          "Create Agreement"
+          page === "create" ? (
+            "Create Agreement"
+          ) : (
+            "Update Agreement"
+          )
         ) : (
           "Next Step"
         )}
@@ -303,6 +315,11 @@ export default function NavPanel({ setLoading }: { setLoading: any }) {
           Save Draft
         </Button>
         <ForwardButton />
+        {page === "edit" && (
+          <Button disabled sx={delBtn}>
+            Delete Agreement
+          </Button>
+        )}
       </Container>
       <ModalAuthorNotAdded
         isOpen={isAuthorNotAddedPopupVisible}

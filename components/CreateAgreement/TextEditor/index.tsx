@@ -6,6 +6,7 @@ import iconsObj from "../../../assets/icons";
 import Icon from "../../icon";
 import { Text, Button, Flex, Box, ButtonProps, Spinner } from "theme-ui";
 import { useCreateAgreement } from "../../../hooks/useCreateAgreement";
+import { useEditAgreement } from "../../../hooks/useEditAgreement";
 import styles from "./styles";
 
 const MDEditor = dynamic(() => import("@uiw/react-md-editor"), {
@@ -29,11 +30,13 @@ const buttonPropsByStatus = (
   return props;
 };
 
-const TextEditor = () => {
+const TextEditor = ({ page }: { page: string }) => {
+  const create = useCreateAgreement();
+  const edit = useEditAgreement();
   const {
     values: { textEditorValue },
     changeValue,
-  } = useCreateAgreement();
+  } = page === "create" ? create : edit;
 
   const [state, setState] = useState<"edit" | "preview">("edit");
 

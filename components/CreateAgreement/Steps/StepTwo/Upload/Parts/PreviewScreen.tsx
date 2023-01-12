@@ -6,6 +6,7 @@ import iconsObj from "../../../../../../assets/icons";
 import Icon from "../../../../../icon";
 import { previewContainer } from "../../../../styles";
 import { useCreateAgreement } from "../../../../../../hooks/useCreateAgreement";
+import { useEditAgreement } from "../../../../../../hooks/useEditAgreement";
 import { Link } from "theme-ui";
 
 const FileViewer = dynamic(() => import("@cyntler/react-doc-viewer"), {
@@ -25,8 +26,10 @@ interface Document {
   fileName: string;
 }
 
-const PreviewScreen = ({ file }: FileState) => {
-  const { changeValue } = useCreateAgreement();
+const PreviewScreen = ({ file, page }: FileState) => {
+  const create = useCreateAgreement();
+  const edit = useEditAgreement();
+  const { changeValue } = page === "create" ? create : edit;
 
   const [documents, setDocuments] = useState<Document[]>([]);
 

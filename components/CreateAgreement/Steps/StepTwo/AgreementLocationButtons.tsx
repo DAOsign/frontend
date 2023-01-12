@@ -4,6 +4,7 @@ import Icon from "../../../icon/index";
 import { itemRadio } from "../../styles";
 import iconsObj from "../../../../assets/icons";
 import { useCreateAgreement } from "../../../../hooks/useCreateAgreement";
+import { useEditAgreement } from "../../../../hooks/useEditAgreement";
 import {
   AgreementLocation,
   LOCATION_CLOUD,
@@ -23,8 +24,10 @@ const agreementLocations: { name: string; value: AgreementLocation }[] = [
   },
 ];
 
-export default function AgreementLocationRadioButtons() {
-  const { values, changeValue } = useCreateAgreement();
+export default function AgreementLocationRadioButtons({ page }: { page: string }) {
+  const create = useCreateAgreement();
+  const edit = useEditAgreement();
+  const { values, changeValue } = page === "create" ? create : edit;
   const [isIpfsWarningVisible, setIsIpfsWarningVisible] = useState<boolean>(false);
 
   const onAgreementLocationClick = (location: AgreementLocation) => {

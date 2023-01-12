@@ -15,7 +15,6 @@ interface TagListProps<T = any> {
 
 export default function TagList<T = any>({ items, type, onDelete }: TagListProps<T>) {
   const { account } = useWeb3();
-
   return (
     <Flex sx={{ flexWrap: "wrap", gap: "4px" }}>
       {items.map((el: any) => {

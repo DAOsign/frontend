@@ -5,20 +5,23 @@ import { card, primaryTitleItem, rightCard, leftCard } from "../../styles";
 import iconsObj from "../../../../assets/icons";
 import TextEditor from "../../TextEditor/index";
 import { useCreateAgreement } from "../../../../hooks/useCreateAgreement";
+import { useEditAgreement } from "../../../../hooks/useEditAgreement";
 import { withFade } from "../..";
 import UploadLocalAgreement from "./UploadLocal";
 import { METHOD_ENTER, METHOD_UPLOAD } from "../../../../types";
 import FieldErrorMessage from "../../../Form/FieldErrorMessage";
 
-export default function ChooseAgreementMethod() {
-  const { values, changeValue } = useCreateAgreement();
+export default function ChooseAgreementMethod({ page }: { page: string }) {
+  const create = useCreateAgreement();
+  const edit = useEditAgreement();
+  const { values, changeValue } = page === "create" ? create : edit;
 
   const renderMethods = () => {
     switch (values.agreementMethod) {
       case METHOD_ENTER:
         return withFade(
           <>
-            <TextEditor />
+            <TextEditor page={page} />
             <FieldErrorMessage error={values?.errors?.agreementFile} />
           </>,
           1
@@ -26,7 +29,7 @@ export default function ChooseAgreementMethod() {
       case METHOD_UPLOAD: {
         return withFade(
           <>
-            <UploadLocalAgreement />
+            <UploadLocalAgreement page={page}/>
             <FieldErrorMessage
               error={values?.errors?.agreementFile}
               sx={values?.file ? { marginBottom: "-45px !important" } : {}}

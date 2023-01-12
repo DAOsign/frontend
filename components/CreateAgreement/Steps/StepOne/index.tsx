@@ -12,20 +12,23 @@ import {
 import ChooseMethod from "./ChooseMethod";
 import PublicMethod from "./ChoosePublicMethod";
 import FieldErrorMessage from "../../../Form/FieldErrorMessage";
+import { useEditAgreement } from "../../../../hooks/useEditAgreement";
 
 export type AnimateContainer = () => void;
 
 export interface Props {
   animateContainer: AnimateContainer;
+  page: string;
 }
 export interface PublicProps extends Props {
   setPublic: any;
 }
 
-export default function StepOne({ animateContainer }: Props) {
-  const { values, changeValue } = useCreateAgreement();
+export default function StepOne({ animateContainer, page }: Props) {
+  const create = useCreateAgreement();
+  const edit = useEditAgreement();
+  const { values, changeValue } = page === "create" ? create : edit;
   const [isPublic, setIsPublic] = useState(false);
-
   const initiated = useRef(false);
 
   useEffect(() => {
@@ -36,7 +39,6 @@ export default function StepOne({ animateContainer }: Props) {
         PRIVACY_PUBLIC_PUBLISHED,
         PRIVACY_PUBLIC_WITH_LINK,
       ].some(p => p === values.agreementPrivacy);
-
       if (isPublic) {
         animateContainer();
         setIsPublic(isPublic);
@@ -60,9 +62,9 @@ export default function StepOne({ animateContainer }: Props) {
 
       <AnimatePresence initial={false}>
         {!isPublic ? (
-          <ChooseMethod animateContainer={animateContainer} setPublic={setIsPublic} />
+          <ChooseMethod page={page} animateContainer={animateContainer} setPublic={setIsPublic} />
         ) : (
-          <PublicMethod animateContainer={animateContainer} setPublic={setIsPublic} />
+          <PublicMethod page={page} animateContainer={animateContainer} setPublic={setIsPublic} />
         )}
       </AnimatePresence>
       <FieldErrorMessage error={values?.errors?.agreementPrivacy} />

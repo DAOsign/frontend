@@ -158,7 +158,7 @@ const rightSide = {
   paddingX: "25px",
   ml: "20px",
   mr: 0,
-  maxHeight: "590px",
+  maxHeight: "636px",
   paddingBottom: "32px",
   paddingTop: "52px",
   "@media screen and (max-width: 1200px)": {
@@ -464,6 +464,24 @@ const textLoading = {
   color: "#212121",
 } as ThemeUIStyleObject;
 
+const delBtn = {
+  fontFamily: "InterBold",
+  fontStyle: "normal",
+  fontWeight: 700,
+  fontSize: "16px",
+  lineHeight: "160%",
+  textAlign: "center",
+  color: "#CA5CF2",
+  opacity: "0.5",
+  backgroundColor: "inherit",
+  mt: "20px",
+  "&:hover": {
+    backgroundColor: "inherit",
+    opacity: 1,
+    background: "unset",
+  },
+} as ThemeUIStyleObject;
+
 export {
   inputCreactAgreement,
   inputCreateAgreementWithRightButton,
@@ -489,6 +507,7 @@ export {
   leftCard,
   leftSide,
   btnBack,
+  delBtn,
   card,
   title,
   item,

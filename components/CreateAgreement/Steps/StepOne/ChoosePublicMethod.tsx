@@ -3,6 +3,7 @@ import NextLink from "next/link";
 import { Container, Flex, Text, Button, Box, Link } from "theme-ui";
 import { item, secondaryTitle, container, btnBack } from "../../styles";
 import { useCreateAgreement } from "../../../../hooks/useCreateAgreement";
+import { useEditAgreement } from "../../../../hooks/useEditAgreement";
 import iconsObj from "../../../../assets/icons";
 import Icon from "../../../icon";
 
@@ -20,6 +21,7 @@ export interface Props {
 }
 export interface PublicProps extends Props {
   setPublic: any;
+  page: string;
 }
 
 const variants: Variants = {
@@ -28,8 +30,10 @@ const variants: Variants = {
   exit: { opacity: 1, x: 0, y: 200 },
 };
 
-export default function PublicMethod({ animateContainer, setPublic }: PublicProps) {
-  const { values, changeValue } = useCreateAgreement();
+export default function PublicMethod({ animateContainer, setPublic, page }: PublicProps) {
+  const create = useCreateAgreement();
+  const edit = useEditAgreement();
+  const { values, changeValue } = page === "create" ? create : edit;
   return (
     <motion.main
       initial="hidden"

@@ -6,13 +6,13 @@ import AgreementMethod from "./ChooseAgreementMethod";
 import AgreementLocationRadioButtons from "./AgreementLocationButtons";
 import styles from "./styles";
 
-export default function StepTwo() {
+export default function StepTwo({ page }: { page: string }) {
   return (
     <Container sx={styles}>
-      <AgreementLocationRadioButtons />
+      <AgreementLocationRadioButtons page={page} />
       <Box>
         <AnimatePresence mode="wait">
-          <AgreementMethod />
+          <AgreementMethod page={page} />
         </AnimatePresence>
       </Box>
     </Container>

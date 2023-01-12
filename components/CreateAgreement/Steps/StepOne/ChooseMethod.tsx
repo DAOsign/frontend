@@ -2,6 +2,7 @@ import React from "react";
 import { Container, Flex, Text, Box } from "theme-ui";
 import { rightCard, leftCard } from "../../styles";
 import { useCreateAgreement } from "../../../../hooks/useCreateAgreement";
+import { useEditAgreement } from "../../../../hooks/useEditAgreement";
 import iconsObj from "../../../../assets/icons";
 import Icon from "../../../icon";
 
@@ -14,8 +15,10 @@ const chooseVariants = {
   visible: { opacity: 1 },
 };
 
-export default function ChooseMethod({ animateContainer, setPublic }: PublicProps) {
-  const { values, changeValue } = useCreateAgreement();
+export default function ChooseMethod({ animateContainer, setPublic, page }: PublicProps) {
+  const create = useCreateAgreement();
+  const edit = useEditAgreement();
+  const { values, changeValue } = page === "create" ? create : edit;
   return (
     <motion.main
       initial="hidden"
@@ -47,7 +50,7 @@ export default function ChooseMethod({ animateContainer, setPublic }: PublicProp
         <Container
           sx={rightCard}
           onClick={() => changeValue("agreementPrivacy", PRIVACY_PRIVATE)}
-          className={values.agreementPrivacy === PRIVACY_PRIVATE ? "active" : undefined}
+          className={values?.agreementPrivacy === PRIVACY_PRIVATE ? "active" : undefined}
         >
           <Box sx={{ maxWidth: "150px", m: "0 auto" }}>
             <div style={{ width: "50px", height: "50px", margin: "0 auto" }}>
