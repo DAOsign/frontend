@@ -29,7 +29,7 @@ export default function ChooseAgreementMethod({ page }: { page: string }) {
       case METHOD_UPLOAD: {
         return withFade(
           <>
-            <UploadLocalAgreement page={page}/>
+            <UploadLocalAgreement page={page} />
             <FieldErrorMessage
               error={values?.errors?.agreementFile}
               sx={values?.file ? { marginBottom: "-45px !important" } : {}}

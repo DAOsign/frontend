@@ -22,9 +22,11 @@ function MyApp({ Component, pageProps }: AppProps) {
     //@ts-ignore
     const hasLayout = !Component?.noLayout;
     return hasLayout ? (
-      <Layout>
-        <Component {...pageProps} />
-      </Layout>
+      getToken() ? (
+        <Layout>
+          <Component {...pageProps} />
+        </Layout>
+      ) : null
     ) : (
       <Component {...pageProps} />
     );

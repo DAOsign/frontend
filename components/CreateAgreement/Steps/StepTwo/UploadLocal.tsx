@@ -28,7 +28,7 @@ export default function UploadLocalAgreement({ page }: { page: string }) {
           <Text sx={{ display: "block" }}>Choose another method</Text>
         </Button>
       </Flex>
-      <Upload page={page}/>
+      <Upload page={page} />
     </Container>
   );
 }

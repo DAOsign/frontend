@@ -25,7 +25,6 @@ export default function TagList<T = any>({ items, type, onDelete }: TagListProps
               p: "5px 9px 5px 14px",
               width: "fit-content",
               gap: "4px",
-              cursor: "pointer",
             }}
             key={el.id}
           >
@@ -36,7 +35,10 @@ export default function TagList<T = any>({ items, type, onDelete }: TagListProps
             >
               {el.value.length > 10 ? formatAddress(el.value) : el.value}
             </Text>
-            <Box onClick={() => onDelete(el, type)} sx={{ width: "13px", height: "11px" }}>
+            <Box
+              onClick={() => onDelete(el, type)}
+              sx={{ width: "13px", height: "11px", cursor: "pointer" }}
+            >
               <Icon style={{ opacity: 0.5 }} src={iconsObj.plusCircle} />
             </Box>
           </Box>

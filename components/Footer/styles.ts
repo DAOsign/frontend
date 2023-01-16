@@ -28,7 +28,7 @@ const footer = {
   },
   "@media screen and (max-width: 720px)": {
     maxWidth: "520px",
-    marginTop: "60px",
+    marginTop: "120px",
     px: 0,
   },
   "@media screen and (min-width: 1200px)": {

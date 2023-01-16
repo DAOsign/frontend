@@ -4,7 +4,7 @@ import { backgroundPopap, popap, popapTitle, popapText } from "./styles";
 import Icon from "../icon";
 import iconsObj from "../../assets/icons";
 
-export default function Popap({ setVisible }: any) {
+export default function Popup({ setVisible }: any) {
   return (
     <Container sx={backgroundPopap}>
       <Container sx={popap}>

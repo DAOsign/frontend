@@ -34,26 +34,26 @@ const verifications: VerificationInfo[] = [
     img: iconsObj.verificationAnonymous,
     description: "Wallet Address",
   },
-  {
-    title: "Pseudonymous",
-    img: iconsObj.verificationPseudonymous,
-    description: "Name, Email address, ENS",
-  },
-  {
-    title: "Digital Identify",
-    img: iconsObj.verificationDigital,
-    description: "Social Network Verification",
-  },
-  {
-    title: "Real Identify",
-    img: iconsObj.verificationReal,
-    description: "Real world assets verification",
-  },
-  {
-    title: "Notarized Identity",
-    img: iconsObj.verificationNotarized,
-    description: "KYC verification",
-  },
+  // {
+  //   title: "Pseudonymous",
+  //   img: iconsObj.verificationPseudonymous,
+  //   description: "Name, Email address, ENS",
+  // },
+  // {
+  //   title: "Digital Identify",
+  //   img: iconsObj.verificationDigital,
+  //   description: "Social Network Verification",
+  // },
+  // {
+  //   title: "Real Identify",
+  //   img: iconsObj.verificationReal,
+  //   description: "Real world assets verification",
+  // },
+  // {
+  //   title: "Notarized Identity",
+  //   img: iconsObj.verificationNotarized,
+  //   description: "KYC verification",
+  // },
 ];
 
 const validateUser = (
@@ -336,7 +336,8 @@ export default function StepThree({ loading, page }: { loading: boolean; page: s
                 <VerificationCard
                   key={verification.title}
                   {...verification}
-                  checked={checkedVerifications[index]}
+                  disabled={verification.title === "Anonymus"}
+                  checked={checkedVerifications[index] || verification.title === "Anonymus"}
                   onClick={() => {
                     setCheckedVerifications(prevState => [
                       ...prevState.slice(0, index),

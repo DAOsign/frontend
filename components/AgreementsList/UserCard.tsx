@@ -1,7 +1,8 @@
 import React from "react";
 import { Container, Box, Text, Button, Flex } from "theme-ui";
 import iconsObj from "../../assets/icons";
-import { ToastContainer, toast } from "react-toastify";
+import { ToastContainer } from "react-toastify";
+import Image from "next/image";
 import Icon from "../icon";
 import { formatAddress, onCopyClick } from "../../utils/formats";
 import {
@@ -36,9 +37,21 @@ export default function UserCard({ address }: any) {
             Ralph Edwards
           </Text>
           <Flex
-            sx={{ justifyContent: "center", marginBottom: "24px", mt: "4px", alignItems: "center" }}
+            sx={{
+              justifyContent: "center",
+              marginBottom: "24px",
+              mt: "4px",
+              alignItems: "center",
+              "@media screen and (min-width: 1200px)": {
+                mb: "40px",
+              },
+            }}
           >
-            <Text sx={{ variant: "text.smallTextMediumUser" }}>
+            <Text
+              sx={{
+                variant: "text.smallTextMediumUser",
+              }}
+            >
               {address ? formatAddress(address) : "\u00A0"}
             </Text>
             <Box
@@ -53,6 +66,22 @@ export default function UserCard({ address }: any) {
           </Flex>
         </Flex>
       </Flex>
+      <Box className="card_tail">
+        <Box
+          sx={{
+            width: "52px",
+            height: "52px",
+            m: "0 auto",
+            display: "none",
+            "@media screen and (min-width: 1200px)": {
+              mb: "20px",
+              display: "block",
+            },
+          }}
+        >
+          <Image src={iconsObj.verificationAnonymous} alt="anonymous" />
+        </Box>
+      </Box>
       <Container sx={percentContainer}>
         <Box sx={{ mb: "10px" }}>
           <Icon src={iconsObj.ellipseGreen} />

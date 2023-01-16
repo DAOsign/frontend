@@ -1,0 +1,51 @@
+.tooltip{
+    position: relative; 
+    display: flex;
+    margin: 0;
+    min-width: 0;
+    font-family: InterBold;
+    font-weight: 700;
+    line-height: 24px;
+    display: block;
+    font-size: 13px;
+    color: #fff;
+    padding-top: 12px;
+    display: flex;
+    align-items: center;
+  }
+  .tooltip_button{
+    border: unset;
+    background-color: unset;
+
+  }
+  /* make our tooltip show up only on button hover */
+  .tooltip_button:hover ~.tooltip_container{
+    visibility: visible;
+    
+  }
+  /* make the tooltip hidden */
+  .tooltip_container{
+    position: absolute;
+  /* this is used to place the tooltip bubble above the button, edit to value that fits you*/
+  /* also you can change top to bottom, right or left for different tooltip location */
+    top:-71%; 
+    left: -180px;
+    visibility: hidden;
+  }
+  /* top part of tooltip container */
+  .tooltip_text{
+    background: #424243;
+    border-radius: 3px;
+    padding: 4px;
+    display: flex;
+    justify-content: left;
+  }
+  /* the button part of the tooltip container */
+  .tooltip_text_buttom{
+    width: 0;
+    height: 0;
+    margin-left: 63%;
+    border-left: 2em solid transparent;
+    border-right: 2em solid transparent;
+    border-top: 0.7em  solid #424243;
+  }

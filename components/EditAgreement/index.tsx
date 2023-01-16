@@ -123,6 +123,7 @@ export default function EditAgreement({ page }: { page: string }) {
         }
       });
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [data]);
 
   const steps = {

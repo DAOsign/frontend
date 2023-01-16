@@ -1,6 +1,7 @@
 import React, { useState } from "react";
-import { Container, Flex, Input, Text, Box } from "theme-ui";
+import { Container, Flex, Input, Text, Box, Button } from "theme-ui";
 import iconsObj from "../../assets/icons";
+import { btnClear } from "./styles";
 import Filter from "../Filter";
 import Icon from "../icon";
 
@@ -71,6 +72,11 @@ export default function HeaderAgreement() {
       signature: initialSignature,
     });
   };
+  const filterValues = [
+    filterOptions.signature,
+    ...filterOptions.permission,
+    ...filterOptions.status,
+  ].filter(el => el.value);
 
   return (
     <Container>
@@ -110,18 +116,21 @@ export default function HeaderAgreement() {
         </Container>
       </Flex>
       <Flex sx={{ flexWrap: "wrap" }}>
-        {[filterOptions.signature, ...filterOptions.permission, ...filterOptions.status]
-          .filter(el => el.value)
-          .map(el => {
-            return (
-              <Flex onClick={() => onChange(el.id)} sx={filterItem} key={el.id}>
-                <Text sx={titleItem}>{el.name}</Text>
-                <Box sx={delBth}>
-                  <Icon src={iconsObj.xClose} />
-                </Box>
-              </Flex>
-            );
-          })}
+        {filterValues.map(el => {
+          return (
+            <Flex onClick={() => onChange(el.id)} sx={filterItem} key={el.id}>
+              <Text sx={titleItem}>{el.name}</Text>
+              <Box sx={delBth}>
+                <Icon src={iconsObj.xClose} />
+              </Box>
+            </Flex>
+          );
+        })}
+        {filterValues.length ? (
+          <Button onClick={reset} sx={btnClear}>
+            Clear All
+          </Button>
+        ) : null}
       </Flex>
     </Container>
   );

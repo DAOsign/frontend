@@ -2,7 +2,7 @@
 /** @jsxImportSource theme-ui */
 import React, { useEffect, useMemo } from "react";
 import UserCard from "./UserCard";
-import { Flex, Button, Text, Container, Link, Spinner, Box } from "theme-ui";
+import { Flex, Button, Text, Container, Link, Box } from "theme-ui";
 import { title, containerSides, noContent, btnText, btn, iconPlus } from "./styles";
 import Icon from "../icon/index";
 import iconsObj from "../../assets/icons";
@@ -37,7 +37,13 @@ export default function AgreementsList({ address }: any) {
   return (
     <Flex sx={containerSides}>
       <UserCard address={address} />
-      <Container>
+      <Container
+        sx={{
+          "@media screen and (min-width: 1200px)": {
+            paddingLeft: "300px",
+          },
+        }}
+      >
         <Flex>
           <Text sx={title}>My Agreements</Text>
           <NextLink href={"/create?step=1"}>

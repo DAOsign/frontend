@@ -4,21 +4,29 @@ import { verificationCardStyles } from "./styles";
 import Image from "next/image";
 import Icon from "../../../icon";
 import "react-tooltip/dist/react-tooltip.css";
-import CheckboxCopmonent from "../../../Checkbox";
+import CheckboxComponent from "../../../Checkbox";
 
 export interface Props {
   title: string;
   description: string;
   img: Icon;
   checked: boolean;
+  disabled: boolean;
   onClick: () => void;
 }
 
-export default function VerificationCard({ title, description, img, checked, onClick }: Props) {
+export default function VerificationCard({
+  title,
+  description,
+  img,
+  checked,
+  onClick,
+  disabled,
+}: Props) {
   return (
     <Box sx={verificationCardStyles} onClick={onClick}>
       <Box style={{ position: "relative" }} className="card_head">
-        <CheckboxCopmonent checked={checked} />
+        <CheckboxComponent disabled={disabled} checked={checked} />
       </Box>
       <Box className="card_body">
         <Text className="title">{title}</Text>

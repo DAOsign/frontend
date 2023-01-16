@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Container, Flex, Input, Text, Box, Checkbox } from "theme-ui";
 import iconsObj from "../../assets/icons";
-import CheckboxCopmonent from "../Checkbox";
+import CheckboxComponent from "../Checkbox";
 
 import Icon from "../icon";
 import {
@@ -42,7 +42,7 @@ export default function Filter({ setVisible, onChange, reset, filterOptions }: a
               sx={{ ...conteinerCheckbox, opacity: el.value ? 1 : 0.5, position: "relative" }}
               key={el.id}
             >
-              <CheckboxCopmonent checked={el.value} />
+              <CheckboxComponent disabled={false} checked={el.value} />
               <Text sx={text}>{el.name}</Text>
             </Flex>
           );
@@ -55,7 +55,7 @@ export default function Filter({ setVisible, onChange, reset, filterOptions }: a
               sx={{ ...conteinerCheckbox, opacity: el.value ? 1 : 0.5, position: "relative" }}
               key={el.id}
             >
-              <CheckboxCopmonent checked={el.value} />
+              <CheckboxComponent disabled={false} checked={el.value} />
               <Text sx={text}>{el.name}</Text>
             </Flex>
           );
@@ -69,7 +69,7 @@ export default function Filter({ setVisible, onChange, reset, filterOptions }: a
           }}
           onClick={() => onChange(filterOptions.signature.id)}
         >
-          <CheckboxCopmonent checked={filterOptions.signature.value} />
+          <CheckboxComponent disabled={false} checked={filterOptions.signature.value} />
           <Text sx={text}>{filterOptions.signature.name}</Text>
         </Flex>
 

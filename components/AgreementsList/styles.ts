@@ -27,6 +27,10 @@ const container = {
     minHeight: "292px",
     px: "16px",
   },
+  "@media screen and (min-width: 1200px)": {
+    position: "fixed",
+    height: "404px",
+  },
 } as ThemeUIStyleObject;
 
 const iconPlus = {
@@ -124,9 +128,11 @@ const percentContainer = {
   position: "relative",
   textAlign: "center",
   width: "130px",
+  display: "none",
   height: "130px",
   "@media screen and (max-width: 1200px)": {
     m: "0  0 0 auto",
+    display: "block",
     bottom: "5px",
   },
   "@media screen and (max-width: 768px)": {
@@ -273,12 +279,24 @@ const greyAgrBtn = {
   ...agrBtnBase,
   background: "#EDEDF3",
   color: "#212121",
+  "&:hover": {
+    background: "#EDEDF3",
+  },
+  "&:focus": {
+    background: "#EDEDF3",
+  },
 } as ThemeUIStyleObject;
 
 const blueAgrBtn = {
   ...agrBtnBase,
   background: "#5051F2",
   color: "#ffffff",
+  "&:hover": {
+    background: "#5051F2",
+  },
+  "&:focus": {
+    background: "#5051F2",
+  },
 } as ThemeUIStyleObject;
 
 const textContainer = {
@@ -346,8 +364,9 @@ const filterItem = {
   pl: "14px",
   height: "32px",
   ml: "8px",
+  mb: "24px",
   pr: "10px",
-  mt: "16px",
+  mt: "5px",
   "& > div": {
     opacity: 0.5,
   },
@@ -406,6 +425,32 @@ const iconCopy = {
   },
 } as ThemeUIStyleObject;
 
+const btnClear = {
+  opacity: "0.5",
+  fontFamily: "InterBold",
+  fontStyle: "normal",
+  fontWeight: 700,
+  fontSize: "14px",
+  lineHeight: "160%",
+  color: "#CA5CF2",
+  background: "unset",
+  m: 0,
+  width: "100px",
+  marginBottom: "24px",
+  height: "31px",
+  backgroundColor: "inherit",
+  "&:hover": {
+    opacity: 1,
+    background: "unset",
+    backgroundColor: "inherit",
+  },
+  "&:focus": {
+    opacity: 1,
+    background: "unset",
+    backgroundColor: "inherit",
+  },
+} as ThemeUIStyleObject;
+
 export {
   agreementConteinerRelative,
   normalTextBoldGreen,
@@ -430,6 +475,7 @@ export {
   container,
   iconPlus,
   noContent,
+  btnClear,
   iconExit,
   userFoto,
   iconCopy,

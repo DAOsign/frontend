@@ -1,5 +1,4 @@
 import React from "react";
-import Layout from "../components/Layout";
 import AgreementsList from "../components/AgreementsList";
 import { useWeb3 } from "../hooks/useWeb3";
 

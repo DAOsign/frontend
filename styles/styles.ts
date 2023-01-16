@@ -31,11 +31,11 @@ const copyIcon = {
 const fotoContainer = {
   width: "292px",
   m: "0 auto",
-  height: "390px",
+  minHeight: "390px",
   background: "#FFFFFF",
   border: "1px solid #EDEDF3",
   borderRadius: "12px",
-  p: "32px 32px 20px 32px",
+  p: "32px 32px 0 32px",
   boxShadow: "0px 4px 40px rgba(0, 0, 0, 0.08)",
   position: "absolute",
   "&.visible": {
@@ -69,6 +69,7 @@ const btnLogaut = {
   width: "100%",
   color: "#CA5CF2",
   opacity: 0.5,
+  height: "64px",
   pt: 0,
   textAlign: "center",
   "&:hover": {

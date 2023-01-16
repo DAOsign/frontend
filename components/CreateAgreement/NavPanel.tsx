@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 import React, { useState } from "react";
 import { useRouter } from "next/router";
 import Icon from "../icon/index";
@@ -60,7 +61,7 @@ export default function NavPanel({ setLoading, page }: { setLoading: any; page: 
     } else {
       switch (step) {
         case 1:
-          if (!values.title) {
+          if (!values.title.trim()) {
             errors.title = "Title can not be blank";
           }
           if (!values.agreementPrivacy) {
@@ -74,7 +75,7 @@ export default function NavPanel({ setLoading, page }: { setLoading: any; page: 
             errors.agreementFile = "Agreement entry is required";
           } else if (values.agreementMethod === METHOD_UPLOAD && !values.agreementHash) {
             errors.agreementFile = "Agreement file upload is required";
-          } else if (!values.textEditorValue && !values.agreementHash) {
+          } else if (!values.textEditorValue.trim() && !values.agreementHash) {
             errors.agreementFile = "Agreement Description is a required selection";
           }
           break;

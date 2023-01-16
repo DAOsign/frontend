@@ -59,7 +59,15 @@ const PreviewScreen = ({ file, page }: FileState) => {
       <Box className="preview">
         <FileViewer documents={documents} config={FILE_VIEWER_CONFIG} />
       </Box>
-      <Box sx={{ display: "flex", justifyContent: "space-between", height: "26px", gap: "20px" }}>
+      <Box
+        sx={{
+          justifyContent: "space-between",
+          display: "flex",
+          height: "26px",
+          gap: "20px",
+          mt: "8px",
+        }}
+      >
         <Flex sx={{ gap: "8px", alignItems: "center" }}>
           <Link
             href={documents[0]?.uri}
@@ -83,7 +91,7 @@ const PreviewScreen = ({ file, page }: FileState) => {
             </Text>
           </Link>
         </Flex>
-        <Box sx={{ minWidth: "unset" }}>
+        <Box sx={{ minWidth: "unset", opacity: "0.5", "&:hover": { opacity: 1 } }}>
           <Flex
             onClick={handleDelete}
             sx={{

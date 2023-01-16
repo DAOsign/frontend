@@ -11,9 +11,17 @@ import {
   headerItem,
   blueAgrBtn,
 } from "./styles";
-import { Agreement, STATUS_READY_TO_SIGN } from "../../types";
+import {
+  Agreement,
+  STATUS_READY_TO_SIGN,
+  PRIVACY_PRIVATE,
+  PRIVACY_PUBLIC_WITH_LINK,
+  PRIVACY_PUBLIC_PROOF_ONLY,
+  PRIVACY_PUBLIC_PUBLISHED,
+} from "../../types";
 
 export default function AgreementItem({
+  agreementPrivacy,
   agreementStatus,
   agrementId,
   observers,
@@ -40,7 +48,11 @@ export default function AgreementItem({
               </Button>
               <Flex sx={iconMenuAgreement}>
                 <Box sx={{ width: "20px", height: "20px" }}>
-                  <Icon src={iconsObj.privateIcon} />
+                  {agreementPrivacy === PRIVACY_PRIVATE ? (
+                    <Icon src={iconsObj.privateIcon} />
+                  ) : (
+                    <Icon src={iconsObj.publicIcon} />
+                  )}
                 </Box>
               </Flex>
             </Flex>
@@ -59,6 +71,19 @@ export default function AgreementItem({
               Observers:
             </Text>
             <Text sx={{ variant: "text.smallTextMediumUser", mr: "20px" }}>{observers.length}</Text>
+            {agreementPrivacy !== PRIVACY_PRIVATE ? (
+              <>
+                <Text sx={{ variant: "text. smallTextMedium", opacity: "0.5", mr: "6px" }}>
+                  Access:
+                </Text>
+                <Text sx={{ variant: "text.smallTextMediumUser", mr: "20px" }}>
+                  {
+                    //@ts-ignore
+                    agreementPrivacy !== "With Link" ? agreementPrivacy : "Anyone With Link"
+                  }
+                </Text>
+              </>
+            ) : null}
           </Flex>
         </Flex>
         <div style={{ height: "20px" }}></div>

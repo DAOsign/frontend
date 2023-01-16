@@ -6,12 +6,13 @@ import iconsObj from "../../assets/icons";
 
 interface checkbox {
   checked: boolean;
+  disabled: boolean;
 }
 
-const CheckboxCopmonent = ({ checked }: checkbox) => {
+const CheckboxComponent = ({ checked, disabled }: checkbox) => {
   return (
     <>
-      <Checkbox defaultChecked={checked} />
+      <Checkbox checked={checked} disabled={disabled} />
       <Box
         sx={{
           border: !checked ? "1.8px solid #21212150" : "1.8px solid #212121",
@@ -26,4 +27,4 @@ const CheckboxCopmonent = ({ checked }: checkbox) => {
   );
 };
 
-export default CheckboxCopmonent;
+export default CheckboxComponent;

@@ -5,8 +5,9 @@ import Icon from "../icon/index";
 import iconsObj from "../../assets/icons";
 import { notifSucces } from "../../utils/notification";
 import { formatAddress, onCopyClick } from "../../utils/formats";
-import LogOutPopap from "../modalLogaut";
+import LogOutPopap from "../modalLogout";
 import Identicon from "../Identicon/Identicon";
+import styles from "./index.module.css";
 
 const HeaderMenu = ({ address, setVisibleMenu, visibleMenu }: any) => {
   const [visible, setVisible] = useState(false);
@@ -25,20 +26,37 @@ const HeaderMenu = ({ address, setVisibleMenu, visibleMenu }: any) => {
         <Flex>
           <Identicon account={address} size={60} sx={foto} />
           <Container sx={{ maxWidth: "150px", ml: "20px" }}>
-            <Text sx={{ variant: "text.largeTextBold", display: "block", textAlign: "left" }}>
+            <Text
+              sx={{
+                variant: "text.largeTextBold",
+                display: "block",
+                textAlign: "left",
+                fontSize: "24px",
+              }}
+            >
               Ralph Edwards
             </Text>
+
             <Flex sx={{ justifyContent: "left", alignItems: "center", mt: "4px" }}>
-              <Text sx={{ variant: "text.smallTextMediumUser" }}>{formatAddress(address)}</Text>
-              <Box
-                onClick={() => {
-                  onCopyClick(address);
-                  notifSucces("Link copied");
-                }}
-                sx={copyIcon}
-              >
-                <Icon style={{ cursor: "pointer" }} src={iconsObj.iconSix} />
-              </Box>
+              <div className={`${styles.tooltip}`}>
+                <button className={`${styles.tooltip_button}`}>
+                  <Text sx={{ variant: "text.smallTextMediumUser" }}>{formatAddress(address)}</Text>
+                </button>
+                <Box
+                  onClick={() => {
+                    onCopyClick(address);
+                    notifSucces("Link copied");
+                  }}
+                  sx={copyIcon}
+                >
+                  <Icon style={{ cursor: "pointer" }} src={iconsObj.iconSix} />
+                </Box>
+
+                <div className={`${styles.tooltip_container}`}>
+                  <div className={`${styles.tooltip_text}`}>{address}</div>
+                  <div className={`${styles.tooltip_text_buttom}`}></div>
+                </div>
+              </div>
             </Flex>
           </Container>
         </Flex>
@@ -64,7 +82,9 @@ const HeaderMenu = ({ address, setVisibleMenu, visibleMenu }: any) => {
           }}
         />
         <Button onClick={() => setVisible(!visible)} sx={btnLogaut}>
-          <Box sx={{ width: "24px", height: "24px", position: "absolute", left: "100px" }}>
+          <Box
+            sx={{ width: "24px", height: "24px", position: "absolute", left: "calc(50% - 48px)" }}
+          >
             <Icon src={iconsObj.logOut} />
           </Box>
           <Text sx={{ ml: "28px" }}>Log Out</Text>

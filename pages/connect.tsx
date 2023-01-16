@@ -4,7 +4,7 @@ import LogoAnimate from "../components/Logo/LogoAnimate";
 import { Container } from "theme-ui";
 import { animateContainer } from "../components/Logo/styles";
 import Footer from "../components/Footer/Footer";
-import Popap from "../components/popap";
+import Popap from "../components/popup";
 
 function ConnectPage() {
   const [visible, setVisible] = useState(false);
