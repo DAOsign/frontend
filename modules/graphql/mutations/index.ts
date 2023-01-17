@@ -42,6 +42,15 @@ export const saveAgreementMutation = graphql(`
   }
 `);
 
+export const deleteAgreementMutation = graphql(`
+  mutation DeleteAgreementMutation($agreementId: Int!) {
+    deleteAgreement(agreementId: $agreementId) {
+      agreementId
+      message
+    }
+  }
+`);
+
 export const logoutMutation = graphql(`
   mutation Mutation {
     logout {

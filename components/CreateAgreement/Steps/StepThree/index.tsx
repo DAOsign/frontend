@@ -184,7 +184,7 @@ export default function StepThree({ loading, page }: { loading: boolean; page: s
   );
 
   const onKeyDown = (e: React.KeyboardEvent<HTMLInputElement>, type: ParticipantType) => {
-    if (e.code === "Enter") {
+    if (e.code === "Enter" || e.code === "NumpadEnter") {
       //@ts-ignore
       const value = e.target.value;
       if (type === "observers") {

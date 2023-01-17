@@ -4,3 +4,14 @@
 export function isEmpty(obj: any): boolean {
   return Object.keys(obj)?.length === 0;
 }
+
+/**
+ * Can be used to wait specified time
+ */
+export function sleep(millisecondsToSleep: number): Promise<boolean> {
+  return new Promise(resolve =>
+    setTimeout(() => {
+      resolve(true);
+    }, millisecondsToSleep)
+  );
+}

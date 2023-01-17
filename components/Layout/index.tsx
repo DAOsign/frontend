@@ -8,15 +8,13 @@ import HeaderMenu from "../Header/HeaderMenu";
 import Footer from "../Footer/Footer";
 
 function Layout({ children }: React.PropsWithChildren) {
-  const { account, login } = useWeb3();
+  const { account } = useWeb3();
   const [visible, setVisible] = useState(false);
 
-  useEffect(() => {
-    login();
-  }, []);
+  const hideStyles = account ? {} : { display: "none" };
 
   return (
-    <Container sx={{ width: "100%", paddingTop: "80px" }}>
+    <Container sx={{ width: "100%", paddingTop: "80px", ...hideStyles }}>
       <Head>
         <title>Dao-Sign</title>
         <meta name="description" content="Dao-Sign" />

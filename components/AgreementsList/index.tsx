@@ -9,7 +9,7 @@ import iconsObj from "../../assets/icons";
 import HeaderAgreement from "./HeaderAgreement";
 import NextLink from "next/link";
 import { useQuery } from "urql";
-import { agreementsMutation, agreementById } from "../../modules/graphql/queries";
+import { myAgreementsQuery } from "../../modules/graphql/queries";
 import { useWeb3 } from "../../hooks/useWeb3";
 import AgreementItem from "./AgreementItem";
 import { toAgreement } from "../../utils/typeUtils";
@@ -20,9 +20,11 @@ import loader from "../../img/json/loader.json";
 export default function AgreementsList({ address }: any) {
   const { account } = useWeb3();
   const [{ data, fetching: agreementsLoading, error }] = useQuery({
-    // @ts-ignore
-    query: agreementsMutation,
-    variables: { authorWallet: account },
+    query: myAgreementsQuery,
+    //@ts-ignore: force refetch agreements when account changes
+    variables: { account },
+    pause: !account,
+    requestPolicy: "network-only",
   });
 
   useEffect(() => {
@@ -30,7 +32,7 @@ export default function AgreementsList({ address }: any) {
   }, [error]);
 
   const agreements = useMemo(
-    () => data?.agreements?.agreements.map((a: any) => toAgreement(a as AgreementRespone)) || [],
+    () => data?.myAgreements?.agreements.map((a: any) => toAgreement(a as AgreementRespone)) || [],
     [data]
   );
 

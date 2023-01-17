@@ -56,16 +56,20 @@ export const agreementById = graphql(`
       }
       title
       content
+      isWaitingForMySignature
+      createdAt
     }
   }
 `);
-export const agreementsMutation = graphql(`
-  query Agreements($authorWallet: String) {
-    agreements(authorWallet: $authorWallet) {
+export const myAgreementsQuery = graphql(`
+  query MyAgreements {
+    myAgreements {
       agreements {
         agreementId
         title
         content
+        isWaitingForMySignature
+        createdAt
         agreementLocation {
           name
           isActive

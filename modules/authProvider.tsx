@@ -72,7 +72,7 @@ const AuthProvider = (props?: Partial<ProviderProps<AuthProps>>) => {
         const loadedConnector = await auth.getConnector();
         if (!loadedConnector || !hasToken) {
           clearToken();
-          push("/connect");
+          await push("/connect");
           loginStarted.current = false;
           return;
         }
@@ -152,12 +152,15 @@ const AuthProvider = (props?: Partial<ProviderProps<AuthProps>>) => {
           handleChainChanged(formatUnits(chainId, 0) as ChainId);
         });
         provider.on("accountsChanged", async (accounts: string[]) => {
-          if (accounts.length !== 0) {
-            loadedState.account = accounts[0];
-            //setState((state) => ({ ...state, account: accounts[0] }));
-
-            await login();
-          }
+          clearToken();
+          await login();
+          // TODO: swap between different wallets without deleting token
+          // if (accounts.length !== 0) {
+          //   loadedState.account = accounts[0];
+          //   //setState((state) => ({ ...state, account: accounts[0] }));
+          //
+          //   await login();
+          // }
         });
         // auth.provider.on('disconnect', async () => {});
       }

@@ -40,7 +40,7 @@ export type AgreementLocation =
   | "";
 
 export interface Agreement {
-  agrementId: number;
+  agreementId: number;
   agreementLocation: AgreementLocation;
   agreementPrivacy: AgreementPrivacy;
   agreementStatus: AgreementStatus;
@@ -49,6 +49,8 @@ export interface Agreement {
   observers: string[];
   signers: string[];
   title: string;
+  isWaitingForMySignature: boolean;
+  createdAt: Date;
 }
 
 export type FieldError = string | null | undefined;

@@ -243,8 +243,11 @@ const agreementConteinerRelative = {
   },
 } as ThemeUIStyleObject;
 
+const agreementLabels = {
+  gap: "16px",
+} as ThemeUIStyleObject;
+
 const iconMenuAgreement = {
-  ml: "16px",
   width: "32px",
   display: "flex",
   alignItems: "center",
@@ -257,16 +260,15 @@ const iconMenuAgreement = {
   cursor: "poiner",
 } as ThemeUIStyleObject;
 
-const agrBtnBase = {
-  py: "0",
-  px: "16",
+const agrLabelBase = {
+  py: "6px",
+  px: "16px",
   height: "32px",
   borderRadius: "52px",
   fontFamily: "InterBold",
   fontStyle: "normal",
   fontWeight: 700,
   fontSize: "14px",
-  lineHeight: "160%",
   textAlign: "center",
   width: "initial",
   "@media screen and (max-width: 768px)": {
@@ -275,28 +277,27 @@ const agrBtnBase = {
   },
 } as ThemeUIStyleObject;
 
-const greyAgrBtn = {
-  ...agrBtnBase,
-  background: "#EDEDF3",
-  color: "#212121",
-  "&:hover": {
-    background: "#EDEDF3",
-  },
-  "&:focus": {
-    background: "#EDEDF3",
-  },
+const needSigningIcon = {
+  width: "32px",
+  height: "32px",
+  backgroundColor: "red",
+  borderRadius: "50%",
+  color: "white",
+  display: "flex",
+  justifyContent: "center",
+  alignItems: "center",
 } as ThemeUIStyleObject;
 
-const blueAgrBtn = {
-  ...agrBtnBase,
+const greyAgrLabel = {
+  ...agrLabelBase,
+  background: "#EDEDF3",
+  color: "#212121",
+} as ThemeUIStyleObject;
+
+const blueAgrLabel = {
+  ...agrLabelBase,
   background: "#5051F2",
   color: "#ffffff",
-  "&:hover": {
-    background: "#5051F2",
-  },
-  "&:focus": {
-    background: "#5051F2",
-  },
 } as ThemeUIStyleObject;
 
 const textContainer = {
@@ -467,9 +468,11 @@ export {
   fotoContainer,
   textContainer,
   improveBtn,
-  greyAgrBtn,
+  agreementLabels,
+  needSigningIcon,
+  greyAgrLabel,
   filterItem,
-  blueAgrBtn,
+  blueAgrLabel,
   headerItem,
   titleItem,
   container,

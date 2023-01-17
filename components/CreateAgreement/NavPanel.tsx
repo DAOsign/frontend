@@ -26,12 +26,13 @@ import {
   CreateAgreementFieldErrors,
   CreationState,
 } from "../../modules/createAgreementProvider";
-import { isEmpty } from "../../utils/common";
+import { isEmpty, sleep } from "../../utils/common";
 import { useWeb3 } from "../../hooks/useWeb3";
 import ModalAuthorNotAdded from "../ModalAuthorNotAdded/ModalAuthorNotAdded";
 import { calculateIpfsHash } from "../../utils/ipfs";
 import { uploadFile, uploadToIpfs } from "../../modules/rest";
 import { notifError } from "../../utils/notification";
+import ModalConfirmAgreementDeletion from "../ModalConfirmAgreementDeletion/ModalConfirmAgreementDeletion";
 
 const FILE_UPLOAD_ERROR_DEFAULT_MESSAGE = "Failed to upload file";
 
@@ -46,6 +47,9 @@ export default function NavPanel({ setLoading, page }: { setLoading: any; page: 
 
   const [isLoadingNextStep, setIsLoadingNextStep] = useState<boolean>(false);
   const [isAuthorNotAddedPopupVisible, setIsAuthorNotAddedPopupVisible] = useState<boolean>(false);
+
+  const [isConfirmAgreementDeletionPopupVisible, setIsConfirmAgreementDeletionPopupVisible] =
+    useState<boolean>(false);
 
   const validateFields = (values: CreationState, isSavingDraft: boolean = false): boolean => {
     const errors: CreateAgreementFieldErrors = {};
@@ -258,6 +262,16 @@ export default function NavPanel({ setLoading, page }: { setLoading: any; page: 
     return <Button {...props}>{isCancelButton ? "Cancel" : "Back"}</Button>;
   };
 
+  const handleDeleteAgreement = async () => {
+    setIsConfirmAgreementDeletionPopupVisible(true);
+  };
+
+  const onAgreementDeletionSuccess = async () => {
+    // For less screen flickering
+    await sleep(500);
+    push("/agreements", "/agreements", { shallow: false });
+  };
+
   return (
     <>
       <Container sx={stepsContainer}>
@@ -316,16 +330,24 @@ export default function NavPanel({ setLoading, page }: { setLoading: any; page: 
           Save Draft
         </Button>
         <ForwardButton />
-        {page === "edit" && (
-          <Button disabled sx={delBtn}>
+        {page === "edit" ? (
+          <Button sx={delBtn} onClick={handleDeleteAgreement}>
             Delete Agreement
           </Button>
-        )}
+        ) : null}
       </Container>
       <ModalAuthorNotAdded
         isOpen={isAuthorNotAddedPopupVisible}
         onExit={() => setIsAuthorNotAddedPopupVisible(false)}
       />
+      {page === "edit" && query.id ? (
+        <ModalConfirmAgreementDeletion
+          agreementId={Number(query.id)}
+          isOpen={isConfirmAgreementDeletionPopupVisible}
+          onSuccess={onAgreementDeletionSuccess}
+          onExit={() => setIsConfirmAgreementDeletionPopupVisible(false)}
+        />
+      ) : null}
     </>
   );
 }
