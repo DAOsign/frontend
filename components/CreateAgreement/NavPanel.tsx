@@ -88,8 +88,12 @@ export default function NavPanel({ setLoading, page }: { setLoading: any; page: 
             errors.signers = "At least one signer is required";
           }
           if (
-            !values.signers?.some(signer => signer.value === account) &&
-            !values.observers?.some(observer => observer.value === account)
+            !values.signers?.some(
+              signer => signer.value?.toLocaleLowerCase() === account?.toLocaleLowerCase()
+            ) &&
+            !values.observers?.some(
+              observer => observer.value?.toLocaleLowerCase() === account?.toLocaleLowerCase()
+            )
           ) {
             extraError = "Should add yourself as signer or observer";
             setIsAuthorNotAddedPopupVisible(true);
@@ -149,7 +153,7 @@ export default function NavPanel({ setLoading, page }: { setLoading: any; page: 
       agreementLocation: values.agreementLocation || null,
       content:
         values.agreementMethod === METHOD_ENTER && values.textEditorValue
-          ? JSON.stringify(values.textEditorValue)
+          ? values.textEditorValue
           : "",
       agreementPrivacy: values.agreementPrivacy || null,
       signers: values.signers.map(s => s.value),

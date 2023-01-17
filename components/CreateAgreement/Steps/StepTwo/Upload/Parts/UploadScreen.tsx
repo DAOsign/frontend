@@ -24,7 +24,9 @@ const UploadScreen = ({ page }: { page: string }) => {
     <>
       <Box sx={imageUploadContainer} className={values.file ? "uploaded" : undefined}>
         <input
+          style={{ cursor: !!values.file ? "default" : "pointer" }}
           lang="en"
+          disabled={!!values.file}
           onChange={handleReadFile}
           className="file"
           id="file"

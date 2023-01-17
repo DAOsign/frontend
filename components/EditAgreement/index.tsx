@@ -1,4 +1,5 @@
-import React, { useEffect, useState } from "react";
+/* eslint-disable react-hooks/exhaustive-deps */
+import React, { useCallback, useEffect, useMemo, useState } from "react";
 import StepOne from "../CreateAgreement/Steps/StepOne";
 import StepTwo from "../CreateAgreement/Steps/StepTwo";
 import StepThree from "../CreateAgreement/Steps/StepThree";
@@ -62,78 +63,80 @@ export default function EditAgreement({ page }: { page: string }) {
         "title",
         "file",
       ];
-
-      valuesEditAgreemnt.map(el => {
-        switch (el) {
-          case "title":
-            //@ts-ignore
-            changeValue(el, !!data?.agreement.title ? data?.agreement.title : "");
-            return;
-            break;
-          case "agreementPrivacy":
-            //@ts-ignore
-            if (data?.agreement?.agreementPrivacy.name === "Private") {
-              changeValue(el, PRIVACY_PRIVATE);
-              return;
-            }
-            //@ts-ignore
-            if (data?.agreement?.agreementPrivacy.name === "Proof Only") {
-              changeValue(el, PRIVACY_PUBLIC_PROOF_ONLY);
-              return;
-            }
-            //@ts-ignore
-            if (data?.agreement?.agreementPrivacy.name === "Published") {
-              changeValue(el, PRIVACY_PUBLIC_PUBLISHED);
-              return;
-            }
-            //@ts-ignore
-            if (data?.agreement?.agreementPrivacy.name === "With Link") {
-              changeValue(el, PRIVACY_PUBLIC_WITH_LINK);
-              return;
-            }
-          case "textEditorValue":
-            //@ts-ignore
-            changeValue(el, !!data?.agreement.content ? data?.agreement.content : "");
-            return;
-          case "agreementLocation":
-            changeValue(
-              el,
+      if (Number(query.step) === 1) {
+        valuesEditAgreemnt.map(el => {
+          switch (el) {
+            case "title":
               //@ts-ignore
-              !!data?.agreement.agreementLocation ? data?.agreement.agreementLocation : "Cloud"
-            );
-            return;
-          case "observers":
-            //@ts-ignore
-            const observsValue: any = data?.agreement?.observers?.map(value => {
-              return { value: value?.email || value?.wallet?.address };
-            });
-            //@ts-ignore
-            changeValue(el, observsValue);
-            return;
-          case "signers":
-            //@ts-ignore
-            const signersValue: any = data?.agreement?.signers?.map((value: any) => {
-              return { value: !!value?.email ? value?.email : value?.wallet?.address };
-            });
-            //@ts-ignore
-            changeValue(el, signersValue);
-            return;
-          default:
-            break;
-        }
-      });
+              changeValue(el, !!data?.agreement.title ? data?.agreement.title : "");
+              return;
+              break;
+            case "agreementPrivacy":
+              //@ts-ignore
+              if (data?.agreement?.agreementPrivacy.name === "Private") {
+                changeValue(el, PRIVACY_PRIVATE);
+                return;
+              }
+              //@ts-ignore
+              if (data?.agreement?.agreementPrivacy.name === "Proof Only") {
+                changeValue(el, PRIVACY_PUBLIC_PROOF_ONLY);
+                return;
+              }
+              //@ts-ignore
+              if (data?.agreement?.agreementPrivacy.name === "Published") {
+                changeValue(el, PRIVACY_PUBLIC_PUBLISHED);
+                return;
+              }
+              //@ts-ignore
+              if (data?.agreement?.agreementPrivacy.name === "With Link") {
+                changeValue(el, PRIVACY_PUBLIC_WITH_LINK);
+                return;
+              }
+            case "textEditorValue":
+              //@ts-ignore
+              changeValue(el, !!data?.agreement.content ? data?.agreement.content : "");
+              return;
+            case "agreementLocation":
+              changeValue(
+                el,
+                //@ts-ignore
+                !!data?.agreement.agreementLocation ? data?.agreement.agreementLocation : "Cloud"
+              );
+              return;
+            case "observers":
+              //@ts-ignore
+              const observsValue: any = data?.agreement?.observers?.map(value => {
+                return { value: value?.email || value?.wallet?.address };
+              });
+              //@ts-ignore
+              changeValue(el, observsValue);
+              return;
+            case "signers":
+              //@ts-ignore
+              const signersValue: any = data?.agreement?.signers?.map((value: any) => {
+                return { value: !!value?.email ? value?.email : value?.wallet?.address };
+              });
+              //@ts-ignore
+              changeValue(el, signersValue);
+              return;
+            default:
+              break;
+          }
+        });
+      }
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [data]);
+  }, []);
 
-  const steps = {
-    1: withFade(
-      <StepOne page={page} animateContainer={() => setTransitioned(val => !val)} />,
-      step
-    ),
-    2: withFade(<StepTwo page={page} />, step),
-    3: withFade(<StepThree page={page} loading={loading} />, step),
-  };
+  const steps = useMemo(() => {
+    return {
+      1: withFade(
+        <StepOne page={page} animateContainer={() => setTransitioned(val => !val)} />,
+        step
+      ),
+      2: withFade(<StepTwo page={page} />, step),
+      3: withFade(<StepThree page={page} loading={loading} />, step),
+    };
+  }, []);
 
   return (
     <Flex sx={containerSides}>

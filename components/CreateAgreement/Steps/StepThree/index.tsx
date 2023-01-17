@@ -155,9 +155,9 @@ export default function StepThree({ loading, page }: { loading: boolean; page: s
 
   const addMe = (to: "signers" | "observers") => {
     if (to === "signers") {
-      addSigner(account!);
+      addSigner(account!.toLocaleLowerCase());
     } else {
-      addObserver(account!);
+      addObserver(account!.toLocaleUpperCase());
     }
   };
 
@@ -229,7 +229,10 @@ export default function StepThree({ loading, page }: { loading: boolean; page: s
                   Add Me
                 </Button>
               ) : null}
-              <Box onClick={() => addSigner(signerInputRef.current?.value)} sx={plus}>
+              <Box
+                onClick={() => addSigner(signerInputRef.current?.value.toLocaleLowerCase())}
+                sx={plus}
+              >
                 <Icon width="24px" height="24px" style={{ opacity: 0.5 }} src={iconsObj.pinkPlus} />
               </Box>
             </Flex>
@@ -285,7 +288,10 @@ export default function StepThree({ loading, page }: { loading: boolean; page: s
                   Add Me
                 </Button>
               ) : null}
-              <Box onClick={() => addObserver(observerInputRef.current?.value)} sx={plus}>
+              <Box
+                onClick={() => addObserver(observerInputRef.current?.value.toLocaleLowerCase())}
+                sx={plus}
+              >
                 <Icon width="24px" height="24px" style={{ opacity: 0.5 }} src={iconsObj.pinkPlus} />
               </Box>
             </Flex>
@@ -305,7 +311,7 @@ export default function StepThree({ loading, page }: { loading: boolean; page: s
             <FieldErrorMessage error={values?.errors?.observers} isAbsolutePosition={false} />
             <TagList items={values.observers} type="observers" onDelete={onDelete} />
           </Box>
-          <Box>
+          <Box sx={{ mt: "10px" }}>
             <Flex
               sx={{
                 position: "relative",

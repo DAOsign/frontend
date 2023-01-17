@@ -44,6 +44,12 @@ const TextEditor = ({ page }: { page: string }) => {
     changeValue("textEditorValue", value || "");
   };
 
+  // const replaceValue = () => {
+  //   const str = JSON.parse(textEditorValue);
+  //   return JSON.parse(str);
+  // };
+  // console.log(state);
+
   return (
     <Box style={{ position: "relative" }} sx={styles}>
       <Flex sx={{ alignItems: "center" }}>
