@@ -3,12 +3,12 @@
     display: flex;
     margin: 0;
     min-width: 0;
-    font-family: InterBold;
-    font-weight: 700;
-    line-height: 24px;
-    display: block;
-    font-size: 13px;
-    color: #fff;
+    font-family: 'InterRegular';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 12px;
+    line-height: 160%;
+    color: #FFFFFF;
     padding-top: 12px;
     display: flex;
     align-items: center;
@@ -16,36 +16,37 @@
   .tooltip_button{
     border: unset;
     background-color: unset;
+  }
 
-  }
-  /* make our tooltip show up only on button hover */
   .tooltip_button:hover ~.tooltip_container{
-    visibility: visible;
-    
+    opacity: 1;
   }
-  /* make the tooltip hidden */
+
   .tooltip_container{
+    transition: opacity .2s cubic-bezier(.29, -0.32, .68, .41);
     position: absolute;
-  /* this is used to place the tooltip bubble above the button, edit to value that fits you*/
-  /* also you can change top to bottom, right or left for different tooltip location */
-    top:-71%; 
-    left: -180px;
-    visibility: hidden;
+    top: -80%;
+    left: -161px;
+    opacity: 0;
   }
-  /* top part of tooltip container */
+
   .tooltip_text{
-    background: #424243;
+    background: rgba(33, 33, 33, 0.8);
+    -webkit-backdrop-filter: blur(6px);
+    backdrop-filter: blur(6px);
     border-radius: 3px;
-    padding: 4px;
+    padding: 10px 12px;
     display: flex;
     justify-content: left;
   }
-  /* the button part of the tooltip container */
+
   .tooltip_text_buttom{
     width: 0;
     height: 0;
-    margin-left: 63%;
-    border-left: 2em solid transparent;
-    border-right: 2em solid transparent;
-    border-top: 0.7em  solid #424243;
+    margin-left: 66%;
+    border-left: 1em solid transparent;
+    border-right: 1em solid transparent;
+    border-top: 0.4em solid rgba(33, 33, 33, 0.8);
+    -webkit-backdrop-filter: blur(6px);
+    backdrop-filter: blur(6px);
   }

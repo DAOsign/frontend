@@ -19,6 +19,7 @@ export interface CreateAgreementFieldErrors {
 }
 
 export interface CreationState {
+  agreementId: number | undefined;
   title: string;
   agreementPrivacy: AgreementPrivacy;
   agreementMethod: AgreementMethod;
@@ -39,6 +40,7 @@ interface CreateAgrementContext {
 const DRAFT_STORAGE_KEY = "draftAgreement";
 
 const defaultState: CreationState = {
+  agreementId: undefined,
   agreementPrivacy: "",
   title: "",
   textEditorValue: "",

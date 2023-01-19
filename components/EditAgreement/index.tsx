@@ -44,10 +44,11 @@ export default function EditAgreement({ page }: { page: string }) {
   const [transitioned, setTransitioned] = useState(false);
   const { values, changeValue } = useEditAgreement();
   const [loading, setLoading] = useState(false);
+  const [getValue, setGetValue] = useState(true);
   const [{ data, fetching: agreementsLoading, error }] = useQuery({
     // @ts-ignore
     query: agreementById,
-    variables: { agreementId: query?.id ? Number(query.id) : 64 },
+    variables: { agreementId: Number(query.id) },
   });
   useEffect(() => {
     if (!!data) {
@@ -63,7 +64,7 @@ export default function EditAgreement({ page }: { page: string }) {
         "title",
         "file",
       ];
-      if (Number(query.step) === 1) {
+      if (getValue && Number(query.step) === 1) {
         valuesEditAgreemnt.map(el => {
           switch (el) {
             case "title":
@@ -124,7 +125,9 @@ export default function EditAgreement({ page }: { page: string }) {
           }
         });
       }
+      changeValue("agreementId", Number(query.id));
     }
+    setGetValue(false);
   }, []);
 
   const steps = useMemo(() => {

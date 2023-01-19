@@ -5,7 +5,7 @@ const menuContainer = {
   height: "100vh",
   backgroundColor: "inherit",
   width: "100%",
-  zIndex: 2,
+  zIndex: 3,
   top: 0,
   left: 0,
   overflow: "hidden",

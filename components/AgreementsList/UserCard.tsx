@@ -21,7 +21,7 @@ import {
 import useWindowDimensions from "../../hooks/useWindowDimensions";
 import Identicon from "../Identicon/Identicon";
 import { notifSucces } from "../../utils/notification";
-
+import styles from "../Header/index.module.css";
 export default function UserCard({ address }: any) {
   const { width } = useWindowDimensions();
 
@@ -47,13 +47,28 @@ export default function UserCard({ address }: any) {
               },
             }}
           >
-            <Text
-              sx={{
-                variant: "text.smallTextMediumUser",
-              }}
-            >
-              {address ? formatAddress(address) : "\u00A0"}
-            </Text>
+            <div style={{ paddingTop: 0 }} className={`${styles.tooltip}`}>
+              <button className={`${styles.tooltip_button}`}>
+                <Text
+                  sx={{
+                    variant: "text.smallTextMediumUser",
+                    cursor: "default",
+                  }}
+                >
+                  {address ? formatAddress(address) : "\u00A0"}
+                </Text>
+              </button>
+              <div
+                style={{ top: "-164%", left: "-110px" }}
+                className={`${styles.tooltip_container}`}
+              >
+                <div className={`${styles.tooltip_text}`}>{address}</div>
+                <div
+                  style={{ marginLeft: "50.5%" }}
+                  className={`${styles.tooltip_text_buttom}`}
+                ></div>
+              </div>
+            </div>
             <Box
               onClick={() => {
                 onCopyClick(address);

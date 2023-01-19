@@ -226,19 +226,11 @@ const rightCard = {
   width: "210px",
   height: "232px",
   maxWidth: "210px",
+  transitionProperty: "all",
+  transitionDuration: "300ms",
   "@media screen and (min-width: 768px)": {
     "&:hover": {
-      right: "-5px",
-      width: "220px",
-      maxWidth: "220px",
-      height: "242px",
-      top: "-5px",
-    },
-    "&:hover > div": {
-      margin: "0 auto",
-      position: "relative",
-      top: "5px",
-      right: "0",
+      transform: "scale(1.02)",
     },
   },
 } as ThemeUIStyleObject;
@@ -250,19 +242,11 @@ const leftCard = {
   width: "210px",
   height: "232px",
   maxWidth: "210px",
+  transitionProperty: "all",
+  transitionDuration: "300ms",
   "@media screen and (min-width: 768px)": {
     "&:hover": {
-      left: "-5px",
-      width: "220px",
-      maxWidth: "220px",
-      height: "242px",
-      top: "-5px",
-    },
-    "&:hover > div": {
-      margin: "0 auto",
-      position: "relative",
-      top: "5px",
-      left: "0",
+      transform: "scale(1.02)",
     },
   },
 } as ThemeUIStyleObject;
@@ -292,15 +276,13 @@ const item = {
   mb: "10px",
   alignItems: "start",
   cursor: "pointer",
+  transitionProperty: "all",
+  transitionDuration: "300ms",
   transition: ".3s all",
   gap: "10px",
   "@media screen and (min-width: 768px)": {
     "&:hover": {
-      width: "101%",
-      height: "109px",
-      position: "relative",
-      top: "-2px",
-      left: "-2px",
+      transform: "scale(1.01)",
     },
   },
   "&.active": {

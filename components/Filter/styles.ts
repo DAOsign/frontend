@@ -10,7 +10,7 @@ const container = {
   border: "1px solid #EDEDF3",
   boxShadow: "0px 4px 40px rgba(0, 0, 0, 0.08)",
   borderRadius: "12px",
-  zIndex: 1,
+  zIndex: 2,
   padding: "24px 24px 28px 32px",
   cursor: "initial",
   "@media screen and (max-width: 768px)": {
@@ -25,7 +25,6 @@ const container = {
 const conteinerHeader = {
   justifyContent: "space-between",
   alignItems: "center",
-  cursor: "pointer",
 } as ThemeUIStyleObject;
 
 const title = {

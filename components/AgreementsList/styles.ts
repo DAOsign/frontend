@@ -203,8 +203,8 @@ const headerContainer = {
   flexDirection: "row",
   position: "relative",
   alignItems: "baseline",
-  mt: "38px",
-  mb: "24px",
+  mt: "28px",
+  mb: "16px",
   "@media screen and (max-width: 768px)": {
     flexDirection: "column",
     position: "static",
@@ -220,14 +220,13 @@ const agreementConteiner = {
   p: "20px 24px 20px 24px",
   cursor: "pointer",
   width: "100%",
+  transitionProperty: "all",
+  transitionDuration: "300ms",
   mb: "20px",
   "@media screen and (min-width: 768px)": {
     height: "140px",
     "&:hover": {
-      width: "101%",
-      height: "145px",
-      left: "-5px",
-      top: "-5px",
+      transform: "scale(1.01)",
     },
   },
 } as ThemeUIStyleObject;
@@ -364,10 +363,11 @@ const filterItem = {
   alignItems: "center",
   pl: "14px",
   height: "32px",
-  ml: "8px",
+  mr: "8px",
   mb: "24px",
   pr: "10px",
   mt: "5px",
+  animation: "opacityAnimation 0.3s 1 linear",
   "& > div": {
     opacity: 0.5,
   },
@@ -391,6 +391,7 @@ const delBth = {
 
 const titleItem = {
   display: "block",
+  cursor: "default",
   variant: "text.smallTextBold",
 } as ThemeUIStyleObject;
 
@@ -439,6 +440,8 @@ const btnClear = {
   width: "100px",
   marginBottom: "24px",
   height: "31px",
+  textAlign: "left",
+  pl: "8px",
   backgroundColor: "inherit",
   "&:hover": {
     opacity: 1,

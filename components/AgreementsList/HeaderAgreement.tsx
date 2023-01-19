@@ -88,7 +88,18 @@ export default function HeaderAgreement() {
           <Input sx={{ variant: "forms.input", ...inputMyAgreement }} placeholder="Search" />
         </Container>
         <Container>
-          <Flex onClick={() => setVisible(!visible)} sx={textContainer}>
+          <Flex
+            onClick={() => setVisible(!visible)}
+            sx={{
+              ...textContainer,
+              "&:hover": {
+                border: visible ? "unset" : "1px solid #00000040",
+              },
+              "&:focus": {
+                border: visible ? "unset" : "1px solid #00000040",
+              },
+            }}
+          >
             <Text
               sx={{
                 variant: "text.normalTextMedium",
@@ -132,6 +143,12 @@ export default function HeaderAgreement() {
           </Button>
         ) : null}
       </Flex>
+      {visible ? (
+        <Container
+          onClick={() => setVisible(!visible)}
+          sx={{ position: "fixed", left: 0, top: 0, width: "100%", height: "100%", zIndex: 1 }}
+        />
+      ) : null}
     </Container>
   );
 }

@@ -149,6 +149,7 @@ export default function NavPanel({ setLoading, page }: { setLoading: any; page: 
 
   const handleCreateAgreement = async (isReadyToSign: boolean = true) => {
     await saveAgreement({
+      agreementId: Number(query.id),
       title: values.title,
       agreementLocation: values.agreementLocation || null,
       content:
@@ -168,6 +169,7 @@ export default function NavPanel({ setLoading, page }: { setLoading: any; page: 
       if (res.data?.saveAgreement?.title) {
         clearDraft();
         push("/agreements");
+        return;
       }
     });
   };

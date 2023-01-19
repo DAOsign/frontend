@@ -19,17 +19,17 @@ import {
 export default function Filter({ setVisible, onChange, reset, filterOptions }: any) {
   return (
     <Container onClick={e => e.stopPropagation()} sx={container}>
-      <Flex
-        onClick={() => {
-          setVisible(false);
-        }}
-        sx={conteinerHeader}
-      >
+      <Flex sx={conteinerHeader}>
         <Text sx={title}>Filter by:</Text>
-        <Box sx={icon}>
+        <Box
+          onClick={() => {
+            setVisible(false);
+          }}
+          sx={{ ...icon, cursor: "pointer" }}
+        >
           <Icon src={iconsObj.chevronUp} />
         </Box>
-        <Box sx={iconClose}>
+        <Box sx={{ ...iconClose }}>
           <Icon src={iconsObj.xClose} />
         </Box>
       </Flex>

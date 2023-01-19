@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { Container, Flex, Text, Button, Link, Box } from "theme-ui";
 import iconsObj from "../../assets/icons";
 import { formatAddress } from "../../utils/formats";
@@ -11,6 +11,7 @@ import Identicon from "../Identicon/Identicon";
 
 export default function Header({ visible, setVisible }: any) {
   const { account } = useWeb3();
+  const [openModal, setModalOpen] = useState(false);
 
   return (
     <Container onClick={() => setVisible(false)} sx={container}>

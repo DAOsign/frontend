@@ -110,7 +110,6 @@ export default function StepThree({ loading, page }: { loading: boolean; page: s
   const edit = useEditAgreement();
   const { values, changeValue } = page === "create" ? create : edit;
   const { account } = useWeb3();
-
   const [checkedVerifications, setCheckedVerifications] = useState<boolean[]>(
     Array(verifications.length).fill(false)
   );
@@ -162,7 +161,7 @@ export default function StepThree({ loading, page }: { loading: boolean; page: s
   };
 
   const onDelete = (el: any, key: ParticipantType) => {
-    changeValue(key, [...values[key].filter(e => e.id !== el.id)]);
+    changeValue(key, [...values[key].filter(e => e.value !== el.value)]);
   };
 
   const onChangeSignerInputValue: React.ChangeEventHandler<HTMLInputElement> = e => {

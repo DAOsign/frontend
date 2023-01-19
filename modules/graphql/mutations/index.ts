@@ -12,6 +12,7 @@ export const loginMutation = graphql(`
 
 export const saveAgreementMutation = graphql(`
   mutation SaveAgreement(
+    $agreementId: Int
     $agreementPrivacy: String
     $agreementLocation: String
     $content: String
@@ -23,6 +24,7 @@ export const saveAgreementMutation = graphql(`
     $isReadyToSign: Boolean!
   ) {
     saveAgreement(
+      agreementId: $agreementId
       agreementPrivacy: $agreementPrivacy
       agreementLocation: $agreementLocation
       content: $content
