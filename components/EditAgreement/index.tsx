@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, { useCallback, useEffect, useMemo, useState } from "react";
 import StepOne from "../CreateAgreement/Steps/StepOne";
@@ -65,45 +66,44 @@ export default function EditAgreement({ page }: { page: string }) {
         "file",
       ];
       if (getValue && Number(query.step) === 1) {
-        valuesEditAgreemnt.map(el => {
+        valuesEditAgreemnt.forEach(el => {
           switch (el) {
             case "title":
               //@ts-ignore
               changeValue(el, !!data?.agreement.title ? data?.agreement.title : "");
-              return;
               break;
             case "agreementPrivacy":
               //@ts-ignore
               if (data?.agreement?.agreementPrivacy.name === "Private") {
                 changeValue(el, PRIVACY_PRIVATE);
-                return;
+                break;
               }
               //@ts-ignore
               if (data?.agreement?.agreementPrivacy.name === "Proof Only") {
                 changeValue(el, PRIVACY_PUBLIC_PROOF_ONLY);
-                return;
+                break;
               }
               //@ts-ignore
               if (data?.agreement?.agreementPrivacy.name === "Published") {
                 changeValue(el, PRIVACY_PUBLIC_PUBLISHED);
-                return;
+                break;
               }
               //@ts-ignore
               if (data?.agreement?.agreementPrivacy.name === "With Link") {
                 changeValue(el, PRIVACY_PUBLIC_WITH_LINK);
-                return;
+                break;
               }
             case "textEditorValue":
               //@ts-ignore
               changeValue(el, !!data?.agreement.content ? data?.agreement.content : "");
-              return;
+              break;
             case "agreementLocation":
               changeValue(
                 el,
                 //@ts-ignore
                 !!data?.agreement.agreementLocation ? data?.agreement.agreementLocation : "Cloud"
               );
-              return;
+              break;
             case "observers":
               //@ts-ignore
               const observsValue: any = data?.agreement?.observers?.map(value => {
@@ -111,7 +111,7 @@ export default function EditAgreement({ page }: { page: string }) {
               });
               //@ts-ignore
               changeValue(el, observsValue);
-              return;
+              break;
             case "signers":
               //@ts-ignore
               const signersValue: any = data?.agreement?.signers?.map((value: any) => {
@@ -119,7 +119,7 @@ export default function EditAgreement({ page }: { page: string }) {
               });
               //@ts-ignore
               changeValue(el, signersValue);
-              return;
+              break;
             default:
               break;
           }

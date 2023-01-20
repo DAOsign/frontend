@@ -23,7 +23,6 @@ export const theme: Theme = {
       opacity: 0.5,
       alignItems: "center",
       height: "20px",
-      cursor: "pointer",
       display: "block",
     },
     input: {

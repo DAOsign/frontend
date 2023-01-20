@@ -385,11 +385,22 @@ const stepStyle = {
 } as ThemeUIStyleObject;
 
 const uploadBtn = {
-  opacity: 0.5,
+  fontFamily: "InterRegular",
+  fontStyle: "normal",
+  fontWeight: 400,
+  fontSize: "12px",
+  color: " #CA5CF2",
+  display: "flex",
+  lineHeight: "160%",
+  alignItems: "center",
+  width: "180px",
+  marginLeft: "auto",
+  marginRight: 0,
+  backgroundColor: "transparent",
+  background: "unset",
   "&:hover": {
     background: "unset",
     backgroundColor: "transparent",
-    opacity: 1,
   },
   "@media screen and (max-width: 768px)": {
     position: "absolute",
@@ -424,12 +435,24 @@ const plus = {
 } as ThemeUIStyleObject;
 
 const btnBack = {
-  variant: "buttons.back",
-  opacity: 0.5,
+  fontFamily: "InterRegular",
+  fontStyle: "normal",
+  fontWeight: 400,
+  fontSize: "12px",
+  color: " #CA5CF2",
+  display: "flex",
+  lineHeight: "160%",
+  alignItems: "center",
+  width: "180px",
+  marginLeft: "auto",
+  marginRight: 0,
+  backgroundColor: "transparent",
+  background: "unset",
+  pr: 0,
+  justifyContent: "flex-end",
   "&:hover": {
     backgroundColor: "transparent",
     background: "unset",
-    opacity: 1,
   },
 } as ThemeUIStyleObject;
 

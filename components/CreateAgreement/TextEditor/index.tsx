@@ -56,7 +56,7 @@ const TextEditor = ({ page }: { page: string }) => {
         <Text sx={{ variant: "forms.label", minWidth: "170px" }}>Enter agreement description</Text>
         <Button className="backBtn" onClick={() => changeValue("agreementMethod", "")}>
           <Icon style={{ display: "block" }} src={iconsObj.arrowLeftPink} />
-          <Text sx={{ display: "block", fontSize: "10px" }}>{" < "} Choose another method</Text>
+          <Text sx={{ display: "block" }}>{" < "} Choose another method</Text>
         </Button>
       </Flex>
 

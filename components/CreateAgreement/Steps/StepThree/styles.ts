@@ -9,9 +9,6 @@ export const verificationCardStyles: ThemeUIStyleObject = {
   display: "flex",
   cursor: "pointer",
   transition: "box-shadow .3s",
-  "&:hover": {
-    boxShadow: "0 0 11px rgba(33,33,33,.2)",
-  },
   ".card_head": {
     pt: "8px",
     pb: "6px",

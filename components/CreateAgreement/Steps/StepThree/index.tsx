@@ -63,18 +63,18 @@ const validateUser = (
   addedObservers: { id: number; value: string }[]
 ): string | null => {
   let error: string | null = null;
+  //TODO add  userAlreadySigner userAlreadyObserver
+  // const userAlreadySigner = addedSigners.some(signer => signer?.value === value);
+  // const userAlreadyObserver = addedObservers.some(observer => observer?.value === value);
 
-  const userAlreadySigner = addedSigners.some(signer => signer?.value === value);
-  const userAlreadyObserver = addedObservers.some(observer => observer?.value === value);
-
-  if (userAlreadySigner) {
+  if (false) {
     error = userRole === "signer" ? "Signer is already added" : "Already exists as Signer";
-  } else if (userAlreadyObserver) {
+  } else if (false) {
     error = userRole === "signer" ? "Already exists as Observer" : "Observer is already added";
   } else {
     const isEmail = value.includes("@");
     const isEns = value.includes(".eth");
-    const isAddress = value.startsWith("0x");
+    const isAddress = value.toLocaleLowerCase().startsWith("0x");
     if (!isEmail && !isEns && !isAddress) {
       error = "Invalid value";
     } else if (isEmail) {
@@ -95,7 +95,7 @@ const validateUser = (
         error = "Invalid ENS name";
       }
     } else if (isAddress) {
-      const isValidAddress = value.match(/^0x[a-fA-F0-9]{40}$/);
+      const isValidAddress = value.toLocaleLowerCase().match(/^0x[a-fA-F0-9]{40}$/);
       if (!isValidAddress) {
         error = "Invalid wallet address";
       }
@@ -129,7 +129,10 @@ export default function StepThree({ loading, page }: { loading: boolean; page: s
         changeValue("errors", { ...values.errors, signers: validationError });
         return;
       }
-      changeValue("signers", [...values.signers, { value: value, id: uniqueId() }]);
+      changeValue("signers", [
+        ...values.signers,
+        { value: value.toLocaleLowerCase(), id: uniqueId() },
+      ]);
       signerInputRef.current.value = "";
     }
   };
@@ -147,7 +150,10 @@ export default function StepThree({ loading, page }: { loading: boolean; page: s
         return;
       }
 
-      changeValue("observers", [...values.observers, { value: value, id: uniqueId() }]);
+      changeValue("observers", [
+        ...values.observers,
+        { value: value.toLocaleLowerCase(), id: uniqueId() },
+      ]);
       observerInputRef.current.value = "";
     }
   };
@@ -217,7 +223,8 @@ export default function StepThree({ loading, page }: { loading: boolean; page: s
               {!userAlreadySigner && !userAlreadyObserver ? (
                 <Button
                   onClick={() => addMe("signers")}
-                  className={userAlreadySigner || userAlreadyObserver ? "disabled" : ""}
+                  // className={userAlreadySigner || userAlreadyObserver ? "disabled" : ""}
+                  className={userAlreadySigner || userAlreadyObserver ? "" : ""}
                   variant="link"
                   sx={{
                     justifyContent: "flex-end",
@@ -276,7 +283,8 @@ export default function StepThree({ loading, page }: { loading: boolean; page: s
               {!userAlreadySigner && !userAlreadyObserver ? (
                 <Button
                   onClick={() => addMe("observers")}
-                  className={userAlreadySigner || userAlreadyObserver ? "disabled" : ""}
+                  // className={userAlreadySigner || userAlreadyObserver ? "'disabled'" : ""}
+                  className={userAlreadySigner || userAlreadyObserver ? "" : ""}
                   variant="link"
                   sx={{
                     justifyContent: "flex-end",

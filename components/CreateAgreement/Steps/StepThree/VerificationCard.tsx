@@ -24,7 +24,15 @@ export default function VerificationCard({
   disabled,
 }: Props) {
   return (
-    <Box sx={verificationCardStyles} onClick={onClick}>
+    <Box
+      sx={{
+        ...verificationCardStyles,
+        cursor: disabled ? "no-drop" : "pointer",
+        backgroundColor: disabled ? "#EDEDF390" : "#fff",
+        "&:hover": { boxShadow: disabled ? "unset" : "0 0 11px rgba(33,33,33,.2)" },
+      }}
+      onClick={onClick}
+    >
       <Box style={{ position: "relative" }} className="card_head">
         <CheckboxComponent disabled={disabled} checked={checked} />
       </Box>

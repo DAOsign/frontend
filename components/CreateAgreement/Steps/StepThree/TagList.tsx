@@ -33,7 +33,12 @@ export default function TagList<T = any>({ items, type, onDelete }: TagListProps
               <button className={`${styles.tooltip_button}`}>
                 <Text
                   sx={{
-                    fontFamily: "InterRegular",
+                    fontFamily: "InterBold",
+                    fontStyle: "normal",
+                    fontWeight: 700,
+                    fontSize: "14px",
+                    lineHeight: "160%",
+                    color: "#212121",
                   }}
                 >
                   {el.value.length > 10 ? formatAddress(el.value) : el.value}
