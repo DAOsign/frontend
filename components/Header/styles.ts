@@ -26,6 +26,9 @@ const addresContainer = {
   paddingX: "12px",
   borderRadius: "80px",
   ml: "20px",
+  fontFamily: "InterMedium",
+  fontStyle: "normal",
+  fontWeight: 400,
   cursor: "pointer",
   "@media screen and (max-width: 768px)": {
     display: "none",

@@ -6,15 +6,20 @@ import iconsObj from "../../assets/icons";
 
 const toastList = new Set();
 
+// This container is required for the first parameter of the toast function
+const ToastContainer = (props: any) => <div>{props.children}</div>;
+
 export const notifSucces = (text: string) => {
   const id = toast(
-    <Flex sx={{ alignItems: "center" }}>
-      {" "}
-      <Box sx={{ width: "44px", height: "44px", mr: "16px" }}>
-        <Icon src={iconsObj.good} />{" "}
-      </Box>
-      {text}{" "}
-    </Flex>,
+    <ToastContainer>
+      <Flex sx={{ alignItems: "center" }}>
+        {" "}
+        <Box sx={{ width: "44px", height: "44px", mr: "16px" }}>
+          <Icon src={iconsObj.good} />{" "}
+        </Box>
+        {text}{" "}
+      </Flex>
+    </ToastContainer>,
     {
       position: "top-right",
       autoClose: 3000,
@@ -28,12 +33,14 @@ export const notifSucces = (text: string) => {
 
 export const notifError = (text: string) => {
   const id = toast(
-    <Flex sx={{ alignItems: "center" }}>
-      <Box sx={{ width: "44px", height: "44px", mr: "16px" }}>
-        <Icon src={iconsObj.errorSvg} />
-      </Box>
-      {text}
-    </Flex>,
+    <ToastContainer>
+      <Flex sx={{ alignItems: "center" }}>
+        <Box sx={{ width: "44px", height: "44px", mr: "16px" }}>
+          <Icon src={iconsObj.errorSvg} />
+        </Box>
+        {text}
+      </Flex>
+    </ToastContainer>,
     {
       position: "top-right",
       autoClose: 3000,
@@ -47,12 +54,14 @@ export const notifError = (text: string) => {
 
 export const notifWarning = (text: string) => {
   const id = toast(
-    <Flex sx={{ alignItems: "center" }}>
-      <Box sx={{ width: "44px", height: "44px", mr: "16px" }}>
-        <Icon src={iconsObj.alert} />
-      </Box>
-      {text}
-    </Flex>,
+    <ToastContainer>
+      <Flex sx={{ alignItems: "center" }}>
+        <Box sx={{ width: "44px", height: "44px", mr: "16px" }}>
+          <Icon src={iconsObj.alert} />
+        </Box>
+        {text}
+      </Flex>
+    </ToastContainer>,
     {
       position: "top-right",
       autoClose: 3000,

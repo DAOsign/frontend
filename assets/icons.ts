@@ -86,6 +86,8 @@ import mail from "../img/svg/mail.svg";
 import good from "../img/svg/good.svg";
 import ink from "../img/svg/ink.svg";
 import m from "../img/svg/m.svg";
+import defaultUserPicture from "../img/defaultUserPicture.png";
+import closedEye from "../img/svg/closedEye.svg";
 
 import { IconsMapper } from "./icons.types";
 
@@ -178,6 +180,8 @@ const iconsObj: IconsMapper = {
   verificationReal,
   verificationNotarized,
   m,
+  defaultUserPicture,
+  closedEye,
 };
 
 export default iconsObj;

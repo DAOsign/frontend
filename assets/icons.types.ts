@@ -87,6 +87,8 @@ export interface IconsMapper extends Record<string, unknown> {
   verificationDigital: Icon;
   verificationReal: Icon;
   verificationNotarized: Icon;
+  defaultUserPicture: Icon;
+  closedEye: Icon;
 }
 
 interface Icon {

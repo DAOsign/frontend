@@ -2,7 +2,7 @@ import { STATUS_READY_TO_SIGN } from "../types";
 import { format } from "date-fns";
 
 export const formatAddress = (address: string) => {
-  return address?.length > 14 ? `${address.slice(0, 6)} ... ${address.slice(-4)}` : address;
+  return address?.length > 14 ? `${address.slice(0, 6)}...${address.slice(-4)}` : address;
 };
 
 export function uniqueId() {

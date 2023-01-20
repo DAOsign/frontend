@@ -6,7 +6,7 @@ import Jazzicon from "@metamask/jazzicon";
 interface Props {
   account: string | null;
   size: number;
-  sx: ThemeUIStyleObject;
+  sx?: ThemeUIStyleObject;
 }
 
 const Identicon = ({ account, size, sx = {} }: Props) => {

@@ -1,10 +1,13 @@
 import type { AppProps } from "next/app";
 import { createClient, Provider as GraphqlProvider } from "urql";
 import { ThemeProvider } from "theme-ui";
+import React from "react";
+import { ToastContainer } from "react-toastify";
 import LockProvider from "../modules/lockProvider";
 import AuthProvider from "../modules/authProvider";
 import { theme } from "../theme";
 import "../styles/globals.css";
+import "../styles/tables.css";
 import { getToken } from "../utils/token";
 import Layout from "../components/Layout";
 import "react-toastify/dist/ReactToastify.css";
@@ -36,6 +39,7 @@ function MyApp({ Component, pageProps }: AppProps) {
         <AuthProvider>
           <ThemeProvider theme={theme}>
             <Page />
+            <ToastContainer icon />
           </ThemeProvider>
         </AuthProvider>
       </LockProvider>

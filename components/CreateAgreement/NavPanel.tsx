@@ -36,6 +36,13 @@ import ModalConfirmAgreementDeletion from "../ModalConfirmAgreementDeletion/Moda
 
 const FILE_UPLOAD_ERROR_DEFAULT_MESSAGE = "Failed to upload file";
 
+function formatFileUploadErrorMessage(message: string): string {
+  if (message.includes("maxFileSize")) {
+    return "File should be less than 20 MB";
+  }
+  return FILE_UPLOAD_ERROR_DEFAULT_MESSAGE;
+}
+
 export default function NavPanel({ setLoading, page }: { setLoading: any; page: string }) {
   const create = useCreateAgreement();
   const edit = useEditAgreement();
@@ -216,7 +223,13 @@ export default function NavPanel({ setLoading, page }: { setLoading: any; page: 
             uploadedFileData = await uploadNewFile(values.file);
             if (!uploadedFileData || uploadedFileData.error) {
               console.error(uploadedFileData.error || new Error(FILE_UPLOAD_ERROR_DEFAULT_MESSAGE));
-              notifError(uploadedFileData.error.message || FILE_UPLOAD_ERROR_DEFAULT_MESSAGE);
+              notifError(
+                formatFileUploadErrorMessage(
+                  uploadedFileData.error?.response?.data?.error ||
+                    uploadedFileData.error.message ||
+                    FILE_UPLOAD_ERROR_DEFAULT_MESSAGE
+                )
+              );
               return;
             }
           }
@@ -231,7 +244,11 @@ export default function NavPanel({ setLoading, page }: { setLoading: any; page: 
           }
         } catch (error) {
           console.error(error);
-          notifError(error?.message || FILE_UPLOAD_ERROR_DEFAULT_MESSAGE);
+          notifError(
+            formatFileUploadErrorMessage(
+              error?.response?.data?.error || error?.message || FILE_UPLOAD_ERROR_DEFAULT_MESSAGE
+            )
+          );
         } finally {
           setLoading(false);
           setIsLoadingNextStep(false);

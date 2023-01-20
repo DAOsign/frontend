@@ -1,7 +1,6 @@
 import React from "react";
 import { Container, Box, Text, Button, Flex } from "theme-ui";
 import iconsObj from "../../assets/icons";
-import { ToastContainer } from "react-toastify";
 import Image from "next/image";
 import Icon from "../icon";
 import { formatAddress, onCopyClick } from "../../utils/formats";
@@ -109,7 +108,6 @@ export default function UserCard({ address }: any) {
       <Container sx={improveBtnContainer}>
         <Button sx={improveBtn}>Add Verifications</Button>
       </Container>
-      <ToastContainer icon />
     </Flex>
   );
 }

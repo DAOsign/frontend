@@ -14,5 +14,20 @@ export const toAgreement = (agreement: AgreementResponse): Agreement => {
     signers: agreement.signers?.map(s => s.wallet?.address || "noWallet") || [],
     isWaitingForMySignature: agreement.isWaitingForMySignature || false,
     createdAt: new Date(agreement.createdAt),
+    agreementFile: agreement?.agreementFile
+      ? {
+          filePath: agreement?.agreementFile?.filePath || undefined,
+          agreementHash: agreement?.agreementFile?.agreementHash || undefined,
+          createdAt: agreement?.agreementFile?.createdAt,
+        }
+      : undefined,
+  };
+};
+
+export const toAgreementWithParticipants = (agreement: AgreementResponse) => {
+  return {
+    ...toAgreement(agreement),
+    observers: agreement.observers || [],
+    signers: agreement.signers || [],
   };
 };

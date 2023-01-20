@@ -29,6 +29,7 @@ const mainData = {
   width: "756px",
   flexDirection: "column",
   textAlign: "left",
+  marginBottom: "16px",
 } as ThemeUIStyleObject;
 
 const briefInformation = {
@@ -75,7 +76,7 @@ const btnBase = {
   fontWeight: 700,
   fontSize: "16px",
   lineHeight: "160%",
-  transition: "backgroundColor 0.3s, background 0.3s, color 0.3s, opacity: 0.3s, border 0.3s",
+  transition: "backgroundColor 0.3s, background 0.3s, color 0.3s, opacity 0.3s, border 0.3s",
   width: "100%",
 } as ThemeUIStyleObject;
 
@@ -246,7 +247,7 @@ const briefInformationData = {
   width: "100%",
   marginTop: "16px",
   flexDirection: "column",
-  rowGap: "4px",
+  rowGap: "14px",
 } as ThemeUIStyleObject;
 
 const informationRow = {
@@ -256,7 +257,7 @@ const informationRow = {
   fontStyle: "normal",
   fontWeight: 500,
   fontSize: "16px",
-  lineHeight: "160%",
+  lineHeight: "100%",
   width: "100%",
 } as ThemeUIStyleObject;
 
@@ -267,6 +268,330 @@ const informationRowName = {
 const informationRowValue = {
   paddingLeft: "5px",
   lineBreak: "anywhere",
+  alignItems: "center",
+} as ThemeUIStyleObject;
+
+const informationRowIcon = {
+  marginLeft: "4px",
+  width: "11px",
+  opacity: 0.7,
+  height: "11px",
+  transition: "opacity 0.3s",
+  "&:hover": {
+    opacity: 1,
+  },
+} as ThemeUIStyleObject;
+
+const contentCard = {
+  ...card,
+  overflow: "hidden",
+  flexDirection: "column",
+  marginTop: "40px",
+} as ThemeUIStyleObject;
+
+const contentTitle = {
+  fontFamily: "InterBold",
+  fontStyle: "normal",
+  fontWeight: 700,
+  fontSize: "20px",
+  lineHeight: "120%",
+  borderBottom: "2px solid #F7F7FB",
+  paddingTop: "28px",
+  paddingBottom: "16px",
+  paddingX: "32px",
+} as ThemeUIStyleObject;
+
+const DEFAULT_CONTENT_PREVIEW_MAX_HEIGHT = 300;
+
+const contentData = {
+  paddingTop: "0",
+  paddingX: "32px",
+  minHeight: "200px",
+  maxHeight: `${DEFAULT_CONTENT_PREVIEW_MAX_HEIGHT}px`,
+  overflow: "hidden",
+  ".w-md-editor": {
+    backgroundColor: "white !important",
+  },
+  ".w-md-editor-bar": {
+    display: "none",
+  },
+  ".wmde-markdown": {
+    background: "#fff !important",
+    color: "#212121 !important",
+  },
+} as ThemeUIStyleObject;
+
+const participantsCard = {
+  ...card,
+  flexDirection: "column",
+  marginTop: "20px",
+  fontFamily: "InterMedium",
+  fontStyle: "normal",
+  fontWeight: 400,
+} as ThemeUIStyleObject;
+
+const participantsCardTitle = {
+  fontFamily: "InterBold",
+  fontStyle: "normal",
+  fontWeight: 700,
+  fontSize: "20px",
+  lineHeight: "120%",
+  paddingTop: "28px",
+  paddingBottom: "16px",
+  paddingX: "32px",
+} as ThemeUIStyleObject;
+
+const tableCellBase = { alignItems: "center" } as ThemeUIStyleObject;
+
+const tableUserNameCell = {
+  ...tableCellBase,
+  columnGap: "8px",
+} as ThemeUIStyleObject;
+
+const tableAddressCell = {
+  ...tableCellBase,
+} as ThemeUIStyleObject;
+
+const tableSignatureCell = {
+  ...tableCellBase,
+  columnGap: "7px",
+} as ThemeUIStyleObject;
+
+const pendingIcon = {
+  color: "#D8D8E2",
+  width: "16px",
+} as ThemeUIStyleObject;
+
+const userPicture = {
+  width: "20px",
+} as ThemeUIStyleObject;
+
+const usernameText = {
+  overflow: "hidden",
+  textOverflow: "ellipsis",
+  maxWidth: "240px",
+} as ThemeUIStyleObject;
+
+const noObserversMessage = {
+  padding: "0 32px 12px",
+  fontFamily: "InterMedium",
+  fontStyle: "normal",
+  fontWeight: 400,
+  fontSize: "14px",
+  opacity: 0.5,
+} as ThemeUIStyleObject;
+
+const verificationsContainer = {
+  marginTop: "24px",
+  background: "#F7F7FB",
+  border: "2px solid #F7F7FB",
+  borderRadius: "8px",
+  flexDirection: "column",
+  padding: "12px 24px 24px",
+  width: "100%",
+} as ThemeUIStyleObject;
+
+const verificationsTitle = {
+  fontFamily: "InterBold",
+  fontStyle: "normal",
+  fontWeight: 700,
+  fontSize: "14px",
+  lineHeight: "160%",
+  textAlign: "start",
+} as ThemeUIStyleObject;
+
+const verificationsRow = {
+  alignItems: "center",
+  marginTop: "12px",
+  columnGap: "15px",
+} as ThemeUIStyleObject;
+
+const verificationCard = {
+  width: "52px",
+  height: "52px",
+} as ThemeUIStyleObject;
+
+const showMoreLabel = {
+  position: "absolute",
+  bottom: "24px",
+  left: "32px",
+  color: "#CA5CF2",
+  fontFamily: "InterBold",
+  fontStyle: "normal",
+  fontWeight: 700,
+  fontSize: "16px",
+  lineHeight: "160%",
+  cursor: "pointer",
+  opacity: 0.7,
+  transition: "opacity 0.3s",
+  "&:hover": {
+    opacity: 1,
+  },
+} as ThemeUIStyleObject;
+
+const uploadedFilePreviewContainer = {
+  height: "100%",
+  width: "100%",
+  marginTop: "14px",
+  padding: "0 33px 24px",
+  flexDirection: "column",
+  position: "relative",
+  ".preview": {
+    overflow: "hidden",
+    borderRadius: "12px",
+    height: "100%",
+  },
+} as ThemeUIStyleObject;
+
+const uploadedFileTitleContainer = {
+  cursor: "pointer",
+  opacity: 1,
+  transition: "opacity 0.3s",
+  position: "absolute",
+  top: "3px",
+  zIndex: "100",
+  "&:hover": {
+    opacity: 0.8,
+  },
+} as ThemeUIStyleObject;
+
+const uploadedFileIconContainer = {
+  width: "18px",
+} as ThemeUIStyleObject;
+
+const uploadedFileTitleLink = {
+  display: "flex",
+  alignItems: "center",
+  gap: "8px",
+  cursor: "pointer",
+} as ThemeUIStyleObject;
+
+const uploadedFileTitleWrapper = {
+  maxWidth: "400px",
+  overflow: "hidden",
+  textOverflow: "ellipsis",
+} as ThemeUIStyleObject;
+
+const uploadedFileTitle = {
+  fontFamily: "InterMedium",
+  fontWeight: "500",
+  lineHeight: "160%",
+  overflow: "hidden",
+  whiteSpace: "nowrap",
+  textOverflow: "ellipsis",
+} as ThemeUIStyleObject;
+
+const uploadedFilePreview = {
+  // Document wrapper class
+  ".sc-idXgbr": {
+    border: "1px solid #EDEDF3",
+    borderRadius: "12px",
+    marginTop: "30px",
+  },
+  ".react-pdf__Document": {
+    width: "100%",
+    padding: "0 60px",
+    maxHeight: "300px",
+    overflow: "hidden",
+  },
+  "#pdf-zoom-out, #pdf-zoom-out, #pdf-zoom-in, #pdf-zoom-reset, #pdf-toggle-pagination, #pdf-download, #pdf-pagination":
+    {
+      display: "none",
+    },
+  "#pdf-controls": {
+    padding: "0 0 15px",
+    boxShadow: "none",
+  },
+  "#pdf-pagination-next": {
+    marginRight: 0,
+  },
+  "#txt-renderer": {
+    maxHeight: "300px",
+    overflow: "hidden",
+    marginTop: "45px",
+    paddingX: "60px",
+    border: "1px solid #EDEDF3",
+    borderRadius: "12px",
+    whiteSpace: "break-spaces",
+  },
+  ".sc-idXgbr, #txt-renderer": {
+    boxShadow: "none",
+    transition: "border 0.6s, boxShadow 0.6s",
+    "&:hover": {
+      border: "1px solid #CA5CF2",
+      boxShadow: "rgba(149, 157, 165, 0.2) 0px 8px 24px",
+    },
+  },
+  "#msdoc-renderer": {
+    maxHeight: "300px",
+    overflow: "scroll",
+    overflowX: "hidden",
+    marginTop: "45px",
+    paddingX: "60px",
+    border: "1px solid #EDEDF3",
+    borderRadius: "12px",
+  },
+  ".react-pdf__message--loading": {
+    display: "none",
+  },
+} as ThemeUIStyleObject;
+
+const uploadedFilePreviewLink = {
+  cursor: "pointer",
+} as ThemeUIStyleObject;
+
+const viewFileLabel = {
+  color: "#CA5CF2",
+  width: "fit-content",
+  marginTop: "16px",
+  fontFamily: "InterBold",
+  fontStyle: "normal",
+  fontWeight: 700,
+  fontSize: "16px",
+  lineHeight: "160%",
+  opacity: 1,
+  transition: "opacity 0.3s",
+  cursor: "pointer",
+  position: "absolute",
+  zIndex: "10",
+  bottom: 0,
+  "&:hover": {
+    opacity: 0.8,
+  },
+} as ThemeUIStyleObject;
+
+const contentHiddenContainer = {
+  background: "#F7F7FB80",
+  flexDirection: "column",
+  justifyContent: "center",
+  rowGap: "16px",
+  padding: "24px 40px 39px",
+} as ThemeUIStyleObject;
+
+const contentHiddenMessage = {
+  fontFamily: "InterMedium",
+  fontStyle: "normal",
+  fontWeight: 500,
+  fontSize: "16px",
+  lineHeight: "160%",
+  color: "#212121",
+  width: "fit-content",
+  marginX: "auto",
+} as ThemeUIStyleObject;
+
+const contentHiddenIconWrapper = {
+  padding: "12px",
+  background: "white",
+  borderRadius: "50%",
+  border: "1px solid #EDEDF3",
+  width: "60px",
+  height: "60px",
+  marginX: "auto",
+} as ThemeUIStyleObject;
+
+const contentHiddenIconInnerWrapper = {
+  background: "white",
+  borderRadius: "50%",
 } as ThemeUIStyleObject;
 
 export {
@@ -300,4 +625,36 @@ export {
   informationRowName,
   informationRowValue,
   needSigningIcon,
+  informationRowIcon,
+  contentCard,
+  contentTitle,
+  contentData,
+  participantsCard,
+  participantsCardTitle,
+  tableUserNameCell,
+  tableAddressCell,
+  tableSignatureCell,
+  pendingIcon,
+  userPicture,
+  usernameText,
+  noObserversMessage,
+  verificationsContainer,
+  verificationsTitle,
+  verificationsRow,
+  verificationCard,
+  showMoreLabel,
+  DEFAULT_CONTENT_PREVIEW_MAX_HEIGHT,
+  uploadedFilePreviewContainer,
+  uploadedFileTitleContainer,
+  uploadedFileIconContainer,
+  uploadedFileTitleLink,
+  uploadedFileTitleWrapper,
+  uploadedFileTitle,
+  uploadedFilePreview,
+  uploadedFilePreviewLink,
+  viewFileLabel,
+  contentHiddenContainer,
+  contentHiddenMessage,
+  contentHiddenIconWrapper,
+  contentHiddenIconInnerWrapper,
 };

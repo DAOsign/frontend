@@ -9,7 +9,7 @@ const pinata = new pinataSDK(process.env.PINATA_API_KEY, process.env.PINATA_API_
 
 const fs = require("fs");
 
-const MAX_FILE_MEGABYTES_SIZE = 50;
+const MAX_FILE_MEGABYTES_SIZE = 20;
 
 export const config = {
   api: {

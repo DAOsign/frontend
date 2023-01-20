@@ -6,6 +6,7 @@ export const LOCATION_LOCAL = "Local";
 export const PRIVACY_PRIVATE = "Private";
 export const PRIVACY_PUBLIC_PUBLISHED = "Published";
 export const PRIVACY_PUBLIC_PROOF_ONLY = "proof_only";
+export const PRIVACY_PUBLIC_PROOF_ONLY_FULL_NAME = "Proof Only";
 export const PRIVACY_PUBLIC_WITH_LINK = "with_link";
 
 export const METHOD_UPLOAD = "Upload";
@@ -50,6 +51,13 @@ export interface Agreement {
   signers: string[];
   title: string;
   isWaitingForMySignature: boolean;
+  createdAt: Date;
+  agreementFile?: AgreementFile;
+}
+
+interface AgreementFile {
+  agreementHash?: string;
+  filePath?: string;
   createdAt: Date;
 }
 

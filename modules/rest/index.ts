@@ -30,25 +30,28 @@ export const uploadToIpfs = async (file: File) => {
   return error || res.data;
 };
 
-export const restoreCloudFile = async (url: string) => {
-  return axios.get(url, { responseType: "blob" }).then(res => {
-    const blob: Blob = res.data;
+export const restoreCloudFile = async (url: string, abortController?: AbortController) => {
+  return axios
+    .get(url, { responseType: "blob", signal: abortController?.signal || undefined })
+    .then(res => {
+      const blob: Blob = res.data;
 
-    const split = url.split("/")!;
-    const fullFileName = split[split.length - 1];
-    const [, ...filenameArray] = fullFileName.split("-");
-    const fileName = filenameArray.join("-");
+      const split = url.split("/")!;
+      const fullFileName = split[split.length - 1];
+      const [, ...filenameArray] = fullFileName.split("-");
+      const fileName = filenameArray.join("-");
 
-    const file = new File([blob], fileName, { type: blob.type });
-    return file;
-  });
+      const file = new File([blob], fileName, { type: blob.type });
+      return file;
+    });
 };
 
-export const restoreIpfsFile = async (hash: string) => {
+export const restoreIpfsFile = async (hash: string, abortController?: AbortController) => {
   return axios
     .get("/api/getFromIpfs", {
       params: { hash: hash },
       responseType: "blob",
+      signal: abortController?.signal || undefined,
     })
     .then(res => {
       const blob: Blob = res.data;

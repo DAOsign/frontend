@@ -13,15 +13,20 @@ const FileViewer = dynamic(() => import("@cyntler/react-doc-viewer"), {
   ssr: false,
 });
 
-const getIconByFileType = (type: string) => {
-  return iconsObj.fileSvg;
+export const getIconByFileType = (type: string | undefined) => {
+  switch (type) {
+    case "application/pdf":
+      return iconsObj.fileSvg;
+    default:
+      return iconsObj.fileSecondarysvg;
+  }
 };
 
-const DEFAULT_FILE_PATH = "#";
+export const DEFAULT_FILE_PATH = "#";
 
-const FILE_VIEWER_CONFIG = { header: { disableHeader: true } };
+export const FILE_VIEWER_CONFIG = { header: { disableHeader: true } };
 
-interface Document {
+export interface AgreementDocument {
   uri: string;
   fileName: string;
 }
@@ -31,7 +36,7 @@ const PreviewScreen = ({ file, page }: FileState) => {
   const edit = useEditAgreement();
   const { changeValue } = page === "create" ? create : edit;
 
-  const [documents, setDocuments] = useState<Document[]>([]);
+  const [documents, setDocuments] = useState<AgreementDocument[]>([]);
 
   useEffect(() => {
     const getDocuments = () => {

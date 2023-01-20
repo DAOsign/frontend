@@ -4,6 +4,9 @@ import { PreviewScreen, UploadPaceholder } from "./";
 import { imageUploadContainer } from "../../../../styles";
 import { useCreateAgreement } from "../../../../../../hooks/useCreateAgreement";
 import { useEditAgreement } from "../../../../../../hooks/useEditAgreement";
+import { notifError } from "../../../../../../utils/notification";
+
+const MAX_FILE_MEGABYTES_SIZE = 20;
 
 const UploadScreen = ({ page }: { page: string }) => {
   const create = useCreateAgreement();
@@ -12,6 +15,10 @@ const UploadScreen = ({ page }: { page: string }) => {
 
   const handleReadFile = (event: React.ChangeEvent<HTMLInputElement>) => {
     let file = event?.target?.files && (event?.target?.files[0] as File);
+    if (file?.size && file?.size > MAX_FILE_MEGABYTES_SIZE * 1024 * 1024) {
+      notifError(`File should be less than ${MAX_FILE_MEGABYTES_SIZE} MB`);
+      return;
+    }
 
     if (file) {
       changeValue("filePath", "");
@@ -32,7 +39,7 @@ const UploadScreen = ({ page }: { page: string }) => {
           id="file"
           type="file"
           name="file"
-          accept=".txt,.pdf,.doc,.docx"
+          accept=".txt,.pdf"
         />
         {values.file ? <PreviewScreen page={page} file={values.file} /> : <UploadPaceholder />}
       </Box>
