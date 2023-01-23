@@ -1,6 +1,9 @@
 import axios, { AxiosResponse, AxiosError } from "axios";
 
-export const uploadFile = async (file: File): Promise<{ fileLink: string } | AxiosError> => {
+export const uploadFile = async (
+  authToken: string,
+  file: File
+): Promise<{ fileLink: string } | AxiosError> => {
   const formData = new FormData();
   formData.append("data", file);
   const res = await axios<AxiosResponse<{ fileLink: string }>>({
@@ -9,6 +12,7 @@ export const uploadFile = async (file: File): Promise<{ fileLink: string } | Axi
     data: formData,
     headers: {
       "Content-Type": "multipart/form-data",
+      token: authToken,
     },
   });
 

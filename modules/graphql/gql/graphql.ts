@@ -121,6 +121,7 @@ export type Mutation = {
   logout: LogoutResponse;
   saveAgreement?: Maybe<Agreement>;
   sendAgreementInvitation: SendAgreementInvitationResponseResponse;
+  setAgreementReadyToSign: SetAgreementReadyToSignResponse;
   updateUser: User;
 };
 
@@ -152,6 +153,11 @@ export type MutationSaveAgreementArgs = {
 
 export type MutationSendAgreementInvitationArgs = {
   targetEmail: Scalars['String'];
+};
+
+
+export type MutationSetAgreementReadyToSignArgs = {
+  agreementId: Scalars['Int'];
 };
 
 
@@ -269,6 +275,12 @@ export type SendAgreementInvitationResponseResponse = {
   message: Scalars['String'];
 };
 
+export type SetAgreementReadyToSignResponse = {
+  __typename?: 'SetAgreementReadyToSignResponse';
+  agreementId: Scalars['Int'];
+  message: Scalars['String'];
+};
+
 export type Signer = {
   __typename?: 'Signer';
   agreementId: Scalars['Int'];
@@ -324,6 +336,13 @@ export type SaveAgreementMutationVariables = Exact<{
 
 export type SaveAgreementMutation = { __typename?: 'Mutation', saveAgreement?: { __typename?: 'Agreement', title: string, content?: string | null, authorWallet: { __typename?: 'Wallet', address: string } } | null };
 
+export type SetAgreementReadyToSignMutationMutationVariables = Exact<{
+  agreementId: Scalars['Int'];
+}>;
+
+
+export type SetAgreementReadyToSignMutationMutation = { __typename?: 'Mutation', setAgreementReadyToSign: { __typename?: 'SetAgreementReadyToSignResponse', agreementId: number, message: string } };
+
 export type DeleteAgreementMutationMutationVariables = Exact<{
   agreementId: Scalars['Int'];
 }>;
@@ -356,6 +375,7 @@ export type MyAgreementsQuery = { __typename?: 'Query', myAgreements: { __typena
 
 export const LoginDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"mutation","name":{"kind":"Name","value":"login"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"address"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}}}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"signature"}},"type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"login"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"address"},"value":{"kind":"Variable","name":{"kind":"Name","value":"address"}}},{"kind":"Argument","name":{"kind":"Name","value":"signature"},"value":{"kind":"Variable","name":{"kind":"Name","value":"signature"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"message"}},{"kind":"Field","name":{"kind":"Name","value":"payload"}},{"kind":"Field","name":{"kind":"Name","value":"token"}}]}}]}}]} as unknown as DocumentNode<LoginMutation, LoginMutationVariables>;
 export const SaveAgreementDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"mutation","name":{"kind":"Name","value":"SaveAgreement"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"agreementId"}},"type":{"kind":"NamedType","name":{"kind":"Name","value":"Int"}}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"agreementPrivacy"}},"type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"agreementLocation"}},"type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"content"}},"type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"title"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}}}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"signers"}},"type":{"kind":"ListType","type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}}}}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"observers"}},"type":{"kind":"ListType","type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}}}}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"agreementHash"}},"type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"agreementFilePath"}},"type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"isReadyToSign"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"Boolean"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"saveAgreement"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"agreementId"},"value":{"kind":"Variable","name":{"kind":"Name","value":"agreementId"}}},{"kind":"Argument","name":{"kind":"Name","value":"agreementPrivacy"},"value":{"kind":"Variable","name":{"kind":"Name","value":"agreementPrivacy"}}},{"kind":"Argument","name":{"kind":"Name","value":"agreementLocation"},"value":{"kind":"Variable","name":{"kind":"Name","value":"agreementLocation"}}},{"kind":"Argument","name":{"kind":"Name","value":"content"},"value":{"kind":"Variable","name":{"kind":"Name","value":"content"}}},{"kind":"Argument","name":{"kind":"Name","value":"title"},"value":{"kind":"Variable","name":{"kind":"Name","value":"title"}}},{"kind":"Argument","name":{"kind":"Name","value":"signers"},"value":{"kind":"Variable","name":{"kind":"Name","value":"signers"}}},{"kind":"Argument","name":{"kind":"Name","value":"observers"},"value":{"kind":"Variable","name":{"kind":"Name","value":"observers"}}},{"kind":"Argument","name":{"kind":"Name","value":"agreementHash"},"value":{"kind":"Variable","name":{"kind":"Name","value":"agreementHash"}}},{"kind":"Argument","name":{"kind":"Name","value":"agreementFilePath"},"value":{"kind":"Variable","name":{"kind":"Name","value":"agreementFilePath"}}},{"kind":"Argument","name":{"kind":"Name","value":"isReadyToSign"},"value":{"kind":"Variable","name":{"kind":"Name","value":"isReadyToSign"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"content"}},{"kind":"Field","name":{"kind":"Name","value":"authorWallet"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"address"}}]}}]}}]}}]} as unknown as DocumentNode<SaveAgreementMutation, SaveAgreementMutationVariables>;
+export const SetAgreementReadyToSignMutationDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"mutation","name":{"kind":"Name","value":"SetAgreementReadyToSignMutation"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"agreementId"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"Int"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"setAgreementReadyToSign"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"agreementId"},"value":{"kind":"Variable","name":{"kind":"Name","value":"agreementId"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"agreementId"}},{"kind":"Field","name":{"kind":"Name","value":"message"}}]}}]}}]} as unknown as DocumentNode<SetAgreementReadyToSignMutationMutation, SetAgreementReadyToSignMutationMutationVariables>;
 export const DeleteAgreementMutationDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"mutation","name":{"kind":"Name","value":"DeleteAgreementMutation"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"agreementId"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"Int"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"deleteAgreement"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"agreementId"},"value":{"kind":"Variable","name":{"kind":"Name","value":"agreementId"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"agreementId"}},{"kind":"Field","name":{"kind":"Name","value":"message"}}]}}]}}]} as unknown as DocumentNode<DeleteAgreementMutationMutation, DeleteAgreementMutationMutationVariables>;
 export const MutationDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"mutation","name":{"kind":"Name","value":"Mutation"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"logout"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"message"}}]}}]}}]} as unknown as DocumentNode<MutationMutation, MutationMutationVariables>;
 export const UsersDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"Users"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"users"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"users"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"name"}},{"kind":"Field","name":{"kind":"Name","value":"bio"}},{"kind":"Field","name":{"kind":"Name","value":"email"}},{"kind":"Field","name":{"kind":"Name","value":"phone"}},{"kind":"Field","name":{"kind":"Name","value":"twitterVerificationCode"}},{"kind":"Field","name":{"kind":"Name","value":"twitterVerificationSig"}}]}}]}}]}}]} as unknown as DocumentNode<UsersQuery, UsersQueryVariables>;

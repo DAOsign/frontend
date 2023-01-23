@@ -12,7 +12,7 @@ import {
   verificationsRow,
   verificationsTitle,
 } from "./styles";
-import { Box, Button, Flex, Link } from "theme-ui";
+import { Box, Button, Flex, Link, Spinner } from "theme-ui";
 import Icon from "../icon";
 import iconsObj from "../../assets/icons";
 import { InformationRow } from "./InformationRow";
@@ -29,8 +29,10 @@ import NextLink from "next/link";
 import ModalConfirmAgreementDeletion from "../ModalConfirmAgreementDeletion/ModalConfirmAgreementDeletion";
 import { sleep } from "../../utils/common";
 import { useRouter } from "next/router";
-import { notifSucces } from "../../utils/notification";
+import { notifError, notifSucces } from "../../utils/notification";
 import Image from "next/image";
+import { useMutation } from "urql";
+import { setAgreementReadyToSignMutation } from "../../modules/graphql/mutations";
 
 const formatAgreementPrivacy = (agreementPrivacy: string | undefined) => {
   if (!agreementPrivacy) return "";
@@ -51,6 +53,7 @@ interface Props {
   isWaitingForMySignature: boolean;
   userIsAuthor: boolean;
   authorWalletAddress?: string;
+  onSetAgreementReadyToSign?: () => void;
 }
 
 export const AgreementInformation = ({
@@ -62,10 +65,14 @@ export const AgreementInformation = ({
   isWaitingForMySignature,
   userIsAuthor,
   authorWalletAddress,
+  onSetAgreementReadyToSign = () => {},
 }: Props) => {
   const { push } = useRouter();
   const [isConfirmAgreementDeletionPopupVisible, setIsConfirmAgreementDeletionPopupVisible] =
     useState<boolean>(false);
+
+  const [, setAgreementReadyToSign] = useMutation(setAgreementReadyToSignMutation);
+  const [isSettingReadyToSign, setIsSettingReadyToSign] = useState<boolean>(false);
 
   const handleCopyAddress = () => {
     onCopyClick(authorWalletAddress || "");
@@ -73,10 +80,25 @@ export const AgreementInformation = ({
   };
 
   // TODO: edit observers
-  const handleEditObservers = () => {};
+  const handleEditObservers = () => {
+    notifError("Editing observers is not yet implemented");
+  };
 
-  // TODO: set status to ready to sign
-  const handleReadyToSign = () => {};
+  const handleReadyToSign = async () => {
+    if (isSettingReadyToSign) return;
+    setIsSettingReadyToSign(true);
+
+    try {
+      await setAgreementReadyToSign({ agreementId: agreementId });
+      onSetAgreementReadyToSign();
+      notifSucces("Agreement is ready to sign");
+    } catch (error) {
+      notifError(error?.message || "Failed to set agreement to Ready to Sign status");
+      console.error("[HandleReadyToSign]", error);
+    } finally {
+      setIsSettingReadyToSign(false);
+    }
+  };
 
   // TODO: sign agreement
   const handleSignAgreement = () => {};
@@ -129,21 +151,24 @@ export const AgreementInformation = ({
       </Flex>
       <Flex sx={buttonsContainer}>
         {userIsAuthor ? (
-          agreementStatus === STATUS_DRAFT || agreementStatus === STATUS_READY_TO_SIGN ? (
-            <NextLink href={`/edit/${agreementId}?step=1`}>
-              <Link>
-                <Button sx={btnSecondary}>Edit Agreement</Button>
-              </Link>
-            </NextLink>
-          ) : (
-            <Button sx={btnSecondary} onClick={handleEditObservers}>
-              Edit Observers
-            </Button>
-          )
+          <>
+            {agreementStatus === STATUS_DRAFT ? (
+              <NextLink href={`/edit/${agreementId}?step=1`}>
+                <Link>
+                  <Button sx={btnSecondary}>Edit Agreement</Button>
+                </Link>
+              </NextLink>
+            ) : null}
+            {agreementStatus === STATUS_READY_TO_SIGN ? (
+              <Button sx={btnSecondary} onClick={handleEditObservers}>
+                Edit Observers
+              </Button>
+            ) : null}
+          </>
         ) : null}
         {agreementStatus === STATUS_DRAFT ? (
-          <Button sx={btnPrimary} onClick={handleReadyToSign}>
-            Ready to Sign
+          <Button sx={btnPrimary} onClick={handleReadyToSign} disabled={isSettingReadyToSign}>
+            {isSettingReadyToSign ? <Spinner size={16} color="#CA5CF2" /> : "Ready to Sign"}
           </Button>
         ) : (agreementStatus === STATUS_READY_TO_SIGN ||
             agreementStatus === STATUS_PARTIALLY_SIGNED) &&

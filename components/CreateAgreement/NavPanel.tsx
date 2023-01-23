@@ -33,6 +33,7 @@ import { calculateIpfsHash } from "../../utils/ipfs";
 import { uploadFile, uploadToIpfs } from "../../modules/rest";
 import { notifError } from "../../utils/notification";
 import ModalConfirmAgreementDeletion from "../ModalConfirmAgreementDeletion/ModalConfirmAgreementDeletion";
+import { getToken } from "../../utils/token";
 
 const FILE_UPLOAD_ERROR_DEFAULT_MESSAGE = "Failed to upload file";
 
@@ -137,7 +138,8 @@ export default function NavPanel({ setLoading, page }: { setLoading: any; page: 
 
     if (values.agreementLocation === LOCATION_CLOUD) {
       try {
-        const res = await uploadFile(file);
+        const token = getToken();
+        const res = await uploadFile(token!, file);
         if (res && "fileLink" in res) {
           changeValue("filePath", res.fileLink);
           return { filePath: res.fileLink, agreementHash: calculatedIpfsHash };

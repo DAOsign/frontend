@@ -33,7 +33,7 @@ export const ViewAgreement = () => {
 
   const { account } = useWeb3();
 
-  const [{ data, error: getAgreementError }] = useQuery({
+  const [{ data, error: getAgreementError }, refetchAgreement] = useQuery({
     query: agreementById,
     variables: { agreementId: Number(agreementId) },
     pause: !agreementId || idIsWrong,
@@ -61,6 +61,10 @@ export const ViewAgreement = () => {
       console.error("[GetAgreementById]", getAgreementError.message);
     }
   }, [getAgreementError]);
+
+  const onSetAgreementReadyToSign = () => {
+    refetchAgreement();
+  };
 
   const handleBack = () => {
     push("/");
@@ -111,6 +115,7 @@ export const ViewAgreement = () => {
             isWaitingForMySignature={agreement?.isWaitingForMySignature || false}
             userIsAuthor={userIsAuthor}
             authorWalletAddress={agreement?.authorWalletAddress}
+            onSetAgreementReadyToSign={onSetAgreementReadyToSign}
           />
         </>
       )}
