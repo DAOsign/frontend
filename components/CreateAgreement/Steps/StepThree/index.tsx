@@ -12,6 +12,7 @@ import { uniqueId } from "../../../../utils/formats";
 import iconsObj from "../../../../assets/icons";
 import Icon from "../../../icon";
 import { useCreateAgreement } from "../../../../hooks/useCreateAgreement";
+import stylesTooltip from "../../../Header/index.module.css";
 import { useEditAgreement } from "../../../../hooks/useEditAgreement";
 import { useWeb3 } from "../../../../hooks/useWeb3";
 import { useMemo } from "react";
@@ -219,15 +220,39 @@ export default function StepThree({ loading, page }: { loading: boolean; page: s
             <Flex
               sx={{ position: "relative", justifyContent: "space-between", alignItems: "center" }}
             >
-              <Text
-                sx={{ variant: "forms.label", ml: "3px", maxWidth: "unset", minHeight: "25px" }}
-              >
-                Signers (ENS name, address or email)
-                <Box sx={{ width: "12px", height: "12px", display: "inline-block" }}>
-                  <Icon style={{ opacity: 0.5 }} src={iconsObj.infoCircle} />
-                </Box>
-              </Text>
-              {!userAlreadySigner ? (
+              <Flex sx={{ alignItems: "center" }}>
+                <Text
+                  sx={{ variant: "forms.label", ml: "3px", maxWidth: "unset", minHeight: "25px" }}
+                >
+                  Signers (ENS name, address or email)
+                </Text>
+                <div style={{ paddingTop: 0 }} className={`${stylesTooltip.tooltip}`}>
+                  <button className={`${stylesTooltip.tooltip_button}`}>
+                    <Box sx={{ width: "12px", height: "12px", display: "inline-block" }}>
+                      <Icon style={{ opacity: 0.5 }} src={iconsObj.infoCircle} />
+                    </Box>
+                  </button>
+                  <div
+                    style={{
+                      top: "-361%",
+                      left: "50%",
+                      width: "200px",
+                      transform: "translate(-57%, 0)",
+                      pointerEvents: "none",
+                    }}
+                    className={`${stylesTooltip.tooltip_container}`}
+                  >
+                    <div className={`${stylesTooltip.tooltip_text}`}>
+                      Add users that will sign this agreement.
+                    </div>
+                    <div
+                      style={{ marginLeft: "50.5%" }}
+                      className={`${stylesTooltip.tooltip_text_buttom}`}
+                    ></div>
+                  </div>
+                </div>
+              </Flex>
+              {!userAlreadySigner && !userAlreadyObserver ? (
                 <Button
                   onClick={() => addMe("signers")}
                   className={userAlreadySigner ? "disabled" : ""}
@@ -236,6 +261,9 @@ export default function StepThree({ loading, page }: { loading: boolean; page: s
                     justifyContent: "flex-end",
                     height: "25px",
                     width: "initial",
+                    "&:hover": {
+                      color: "#AE4FD0",
+                    },
                   }}
                 >
                   Add Me
@@ -245,7 +273,7 @@ export default function StepThree({ loading, page }: { loading: boolean; page: s
                 onClick={() => addSigner(signerInputRef.current?.value.toLocaleLowerCase())}
                 sx={plus}
               >
-                <Icon width="24px" height="24px" style={{ opacity: 0.5 }} src={iconsObj.pinkPlus} />
+                <Icon width="24px" height="24px" className="iconPlus" src={iconsObj.pinkPlus} />
               </Box>
             </Flex>
             <Input
@@ -273,20 +301,39 @@ export default function StepThree({ loading, page }: { loading: boolean; page: s
                 alignItems: "center",
               }}
             >
-              <Text
-                sx={{ variant: "forms.label", ml: "3px", maxWidth: "unset", minHeight: "25px" }}
-              >
-                Observers (ENS name or adderess)
-                <Box sx={{ width: "12px", height: "12px", display: "inline-block" }}>
-                  <Icon
-                    width="12px"
-                    height="12px"
-                    style={{ opacity: 0.5 }}
-                    src={iconsObj.infoCircle}
-                  />
-                </Box>
-              </Text>
-              {!userAlreadyObserver ? (
+              <Flex sx={{ alignItems: "center" }}>
+                <Text
+                  sx={{ variant: "forms.label", ml: "3px", maxWidth: "unset", minHeight: "25px" }}
+                >
+                  Observers (ENS name or adderess)
+                </Text>
+                <div style={{ paddingTop: 0 }} className={`${stylesTooltip.tooltip}`}>
+                  <button className={`${stylesTooltip.tooltip_button}`}>
+                    <Box sx={{ width: "12px", height: "12px", display: "inline-block" }}>
+                      <Icon style={{ opacity: 0.5 }} src={iconsObj.infoCircle} />
+                    </Box>
+                  </button>
+                  <div
+                    style={{
+                      top: "-85px",
+                      left: "50%",
+                      width: "200px",
+                      transform: "translate(-57%, 0)",
+                      pointerEvents: "none",
+                    }}
+                    className={`${stylesTooltip.tooltip_container}`}
+                  >
+                    <div className={`${stylesTooltip.tooltip_text}`}>
+                      Add users that will be able to see but not sign an agreement.
+                    </div>
+                    <div
+                      style={{ marginLeft: "50.5%" }}
+                      className={`${stylesTooltip.tooltip_text_buttom}`}
+                    ></div>
+                  </div>
+                </div>
+              </Flex>
+              {!userAlreadySigner && !userAlreadyObserver ? (
                 <Button
                   onClick={() => addMe("observers")}
                   className={userAlreadyObserver ? "'disabled'" : ""}
@@ -295,6 +342,9 @@ export default function StepThree({ loading, page }: { loading: boolean; page: s
                     justifyContent: "flex-end",
                     height: "25px",
                     width: "initial",
+                    "&:hover": {
+                      color: "#AE4FD0",
+                    },
                   }}
                 >
                   Add Me
@@ -304,7 +354,7 @@ export default function StepThree({ loading, page }: { loading: boolean; page: s
                 onClick={() => addObserver(observerInputRef.current?.value.toLocaleLowerCase())}
                 sx={plus}
               >
-                <Icon width="24px" height="24px" style={{ opacity: 0.5 }} src={iconsObj.pinkPlus} />
+                <Icon width="24px" height="24px" className="iconPlus" src={iconsObj.pinkPlus} />
               </Box>
             </Flex>
             <Input
@@ -330,24 +380,43 @@ export default function StepThree({ loading, page }: { loading: boolean; page: s
                 alignItems: "center",
               }}
             >
-              <Text
-                sx={{
-                  variant: "forms.label",
-                  ml: "3px",
-                  maxWidth: "unset",
-                  minHeight: "25px",
-                }}
-              >
-                Required Signed Verifications
-                <Box sx={{ width: "12px", height: "12px", display: "inline-block" }}>
-                  <Icon
-                    width="12px"
-                    height="12px"
-                    style={{ opacity: 0.5 }}
-                    src={iconsObj.infoCircle}
-                  />
-                </Box>
-              </Text>
+              <Flex sx={{ alignItems: "center" }}>
+                <Text
+                  sx={{
+                    variant: "forms.label",
+                    ml: "3px",
+                    maxWidth: "unset",
+                    minHeight: "25px",
+                  }}
+                >
+                  Required Signed Verifications
+                </Text>
+                <div style={{ paddingTop: 0 }} className={`${stylesTooltip.tooltip}`}>
+                  <button className={`${stylesTooltip.tooltip_button}`}>
+                    <Box sx={{ width: "12px", height: "12px", display: "inline-block" }}>
+                      <Icon style={{ opacity: 0.5 }} src={iconsObj.infoCircle} />
+                    </Box>
+                  </button>
+                  <div
+                    style={{
+                      top: "-65px",
+                      left: "50%",
+                      width: "200px",
+                      transform: "translate(-56%, 0)",
+                      pointerEvents: "none",
+                    }}
+                    className={`${stylesTooltip.tooltip_container}`}
+                  >
+                    <div className={`${stylesTooltip.tooltip_text}`}>
+                      Required level of verification. More levels are coming soon.
+                    </div>
+                    <div
+                      style={{ marginLeft: "50.5%" }}
+                      className={`${stylesTooltip.tooltip_text_buttom}`}
+                    ></div>
+                  </div>
+                </div>
+              </Flex>
             </Flex>
             <Box sx={{ display: "flex", flexDirection: "column", gap: "20px" }}>
               {verifications.map((verification, index) => (

@@ -25,7 +25,16 @@ export default function UploadLocalAgreement({ page }: { page: string }) {
           <Box sx={{ width: "14px" }}>
             <Icon style={{ display: "block" }} src={iconsObj.arrowLeftPink} />
           </Box>
-          <Text sx={{ display: "block" }}>Choose another method</Text>
+          <Text
+            sx={{
+              display: "block",
+              "&:hover": {
+                color: "#AE4FD0",
+              },
+            }}
+          >
+            Choose another method
+          </Text>
         </Button>
       </Flex>
       <Upload page={page} />

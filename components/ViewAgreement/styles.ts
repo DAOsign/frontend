@@ -8,11 +8,11 @@ const container = {
   columnGap: "40px",
   "@media screen and (max-width: 1200px)": {
     flexDirection: "column",
-    mt: "270px",
+    p: "24px 24px 28px 24px",
+    mt: 0,
   },
   "@media screen and (max-width: 768px)": {
     flexDirection: "column",
-    mt: "220px",
   },
 } as ThemeUIStyleObject;
 
@@ -30,6 +30,12 @@ const mainData = {
   flexDirection: "column",
   textAlign: "left",
   marginBottom: "16px",
+  "@media screen and (max-width: 1200px)": {
+    width: "100%",
+    maxWidth: "672px",
+    m: "0 auto",
+    minWidth: "unset",
+  },
 } as ThemeUIStyleObject;
 
 const briefInformation = {
@@ -37,6 +43,11 @@ const briefInformation = {
   width: "364px",
   padding: "28px 32px",
   height: "fit-content",
+  "@media screen and (max-width: 1200px)": {
+    width: "100%",
+    maxWidth: "672px",
+    m: "0 auto",
+  },
 } as ThemeUIStyleObject;
 
 const backContainer = {

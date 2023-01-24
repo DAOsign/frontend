@@ -5,6 +5,7 @@ import { itemRadio } from "../../styles";
 import iconsObj from "../../../../assets/icons";
 import { useCreateAgreement } from "../../../../hooks/useCreateAgreement";
 import { useEditAgreement } from "../../../../hooks/useEditAgreement";
+import stylesTooltip from "../../../Header/index.module.css";
 import {
   AgreementLocation,
   LOCATION_CLOUD,
@@ -43,14 +44,43 @@ export default function AgreementLocationRadioButtons({ page }: { page: string }
 
   return (
     <>
-      <Text
-        sx={{ variant: "forms.label", mr: "auto", display: "block", maxWidth: "150px", mb: "5px" }}
-      >
-        Agreement location{" "}
-        <Box sx={{ width: "12px", height: "12px", display: "inline-block" }}>
-          <Icon width="12px" height="12px" style={{ opacity: 0.5 }} src={iconsObj.infoCircle} />
-        </Box>
-      </Text>
+      <Flex sx={{ alignItems: "center" }}>
+        <Text
+          sx={{
+            variant: "forms.label",
+            display: "block",
+            maxWidth: "150px",
+            mb: "5px",
+          }}
+        >
+          Agreement location{" "}
+        </Text>
+        <div style={{ paddingTop: 0 }} className={`${stylesTooltip.tooltip}`}>
+          <button className={`${stylesTooltip.tooltip_button}`}>
+            <Box sx={{ width: "12px", height: "12px", display: "inline-block" }}>
+              <Icon style={{ opacity: 0.5 }} src={iconsObj.infoCircle} />
+            </Box>
+          </button>
+          <div
+            style={{
+              top: "-361%",
+              left: "50%",
+              width: "200px",
+              transform: "translate(-57%, 0)",
+              pointerEvents: "none",
+            }}
+            className={`${stylesTooltip.tooltip_container}`}
+          >
+            <div className={`${stylesTooltip.tooltip_text}`}>
+              Select where you want to store your agreement.
+            </div>
+            <div
+              style={{ marginLeft: "50.5%" }}
+              className={`${stylesTooltip.tooltip_text_buttom}`}
+            ></div>
+          </div>
+        </div>
+      </Flex>
       <Box as="form" onSubmit={e => e.preventDefault()}>
         <Flex sx={{ mb: "24px", display: "flex", gap: "22px" }}>
           {agreementLocations.map(el => (

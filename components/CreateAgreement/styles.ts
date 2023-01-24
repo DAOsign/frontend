@@ -453,6 +453,7 @@ const btnBack = {
   "&:hover": {
     backgroundColor: "transparent",
     background: "unset",
+    color: "#AE4FD0",
   },
 } as ThemeUIStyleObject;
 
