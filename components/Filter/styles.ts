@@ -2,7 +2,7 @@ import { ThemeUIStyleObject } from "theme-ui";
 
 const container = {
   position: "absolute",
-  top: 0,
+  top: "-2px",
   right: 0,
   width: "253px",
   height: "410px",
@@ -69,6 +69,7 @@ const icon = {
 
 const iconClose = {
   width: "24px",
+  cursor: "pointer",
   height: "24px",
   display: "none",
   "@media screen and (max-width: 768px)": {

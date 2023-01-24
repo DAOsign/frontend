@@ -29,7 +29,12 @@ export default function Filter({ setVisible, onChange, reset, filterOptions }: a
         >
           <Icon src={iconsObj.chevronUp} />
         </Box>
-        <Box sx={{ ...iconClose }}>
+        <Box
+          onClick={() => {
+            setVisible(false);
+          }}
+          sx={{ ...iconClose }}
+        >
           <Icon src={iconsObj.xClose} />
         </Box>
       </Flex>

@@ -195,6 +195,7 @@ export default function NavPanel({ setLoading, page }: { setLoading: any; page: 
       ? push({ query: { step: step + 1 } }, undefined, { shallow: true })
       : push(`/edit/${query.id}?step=${step + 1}`);
   };
+
   const handlePrevStep = () => {
     if (step === 1 && (!values.filePath || !values.agreementHash)) {
       changeValue("file", undefined);
@@ -206,6 +207,16 @@ export default function NavPanel({ setLoading, page }: { setLoading: any; page: 
 
   const handleCancel = () => {
     push("/");
+  };
+
+  const changeStep = (step: number) => {
+    const areFieldsValid = validateFields(values, true);
+    if (step === 3 || !areFieldsValid) {
+      return;
+    }
+    page === "create"
+      ? push({ query: { step } }, undefined, { shallow: true })
+      : push(`/edit/${query.id}?step=${step}`);
   };
 
   const ForwardButton = () => {
@@ -303,7 +314,10 @@ export default function NavPanel({ setLoading, page }: { setLoading: any; page: 
         <Flex sx={{ ...stepStyle, mt: 0 }}>
           <Box sx={stepNumber}>
             {step > 1 ? (
-              <Box sx={{ width: "24px", height: "24px", m: "0 auto" }}>
+              <Box
+                onClick={() => changeStep(1)}
+                sx={{ width: "24px", height: "24px", m: "0 auto", cursor: "pointer" }}
+              >
                 <Icon src={iconsObj.done} />
               </Box>
             ) : (
@@ -320,7 +334,10 @@ export default function NavPanel({ setLoading, page }: { setLoading: any; page: 
         <Flex sx={stepStyle}>
           <Box sx={{ ...stepNumber, backgroundColor: step > 1 ? "#CA5CF2" : "#EDEDF3" }}>
             {step > 2 ? (
-              <Box sx={{ width: "20px", height: "20px", m: "0 auto" }}>
+              <Box
+                onClick={() => changeStep(2)}
+                sx={{ width: "20px", height: "20px", m: "0 auto", cursor: "pointer" }}
+              >
                 <Icon src={iconsObj.done} />
               </Box>
             ) : (
@@ -334,7 +351,10 @@ export default function NavPanel({ setLoading, page }: { setLoading: any; page: 
         </Flex>
         <Container sx={box}></Container>
         <Flex sx={stepStyle}>
-          <Box sx={{ ...stepNumber, backgroundColor: step > 2 ? "#CA5CF2" : "#EDEDF3" }}>
+          <Box
+            onClick={() => changeStep(3)}
+            sx={{ ...stepNumber, backgroundColor: step > 2 ? "#CA5CF2" : "#EDEDF3" }}
+          >
             <Text sx={{ variant: "text.normalTextBold", lineHeight: "0", color: "#fff" }}>3</Text>
           </Box>
           <Container sx={leftSideItem}>

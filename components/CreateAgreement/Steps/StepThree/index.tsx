@@ -179,12 +179,18 @@ export default function StepThree({ loading, page }: { loading: boolean; page: s
   };
 
   const userAlreadySigner = useMemo(
-    () => values?.signers?.some(signer => signer?.value === account),
+    () =>
+      values?.signers?.some(
+        signer => signer?.value.toLocaleLowerCase() === account?.toLocaleLowerCase()
+      ),
     [values.signers, account]
   );
 
   const userAlreadyObserver = useMemo(
-    () => values?.observers?.some(observer => observer.value === account),
+    () =>
+      values?.observers?.some(
+        observer => observer.value.toLocaleLowerCase() === account?.toLocaleLowerCase()
+      ),
     [values.observers, account]
   );
 
@@ -200,6 +206,7 @@ export default function StepThree({ loading, page }: { loading: boolean; page: s
       }
     }
   };
+
   const signersInputErrorStyles = values?.errors?.signers ? inputCreateAgreementError : {};
   const observersInputErrorStyles = values?.errors?.observers ? inputCreateAgreementError : {};
 
@@ -220,11 +227,10 @@ export default function StepThree({ loading, page }: { loading: boolean; page: s
                   <Icon style={{ opacity: 0.5 }} src={iconsObj.infoCircle} />
                 </Box>
               </Text>
-              {!userAlreadySigner && !userAlreadyObserver ? (
+              {!userAlreadySigner ? (
                 <Button
                   onClick={() => addMe("signers")}
-                  // className={userAlreadySigner || userAlreadyObserver ? "disabled" : ""}
-                  className={userAlreadySigner || userAlreadyObserver ? "" : ""}
+                  className={userAlreadySigner ? "disabled" : ""}
                   variant="link"
                   sx={{
                     justifyContent: "flex-end",
@@ -280,11 +286,10 @@ export default function StepThree({ loading, page }: { loading: boolean; page: s
                   />
                 </Box>
               </Text>
-              {!userAlreadySigner && !userAlreadyObserver ? (
+              {!userAlreadyObserver ? (
                 <Button
                   onClick={() => addMe("observers")}
-                  // className={userAlreadySigner || userAlreadyObserver ? "'disabled'" : ""}
-                  className={userAlreadySigner || userAlreadyObserver ? "" : ""}
+                  className={userAlreadyObserver ? "'disabled'" : ""}
                   variant="link"
                   sx={{
                     justifyContent: "flex-end",

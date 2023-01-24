@@ -4,6 +4,7 @@ import iconsObj from "../../assets/icons";
 import { btnClear } from "./styles";
 import Filter from "../Filter";
 import Icon from "../icon";
+import { initialPermission, initialSignature, initialStatus } from "./initialState";
 
 import {
   iconSearchContainer,
@@ -16,30 +17,12 @@ import {
   titleItem,
 } from "./styles";
 
-const initialStatus = [
-  { value: false, name: "Draft", id: 1 },
-  { value: false, name: "Partially Signed", id: 2 },
-  { value: false, name: "Ready to Sign", id: 3 },
-  { value: false, name: "Signed", id: 4 },
-];
-
-const initialPermission = [
-  { value: false, name: "Public", id: 5 },
-  { value: false, name: "Private", id: 6 },
-];
-
-const initialSignature = {
-  value: false,
-  name: "Waiting for my signature",
-  id: 7,
-};
-
-export default function HeaderAgreement() {
-  const [filterOptions, setFilterOptions] = useState({
-    status: initialStatus,
-    permission: initialPermission,
-    signature: initialSignature,
-  });
+export default function HeaderAgreement({
+  filterOptions,
+  setFilterOptions,
+  onChangeSearch,
+  value,
+}: any) {
   const [visible, setVisible] = useState(false);
 
   const onChange = (id: number) => {
@@ -85,7 +68,12 @@ export default function HeaderAgreement() {
           <Box sx={iconSearchContainer}>
             <Icon src={iconsObj.search} />
           </Box>
-          <Input sx={{ variant: "forms.input", ...inputMyAgreement }} placeholder="Search" />
+          <Input
+            sx={{ variant: "forms.input", ...inputMyAgreement }}
+            placeholder="Search"
+            value={value}
+            onChange={e => onChangeSearch(e.target.value)}
+          />
         </Container>
         <Container>
           <Flex
@@ -93,10 +81,10 @@ export default function HeaderAgreement() {
             sx={{
               ...textContainer,
               "&:hover": {
-                border: visible ? "unset" : "1px solid #00000040",
+                border: visible ? "1px solid transparent" : "1px solid #00000040",
               },
               "&:focus": {
-                border: visible ? "unset" : "1px solid #00000040",
+                border: visible ? "1px solid transparent" : "1px solid #00000040",
               },
             }}
           >

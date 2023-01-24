@@ -1,6 +1,6 @@
 /* eslint-disable no-console */
 /** @jsxImportSource theme-ui */
-import React, { useEffect, useMemo } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import UserCard from "./UserCard";
 import { Flex, Button, Text, Container, Link, Box } from "theme-ui";
 import { title, containerSides, noContent, btnText, btn, iconPlus } from "./styles";
@@ -16,13 +16,35 @@ import { toAgreement } from "../../utils/typeUtils";
 import { Agreement as AgreementRespone } from "../../modules/graphql/gql/graphql";
 import Lottie from "lottie-react";
 import loader from "../../img/json/loader.json";
+import { initialPermission, initialSignature, initialStatus } from "./initialState";
 
 export default function AgreementsList({ address }: any) {
+  const [valueSearch, setValueSearch] = useState("");
+  const [filterOptions, setFilterOptions] = useState({
+    status: initialStatus,
+    permission: initialPermission,
+    signature: initialSignature,
+  });
+
+  const filterValues = [
+    filterOptions.signature,
+    ...filterOptions.permission,
+    ...filterOptions.status,
+  ]
+    .filter(el => el.value)
+    .map(el => {
+      return el.nameSecondary;
+    });
+
   const { account } = useWeb3();
   const [{ data, fetching: agreementsLoading, error }] = useQuery({
     query: myAgreementsQuery,
     //@ts-ignore: force refetch agreements when account changes
-    variables: { account },
+    variables: {
+      account,
+      filterBy: !!filterValues.length ? filterValues : null,
+      search: !!valueSearch.length ? valueSearch : null,
+    },
     pause: !account,
     requestPolicy: "network-only",
   });
@@ -57,7 +79,14 @@ export default function AgreementsList({ address }: any) {
             </Button>
           </NextLink>
         </Flex>
-        {agreements.length ? <HeaderAgreement /> : null}
+        {agreements.length ? (
+          <HeaderAgreement
+            value={valueSearch}
+            onChangeSearch={setValueSearch}
+            filterOptions={filterOptions}
+            setFilterOptions={setFilterOptions}
+          />
+        ) : null}
         {agreementsLoading ? (
           <Lottie
             style={{ height: "60px", marginBottom: "52px" }}
