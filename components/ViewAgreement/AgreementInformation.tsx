@@ -177,7 +177,8 @@ export const AgreementInformation = ({
             Sign Agreement
           </Button>
         ) : null}
-        {userIsAuthor && agreementStatus === STATUS_DRAFT ? (
+        {userIsAuthor &&
+        (agreementStatus === STATUS_DRAFT || agreementStatus === STATUS_READY_TO_SIGN) ? (
           <Box sx={deleteAgreementBtn} onClick={handleDeleteAgreement}>
             Delete Agreement
           </Box>
