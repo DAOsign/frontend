@@ -431,7 +431,7 @@ const box = {
 const plus = {
   position: "absolute",
   right: "12px",
-  top: "35px",
+  top: "37px",
   cursor: "pointer",
   width: "24px",
   m: "0 auto",

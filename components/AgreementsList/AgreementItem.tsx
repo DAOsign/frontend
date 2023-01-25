@@ -123,7 +123,17 @@ export default function AgreementItem({
               </Flex>
             </Flex>
           </Flex>
-          <Text sx={{ variant: "text.largeTextBold", pt: "12px" }}>{title}</Text>
+          <Box
+            sx={{
+              variant: "text.largeTextBold",
+              pt: "12px",
+              overflow: "hidden",
+              textOverflow: "ellipsis",
+              lineHeight: "30px",
+            }}
+          >
+            {title}
+          </Box>
           <Flex sx={{ pt: "8px" }}>
             <Text sx={{ variant: "text.smallTextMedium", opacity: "0.5", mr: "6px" }}>
               Signers:
@@ -150,7 +160,6 @@ export default function AgreementItem({
             ) : null}
           </Flex>
         </Flex>
-        <div style={{ height: "20px" }}></div>
       </Link>
     </NextLink>
   );

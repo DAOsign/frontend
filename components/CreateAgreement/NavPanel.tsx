@@ -311,13 +311,15 @@ export default function NavPanel({ setLoading, page }: { setLoading: any; page: 
   return (
     <>
       <Container sx={stepsContainer}>
-        <Flex sx={{ ...stepStyle, mt: 0 }}>
+        <Flex
+          onClick={() => {
+            return step > 1 ? changeStep(1) : null;
+          }}
+          sx={{ ...stepStyle, mt: 0, cursor: step > 1 ? "pointer" : "initial" }}
+        >
           <Box sx={stepNumber}>
             {step > 1 ? (
-              <Box
-                onClick={() => changeStep(1)}
-                sx={{ width: "24px", height: "24px", m: "0 auto", cursor: "pointer" }}
-              >
+              <Box sx={{ width: "24px", height: "24px", m: "0 auto", cursor: "pointer" }}>
                 <Icon src={iconsObj.done} />
               </Box>
             ) : (
@@ -331,7 +333,12 @@ export default function NavPanel({ setLoading, page }: { setLoading: any; page: 
           </Container>
         </Flex>
         <Container sx={box}></Container>
-        <Flex sx={stepStyle}>
+        <Flex
+          onClick={() => {
+            return step > 2 ? changeStep(2) : null;
+          }}
+          sx={{ ...stepStyle, cursor: step > 2 ? "pointer" : "initial" }}
+        >
           <Box sx={{ ...stepNumber, backgroundColor: step > 1 ? "#CA5CF2" : "#EDEDF3" }}>
             {step > 2 ? (
               <Box
@@ -350,11 +357,13 @@ export default function NavPanel({ setLoading, page }: { setLoading: any; page: 
           </Container>
         </Flex>
         <Container sx={box}></Container>
-        <Flex sx={stepStyle}>
-          <Box
-            onClick={() => changeStep(3)}
-            sx={{ ...stepNumber, backgroundColor: step > 2 ? "#CA5CF2" : "#EDEDF3" }}
-          >
+        <Flex
+          onClick={() => {
+            return step > 3 ? changeStep(3) : null;
+          }}
+          sx={{ ...stepStyle, cursor: step > 3 ? "pointer" : "initial" }}
+        >
+          <Box sx={{ ...stepNumber, backgroundColor: step > 2 ? "#CA5CF2" : "#EDEDF3" }}>
             <Text sx={{ variant: "text.normalTextBold", lineHeight: "0", color: "#fff" }}>3</Text>
           </Box>
           <Container sx={leftSideItem}>

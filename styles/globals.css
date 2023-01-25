@@ -758,12 +758,10 @@ body {
   }
 }
 
-.iconPlus {
-  opacity: 0.5;
-}
-.iconPlus:hover {
-  opacity: 1;
-}
 .w-md-editor.w-md-editor-show-edit {
   max-height: unset;
+}
+
+.iconPlus:hover > g > path {
+  stroke: #AE4FD0
 }

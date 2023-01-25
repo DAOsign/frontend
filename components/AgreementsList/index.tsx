@@ -79,7 +79,7 @@ export default function AgreementsList({ address }: any) {
             </Button>
           </NextLink>
         </Flex>
-        {agreements.length ? (
+        {!!agreements.length || !(!filterValues.length && !valueSearch.length) ? (
           <HeaderAgreement
             value={valueSearch}
             onChangeSearch={setValueSearch}

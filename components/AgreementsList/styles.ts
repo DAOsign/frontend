@@ -213,7 +213,6 @@ const headerContainer = {
 
 const agreementConteiner = {
   flexDirection: "column",
-  position: "absolute",
   background: "white",
   border: "1px solid #EDEDF3",
   borderRadius: "12px",
@@ -224,7 +223,6 @@ const agreementConteiner = {
   transitionDuration: "300ms",
   mb: "20px",
   "@media screen and (min-width: 768px)": {
-    height: "140px",
     "&:hover": {
       transform: "scale(1.01)",
     },
@@ -232,14 +230,9 @@ const agreementConteiner = {
 } as ThemeUIStyleObject;
 
 const agreementConteinerRelative = {
-  position: "relative",
-  height: "160px",
   width: "100%",
   flexDirection: "column",
   display: "block",
-  "@media screen and (max-width: 768px)": {
-    height: "200px",
-  },
 } as ThemeUIStyleObject;
 
 const agreementLabels = {
