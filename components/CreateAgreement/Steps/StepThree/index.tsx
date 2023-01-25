@@ -76,7 +76,7 @@ const validateUser = (
     const isEmail = value.includes("@");
     const isEns = value.includes(".eth");
     const isAddress = value.toLocaleLowerCase().startsWith("0x");
-    if (!isEmail && !isEns && !isAddress) {
+    if (isEmail && !isEns && !isAddress) {
       error = "Invalid value";
     } else if (isEmail) {
       const isValidEmail = String(value)
@@ -84,9 +84,8 @@ const validateUser = (
         .match(
           /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
         );
-
-      if (!isValidEmail) {
-        error = "Invalid email address";
+      if (isValidEmail) {
+        error = "Invalid value";
       }
     } else if (isEns) {
       const isValidEns = value.match(
@@ -224,7 +223,7 @@ export default function StepThree({ loading, page }: { loading: boolean; page: s
                 <Text
                   sx={{ variant: "forms.label", ml: "3px", maxWidth: "unset", minHeight: "25px" }}
                 >
-                  Signers (ENS name, address or email)
+                  Signers (ENS name or address)
                 </Text>
                 <div style={{ paddingTop: 0 }} className={`${stylesTooltip.tooltip}`}>
                   <button className={`${stylesTooltip.tooltip_button}`}>
@@ -252,7 +251,7 @@ export default function StepThree({ loading, page }: { loading: boolean; page: s
                   </div>
                 </div>
               </Flex>
-              {!userAlreadySigner && !userAlreadyObserver ? (
+              {!userAlreadySigner ? (
                 <Button
                   onClick={() => addMe("signers")}
                   className={userAlreadySigner ? "disabled" : ""}
@@ -333,7 +332,7 @@ export default function StepThree({ loading, page }: { loading: boolean; page: s
                   </div>
                 </div>
               </Flex>
-              {!userAlreadySigner && !userAlreadyObserver ? (
+              {!userAlreadyObserver ? (
                 <Button
                   onClick={() => addMe("observers")}
                   className={userAlreadyObserver ? "'disabled'" : ""}

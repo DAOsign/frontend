@@ -89,8 +89,8 @@ a {
   border-bottom: 1px solid #d8d8e2 !important;
 }
 .w-md-editor-bar {
-  width: 24px !important;
-  height: 24px !important;
+  width: 30px !important;
+  height: 30px !important;
   background-image: url("../img/svg/drag.svg");
   background-size: cover;
 }
@@ -763,4 +763,7 @@ body {
 }
 .iconPlus:hover {
   opacity: 1;
+}
+.w-md-editor.w-md-editor-show-edit {
+  max-height: unset;
 }

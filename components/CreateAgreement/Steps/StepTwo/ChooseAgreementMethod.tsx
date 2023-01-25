@@ -55,7 +55,7 @@ export default function ChooseAgreementMethod({ page }: { page: string }) {
                   </div>
                   <Text sx={{ ...primaryTitleItem, mb: "12px", mt: "24px" }}>Upload Agreement</Text>
                   <Text sx={{ variant: "text.smallTextMedium", maxWidth: "160px", opacity: 1 }}>
-                    Upload file of a type PDF, DOCX, TXT
+                    Upload PDF file
                   </Text>
                 </Box>
               </Container>

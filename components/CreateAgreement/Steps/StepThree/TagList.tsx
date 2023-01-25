@@ -49,7 +49,7 @@ export default function TagList<T = any>({ items, type, onDelete }: TagListProps
                   style={{
                     top: "-206%",
                     left: "50%",
-                    transform: "translate(-50%, -4%)",
+                    transform: "translate(-50%, -3%)",
                     pointerEvents: "none",
                   }}
                   className={`${styles.tooltip_container}`}

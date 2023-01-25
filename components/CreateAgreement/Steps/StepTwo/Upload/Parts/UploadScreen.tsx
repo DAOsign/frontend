@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useRef } from "react";
 import { Box } from "theme-ui";
 import { PreviewScreen, UploadPaceholder } from "./";
 import { imageUploadContainer } from "../../../../styles";
@@ -12,6 +12,8 @@ const UploadScreen = ({ page }: { page: string }) => {
   const create = useCreateAgreement();
   const edit = useEditAgreement();
   const { values, changeValue } = page === "create" ? create : edit;
+
+  const fileInputRef = useRef<HTMLInputElement>(null);
 
   const handleReadFile = (event: React.ChangeEvent<HTMLInputElement>) => {
     let file = event?.target?.files && (event?.target?.files[0] as File);
@@ -27,6 +29,12 @@ const UploadScreen = ({ page }: { page: string }) => {
     }
   };
 
+  const onFileDelete = () => {
+    if (fileInputRef?.current?.value) {
+      fileInputRef.current.value = "";
+    }
+  };
+
   return (
     <>
       <Box sx={imageUploadContainer} className={values.file ? "uploaded" : undefined}>
@@ -39,9 +47,14 @@ const UploadScreen = ({ page }: { page: string }) => {
           id="file"
           type="file"
           name="file"
-          accept=".txt,.pdf"
+          accept=".pdf"
+          ref={fileInputRef}
         />
-        {values.file ? <PreviewScreen page={page} file={values.file} /> : <UploadPaceholder />}
+        {values.file ? (
+          <PreviewScreen page={page} file={values.file} onFileDelete={onFileDelete} />
+        ) : (
+          <UploadPaceholder />
+        )}
       </Box>
     </>
   );

@@ -282,7 +282,11 @@ const item = {
   gap: "10px",
   "@media screen and (min-width: 768px)": {
     "&:hover": {
-      transform: "scale(1.01)",
+      width: "101%",
+      height: "108px",
+      position: "relative",
+      top: "-2px",
+      left: "-2px",
     },
   },
   "&.active": {
