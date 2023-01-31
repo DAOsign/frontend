@@ -38,7 +38,7 @@ const iconPlus = {
   width: "24px",
   height: "24px",
   ml: "20px",
-  "@media screen and (max-width: 768px)": {
+  "@media screen and (max-width: 719px)": {
     m: "0 auto",
   },
 } as ThemeUIStyleObject;
@@ -70,7 +70,7 @@ const userFoto = {
     m: 0,
     left: 0,
   },
-  "@media screen and (max-width: 768px)": {
+  "@media screen and (max-width: 720px)": {
     width: "80px",
     height: "80px",
   },
@@ -213,7 +213,7 @@ const headerContainer = {
   alignItems: "baseline",
   mt: "28px",
   mb: "16px",
-  "@media screen and (max-width: 768px)": {
+  "@media screen and (max-width: 719px)": {
     flexDirection: "column",
     position: "static",
   },
@@ -234,6 +234,9 @@ const agreementConteiner = {
   "@media screen and (min-width: 768px)": {
     "&:hover": {
       transform: "scale(1.007)",
+    },
+    "&:hover .arrowTooltip": {
+      transform: "scale(1.1)",
     },
   },
 } as ThemeUIStyleObject;
@@ -329,15 +332,18 @@ const textContainer = {
     height: "50px",
     mt: "10px",
     width: "100%",
-    maxWidth: "unset",
+    maxWidth: "161px",
     position: "static",
+  },
+  "@media screen and (max-width: 719px)": {
+    maxWidth: "unset",
   },
 } as ThemeUIStyleObject;
 
 const btnText = {
   display: "inline-block",
   ml: "10px",
-  "@media screen and (max-width: 768px)": {
+  "@media screen and (max-width: 719px)": {
     display: "none",
   },
 } as ThemeUIStyleObject;
@@ -349,7 +355,7 @@ const btn = {
   ml: "auto",
   mr: 0,
   p: 0,
-  "@media screen and (max-width: 768px)": {
+  "@media screen and (max-width: 719px)": {
     width: "50px",
     height: "50px",
     borderRadius: "50%",
@@ -358,7 +364,7 @@ const btn = {
 
 const headerItem = {
   justifyContent: "space-between",
-  "@media screen and (max-width: 768px)": {
+  "@media screen and (max-width: 719px)": {
     flexDirection: "column-reverse",
   },
 } as ThemeUIStyleObject;
@@ -508,6 +514,15 @@ const verificationIconContainer = {
   },
 } as ThemeUIStyleObject;
 
+const titleSigners = {
+  mt: "8px",
+  "@media screen and (max-width: 768px)": {
+    mr: "20px",
+    mt: 0,
+    pt: "16px",
+  },
+} as ThemeUIStyleObject;
+
 export {
   agreementConteinerRelative,
   verificationIconContainer,
@@ -528,6 +543,7 @@ export {
   fotoContainer,
   textContainer,
   greyAgrLabel,
+  titleSigners,
   blueAgrLabel,
   improveBtn,
   filterItem,

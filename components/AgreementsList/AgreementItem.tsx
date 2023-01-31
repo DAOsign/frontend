@@ -1,5 +1,5 @@
-import React, { useEffect } from "react";
-import { Flex, Text, Box, Button, Link } from "theme-ui";
+import React from "react";
+import { Flex, Text, Box, Link } from "theme-ui";
 import NextLink from "next/link";
 import Icon from "../icon/index";
 import iconsObj from "../../assets/icons";
@@ -14,6 +14,7 @@ import {
   blueAgrLabel,
   agreementLabels,
   needSigningIcon,
+  titleSigners,
 } from "./styles";
 import { Agreement, STATUS_READY_TO_SIGN, PRIVACY_PRIVATE } from "../../types";
 import { formatAgreementCreationDate, formatAgreementStatus } from "../../utils/formats";
@@ -112,23 +113,46 @@ export default function AgreementItem({
           >
             {title}
           </Box>
-          <Flex sx={{ pt: "8px" }}>
-            <Text sx={{ variant: "text.smallTextMedium", opacity: "0.5", mr: "6px" }}>
+          <Flex sx={{ flexWrap: "wrap" }}>
+            <Text
+              sx={{
+                variant: "text.smallTextMedium",
+                opacity: "0.5",
+                mr: "6px",
+                ...titleSigners,
+              }}
+            >
               Signers:
             </Text>
-            <Text sx={{ variant: "text.smallTextMediumUser", mr: "20px" }}>{signers.length}</Text>
-            <Text sx={{ variant: "text.smallTextMedium", opacity: "0.5", mr: "6px" }}>Signed:</Text>
-            <Text sx={{ variant: "text.smallTextMediumUser", mr: "20px" }}>0</Text>
-            <Text sx={{ variant: "text.smallTextMedium", opacity: "0.5", mr: "6px" }}>
+            <Text sx={{ variant: "text.smallTextMediumUser", mr: "20px", ...titleSigners }}>
+              {signers.length}
+            </Text>
+            <Text
+              sx={{ variant: "text.smallTextMedium", opacity: "0.5", mr: "6px", ...titleSigners }}
+            >
+              Signed:
+            </Text>
+            <Text sx={{ variant: "text.smallTextMediumUser", mr: "20px", ...titleSigners }}>0</Text>
+            <Text
+              sx={{ variant: "text.smallTextMedium", opacity: "0.5", mr: "6px", ...titleSigners }}
+            >
               Observers:
             </Text>
-            <Text sx={{ variant: "text.smallTextMediumUser", mr: "20px" }}>{observers.length}</Text>
+            <Text sx={{ variant: "text.smallTextMediumUser", mr: "20px", ...titleSigners }}>
+              {observers.length}
+            </Text>
             {agreementPrivacy !== PRIVACY_PRIVATE ? (
-              <Box>
-                <Text sx={{ variant: "text.smallTextMedium", opacity: "0.5", mr: "6px" }}>
+              <Box sx={titleSigners}>
+                <Text
+                  sx={{
+                    variant: "text.smallTextMedium",
+                    opacity: "0.5",
+                    mr: "6px",
+                  }}
+                >
                   Access:
                 </Text>
-                <Text sx={{ variant: "text.smallTextMediumUser", mr: "20px" }}>
+                <Text sx={{ variant: "text.smallTextMediumUser", mr: "20px", ...titleSigners }}>
                   {
                     //@ts-ignore
                     agreementPrivacy !== "With Link" ? agreementPrivacy : "Anyone With Link"

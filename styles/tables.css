@@ -2,7 +2,20 @@
     border-collapse: separate;
     border-spacing: 0 0;
 }
-
+.participantsTableMobile {
+    display: none !important;
+}
+@media screen and (max-width: 720px) {
+    .participantsTable {
+        display: none !important;
+    }
+    .participantsTableMobile {
+        display: block !important;
+        background-color: transparent;
+        border: none;
+        padding-top: 16px;
+    }
+}
 .participantsTable thead tr th {
     font-style: normal;
     font-weight: 400;
@@ -14,7 +27,7 @@
 }
 
 .participantsTable tbody tr td {
-    padding: 9px 0;
+    padding: 12px 0;
     font-size: 14px;
 }
 

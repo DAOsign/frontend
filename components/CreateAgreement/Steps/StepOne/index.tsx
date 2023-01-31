@@ -2,8 +2,6 @@ import React, { useEffect, useRef, useState } from "react";
 import { Container, Input, Text } from "theme-ui";
 import { inputCreactAgreement, inputCreateAgreementError } from "../../styles";
 import { useCreateAgreement } from "../../../../hooks/useCreateAgreement";
-
-import { AnimatePresence } from "framer-motion";
 import {
   PRIVACY_PUBLIC_PROOF_ONLY,
   PRIVACY_PUBLIC_PUBLISHED,
@@ -59,14 +57,11 @@ export default function StepOne({ animateContainer, page }: Props) {
       />
       <FieldErrorMessage error={values?.errors?.title} />
       <Text sx={{ variant: "forms.label", margin: "24px auto 3px 2px" }}>Agreement privacy</Text>
-
-      <AnimatePresence initial={false}>
-        {!isPublic ? (
-          <ChooseMethod page={page} animateContainer={animateContainer} setPublic={setIsPublic} />
-        ) : (
-          <PublicMethod page={page} animateContainer={animateContainer} setPublic={setIsPublic} />
-        )}
-      </AnimatePresence>
+      {!isPublic ? (
+        <ChooseMethod page={page} animateContainer={animateContainer} setPublic={setIsPublic} />
+      ) : (
+        <PublicMethod page={page} animateContainer={animateContainer} setPublic={setIsPublic} />
+      )}
       <FieldErrorMessage error={values?.errors?.agreementPrivacy} />
     </Container>
   );

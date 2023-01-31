@@ -25,6 +25,9 @@ const container = {
 const conteinerHeader = {
   justifyContent: "space-between",
   alignItems: "center",
+  "@media screen and (max-width: 768px)": {
+    maxWidth: "160px",
+  },
 } as ThemeUIStyleObject;
 
 const title = {

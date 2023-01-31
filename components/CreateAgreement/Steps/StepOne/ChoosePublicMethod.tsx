@@ -8,6 +8,8 @@ import iconsObj from "../../../../assets/icons";
 import Icon from "../../../icon";
 
 import { motion, Variants } from "framer-motion";
+
+// import { AnimatePresence, motion } from "framer-motion/dist/framer-motion";
 import {
   PRIVACY_PUBLIC_PROOF_ONLY,
   PRIVACY_PUBLIC_PUBLISHED,

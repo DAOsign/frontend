@@ -1,6 +1,5 @@
 import React from "react";
 import { Container, Box } from "theme-ui";
-import { AnimatePresence } from "framer-motion";
 
 import AgreementMethod from "./ChooseAgreementMethod";
 import AgreementLocationRadioButtons from "./AgreementLocationButtons";
@@ -11,9 +10,7 @@ export default function StepTwo({ page }: { page: string }) {
     <Container sx={styles}>
       <AgreementLocationRadioButtons page={page} />
       <Box>
-        <AnimatePresence mode="wait">
-          <AgreementMethod page={page} />
-        </AnimatePresence>
+        <AgreementMethod page={page} />
       </Box>
     </Container>
   );

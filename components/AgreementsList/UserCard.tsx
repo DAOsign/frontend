@@ -32,7 +32,7 @@ export default function UserCard({ address }: any) {
         <Icon style={{ cursor: "pointer" }} src={iconsObj.iconExit} />
       </Box>
       <Flex sx={fotoContainer}>
-        <Identicon account={address} size={width && width > 768 ? 124 : 80} sx={userFoto} />
+        <Identicon account={address} size={width && width > 720 ? 124 : 80} sx={userFoto} />
         <Flex sx={infoContainer}>
           <Text sx={{ variant: "text.largeTextBold", display: "block", textAlign: "center" }}>
             Ralph Edwards

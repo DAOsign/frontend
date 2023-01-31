@@ -6,12 +6,13 @@ const container = {
   textAlign: "center",
   rowGap: "20px",
   columnGap: "40px",
+  justifyContent: "center",
   "@media screen and (max-width: 1200px)": {
     flexDirection: "column",
     p: "24px 24px 28px 24px",
     mt: 0,
   },
-  "@media screen and (max-width: 768px)": {
+  "@media screen and (max-width: 719px)": {
     flexDirection: "column",
   },
 } as ThemeUIStyleObject;
@@ -155,7 +156,7 @@ const title = {
 const labelsContainer = {
   justifyContent: "space-between",
   marginTop: "24px",
-  "@media screen and (max-width: 768px)": {
+  "@media screen and (max-width: 720px)": {
     justifyContent: "initial",
     flexDirection: "column",
     rowGap: "32px",
@@ -339,6 +340,12 @@ const participantsCard = {
   fontFamily: "InterMedium",
   fontStyle: "normal",
   fontWeight: 400,
+  "@media screen and (max-width: 720px)": {
+    "&": {
+      backgroundColor: "transparent",
+      border: "unset",
+    },
+  },
 } as ThemeUIStyleObject;
 
 const participantsCardTitle = {
@@ -361,11 +368,26 @@ const tableUserNameCell = {
 
 const tableAddressCell = {
   ...tableCellBase,
+  "@media screen and (max-width: 720px)": {
+    "&": {
+      justifyContent: "space-between",
+      backgroundColor: "#F7F7FB",
+      p: "10px 16px",
+    },
+  },
 } as ThemeUIStyleObject;
 
 const tableSignatureCell = {
   ...tableCellBase,
   columnGap: "7px",
+  "@media screen and (max-width: 720px)": {
+    "&": {
+      justifyContent: "space-between",
+      backgroundColor: "#F7F7FB",
+      display: "flex",
+      p: "10px 16px",
+    },
+  },
 } as ThemeUIStyleObject;
 
 const pendingIcon = {
@@ -375,16 +397,35 @@ const pendingIcon = {
 
 const userPicture = {
   width: "20px",
+  "@media screen and (max-width: 720px)": {
+    "&": {
+      width: "40px",
+      height: "40px",
+      ml: "16px",
+      mb: "16px",
+    },
+  },
 } as ThemeUIStyleObject;
 
 const usernameText = {
   overflow: "hidden",
   textOverflow: "ellipsis",
   maxWidth: "240px",
+  "@media screen and (max-width: 720px)": {
+    "&": {
+      fontFamily: "InterBold",
+      fontWeight: 700,
+      fontSize: "16px",
+      lineHeight: "160%",
+      color: "#212121",
+      ml: "15px",
+      mb: "16px",
+    },
+  },
 } as ThemeUIStyleObject;
 
 const noObserversMessage = {
-  padding: "0 32px 12px",
+  padding: "0 32px 28px",
   fontFamily: "InterMedium",
   fontStyle: "normal",
   fontWeight: 400,
@@ -605,12 +646,35 @@ const contentHiddenIconInnerWrapper = {
   borderRadius: "50%",
 } as ThemeUIStyleObject;
 
+const textMobile = {
+  fontFamily: "InterMedium",
+  fontWeight: 500,
+  fontSize: "14px",
+  lineHeight: "160%",
+  color: "#212121",
+  opacity: "0.5",
+} as ThemeUIStyleObject;
+
+const signersRow = {
+  alignItems: "center",
+} as ThemeUIStyleObject;
+
+const cardMobile = {
+  backgroundColor: "#fff",
+  border: "1px solid #EDEDF3",
+  borderRadius: "12px",
+  pt: "16px",
+  mt: "12px",
+} as ThemeUIStyleObject;
+
 export {
   container,
+  cardMobile,
   card,
   mainData,
   briefInformation,
   buttonsContainer,
+  signersRow,
   btnBase,
   btnPrimary,
   btnSecondary,
@@ -628,6 +692,7 @@ export {
   yellowLabel,
   greenLabel,
   errorContainer,
+  textMobile,
   errorMessage,
   errorBackButton,
   briefInformationHeader,
