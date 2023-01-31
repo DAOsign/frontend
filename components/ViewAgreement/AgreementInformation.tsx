@@ -94,6 +94,7 @@ export const AgreementInformation = ({
       notifSucces("Agreement is ready to sign");
     } catch (error) {
       notifError(error?.message || "Failed to set agreement to Ready to Sign status");
+      // eslint-disable-next-line no-console
       console.error("[HandleReadyToSign]", error);
     } finally {
       setIsSettingReadyToSign(false);

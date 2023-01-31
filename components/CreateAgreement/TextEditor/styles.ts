@@ -57,4 +57,27 @@ const tabStyles: ThemeUIStyleObject = {
   },
 };
 
+export const btnBack = {
+  fontFamily: "InterRegular",
+  fontStyle: "normal",
+  fontWeight: 400,
+  fontSize: "12px",
+  color: " #CA5CF2",
+  display: "flex",
+  lineHeight: "160%",
+  alignItems: "center",
+  width: "180px",
+  marginLeft: "auto",
+  marginRight: 0,
+  backgroundColor: "transparent",
+  background: "unset",
+  pr: 0,
+  justifyContent: "flex-end",
+  "&:hover": {
+    backgroundColor: "transparent",
+    background: "unset",
+    color: "#AE4FD0",
+  },
+} as ThemeUIStyleObject;
+
 export default tabStyles;

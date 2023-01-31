@@ -58,6 +58,7 @@ export const ViewAgreement = () => {
       !getAgreementError.message.includes("Access denied")
     ) {
       notifError(getAgreementError?.message || "Failed to get agreement from server");
+      // eslint-disable-next-line no-console
       console.error("[GetAgreementById]", getAgreementError.message);
     }
   }, [getAgreementError]);

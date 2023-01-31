@@ -30,6 +30,7 @@ import SignatureIcon from "../icon/editable/SignatureIcon";
 import ShareIcon from "../icon/editable/ShareIcon";
 import DownloadIcon from "../icon/editable/DownloadIcon";
 import { notifError, notifSucces } from "../../utils/notification";
+import Tooltip from "../Tooltip";
 
 const getAgreementStatusLabelStyle = (agreementStatus: string | undefined): ThemeUIStyleObject => {
   switch (agreementStatus) {
@@ -67,28 +68,67 @@ export const AgreementLabels = ({
     notifError("Document download is not yet implemented");
   };
 
+  const titleTooltip = (value: string | undefined) => {
+    if (!value) {
+      return "";
+    }
+    if (value === "Private") {
+      return "Agreement Privacy: Private";
+    } else if (value === "With Link") {
+      return "Agreement Privacy: Anyone With Link";
+    } else {
+      return `Agreement Privacy: ${value} `;
+    }
+  };
+
   return (
     <Flex sx={labelsContainer}>
       <Flex sx={labelsRow}>
         <Flex sx={getAgreementStatusLabelStyle(agreementStatus)}>
           {formatAgreementStatus(agreementStatus)}
         </Flex>
-        <Flex sx={baseLabel}>
-          {agreementPrivacy ? (
-            <Box sx={labelIcon}>
-              <Icon
-                src={
-                  agreementPrivacy === PRIVACY_PRIVATE ? iconsObj.privateIcon : iconsObj.publicIcon
-                }
-              />
-            </Box>
-          ) : null}
-          {agreementPrivacy}
-        </Flex>
+        <Tooltip
+          height="0"
+          top="-62px"
+          left="66%"
+          transform={
+            //@ts-ignore
+            agreementPrivacy !== "With Link" ? "translate(-65%, 0px)" : "translate(-60%, -3%)"
+          }
+          title={titleTooltip(agreementPrivacy)}
+          minWidth={
+            //@ts-ignore
+            agreementPrivacy !== "With Link" ? "135px" : "135px"
+          }
+        >
+          <Flex sx={baseLabel}>
+            {agreementPrivacy ? (
+              <Box sx={labelIcon}>
+                <Icon
+                  src={
+                    agreementPrivacy === PRIVACY_PRIVATE
+                      ? iconsObj.privateIcon
+                      : iconsObj.publicIcon
+                  }
+                />
+              </Box>
+            ) : null}
+            {agreementPrivacy}
+          </Flex>
+        </Tooltip>
         {isWaitingForMySignature ? (
-          <Box sx={needSigningIcon}>
-            <SignatureIcon />
-          </Box>
+          <Tooltip
+            title="Your signature is missing"
+            transform="translate(-58%, -11%)"
+            minWidth="170px"
+            left="61%"
+            top="-142%"
+            height="0"
+          >
+            <Box sx={needSigningIcon}>
+              <SignatureIcon />
+            </Box>
+          </Tooltip>
         ) : null}
       </Flex>
       <Flex sx={labelsRow}>

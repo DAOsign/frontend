@@ -318,7 +318,7 @@ export default function NavPanel({ setLoading, page }: { setLoading: any; page: 
           sx={{ ...stepStyle, mt: 0, cursor: step > 1 ? "pointer" : "initial" }}
         >
           <Box sx={stepNumber}>
-            {step > 1 ? (
+            {step > 1 && page === "create" ? (
               <Box sx={{ width: "24px", height: "24px", m: "0 auto", cursor: "pointer" }}>
                 <Icon src={iconsObj.done} />
               </Box>
@@ -340,7 +340,7 @@ export default function NavPanel({ setLoading, page }: { setLoading: any; page: 
           sx={{ ...stepStyle, cursor: step > 2 ? "pointer" : "initial" }}
         >
           <Box sx={{ ...stepNumber, backgroundColor: step > 1 ? "#CA5CF2" : "#EDEDF3" }}>
-            {step > 2 ? (
+            {step > 2 && page === "create" ? (
               <Box
                 onClick={() => changeStep(2)}
                 sx={{ width: "20px", height: "20px", m: "0 auto", cursor: "pointer" }}

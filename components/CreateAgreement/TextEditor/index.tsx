@@ -7,7 +7,7 @@ import Icon from "../../icon";
 import { Text, Button, Flex, Box, ButtonProps, Spinner } from "theme-ui";
 import { useCreateAgreement } from "../../../hooks/useCreateAgreement";
 import { useEditAgreement } from "../../../hooks/useEditAgreement";
-import styles from "./styles";
+import styles, { btnBack } from "./styles";
 
 const MDEditor = dynamic(() => import("@uiw/react-md-editor"), {
   ssr: false,
@@ -54,7 +54,7 @@ const TextEditor = ({ page }: { page: string }) => {
     <Box style={{ position: "relative" }} sx={styles}>
       <Flex sx={{ alignItems: "center" }}>
         <Text sx={{ variant: "forms.label", minWidth: "170px" }}>Enter agreement description</Text>
-        <Button className="backBtn" onClick={() => changeValue("agreementMethod", "")}>
+        <Button sx={btnBack} className="backBtn" onClick={() => changeValue("agreementMethod", "")}>
           <Icon style={{ display: "block" }} src={iconsObj.arrowLeftPink} />
           <Text sx={{ display: "block" }}>{" < "} Choose another method</Text>
         </Button>

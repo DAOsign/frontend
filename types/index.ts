@@ -3,6 +3,11 @@ export const LOCATION_PUBLIC_IPFS = "Public IPFS";
 export const LOCATION_PRIVATE_IPFS = "Private IPFS";
 export const LOCATION_LOCAL = "Local";
 
+export enum TOOLTIP_VALUES {
+  PRIVATE = "Private",
+  WITH_LINK = "With Link",
+}
+
 export const PRIVACY_PRIVATE = "Private";
 export const PRIVACY_PUBLIC_PUBLISHED = "Published";
 export const PRIVACY_PUBLIC_PROOF_ONLY = "proof_only";

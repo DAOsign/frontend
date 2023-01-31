@@ -63,7 +63,7 @@ export default function AgreementsList({ address }: any) {
       <UserCard address={address} />
       <Container
         sx={{
-          "@media screen and (min-width: 1200px)": {
+          "@media screen and (min-width: 1201px)": {
             paddingLeft: "300px",
           },
         }}

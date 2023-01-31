@@ -9,6 +9,7 @@ const container = {
   width: "275px",
   minWidth: "275px",
   height: "430px",
+  justifyContent: "space-between",
   marginRight: "20px",
   "@media screen and (max-width: 1200px)": {
     flexDirection: "row",
@@ -27,7 +28,7 @@ const container = {
     minHeight: "292px",
     px: "16px",
   },
-  "@media screen and (min-width: 1200px)": {
+  "@media screen and (min-width: 1201px)": {
     position: "fixed",
     height: "404px",
   },
@@ -148,21 +149,28 @@ const improveBtn = {
   opacity: 1,
   height: "46px",
   px: "45px",
-
+  "@media screen and (max-width: 1200px)": {
+    mr: 0,
+  },
   "@media screen and (max-width: 768px)": {
     maxWidth: "unset",
     width: "90%",
+    mr: "auto",
   },
 } as ThemeUIStyleObject;
 
 const improveBtnContainer = {
+  mb: "28px",
   "@media screen and (max-width: 1200px)": {
+    right: "24px",
     position: "absolute",
-    bottom: "24px",
+    bottom: "17px",
     left: "168px",
     width: "unset",
+    mb: 0,
   },
   "@media screen and (max-width: 768px)": {
+    m: "0 auto",
     position: "absolute",
     bottom: "24px",
     left: "50%",
@@ -220,11 +228,12 @@ const agreementConteiner = {
   cursor: "pointer",
   width: "100%",
   transitionProperty: "all",
-  transitionDuration: "300ms",
+  transition: "linear",
+  transitionDuration: "250ms",
   mb: "20px",
   "@media screen and (min-width: 768px)": {
     "&:hover": {
-      transform: "scale(1.01)",
+      transform: "scale(1.007)",
     },
   },
 } as ThemeUIStyleObject;
@@ -237,6 +246,7 @@ const agreementConteinerRelative = {
 
 const agreementLabels = {
   gap: "16px",
+  alignItems: "flex-start",
 } as ThemeUIStyleObject;
 
 const iconMenuAgreement = {
@@ -250,6 +260,9 @@ const iconMenuAgreement = {
   textAlign: "center",
   padding: "0",
   cursor: "poiner",
+  "& > .tooltip": {
+    maxWidth: "135px",
+  },
 } as ThemeUIStyleObject;
 
 const agrLabelBase = {
@@ -448,8 +461,56 @@ const btnClear = {
   },
 } as ThemeUIStyleObject;
 
+const userContainer = {
+  justifyContent: "center",
+  marginBottom: "24px",
+  mt: "4px",
+  alignItems: "center",
+  "@media screen and (min-width: 1200px)": {
+    mb: "40px",
+    "& > div > div > .arrowTooltip": {
+      marginLeft: "46.5%",
+    },
+  },
+  "@media screen and (min-width: 768px) and (max-width: 1300px)": {
+    "& > div > div > .arrowTooltip": {
+      marginLeft: "46%",
+    },
+  },
+  "@media screen and (max-width: 1200px)": {
+    justifyContent: "flex-start",
+    mt: 0,
+    ml: "20px",
+    mb: "11px",
+    position: "relative",
+  },
+} as ThemeUIStyleObject;
+
+const verificationIconContainer = {
+  width: "52px",
+  height: "52px",
+  m: "24px auto 0",
+  position: "absolute",
+  left: "50%",
+  transform: "translate(-50%, 0)",
+  bottom: "98px",
+  "@media screen and (max-width: 1200px)": {
+    position: "initial",
+    transform: "none",
+    marginLeft: "20px",
+    marginTop: 0,
+  },
+  "@media screen and (max-width: 768px)": {
+    position: "absolute",
+    transform: "translate(-50%, 0)",
+    left: "50%",
+    ml: "0px",
+  },
+} as ThemeUIStyleObject;
+
 export {
   agreementConteinerRelative,
+  verificationIconContainer,
   normalTextBoldGreen,
   improveBtnContainer,
   iconSearchContainer,
@@ -458,17 +519,18 @@ export {
   inputMyAgreement,
   percentContainer,
   searchContainer,
+  agreementLabels,
+  needSigningIcon,
   headerContainer,
   containerSides,
   infoContainer,
+  userContainer,
   fotoContainer,
   textContainer,
-  improveBtn,
-  agreementLabels,
-  needSigningIcon,
   greyAgrLabel,
-  filterItem,
   blueAgrLabel,
+  improveBtn,
+  filterItem,
   headerItem,
   titleItem,
   container,

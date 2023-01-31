@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 import React, { useState } from "react";
 import { Flex, Text, Button, Box, Spinner } from "theme-ui";
 import Icon from "../icon/index";

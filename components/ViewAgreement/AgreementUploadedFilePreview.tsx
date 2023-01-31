@@ -95,6 +95,7 @@ export const AgreementUploadedFilePreview = ({
           notifError(
             `Failed to load agreement document${error?.message ? `: ${error.message}` : ""}`
           );
+          // eslint-disable-next-line no-console
           console.error("[RestoreAgreementFile]", error);
         });
 

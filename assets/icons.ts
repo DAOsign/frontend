@@ -17,6 +17,7 @@ import calendarMinus from "../img/svg/calendarMinus.svg";
 import alertTriangle from "../img/svg/alertTriangle.svg";
 import calendarCheck from "../img/svg/calendarCheck.svg";
 import chevronRight from "../img/svg/chevronRight.svg";
+import arrowTooltip from "../img/svg/arrowTooltip.svg";
 import bookmarkVote from "../img/svg/bookmarkVote.svg";
 import trashPrimary from "../img/svg/trashPrimary.svg";
 import ellipseGreen from "../img/svg/EllipseGreen.svg";
@@ -105,6 +106,7 @@ const iconsObj: IconsMapper = {
   alertTriangle,
   calendarCheck,
   arrowLeftPink,
+  arrowTooltip,
   trashPrimary,
   heartViolet,
   bookmarkVote,

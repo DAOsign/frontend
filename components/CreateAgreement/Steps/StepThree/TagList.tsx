@@ -3,9 +3,10 @@ import { Flex, Text, Box } from "theme-ui";
 import iconsObj from "../../../../assets/icons";
 import Icon from "../../../icon";
 import { formatAddress } from "../../../../utils/formats";
-import styles from "../../../Header/index.module.css";
 export type ParticipantType = "signers" | "observers";
 import { useWeb3 } from "../../../../hooks/useWeb3";
+import Tooltip from "../../../Tooltip";
+import { title } from "./styles";
 
 interface TagListProps<T = any> {
   items: T[];
@@ -29,39 +30,20 @@ export default function TagList<T = any>({ items, type, onDelete }: TagListProps
             }}
             key={el.value}
           >
-            <div style={{ paddingTop: 0 }} className={`${styles.tooltip}`}>
-              <button className={`${styles.tooltip_button}`}>
-                <Text
-                  sx={{
-                    fontFamily: "InterBold",
-                    fontStyle: "normal",
-                    fontWeight: 700,
-                    fontSize: "14px",
-                    lineHeight: "160%",
-                    color: "#212121",
-                  }}
-                >
-                  {el.value.length > 10 ? formatAddress(el.value) : el.value}
-                </Text>
-              </button>
-              {el.value.length > 14 ? (
-                <div
-                  style={{
-                    top: "-206%",
-                    left: "50%",
-                    transform: "translate(-50%, -3%)",
-                    pointerEvents: "none",
-                  }}
-                  className={`${styles.tooltip_container}`}
-                >
-                  <div className={`${styles.tooltip_text}`}>{el.value}</div>
-                  <div
-                    style={{ marginLeft: "50.5%" }}
-                    className={`${styles.tooltip_text_buttom}`}
-                  ></div>
-                </div>
-              ) : null}
-            </div>
+            {el.value.length > 14 ? (
+              <Tooltip
+                transform="translate(-50%, 0%)"
+                title={el.value}
+                height="0"
+                top="-206%"
+                left="50%"
+                minWidth=""
+              >
+                <Text sx={title}>{el.value.length > 10 ? formatAddress(el.value) : el.value}</Text>
+              </Tooltip>
+            ) : (
+              <Text sx={title}>{el.value.length > 10 ? formatAddress(el.value) : el.value}</Text>
+            )}
             <Box
               onClick={() => onDelete(el, type)}
               sx={{ width: "13px", height: "11px", cursor: "pointer" }}

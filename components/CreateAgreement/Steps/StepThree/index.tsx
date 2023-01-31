@@ -12,7 +12,6 @@ import { uniqueId } from "../../../../utils/formats";
 import iconsObj from "../../../../assets/icons";
 import Icon from "../../../icon";
 import { useCreateAgreement } from "../../../../hooks/useCreateAgreement";
-import stylesTooltip from "../../../Header/index.module.css";
 import { useEditAgreement } from "../../../../hooks/useEditAgreement";
 import { useWeb3 } from "../../../../hooks/useWeb3";
 import { useMemo } from "react";
@@ -22,6 +21,8 @@ import VerificationCard from "./VerificationCard";
 import FieldErrorMessage from "../../../Form/FieldErrorMessage";
 import Lottie from "lottie-react";
 import loader from "../../../../img/json/loader.json";
+import Tooltip from "../../../Tooltip";
+import { validateAddress, validateEnsDomains } from "./validationUtils";
 
 interface VerificationInfo {
   title: string;
@@ -63,46 +64,34 @@ const validateUser = (
   addedSigners: { id: number; value: string }[],
   addedObservers: { id: number; value: string }[]
 ): string | null => {
-  let error: string | null = null;
-  //TODO add  userAlreadySigner userAlreadyObserver
-  // const userAlreadySigner = addedSigners.some(signer => signer?.value === value);
-  // const userAlreadyObserver = addedObservers.some(observer => observer?.value === value);
+  const userAlreadySigner = addedSigners.some(signer => signer?.value === value);
+  const userAlreadyObserver = addedObservers.some(observer => observer?.value === value);
 
-  if (false) {
-    error = userRole === "signer" ? "Signer is already added" : "Already exists as Signer";
-  } else if (false) {
-    error = userRole === "signer" ? "Already exists as Observer" : "Observer is already added";
-  } else {
-    const isEmail = value.includes("@");
-    const isEns = value.includes(".eth");
-    const isAddress = value.toLocaleLowerCase().startsWith("0x");
-    if (isEmail && !isEns && !isAddress) {
-      error = "Invalid value";
-    } else if (isEmail) {
-      const isValidEmail = String(value)
-        .toLowerCase()
-        .match(
-          /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
-        );
-      if (isValidEmail) {
-        error = "Invalid value";
-      }
-    } else if (isEns) {
-      const isValidEns = value.match(
-        /[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_\+.~#?&//=]*)?/
-      );
-      if (!isValidEns) {
-        error = "Invalid ENS name";
-      }
-    } else if (isAddress) {
-      const isValidAddress = value.toLocaleLowerCase().match(/^0x[a-fA-F0-9]{40}$/);
-      if (!isValidAddress) {
-        error = "Invalid wallet address";
-      }
-    }
+  if (userAlreadySigner) {
+    return userRole === "signer" ? "Signer is already added" : "Already exists as Signer";
   }
 
-  return error;
+  if (userAlreadyObserver) {
+    return userRole === "signer" ? "Already exists as Observer" : "Observer is already added";
+  }
+
+  const isEns = value.includes(".eth");
+  const isAddress = value.startsWith("0x");
+  if (!isEns && !isAddress) {
+    return "Invalid value";
+  }
+
+  if (isEns) {
+    const res = validateEnsDomains(value);
+    if (res) return res;
+  }
+
+  if (isAddress) {
+    const res = validateAddress(value);
+    if (res) return res;
+  }
+
+  return null;
 };
 
 export default function StepThree({ loading, page }: { loading: boolean; page: string }) {
@@ -162,7 +151,7 @@ export default function StepThree({ loading, page }: { loading: boolean; page: s
     if (to === "signers") {
       addSigner(account!.toLocaleLowerCase());
     } else {
-      addObserver(account!.toLocaleUpperCase());
+      addObserver(account!.toLocaleLowerCase());
     }
   };
 
@@ -199,10 +188,10 @@ export default function StepThree({ loading, page }: { loading: boolean; page: s
       //@ts-ignore
       const value = e.target.value;
       if (type === "observers") {
-        addObserver(value);
+        addObserver(value.toLocaleLowerCase);
       }
       if (type === "signers") {
-        addSigner(value);
+        addSigner(value.toLocaleLowerCase());
       }
     }
   };
@@ -225,33 +214,20 @@ export default function StepThree({ loading, page }: { loading: boolean; page: s
                 >
                   Signers (ENS name or address)
                 </Text>
-                <div style={{ paddingTop: 0 }} className={`${stylesTooltip.tooltip}`}>
-                  <button className={`${stylesTooltip.tooltip_button}`}>
-                    <Box sx={{ width: "12px", height: "12px", display: "inline-block" }}>
-                      <Icon style={{ opacity: 0.5 }} src={iconsObj.infoCircle} />
-                    </Box>
-                  </button>
-                  <div
-                    style={{
-                      top: "-361%",
-                      left: "50%",
-                      width: "200px",
-                      transform: "translate(-57%, 0)",
-                      pointerEvents: "none",
-                    }}
-                    className={`${stylesTooltip.tooltip_container}`}
-                  >
-                    <div className={`${stylesTooltip.tooltip_text}`}>
-                      Add users that will sign this agreement.
-                    </div>
-                    <div
-                      style={{ marginLeft: "50.5%" }}
-                      className={`${stylesTooltip.tooltip_text_buttom}`}
-                    ></div>
-                  </div>
-                </div>
+                <Tooltip
+                  title="Add users that will sign this agreement."
+                  transform="translate(-57%, 0)"
+                  minWidth="200px"
+                  height="0"
+                  top="-361%"
+                  left="71%"
+                >
+                  <Box sx={{ width: "12px", height: "12px", display: "inline-block" }}>
+                    <Icon style={{ opacity: 0.5 }} src={iconsObj.infoCircle} />
+                  </Box>
+                </Tooltip>
               </Flex>
-              {!userAlreadySigner ? (
+              {!userAlreadySigner && !userAlreadyObserver ? (
                 <Button
                   onClick={() => addMe("signers")}
                   className={userAlreadySigner ? "disabled" : ""}
@@ -323,33 +299,20 @@ export default function StepThree({ loading, page }: { loading: boolean; page: s
                 >
                   Observers (ENS name or adderess)
                 </Text>
-                <div style={{ paddingTop: 0 }} className={`${stylesTooltip.tooltip}`}>
-                  <button className={`${stylesTooltip.tooltip_button}`}>
-                    <Box sx={{ width: "12px", height: "12px", display: "inline-block" }}>
-                      <Icon style={{ opacity: 0.5 }} src={iconsObj.infoCircle} />
-                    </Box>
-                  </button>
-                  <div
-                    style={{
-                      top: "-85px",
-                      left: "50%",
-                      width: "200px",
-                      transform: "translate(-57%, 0)",
-                      pointerEvents: "none",
-                    }}
-                    className={`${stylesTooltip.tooltip_container}`}
-                  >
-                    <div className={`${stylesTooltip.tooltip_text}`}>
-                      Add users that will be able to see but not sign an agreement.
-                    </div>
-                    <div
-                      style={{ marginLeft: "50.5%" }}
-                      className={`${stylesTooltip.tooltip_text_buttom}`}
-                    ></div>
-                  </div>
-                </div>
+                <Tooltip
+                  title="Add users that will be able to see but not sign an agreement."
+                  transform="translate(-57%, 0)"
+                  minWidth="200px"
+                  height="0"
+                  top="-85px"
+                  left="71%"
+                >
+                  <Box sx={{ width: "12px", height: "12px", display: "inline-block" }}>
+                    <Icon style={{ opacity: 0.5 }} src={iconsObj.infoCircle} />
+                  </Box>
+                </Tooltip>
               </Flex>
-              {!userAlreadyObserver ? (
+              {!userAlreadySigner && !userAlreadyObserver ? (
                 <Button
                   onClick={() => addMe("observers")}
                   className={userAlreadyObserver ? "'disabled'" : ""}
@@ -424,31 +387,18 @@ export default function StepThree({ loading, page }: { loading: boolean; page: s
                 >
                   Required Signed Verifications
                 </Text>
-                <div style={{ paddingTop: 0 }} className={`${stylesTooltip.tooltip}`}>
-                  <button className={`${stylesTooltip.tooltip_button}`}>
-                    <Box sx={{ width: "12px", height: "12px", display: "inline-block" }}>
-                      <Icon style={{ opacity: 0.5 }} src={iconsObj.infoCircle} />
-                    </Box>
-                  </button>
-                  <div
-                    style={{
-                      top: "-65px",
-                      left: "50%",
-                      width: "200px",
-                      transform: "translate(-56%, 0)",
-                      pointerEvents: "none",
-                    }}
-                    className={`${stylesTooltip.tooltip_container}`}
-                  >
-                    <div className={`${stylesTooltip.tooltip_text}`}>
-                      Required level of verification. More levels are coming soon.
-                    </div>
-                    <div
-                      style={{ marginLeft: "50.5%" }}
-                      className={`${stylesTooltip.tooltip_text_buttom}`}
-                    ></div>
-                  </div>
-                </div>
+                <Tooltip
+                  title="Required level of verification. More levels are coming soon."
+                  transform="translate(-56%, 0)"
+                  minWidth="200px"
+                  top="-65px"
+                  left="65%"
+                  height="0"
+                >
+                  <Box sx={{ width: "12px", height: "12px", display: "inline-block" }}>
+                    <Icon style={{ opacity: 0.5 }} src={iconsObj.infoCircle} />
+                  </Box>
+                </Tooltip>
               </Flex>
             </Flex>
             <Box sx={{ display: "flex", flexDirection: "column", gap: "20px" }}>

@@ -62,3 +62,12 @@ export default {
     },
   },
 } as ThemeUIStyleObject;
+
+export const title = {
+  fontFamily: "InterBold",
+  fontStyle: "normal",
+  fontWeight: 700,
+  fontSize: "14px",
+  lineHeight: "160%",
+  color: "#212121",
+} as ThemeUIStyleObject;

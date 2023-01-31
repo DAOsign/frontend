@@ -7,7 +7,7 @@ import { notifSucces } from "../../utils/notification";
 import { formatAddress, onCopyClick } from "../../utils/formats";
 import LogOutPopap from "../modalLogout";
 import Identicon from "../Identicon/Identicon";
-import styles from "./index.module.css";
+import Tooltip from "../Tooltip";
 
 const HeaderMenu = ({ address, setVisibleMenu, visibleMenu }: any) => {
   const [visible, setVisible] = useState(false);
@@ -38,25 +38,25 @@ const HeaderMenu = ({ address, setVisibleMenu, visibleMenu }: any) => {
             </Text>
 
             <Flex sx={{ justifyContent: "left", alignItems: "center", mt: "4px" }}>
-              <div className={`${styles.tooltip}`}>
-                <button className={`${styles.tooltip_button}`}>
-                  <Text sx={{ variant: "text.smallTextMediumUser" }}>{formatAddress(address)}</Text>
-                </button>
-                <Box
-                  onClick={() => {
-                    onCopyClick(address);
-                    notifSucces("Link copied");
-                  }}
-                  sx={copyIcon}
-                >
-                  <Icon style={{ cursor: "pointer" }} src={iconsObj.iconSix} />
-                </Box>
-
-                <div className={`${styles.tooltip_container}`}>
-                  <div className={`${styles.tooltip_text}`}>{address}</div>
-                  <div className={`${styles.tooltip_text_buttom}`}></div>
-                </div>
-              </div>
+              <Tooltip
+                title={address}
+                left="-99%"
+                top="-42px"
+                transform=""
+                minWidth="150px"
+                height="0"
+              >
+                <Text sx={{ variant: "text.smallTextMediumUser" }}>{formatAddress(address)}</Text>
+              </Tooltip>
+              <Box
+                onClick={() => {
+                  onCopyClick(address);
+                  notifSucces("Link copied");
+                }}
+                sx={copyIcon}
+              >
+                <Icon style={{ cursor: "pointer" }} src={iconsObj.iconSix} />
+              </Box>
             </Flex>
           </Container>
         </Flex>

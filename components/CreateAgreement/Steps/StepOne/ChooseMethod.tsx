@@ -43,7 +43,7 @@ export default function ChooseMethod({ animateContainer, setPublic, page }: Publ
             </div>
             <Text sx={{ variant: "text.largeTextBold", mt: "20px" }}>Public</Text>
             <Text sx={{ variant: "text.overscript", mt: "20px", maxWidth: "160px" }}>
-              Accessed Publicly based on sharing opionts
+              Accessed Publicly based on sharing options
             </Text>
           </Box>
         </Container>

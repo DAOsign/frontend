@@ -17,6 +17,7 @@ export interface IconsMapper extends Record<string, unknown> {
   bookmarkVote: Icon;
   chevronRight: Icon;
   ellipseGreen: Icon;
+  arrowTooltip: Icon;
   greyPercent: Icon;
   checkboxOff: Icon;
   privateIcon: Icon;
