@@ -41,10 +41,12 @@ const link = {
   fontWeight: 500,
   fontSize: "12px",
   lineHeight: "15px",
-  opacity: 0.5,
   ml: "5px",
   "&:hover": {
-    opacity: 1,
+    color: "#AE4FD0",
+  },
+  "&:focus": {
+    color: "#AE4FD0",
   },
 } as ThemeUIStyleObject;
 

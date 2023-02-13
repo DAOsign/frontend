@@ -13,7 +13,6 @@ import {
   verificationsTitle,
 } from "./styles";
 import { Box, Button, Flex, Link, Spinner } from "theme-ui";
-import Icon from "../icon";
 import iconsObj from "../../assets/icons";
 import { InformationRow } from "./InformationRow";
 import { formatAddress, formatAgreementCreationDate, onCopyClick } from "../../utils/formats";
@@ -33,6 +32,7 @@ import { notifError, notifSucces } from "../../utils/notification";
 import Image from "next/image";
 import { useMutation } from "urql";
 import { setAgreementReadyToSignMutation } from "../../modules/graphql/mutations";
+import ModalSignStatus from "../ModalSignStatus";
 
 const formatAgreementPrivacy = (agreementPrivacy: string | undefined) => {
   if (!agreementPrivacy) return "";
@@ -53,6 +53,7 @@ interface Props {
   isWaitingForMySignature: boolean;
   userIsAuthor: boolean;
   authorWalletAddress?: string;
+  setIsOpen: any;
   onSetAgreementReadyToSign?: () => void;
 }
 
@@ -64,6 +65,7 @@ export const AgreementInformation = ({
   createdAt,
   isWaitingForMySignature,
   userIsAuthor,
+  setIsOpen,
   authorWalletAddress,
   onSetAgreementReadyToSign = () => {},
 }: Props) => {
@@ -73,6 +75,7 @@ export const AgreementInformation = ({
 
   const [, setAgreementReadyToSign] = useMutation(setAgreementReadyToSignMutation);
   const [isSettingReadyToSign, setIsSettingReadyToSign] = useState<boolean>(false);
+  const [isOpenModalSignStatus, setIsOpenModalSignStatus] = useState<boolean>(false);
 
   const handleCopyAddress = () => {
     onCopyClick(authorWalletAddress || "");
@@ -81,7 +84,8 @@ export const AgreementInformation = ({
 
   // TODO: edit observers
   const handleEditObservers = () => {
-    notifError("Editing observers is not yet implemented");
+    setIsOpen(true);
+    // notifError("Editing observers is not yet implemented");
   };
 
   const handleReadyToSign = async () => {
@@ -102,8 +106,9 @@ export const AgreementInformation = ({
   };
 
   // TODO: sign agreement
-  const handleSignAgreement = () => {};
-
+  const handleSignAgreement = () => {
+    setIsOpenModalSignStatus(true);
+  };
   const handleDeleteAgreement = async () => {
     setIsConfirmAgreementDeletionPopupVisible(true);
   };
@@ -118,9 +123,6 @@ export const AgreementInformation = ({
     <Flex sx={briefInformation}>
       <Flex sx={briefInformationHeader}>
         <Box>Information</Box>
-        <Box style={{ width: "20px", transform: "rotate(180deg)" }}>
-          <Icon src={iconsObj.arrowLeftPink} />
-        </Box>
       </Flex>
       <Flex sx={briefInformationData}>
         <InformationRow
@@ -190,6 +192,11 @@ export const AgreementInformation = ({
         isOpen={isConfirmAgreementDeletionPopupVisible}
         onSuccess={onAgreementDeletionSuccess}
         onExit={() => setIsConfirmAgreementDeletionPopupVisible(false)}
+      />
+      <ModalSignStatus
+        isOpen={isOpenModalSignStatus}
+        onExit={() => setIsOpenModalSignStatus(false)}
+        error={false}
       />
     </Flex>
   );

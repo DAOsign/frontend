@@ -16,6 +16,7 @@ import {
   needSigningIcon,
   titleSigners,
 } from "./styles";
+import useWindowDimensions from "../../hooks/useWindowDimensions";
 import { Agreement, STATUS_READY_TO_SIGN, PRIVACY_PRIVATE } from "../../types";
 import { formatAgreementCreationDate, formatAgreementStatus } from "../../utils/formats";
 import SignatureIcon from "../icon/editable/SignatureIcon";
@@ -30,11 +31,15 @@ export default function AgreementItem({
   isWaitingForMySignature,
   createdAt,
 }: Agreement) {
+  const { width } = useWindowDimensions();
   const titleTooltip = (value: string) => {
+    // Agreement Privacy: Public, published.
     if (value === "Private") {
       return "Agreement Privacy: Private";
     } else if (value === "With Link") {
       return "Agreement Privacy: Anyone With Link";
+    } else if (value === "Published") {
+      return `Agreement Privacy: Public, published `;
     } else {
       return `Agreement Privacy: ${value} `;
     }
@@ -61,7 +66,8 @@ export default function AgreementItem({
                   title="Your signature is missing"
                   transform="translate(-58%, -3%)"
                   minWidth="170px"
-                  left="63%"
+                  //@ts-ignore
+                  left={width < 720 ? "166% " : "63%"}
                   top="-45px"
                   height="0"
                 >
@@ -77,8 +83,8 @@ export default function AgreementItem({
                 <Tooltip
                   top="-68px"
                   height="0"
-                  // ""
-                  left="65%"
+                  //@ts-ignore
+                  left={width < 720 ? "151% " : "65%"}
                   transform={
                     //@ts-ignore
                     agreementPrivacy !== "With Link"

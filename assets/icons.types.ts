@@ -28,6 +28,7 @@ export interface IconsMapper extends Record<string, unknown> {
   shareFourth: Icon;
   fieldResize: Icon;
   chevronLeft: Icon;
+  whitoutUser: Icon;
   heartViolet: Icon;
   publicIcon: Icon;
   logoHeader: Icon;
@@ -37,6 +38,7 @@ export interface IconsMapper extends Record<string, unknown> {
   chevronUp: Icon;
   pinkArrow: Icon;
   published: Icon;
+  errorSign: Icon;
   iconExit: Icon;
   settings: Icon;
   telegram: Icon;
@@ -49,6 +51,7 @@ export interface IconsMapper extends Record<string, unknown> {
   portfile: Icon;
   pinkPlus: Icon;
   logoIcon: Icon;
+  success: Icon;
   twitter: Icon;
   radioOn: Icon;
   iconSix: Icon;
@@ -90,6 +93,7 @@ export interface IconsMapper extends Record<string, unknown> {
   verificationNotarized: Icon;
   defaultUserPicture: Icon;
   closedEye: Icon;
+  link: Icon;
 }
 
 interface Icon {

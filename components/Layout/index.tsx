@@ -10,6 +10,7 @@ import Footer from "../Footer/Footer";
 function Layout({ children }: React.PropsWithChildren) {
   const { account } = useWeb3();
   const [visible, setVisible] = useState(false);
+  const [visibleLogOut, setVisibleLogOut] = useState(false);
 
   const hideStyles = account ? {} : { display: "none" };
 
@@ -20,8 +21,19 @@ function Layout({ children }: React.PropsWithChildren) {
         <meta name="description" content="Dao-Sign" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <Header visible={visible} setVisible={setVisible} address={account || ""} />
-      <HeaderMenu visibleMenu={visible} setVisibleMenu={setVisible} address={account || ""} />
+      <Header
+        visibleLogOut={visibleLogOut}
+        visible={visible}
+        setVisible={setVisible}
+        address={account || ""}
+      />
+      <HeaderMenu
+        visibleLogOut={visibleLogOut}
+        visibleMenu={visible}
+        setVisibleLogOut={setVisibleLogOut}
+        setVisibleMenu={setVisible}
+        address={account || ""}
+      />
       {children}
     </Container>
   );

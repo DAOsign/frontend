@@ -19,9 +19,10 @@ import { notifSucces } from "../../utils/notification";
 
 interface Props {
   signer: Signer;
+  openProof: any;
 }
 
-export const SignerRow = ({ signer }: Props) => {
+export const SignerRow = ({ signer, openProof }: Props) => {
   const handleCopyAddress = (address: string) => {
     onCopyClick(address);
     notifSucces("Link Copied");
@@ -76,7 +77,7 @@ export const SignerRow = ({ signer }: Props) => {
           )}
         </Flex>
       </td>
-      <td>{signer?.signature?.signatureCid || "-"}</td>
+      <td onClick={openProof}>{signer?.signature?.signatureCid || "-"}</td>
     </tr>
   );
 };

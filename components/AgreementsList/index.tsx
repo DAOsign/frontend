@@ -1,5 +1,5 @@
 /* eslint-disable no-console */
-/** @jsxImportSource theme-ui */
+// /** @jsxImportSource theme-ui */
 import React, { useEffect, useMemo, useState } from "react";
 import UserCard from "./UserCard";
 import { Flex, Button, Text, Container, Link, Box } from "theme-ui";
@@ -8,55 +8,52 @@ import Icon from "../icon/index";
 import iconsObj from "../../assets/icons";
 import HeaderAgreement from "./HeaderAgreement";
 import NextLink from "next/link";
-import { useQuery } from "urql";
-import { myAgreementsQuery } from "../../modules/graphql/queries";
-import { useWeb3 } from "../../hooks/useWeb3";
+
 import AgreementItem from "./AgreementItem";
 import { toAgreement } from "../../utils/typeUtils";
 import { Agreement as AgreementRespone } from "../../modules/graphql/gql/graphql";
 import Lottie from "lottie-react";
 import loader from "../../img/json/loader.json";
-import { initialPermission, initialSignature, initialStatus } from "./initialState";
+
+import { useLoadItems } from "../../utils/infiniteScroll";
+import useInfiniteScroll from "react-infinite-scroll-hook";
 
 export default function AgreementsList({ address }: any) {
-  const [valueSearch, setValueSearch] = useState("");
-  const [filterOptions, setFilterOptions] = useState({
-    status: initialStatus,
-    permission: initialPermission,
-    signature: initialSignature,
-  });
-
-  const filterValues = [
-    filterOptions.signature,
-    ...filterOptions.permission,
-    ...filterOptions.status,
-  ]
-    .filter(el => el.value)
-    .map(el => {
-      return el.nameSecondary;
-    });
-
-  const { account } = useWeb3();
-  const [{ data, fetching: agreementsLoading, error }] = useQuery({
-    query: myAgreementsQuery,
-    //@ts-ignore: force refetch agreements when account changes
-    variables: {
-      account,
-      filterBy: !!filterValues.length ? filterValues : null,
-      search: !!valueSearch.length ? valueSearch : null,
-    },
-    pause: !account,
-    requestPolicy: "network-only",
+  const {
+    error: errorLoad,
+    setValueSearch,
+    setFilterOptions,
+    filterOptions,
+    filterValues,
+    hasNextPage,
+    valueSearch,
+    loadMore,
+    validData,
+    loading,
+    error,
+    count,
+    data,
+  } = useLoadItems();
+  const [infiniteRef] = useInfiniteScroll({
+    loading,
+    hasNextPage,
+    onLoadMore: loadMore,
+    disabled: !!errorLoad,
   });
 
   useEffect(() => {
     error && console.error(error);
   }, [error]);
 
-  const agreements = useMemo(
-    () => data?.myAgreements?.agreements.map((a: any) => toAgreement(a as AgreementRespone)) || [],
-    [data]
-  );
+  const agreements = useMemo(() => {
+    return !validData
+      ? //@ts-ignore
+        data?.map((a: any) => toAgreement(a as AgreementRespone)) || []
+      : //@ts-ignore
+        data?.myAgreements?.agreements.map((a: any) => toAgreement(a as AgreementRespone)) || [];
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [data]);
+  console.log("data", data);
 
   return (
     <Flex sx={containerSides}>
@@ -87,15 +84,30 @@ export default function AgreementsList({ address }: any) {
             setFilterOptions={setFilterOptions}
           />
         ) : null}
-        {agreementsLoading ? (
+        {/* {agreementsLoading ? (
           <Lottie
             style={{ height: "60px", marginBottom: "52px" }}
             animationData={loader}
             loop={true}
           />
-        ) : agreements.length ? (
-          agreements.map((agr: any, index: number) => <AgreementItem key={index} {...agr} />)
-        ) : (
+        ) : agreements.length ? ( */}
+        <>
+          <div>
+            {agreements.map((agr: any, index: number) => (
+              <AgreementItem key={index} {...agr} />
+            ))}
+            {(loading || hasNextPage) && (
+              <div ref={infiniteRef}>
+                <Lottie
+                  style={{ height: "60px", marginBottom: "52px" }}
+                  animationData={loader}
+                  loop={true}
+                />
+              </div>
+            )}
+          </div>
+        </>
+        {/* ) : (
           <Container sx={{ textAlign: "center" }}>
             <Flex sx={noContent}>
               <Box sx={{ width: "75px", height: "70px" }}>
@@ -106,7 +118,7 @@ export default function AgreementsList({ address }: any) {
               sx={{ variant: "text.normalTextBold" }}
             >{`You don't have any agreements yet`}</Text>
           </Container>
-        )}
+        )} */}
       </Container>
     </Flex>
   );

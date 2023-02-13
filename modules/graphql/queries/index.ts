@@ -62,8 +62,8 @@ export const agreementById = graphql(`
   }
 `);
 export const myAgreementsQuery = graphql(`
-  query MyAgreements($search: String, $filterBy: [String!]) {
-    myAgreements(search: $search, filterBy: $filterBy) {
+  query MyAgreements($take: Int, $filterBy: [String!], $search: String, $skip: Int) {
+    myAgreements(take: $take, filterBy: $filterBy, search: $search, skip: $skip) {
       agreements {
         agreementId
         title

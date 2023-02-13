@@ -7,6 +7,7 @@ import togglePrimaryRight from "../img/svg/togglePrimaryRight.svg";
 import uploadCloudPrimary from "../img/svg/uploadCloudPrimary.svg";
 import togglePrimaryLeft from "../img/svg/togglePrimaryLeft.svg";
 import verificationReal from "../img/svg/verification_real.svg";
+import defaultUserPicture from "../img/defaultUserPicture.png";
 import fileSecondarysvg from "../img/svg/fileSecondarysvg.svg";
 import arrowNarrowLeft from "../img/svg/arrowNarrowLeft.svg";
 import proofSecondary from "../img/svg/proofSecondary.svg";
@@ -28,6 +29,7 @@ import fieldResize from "../img/svg/fieldResize.svg";
 import iconSetting from "../img/svg/iconSetting.svg";
 import shareFourth from "../img/svg/shareFourth.svg";
 import layersThree from "../img/svg/layersThree.svg";
+import whitoutUser from "../img/svg/withoutUser.svg";
 import checkboxOff from "../img/svg/checkboxOff.svg";
 import checkCircle from "../img/svg/checkCircle.svg";
 import greyPercent from "../img/svg/greyPercent.svg";
@@ -35,8 +37,10 @@ import infoCircle from "../img/svg/infoCircle.svg";
 import plusCircle from "../img/svg/plusCircle.svg";
 import logoHeader from "../img/svg/logoHeader.svg";
 import checkboxOn from "../img/svg/checkboxOn.svg";
+import closedEye from "../img/svg/closedEye.svg";
 import chevronUp from "../img/svg/chevronUp.svg";
 import published from "../img/svg/published.svg";
+import errorSign from "../img/svg/errorSign.svg";
 import privateIcon from "../img/svg/private.svg";
 import pinkArrow from "../img/svg/pinkArrow.svg";
 import publicIcon from "../img/svg/public.svg";
@@ -53,6 +57,7 @@ import fileSvg from "../img/svg/file_svg.svg";
 import radioOn from "../img/svg/radioOn.svg";
 import pending from "../img/svg/pending.svg";
 import twitter from "../img/svg/twitter.svg";
+import success from "../img/svg/success.svg";
 import errorSvg from "../img/svg/error.svg";
 import search from "../img/svg/search.svg";
 import logoIcon from "../img/svg/logo.svg";
@@ -85,10 +90,9 @@ import prof from "../img/svg/prof.svg";
 import drag from "../img/svg/drag.svg";
 import mail from "../img/svg/mail.svg";
 import good from "../img/svg/good.svg";
+import link from "../img/svg/link.svg";
 import ink from "../img/svg/ink.svg";
 import m from "../img/svg/m.svg";
-import defaultUserPicture from "../img/defaultUserPicture.png";
-import closedEye from "../img/svg/closedEye.svg";
 
 import { IconsMapper } from "./icons.types";
 
@@ -108,9 +112,10 @@ const iconsObj: IconsMapper = {
   arrowLeftPink,
   arrowTooltip,
   trashPrimary,
-  heartViolet,
+  whitoutUser,
   bookmarkVote,
   chevronRight,
+  heartViolet,
   greyPercent,
   privateIcon,
   checkboxOff,
@@ -133,20 +138,22 @@ const iconsObj: IconsMapper = {
   pinkPlus,
   portfile,
   logoIcon,
+  errorSign,
   birthday,
   settings,
   telegram,
   radioOff,
   facebook,
-  calendar,
+  success,
   download,
+  calendar,
+  errorSvg,
   twitter,
+  iconExit,
   radioOn,
   iconSix,
-  iconExit,
-  errorSvg,
-  logOut,
   pending,
+  logOut,
   verify,
   github,
   alert,
@@ -160,6 +167,7 @@ const iconsObj: IconsMapper = {
   award,
   aLogo,
   dLogo,
+  link,
   oLogo,
   globe,
   error,

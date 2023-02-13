@@ -20,8 +20,22 @@ const documents = {
     "\n  mutation Mutation {\n    logout {\n      message\n    }\n  }\n": types.MutationDocument,
     "\n  query Users {\n    users {\n      users {\n        name\n        bio\n        email\n        phone\n        twitterVerificationCode\n        twitterVerificationSig\n      }\n    }\n  }\n": types.UsersDocument,
     "\n  query Query($agreementId: Int!) {\n    agreement(agreementId: $agreementId) {\n      agreementFile {\n        agreementFileId\n        agreementHash\n        createdAt\n        filePath\n      }\n      agreementLocation {\n        agreementLocationId\n        isActive\n        name\n      }\n      agreementPrivacy {\n        name\n      }\n      agreementStatus {\n        name\n      }\n      authorWallet {\n        address\n        networkId\n        userId\n        walletId\n      }\n      observers {\n        email\n        observerId\n        wallet {\n          address\n        }\n      }\n      signers {\n        email\n        wallet {\n          address\n        }\n      }\n      title\n      content\n      isWaitingForMySignature\n      createdAt\n    }\n  }\n": types.QueryDocument,
-    "\n  query MyAgreements($search: String, $filterBy: [String!]) {\n    myAgreements(search: $search, filterBy: $filterBy) {\n      agreements {\n        agreementId\n        title\n        content\n        isWaitingForMySignature\n        createdAt\n        agreementLocation {\n          name\n          isActive\n        }\n        agreementPrivacy {\n          name\n        }\n        agreementFile {\n          filePath\n          createdAt\n        }\n        authorWallet {\n          address\n          user {\n            name\n            email\n            phone\n            twitterVerificationCode\n            twitterVerificationSig\n            bio\n          }\n        }\n        signers {\n          email\n          wallet {\n            address\n            user {\n              name\n            }\n          }\n        }\n        observers {\n          email\n          wallet {\n            address\n            user {\n              name\n            }\n          }\n        }\n        agreementStatus {\n          name\n        }\n      }\n      count\n    }\n  }\n": types.MyAgreementsDocument,
+    "\n  query MyAgreements($take: Int, $filterBy: [String!], $search: String, $skip: Int) {\n    myAgreements(take: $take, filterBy: $filterBy, search: $search, skip: $skip) {\n      agreements {\n        agreementId\n        title\n        content\n        isWaitingForMySignature\n        createdAt\n        agreementLocation {\n          name\n          isActive\n        }\n        agreementPrivacy {\n          name\n        }\n        agreementFile {\n          filePath\n          createdAt\n        }\n        authorWallet {\n          address\n          user {\n            name\n            email\n            phone\n            twitterVerificationCode\n            twitterVerificationSig\n            bio\n          }\n        }\n        signers {\n          email\n          wallet {\n            address\n            user {\n              name\n            }\n          }\n        }\n        observers {\n          email\n          wallet {\n            address\n            user {\n              name\n            }\n          }\n        }\n        agreementStatus {\n          name\n        }\n      }\n      count\n    }\n  }\n": types.MyAgreementsDocument,
 };
+
+/**
+ * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ *
+ *
+ * @example
+ * ```ts
+ * const query = gql(`query GetUser($id: ID!) { user(id: $id) { name } }`);
+ * ```
+ *
+ * The query argument is unknown!
+ * Please regenerate the types.
+ */
+export function graphql(source: string): unknown;
 
 /**
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
@@ -54,21 +68,7 @@ export function graphql(source: "\n  query Query($agreementId: Int!) {\n    agre
 /**
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
-export function graphql(source: "\n  query MyAgreements($search: String, $filterBy: [String!]) {\n    myAgreements(search: $search, filterBy: $filterBy) {\n      agreements {\n        agreementId\n        title\n        content\n        isWaitingForMySignature\n        createdAt\n        agreementLocation {\n          name\n          isActive\n        }\n        agreementPrivacy {\n          name\n        }\n        agreementFile {\n          filePath\n          createdAt\n        }\n        authorWallet {\n          address\n          user {\n            name\n            email\n            phone\n            twitterVerificationCode\n            twitterVerificationSig\n            bio\n          }\n        }\n        signers {\n          email\n          wallet {\n            address\n            user {\n              name\n            }\n          }\n        }\n        observers {\n          email\n          wallet {\n            address\n            user {\n              name\n            }\n          }\n        }\n        agreementStatus {\n          name\n        }\n      }\n      count\n    }\n  }\n"): (typeof documents)["\n  query MyAgreements($search: String, $filterBy: [String!]) {\n    myAgreements(search: $search, filterBy: $filterBy) {\n      agreements {\n        agreementId\n        title\n        content\n        isWaitingForMySignature\n        createdAt\n        agreementLocation {\n          name\n          isActive\n        }\n        agreementPrivacy {\n          name\n        }\n        agreementFile {\n          filePath\n          createdAt\n        }\n        authorWallet {\n          address\n          user {\n            name\n            email\n            phone\n            twitterVerificationCode\n            twitterVerificationSig\n            bio\n          }\n        }\n        signers {\n          email\n          wallet {\n            address\n            user {\n              name\n            }\n          }\n        }\n        observers {\n          email\n          wallet {\n            address\n            user {\n              name\n            }\n          }\n        }\n        agreementStatus {\n          name\n        }\n      }\n      count\n    }\n  }\n"];
-
-/**
- * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
- *
- *
- * @example
- * ```ts
- * const query = gql(`query GetUser($id: ID!) { user(id: $id) { name } }`);
- * ```
- *
- * The query argument is unknown!
- * Please regenerate the types.
-**/
-export function graphql(source: string): unknown;
+export function graphql(source: "\n  query MyAgreements($take: Int, $filterBy: [String!], $search: String, $skip: Int) {\n    myAgreements(take: $take, filterBy: $filterBy, search: $search, skip: $skip) {\n      agreements {\n        agreementId\n        title\n        content\n        isWaitingForMySignature\n        createdAt\n        agreementLocation {\n          name\n          isActive\n        }\n        agreementPrivacy {\n          name\n        }\n        agreementFile {\n          filePath\n          createdAt\n        }\n        authorWallet {\n          address\n          user {\n            name\n            email\n            phone\n            twitterVerificationCode\n            twitterVerificationSig\n            bio\n          }\n        }\n        signers {\n          email\n          wallet {\n            address\n            user {\n              name\n            }\n          }\n        }\n        observers {\n          email\n          wallet {\n            address\n            user {\n              name\n            }\n          }\n        }\n        agreementStatus {\n          name\n        }\n      }\n      count\n    }\n  }\n"): (typeof documents)["\n  query MyAgreements($take: Int, $filterBy: [String!], $search: String, $skip: Int) {\n    myAgreements(take: $take, filterBy: $filterBy, search: $search, skip: $skip) {\n      agreements {\n        agreementId\n        title\n        content\n        isWaitingForMySignature\n        createdAt\n        agreementLocation {\n          name\n          isActive\n        }\n        agreementPrivacy {\n          name\n        }\n        agreementFile {\n          filePath\n          createdAt\n        }\n        authorWallet {\n          address\n          user {\n            name\n            email\n            phone\n            twitterVerificationCode\n            twitterVerificationSig\n            bio\n          }\n        }\n        signers {\n          email\n          wallet {\n            address\n            user {\n              name\n            }\n          }\n        }\n        observers {\n          email\n          wallet {\n            address\n            user {\n              name\n            }\n          }\n        }\n        agreementStatus {\n          name\n        }\n      }\n      count\n    }\n  }\n"];
 
 export function graphql(source: string) {
   return (documents as any)[source] ?? {};

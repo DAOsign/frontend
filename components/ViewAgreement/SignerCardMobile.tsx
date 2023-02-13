@@ -6,7 +6,6 @@ import {
   tableAddressCell,
   tableSignatureCell,
   signersRow,
-  tableUserNameCell,
   usernameText,
   textMobile,
   cardMobile,

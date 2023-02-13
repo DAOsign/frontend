@@ -22,6 +22,7 @@ a {
 .Toastify__close-button.Toastify__close-button--light {
   display: none;
 }
+
 .Toastify__toast-body {
   font-family: "InterBold";
   font-style: normal;
@@ -763,4 +764,53 @@ body {
 
 .iconPlus:hover > g > path {
   stroke: #AE4FD0
+}
+
+.object-key-val, .variable-row {
+  border-left: none !important;
+}
+.copy-to-clipboard-container{
+  display: none !important;
+}
+.collapsed-icon > svg {
+  fill: #212121;
+}
+.data-type-label {
+  display: none !important;
+}
+.string-value {
+  font-family: 'InterRegular' !important;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 12px !important;
+  line-height: 160%;
+  color: #212121 !important;
+  opacity: 1 !important;
+}
+.object-key > span:last-child, .object-key > span:first-child {
+  display: none !important;
+}
+.object-key, .array-key {
+  font-family: 'InterRegular' !important;
+  font-style: normal !important;
+  font-weight: 400 !important;
+  font-size: 12px !important;
+  line-height: 160% !important;
+  color: #212121 !important;
+  opacity: 1 !important;
+}
+.icon-container ~ span {
+  margin-right: 5px;
+}
+.icon-container ~ span > span:last-child {
+  display: none !important;
+}
+.expanded-icon > svg {
+  fill: #212121 !important;
+}
+.object-key-val > span > span:last-child  {
+  color: #212121 !important;
+}
+.node-ellipsis {
+  color: #212121 !important;
 }

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { Container, Flex, Text, Button, Link, Box } from "theme-ui";
 import iconsObj from "../../assets/icons";
 import { formatAddress } from "../../utils/formats";
@@ -9,12 +9,14 @@ import { useWeb3 } from "../../hooks/useWeb3";
 import NextLink from "next/link";
 import Identicon from "../Identicon/Identicon";
 
-export default function Header({ visible, setVisible }: any) {
+export default function Header({ visible, setVisible, visibleLogOut }: any) {
   const { account } = useWeb3();
-  const [openModal, setModalOpen] = useState(false);
 
   return (
-    <Container onClick={() => setVisible(false)} sx={container}>
+    <Container
+      onClick={() => setVisible(false)}
+      sx={{ ...container, zIndex: visibleLogOut ? 3 : 10 }}
+    >
       <Flex sx={{ justifyContent: "space-between" }}>
         <NextLink href={"/"}>
           <Link>

@@ -39,15 +39,14 @@ const secondText = {
   textAlign: "center",
   pt: "32px",
   color: "#CA5CF2",
-  opacity: "0.5",
   cursor: "pointer",
   width: "150px",
   margin: "0 auto",
   "&:hover": {
-    opacity: 1,
+    color: "#AE4FD0",
   },
   "&:focus": {
-    opacity: 1,
+    color: "#AE4FD0",
   },
 } as ThemeUIStyleObject;
 
@@ -62,7 +61,7 @@ const closeIcon = {
 
 const bg = {
   width: "100%",
-  position: "absolute",
+  position: "fixed",
   top: 0,
   height: "100vh",
   backgroundColor: "#00000090",

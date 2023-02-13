@@ -20,11 +20,9 @@ const menuContainer = {
 
 const copyIcon = {
   marginLeft: "5px",
-  width: "10px",
-  opacity: 0.5,
-  height: "10px",
-  "&:hover": {
-    opacity: 1,
+  cursor: "pointer",
+  "&:hover > svg > path": {
+    stroke: "#AE4FD0",
   },
 } as ThemeUIStyleObject;
 
@@ -68,21 +66,33 @@ const btnLogaut = {
   border: "none",
   width: "100%",
   color: "#CA5CF2",
-  opacity: 0.5,
   height: "64px",
   pt: 0,
   textAlign: "center",
   "&:hover": {
-    opacity: 1,
     border: "none",
     backgroundColor: "#FFFFFF",
     background: "unset",
+    color: "#AE4FD0",
+  },
+  "&:hover > div > svg > path ": {
+    stroke: "#AE4FD0",
   },
   "&:focus": {
     opacity: 1,
     border: "none",
     backgroundColor: "#FFFFFF",
     background: "unset",
+  },
+} as ThemeUIStyleObject;
+
+const iconLogOut = {
+  width: "24px",
+  height: "24px",
+  position: "absolute",
+  left: "calc(50% - 48px)",
+  "&:hover > svg > path": {
+    stroke: "#AE4FD0",
   },
 } as ThemeUIStyleObject;
 
@@ -93,4 +103,4 @@ const foto = {
   borderRadius: "50%",
 } as ThemeUIStyleObject;
 
-export { menuContainer, fotoContainer, foto, copyIcon, btnLogaut };
+export { menuContainer, fotoContainer, foto, copyIcon, btnLogaut, iconLogOut };

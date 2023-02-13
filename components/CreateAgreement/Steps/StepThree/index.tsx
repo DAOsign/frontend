@@ -1,5 +1,4 @@
 import React, { useRef, useState } from "react";
-import dynamic from "next/dynamic";
 import { Container, Flex, Input, Text, Button, Box } from "theme-ui";
 import {
   inputCreactAgreement,
@@ -75,8 +74,8 @@ const validateUser = (
     return userRole === "signer" ? "Already exists as Observer" : "Observer is already added";
   }
 
-  const isEns = value.includes(".eth");
-  const isAddress = value.startsWith("0x");
+  const isEns = value?.includes(".eth");
+  const isAddress = value?.startsWith("0x");
   if (!isEns && !isAddress) {
     return "Invalid value";
   }
@@ -188,7 +187,7 @@ export default function StepThree({ loading, page }: { loading: boolean; page: s
       //@ts-ignore
       const value = e.target.value;
       if (type === "observers") {
-        addObserver(value.toLocaleLowerCase);
+        addObserver(value.toLocaleLowerCase());
       }
       if (type === "signers") {
         addSigner(value.toLocaleLowerCase());

@@ -21,7 +21,7 @@ interface Props {
 export default function ModalIpfsWarning({ isOpen, onExit }: Props) {
   return (
     <Portal isOpen={isOpen}>
-      <ModalBase>
+      <ModalBase width="" height="442px">
         <Flex sx={flexContainer}>
           <Box onClick={onExit} sx={closeIcon}>
             <Icon src={iconsObj.xClose} />

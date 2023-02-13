@@ -1,17 +1,27 @@
 import React, { useState } from "react";
 import { Container, Flex, Text, Box, Button } from "theme-ui";
-import { menuContainer, fotoContainer, foto, copyIcon, btnLogaut } from "../../styles/styles";
-import Icon from "../icon/index";
-import iconsObj from "../../assets/icons";
+import {
+  menuContainer,
+  fotoContainer,
+  foto,
+  copyIcon,
+  btnLogaut,
+  iconLogOut,
+} from "../../styles/styles";
 import { notifSucces } from "../../utils/notification";
 import { formatAddress, onCopyClick } from "../../utils/formats";
 import LogOutPopap from "../modalLogout";
 import Identicon from "../Identicon/Identicon";
 import Tooltip from "../Tooltip";
+import CopyIcon from "../CopyIcon";
 
-const HeaderMenu = ({ address, setVisibleMenu, visibleMenu }: any) => {
-  const [visible, setVisible] = useState(false);
-
+const HeaderMenu = ({
+  setVisibleLogOut,
+  setVisibleMenu,
+  visibleLogOut,
+  visibleMenu,
+  address,
+}: any) => {
   return (
     <Container
       className={visibleMenu ? "visible" : "close"}
@@ -34,9 +44,8 @@ const HeaderMenu = ({ address, setVisibleMenu, visibleMenu }: any) => {
                 fontSize: "24px",
               }}
             >
-              Ralph Edwards
+              Anonymous
             </Text>
-
             <Flex sx={{ justifyContent: "left", alignItems: "center", mt: "4px" }}>
               <Tooltip
                 title={address}
@@ -55,7 +64,7 @@ const HeaderMenu = ({ address, setVisibleMenu, visibleMenu }: any) => {
                 }}
                 sx={copyIcon}
               >
-                <Icon style={{ cursor: "pointer" }} src={iconsObj.iconSix} />
+                <CopyIcon />
               </Box>
             </Flex>
           </Container>
@@ -81,16 +90,28 @@ const HeaderMenu = ({ address, setVisibleMenu, visibleMenu }: any) => {
             left: 0,
           }}
         />
-        <Button onClick={() => setVisible(!visible)} sx={btnLogaut}>
-          <Box
-            sx={{ width: "24px", height: "24px", position: "absolute", left: "calc(50% - 48px)" }}
-          >
-            <Icon src={iconsObj.logOut} />
+        <Button onClick={() => setVisibleLogOut(!visibleLogOut)} sx={btnLogaut}>
+          <Box sx={iconLogOut}>
+            <svg
+              width="24"
+              height="24"
+              viewBox="0 0 24 24"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M16 17L21 12M21 12L16 7M21 12H9M9 3H7.8C6.11984 3 5.27976 3 4.63803 3.32698C4.07354 3.6146 3.6146 4.07354 3.32698 4.63803C3 5.27976 3 6.11984 3 7.8V16.2C3 17.8802 3 18.7202 3.32698 19.362C3.6146 19.9265 4.07354 20.3854 4.63803 20.673C5.27976 21 6.11984 21 7.8 21H9"
+                stroke="#CA5CF2"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              />
+            </svg>
           </Box>
           <Text sx={{ ml: "28px" }}>Log Out</Text>
         </Button>
       </Container>
-      {visible ? <LogOutPopap setVisible={setVisible} /> : null}
+      {visibleLogOut ? <LogOutPopap setVisible={setVisibleLogOut} /> : null}
     </Container>
   );
 };

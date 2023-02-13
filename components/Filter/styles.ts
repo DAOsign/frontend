@@ -86,6 +86,12 @@ const clear = {
   color: "#CA5CF2",
   display: "none",
   cursor: "pointer",
+  "&:hover": {
+    color: "#AE4FD0",
+  },
+  "&:focus": {
+    color: "#AE4FD0",
+  },
   "@media screen and (max-width: 768px)": {
     display: "inline-block",
   },

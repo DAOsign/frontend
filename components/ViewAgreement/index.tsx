@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import { Box, Button, Flex } from "theme-ui";
 import { useRouter } from "next/router";
 import { useQuery } from "urql";
@@ -25,11 +25,13 @@ import { AgreementLabels } from "./AgreementLabels";
 import { AgreementSignersList } from "./AgreementSignersList";
 import { AgreementObserversList } from "./AgreementObserversList";
 import { AgreementContentPreview } from "./AgreementContentPreview";
+import ModalAddObservers from "../../components/ModalAddObserver";
 
 export const ViewAgreement = () => {
   const { push, query } = useRouter();
   const { agreementId } = query;
   const idIsWrong = !!agreementId && !Number(agreementId);
+  const [isOpen, setIsOpen] = useState(false);
 
   const { account } = useWeb3();
 
@@ -115,11 +117,13 @@ export const ViewAgreement = () => {
             createdAt={agreement?.createdAt}
             isWaitingForMySignature={agreement?.isWaitingForMySignature || false}
             userIsAuthor={userIsAuthor}
+            setIsOpen={setIsOpen}
             authorWalletAddress={agreement?.authorWalletAddress}
             onSetAgreementReadyToSign={onSetAgreementReadyToSign}
           />
         </>
       )}
+      <ModalAddObservers onExit={() => setIsOpen(false)} isOpen={isOpen} />
     </Flex>
   );
 };

@@ -6,7 +6,7 @@ export const modalContainer = {
   left: "50%",
   transform: "translate(-50%, -50%)",
   width: "500px",
-  height: "466px",
+  // minHeight: "466px",
   borderRadius: "12px",
   backgroundColor: "white",
 } as ThemeUIStyleObject;

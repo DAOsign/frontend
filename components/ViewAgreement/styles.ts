@@ -13,6 +13,7 @@ const container = {
     mt: 0,
   },
   "@media screen and (max-width: 719px)": {
+    overflow: "hidden",
     flexDirection: "column",
   },
 } as ThemeUIStyleObject;
@@ -31,11 +32,14 @@ const mainData = {
   flexDirection: "column",
   textAlign: "left",
   marginBottom: "16px",
-  "@media screen and (max-width: 1200px)": {
+  "@media screen and (max-width: 1199px)": {
     width: "100%",
     maxWidth: "672px",
     m: "0 auto",
     minWidth: "unset",
+  },
+  "@media screen and (min-width: 1200px)": {
+    mr: "auto",
   },
 } as ThemeUIStyleObject;
 
@@ -44,10 +48,14 @@ const briefInformation = {
   width: "364px",
   padding: "28px 32px",
   height: "fit-content",
-  "@media screen and (max-width: 1200px)": {
+  "@media screen and (max-width: 1199px)": {
     width: "100%",
     maxWidth: "672px",
     m: "0 auto",
+  },
+  "@media screen and (min-width: 1300px)": {
+    position: "fixed",
+    ml: "750px",
   },
 } as ThemeUIStyleObject;
 
@@ -135,10 +143,9 @@ const deleteAgreementBtn = {
   color: "#CA5CF2",
   height: "fit-content",
   borderRadius: 0,
-  opacity: 0.5,
   transition: "opacity 0.3s",
   "&:hover": {
-    opacity: 1,
+    color: "#AE4FD0",
   },
 } as ThemeUIStyleObject;
 
@@ -285,12 +292,10 @@ const informationRowValue = {
 
 const informationRowIcon = {
   marginLeft: "4px",
-  width: "11px",
-  opacity: 0.7,
-  height: "11px",
   transition: "opacity 0.3s",
-  "&:hover": {
-    opacity: 1,
+  cursor: "pointer",
+  "&:hover > svg> path": {
+    stroke: "#AE4FD0",
   },
 } as ThemeUIStyleObject;
 
@@ -425,12 +430,14 @@ const usernameText = {
 } as ThemeUIStyleObject;
 
 const noObserversMessage = {
-  padding: "0 32px 28px",
   fontFamily: "InterMedium",
   fontStyle: "normal",
-  fontWeight: 400,
-  fontSize: "14px",
-  opacity: 0.5,
+  fontWeight: 500,
+  fontSize: "16px",
+  lineHeight: "160%",
+  textAlign: "center",
+  color: "#D8D8E2",
+  mb: "72px",
 } as ThemeUIStyleObject;
 
 const verificationsContainer = {

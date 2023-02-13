@@ -187,6 +187,9 @@ const icon = {
   "&:hover > svg > path": {
     stroke: "#CA5CF2",
   },
+  "&:hover > svg > g > path": {
+    stroke: "#CA5CF2",
+  },
   "@media screen and (max-width: 720px)": {
     height: 32,
     width: 32,

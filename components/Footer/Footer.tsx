@@ -88,8 +88,39 @@ export default function Footer({ animationNotVisible, setVisible }: any) {
               <Box
                 sx={icon}
                 onClick={() => {
-                  window.open("https://consideritdone.tech/", "_blank");
+                  window.open("https://discord.com/invite/AwnhGFbT8Z", "_blank");
                 }}
+              >
+                <svg
+                  width="24"
+                  height="24"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <g>
+                    <path
+                      d="M7.17007 7.18186C10.9172 6.11125 13.0584 6.11125 16.8055 7.18186M6.63477 16.8173C10.3819 17.8879 13.5937 17.8879 17.3408 16.8173M7.70537 11.9996C7.70537 12.2835 7.81817 12.5558 8.01895 12.7566C8.21972 12.9574 8.49204 13.0702 8.77598 13.0702C9.05992 13.0702 9.33223 12.9574 9.53301 12.7566C9.73379 12.5558 9.84659 12.2835 9.84659 11.9996C9.84659 11.7156 9.73379 11.4433 9.53301 11.2426C9.33223 11.0418 9.05992 10.929 8.77598 10.929C8.49204 10.929 8.21972 11.0418 8.01895 11.2426C7.81817 11.4433 7.70537 11.7156 7.70537 11.9996ZM14.129 11.9996C14.129 12.2835 14.2418 12.5558 14.4426 12.7566C14.6434 12.9574 14.9157 13.0702 15.1996 13.0702C15.4836 13.0702 15.7559 12.9574 15.9567 12.7566C16.1574 12.5558 16.2702 12.2835 16.2702 11.9996C16.2702 11.7156 16.1574 11.4433 15.9567 11.2426C15.7559 11.0418 15.4836 10.929 15.1996 10.929C14.9157 10.929 14.6434 11.0418 14.4426 11.2426C14.2418 11.4433 14.129 11.7156 14.129 11.9996Z"
+                      stroke="#212121"
+                      stroke-width="2"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                    />
+                    <path
+                      d="M15.7343 17.3534C15.7343 18.424 17.3402 20.5652 17.8755 20.5652C19.4814 20.5652 20.9085 18.7805 21.6226 17.3534C22.3367 15.5687 22.1579 11.1086 20.0167 5.04146C18.4568 3.95479 16.8049 3.60684 15.199 3.43555L14.1284 6.11206M8.24002 17.3534C8.24002 18.424 6.78827 20.5652 6.27867 20.5652C4.74877 20.5652 3.39017 18.7805 2.71033 17.3534C2.0305 15.5687 2.20073 11.1086 4.23916 5.04146C5.72516 3.95479 7.21759 3.60684 8.77532 3.43555L9.84593 6.11206"
+                      stroke="#212121"
+                      stroke-width="2"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                    />
+                  </g>
+                </svg>
+              </Box>
+              <Box
+                onClick={() => {
+                  window.open("https://github.com/daosign", "_blank");
+                }}
+                sx={icon}
               >
                 <svg
                   width="24"
@@ -101,89 +132,15 @@ export default function Footer({ animationNotVisible, setVisible }: any) {
                   <path
                     d="M9 19.0004C4.7 20.4004 4.7 16.5004 3 16.0004M15 21.0004V17.5004C15 16.5004 15.1 16.1004 14.5 15.5004C17.3 15.2004 20 14.1004 20 9.50044C19.9988 8.3054 19.5325 7.15775 18.7 6.30044C19.0905 5.26241 19.0545 4.11207 18.6 3.10044C18.6 3.10044 17.5 2.80044 15.1 4.40044C13.0672 3.87103 10.9328 3.87103 8.9 4.40044C6.5 2.80044 5.4 3.10044 5.4 3.10044C4.94548 4.11207 4.90953 5.26241 5.3 6.30044C4.46745 7.15775 4.00122 8.3054 4 9.50044C4 14.1004 6.7 15.2004 9.5 15.5004C8.9 16.1004 8.9 16.7004 9 17.5004V21.0004"
                     stroke="#212121"
-                    strokeWidth="2"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                  />
-                </svg>
-              </Box>
-
-              <Box
-                onClick={() => {
-                  window.open("https://consideritdone.tech/", "_blank");
-                }}
-                sx={icon}
-              >
-                <svg
-                  width="24"
-                  height="24"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <path
-                    d="M22 4.00904C21 4.49904 20.02 4.69804 19 4.99904C17.879 3.73404 16.217 3.66404 14.62 4.26204C13.023 4.86004 11.977 6.32204 12 7.99904V8.99904C8.755 9.08204 5.865 7.60404 4 4.99904C4 4.99904 -0.182 12.432 8 15.999C6.128 17.246 4.261 18.087 2 17.999C5.308 19.802 8.913 20.422 12.034 19.516C15.614 18.476 18.556 15.793 19.685 11.774C20.0218 10.5517 20.189 9.2889 20.182 8.02104C20.18 7.77204 21.692 5.24904 22 4.00804V4.00904Z"
-                    stroke="#212121"
-                    strokeWidth="2"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
                   />
                 </svg>
               </Box>
               <Box
                 onClick={() => {
-                  window.open("https://consideritdone.tech/", "_blank");
-                }}
-                sx={icon}
-              >
-                <svg
-                  width="24"
-                  height="24"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <path
-                    d="M7 10V14H10V21H14V14H17L18 10H14V8C14 7.73478 14.1054 7.48043 14.2929 7.29289C14.4804 7.10536 14.7348 7 15 7H18V3H15C13.6739 3 12.4021 3.52678 11.4645 4.46447C10.5268 5.40215 10 6.67392 10 8V10H7Z"
-                    stroke="#212121"
-                    strokeWidth="2"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                  />
-                </svg>
-              </Box>
-              <Box
-                onClick={() => {
-                  window.open("https://consideritdone.tech/", "_blank");
-                }}
-                sx={icon}
-              >
-                <svg
-                  width="24"
-                  height="24"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <path
-                    d="M12 21C16.9706 21 21 16.9706 21 12C21 7.02944 16.9706 3 12 3C7.02944 3 3 7.02944 3 12C3 16.9706 7.02944 21 12 21Z"
-                    stroke="#212121"
-                    strokeWidth="2"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                  />
-                  <path
-                    d="M4.00005 9H20.0001M4 15H20.0001M10.9219 20C9.61151 17.5431 8.92187 14.7962 8.92187 12C8.92187 9.20377 9.61151 6.45687 10.9219 4M13.0775 20C14.3878 17.5431 15.0775 14.7962 15.0775 12C15.0775 9.20377 14.3878 6.45687 13.0775 4"
-                    stroke="#212121"
-                    strokeWidth="2"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                  />
-                </svg>
-              </Box>
-              <Box
-                onClick={() => {
-                  window.open("https://consideritdone.tech/", "_blank");
+                  window.open("https://t.me/DAOsign", "_blank");
                 }}
                 sx={icon}
               >
@@ -203,8 +160,36 @@ export default function Footer({ animationNotVisible, setVisible }: any) {
                   />
                 </svg>
               </Box>
+              <Box
+                onClick={() => {
+                  window.open("https://twitter.com/dao_sign", "_blank");
+                }}
+                sx={icon}
+              >
+                <svg
+                  width="24"
+                  height="24"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    d="M22 4.00904C21 4.49904 20.02 4.69804 19 4.99904C17.879 3.73404 16.217 3.66404 14.62 4.26204C13.023 4.86004 11.977 6.32204 12 7.99904V8.99904C8.755 9.08204 5.865 7.60404 4 4.99904C4 4.99904 -0.182 12.432 8 15.999C6.128 17.246 4.261 18.087 2 17.999C5.308 19.802 8.913 20.422 12.034 19.516C15.614 18.476 18.556 15.793 19.685 11.774C20.0218 10.5517 20.189 9.2889 20.182 8.02104C20.18 7.77204 21.692 5.24904 22 4.00804V4.00904Z"
+                    stroke="#212121"
+                    strokeWidth="2"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  />
+                </svg>
+              </Box>
             </Flex>
-            <Button sx={aboutUs} type="button">
+            <Button
+              onClick={() => {
+                window.open("https://daosign.org/", "_blank");
+              }}
+              sx={aboutUs}
+              type="button"
+            >
               About Us
             </Button>
           </Box>
@@ -224,8 +209,8 @@ export default function Footer({ animationNotVisible, setVisible }: any) {
             cursor: "pointer",
             color: "#CA5CF2",
             ml: "5px",
-            opacity: 0.5,
-            "&:hover": { opacity: 1 },
+            "&:hover": { color: "#AE4FD0" },
+            "&:focus": { color: "#AE4FD0" },
           }}
         >
           CIDT

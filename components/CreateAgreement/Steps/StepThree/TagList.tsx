@@ -30,7 +30,7 @@ export default function TagList<T = any>({ items, type, onDelete }: TagListProps
             }}
             key={el.value}
           >
-            {el.value.length > 14 ? (
+            {el?.value?.length > 14 ? (
               <Tooltip
                 transform="translate(-50%, 0%)"
                 title={el.value}

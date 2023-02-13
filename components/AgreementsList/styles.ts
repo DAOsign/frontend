@@ -48,10 +48,10 @@ const iconExit = {
   right: "18px",
   top: "18px",
   width: "15px",
+  cursor: "pointer",
   height: "15px",
-  opacity: "0.5",
-  "&:hover": {
-    opacity: 1,
+  "&:hover > svg > path": {
+    stroke: "#AE4FD0",
   },
   "@media screen and (max-width: 1200px)": {
     pt: "0",
@@ -110,6 +110,7 @@ const containerSides = {
   "@media screen and (max-width: 768px)": {
     flexDirection: "column",
     px: "16px",
+    overflow: "hidden",
   },
 } as ThemeUIStyleObject;
 
@@ -250,6 +251,12 @@ const agreementConteinerRelative = {
 const agreementLabels = {
   gap: "16px",
   alignItems: "flex-start",
+  "@media screen and (max-width: 720px)": {
+    "& .arrowTooltip": {
+      mr: "auto",
+      ml: "40px",
+    },
+  },
 } as ThemeUIStyleObject;
 
 const iconMenuAgreement = {
@@ -431,16 +438,13 @@ const iconSearchContainer = {
 
 const iconCopy = {
   marginLeft: "5px",
-  width: "10px",
-  height: "10px",
-  opacity: 0.5,
-  "&:hover": {
-    opacity: 1,
+  cursor: "pointer",
+  "&:hover > svg > path": {
+    stroke: "#AE4FD0",
   },
 } as ThemeUIStyleObject;
 
 const btnClear = {
-  opacity: "0.5",
   fontFamily: "InterBold",
   fontStyle: "normal",
   fontWeight: 700,
@@ -456,12 +460,12 @@ const btnClear = {
   pl: "8px",
   backgroundColor: "inherit",
   "&:hover": {
-    opacity: 1,
+    color: "#AE4FD0",
     background: "unset",
     backgroundColor: "inherit",
   },
   "&:focus": {
-    opacity: 1,
+    color: "#AE4FD0",
     background: "unset",
     backgroundColor: "inherit",
   },
