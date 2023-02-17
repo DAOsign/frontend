@@ -76,9 +76,18 @@ export default function AgreementItem({
                   </Box>
                 </Tooltip>
               ) : null}
-              <Box sx={agreementStatus === STATUS_READY_TO_SIGN ? blueAgrLabel : greyAgrLabel}>
-                {formatAgreementStatus(agreementStatus)}
-              </Box>
+              <Tooltip
+                top="-46px"
+                height="0"
+                left="58%"
+                transform={"translate(-60%, -3%)"}
+                title={"Agreement Status"}
+                minWidth="135px"
+              >
+                <Box sx={agreementStatus === STATUS_READY_TO_SIGN ? blueAgrLabel : greyAgrLabel}>
+                  {formatAgreementStatus(agreementStatus)}
+                </Box>
+              </Tooltip>
               <Flex sx={iconMenuAgreement}>
                 <Tooltip
                   top="-68px"

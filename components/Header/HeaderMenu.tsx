@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { Container, Flex, Text, Box, Button } from "theme-ui";
+import { notifComingSoon, notifSucces } from "../../utils/notification";
 import {
   menuContainer,
   fotoContainer,
@@ -8,7 +9,7 @@ import {
   btnLogaut,
   iconLogOut,
 } from "../../styles/styles";
-import { notifSucces } from "../../utils/notification";
+
 import { formatAddress, onCopyClick } from "../../utils/formats";
 import LogOutPopap from "../modalLogout";
 import Identicon from "../Identicon/Identicon";
@@ -69,7 +70,14 @@ const HeaderMenu = ({
             </Flex>
           </Container>
         </Flex>
-        <Button sx={{ variant: "buttons.grey", mt: "32px", width: "100%" }}>My Profile</Button>
+        <Button
+          onClick={() =>
+            notifComingSoon("Abilities to See and Customize My Profile are coming soon")
+          }
+          sx={{ variant: "buttons.grey", mt: "32px", width: "100%" }}
+        >
+          My Profile
+        </Button>
         <Button
           onClick={() => {
             onCopyClick(address);
@@ -79,7 +87,14 @@ const HeaderMenu = ({
         >
           Copy Share Link
         </Button>
-        <Button sx={{ variant: "buttons.grey", mt: "16px", width: "100%" }}>Switch Wallet</Button>
+        <Button
+          onClick={() =>
+            notifComingSoon("Abilities To Switch and Add Multiple Wallets are coming soon")
+          }
+          sx={{ variant: "buttons.grey", mt: "16px", width: "100%" }}
+        >
+          Switch Wallet
+        </Button>
         <Box
           sx={{
             width: "292px",

@@ -129,6 +129,13 @@ const CreateAgreementProvider = (props?: Partial<ProviderProps<CreateAgrementCon
   }, []);
 
   useEffect(() => {
+    if (values?.title?.length > 120) {
+      setValues(prevState => ({
+        ...prevState,
+        errors: { ...prevState.errors, title: "Title should be 120 characters max." },
+      }));
+      return;
+    }
     setValues(prevState => ({ ...prevState, errors: { ...prevState.errors, title: null } }));
   }, [values?.title]);
 

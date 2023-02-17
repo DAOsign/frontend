@@ -34,7 +34,7 @@ a {
 }
 .Toastify__toast.Toastify__toast-theme--light.Toastify__toast--default.Toastify__toast--close-on-click {
   width: 333px;
-  height: 80px;
+  min-height: 80px;
   right: 30px;
   position: relative;
   background: #ffffff;
@@ -44,6 +44,15 @@ a {
 }
 .Toastify__progress-bar.Toastify__progress-bar--animated.Toastify__progress-bar-theme--light.Toastify__progress-bar--default {
   display: none;
+}
+@media screen and (max-width: 768px) {
+  .Toastify__toast.Toastify__toast-theme--light.Toastify__toast--default.Toastify__toast--close-on-click  {
+    right: -19px;
+    margin-top: 10px;
+  }
+  .Toastify__toast.Toastify__toast-theme--light.Toastify__toast--default.Toastify__toast--close-on-click:first-child {
+    margin-top: 0;
+  }
 }
 .bg {
   position: relative;

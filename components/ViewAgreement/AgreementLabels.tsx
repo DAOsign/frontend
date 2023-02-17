@@ -84,9 +84,18 @@ export const AgreementLabels = ({
   return (
     <Flex sx={labelsContainer}>
       <Flex sx={labelsRow}>
-        <Flex sx={getAgreementStatusLabelStyle(agreementStatus)}>
-          {formatAgreementStatus(agreementStatus)}
-        </Flex>
+        <Tooltip
+          top="-46px"
+          height="0"
+          left="58%"
+          transform={"translate(-60%, -3%)"}
+          title={"Agreement Status"}
+          minWidth="135px"
+        >
+          <Flex sx={getAgreementStatusLabelStyle(agreementStatus)}>
+            {formatAgreementStatus(agreementStatus)}
+          </Flex>
+        </Tooltip>
         <Tooltip
           height="0"
           top="-62px"

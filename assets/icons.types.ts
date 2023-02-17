@@ -93,6 +93,7 @@ export interface IconsMapper extends Record<string, unknown> {
   verificationNotarized: Icon;
   defaultUserPicture: Icon;
   closedEye: Icon;
+  soon: Icon;
   link: Icon;
 }
 

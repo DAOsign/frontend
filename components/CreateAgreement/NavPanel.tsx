@@ -67,6 +67,10 @@ export default function NavPanel({ setLoading, page }: { setLoading: any; page: 
       if (!values.title) {
         errors.title = "Title can not be blank";
       }
+      //@ts-ignore
+      if (values.title.trim()?.length > 120) {
+        errors.title = "Title should be 120 characters max";
+      }
       if (!values.agreementPrivacy) {
         errors.agreementPrivacy = "Agreement Privacy is a required selection";
       }
@@ -75,6 +79,10 @@ export default function NavPanel({ setLoading, page }: { setLoading: any; page: 
         case 1:
           if (!values.title.trim()) {
             errors.title = "Title can not be blank";
+          }
+          //@ts-ignore
+          if (values.title.trim()?.length > 120) {
+            errors.title = "Title should be 120 characters max";
           }
           if (!values.agreementPrivacy) {
             errors.agreementPrivacy = "Agreement Privacy is a required selection";

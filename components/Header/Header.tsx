@@ -2,12 +2,20 @@ import React from "react";
 import { Container, Flex, Text, Button, Link, Box } from "theme-ui";
 import iconsObj from "../../assets/icons";
 import { formatAddress } from "../../utils/formats";
-import { container, addresContainer, iconMenu, identiconIcon, iconBell } from "./styles";
+import {
+  container,
+  addresContainer,
+  iconMenu,
+  identiconIcon,
+  iconBell,
+  containerBtn,
+} from "./styles";
 import Icon from "../icon";
 import { Logo } from "../Logo/Logo";
 import { useWeb3 } from "../../hooks/useWeb3";
 import NextLink from "next/link";
 import Identicon from "../Identicon/Identicon";
+import { notifComingSoon } from "../../utils/notification";
 
 export default function Header({ visible, setVisible, visibleLogOut }: any) {
   const { account } = useWeb3();
@@ -23,8 +31,12 @@ export default function Header({ visible, setVisible, visibleLogOut }: any) {
             <Logo />
           </Link>
         </NextLink>
-        <Flex sx={{ alignItems: "center", flexDirection: "row" }}>
-          <Button type="button" sx={{ ...iconMenu, display: "block" }}>
+        <Flex sx={containerBtn}>
+          <Button
+            onClick={() => notifComingSoon("Notification Center is coming soon")}
+            type="button"
+            sx={{ ...iconMenu, display: "block" }}
+          >
             <Box sx={iconBell}>
               <Icon src={iconsObj.Bell} />
             </Box>

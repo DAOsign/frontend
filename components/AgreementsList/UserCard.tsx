@@ -18,7 +18,7 @@ import {
 } from "./styles";
 import useWindowDimensions from "../../hooks/useWindowDimensions";
 import Identicon from "../Identicon/Identicon";
-import { notifSucces } from "../../utils/notification";
+import { notifComingSoon, notifSucces } from "../../utils/notification";
 import Tooltip from "../Tooltip";
 import CopyIcon from "../CopyIcon";
 export default function UserCard({ address }: any) {
@@ -26,7 +26,10 @@ export default function UserCard({ address }: any) {
 
   return (
     <Flex sx={container}>
-      <Box sx={iconExit}>
+      <Box
+        onClick={() => notifComingSoon("Ability to Share Public User Profile is coming soon")}
+        sx={iconExit}
+      >
         <svg
           width="20"
           height="20"
@@ -79,13 +82,27 @@ export default function UserCard({ address }: any) {
           </Flex>
           <Box className="card_tail">
             <Box sx={verificationIconContainer}>
-              <Image src={iconsObj.verificationAnonymous} alt="anonymous" />
+              <Tooltip
+                top="-106%"
+                left="-49px"
+                transform=""
+                minWidth="134px"
+                title={"Anonymous Badge"}
+                height={undefined}
+              >
+                <Image src={iconsObj.verificationAnonymous} alt="anonymous" />
+              </Tooltip>
             </Box>
           </Box>
         </Flex>
       </Flex>
       <Container sx={improveBtnContainer}>
-        <Button sx={improveBtn}>Add Verifications</Button>
+        <Button
+          onClick={() => notifComingSoon("More User Verification Badges are coming soon")}
+          sx={improveBtn}
+        >
+          Add Verifications
+        </Button>
       </Container>
     </Flex>
   );

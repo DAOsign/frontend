@@ -31,6 +31,28 @@ export const notifSucces = (text: string) => {
   toastList.add(id);
 };
 
+export const notifComingSoon = (text: string) => {
+  const id = toast(
+    <ToastContainer>
+      <Flex sx={{ alignItems: "center" }}>
+        {" "}
+        <Box sx={{ width: "44px", height: "44px", mr: "16px" }}>
+          <Icon src={iconsObj.soon} />{" "}
+        </Box>
+        <Text sx={{ maxWidth: "70%" }}>{text} </Text>
+      </Flex>
+    </ToastContainer>,
+    {
+      position: "top-right",
+      autoClose: 3000,
+    }
+  );
+  setTimeout(() => {
+    toast.dismiss(id);
+  }, 3000);
+  toastList.add(id);
+};
+
 export const notifError = (text: string) => {
   const id = toast(
     <ToastContainer>

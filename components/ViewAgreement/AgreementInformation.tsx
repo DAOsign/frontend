@@ -16,6 +16,7 @@ import { Box, Button, Flex, Link, Spinner } from "theme-ui";
 import iconsObj from "../../assets/icons";
 import { InformationRow } from "./InformationRow";
 import { formatAddress, formatAgreementCreationDate, onCopyClick } from "../../utils/formats";
+import Tooltip from "../../components/Tooltip";
 import {
   AgreementLocation,
   AgreementPrivacy,
@@ -148,7 +149,16 @@ export const AgreementInformation = ({
         <Box sx={verificationsTitle}>Required Verifications</Box>
         <Flex sx={verificationsRow}>
           <Box sx={verificationCard}>
-            <Image src={iconsObj.verificationAnonymous} alt="anonymous" />
+            <Tooltip
+              top="-111%"
+              left="-47px"
+              transform=""
+              minWidth="132px"
+              title={"Anonymous Badge"}
+              height={undefined}
+            >
+              <Image src={iconsObj.verificationAnonymous} alt="anonymous" />
+            </Tooltip>
           </Box>
         </Flex>
       </Flex>

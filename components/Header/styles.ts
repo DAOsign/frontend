@@ -65,4 +65,12 @@ const iconBell = {
   height: "24px",
   m: "0 auto",
 } as ThemeUIStyleObject;
-export { addresContainer, container, iconMenu, identiconIcon, iconBell };
+
+const containerBtn = {
+  alignItems: "center",
+  flexDirection: "row",
+  "@media screen and (max-width: 768px)": {
+    width: "126px",
+  },
+} as ThemeUIStyleObject;
+export { addresContainer, container, iconMenu, identiconIcon, iconBell, containerBtn };

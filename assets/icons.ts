@@ -88,6 +88,7 @@ import send from "../img/svg/send.svg";
 import error from "../img/svg/404.svg";
 import prof from "../img/svg/prof.svg";
 import drag from "../img/svg/drag.svg";
+import soon from "../img/svg/soon.svg";
 import mail from "../img/svg/mail.svg";
 import good from "../img/svg/good.svg";
 import link from "../img/svg/link.svg";
@@ -180,6 +181,7 @@ const iconsObj: IconsMapper = {
   send,
   Bell,
   menu,
+  soon,
   mail,
   user,
   drag,

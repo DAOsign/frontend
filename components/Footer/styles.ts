@@ -197,6 +197,7 @@ const icon = {
       height: 32,
       width: 32,
     },
+
   },
 } as ThemeUIStyleObject;
 

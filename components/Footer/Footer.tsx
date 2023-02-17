@@ -71,15 +71,15 @@ export default function Footer({ animationNotVisible, setVisible }: any) {
         <Flex sx={rightSide}>
           <Box>
             <Text sx={{ variant: "text.normalTextBold", display: "inline-block", mb: "12px" }}>
-              DaoSign
+              DAOSign
             </Text>
-            <Text sx={footerItem}>About</Text>
-            <Text sx={{ ...footerItem, mb: 0 }}>Terms of Service</Text>
+            <Text sx={footerItem}>Terms of Service</Text>
+            <Text sx={footerItem}>Coockies Policy</Text>
+            <Text sx={{ ...footerItem, mb: 0 }}>Privacy Policy</Text>
           </Box>
           <Box>
             <Text sx={socialTitle}>Resources</Text>
             <Text sx={footerItem}>GitHub</Text>
-            <Text sx={footerItem}>Discussion</Text>
             <Text sx={{ ...footerItem, mb: 0 }}>Support</Text>
           </Box>
           <Box>
@@ -167,11 +167,11 @@ export default function Footer({ animationNotVisible, setVisible }: any) {
                 sx={icon}
               >
                 <svg
+                  xmlns="http://www.w3.org/2000/svg"
                   width="24"
                   height="24"
                   viewBox="0 0 24 24"
                   fill="none"
-                  xmlns="http://www.w3.org/2000/svg"
                 >
                   <path
                     d="M22 4.00904C21 4.49904 20.02 4.69804 19 4.99904C17.879 3.73404 16.217 3.66404 14.62 4.26204C13.023 4.86004 11.977 6.32204 12 7.99904V8.99904C8.755 9.08204 5.865 7.60404 4 4.99904C4 4.99904 -0.182 12.432 8 15.999C6.128 17.246 4.261 18.087 2 17.999C5.308 19.802 8.913 20.422 12.034 19.516C15.614 18.476 18.556 15.793 19.685 11.774C20.0218 10.5517 20.189 9.2889 20.182 8.02104C20.18 7.77204 21.692 5.24904 22 4.00804V4.00904Z"
@@ -180,6 +180,37 @@ export default function Footer({ animationNotVisible, setVisible }: any) {
                     strokeLinecap="round"
                     strokeLinejoin="round"
                   />
+                </svg>
+              </Box>
+              <Box
+                onClick={() => {
+                  window.open("https://www.linkedin.com/company/daosign/", "_blank");
+                }}
+                sx={icon}
+              >
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="24"
+                  height="24"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                >
+                  <g>
+                    <path
+                      d="M8 11V16M8 8V8.01M12 16V11M4 6C4 5.46957 4.21071 4.96086 4.58579 4.58579C4.96086 4.21071 5.46957 4 6 4H18C18.5304 4 19.0391 4.21071 19.4142 4.58579C19.7893 4.96086 20 5.46957 20 6V18C20 18.5304 19.7893 19.0391 19.4142 19.4142C19.0391 19.7893 18.5304 20 18 20H6C5.46957 20 4.96086 19.7893 4.58579 19.4142C4.21071 19.0391 4 18.5304 4 18V6Z"
+                      stroke="#212121"
+                      stroke-width="2"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                    />
+                    <path
+                      d="M16 16V13C16 12.4696 15.7893 11.9609 15.4142 11.5858C15.0391 11.2107 14.5304 11 14 11C13.4696 11 12.9609 11.2107 12.5858 11.5858C12.2107 11.9609 12 12.4696 12 13"
+                      stroke="#212121"
+                      stroke-width="2"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                    />
+                  </g>
                 </svg>
               </Box>
             </Flex>
