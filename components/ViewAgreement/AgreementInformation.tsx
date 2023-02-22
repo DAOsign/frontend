@@ -190,7 +190,7 @@ export const AgreementInformation = ({
         <InformationRow
           name="Authority proof"
           value={
-            agreement.agreementProof ? (
+            agreement.agreementFileProof ? (
               <div>
                 {formatAddress(agreement.agreementFileProof!.cid)} <SignatureIcon />
               </div>
