@@ -21,9 +21,8 @@ const useSignAgreement = (agreementId: number) => {
       .toPromise()
       .then(async res => {
         const signingPayload = res.data?.getAgreementFileProofData;
-        if (!signingPayload) {
-          console.error("No file proof payload");
-          return;
+        if (res.error || !signingPayload) {
+          throw new Error("No file proof payload");
         }
 
         return clearPayload(signingPayload);
@@ -36,9 +35,8 @@ const useSignAgreement = (agreementId: number) => {
       .toPromise()
       .then(async res => {
         const signingPayload = res.data?.getAgreementSignProofData;
-        if (!signingPayload) {
-          console.error("No sign proof payload");
-          return;
+        if (res.error || !signingPayload) {
+          throw new Error("No file proof payload");
         }
         return clearPayload(signingPayload);
       });
@@ -49,7 +47,12 @@ const useSignAgreement = (agreementId: number) => {
       data: signingPayload,
       signature: signature,
       agreementId: Number(agreementId),
-    }).then(console.log);
+    }).then(res => {
+      if (res.error) {
+        throw new Error(res.error.message);
+      }
+      return res;
+    });
   };
 
   const signSignProofData = async (signingPayload: any, signature: string) => {
@@ -57,6 +60,11 @@ const useSignAgreement = (agreementId: number) => {
       data: signingPayload,
       signature: signature,
       agreementId: Number(agreementId),
+    }).then(res => {
+      if (res.error) {
+        throw new Error(res.error.message);
+      }
+      return res;
     });
   };
 
@@ -82,8 +90,9 @@ const useSignAgreement = (agreementId: number) => {
     if (!signature) {
       throw new Error("Payload wasn't signed");
     }
-
+    
     return signSignProofData(signingPayload, signature);
+
   };
 
   return {

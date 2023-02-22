@@ -45,7 +45,7 @@ export default function CreateAgreement({ page }: { page: string }) {
   return (
     <Flex sx={containerSides}>
       <Container sx={leftSide} className={transitioned ? "transition" : ""}>
-        <Text sx={title}> Create New Agreement</Text>
+        <Text sx={title}>Create New Agreement</Text>
         {steps[step]}
       </Container>
       <Container sx={rightSide}>
