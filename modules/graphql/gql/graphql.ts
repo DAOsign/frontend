@@ -55,8 +55,8 @@ export type AgreementFileProof = {
   agreementFileProofMetadataId: Scalars["Int"];
   agreementId: Scalars["Int"];
   authorWalletId: Scalars["Int"];
-  cid: Scalars["String"];
-  signature: Scalars["String"];
+  cid?: Maybe<Scalars["String"]>;
+  signature?: Maybe<Scalars["String"]>;
   signers: Array<Scalars["String"]>;
   timestamp: Scalars["DateTime"];
 };
@@ -632,8 +632,9 @@ export type QueryQuery = {
     }> | null;
     agreementFileProof?: {
       __typename?: "AgreementFileProof";
-      cid: string;
-      signature: string;
+      cid?: string | null;
+      signature?: string | null;
+      signers: Array<string>;
     } | null;
     agreementProof?: { __typename?: "AgreementProof"; cid: string; signedAt: any } | null;
   } | null;
@@ -1380,6 +1381,7 @@ export const QueryDocument = {
                     selections: [
                       { kind: "Field", name: { kind: "Name", value: "cid" } },
                       { kind: "Field", name: { kind: "Name", value: "signature" } },
+                      { kind: "Field", name: { kind: "Name", value: "signers" } },
                     ],
                   },
                 },

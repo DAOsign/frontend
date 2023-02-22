@@ -91,7 +91,7 @@ export const SignerRow = ({ signer, signProof, viewProof }: Props) => {
 
       {signProof?.cid ? (
         <td onClick={() => viewProof(signProof)} style={{ cursor: "pointer" }}>
-          {formatAddress(signProof.cid)} <SignatureIcon />
+          {formatAddress(signProof.cid)} <SignatureIcon color="#CA5CF2" />
         </td>
       ) : (
         <td>-</td>

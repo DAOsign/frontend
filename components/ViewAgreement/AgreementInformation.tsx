@@ -145,6 +145,7 @@ export const AgreementInformation = ({
       showProof({ title: AGREEMENT_PROOF, proof: agreement.agreementProof });
     }
     if (type === AUTHORITY_PROOF && agreement.agreementFileProof) {
+      //@ts-ignore
       showProof({ title: AUTHORITY_PROOF, proof: agreement.agreementFileProof });
     }
   };
@@ -177,28 +178,34 @@ export const AgreementInformation = ({
           name="Agreement proof"
           value={
             agreement.agreementProof ? (
-              <div>
-                {formatAddress(agreement.agreementProof!.cid)} <SignatureIcon />
+              <div
+                onClick={() => (agreement.agreementProof ? onShowProof(AGREEMENT_PROOF) : {})}
+                style={{ cursor: "pointer" }}
+              >
+                {formatAddress(agreement.agreementProof!.cid)} <SignatureIcon color="#CA5CF2" />
               </div>
             ) : (
               "-"
             )
           }
-          onClick={() => (agreement.agreementProof ? onShowProof(AGREEMENT_PROOF) : {})}
         />
 
         <InformationRow
           name="Authority proof"
           value={
             agreement.agreementFileProof ? (
-              <div>
-                {formatAddress(agreement.agreementFileProof!.cid)} <SignatureIcon />
+              <div
+                onClick={() => (agreement.agreementFileProof ? onShowProof(AUTHORITY_PROOF) : {})}
+                style={{ cursor: "pointer" }}
+              >
+                {formatAddress(agreement.agreementFileProof!.cid!)}{" "}
+                <SignatureIcon color="#CA5CF2" />
               </div>
             ) : (
               "-"
             )
           }
-          onClick={() => (agreement.agreementProof ? onShowProof(AUTHORITY_PROOF) : {})}
+          onClick={() => (agreement.agreementFileProof ? onShowProof(AUTHORITY_PROOF) : {})}
         />
         <InformationRow name="Location" value={agreementLocation || ""} />
         <InformationRow

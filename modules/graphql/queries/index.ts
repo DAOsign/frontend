@@ -69,6 +69,7 @@ export const agreementById = graphql(`
       agreementFileProof {
         cid
         signature
+        signers
       }
       agreementProof {
         cid
