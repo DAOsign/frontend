@@ -49,6 +49,8 @@ export const restoreCloudFile = async (url: string, abortController?: AbortContr
       return file;
     });
 };
+export const getFileFromIPFS = async (hash: string) =>
+  axios.get("/api/getFromIpfs", { params: { hash }, responseType: "json" }).then(res => res.data);
 
 export const restoreIpfsFile = async (hash: string, abortController?: AbortController) => {
   return axios

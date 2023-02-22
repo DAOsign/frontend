@@ -164,7 +164,7 @@ export default function NavPanel({ setLoading, page }: { setLoading: any; page: 
 
   const [{ fetching: savingAgreement }, saveAgreement] = useMutation(saveAgreementMutation);
 
-  const handleCreateAgreement = async (isReadyToSign: boolean = true) => {
+  const handleCreateAgreement = async (isReadyToSign: boolean = false) => {
     await saveAgreement({
       agreementId: Number(query.id),
       title: values.title,

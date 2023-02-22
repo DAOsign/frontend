@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import { Flex, Text, Button, Box, Container, Link } from "theme-ui";
+import React, { useEffect, useState } from "react";
+import { Flex, Text, Button, Box, Container, Link, Spinner } from "theme-ui";
 import Icon from "../icon/index";
 import iconsObj from "../../assets/icons";
 import proof from "./example.json";
@@ -18,19 +18,34 @@ import {
 } from "./styles";
 import { Portal } from "../Portal/Portal";
 import { ModalBase } from "../ModalBase/ModalBase";
-import { AGREEMENT_PROOF, AUTHORITY_PROOF } from "../ViewAgreement/InformationRow";
+
 import dynamic from "next/dynamic";
+import { AgreementSignProof } from "../../modules/graphql/gql/graphql";
+import { getFileFromIPFS } from "../../modules/rest";
+import { formatAddress } from "../../utils/formats";
+import { AGREEMENT_PROOF, AUTHORITY_PROOF } from "../ViewAgreement/AgreementInformation";
 
 const ReactJson = dynamic(() => import("react-json-view"), { ssr: false });
+
+//TODO move to envs
+const IPFS_GATEWAY_URL = "https://gateway.pinata.cloud/ipfs";
 
 interface Props {
   isOpen: boolean;
   onExit: () => void;
   title: string;
+  proof: { cid: string } | AgreementSignProof;
 }
 
-export default function ModalProof({ isOpen, onExit, title }: Props) {
-  const [openProof, setOpenProff] = useState(false);
+export default function ModalProof({ isOpen, onExit, title, proof }: Props) {
+  const [showDetails, setShowDetails] = useState(false);
+  const [{ proofJSON, loading }, setProofJSON] = useState<{
+    proofJSON: Record<string, any> | undefined;
+    loading: boolean;
+  }>({
+    loading: true,
+    proofJSON: undefined,
+  });
 
   const nameTite = () => {
     if (title === AGREEMENT_PROOF) return "agreement";
@@ -38,15 +53,27 @@ export default function ModalProof({ isOpen, onExit, title }: Props) {
     return "signature";
   };
 
-  const JsonConfig = {
-    type: "front end",
-    items: [proof],
+  const handleShowDetails = async () => {
+    setShowDetails(prev => !prev);
+  };
+
+  useEffect(() => {
+    if (proof && proof.cid) {
+      getFileFromIPFS(proof!.cid!).then(proof => {
+        setProofJSON({ loading: false, proofJSON: proof });
+      });
+    }
+  }, [proof]);
+
+  const onClose = () => {
+    setShowDetails(false);
+    onExit();
   };
   return (
-    <Portal isOpen={isOpen}>
+    <Portal isOpen={isOpen && !!proof}>
       <ModalBase height={"fit-content"} width={undefined}>
         <Flex sx={container}>
-          <Box onClick={onExit} sx={closeIcon}>
+          <Box onClick={onClose} sx={closeIcon}>
             <Icon src={iconsObj.xClose} />
           </Box>
           <Text sx={mainText}>Proof</Text>
@@ -54,22 +81,31 @@ export default function ModalProof({ isOpen, onExit, title }: Props) {
             <Box>
               <Text sx={secondaryTitle}>Proof of {nameTite()}</Text>
             </Box>
-            <Link onClick={() => window.open("/proofContent", "_blank")}>
+            <Link
+              onClick={() =>
+                window.open(`${IPFS_GATEWAY_URL}/${proof.cid}`, "_blank", "noreferrer")
+              }
+            >
               <Flex sx={{ alignItems: "center", cursor: "pointer" }}>
-                <Text sx={text}>#bafk...oowa</Text>
+                <Text sx={text}>{showDetails ? proof?.cid : formatAddress(proof?.cid || "")}</Text>
                 <Box sx={linkContainer}>
                   <Icon src={iconsObj.link} />
                 </Box>
               </Flex>
             </Link>
-            <Box onClick={() => setOpenProff(!openProof)} sx={arrowContainer}>
-              <Icon src={iconsObj.arrowLeftPink} />
-            </Box>
+
+            {loading ? (
+              <Spinner width="20px" />
+            ) : (
+              <Box onClick={handleShowDetails} sx={arrowContainer}>
+                <Icon src={iconsObj.arrowLeftPink} />
+              </Box>
+            )}
           </Flex>
-          {openProof ? (
+          {showDetails && proofJSON ? (
             <>
               <Container sx={containerProof}>
-                <ReactJson src={JsonConfig} />
+                <ReactJson src={proofJSON} name={null} />
               </Container>
               <Box
                 sx={{ ...proofPadding, bottom: title !== AGREEMENT_PROOF ? "113px" : "30px" }}

@@ -46,7 +46,7 @@ a {
   display: none;
 }
 @media screen and (max-width: 768px) {
-  .Toastify__toast.Toastify__toast-theme--light.Toastify__toast--default.Toastify__toast--close-on-click  {
+  .Toastify__toast.Toastify__toast-theme--light.Toastify__toast--default.Toastify__toast--close-on-click {
     right: -19px;
     margin-top: 10px;
   }
@@ -772,13 +772,14 @@ body {
 }
 
 .iconPlus:hover > g > path {
-  stroke: #AE4FD0
+  stroke: #ae4fd0;
 }
 
-.object-key-val, .variable-row {
+.object-key-val,
+.variable-row {
   border-left: none !important;
 }
-.copy-to-clipboard-container{
+.copy-to-clipboard-container {
   display: none !important;
 }
 .collapsed-icon > svg {
@@ -788,7 +789,7 @@ body {
   display: none !important;
 }
 .string-value {
-  font-family: 'InterRegular' !important;
+  font-family: "InterRegular" !important;
   font-style: normal;
   font-weight: 400;
   font-size: 12px !important;
@@ -796,11 +797,13 @@ body {
   color: #212121 !important;
   opacity: 1 !important;
 }
-.object-key > span:last-child, .object-key > span:first-child {
+.object-key > span:last-child,
+.object-key > span:first-child {
   display: none !important;
 }
-.object-key, .array-key {
-  font-family: 'InterRegular' !important;
+.object-key,
+.array-key {
+  font-family: "InterRegular" !important;
   font-style: normal !important;
   font-weight: 400 !important;
   font-size: 12px !important;
@@ -817,7 +820,7 @@ body {
 .expanded-icon > svg {
   fill: #212121 !important;
 }
-.object-key-val > span > span:last-child  {
+.object-key-val > span > span:last-child {
   color: #212121 !important;
 }
 .node-ellipsis {

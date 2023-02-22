@@ -1,56 +1,58 @@
 .participantsTable {
-    border-collapse: separate;
-    border-spacing: 0 0;
+  border-collapse: separate;
+  border-spacing: 0 0;
 }
 .participantsTableMobile {
-    display: none !important;
+  display: none !important;
 }
 @media screen and (max-width: 720px) {
-    .participantsTable {
-        display: none !important;
-    }
-    .participantsTableMobile {
-        display: block !important;
-        background-color: transparent;
-        border: none;
-        padding-top: 16px;
-    }
+  .participantsTable {
+    display: none !important;
+  }
+  .participantsTableMobile {
+    display: block !important;
+    background-color: transparent;
+    border: none;
+    padding-top: 16px;
+  }
 }
 .participantsTable thead tr th {
-    font-style: normal;
-    font-weight: 400;
-    font-size: 12px;
-    line-height: 160%;
-    color: #212121;
-    opacity: 0.5;
-    padding: 9px 0;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 160%;
+  color: #212121;
+  opacity: 0.5;
+  padding: 9px 0;
 }
 
 .participantsTable tbody tr td {
-    padding: 12px 0;
-    font-size: 14px;
+  padding: 12px 0;
+  font-size: 14px;
 }
 
 .participantsTable tbody tr:nth-child(even) {
-    background: white;
+  background: white;
 }
 
 .participantsTable tbody tr:nth-child(odd) {
-    background: #F7F7FB;
+  background: #f7f7fb;
 }
 
-.participantsTable tbody tr td:first-child, .participantsTable thead tr th:first-child {
-    padding-left: 32px
+.participantsTable tbody tr td:first-child,
+.participantsTable thead tr th:first-child {
+  padding-left: 32px;
 }
 
-.participantsTable tbody tr td:last-child, .participantsTable thead tr th:last-child {
-    padding-right: 32px
+.participantsTable tbody tr td:last-child,
+.participantsTable thead tr th:last-child {
+  padding-right: 32px;
 }
 
 .participantsTable tbody tr:last-child td:first-child {
-    border-bottom-left-radius: 12px;
+  border-bottom-left-radius: 12px;
 }
 
 .participantsTable tbody tr:last-child td:last-child {
-    border-bottom-right-radius: 12px;
+  border-bottom-right-radius: 12px;
 }

@@ -14,15 +14,17 @@ import Icon from "../icon";
 import iconsObj from "../../assets/icons";
 import { formatAddress, onCopyClick } from "../../utils/formats";
 import PendingIcon from "../icon/editable/PendingIcon";
-import { Signer } from "../../modules/graphql/gql/graphql";
+import { AgreementSignProof, Signer } from "../../modules/graphql/gql/graphql";
 import { notifSucces } from "../../utils/notification";
+import SignedIcon from "../icon/editable/SignedIcon";
 
 interface Props {
   signer: Signer;
-  openProof: any;
+  signProof: AgreementSignProof;
+  viewProof: (proof: AgreementSignProof) => void;
 }
 
-export const SignerRow = ({ signer, openProof }: Props) => {
+export const SignerRow = ({ signer, signProof, viewProof }: Props) => {
   const handleCopyAddress = (address: string) => {
     onCopyClick(address);
     notifSucces("Link Copied");
@@ -65,8 +67,13 @@ export const SignerRow = ({ signer, openProof }: Props) => {
       </td>
       <td>
         <Flex sx={tableSignatureCell}>
-          {signer?.signature?.signature ? (
-            signer.signature.signature
+          {signProof?.signature ? (
+            <>
+              <Box sx={pendingIcon}>
+                <SignedIcon />
+              </Box>
+              <Box>Signed</Box>
+            </>
           ) : (
             <>
               <Box sx={pendingIcon}>
@@ -77,7 +84,14 @@ export const SignerRow = ({ signer, openProof }: Props) => {
           )}
         </Flex>
       </td>
-      <td onClick={openProof}>{signer?.signature?.signatureCid || "-"}</td>
+
+      {signProof?.cid ? (
+        <td onClick={() => viewProof(signProof)} style={{ cursor: "pointer" }}>
+          {formatAddress(signProof.cid)}
+        </td>
+      ) : (
+        <td>-</td>
+      )}
     </tr>
   );
 };

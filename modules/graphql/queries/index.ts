@@ -58,6 +58,22 @@ export const agreementById = graphql(`
       content
       isWaitingForMySignature
       createdAt
+      signProofs {
+        signature
+        cid
+        signerWalletId
+        signerWallet {
+          address
+        }
+      }
+      agreementFileProof {
+        cid
+        signature
+      }
+      agreementProof {
+        cid
+        signedAt
+      }
     }
   }
 `);
@@ -115,6 +131,64 @@ export const myAgreementsQuery = graphql(`
         }
       }
       count
+    }
+  }
+`);
+
+export const getAgreementFileProofData = graphql(`
+  query GetAgreementFileProofData($agreementId: Int!) {
+    getAgreementFileProofData(agreementId: $agreementId) {
+      domain {
+        name
+        version
+      }
+      primaryType
+      types {
+        Agreement {
+          name
+          type
+        }
+        Signers {
+          name
+          type
+        }
+      }
+      message {
+        agreementFileCID
+        app
+        from
+        metadata
+        signers {
+          address
+          metadata
+        }
+        timestamp
+      }
+    }
+  }
+`);
+
+export const getAgreementSignProofData = graphql(`
+  query GetAgreementSignProofData($agreementId: Int!) {
+    getAgreementSignProofData(agreementId: $agreementId) {
+      domain {
+        name
+        version
+      }
+      primaryType
+      types {
+        Agreement {
+          name
+          type
+        }
+      }
+      message {
+        agreementFileProofCID
+        app
+        metadata
+        signer
+        timestamp
+      }
     }
   }
 `);

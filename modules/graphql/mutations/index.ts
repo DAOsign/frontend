@@ -44,15 +44,6 @@ export const saveAgreementMutation = graphql(`
   }
 `);
 
-export const setAgreementReadyToSignMutation = graphql(`
-  mutation SetAgreementReadyToSignMutation($agreementId: Int!) {
-    setAgreementReadyToSign(agreementId: $agreementId) {
-      agreementId
-      message
-    }
-  }
-`);
-
 export const deleteAgreementMutation = graphql(`
   mutation DeleteAgreementMutation($agreementId: Int!) {
     deleteAgreement(agreementId: $agreementId) {
@@ -66,6 +57,30 @@ export const logoutMutation = graphql(`
   mutation Mutation {
     logout {
       message
+    }
+  }
+`);
+
+export const sendSignedAgreementFileData = graphql(`
+  mutation sendSignedFileProofData(
+    $data: AgreementFileProofDataInput!
+    $signature: String!
+    $agreementId: Int!
+  ) {
+    sendSignedFileProofData(data: $data, signature: $signature, agreementId: $agreementId) {
+      cid
+    }
+  }
+`);
+
+export const sendSignedAgreementSignData = graphql(`
+  mutation sendSignedSignProofData(
+    $data: AgreementSignProofDataInput!
+    $signature: String!
+    $agreementId: Int!
+  ) {
+    sendSignedSignProofData(data: $data, signature: $signature, agreementId: $agreementId) {
+      cid
     }
   }
 `);

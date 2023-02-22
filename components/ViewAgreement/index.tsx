@@ -1,9 +1,13 @@
-import React, { useEffect, useMemo, useState } from "react";
+import React, { useCallback, useEffect, useMemo, useState } from "react";
 import { Box, Button, Flex } from "theme-ui";
 import { useRouter } from "next/router";
-import { useQuery } from "urql";
+import { useMutation, useQuery, useClient } from "urql";
 
-import { agreementById } from "../../modules/graphql/queries";
+import {
+  agreementById,
+  getAgreementFileProofData as getAgreementFileProofDataRequest,
+  getAgreementSignProofData as getAgreementSignProofDataRequest,
+} from "../../modules/graphql/queries";
 import {
   backContainer,
   backIcon,
@@ -27,25 +31,20 @@ import { AgreementObserversList } from "./AgreementObserversList";
 import { AgreementContentPreview } from "./AgreementContentPreview";
 import ModalAddObservers from "../../components/ModalAddObserver";
 
+import useSignAgreement from "../../hooks/useSignAgreement";
+
 export const ViewAgreement = () => {
   const { push, query } = useRouter();
   const { agreementId } = query;
   const idIsWrong = !!agreementId && !Number(agreementId);
   const [isOpen, setIsOpen] = useState(false);
+  const client = useClient();
+
+  const [agreement, setAgreement] = useState<ReturnType<
+    typeof toAgreementWithParticipants
+  > | null>();
 
   const { account } = useWeb3();
-
-  const [{ data, error: getAgreementError }, refetchAgreement] = useQuery({
-    query: agreementById,
-    variables: { agreementId: Number(agreementId) },
-    pause: !agreementId || idIsWrong,
-    requestPolicy: "network-only",
-  });
-
-  const agreement = useMemo(
-    () => (data?.agreement ? toAgreementWithParticipants(data.agreement as any) : null),
-    [data]
-  );
 
   // TODO: compare by user, not wallet
   const userIsAuthor = useMemo<boolean>(
@@ -53,20 +52,42 @@ export const ViewAgreement = () => {
     [account, agreement?.authorWalletAddress]
   );
 
-  useEffect(() => {
-    if (
-      getAgreementError &&
-      getAgreementError.message &&
-      !getAgreementError.message.includes("Access denied")
-    ) {
-      notifError(getAgreementError?.message || "Failed to get agreement from server");
-      // eslint-disable-next-line no-console
-      console.error("[GetAgreementById]", getAgreementError.message);
-    }
-  }, [getAgreementError]);
+  const { makeProofOfAuthority, makeProofOfSignature } = useSignAgreement(Number(agreementId));
 
-  const onSetAgreementReadyToSign = () => {
-    refetchAgreement();
+  useEffect(() => {
+    if (agreementId) {
+      refetchAgreement();
+    }
+  }, [agreementId]);
+
+  const refetchAgreement = useCallback(async () => {
+    return await client
+      .query(agreementById, { agreementId: Number(agreementId) }, { requestPolicy: "network-only" })
+      .toPromise()
+      .then(res => {
+        const agr = res.data?.agreement;
+
+        //@ts-ignore
+        if (agr) setAgreement(toAgreementWithParticipants(agr)); //eslint-disable-line
+        if (res?.error) {
+          const errorMsg = res?.error.message;
+          notifError(errorMsg || "Failed to get agreement from server");
+          // eslint-disable-next-line no-console
+          console.error("[GetAgreementById]", errorMsg);
+        }
+      });
+  }, [agreementId]);
+
+  const onSetAgreementReadyToSign = async () => {
+    return makeProofOfAuthority().then(async () => {
+      await refetchAgreement();
+    });
+  };
+
+  const onSignAgreement = async () => {
+    return makeProofOfSignature().then(async () => {
+      await refetchAgreement();
+    });
   };
 
   const handleBack = () => {
@@ -75,7 +96,7 @@ export const ViewAgreement = () => {
 
   return (
     <Flex sx={container}>
-      {idIsWrong || getAgreementError ? (
+      {idIsWrong ? (
         <Flex sx={errorContainer}>
           <Box sx={errorMessage}>
             {idIsWrong ? "Agreement ID is not valid" : "You can't view this agreement"}
@@ -109,18 +130,22 @@ export const ViewAgreement = () => {
             <AgreementSignersList signers={agreement?.signers || []} />
             <AgreementObserversList observers={agreement?.observers || []} />
           </Flex>
-          <AgreementInformation
-            agreementId={Number(agreementId)}
-            agreementStatus={agreement?.agreementStatus}
-            agreementPrivacy={agreement?.agreementPrivacy}
-            agreementLocation={agreement?.agreementLocation}
-            createdAt={agreement?.createdAt}
-            isWaitingForMySignature={agreement?.isWaitingForMySignature || false}
-            userIsAuthor={userIsAuthor}
-            setIsOpen={setIsOpen}
-            authorWalletAddress={agreement?.authorWalletAddress}
-            onSetAgreementReadyToSign={onSetAgreementReadyToSign}
-          />
+          {agreement && (
+            <AgreementInformation
+              agreement={agreement}
+              agreementId={Number(agreementId)}
+              agreementStatus={agreement?.agreementStatus}
+              agreementPrivacy={agreement?.agreementPrivacy}
+              agreementLocation={agreement?.agreementLocation}
+              createdAt={agreement?.createdAt}
+              isWaitingForMySignature={agreement?.isWaitingForMySignature || false}
+              userIsAuthor={userIsAuthor}
+              setIsOpen={setIsOpen}
+              authorWalletAddress={agreement?.authorWalletAddress}
+              onSetAgreementReadyToSign={onSetAgreementReadyToSign}
+              onSignAgreement={onSignAgreement}
+            />
+          )}
         </>
       )}
       <ModalAddObservers onExit={() => setIsOpen(false)} isOpen={isOpen} />

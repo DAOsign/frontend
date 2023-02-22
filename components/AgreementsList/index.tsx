@@ -20,7 +20,6 @@ import useInfiniteScroll from "react-infinite-scroll-hook";
 
 export default function AgreementsList({ address }: any) {
   const {
-    error: errorLoad,
     setValueSearch,
     setFilterOptions,
     filterOptions,
@@ -28,32 +27,21 @@ export default function AgreementsList({ address }: any) {
     hasNextPage,
     valueSearch,
     loadMore,
-    validData,
     loading,
     error,
-    count,
-    data,
+    data: agreements,
   } = useLoadItems();
+
   const [infiniteRef] = useInfiniteScroll({
     loading,
     hasNextPage,
     onLoadMore: loadMore,
-    disabled: !!errorLoad,
+    disabled: loading,
   });
 
   useEffect(() => {
     error && console.error(error);
   }, [error]);
-
-  const agreements = useMemo(() => {
-    return !validData
-      ? //@ts-ignore
-        data?.map((a: any) => toAgreement(a as AgreementRespone)) || []
-      : //@ts-ignore
-        data?.myAgreements?.agreements.map((a: any) => toAgreement(a as AgreementRespone)) || [];
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [data]);
-  console.log("data", data);
 
   return (
     <Flex sx={containerSides}>

@@ -4,12 +4,14 @@ import { useEffect, useState } from "react";
 import { Web3Provider } from "@ethersproject/providers";
 import networks from "../lib/snapshot/networks.json";
 import { formatUnits } from "@ethersproject/units";
+import { TypedDataDomain, TypedDataField } from "ethers";
 import { useLock } from "../hooks/useLock";
 import { ConnectorType } from "../lib/snapshot/options";
 import { clearToken, getToken, setToken } from "../utils/token";
 import { useMutation } from "urql";
 import { loginMutation } from "./graphql/mutations";
 import { useRouter } from "next/router";
+//import { TypedDataDomainType, TypedDataFieldType } from "./graphql/gql/graphql";
 
 interface AuthProps {}
 
@@ -19,13 +21,19 @@ interface AuthContext {
   account: string | null;
   authLoading: boolean;
   sign: (message: string) => Promise<string>;
+  signTypedData: (
+    domain: TypedDataDomain,
+    types: Record<string, TypedDataField[]>,
+    value: Record<string, any>
+  ) => Promise<string>;
+  _signTypedData: (msg: any) => Promise<any>;
 }
 
 type ChainId = keyof typeof networks;
 
 interface Web3State {
   account: string | null;
-  network: typeof networks[ChainId];
+  network: (typeof networks)[ChainId];
   authLoading: boolean;
   walletConnectType: string | null;
   profile: null;
@@ -41,6 +49,8 @@ export const AuthContext = createContext<AuthContext>({
   login: async () => {},
   logout: () => {},
   sign: async () => "",
+  signTypedData: async () => "",
+  _signTypedData: async (msg: any) => "",
 });
 
 const AuthProvider = (props?: Partial<ProviderProps<AuthProps>>) => {
@@ -247,6 +257,30 @@ const AuthProvider = (props?: Partial<ProviderProps<AuthProps>>) => {
     return "";
   }
 
+  async function _signTypedData(msgParam: any) {
+    const signer = web3ProviderRef.current!.getSigner();
+    const address = await signer.getAddress();
+    return await signer.provider.send("eth_signTypedData_v4", [address, JSON.stringify(msgParam)]);
+  }
+
+  async function signTypedData(
+    domain: TypedDataDomain,
+    types: Record<string, TypedDataField[]>,
+    value: Record<string, any>
+  ): Promise<string> {
+    const signer = web3ProviderRef.current!.getSigner();
+    if (!signer) {
+      throw Error("No signer in Web3Provider");
+    }
+    try {
+      const signature = await signer._signTypedData(domain, types, value);
+      return signature;
+    } catch (e) {
+      console.error(e);
+    }
+    return "";
+  }
+
   useEffect(() => {
     login();
   }, []); // eslint-disable-line react-hooks/exhaustive-deps
@@ -258,6 +292,8 @@ const AuthProvider = (props?: Partial<ProviderProps<AuthProps>>) => {
         login,
         logout,
         sign,
+        signTypedData,
+        _signTypedData,
         //loadProvider,
         //handleChainChanged,
         //web3: state,

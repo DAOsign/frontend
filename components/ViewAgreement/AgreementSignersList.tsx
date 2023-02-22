@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Signer } from "../../modules/graphql/gql/graphql";
+import { AgreementSignProof, Signer } from "../../modules/graphql/gql/graphql";
 import { Box, Flex, Container } from "theme-ui";
 import { participantsCard, participantsCardTitle, noObserversMessage } from "./styles";
 import { SignerRow } from "./SignerRow";
@@ -13,7 +13,7 @@ interface Props {
 }
 
 export const AgreementSignersList = ({ signers }: Props) => {
-  const [isOpen, setIsOpen] = useState(false);
+  const [proofToShow, showProof] = useState<AgreementSignProof>();
   return (
     <Container>
       <Flex sx={participantsCard}>
@@ -42,7 +42,13 @@ export const AgreementSignersList = ({ signers }: Props) => {
               </thead>
               <tbody>
                 {signers?.map((signer, index) => (
-                  <SignerRow openProof={() => setIsOpen(true)} signer={signer} key={index} />
+                  <SignerRow
+                    viewProof={proof => showProof(proof)}
+                    signer={signer}
+                    //@ts-ignore
+                    signProof={signer?.signProof}
+                    key={index}
+                  />
                 ))}
               </tbody>
             </table>
@@ -70,7 +76,14 @@ export const AgreementSignersList = ({ signers }: Props) => {
           </Box>
         )}
       </Flex>
-      <ModalProof isOpen={isOpen} onExit={() => setIsOpen(false)} title="signature" />
+      {proofToShow && (
+        <ModalProof
+          isOpen={!!proofToShow}
+          onExit={() => showProof(undefined)}
+          title="signature"
+          proof={proofToShow}
+        />
+      )}
     </Container>
   );
 };

@@ -31,9 +31,9 @@ import { sleep } from "../../utils/common";
 import { useRouter } from "next/router";
 import { notifError, notifSucces } from "../../utils/notification";
 import Image from "next/image";
-import { useMutation } from "urql";
-import { setAgreementReadyToSignMutation } from "../../modules/graphql/mutations";
 import ModalSignStatus from "../ModalSignStatus";
+import ModalProof from "../ModalProof";
+import { toAgreementWithParticipants } from "../../utils/typeUtils";
 
 const formatAgreementPrivacy = (agreementPrivacy: string | undefined) => {
   if (!agreementPrivacy) return "";
@@ -46,6 +46,7 @@ const formatAgreementPrivacy = (agreementPrivacy: string | undefined) => {
 };
 
 interface Props {
+  agreement: ReturnType<typeof toAgreementWithParticipants>;
   agreementId: number;
   agreementStatus?: AgreementStatus;
   agreementPrivacy?: AgreementPrivacy;
@@ -55,10 +56,15 @@ interface Props {
   userIsAuthor: boolean;
   authorWalletAddress?: string;
   setIsOpen: any;
-  onSetAgreementReadyToSign?: () => void;
+  onSetAgreementReadyToSign?: () => Promise<void>;
+  onSignAgreement?: (...props: any) => Promise<any>;
 }
 
+export const AGREEMENT_PROOF = "Agreement Proof";
+export const AUTHORITY_PROOF = "Authority Proof";
+
 export const AgreementInformation = ({
+  agreement,
   agreementId,
   agreementStatus,
   agreementPrivacy,
@@ -68,15 +74,21 @@ export const AgreementInformation = ({
   userIsAuthor,
   setIsOpen,
   authorWalletAddress,
-  onSetAgreementReadyToSign = () => {},
+  onSetAgreementReadyToSign = async () => {},
+  onSignAgreement = async () => {},
 }: Props) => {
   const { push } = useRouter();
   const [isConfirmAgreementDeletionPopupVisible, setIsConfirmAgreementDeletionPopupVisible] =
     useState<boolean>(false);
 
-  const [, setAgreementReadyToSign] = useMutation(setAgreementReadyToSignMutation);
   const [isSettingReadyToSign, setIsSettingReadyToSign] = useState<boolean>(false);
   const [isOpenModalSignStatus, setIsOpenModalSignStatus] = useState<boolean>(false);
+
+  const [{ agreementProof }] = useState({ agreementProof: undefined });
+
+  const [proofToShow, showProof] = useState<
+    { title: string; proof: { cid: string } } | undefined
+  >();
 
   const handleCopyAddress = () => {
     onCopyClick(authorWalletAddress || "");
@@ -94,9 +106,9 @@ export const AgreementInformation = ({
     setIsSettingReadyToSign(true);
 
     try {
-      await setAgreementReadyToSign({ agreementId: agreementId });
-      onSetAgreementReadyToSign();
-      notifSucces("Agreement is ready to sign");
+      onSetAgreementReadyToSign().then(() => {
+        notifSucces("Agreement is ready to sign");
+      });
     } catch (error) {
       notifError(error?.message || "Failed to set agreement to Ready to Sign status");
       // eslint-disable-next-line no-console
@@ -106,10 +118,16 @@ export const AgreementInformation = ({
     }
   };
 
-  // TODO: sign agreement
   const handleSignAgreement = () => {
-    setIsOpenModalSignStatus(true);
+    onSignAgreement()
+      .then(res => {
+        setIsOpenModalSignStatus(true);
+      })
+      .catch(error => {
+        notifError(error.message);
+      });
   };
+
   const handleDeleteAgreement = async () => {
     setIsConfirmAgreementDeletionPopupVisible(true);
   };
@@ -118,6 +136,15 @@ export const AgreementInformation = ({
     // For less screen flickering
     await sleep(500);
     push("/agreements", "/agreements", { shallow: false });
+  };
+
+  const onShowProof = (type: typeof AGREEMENT_PROOF | typeof AUTHORITY_PROOF) => {
+    if (type === AGREEMENT_PROOF && agreement.agreementProof) {
+      showProof({ title: AGREEMENT_PROOF, proof: agreement.agreementProof });
+    }
+    if (type === AUTHORITY_PROOF && agreement.agreementFileProof) {
+      showProof({ title: AUTHORITY_PROOF, proof: agreement.agreementFileProof });
+    }
   };
 
   return (
@@ -130,15 +157,31 @@ export const AgreementInformation = ({
           name="Creation Date"
           value={createdAt ? formatAgreementCreationDate(createdAt) : ""}
         />
-        <InformationRow name="Signed Date" value="-" />
+        <InformationRow
+          name="Signed Date"
+          value={
+            agreement?.agreementProof?.signedAt
+              ? formatAgreementCreationDate(agreement?.agreementProof?.signedAt)
+              : "-"
+          }
+        />
         <InformationRow
           name="Creator"
           value={authorWalletAddress ? formatAddress(authorWalletAddress) : ""}
           valueIcon={iconsObj.iconSix}
           onIconClick={handleCopyAddress}
         />
-        <InformationRow name="Agreement proof" value="-" />
-        <InformationRow name="Authority proof" value="-" />
+        <InformationRow
+          name="Agreement proof"
+          value={agreement.agreementProof ? formatAddress(agreement.agreementProof!.cid) : "-"}
+          onClick={() => (agreement.agreementProof ? onShowProof(AGREEMENT_PROOF) : {})}
+        />
+
+        <InformationRow
+          name="Authority proof"
+          value={agreement.agreementProof ? formatAddress(agreement.agreementFileProof!.cid) : "-"}
+          onClick={() => (agreement.agreementProof ? onShowProof(AUTHORITY_PROOF) : {})}
+        />
         <InformationRow name="Location" value={agreementLocation || ""} />
         <InformationRow
           name="Access"
@@ -208,6 +251,14 @@ export const AgreementInformation = ({
         onExit={() => setIsOpenModalSignStatus(false)}
         error={false}
       />
+      {proofToShow && (
+        <ModalProof
+          title={proofToShow.title}
+          isOpen={!!proofToShow}
+          onExit={() => showProof(undefined)}
+          proof={proofToShow.proof}
+        />
+      )}
     </Flex>
   );
 };

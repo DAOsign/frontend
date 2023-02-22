@@ -28,6 +28,14 @@ export const toAgreementWithParticipants = (agreement: AgreementResponse) => {
   return {
     ...toAgreement(agreement),
     observers: agreement.observers || [],
-    signers: agreement.signers || [],
+    signers:
+      agreement.signers.map(s => {
+        const signProof = agreement?.signProofs?.find(
+          p => p.signerWallet && p.signerWallet.address === s.wallet?.address
+        );
+        return { ...s, signProof: signProof };
+      }) || [],
+    agreementProof: agreement?.agreementProof || null,
+    agreementFileProof: agreement?.agreementFileProof || null,
   };
 };

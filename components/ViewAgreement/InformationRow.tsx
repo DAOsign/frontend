@@ -15,27 +15,22 @@ interface Props {
   value: string | React.ReactElement;
   valueIcon?: Icon;
   onIconClick?: () => void;
+  onClick?: () => void;
 }
 
-export const AGREEMENT_PROOF = "Agreement proof";
-export const AUTHORITY_PROOF = "Authority proof";
-
-export const InformationRow = ({ name, value, valueIcon, onIconClick }: Props) => {
-  const [isOpen, setIsOpen] = useState(false);
-
-  const onClick = () => {
-    if (name === AGREEMENT_PROOF || name === AUTHORITY_PROOF) {
-      setIsOpen(true);
-    }
-    return;
-  };
-
+export const InformationRow = ({ name, value, valueIcon, onIconClick, onClick }: Props) => {
   return (
     <Container>
       <Flex sx={informationRow}>
         <Box sx={informationRowName}>{name}</Box>
         {typeof value === "string" ? (
-          <Flex onClick={onClick} sx={informationRowValue}>
+          <Flex
+            onClick={onClick}
+            sx={{
+              ...informationRowValue,
+              cursor: value && value !== "-" && onClick ? "pointer" : "unset",
+            }}
+          >
             {value}
             {valueIcon ? (
               <Box onClick={onIconClick ? onIconClick : () => {}} sx={informationRowIcon}>
@@ -48,7 +43,6 @@ export const InformationRow = ({ name, value, valueIcon, onIconClick }: Props) =
           value
         )}
       </Flex>
-      <ModalProof title={name} isOpen={isOpen} onExit={() => setIsOpen(!isOpen)} />
     </Container>
   );
 };
