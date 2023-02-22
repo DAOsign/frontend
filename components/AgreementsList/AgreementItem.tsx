@@ -17,9 +17,17 @@ import {
   titleSigners,
 } from "./styles";
 import useWindowDimensions from "../../hooks/useWindowDimensions";
-import { Agreement, STATUS_READY_TO_SIGN, PRIVACY_PRIVATE } from "../../types";
+import {
+  Agreement,
+  STATUS_READY_TO_SIGN,
+  PRIVACY_PRIVATE,
+  STATUS_DRAFT,
+  STATUS_PARTIALLY_SIGNED,
+  STATUS_SIGNED,
+} from "../../types";
 import { formatAgreementCreationDate, formatAgreementStatus } from "../../utils/formats";
 import SignatureIcon from "../icon/editable/SignatureIcon";
+import { greenLabel, yellowLabel } from "../ViewAgreement/styles";
 
 export default function AgreementItem({
   agreementPrivacy,
@@ -44,6 +52,22 @@ export default function AgreementItem({
       return `Agreement Privacy: ${value} `;
     }
   };
+
+  const statusSx = () => {
+    switch (agreementStatus) {
+      case STATUS_READY_TO_SIGN:
+        return blueAgrLabel;
+      case STATUS_DRAFT:
+        return greyAgrLabel;
+      case STATUS_PARTIALLY_SIGNED:
+        return yellowLabel;
+      case STATUS_SIGNED:
+        return greenLabel;
+      default:
+        return greyAgrLabel;
+    }
+  };
+
   return (
     <NextLink href={`/agreement/${agreementId}`}>
       <Link sx={agreementConteinerRelative}>
@@ -84,9 +108,7 @@ export default function AgreementItem({
                 title={"Agreement Status"}
                 minWidth="135px"
               >
-                <Box sx={agreementStatus === STATUS_READY_TO_SIGN ? blueAgrLabel : greyAgrLabel}>
-                  {formatAgreementStatus(agreementStatus)}
-                </Box>
+                <Box sx={statusSx()}>{formatAgreementStatus(agreementStatus)}</Box>
               </Tooltip>
               <Flex sx={iconMenuAgreement}>
                 <Tooltip
