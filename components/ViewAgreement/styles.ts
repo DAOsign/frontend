@@ -292,10 +292,17 @@ const informationRowValue = {
 
 const informationRowIcon = {
   marginLeft: "4px",
+  width: "14px",
+  height: "14px",
   transition: "opacity 0.3s",
   cursor: "pointer",
   "&:hover > svg> path": {
     stroke: "#AE4FD0",
+  },
+  svg: {
+    display: "block",
+    width: "100%",
+    height: "100%",
   },
 } as ThemeUIStyleObject;
 

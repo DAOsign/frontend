@@ -515,6 +515,7 @@ export type SaveAgreementMutation = {
   __typename?: "Mutation";
   saveAgreement?: {
     __typename?: "Agreement";
+    agreementId: string;
     title: string;
     content?: string | null;
     authorWallet: { __typename?: "Wallet"; address: string };
@@ -952,6 +953,7 @@ export const SaveAgreementDocument = {
             selectionSet: {
               kind: "SelectionSet",
               selections: [
+                { kind: "Field", name: { kind: "Name", value: "agreementId" } },
                 { kind: "Field", name: { kind: "Name", value: "title" } },
                 { kind: "Field", name: { kind: "Name", value: "content" } },
                 {

@@ -34,6 +34,8 @@ import Image from "next/image";
 import ModalSignStatus from "../ModalSignStatus";
 import ModalProof from "../ModalProof";
 import { toAgreementWithParticipants } from "../../utils/typeUtils";
+import SignedIcon from "../icon/editable/SignedIcon";
+import SignatureIcon from "../icon/editable/SignatureIcon";
 
 const formatAgreementPrivacy = (agreementPrivacy: string | undefined) => {
   if (!agreementPrivacy) return "";
@@ -92,7 +94,7 @@ export const AgreementInformation = ({
 
   const handleCopyAddress = () => {
     onCopyClick(authorWalletAddress || "");
-    notifSucces("Link Copied");
+    notifSucces("Address Copied");
   };
 
   // TODO: edit observers
@@ -173,13 +175,29 @@ export const AgreementInformation = ({
         />
         <InformationRow
           name="Agreement proof"
-          value={agreement.agreementProof ? formatAddress(agreement.agreementProof!.cid) : "-"}
+          value={
+            agreement.agreementProof ? (
+              <div>
+                {formatAddress(agreement.agreementProof!.cid)} <SignatureIcon />
+              </div>
+            ) : (
+              "-"
+            )
+          }
           onClick={() => (agreement.agreementProof ? onShowProof(AGREEMENT_PROOF) : {})}
         />
 
         <InformationRow
           name="Authority proof"
-          value={agreement.agreementProof ? formatAddress(agreement.agreementFileProof!.cid) : "-"}
+          value={
+            agreement.agreementProof ? (
+              <div>
+                {formatAddress(agreement.agreementFileProof!.cid)} <SignatureIcon />
+              </div>
+            ) : (
+              "-"
+            )
+          }
           onClick={() => (agreement.agreementProof ? onShowProof(AUTHORITY_PROOF) : {})}
         />
         <InformationRow name="Location" value={agreementLocation || ""} />

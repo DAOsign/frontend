@@ -35,6 +35,7 @@ export const saveAgreementMutation = graphql(`
       agreementFilePath: $agreementFilePath
       isReadyToSign: $isReadyToSign
     ) {
+      agreementId
       title
       content
       authorWallet {

@@ -17,6 +17,7 @@ import PendingIcon from "../icon/editable/PendingIcon";
 import { AgreementSignProof, Signer } from "../../modules/graphql/gql/graphql";
 import { notifSucces } from "../../utils/notification";
 import SignedIcon from "../icon/editable/SignedIcon";
+import SignatureIcon from "../icon/editable/SignatureIcon";
 
 interface Props {
   signer: Signer;
@@ -27,7 +28,7 @@ interface Props {
 export const SignerRow = ({ signer, signProof, viewProof }: Props) => {
   const handleCopyAddress = (address: string) => {
     onCopyClick(address);
-    notifSucces("Link Copied");
+    notifSucces("Address Copied");
   };
   const address = useMemo<string>(
     () =>
@@ -58,7 +59,10 @@ export const SignerRow = ({ signer, signProof, viewProof }: Props) => {
           <Flex sx={tableAddressCell}>
             <Box>{formatAddress(address)}</Box>
             <Box onClick={() => handleCopyAddress(address)} sx={informationRowIcon}>
-              <Icon style={{ cursor: "pointer" }} src={iconsObj.iconSix} />
+              <Icon
+                style={{ cursor: "pointer", width: "14px", height: "14px" }}
+                src={iconsObj.iconSix}
+              />
             </Box>
           </Flex>
         ) : (
@@ -87,7 +91,7 @@ export const SignerRow = ({ signer, signProof, viewProof }: Props) => {
 
       {signProof?.cid ? (
         <td onClick={() => viewProof(signProof)} style={{ cursor: "pointer" }}>
-          {formatAddress(signProof.cid)}
+          {formatAddress(signProof.cid)} <SignatureIcon />
         </td>
       ) : (
         <td>-</td>

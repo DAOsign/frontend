@@ -181,11 +181,11 @@ export default function NavPanel({ setLoading, page }: { setLoading: any; page: 
       isReadyToSign,
     }).then(res => {
       if (res.error) {
-        //console.error(res.error);
+        notifError(res.error.message);
       }
       if (res.data?.saveAgreement?.title) {
         clearDraft();
-        push("/agreements");
+        push(`/agreement/${res.data.saveAgreement.agreementId}`);
         return;
       }
     });
