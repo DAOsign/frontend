@@ -86,8 +86,6 @@ export const AgreementInformation = ({
   const [isSettingReadyToSign, setIsSettingReadyToSign] = useState<boolean>(false);
   const [isOpenModalSignStatus, setIsOpenModalSignStatus] = useState<boolean>(false);
 
-  const [{ agreementProof }] = useState({ agreementProof: undefined });
-
   const [proofToShow, showProof] = useState<
     { title: string; proof: { cid: string } } | undefined
   >();
@@ -100,7 +98,7 @@ export const AgreementInformation = ({
   // TODO: edit observers
   const handleEditObservers = () => {
     setIsOpen(true);
-    // notifError("Editing observers is not yet implemented");
+    notifError("Editing observers is not yet implemented");
   };
 
   const handleReadyToSign = async () => {
@@ -240,11 +238,11 @@ export const AgreementInformation = ({
                 </Link>
               </NextLink>
             ) : null}
-            {agreementStatus === STATUS_READY_TO_SIGN ? (
+            {agreementStatus !== STATUS_DRAFT && (
               <Button sx={btnSecondary} onClick={handleEditObservers}>
                 Edit Observers
               </Button>
-            ) : null}
+            )}
           </>
         ) : null}
         {agreementStatus === STATUS_DRAFT ? (
