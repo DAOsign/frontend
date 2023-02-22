@@ -56,14 +56,14 @@ export const AgreementContentPreview = ({
             </Box>
           </Box>
         </Flex>
+      ) : textContent ? (
+        <AgreementTextMarkdownPreview textContent={textContent} />
       ) : agreementLocation && (filePath || fileIpfsHash) ? (
         <AgreementUploadedFilePreview
           agreementLocation={agreementLocation}
           filePath={filePath}
           fileIpfsHash={fileIpfsHash}
         />
-      ) : textContent ? (
-        <AgreementTextMarkdownPreview textContent={textContent} />
       ) : null}
     </Flex>
   );
