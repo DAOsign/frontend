@@ -90,9 +90,8 @@ const useSignAgreement = (agreementId: number) => {
     if (!signature) {
       throw new Error("Payload wasn't signed");
     }
-    
-    return signSignProofData(signingPayload, signature);
 
+    return signSignProofData(signingPayload, signature);
   };
 
   return {

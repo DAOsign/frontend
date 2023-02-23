@@ -85,3 +85,11 @@ export const sendSignedAgreementSignData = graphql(`
     }
   }
 `);
+
+export const editObservers = graphql(`
+  mutation EditObservers($agreementId: Int, $observers: [String!]) {
+    editObservers(agreementId: $agreementId, observers: $observers) {
+      message
+    }
+  }
+`);

@@ -20,8 +20,8 @@ interface Props {
 
 export default function ModalAuthorNotAdded({ isOpen, onExit }: Props) {
   return (
-    <Portal isOpen={isOpen}>
-      <ModalBase height="442px" width={undefined}>
+    <Portal isOpen={isOpen} onClose={onExit}>
+      <ModalBase height="442px">
         <Flex sx={flexContainer}>
           <Box onClick={onExit} sx={closeIcon}>
             <Icon src={iconsObj.xClose} />

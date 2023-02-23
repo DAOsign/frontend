@@ -29,7 +29,7 @@ import { AgreementLabels } from "./AgreementLabels";
 import { AgreementSignersList } from "./AgreementSignersList";
 import { AgreementObserversList } from "./AgreementObserversList";
 import { AgreementContentPreview } from "./AgreementContentPreview";
-import ModalAddObservers from "../../components/ModalAddObserver";
+import ModalEditObservers from "../../components/ModalEditObservers";
 
 import useSignAgreement from "../../hooks/useSignAgreement";
 
@@ -148,7 +148,14 @@ export const ViewAgreement = () => {
           )}
         </>
       )}
-      <ModalAddObservers onExit={() => setIsOpen(false)} isOpen={isOpen} />
+      {agreement && (
+        <ModalEditObservers
+          agreement={agreement}
+          onExit={() => setIsOpen(false)}
+          onSuccess={refetchAgreement}
+          isOpen={isOpen}
+        />
+      )}
     </Flex>
   );
 };

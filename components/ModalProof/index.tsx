@@ -34,7 +34,7 @@ interface Props {
   isOpen: boolean;
   onExit: () => void;
   title: string;
-  proof: { cid: string } | AgreementSignProof;
+  proof: { cid: string; signature?: string } | AgreementSignProof;
 }
 
 export default function ModalProof({ isOpen, onExit, title, proof }: Props) {
@@ -70,7 +70,7 @@ export default function ModalProof({ isOpen, onExit, title, proof }: Props) {
     onExit();
   };
   return (
-    <Portal isOpen={isOpen && !!proof}>
+    <Portal isOpen={isOpen && !!proof} onClose={onClose}>
       <ModalBase height={"fit-content"} width={undefined}>
         <Flex sx={container}>
           <Box onClick={onClose} sx={closeIcon}>
@@ -112,11 +112,15 @@ export default function ModalProof({ isOpen, onExit, title, proof }: Props) {
               ></Box>
             </>
           ) : null}
-          {title !== AGREEMENT_PROOF ? (
-            <Link onClick={() => window.open("https://signator.io/", "_blank")}>
+          {title !== AGREEMENT_PROOF && proof.cid && (
+            <a
+              href={`https://signator.io/view?ipfs=${proof?.cid}`}
+              target="_blank"
+              rel="noreferrer"
+            >
               <Button sx={btnContainer}>Verify on Signator.io</Button>
-            </Link>
-          ) : null}
+            </a>
+          )}
         </Flex>
       </ModalBase>
     </Portal>

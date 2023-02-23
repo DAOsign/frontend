@@ -60,8 +60,8 @@ export default function ModalConfirmAgreementDeletion({
   };
 
   return (
-    <Portal isOpen={isOpen}>
-      <ModalBase height="442px" width={undefined}>
+    <Portal isOpen={isOpen} onClose={onExit}>
+      <ModalBase height="442px">
         {isDeletingAgreement ? (
           <Flex sx={spinnerContainer}>
             <Spinner size={60} color="#CA5CF2" />

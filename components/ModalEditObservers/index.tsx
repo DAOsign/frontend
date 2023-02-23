@@ -24,25 +24,36 @@ import {
 } from "./styles";
 import { Portal } from "../Portal/Portal";
 import { ModalBase } from "../ModalBase/ModalBase";
-import Tooltip from "../../components/Tooltip";
+import Tooltip from "../Tooltip";
 import useWindowDimensions from "../../hooks/useWindowDimensions";
 import {
   validateAddress,
   validateEnsDomains,
 } from "../CreateAgreement/Steps/StepThree/validationUtils";
+import { toAgreementWithParticipants } from "../../utils/typeUtils";
+import { useMutation } from "urql";
+import { editObservers as editObserversMutation } from "../../modules/graphql/mutations";
+import { notifError, notifSucces } from "../../utils/notification";
 
 interface Props {
+  agreement: ReturnType<typeof toAgreementWithParticipants>;
   isOpen: boolean;
   onExit: () => void;
+  onSuccess?: () => Promise<void>;
 }
 
-export default function ModalAddObservers({ isOpen, onExit }: Props) {
-  const [observers, setObservers] = useState<{ id: number; value: string }[]>([]);
-  const [signers, setSigners] = useState([]);
+export default function ModalEditObservers({ agreement, isOpen, onExit, onSuccess }: Props) {
+  const [observers, setObservers] = useState<{ id: number; value: string }[]>(
+    agreement.observers.map((o, i) => ({ id: i, value: o.wallet!.address! }))
+  );
+
   const observerInputRef = useRef<HTMLInputElement>();
   const { width } = useWindowDimensions();
   const { account } = useWeb3();
   const [error, setError] = useState<string | null | undefined>();
+  const [{ fetching: loading }, editObservers] = useMutation(editObserversMutation);
+
+  const signers = useMemo(() => agreement.signers.map(s => s.wallet!.address!), [agreement]);
 
   const onChangeObserverInputValue: React.ChangeEventHandler<HTMLInputElement> = e => {
     setError(null);
@@ -53,29 +64,22 @@ export default function ModalAddObservers({ isOpen, onExit }: Props) {
   };
 
   const userAlreadyObserver = useMemo(
-    () =>
-      observers?.some(
-        //@ts-ignore
-        observer => observer?.value?.toLocaleLowerCase() === account?.toLocaleLowerCase()
-      ),
+    () => observers?.some(observer => observer?.value?.toLowerCase() === account?.toLowerCase()),
     [observers, account]
   );
 
-  const validateUser = (
-    value: string,
-    userRole: "signer" | "observer",
-    addedSigners: { id: number; value: string }[],
-    addedObservers: { id: number; value: string }[]
-  ): string | null => {
-    const userAlreadySigner = addedSigners.some(signer => signer?.value === value);
-    const userAlreadyObserver = addedObservers.some(observer => observer?.value === value);
+  const userAlreadySigner = useMemo(
+    () => signers.some(signer => signer === account?.toLowerCase()),
+    [signers, account]
+  );
 
-    if (userAlreadySigner) {
-      return userRole === "signer" ? "Signer is already added" : "Already exists as Signer";
+  const validateObserver = (value: string): string | undefined => {
+    if (signers.some(signer => signer === value)) {
+      return "Already exists as Signer";
     }
 
-    if (userAlreadyObserver) {
-      return userRole === "signer" ? "Already exists as Observer" : "Observer is already added";
+    if (observers.some(observer => observer?.value === value)) {
+      return "Observer is already added";
     }
 
     const isEns = value?.includes(".eth");
@@ -85,30 +89,27 @@ export default function ModalAddObservers({ isOpen, onExit }: Props) {
     }
 
     if (isEns) {
-      const res = validateEnsDomains(value);
-      if (res) return res;
+      return validateEnsDomains(value);
     }
 
     if (isAddress) {
-      const res = validateAddress(value);
-      if (res) return res;
+      return validateAddress(value);
     }
-
-    return null;
   };
 
   const addMe = () => {
-    addObserver(account!.toLocaleLowerCase());
+    handleAddObserver(account!.toLocaleLowerCase());
   };
 
-  const addObserver = (value?: string) => {
+  const handleAddObserver = (value?: string) => {
     if (value && observerInputRef.current) {
-      const validationError: string | null = validateUser(value, "observer", signers, observers);
+      const validationError = validateObserver(value.toLowerCase());
+
       if (validationError) {
         setError(validationError);
         return;
       }
-      setObservers([...observers, { value: value.toLocaleLowerCase(), id: uniqueId() }]);
+      setObservers([...observers, { value: value.toLowerCase(), id: uniqueId() }]);
       observerInputRef.current.value = "";
     }
   };
@@ -117,12 +118,27 @@ export default function ModalAddObservers({ isOpen, onExit }: Props) {
     if (e.code === "Enter" || e.code === "NumpadEnter") {
       //@ts-ignore
       const value = e.target.value;
-      addObserver(value);
+      handleAddObserver(value);
     }
   };
 
+  const handleSubmit = () => {
+    editObservers({
+      agreementId: agreement.agreementId,
+      observers: observers.map(o => o.value),
+    }).then(({ data, error }) => {
+      if (error) {
+        error?.graphQLErrors?.map(e => notifError(e.message));
+        return;
+      }
+      notifSucces("Observers edited");
+      onSuccess && onSuccess();
+      onExit();
+    });
+  };
+
   return (
-    <Portal isOpen={isOpen}>
+    <Portal isOpen={isOpen} onClose={onExit}>
       <ModalBase
         //@ts-ignore
         width={width >= 1200 ? "756px" : width >= 720 ? "672px" : "343px"}
@@ -154,10 +170,10 @@ export default function ModalAddObservers({ isOpen, onExit }: Props) {
                   </Box>
                 </Tooltip>
               </Flex>
-              {!userAlreadyObserver ? (
+              {!userAlreadyObserver && !userAlreadySigner ? (
                 <Button
                   onClick={() => addMe()}
-                  className={userAlreadyObserver ? "'disabled'" : ""}
+                  className={userAlreadyObserver && userAlreadySigner ? "'disabled'" : ""}
                   variant="link"
                   sx={{
                     justifyContent: "flex-end",
@@ -172,7 +188,9 @@ export default function ModalAddObservers({ isOpen, onExit }: Props) {
                 </Button>
               ) : null}
               <Box
-                onClick={() => addObserver(observerInputRef.current?.value.toLocaleLowerCase())}
+                onClick={() =>
+                  handleAddObserver(observerInputRef.current?.value.toLocaleLowerCase())
+                }
                 sx={{
                   ...plus,
                   "@media screen and (max-width: 720px)": {
@@ -231,7 +249,9 @@ export default function ModalAddObservers({ isOpen, onExit }: Props) {
             <Button onClick={onExit} sx={btnCancel}>
               Cancel
             </Button>
-            <Button sx={btnApply}>Apply</Button>
+            <Button sx={btnApply} onClick={handleSubmit} disabled={loading}>
+              Apply
+            </Button>
           </Flex>
         </Flex>
       </ModalBase>

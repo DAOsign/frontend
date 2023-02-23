@@ -32,6 +32,7 @@ export type Agreement = {
   authorWalletId: Scalars["Int"];
   content?: Maybe<Scalars["String"]>;
   createdAt: Scalars["DateTime"];
+  isAllowedToEditObservers: Scalars["Boolean"];
   isWaitingForMySignature: Scalars["Boolean"];
   observers: Array<Observer>;
   signProofs?: Maybe<Array<AgreementSignProof>>;
@@ -73,6 +74,7 @@ export type AgreementFileProofDataMessageInput = {
   app: Scalars["String"];
   from: Scalars["String"];
   metadata: Scalars["String"];
+  name: Scalars["String"];
   signers: Array<AgreementFileProofDataMessageSignerInput>;
   timestamp: Scalars["String"];
 };
@@ -94,6 +96,7 @@ export type AgreementFileProofDataMessageType = {
   app: Scalars["String"];
   from: Scalars["String"];
   metadata: Scalars["String"];
+  name: Scalars["String"];
   signers: Array<AgreementFileProofDataMessageSignerType>;
   timestamp: Scalars["String"];
 };
@@ -170,6 +173,7 @@ export type AgreementSignProofDataMessageInput = {
   agreementFileProofCID: Scalars["String"];
   app: Scalars["String"];
   metadata: Scalars["String"];
+  name: Scalars["String"];
   signer: Scalars["String"];
   timestamp: Scalars["String"];
 };
@@ -179,6 +183,7 @@ export type AgreementSignProofDataMessageType = {
   agreementFileProofCID: Scalars["String"];
   app: Scalars["String"];
   metadata: Scalars["String"];
+  name: Scalars["String"];
   signer: Scalars["String"];
   timestamp: Scalars["String"];
 };
@@ -255,6 +260,7 @@ export type LogoutResponse = {
 export type Mutation = {
   __typename?: "Mutation";
   deleteAgreement: DeleteAgreementResponse;
+  editObservers?: Maybe<SendAgreementInvitationResponseResponse>;
   login: LoginResponse;
   logout: LogoutResponse;
   saveAgreement?: Maybe<Agreement>;
@@ -267,6 +273,11 @@ export type Mutation = {
 
 export type MutationDeleteAgreementArgs = {
   agreementId: Scalars["Int"];
+};
+
+export type MutationEditObserversArgs = {
+  agreementId?: InputMaybe<Scalars["Int"]>;
+  observers?: InputMaybe<Array<Scalars["String"]>>;
 };
 
 export type MutationLoginArgs = {
@@ -560,6 +571,19 @@ export type SendSignedSignProofDataMutation = {
   sendSignedSignProofData?: { __typename?: "CID"; cid: string } | null;
 };
 
+export type EditObserversMutationVariables = Exact<{
+  agreementId?: InputMaybe<Scalars["Int"]>;
+  observers?: InputMaybe<Array<Scalars["String"]> | Scalars["String"]>;
+}>;
+
+export type EditObserversMutation = {
+  __typename?: "Mutation";
+  editObservers?: {
+    __typename?: "SendAgreementInvitationResponseResponse";
+    message: string;
+  } | null;
+};
+
 export type UsersQueryVariables = Exact<{ [key: string]: never }>;
 
 export type UsersQuery = {
@@ -586,6 +610,7 @@ export type QueryQuery = {
   __typename?: "Query";
   agreement?: {
     __typename?: "Agreement";
+    agreementId: string;
     title: string;
     content?: string | null;
     isWaitingForMySignature: boolean;
@@ -723,6 +748,7 @@ export type GetAgreementFileProofDataQuery = {
     };
     message: {
       __typename?: "AgreementFileProofDataMessageType";
+      name: string;
       agreementFileCID: string;
       app: string;
       from: string;
@@ -753,6 +779,7 @@ export type GetAgreementSignProofDataQuery = {
     };
     message: {
       __typename?: "AgreementSignProofDataMessageType";
+      name: string;
       agreementFileProofCID: string;
       app: string;
       metadata: string;
@@ -1186,6 +1213,59 @@ export const SendSignedSignProofDataDocument = {
   SendSignedSignProofDataMutation,
   SendSignedSignProofDataMutationVariables
 >;
+export const EditObserversDocument = {
+  kind: "Document",
+  definitions: [
+    {
+      kind: "OperationDefinition",
+      operation: "mutation",
+      name: { kind: "Name", value: "EditObservers" },
+      variableDefinitions: [
+        {
+          kind: "VariableDefinition",
+          variable: { kind: "Variable", name: { kind: "Name", value: "agreementId" } },
+          type: { kind: "NamedType", name: { kind: "Name", value: "Int" } },
+        },
+        {
+          kind: "VariableDefinition",
+          variable: { kind: "Variable", name: { kind: "Name", value: "observers" } },
+          type: {
+            kind: "ListType",
+            type: {
+              kind: "NonNullType",
+              type: { kind: "NamedType", name: { kind: "Name", value: "String" } },
+            },
+          },
+        },
+      ],
+      selectionSet: {
+        kind: "SelectionSet",
+        selections: [
+          {
+            kind: "Field",
+            name: { kind: "Name", value: "editObservers" },
+            arguments: [
+              {
+                kind: "Argument",
+                name: { kind: "Name", value: "agreementId" },
+                value: { kind: "Variable", name: { kind: "Name", value: "agreementId" } },
+              },
+              {
+                kind: "Argument",
+                name: { kind: "Name", value: "observers" },
+                value: { kind: "Variable", name: { kind: "Name", value: "observers" } },
+              },
+            ],
+            selectionSet: {
+              kind: "SelectionSet",
+              selections: [{ kind: "Field", name: { kind: "Name", value: "message" } }],
+            },
+          },
+        ],
+      },
+    },
+  ],
+} as unknown as DocumentNode<EditObserversMutation, EditObserversMutationVariables>;
 export const UsersDocument = {
   kind: "Document",
   definitions: [
@@ -1258,6 +1338,7 @@ export const QueryDocument = {
             selectionSet: {
               kind: "SelectionSet",
               selections: [
+                { kind: "Field", name: { kind: "Name", value: "agreementId" } },
                 {
                   kind: "Field",
                   name: { kind: "Name", value: "agreementFile" },
@@ -1704,6 +1785,7 @@ export const GetAgreementFileProofDataDocument = {
                   selectionSet: {
                     kind: "SelectionSet",
                     selections: [
+                      { kind: "Field", name: { kind: "Name", value: "name" } },
                       { kind: "Field", name: { kind: "Name", value: "agreementFileCID" } },
                       { kind: "Field", name: { kind: "Name", value: "app" } },
                       { kind: "Field", name: { kind: "Name", value: "from" } },
@@ -1805,6 +1887,7 @@ export const GetAgreementSignProofDataDocument = {
                   selectionSet: {
                     kind: "SelectionSet",
                     selections: [
+                      { kind: "Field", name: { kind: "Name", value: "name" } },
                       { kind: "Field", name: { kind: "Name", value: "agreementFileProofCID" } },
                       { kind: "Field", name: { kind: "Name", value: "app" } },
                       { kind: "Field", name: { kind: "Name", value: "metadata" } },

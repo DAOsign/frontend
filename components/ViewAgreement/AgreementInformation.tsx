@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { ReactNode, useState } from "react";
 import {
   briefInformation,
   briefInformationData,
@@ -83,11 +83,14 @@ export const AgreementInformation = ({
   const [isConfirmAgreementDeletionPopupVisible, setIsConfirmAgreementDeletionPopupVisible] =
     useState<boolean>(false);
 
-  const [isSettingReadyToSign, setIsSettingReadyToSign] = useState<boolean>(false);
-  const [isOpenModalSignStatus, setIsOpenModalSignStatus] = useState<boolean>(false);
+  const [loading, setLoading] = useState<boolean>(false);
+
+  const [successModalContent, setSuccessModalContent] = useState<
+    { title?: string; content: ReactNode } | undefined
+  >();
 
   const [proofToShow, showProof] = useState<
-    { title: string; proof: { cid: string } } | undefined
+    { title: string; proof: { cid: string; signature?: string } } | undefined
   >();
 
   const handleCopyAddress = () => {
@@ -98,34 +101,50 @@ export const AgreementInformation = ({
   // TODO: edit observers
   const handleEditObservers = () => {
     setIsOpen(true);
-    notifError("Editing observers is not yet implemented");
   };
 
   const handleReadyToSign = async () => {
-    if (isSettingReadyToSign) return;
-    setIsSettingReadyToSign(true);
+    if (loading) return;
+    setLoading(true);
 
     try {
-      onSetAgreementReadyToSign().then(() => {
-        notifSucces("Agreement is ready to sign");
+      await onSetAgreementReadyToSign();
+      //notifSucces("Agreement is ready to sign");
+      setSuccessModalContent({
+        content: <p>You have successfully generated Proof-of-authority</p>,
       });
     } catch (error) {
       notifError(error?.message || "Failed to set agreement to Ready to Sign status");
-      // eslint-disable-next-line no-console
-      console.error("[HandleReadyToSign]", error);
-    } finally {
-      setIsSettingReadyToSign(false);
     }
+    setLoading(false);
   };
 
-  const handleSignAgreement = () => {
-    onSignAgreement()
-      .then(res => {
-        setIsOpenModalSignStatus(true);
-      })
-      .catch(error => {
-        notifError(error.message);
+  const handleSignAgreement = async () => {
+    if (loading) return;
+    setLoading(true);
+    try {
+      await onSignAgreement();
+
+      const signProofsLength = agreement.signers.filter(
+        s => !!s.signProof?.cid && !!s.signProof?.signature
+      ).length;
+
+      const isLastSignature = agreement.signers.length - signProofsLength;
+
+      setSuccessModalContent({
+        content: (
+          <>
+            <p>You have successfully generated Proof-of-signature </p>
+            {isLastSignature && (
+              <p> Proof-of-agreement was generated because all signers signed the Agreement.</p>
+            )}
+          </>
+        ),
       });
+    } catch (error) {
+      notifError(error.message);
+    }
+    setLoading(false);
   };
 
   const handleDeleteAgreement = async () => {
@@ -246,14 +265,14 @@ export const AgreementInformation = ({
           </>
         ) : null}
         {agreementStatus === STATUS_DRAFT ? (
-          <Button sx={btnPrimary} onClick={handleReadyToSign} disabled={isSettingReadyToSign}>
-            {isSettingReadyToSign ? <Spinner size={16} color="#CA5CF2" /> : "Ready to Sign"}
+          <Button sx={btnPrimary} onClick={handleReadyToSign} disabled={loading}>
+            {loading ? <Spinner size={16} color="white" /> : "Ready to Sign"}
           </Button>
         ) : (agreementStatus === STATUS_READY_TO_SIGN ||
             agreementStatus === STATUS_PARTIALLY_SIGNED) &&
           isWaitingForMySignature ? (
-          <Button sx={btnPrimary} onClick={handleSignAgreement}>
-            Sign Agreement
+          <Button sx={btnPrimary} onClick={handleSignAgreement} disabled={loading}>
+            {loading ? <Spinner size={16} color="white" /> : "Sign Agreement"}
           </Button>
         ) : null}
         {userIsAuthor &&
@@ -269,11 +288,15 @@ export const AgreementInformation = ({
         onSuccess={onAgreementDeletionSuccess}
         onExit={() => setIsConfirmAgreementDeletionPopupVisible(false)}
       />
-      <ModalSignStatus
-        isOpen={isOpenModalSignStatus}
-        onExit={() => setIsOpenModalSignStatus(false)}
-        error={false}
-      />
+      {successModalContent && (
+        <ModalSignStatus
+          isOpen={!!successModalContent}
+          title={successModalContent.title}
+          content={successModalContent.content}
+          onExit={() => setSuccessModalContent(undefined)}
+          error={false}
+        />
+      )}
       {proofToShow && (
         <ModalProof
           title={proofToShow.title}

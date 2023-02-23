@@ -1,4 +1,4 @@
-import React from "react";
+import React, { ReactElement, ReactNode } from "react";
 import { Flex, Text, Button, Box } from "theme-ui";
 import Icon from "../icon/index";
 import iconsObj from "../../assets/icons";
@@ -16,11 +16,19 @@ interface Props {
   isOpen: boolean;
   error: boolean;
   onExit: () => void;
+  title?: string;
+  content: ReactNode;
 }
 
-export default function ModalSignStatus({ isOpen, onExit, error }: Props) {
+export default function ModalSignStatus({
+  isOpen,
+  onExit,
+  error,
+  title = "Congratulations!",
+  content,
+}: Props) {
   return (
-    <Portal isOpen={isOpen}>
+    <Portal isOpen={isOpen} onClose={onExit}>
       <ModalBase width={undefined} height={error ? "382px" : "360px"}>
         <Flex sx={flexContainer}>
           <Box onClick={onExit} sx={closeIcon}>
@@ -33,7 +41,7 @@ export default function ModalSignStatus({ isOpen, onExit, error }: Props) {
               <Icon width={"36px"} height={"36px"} src={iconsObj.success} />
             )}
           </Box>
-          <Text sx={mainText}>{!error ? "Signing Success" : "Signing Error"}</Text>
+          <Text sx={mainText}>{!error ? title : "Signing Error"}</Text>
           <Text sx={textContainer}>
             {error ? (
               <div>
@@ -41,7 +49,7 @@ export default function ModalSignStatus({ isOpen, onExit, error }: Props) {
                 Please sign the Agreement again
               </div>
             ) : (
-              "The agreement was successfully signed"
+              content
             )}
           </Text>
         </Flex>

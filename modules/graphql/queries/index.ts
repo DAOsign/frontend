@@ -18,6 +18,7 @@ export const allUsers = graphql(`
 export const agreementById = graphql(`
   query Query($agreementId: Int!) {
     agreement(agreementId: $agreementId) {
+      agreementId
       agreementFile {
         agreementFileId
         agreementHash
@@ -155,6 +156,7 @@ export const getAgreementFileProofData = graphql(`
         }
       }
       message {
+        name
         agreementFileCID
         app
         from
@@ -184,6 +186,7 @@ export const getAgreementSignProofData = graphql(`
         }
       }
       message {
+        name
         agreementFileProofCID
         app
         metadata

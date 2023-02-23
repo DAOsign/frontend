@@ -6,8 +6,9 @@ import {
   contentHiddenIconWrapper,
   contentHiddenMessage,
   contentTitle,
+  noObserversMessage,
 } from "./styles";
-import { Box, Flex, ThemeUIStyleObject } from "theme-ui";
+import { Box, Container, Text, Flex, ThemeUIStyleObject } from "theme-ui";
 import {
   AgreementLocation,
   AgreementPrivacy,
@@ -18,6 +19,7 @@ import { AgreementUploadedFilePreview } from "./AgreementUploadedFilePreview";
 import { AgreementTextMarkdownPreview } from "./AgreementTextMarkdownPreview";
 import Icon from "../icon";
 import iconsObj from "../../assets/icons";
+import { noContent } from "../AgreementsList/styles";
 
 interface Props {
   textContent?: string;
@@ -64,7 +66,18 @@ export const AgreementContentPreview = ({
           filePath={filePath}
           fileIpfsHash={fileIpfsHash}
         />
-      ) : null}
+      ) : (
+        <div>
+          <Container sx={{ textAlign: "center" }}>
+            <Flex sx={{ justifyContent: "center" }}>
+              <Box sx={{ width: "80px", height: "80px", m: "20px auto 12px" }}>
+                <Icon src={iconsObj.portfile} />
+              </Box>
+            </Flex>
+            <Text sx={{ ...noObserversMessage }}>{`The agreement has no content yet`}</Text>
+          </Container>
+        </div>
+      )}
     </Flex>
   );
 };

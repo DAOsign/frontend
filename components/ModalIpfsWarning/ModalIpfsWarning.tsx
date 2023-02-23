@@ -20,8 +20,8 @@ interface Props {
 
 export default function ModalIpfsWarning({ isOpen, onExit }: Props) {
   return (
-    <Portal isOpen={isOpen}>
-      <ModalBase width="" height="442px">
+    <Portal isOpen={isOpen} onClose={onExit}>
+      <ModalBase height="442px" sx={{ width: ["80%", "fit-content"] }}>
         <Flex sx={flexContainer}>
           <Box onClick={onExit} sx={closeIcon}>
             <Icon src={iconsObj.xClose} />
