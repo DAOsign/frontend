@@ -222,9 +222,7 @@ export default function NavPanel({ setLoading, page }: { setLoading: any; page: 
     if (step === 3 || !areFieldsValid) {
       return;
     }
-    page === "create"
-      ? push({ query: { step } }, undefined, { shallow: true })
-      : push(`/edit/${query.id}?step=${step}`);
+    page === "create" ? push({ query: { step } }, undefined, { shallow: true }) : undefined; // push(`/edit/${query.id}?step=${step}`);
   };
 
   const ForwardButton = () => {

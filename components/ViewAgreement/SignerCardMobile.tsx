@@ -16,14 +16,18 @@ import Icon from "../icon";
 import iconsObj from "../../assets/icons";
 import { formatAddress, onCopyClick } from "../../utils/formats";
 import useWindowDimensions from "../../hooks/useWindowDimensions";
+import { AgreementSignProof, Signer } from "../../modules/graphql/gql/graphql";
 import PendingIcon from "../icon/editable/PendingIcon";
-import { Signer } from "../../modules/graphql/gql/graphql";
 import { notifSucces } from "../../utils/notification";
+import SignatureIcon from "../icon/editable/SignatureIcon";
+import SignedIcon from "../icon/editable/SignedIcon";
 
 interface Props {
   signer: Signer;
+  signProof: AgreementSignProof;
+  viewProof: (proof: AgreementSignProof) => void;
 }
-const SignerCardMobile = ({ signer }: Props) => {
+const SignerCardMobile = ({ signer, signProof, viewProof }: Props) => {
   const { width } = useWindowDimensions();
   const handleCopyAddress = (address: string) => {
     onCopyClick(address);
@@ -68,22 +72,31 @@ const SignerCardMobile = ({ signer }: Props) => {
       <Flex sx={{ ...tableSignatureCell, backgroundColor: "#fff !important" }}>
         <Box sx={textMobile}>Signature status</Box>
         <Box>
-          {signer?.signature?.signature ? (
-            signer.signature.signature
-          ) : (
-            <Flex sx={{ alignItems: "center" }}>
-              <Box mx={"6px"}>Pending</Box>
-              <Box sx={pendingIcon}>
-                <PendingIcon />
-              </Box>
-            </Flex>
-          )}
+          <Flex sx={{ alignItems: "center" }}>
+            {signProof?.signature ? (
+              <>
+                <Box mx={"6px"}>Signed</Box>
+                <SignedIcon />
+              </>
+            ) : (
+              <>
+                <Box mx={"6px"}>Pending</Box>
+                <Box sx={pendingIcon}>
+                  <PendingIcon />
+                </Box>
+              </>
+            )}
+          </Flex>
         </Box>
       </Flex>
       <Flex sx={tableSignatureCell}>
         <Box sx={textMobile}>Proof of signature</Box>
-        <Box>
-          <Box>{signer?.signature?.signatureCid || "-"}</Box>
+        <Box onClick={() => viewProof(signProof)}>
+          {signProof?.cid && (
+            <>
+              {formatAddress(signProof.cid)} <SignatureIcon color="#CA5CF2" />
+            </>
+          )}
         </Box>
       </Flex>
     </Container>

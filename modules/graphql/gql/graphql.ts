@@ -614,6 +614,7 @@ export type QueryQuery = {
     title: string;
     content?: string | null;
     isWaitingForMySignature: boolean;
+    isAllowedToEditObservers: boolean;
     createdAt: any;
     agreementFile?: {
       __typename?: "AgreementFile";
@@ -727,6 +728,11 @@ export type MyAgreementsQuery = {
         } | null;
       }>;
       agreementStatus: { __typename?: "AgreementStatus"; name: string };
+      signProofs?: Array<{
+        __typename?: "AgreementSignProof";
+        cid?: string | null;
+        signature?: string | null;
+      }> | null;
     }>;
   };
 };
@@ -1433,6 +1439,7 @@ export const QueryDocument = {
                 { kind: "Field", name: { kind: "Name", value: "title" } },
                 { kind: "Field", name: { kind: "Name", value: "content" } },
                 { kind: "Field", name: { kind: "Name", value: "isWaitingForMySignature" } },
+                { kind: "Field", name: { kind: "Name", value: "isAllowedToEditObservers" } },
                 { kind: "Field", name: { kind: "Name", value: "createdAt" } },
                 {
                   kind: "Field",
@@ -1689,6 +1696,17 @@ export const MyAgreementsDocument = {
                         selectionSet: {
                           kind: "SelectionSet",
                           selections: [{ kind: "Field", name: { kind: "Name", value: "name" } }],
+                        },
+                      },
+                      {
+                        kind: "Field",
+                        name: { kind: "Name", value: "signProofs" },
+                        selectionSet: {
+                          kind: "SelectionSet",
+                          selections: [
+                            { kind: "Field", name: { kind: "Name", value: "cid" } },
+                            { kind: "Field", name: { kind: "Name", value: "signature" } },
+                          ],
                         },
                       },
                     ],

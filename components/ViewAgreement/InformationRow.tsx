@@ -35,7 +35,6 @@ export const InformationRow = ({ name, value, valueIcon, onIconClick, onClick }:
             {valueIcon ? (
               <Box onClick={onIconClick ? onIconClick : () => {}} sx={informationRowIcon}>
                 <CopyIcon />
-                {/* <Icon style={{ cursor: "pointer" }} src={valueIcon} /> */}
               </Box>
             ) : null}
           </Flex>

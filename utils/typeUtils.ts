@@ -13,6 +13,8 @@ export const toAgreement = (agreement: AgreementResponse): Agreement => {
     observers: agreement.observers.map(o => o.wallet?.address || "noWallet"),
     signers: agreement.signers?.map(s => s.wallet?.address || "noWallet") || [],
     isWaitingForMySignature: agreement.isWaitingForMySignature || false,
+    signProofAmount: agreement.signProofs?.filter(p => p.cid && p.signature)?.length || 0,
+    isAllowedToEditObservers: agreement.isAllowedToEditObservers || false,
     createdAt: new Date(agreement.createdAt),
     agreementFile: agreement?.agreementFile
       ? {

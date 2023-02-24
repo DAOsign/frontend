@@ -58,6 +58,7 @@ export const agreementById = graphql(`
       title
       content
       isWaitingForMySignature
+      isAllowedToEditObservers
       createdAt
       signProofs {
         signature
@@ -130,6 +131,10 @@ export const myAgreementsQuery = graphql(`
         }
         agreementStatus {
           name
+        }
+        signProofs {
+          cid
+          signature
         }
       }
       count

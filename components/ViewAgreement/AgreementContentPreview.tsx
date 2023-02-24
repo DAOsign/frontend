@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useMemo } from "react";
 import {
   contentCard,
   contentHiddenContainer,
@@ -20,8 +20,11 @@ import { AgreementTextMarkdownPreview } from "./AgreementTextMarkdownPreview";
 import Icon from "../icon";
 import iconsObj from "../../assets/icons";
 import { noContent } from "../AgreementsList/styles";
+import { toAgreementWithParticipants } from "../../utils/typeUtils";
+import { useWeb3 } from "../../hooks/useWeb3";
 
 interface Props {
+  agreement?: ReturnType<typeof toAgreementWithParticipants> | null;
   textContent?: string;
   filePath?: string;
   fileIpfsHash?: string;
@@ -30,17 +33,31 @@ interface Props {
 }
 
 export const AgreementContentPreview = ({
+  agreement,
   textContent,
   filePath,
   fileIpfsHash,
   agreementLocation,
   agreementPrivacy,
 }: Props) => {
-  const isContentHidden =
-    agreementPrivacy === PRIVACY_PUBLIC_PROOF_ONLY ||
-    agreementPrivacy === PRIVACY_PUBLIC_PROOF_ONLY_FULL_NAME;
+  const { account } = useWeb3();
 
-  const textContentExtraStyles: ThemeUIStyleObject = isContentHidden
+  const isAllowedToSeeContent = useMemo(() => {
+    const isProofOnly =
+      agreementPrivacy === PRIVACY_PUBLIC_PROOF_ONLY ||
+      agreementPrivacy === PRIVACY_PUBLIC_PROOF_ONLY_FULL_NAME;
+    if (!isProofOnly) return true;
+    const userAddress = account?.toLowerCase();
+    const userIsSigner = agreement?.signers.some(s => s.wallet?.address === userAddress);
+    if (userIsSigner) return true;
+    const userIsObserver = agreement?.observers.some(s => s.wallet?.address === userAddress);
+
+    if (userIsObserver) return true;
+
+    return false;
+  }, [agreement, account]);
+
+  const textContentExtraStyles: ThemeUIStyleObject = isAllowedToSeeContent
     ? {}
     : textContent
     ? { paddingBottom: "64px" }
@@ -49,7 +66,7 @@ export const AgreementContentPreview = ({
   return (
     <Flex sx={{ ...contentCard, ...textContentExtraStyles }}>
       <Box sx={contentTitle}>Agreement</Box>
-      {isContentHidden ? (
+      {!isAllowedToSeeContent ? (
         <Flex sx={contentHiddenContainer}>
           <Box sx={contentHiddenMessage}>Agreement Content is Hidden by Privacy Settings</Box>
           <Box sx={contentHiddenIconWrapper}>

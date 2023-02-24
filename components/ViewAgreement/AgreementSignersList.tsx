@@ -54,7 +54,13 @@ export const AgreementSignersList = ({ signers }: Props) => {
             </table>
             <Flex className="participantsTableMobile">
               {signers?.map((signer, index) => (
-                <SignerCardMobile signer={signer} key={index} />
+                <SignerCardMobile
+                  signer={signer}
+                  key={index}
+                  //@ts-ignore
+                  signProof={signer?.signProof}
+                  viewProof={proof => showProof(proof)}
+                />
               ))}
             </Flex>
           </>

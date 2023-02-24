@@ -53,7 +53,7 @@ export default function ModalEditObservers({ agreement, isOpen, onExit, onSucces
   const [error, setError] = useState<string | null | undefined>();
   const [{ fetching: loading }, editObservers] = useMutation(editObserversMutation);
 
-  const signers = useMemo(() => agreement.signers.map(s => s.wallet!.address!), [agreement]);
+  const signers = useMemo(() => agreement.signers.map(s => s.wallet?.address!), [agreement]);
 
   const onChangeObserverInputValue: React.ChangeEventHandler<HTMLInputElement> = e => {
     setError(null);

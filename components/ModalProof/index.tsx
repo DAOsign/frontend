@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import { Flex, Text, Button, Box, Container, Link, Spinner } from "theme-ui";
 import Icon from "../icon/index";
 import iconsObj from "../../assets/icons";
-import proof from "./example.json";
 import {
   secondaryTitle,
   arrowContainer,
@@ -15,6 +14,7 @@ import {
   mainText,
   text,
   box,
+  hideOnMobile,
 } from "./styles";
 import { Portal } from "../Portal/Portal";
 import { ModalBase } from "../ModalBase/ModalBase";
@@ -48,9 +48,9 @@ export default function ModalProof({ isOpen, onExit, title, proof }: Props) {
   });
 
   const nameTite = () => {
-    if (title === AGREEMENT_PROOF) return "agreement";
-    if (title === AUTHORITY_PROOF) return "authority";
-    return "signature";
+    if (title === AGREEMENT_PROOF) return "Agreement";
+    if (title === AUTHORITY_PROOF) return "Authority";
+    return "Signature";
   };
 
   const handleShowDetails = async () => {
@@ -76,7 +76,7 @@ export default function ModalProof({ isOpen, onExit, title, proof }: Props) {
           <Box onClick={onClose} sx={closeIcon}>
             <Icon src={iconsObj.xClose} />
           </Box>
-          <Text sx={mainText}>Proof</Text>
+          <Text sx={mainText}>Proof-of-{nameTite()}</Text>
           <Flex sx={box}>
             <Box>
               <Text sx={secondaryTitle}>Proof of {nameTite()}</Text>
@@ -93,14 +93,15 @@ export default function ModalProof({ isOpen, onExit, title, proof }: Props) {
                 </Box>
               </Flex>
             </Link>
-
-            {loading ? (
-              <Spinner width="20px" />
-            ) : (
-              <Box onClick={handleShowDetails} sx={arrowContainer}>
-                <Icon src={iconsObj.arrowLeftPink} />
-              </Box>
-            )}
+            <Box sx={hideOnMobile}>
+              {loading ? (
+                <Spinner width="20px" />
+              ) : (
+                <Box onClick={handleShowDetails} sx={arrowContainer}>
+                  <Icon src={iconsObj.arrowLeftPink} />
+                </Box>
+              )}
+            </Box>
           </Flex>
           {showDetails && proofJSON ? (
             <>

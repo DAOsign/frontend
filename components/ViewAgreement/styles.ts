@@ -176,7 +176,7 @@ const labelsRow = {
 } as ThemeUIStyleObject;
 
 const baseLabel = {
-  height: "100%",
+  height: "32px",
   padding: "5px 14px",
   fontFamily: "InterBold",
   fontStyle: "normal",
@@ -278,15 +278,17 @@ const informationRow = {
   fontSize: "16px",
   lineHeight: "100%",
   width: "100%",
+  gap: "4px",
 } as ThemeUIStyleObject;
 
 const informationRowName = {
   opacity: 0.5,
+  textAlign: "left",
 } as ThemeUIStyleObject;
 
 const informationRowValue = {
   paddingLeft: "5px",
-  lineBreak: "anywhere",
+  display: "flex",
   alignItems: "center",
 } as ThemeUIStyleObject;
 

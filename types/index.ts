@@ -56,8 +56,10 @@ export interface Agreement {
   signers: string[];
   title: string;
   isWaitingForMySignature: boolean;
+  isAllowedToEditObservers: boolean;
   createdAt: Date;
   agreementFile?: AgreementFile;
+  signProofAmount: number;
 }
 
 interface AgreementFile {

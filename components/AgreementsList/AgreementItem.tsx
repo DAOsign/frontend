@@ -38,6 +38,7 @@ export default function AgreementItem({
   title,
   isWaitingForMySignature,
   createdAt,
+  signProofAmount,
 }: Agreement) {
   const { width } = useWindowDimensions();
   const titleTooltip = (value: string) => {
@@ -169,7 +170,9 @@ export default function AgreementItem({
             >
               Signed:
             </Text>
-            <Text sx={{ variant: "text.smallTextMediumUser", mr: "20px", ...titleSigners }}>0</Text>
+            <Text sx={{ variant: "text.smallTextMediumUser", mr: "20px", ...titleSigners }}>
+              {signProofAmount}
+            </Text>
             <Text
               sx={{ variant: "text.smallTextMedium", opacity: "0.5", mr: "6px", ...titleSigners }}
             >
@@ -178,7 +181,7 @@ export default function AgreementItem({
             <Text sx={{ variant: "text.smallTextMediumUser", mr: "20px", ...titleSigners }}>
               {observers.length}
             </Text>
-            {agreementPrivacy !== PRIVACY_PRIVATE ? (
+            {
               <Box sx={titleSigners}>
                 <Text
                   sx={{
@@ -196,7 +199,7 @@ export default function AgreementItem({
                   }
                 </Text>
               </Box>
-            ) : null}
+            }
           </Flex>
         </Flex>
       </Link>

@@ -34,7 +34,7 @@ export const AgreementObserversList = ({ observers }: Props) => {
               <thead>
                 <tr>
                   <th>Observer Name</th>
-                  <th>Signer Address</th>
+                  <th>Observer Address</th>
                 </tr>
               </thead>
               <tbody>

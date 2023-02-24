@@ -18,6 +18,7 @@ import { AgreementSignProof, Signer } from "../../modules/graphql/gql/graphql";
 import { notifSucces } from "../../utils/notification";
 import SignedIcon from "../icon/editable/SignedIcon";
 import SignatureIcon from "../icon/editable/SignatureIcon";
+import CopyIcon from "../CopyIcon";
 
 interface Props {
   signer: Signer;
@@ -59,10 +60,7 @@ export const SignerRow = ({ signer, signProof, viewProof }: Props) => {
           <Flex sx={tableAddressCell}>
             <Box>{formatAddress(address)}</Box>
             <Box onClick={() => handleCopyAddress(address)} sx={informationRowIcon}>
-              <Icon
-                style={{ cursor: "pointer", width: "14px", height: "14px" }}
-                src={iconsObj.iconSix}
-              />
+              <CopyIcon />
             </Box>
           </Flex>
         ) : (
@@ -90,7 +88,11 @@ export const SignerRow = ({ signer, signProof, viewProof }: Props) => {
       </td>
 
       {signProof?.cid ? (
-        <td onClick={() => viewProof(signProof)} style={{ cursor: "pointer" }}>
+        <td
+          onClick={() => viewProof(signProof)}
+          style={{ cursor: "pointer" }}
+          className="signature_icon"
+        >
           {formatAddress(signProof.cid)} <SignatureIcon color="#CA5CF2" />
         </td>
       ) : (

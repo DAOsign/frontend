@@ -58,7 +58,7 @@ interface Props {
   userIsAuthor: boolean;
   authorWalletAddress?: string;
   setIsOpen: any;
-  onSetAgreementReadyToSign?: () => Promise<void>;
+  onSetAgreementReadyToSign?: () => void;
   onSignAgreement?: (...props: any) => Promise<any>;
 }
 
@@ -76,7 +76,7 @@ export const AgreementInformation = ({
   userIsAuthor,
   setIsOpen,
   authorWalletAddress,
-  onSetAgreementReadyToSign = async () => {},
+  onSetAgreementReadyToSign = () => {},
   onSignAgreement = async () => {},
 }: Props) => {
   const { push } = useRouter();
@@ -103,20 +103,8 @@ export const AgreementInformation = ({
     setIsOpen(true);
   };
 
-  const handleReadyToSign = async () => {
-    if (loading) return;
-    setLoading(true);
-
-    try {
-      await onSetAgreementReadyToSign();
-      //notifSucces("Agreement is ready to sign");
-      setSuccessModalContent({
-        content: <p>You have successfully generated Proof-of-authority</p>,
-      });
-    } catch (error) {
-      notifError(error?.message || "Failed to set agreement to Ready to Sign status");
-    }
-    setLoading(false);
+  const handleReadyToSign = () => {
+    onSetAgreementReadyToSign();
   };
 
   const handleSignAgreement = async () => {
@@ -197,7 +185,8 @@ export const AgreementInformation = ({
             agreement.agreementProof ? (
               <div
                 onClick={() => (agreement.agreementProof ? onShowProof(AGREEMENT_PROOF) : {})}
-                style={{ cursor: "pointer" }}
+                style={{ cursor: "pointer", display: "flex", alignItems: "center", gap: "4px" }}
+                className="signature_icon"
               >
                 {formatAddress(agreement.agreementProof!.cid)} <SignatureIcon color="#CA5CF2" />
               </div>
@@ -213,7 +202,8 @@ export const AgreementInformation = ({
             agreement.agreementFileProof ? (
               <div
                 onClick={() => (agreement.agreementFileProof ? onShowProof(AUTHORITY_PROOF) : {})}
-                style={{ cursor: "pointer" }}
+                style={{ cursor: "pointer", display: "flex", alignItems: "center", gap: "4px" }}
+                className="signature_icon"
               >
                 {formatAddress(agreement.agreementFileProof!.cid!)}{" "}
                 <SignatureIcon color="#CA5CF2" />
@@ -242,31 +232,31 @@ export const AgreementInformation = ({
               title={"Anonymous Badge"}
               height={undefined}
             >
-              <Image src={iconsObj.verificationAnonymous} alt="anonymous" />
+              <img width={52} src={iconsObj.verificationAnonymous.src} alt="anonymous" />
             </Tooltip>
           </Box>
         </Flex>
       </Flex>
       <Flex sx={buttonsContainer}>
-        {userIsAuthor ? (
+        {
           <>
-            {agreementStatus === STATUS_DRAFT ? (
+            {userIsAuthor && agreementStatus === STATUS_DRAFT ? (
               <NextLink href={`/edit/${agreementId}?step=1`}>
                 <Link>
                   <Button sx={btnSecondary}>Edit Agreement</Button>
                 </Link>
               </NextLink>
             ) : null}
-            {agreementStatus !== STATUS_DRAFT && (
+            {agreement.isAllowedToEditObservers && (
               <Button sx={btnSecondary} onClick={handleEditObservers}>
                 Edit Observers
               </Button>
             )}
           </>
-        ) : null}
+        }
         {agreementStatus === STATUS_DRAFT ? (
-          <Button sx={btnPrimary} onClick={handleReadyToSign} disabled={loading}>
-            {loading ? <Spinner size={16} color="white" /> : "Ready to Sign"}
+          <Button sx={btnPrimary} onClick={handleReadyToSign}>
+            Ready to Sign
           </Button>
         ) : (agreementStatus === STATUS_READY_TO_SIGN ||
             agreementStatus === STATUS_PARTIALLY_SIGNED) &&

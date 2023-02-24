@@ -23,7 +23,7 @@ import Icon from "../icon";
 import { toAgreementWithParticipants } from "../../utils/typeUtils";
 import { useWeb3 } from "../../hooks/useWeb3";
 import { areWalletsEqual } from "../../utils/wallet";
-import { notifError } from "../../utils/notification";
+import { notifError, notifWarning } from "../../utils/notification";
 import { AgreementInformation } from "./AgreementInformation";
 import { AgreementLabels } from "./AgreementLabels";
 import { AgreementSignersList } from "./AgreementSignersList";
@@ -32,12 +32,14 @@ import { AgreementContentPreview } from "./AgreementContentPreview";
 import ModalEditObservers from "../../components/ModalEditObservers";
 
 import useSignAgreement from "../../hooks/useSignAgreement";
+import ModalReadyToSign from "../ModalReadyToSign";
 
 export const ViewAgreement = () => {
   const { push, query } = useRouter();
   const { agreementId } = query;
   const idIsWrong = !!agreementId && !Number(agreementId);
   const [isOpen, setIsOpen] = useState(false);
+  const [readyToSignModalOpen, setReadyToSignModalOpen] = useState(false);
   const client = useClient();
 
   const [agreement, setAgreement] = useState<ReturnType<
@@ -78,10 +80,32 @@ export const ViewAgreement = () => {
       });
   }, [agreementId]);
 
+  const handleOpenReadyToSignModal = () => {
+    const agreementComplete =
+      agreement?.agreementLocation &&
+      agreement?.agreementPrivacy &&
+      agreement?.agreementFile &&
+      agreement?.signers?.length > 0;
+
+    if (agreementComplete) {
+      setReadyToSignModalOpen(true);
+    } else {
+      notifWarning(
+        "Agreement is not fully completed. Click “Edit Agreement” to complete all steps."
+      );
+    }
+  };
+
   const onSetAgreementReadyToSign = async () => {
-    return makeProofOfAuthority().then(async () => {
-      await refetchAgreement();
-    });
+    return makeProofOfAuthority()
+      .then(async () => {
+        await refetchAgreement();
+        return true;
+      })
+      .catch(e => {
+        notifError(e?.message);
+        return false;
+      });
   };
 
   const onSignAgreement = async () => {
@@ -121,6 +145,7 @@ export const ViewAgreement = () => {
               isWaitingForMySignature={agreement?.isWaitingForMySignature || false}
             />
             <AgreementContentPreview
+              agreement={agreement}
               textContent={agreement?.content}
               filePath={agreement?.agreementFile?.filePath}
               fileIpfsHash={agreement?.agreementFile?.agreementHash}
@@ -142,7 +167,7 @@ export const ViewAgreement = () => {
               userIsAuthor={userIsAuthor}
               setIsOpen={setIsOpen}
               authorWalletAddress={agreement?.authorWalletAddress}
-              onSetAgreementReadyToSign={onSetAgreementReadyToSign}
+              onSetAgreementReadyToSign={handleOpenReadyToSignModal}
               onSignAgreement={onSignAgreement}
             />
           )}
@@ -154,6 +179,13 @@ export const ViewAgreement = () => {
           onExit={() => setIsOpen(false)}
           onSuccess={refetchAgreement}
           isOpen={isOpen}
+        />
+      )}
+      {readyToSignModalOpen && (
+        <ModalReadyToSign
+          isOpen={readyToSignModalOpen}
+          onSubmit={onSetAgreementReadyToSign}
+          onExit={() => setReadyToSignModalOpen(false)}
         />
       )}
     </Flex>

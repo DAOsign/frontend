@@ -80,7 +80,6 @@ export function useLoadItems() {
 
   const loadMore = async () => {
     if (initLoaded.current) {
-      console.log("loadMore");
       return refetch().then(res => {
         const agreements = res.data?.myAgreements.agreements;
         if (agreements) {

@@ -90,7 +90,7 @@ export default function UserCard({ address }: any) {
                 title={"Anonymous Badge"}
                 height={undefined}
               >
-                <Image src={iconsObj.verificationAnonymous} alt="anonymous" />
+                <img src={iconsObj.verificationAnonymous.src} width="52px" alt="anonymous" />
               </Tooltip>
             </Box>
           </Box>

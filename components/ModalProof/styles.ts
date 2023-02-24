@@ -64,6 +64,11 @@ export const secondaryTitle = {
   mr: "10px",
 } as ThemeUIStyleObject;
 
+export const hideOnMobile = {
+  "@media screen and (max-width: 768px)": {
+    display: "none",
+  },
+};
 export const text = {
   fontFamily: "InterMedium",
   fontEeight: 500,
@@ -74,12 +79,16 @@ export const text = {
 } as ThemeUIStyleObject;
 
 export const box = {
+  display: "flex",
+  flexWrap: "wrap",
   background: "#F7F7FB",
   border: "2px solid #F7F7FB",
   borderRadius: "8px",
-  height: "60px",
   p: "20px 20px",
   alignItems: "center",
+  "@media screen and (max-width: 768px)": {
+    justifyContent: "center",
+  },
 } as ThemeUIStyleObject;
 
 export const linkContainer = {
