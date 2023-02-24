@@ -515,7 +515,6 @@ const uploadedFileTitleContainer = {
   cursor: "pointer",
   opacity: 1,
   transition: "opacity 0.3s",
-  position: "absolute",
   top: "3px",
   zIndex: "100",
   "&:hover": {
@@ -554,13 +553,18 @@ const uploadedFilePreview = {
   ".sc-idXgbr": {
     border: "1px solid #EDEDF3",
     borderRadius: "12px",
-    marginTop: "30px",
   },
   ".react-pdf__Document": {
     width: "100%",
-    padding: "0 60px",
+    padding: "0",
     maxHeight: "300px",
     overflow: "hidden",
+  },
+  ".react-pdf__Page__canvas": {
+    "@media screen and (max-width: 768px)": {
+      width: "100% !important",
+      height: "auto !important",
+    },
   },
   "#pdf-zoom-out, #pdf-zoom-out, #pdf-zoom-in, #pdf-zoom-reset, #pdf-toggle-pagination, #pdf-download, #pdf-pagination":
     {
@@ -620,11 +624,10 @@ const viewFileLabel = {
   opacity: 1,
   transition: "opacity 0.3s",
   cursor: "pointer",
-  position: "absolute",
   zIndex: "10",
   bottom: 0,
   "&:hover": {
-    opacity: 0.8,
+    color: "#AE4FD0",
   },
 } as ThemeUIStyleObject;
 

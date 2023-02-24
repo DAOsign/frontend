@@ -132,7 +132,9 @@ export const AgreementUploadedFilePreview = ({
   }, [agreementPreviewDocuments]);
 
   return (
-    <Box sx={{ minHeight: "383px" }}>
+    <Box
+      sx={{ minHeight: "383px", display: "flex", alignItems: "center", justifyContent: "center" }}
+    >
       {agreementPreviewDocuments ? (
         <Flex
           sx={{

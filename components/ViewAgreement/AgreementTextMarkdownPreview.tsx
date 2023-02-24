@@ -109,20 +109,21 @@ export const AgreementTextMarkdownPreview = ({ textContent }: Props) => {
     setHasContentDataLoadedByTextPreviewer(true);
   };
 
+  const loaderStyles = !hasContentDataLoadedByTextPreviewer
+    ? { display: "flex", justifyContent: "center", alignItems: "center" }
+    : {};
+
   return (
     <Box
       sx={{
         ...contentData,
         animation:
           shouldExpandTextContent === undefined ? "" : `${textExpandAnimation} 1s forwards`,
+        ...loaderStyles,
       }}
       id="contentData"
     >
-      {!hasContentDataLoadedByTextPreviewer ? (
-        <Flex style={{ justifyContent: "center", alignItems: "center", height: "100%" }}>
-          <Spinner size={40} color="#CA5CF2" />
-        </Flex>
-      ) : null}
+      {!hasContentDataLoadedByTextPreviewer ? <Spinner size={40} color="#CA5CF2" /> : null}
       <MDEditor
         value={textContent}
         preview={"preview"}
