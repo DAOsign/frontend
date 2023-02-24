@@ -1,0 +1,77 @@
+name: Build & Push Staging Release
+
+on:
+  release:
+    types: [published]
+
+jobs:
+  build:
+    name: Run docker build
+    runs-on: ubuntu-latest
+    outputs:
+      image_tag: ${{steps.vars.outputs.tag}}
+    steps:
+      - uses: actions/checkout@v3
+      - name: Get the version
+        id: vars
+        run: echo "tag=$(echo ${GITHUB_REF#refs/tags/})" >> $GITHUB_OUTPUT
+      - name: Build the Docker image
+        run: |
+          docker build -t stage-frontend:${{steps.vars.outputs.tag}} \
+            --build-arg PINATA_API_KEY=${{ secrets.PINATA_API_KEY_STAGE }} \
+            --build-arg PINATA_API_SECRET_KEY=${{ secrets.PINATA_API_SECRET_KEY_STAGE }} \
+            --build-arg PINATA_GATEWAY=${{ secrets.PINATA_GATEWAY_STAGE }} \
+            --build-arg PINATA_ACCESS_TOKEN=${{ secrets.PINATA_ACCESS_TOKEN_STAGE }} \
+            --build-arg NEXT_PUBLIC_REST_ENDPOINT=${{ secrets.NEXT_PUBLIC_REST_ENDPOINT_STAGE }} \
+            --build-arg NEXT_PUBLIC_GRAPHQL_ENDPOINT=${{ secrets.NEXT_PUBLIC_GRAPHQL_ENDPOINT_STAGE }} \
+            .
+      - name: Push to ECR
+        id: ecr
+        uses: jwalton/gh-ecr-push@v1
+        with:
+          access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          region: us-east-1
+          image: stage-frontend:${{steps.vars.outputs.tag}}
+  deploy:
+    name: Run helm upgrade
+    runs-on: ubuntu-latest
+    needs: [build]
+    env:
+      NAMESPACE_STAGE: "stage"
+      PRIVATE_REGISTRY: "099077447883.dkr.ecr.us-east-1.amazonaws.com"
+      # Ingress
+      HOST: "testnet.daosign.org"
+    steps:
+      - uses: actions/checkout@v3
+      - name: AWS Credentials
+        uses: aws-actions/configure-aws-credentials@v1-node16
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: us-east-1
+      - name: Create & View env file
+        id: create-env
+        run: |
+          cat << EOF > .env.yaml
+          {
+            "ingress": {
+              "host": "${{ env.HOST }}",
+              "certificateArn": "${{ secrets.CERTIFICATE_ARN_STAGE }}"
+            }
+          }
+          EOF
+      - name: Helm deploy
+        uses: koslib/helm-eks-action@v1.25.2
+        env:
+          KUBE_CONFIG_DATA: ${{ secrets.KUBE_CONFIG_DATA_DEV }}
+          HELM_VERSION: 0.1.1
+        with:
+          plugins: |
+            https://github.com/jkroepke/helm-secrets
+          command: |
+            aws ecr get-login-password --region us-east-1 | helm registry login --username AWS --password-stdin ${{ env.PRIVATE_REGISTRY }} && \
+              kubectl get pods -n ${{ env.NAMESPACE_STAGE }} && helm ls -n ${{ env.NAMESPACE_STAGE }} && \
+              helm upgrade helm-frontend -i -n ${{ env.NAMESPACE_STAGE }} --atomic -f .env.yaml oci://${{ env.PRIVATE_REGISTRY }}/helm-frontend  --version $HELM_VERSION \
+              --set=frontend.image.repository=${{ env.PRIVATE_REGISTRY }}/stage-frontend,frontend.image.tag=${{needs.build.outputs.image_tag}} && \
+              helm ls -n ${{ env.NAMESPACE_STAGE }} && kubectl get pods -n ${{ env.NAMESPACE_STAGE }}
