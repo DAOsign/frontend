@@ -138,7 +138,8 @@ export default function StepThree({ loading, page }: { loading: boolean; page: s
         value,
         "observer",
         values.signers,
-        values.observers
+        values.observers,
+        resolveEns
       );
       if (validationError) {
         changeValue("errors", { ...values.errors, observers: validationError });
