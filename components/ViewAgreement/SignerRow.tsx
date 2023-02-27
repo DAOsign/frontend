@@ -19,6 +19,7 @@ import { notifSucces } from "../../utils/notification";
 import SignedIcon from "../icon/editable/SignedIcon";
 import SignatureIcon from "../icon/editable/SignatureIcon";
 import CopyIcon from "../CopyIcon";
+import { Tooltip } from "react-tooltip";
 
 interface Props {
   signer: Signer;
@@ -31,6 +32,7 @@ export const SignerRow = ({ signer, signProof, viewProof }: Props) => {
     onCopyClick(address);
     notifSucces("Address Copied");
   };
+
   const address = useMemo<string>(
     () =>
       signer?.wallet?.address
@@ -39,6 +41,11 @@ export const SignerRow = ({ signer, signProof, viewProof }: Props) => {
         ? signer?.email
         : "",
     [signer]
+  );
+
+  const signerName = useMemo<string>(
+    () => signer?.ens?.name || signer?.wallet?.user?.name || "Anonymous",
+    []
   );
 
   return (
@@ -52,14 +59,21 @@ export const SignerRow = ({ signer, signProof, viewProof }: Props) => {
               <Icon src={iconsObj.defaultUserPicture} />
             )}
           </Box>
-          <Box sx={usernameText}>{signer?.wallet?.user?.name || "Anonymous"}</Box>
+          <Box sx={usernameText}>{signerName}</Box>
         </Flex>
       </td>
       <td>
         {address ? (
-          <Flex sx={tableAddressCell}>
-            <Box>{formatAddress(address)}</Box>
-            <Box onClick={() => handleCopyAddress(address)} sx={informationRowIcon}>
+          <Flex
+            className="signature_icon"
+            sx={tableAddressCell}
+            onClick={() => handleCopyAddress(address)}
+          >
+            <Box data-tooltip-id={`${address}-signer`} data-tooltip-content={address}>
+              {formatAddress(address)}
+            </Box>
+            <Tooltip id={`${address}-signer`} />
+            <Box sx={informationRowIcon}>
               <CopyIcon />
             </Box>
           </Flex>
@@ -93,7 +107,10 @@ export const SignerRow = ({ signer, signProof, viewProof }: Props) => {
           style={{ cursor: "pointer" }}
           className="signature_icon"
         >
-          {formatAddress(signProof.cid)} <SignatureIcon color="#CA5CF2" />
+          <Box data-tooltip-id={signProof.cid} data-tooltip-content={signProof.cid}>
+            {formatAddress(signProof.cid)} <SignatureIcon color="#CA5CF2" />
+          </Box>
+          <Tooltip id={signProof.cid} />
         </td>
       ) : (
         <td>-</td>

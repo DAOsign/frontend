@@ -22,6 +22,7 @@ import Lottie from "lottie-react";
 import loader from "../../../../img/json/loader.json";
 import Tooltip from "../../../Tooltip";
 import { validateAddress, validateEnsDomains } from "./validationUtils";
+import { useLock } from "../../../../hooks/useLock";
 
 interface VerificationInfo {
   title: string;
@@ -57,12 +58,13 @@ const verifications: VerificationInfo[] = [
   // },
 ];
 
-const validateUser = (
+const validateUser = async (
   value: string,
   userRole: "signer" | "observer",
   addedSigners: { id: number; value: string }[],
-  addedObservers: { id: number; value: string }[]
-): string | null => {
+  addedObservers: { id: number; value: string }[],
+  ensResolveFn?: (name: string) => Promise<string | null | undefined>
+): Promise<string | null> => {
   const userAlreadySigner = addedSigners.some(signer => signer?.value === value);
   const userAlreadyObserver = addedObservers.some(observer => observer?.value === value);
 
@@ -73,21 +75,24 @@ const validateUser = (
   if (userAlreadyObserver) {
     return userRole === "signer" ? "Already exists as Observer" : "Observer is already added";
   }
-
   const isEns = value?.includes(".eth");
-  const isAddress = value?.startsWith("0x");
-  if (!isEns && !isAddress) {
-    return "Invalid value";
+  if (isEns) {
+    const error = validateEnsDomains(value);
+    if (error) return error;
+    return !ensResolveFn
+      ? null
+      : ensResolveFn(value).then(address => (address ? null : "No ENS registered"));
   }
 
-  if (isEns) {
-    const res = validateEnsDomains(value);
-    if (res) return res;
-  }
+  const isAddress = value?.startsWith("0x");
 
   if (isAddress) {
-    const res = validateAddress(value);
-    if (res) return res;
+    const error = validateAddress(value);
+    if (error) return error;
+  }
+
+  if (!isEns && !isAddress) {
+    return "Invalid value";
   }
 
   return null;
@@ -97,7 +102,8 @@ export default function StepThree({ loading, page }: { loading: boolean; page: s
   const create = useCreateAgreement();
   const edit = useEditAgreement();
   const { values, changeValue } = page === "create" ? create : edit;
-  const { account } = useWeb3();
+  const { account, resolveEns } = useWeb3();
+
   const [checkedVerifications, setCheckedVerifications] = useState<boolean[]>(
     Array(verifications.length).fill(false)
   );
@@ -105,13 +111,14 @@ export default function StepThree({ loading, page }: { loading: boolean; page: s
   const signerInputRef = useRef<HTMLInputElement>();
   const observerInputRef = useRef<HTMLInputElement>();
 
-  const addSigner = (value?: string) => {
+  const addSigner = async (value?: string) => {
     if (value && signerInputRef.current) {
-      const validationError: string | null = validateUser(
+      const validationError: string | null = await validateUser(
         value,
         "signer",
         values.signers || [],
-        values.observers || []
+        values.observers || [],
+        resolveEns
       );
       if (validationError) {
         changeValue("errors", { ...values.errors, signers: validationError });
@@ -125,9 +132,9 @@ export default function StepThree({ loading, page }: { loading: boolean; page: s
     }
   };
 
-  const addObserver = (value?: string) => {
+  const addObserver = async (value?: string) => {
     if (value && observerInputRef.current) {
-      const validationError: string | null = validateUser(
+      const validationError: string | null = await validateUser(
         value,
         "observer",
         values.signers,

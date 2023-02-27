@@ -194,6 +194,57 @@ export default function NavPanel({ setLoading, page }: { setLoading: any; page: 
   const handleSaveDraft = async () => {
     const areFieldsValid = validateFields(values, true);
     if (areFieldsValid) {
+      try {
+        let uploadedFileData: { filePath?: string; agreementHash?: string; error?: any } = {};
+        if (
+          step === 2 &&
+          values.agreementMethod === METHOD_UPLOAD &&
+          values.file &&
+          (!values.filePath || !values.agreementHash)
+        ) {
+          uploadedFileData = await uploadNewFile(values.file);
+          if (!uploadedFileData || uploadedFileData.error) {
+            console.error(uploadedFileData.error || new Error(FILE_UPLOAD_ERROR_DEFAULT_MESSAGE));
+            notifError(
+              formatFileUploadErrorMessage(
+                uploadedFileData.error?.response?.data?.error ||
+                  uploadedFileData.error.message ||
+                  FILE_UPLOAD_ERROR_DEFAULT_MESSAGE
+              )
+            );
+            return;
+          }
+        } else if (
+          step === 2 &&
+          values.agreementMethod === METHOD_ENTER &&
+          values.textEditorValue
+        ) {
+          const encoded = Buffer.from(values.textEditorValue); //TODO handle encodings
+          const file = new File([encoded], "agreement.txt", {
+            type: "text/plain",
+          });
+          uploadedFileData = await uploadNewFile(file);
+          if (!uploadedFileData || uploadedFileData.error) {
+            console.error(uploadedFileData.error || new Error(FILE_UPLOAD_ERROR_DEFAULT_MESSAGE));
+            notifError(
+              formatFileUploadErrorMessage(
+                uploadedFileData.error?.response?.data?.error ||
+                  uploadedFileData.error.message ||
+                  FILE_UPLOAD_ERROR_DEFAULT_MESSAGE
+              )
+            );
+            return;
+          }
+        }
+      } catch (error) {
+        console.error(error);
+        notifError(
+          formatFileUploadErrorMessage(
+            error?.response?.data?.error || error?.message || FILE_UPLOAD_ERROR_DEFAULT_MESSAGE
+          )
+        );
+      }
+
       return handleCreateAgreement(false);
     }
   };

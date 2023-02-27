@@ -1,46 +1,28 @@
-import React, { useState } from "react";
+import React from "react";
 import { Box, Container, Flex } from "theme-ui";
-import {
-  informationRow,
-  informationRowName,
-  informationRowValue,
-  informationRowIcon,
-} from "./styles";
-import Icon from "../icon";
-import ModalProof from "../ModalProof";
-import CopyIcon from "../CopyIcon";
+import { informationRow, informationRowName, informationRowValue } from "./styles";
+import { Tooltip } from "react-tooltip";
+import "react-tooltip/dist/react-tooltip.css";
 
 interface Props {
   name: string;
   value: string | React.ReactElement;
-  valueIcon?: Icon;
-  onIconClick?: () => void;
-  onClick?: () => void;
+  tooltipValue?: string;
 }
 
-export const InformationRow = ({ name, value, valueIcon, onIconClick, onClick }: Props) => {
+export const InformationRow = ({ name, value, tooltipValue }: Props) => {
   return (
     <Container>
       <Flex sx={informationRow}>
         <Box sx={informationRowName}>{name}</Box>
-        {typeof value === "string" ? (
-          <Flex
-            onClick={onClick}
-            sx={{
-              ...informationRowValue,
-              cursor: value && value !== "-" && onClick ? "pointer" : "unset",
-            }}
-          >
-            {value}
-            {valueIcon ? (
-              <Box onClick={onIconClick ? onIconClick : () => {}} sx={informationRowIcon}>
-                <CopyIcon />
-              </Box>
-            ) : null}
-          </Flex>
-        ) : (
-          value
-        )}
+        <Flex
+          sx={informationRowValue}
+          data-tooltip-id={tooltipValue}
+          data-tooltip-content={tooltipValue}
+        >
+          {value}
+        </Flex>
+        {tooltipValue && <Tooltip content={tooltipValue} id={tooltipValue} />}
       </Flex>
     </Container>
   );

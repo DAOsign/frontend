@@ -48,11 +48,17 @@ export const agreementById = graphql(`
         wallet {
           address
         }
+        ens {
+          name
+        }
       }
       signers {
         email
         wallet {
           address
+        }
+        ens {
+          name
         }
       }
       title

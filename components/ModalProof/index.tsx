@@ -28,7 +28,7 @@ import { AGREEMENT_PROOF, AUTHORITY_PROOF } from "../ViewAgreement/AgreementInfo
 const ReactJson = dynamic(() => import("react-json-view"), { ssr: false });
 
 //TODO move to envs
-const IPFS_GATEWAY_URL = "https://gateway.pinata.cloud/ipfs";
+const IPFS_GATEWAY_URL = `${process.env.NEXT_PUBLIC_PINATA_GATEWAY}/ipfs`;
 
 interface Props {
   isOpen: boolean;

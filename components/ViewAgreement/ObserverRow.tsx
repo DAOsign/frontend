@@ -34,6 +34,11 @@ export const ObserverRow = ({ observer }: Props) => {
     [observer]
   );
 
+  const observerName = useMemo<string>(
+    () => observer?.ens?.name || observer?.wallet?.user?.name || "Anonymous",
+    [observer]
+  );
+
   return (
     <tr>
       <td>
@@ -45,7 +50,7 @@ export const ObserverRow = ({ observer }: Props) => {
               <Icon src={iconsObj.defaultUserPicture} />
             )}
           </Box>
-          <Box sx={usernameText}>{observer?.wallet?.user?.name || "Anonymous"}</Box>
+          <Box sx={usernameText}>{observerName}</Box>
         </Flex>
       </td>
       <td>

@@ -27,6 +27,7 @@ interface AuthContext {
     value: Record<string, any>
   ) => Promise<string>;
   _signTypedData: (msg: any) => Promise<any>;
+  resolveEns: (name: string) => Promise<string | undefined | null>;
 }
 
 type ChainId = keyof typeof networks;
@@ -51,6 +52,7 @@ export const AuthContext = createContext<AuthContext>({
   sign: async () => "",
   signTypedData: async () => "",
   _signTypedData: async (msg: any) => "",
+  resolveEns: async (name: string) => "",
 });
 
 const AuthProvider = (props?: Partial<ProviderProps<AuthProps>>) => {
@@ -281,6 +283,10 @@ const AuthProvider = (props?: Partial<ProviderProps<AuthProps>>) => {
     return "";
   }
 
+  async function resolveEns(name: string) {
+    return await web3ProviderRef.current?.resolveName(name);
+  }
+
   useEffect(() => {
     login();
   }, []); // eslint-disable-line react-hooks/exhaustive-deps
@@ -294,6 +300,7 @@ const AuthProvider = (props?: Partial<ProviderProps<AuthProps>>) => {
         sign,
         signTypedData,
         _signTypedData,
+        resolveEns,
         //loadProvider,
         //handleChainChanged,
         //web3: state,

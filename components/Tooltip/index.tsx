@@ -8,9 +8,9 @@ type Props = {
   title: string;
   left: string;
   top: string;
-  transform: string;
-  minWidth: string;
-  height: undefined | string;
+  transform?: string;
+  minWidth?: string;
+  height?: undefined | string;
   children: string | JSX.Element | JSX.Element[];
 };
 

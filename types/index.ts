@@ -1,5 +1,5 @@
 export const LOCATION_CLOUD = "Cloud";
-export const LOCATION_PUBLIC_IPFS = "Public IPFS";
+export const LOCATION_PUBLIC_IPFS = "IPFS";
 export const LOCATION_PRIVATE_IPFS = "Private IPFS";
 export const LOCATION_LOCAL = "Local";
 

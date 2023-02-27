@@ -38,6 +38,11 @@ const ObserverCardMobile = ({ observer }: Props) => {
     [observer]
   );
 
+  const observerName = useMemo<string>(
+    () => observer?.ens?.name || observer?.wallet?.user?.name || "Anonymous",
+    [observer]
+  );
+
   return (
     <Container sx={cardMobile}>
       <Flex sx={{ alignItems: "center" }}>
@@ -49,7 +54,7 @@ const ObserverCardMobile = ({ observer }: Props) => {
             <Icon src={iconsObj.defaultUserPicture} />
           )}
         </Box>
-        <Box sx={usernameText}>{observer?.wallet?.user?.name || "Anonymous"}</Box>
+        <Box sx={usernameText}>{observerName}</Box>
       </Flex>
       <Flex sx={tableAddressCell}>
         <Box sx={textMobile}>Observer Address</Box>

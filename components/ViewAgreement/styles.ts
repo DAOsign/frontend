@@ -382,6 +382,7 @@ const tableUserNameCell = {
 
 const tableAddressCell = {
   ...tableCellBase,
+  cursor: "pointer",
   "@media screen and (max-width: 720px)": {
     "&": {
       justifyContent: "space-between",

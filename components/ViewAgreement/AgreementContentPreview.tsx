@@ -85,10 +85,10 @@ export const AgreementContentPreview = ({
         />
       ) : (
         <div>
-          <Container sx={{ textAlign: "center" }}>
+          <Container sx={{ textAlign: "center", pt: "32px", pb: "72px" }}>
             <Flex sx={{ justifyContent: "center" }}>
               <Box sx={{ width: "80px", height: "80px", m: "20px auto 12px" }}>
-                <Icon src={iconsObj.portfile} />
+                <Icon src={iconsObj.whitoutUser} />
               </Box>
             </Flex>
             <Text sx={{ ...noObserversMessage }}>{`The agreement has no content yet`}</Text>

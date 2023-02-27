@@ -36,6 +36,7 @@ import ModalProof from "../ModalProof";
 import { toAgreementWithParticipants } from "../../utils/typeUtils";
 import SignedIcon from "../icon/editable/SignedIcon";
 import SignatureIcon from "../icon/editable/SignatureIcon";
+import CopyIcon from "../CopyIcon";
 
 const formatAgreementPrivacy = (agreementPrivacy: string | undefined) => {
   if (!agreementPrivacy) return "";
@@ -175,21 +176,25 @@ export const AgreementInformation = ({
         />
         <InformationRow
           name="Creator"
-          value={authorWalletAddress ? formatAddress(authorWalletAddress) : ""}
-          valueIcon={iconsObj.iconSix}
-          onIconClick={handleCopyAddress}
+          tooltipValue={authorWalletAddress}
+          value={
+            <Box className="signature_icon" sx={{ cursor: "pointer" }} onClick={handleCopyAddress}>
+              {formatAddress(authorWalletAddress!)} <CopyIcon />
+            </Box>
+          }
         />
         <InformationRow
           name="Agreement proof"
+          tooltipValue={agreement?.agreementProof?.cid}
           value={
             agreement.agreementProof ? (
-              <div
+              <Box
                 onClick={() => (agreement.agreementProof ? onShowProof(AGREEMENT_PROOF) : {})}
-                style={{ cursor: "pointer", display: "flex", alignItems: "center", gap: "4px" }}
+                sx={{ cursor: "pointer", display: "flex", alignItems: "center", gap: "4px" }}
                 className="signature_icon"
               >
                 {formatAddress(agreement.agreementProof!.cid)} <SignatureIcon color="#CA5CF2" />
-              </div>
+              </Box>
             ) : (
               "-"
             )
@@ -198,21 +203,21 @@ export const AgreementInformation = ({
 
         <InformationRow
           name="Authority proof"
+          tooltipValue={agreement?.agreementFileProof?.cid || undefined}
           value={
             agreement.agreementFileProof ? (
-              <div
+              <Box
                 onClick={() => (agreement.agreementFileProof ? onShowProof(AUTHORITY_PROOF) : {})}
-                style={{ cursor: "pointer", display: "flex", alignItems: "center", gap: "4px" }}
+                sx={{ cursor: "pointer", display: "flex", alignItems: "center", gap: "4px" }}
                 className="signature_icon"
               >
                 {formatAddress(agreement.agreementFileProof!.cid!)}{" "}
                 <SignatureIcon color="#CA5CF2" />
-              </div>
+              </Box>
             ) : (
               "-"
             )
           }
-          onClick={() => (agreement.agreementFileProof ? onShowProof(AUTHORITY_PROOF) : {})}
         />
         <InformationRow name="Location" value={agreementLocation || ""} />
         <InformationRow
@@ -254,7 +259,7 @@ export const AgreementInformation = ({
             )}
           </>
         }
-        {agreementStatus === STATUS_DRAFT ? (
+        {agreementStatus === STATUS_DRAFT && userIsAuthor ? (
           <Button sx={btnPrimary} onClick={handleReadyToSign}>
             Ready to Sign
           </Button>

@@ -43,6 +43,11 @@ const SignerCardMobile = ({ signer, signProof, viewProof }: Props) => {
     [signer]
   );
 
+  const signerName = useMemo<string>(
+    () => signer?.ens?.name || signer?.wallet?.user?.name || "Anonymous",
+    []
+  );
+
   return (
     <Container sx={cardMobile}>
       <Flex sx={{ alignItems: "center" }}>
@@ -54,7 +59,7 @@ const SignerCardMobile = ({ signer, signProof, viewProof }: Props) => {
             <Icon src={iconsObj.defaultUserPicture} />
           )}
         </Box>
-        <Box sx={usernameText}>{signer?.wallet?.user?.name || "Anonymous"}</Box>
+        <Box sx={usernameText}>{signerName}</Box>
       </Flex>
       <Flex sx={{ ...tableAddressCell, backgroundColor: "#fff" }}>
         <Box sx={textMobile}>Signer Address</Box>

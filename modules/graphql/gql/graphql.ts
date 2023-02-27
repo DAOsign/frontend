@@ -233,6 +233,14 @@ export type DeleteAgreementResponse = {
   message: Scalars["String"];
 };
 
+export type Ens = {
+  __typename?: "Ens";
+  ensId: Scalars["ID"];
+  name: Scalars["String"];
+  networkId: Scalars["Int"];
+  walletId: Scalars["Int"];
+};
+
 export type GetAgreementsResponse = {
   __typename?: "GetAgreementsResponse";
   agreements: Array<Agreement>;
@@ -328,6 +336,7 @@ export type Observer = {
   __typename?: "Observer";
   agreementId: Scalars["Int"];
   email?: Maybe<Scalars["String"]>;
+  ens?: Maybe<Ens>;
   observerId: Scalars["ID"];
   wallet?: Maybe<Wallet>;
   walletId?: Maybe<Scalars["Int"]>;
@@ -439,6 +448,7 @@ export type Signer = {
   __typename?: "Signer";
   agreementId: Scalars["Int"];
   email?: Maybe<Scalars["String"]>;
+  ens?: Maybe<Ens>;
   signature?: Maybe<AgreementSignature>;
   signerId: Scalars["ID"];
   wallet?: Maybe<Wallet>;
@@ -643,11 +653,13 @@ export type QueryQuery = {
       email?: string | null;
       observerId: string;
       wallet?: { __typename?: "Wallet"; address: string } | null;
+      ens?: { __typename?: "Ens"; name: string } | null;
     }>;
     signers: Array<{
       __typename?: "Signer";
       email?: string | null;
       wallet?: { __typename?: "Wallet"; address: string } | null;
+      ens?: { __typename?: "Ens"; name: string } | null;
     }>;
     signProofs?: Array<{
       __typename?: "AgreementSignProof";
@@ -1415,6 +1427,14 @@ export const QueryDocument = {
                           selections: [{ kind: "Field", name: { kind: "Name", value: "address" } }],
                         },
                       },
+                      {
+                        kind: "Field",
+                        name: { kind: "Name", value: "ens" },
+                        selectionSet: {
+                          kind: "SelectionSet",
+                          selections: [{ kind: "Field", name: { kind: "Name", value: "name" } }],
+                        },
+                      },
                     ],
                   },
                 },
@@ -1431,6 +1451,14 @@ export const QueryDocument = {
                         selectionSet: {
                           kind: "SelectionSet",
                           selections: [{ kind: "Field", name: { kind: "Name", value: "address" } }],
+                        },
+                      },
+                      {
+                        kind: "Field",
+                        name: { kind: "Name", value: "ens" },
+                        selectionSet: {
+                          kind: "SelectionSet",
+                          selections: [{ kind: "Field", name: { kind: "Name", value: "name" } }],
                         },
                       },
                     ],
