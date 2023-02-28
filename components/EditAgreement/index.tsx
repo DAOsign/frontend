@@ -147,7 +147,17 @@ export default function EditAgreement({ page }: { page: string }) {
         <Text sx={title}>Edit Agreement</Text>
         {values && steps[step]}
       </Container>
-      <Container sx={rightSide}>
+      <Container
+        sx={{
+          ...rightSide,
+          "@media screen and (max-width: 768px)": {
+            maxWidth: "343px",
+            paddingX: "16px",
+            pb: "40px",
+            pt: !values.file ? "0" : "95px",
+          },
+        }}
+      >
         <NavPanel page={page} setLoading={setLoading} />
       </Container>
     </Flex>

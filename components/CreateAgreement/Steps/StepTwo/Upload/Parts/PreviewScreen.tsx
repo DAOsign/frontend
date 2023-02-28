@@ -4,7 +4,7 @@ import { Flex, Box, Text } from "theme-ui";
 import { FileState } from "..";
 import iconsObj from "../../../../../../assets/icons";
 import Icon from "../../../../../icon";
-import { previewContainer } from "../../../../styles";
+import { previewContainer, removeContainer, flexRemove, containerFlex } from "../../../../styles";
 import { useCreateAgreement } from "../../../../../../hooks/useCreateAgreement";
 import { useEditAgreement } from "../../../../../../hooks/useEditAgreement";
 import { Link } from "theme-ui";
@@ -69,16 +69,8 @@ const PreviewScreen = ({ file, page, onFileDelete = () => {} }: Props) => {
       <Box className="preview">
         <FileViewer documents={documents} config={FILE_VIEWER_CONFIG} />
       </Box>
-      <Box
-        sx={{
-          justifyContent: "space-between",
-          display: "flex",
-          height: "26px",
-          gap: "20px",
-          mt: "8px",
-        }}
-      >
-        <Flex sx={{ gap: "8px", alignItems: "center" }}>
+      <Box sx={containerFlex}>
+        <Flex sx={flexRemove}>
           <Link
             href={documents[0]?.uri}
             target={"_blank"}
@@ -102,20 +94,11 @@ const PreviewScreen = ({ file, page, onFileDelete = () => {} }: Props) => {
           </Link>
         </Flex>
         <Box sx={{ minWidth: "unset" }}>
-          <Flex
-            onClick={handleDelete}
-            sx={{
-              variant: "text.link",
-              fontSize: "12px",
-              lineHeight: "160%",
-              alignItems: "flex-start",
-              gap: "4px",
-              "&:hover": { color: "#AE4FD0", "& > svg > path": { stroke: "#AE4FD0" } },
-            }}
-          >
+          <Flex onClick={handleDelete} sx={removeContainer}>
             <Box
               sx={{
                 width: "16px",
+                height: "21px",
               }}
             >
               <svg width="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">

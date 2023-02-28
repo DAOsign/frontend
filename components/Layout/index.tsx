@@ -16,7 +16,14 @@ function Layout({ children }: React.PropsWithChildren) {
   const hideStyles = account ? {} : { display: "none" };
 
   return (
-    <Container sx={{ width: "100%", paddingTop: "80px", ...hideStyles }}>
+    <Container
+      sx={{
+        width: "100%",
+        paddingTop: "80px",
+        "@media screen and (max-width: 768px)": { pt: "60px" },
+        ...hideStyles,
+      }}
+    >
       <Head>
         <title>Dao-Sign</title>
         <meta name="description" content="Dao-Sign" />

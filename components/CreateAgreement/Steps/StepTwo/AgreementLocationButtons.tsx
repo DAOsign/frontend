@@ -69,7 +69,18 @@ export default function AgreementLocationRadioButtons({ page }: { page: string }
         </Tooltip>
       </Flex>
       <Box as="form" onSubmit={e => e.preventDefault()}>
-        <Flex sx={{ mb: "24px", display: "flex", gap: "22px" }}>
+        <Flex
+          sx={{
+            "@media screen and (max-width: 1200px)": {
+              mb: "24px",
+            },
+            "@media screen and (max-width: 768px)": {
+              mb: !values.file ? "36px" : "24px",
+            },
+            display: "flex",
+            gap: "22px",
+          }}
+        >
           {agreementLocations.map(el => (
             <Flex
               key={el?.name}

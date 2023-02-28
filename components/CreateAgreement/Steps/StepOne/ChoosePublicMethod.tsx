@@ -45,7 +45,7 @@ export default function PublicMethod({ animateContainer, setPublic, page }: Publ
       transition={{ type: "linear" }}
     >
       <Container sx={container}>
-        <Flex sx={{ alignItems: "center" }}>
+        <Flex sx={{ alignItems: "center", pb: "16px" }}>
           <Text sx={{ variant: "text.largeTextBold" }}>Public</Text>
           <Button
             onClick={() => {
@@ -105,7 +105,7 @@ export default function PublicMethod({ animateContainer, setPublic, page }: Publ
           </Container>
         </Flex>
         <Flex
-          sx={item}
+          sx={{ ...item, mb: 0 }}
           onClick={() => changeValue("agreementPrivacy", PRIVACY_PUBLIC_WITH_LINK)}
           className={values.agreementPrivacy === PRIVACY_PUBLIC_WITH_LINK ? "active" : undefined}
         >

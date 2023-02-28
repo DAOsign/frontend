@@ -3,6 +3,8 @@ import StepOne from "./Steps/StepOne";
 import StepTwo from "./Steps/StepTwo";
 import StepThree from "./Steps/StepThree";
 import { Container, Flex, Text } from "theme-ui";
+import { useCreateAgreement } from "../../hooks/useCreateAgreement";
+import { useEditAgreement } from "../../hooks/useEditAgreement";
 import NavPanel from "./NavPanel";
 import { rightSide, leftSide, containerSides, title } from "./styles";
 import { motion, Variants } from "framer-motion";
@@ -30,9 +32,13 @@ export const withFade = (component: React.ReactElement, key: number | string) =>
 
 export default function CreateAgreement({ page }: { page: string }) {
   const { query } = useRouter();
+  const create = useCreateAgreement();
+  const edit = useEditAgreement();
+  const { values } = page === "create" ? create : edit;
   const [step, setStep] = useState(query?.step ? Number(query.step) : 0);
   const [transitioned, setTransitioned] = useState(false);
   const [loading, setLoading] = useState(false);
+
   const steps = {
     1: withFade(
       <StepOne page={page} animateContainer={() => setTransitioned(val => !val)} />,
@@ -48,7 +54,17 @@ export default function CreateAgreement({ page }: { page: string }) {
         <Text sx={title}>Create New Agreement</Text>
         {steps[step]}
       </Container>
-      <Container sx={rightSide}>
+      <Container
+        sx={{
+          ...rightSide,
+          "@media screen and (max-width: 768px)": {
+            maxWidth: "343px",
+            paddingX: "16px",
+            pb: "40px",
+            pt: !values.file ? "0" : "95px",
+          },
+        }}
+      >
         <NavPanel page={page} setLoading={setLoading} />
       </Container>
     </Flex>

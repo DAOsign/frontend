@@ -12,6 +12,7 @@ const container = {
   zIndex: 10,
   "@media screen and (max-width: 768px)": {
     px: "36px",
+    height: "66px",
   },
   "@media screen and (max-width: 480px)": {
     paddingRight: "12px",

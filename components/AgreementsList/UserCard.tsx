@@ -1,3 +1,4 @@
+/* eslint-disable @next/next/no-img-element */
 import React from "react";
 import { Container, Box, Text, Button, Flex } from "theme-ui";
 import iconsObj from "../../assets/icons";

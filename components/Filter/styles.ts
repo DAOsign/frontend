@@ -15,10 +15,12 @@ const container = {
   cursor: "initial",
   "@media screen and (max-width: 768px)": {
     width: "100%",
+    borderTop: "1px solid #EDEDF3",
     maxWidth: "unset",
-    height: "calc(100vh - 80px)",
+    height: "calc(100vh - 60px)",
     position: "fixed",
-    top: "80px",
+    borderRadius: "0",
+    top: "66px",
   },
 } as ThemeUIStyleObject;
 
@@ -32,26 +34,41 @@ const conteinerHeader = {
 
 const title = {
   fontFamily: "InterBold",
-  fontStyle: "normal",
-  fontWeight: 700,
   fontSize: "20px",
-  lineHeight: "120%",
-  textAlign: "center",
-  color: "#212121",
+  lineHeight: "24px",
+  fontWeight: 700,
+  "@media screen and (max-width: 768px)": {
+    fontStyle: "normal",
+    fontSize: "28px",
+    lineHeight: "120%",
+    textAlign: "center",
+    color: "#212121",
+  },
 } as ThemeUIStyleObject;
 
 const secondaryTitle = {
   variant: "text.normalTextBold",
-  mt: "16px",
+  fontWeight: 700,
+  fontSize: "16px",
   display: "inline-block",
+  lineHeight: "25.6px",
+  mt: "16px",
+  "@media screen and (max-width: 768px)": {
+    mt: "24px",
+    fontSize: "20px",
+    lineHeight: "24px",
+  },
 } as ThemeUIStyleObject;
 
 const text = {
   variant: "text.smallTextMediumUser",
+  fontSize: "14px",
+  "@media screen and (max-width: 768px)": {
+    fontSize: "16px",
+  },
 } as ThemeUIStyleObject;
 
 const conteinerCheckbox = {
-  mt: "8px",
   alignItems: "center",
   cursor: "pointer",
   "&:hover": {
@@ -81,9 +98,12 @@ const iconClose = {
 } as ThemeUIStyleObject;
 
 const clear = {
-  variant: "text.normalTextBold",
-  mt: "32px",
+  variant: "buttons.userBtn",
+  py: "12px",
+  mt: "60px",
+  width: "100%",
   color: "#CA5CF2",
+  height: "50px",
   display: "none",
   cursor: "pointer",
   "&:hover": {
@@ -93,7 +113,19 @@ const clear = {
     color: "#AE4FD0",
   },
   "@media screen and (max-width: 768px)": {
-    display: "inline-block",
+    display: "block",
+    background: "transparent",
+    border: "2px solid #CA5CF280",
+    "&:hover": {
+      color: "#CA5CF2",
+      background: "transparent",
+      border: "2px solid #AE4FD0",
+    },
+    "&:focus": {
+      background: "transparent",
+      color: "#CA5CF2",
+      border: "2px solid #AE4FD0",
+    },
   },
 } as ThemeUIStyleObject;
 

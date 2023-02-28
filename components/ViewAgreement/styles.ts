@@ -14,6 +14,7 @@ const container = {
   },
   "@media screen and (max-width: 719px)": {
     overflow: "hidden",
+    p: "24px 16px 28px 16px",
     flexDirection: "column",
   },
 } as ThemeUIStyleObject;
@@ -209,6 +210,10 @@ const greyLabelWithHover = {
     color: "white",
     backgroundColor: "#212121",
   },
+  "@media screen and (max-width: 720px)": {
+    height: "52px",
+    px: "12px",
+  },
 } as ThemeUIStyleObject;
 
 const blueLabel = {
@@ -313,6 +318,9 @@ const contentCard = {
   overflow: "hidden",
   flexDirection: "column",
   marginTop: "40px",
+  "@media screen and (max-width: 720px)": {
+    mt: "52px",
+  },
 } as ThemeUIStyleObject;
 
 const contentTitle = {

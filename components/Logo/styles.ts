@@ -103,4 +103,23 @@ const animateContainer = {
   paddingTop: "80px",
 } as ThemeUIStyleObject;
 
-export { animateContainer, container, iconLogo, text, logo, a, d, o, logoWithoutAnimate };
+const logoContainer = {
+  height: "48px",
+  margin: "0 auto 0 0",
+  "@media screen and (max-width: 768px)": {
+    height: "32px",
+  },
+} as ThemeUIStyleObject;
+
+export {
+  logoWithoutAnimate,
+  animateContainer,
+  logoContainer,
+  container,
+  iconLogo,
+  text,
+  logo,
+  a,
+  d,
+  o,
+};

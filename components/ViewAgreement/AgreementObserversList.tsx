@@ -21,7 +21,7 @@ export const AgreementObserversList = ({ observers }: Props) => {
             "@media screen and (max-width: 720px)": {
               "&": {
                 display: observers?.length ? "block" : "none",
-                pl: 0,
+                pl: "15px",
               },
             },
           }}

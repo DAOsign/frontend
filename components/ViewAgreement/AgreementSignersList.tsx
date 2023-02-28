@@ -22,6 +22,7 @@ export const AgreementSignersList = ({ signers }: Props) => {
             ...participantsCardTitle,
             "@media screen and (max-width: 720px)": {
               "&": {
+                pl: "15px",
                 display: signers?.length ? "block" : "none",
               },
             },

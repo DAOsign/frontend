@@ -37,7 +37,17 @@ const UploadScreen = ({ page }: { page: string }) => {
 
   return (
     <>
-      <Box sx={imageUploadContainer} className={values.file ? "uploaded" : undefined}>
+      <Box
+        sx={{
+          ...imageUploadContainer,
+          "@media screen and (max-width: 768px)": {
+            width: !values.file ? "124px" : "100% !important",
+            height: !values.file ? "46px" : "140px !important",
+            borderRadius: !values.file ? "80px" : "12px",
+          },
+        }}
+        className={values.file ? "uploaded" : undefined}
+      >
         <input
           style={{ cursor: !!values.file ? "default" : "pointer" }}
           lang="en"

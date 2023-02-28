@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Container, Flex, Input, Text, Box, Checkbox } from "theme-ui";
+import { Container, Flex, Input, Text, Box, Checkbox, Button } from "theme-ui";
 import iconsObj from "../../assets/icons";
 import CheckboxComponent from "../Checkbox";
 
@@ -7,7 +7,6 @@ import Icon from "../icon";
 import {
   container,
   title,
-  conteinerHeader,
   secondaryTitle,
   text,
   iconClose,
@@ -19,7 +18,7 @@ import {
 export default function Filter({ setVisible, onChange, reset, filterOptions }: any) {
   return (
     <Container onClick={e => e.stopPropagation()} sx={container}>
-      <Flex sx={conteinerHeader}>
+      <Flex sx={{ justifyContent: "space-between", alignItems: "center" }}>
         <Text sx={title}>Filter by:</Text>
         <Box
           onClick={() => {
@@ -39,12 +38,20 @@ export default function Filter({ setVisible, onChange, reset, filterOptions }: a
         </Box>
       </Flex>
       <Container>
-        <Text sx={secondaryTitle}>Status</Text>
-        {filterOptions.status.map((el: any) => {
+        <Text sx={{ ...secondaryTitle, "@media screen and (max-width: 768px)": { mt: "22px" } }}>
+          Status
+        </Text>
+        {filterOptions.status.map((el: any, i: number) => {
           return (
             <Flex
               onClick={() => onChange(el.id)}
-              sx={{ ...conteinerCheckbox, opacity: el.value ? 1 : 0.5, position: "relative" }}
+              sx={{
+                ...conteinerCheckbox,
+                opacity: el.value ? 1 : 0.5,
+                position: "relative",
+                mt: "10px",
+                "@media screen and (max-width: 768px)": { mt: i === 0 ? "8px" : "12px" },
+              }}
               key={el.id}
             >
               <CheckboxComponent disabled={false} checked={el.value} />
@@ -53,11 +60,17 @@ export default function Filter({ setVisible, onChange, reset, filterOptions }: a
           );
         })}
         <Text sx={secondaryTitle}>Permission</Text>
-        {filterOptions.permission.map((el: any) => {
+        {filterOptions.permission.map((el: any, i: number) => {
           return (
             <Flex
               onClick={() => onChange(el.id)}
-              sx={{ ...conteinerCheckbox, opacity: el.value ? 1 : 0.5, position: "relative" }}
+              sx={{
+                ...conteinerCheckbox,
+                opacity: el.value ? 1 : 0.5,
+                position: "relative",
+                mt: "10px",
+                "@media screen and (max-width: 768px)": { mt: i === 0 ? "8px" : "12px" },
+              }}
               key={el.id}
             >
               <CheckboxComponent disabled={false} checked={el.value} />
@@ -70,6 +83,7 @@ export default function Filter({ setVisible, onChange, reset, filterOptions }: a
           sx={{
             ...conteinerCheckbox,
             opacity: filterOptions.signature.value ? 1 : 0.5,
+            mt: "8px",
             position: "relative",
           }}
           onClick={() => onChange(filterOptions.signature.id)}
@@ -77,10 +91,9 @@ export default function Filter({ setVisible, onChange, reset, filterOptions }: a
           <CheckboxComponent disabled={false} checked={filterOptions.signature.value} />
           <Text sx={text}>{filterOptions.signature.name}</Text>
         </Flex>
-
-        <Text onClick={reset} sx={clear}>
+        <Button onClick={reset} sx={clear}>
           Clear All
-        </Text>
+        </Button>
       </Container>
     </Container>
   );

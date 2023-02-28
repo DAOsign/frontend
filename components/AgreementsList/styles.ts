@@ -102,7 +102,7 @@ const containerSides = {
   maxWidth: "1200px",
   justifyContent: "space-between",
   margin: "0 auto 0",
-  paddingTop: "20px",
+  paddingTop: "24px",
   "@media screen and (max-width: 1200px)": {
     flexDirection: "column",
     px: "24px",
@@ -225,7 +225,7 @@ const agreementConteiner = {
   background: "white",
   border: "1px solid #EDEDF3",
   borderRadius: "12px",
-  p: "20px 24px 20px 24px",
+  p: "24px 24px 12px 24px",
   cursor: "pointer",
   width: "100%",
   transitionProperty: "all",
@@ -252,6 +252,8 @@ const agreementLabels = {
   gap: "16px",
   alignItems: "flex-start",
   "@media screen and (max-width: 720px)": {
+    justifyContent: "flex-end",
+    flexDirection: "row-reverse",
     "& .arrowTooltip": {
       mr: "auto",
       ml: "40px",
@@ -519,11 +521,8 @@ const verificationIconContainer = {
 } as ThemeUIStyleObject;
 
 const titleSigners = {
-  mt: "8px",
   "@media screen and (max-width: 768px)": {
-    mr: "20px",
     mt: 0,
-    pt: "16px",
   },
 } as ThemeUIStyleObject;
 

@@ -33,6 +33,7 @@ const fotoContainer = {
   background: "#FFFFFF",
   border: "1px solid #EDEDF3",
   borderRadius: "12px",
+  height: "390px",
   p: "32px 32px 0 32px",
   boxShadow: "0px 4px 40px rgba(0, 0, 0, 0.08)",
   position: "absolute",
@@ -62,12 +63,13 @@ const fotoContainer = {
 
 const btnLogaut = {
   variant: "buttons.grey",
-  mt: "32px",
+  mt: "29px",
   border: "none",
   width: "100%",
   color: "#CA5CF2",
-  height: "64px",
+  height: "45px",
   pt: 0,
+  pb: 0,
   textAlign: "center",
   "&:hover": {
     border: "none",

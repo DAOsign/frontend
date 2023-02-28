@@ -10,7 +10,7 @@ const containerSides = {
   },
   "@media screen and (max-width: 768px)": {
     flexDirection: "column",
-    mt: "220px",
+    marginTop: "236px",
   },
 } as ThemeUIStyleObject;
 
@@ -76,6 +76,7 @@ export const previewContainer = {
 const uploadText = {
   variant: "text.smallTextMedium",
   display: "block",
+  padding: "10px 16px",
   opacity: 1,
   "@media screen and (max-width: 768px)": {
     display: "none",
@@ -86,7 +87,6 @@ const uploadTextMobile = {
   display: "none",
   "@media screen and (max-width: 768px)": {
     display: "inline-block",
-    mt: "10px",
     variant: "text.normalTextBold",
   },
 } as ThemeUIStyleObject;
@@ -137,6 +137,7 @@ const leftSide = {
     maxWidth: "343px",
     paddingX: "16px",
     minHeight: "300px",
+    paddingBottom: "40px",
   },
 } as ThemeUIStyleObject;
 
@@ -173,26 +174,18 @@ const rightSide = {
     pb: "72px",
     pt: 0,
   },
-  "@media screen and (max-width: 768px)": {
-    maxWidth: "343px",
-    paddingX: "16px",
-    pb: "40px",
-    pt: 0,
-  },
 } as ThemeUIStyleObject;
 
 const container = {
   border: "2px solid #F7F7FB",
   borderRadius: "8px",
-  height: "490px",
+  height: "fit-content",
   px: "32px",
   py: "24px",
   position: "relative",
   "@media screen and (max-width: 768px)": {
     maxWidth: "343px",
-    paddingX: "16px",
-    pb: "40px",
-    pt: 0,
+    p: "16px",
   },
 } as ThemeUIStyleObject;
 
@@ -395,6 +388,8 @@ const uploadBtn = {
   fontSize: "12px",
   color: " #CA5CF2",
   display: "flex",
+  height: "20px",
+  pt: 0,
   lineHeight: "160%",
   alignItems: "center",
   width: "180px",
@@ -402,14 +397,10 @@ const uploadBtn = {
   marginRight: 0,
   backgroundColor: "transparent",
   background: "unset",
+  justifyContent: "flex-end",
   "&:hover": {
     background: "unset",
     backgroundColor: "transparent",
-  },
-  "@media screen and (max-width: 768px)": {
-    position: "absolute",
-    right: 0,
-    top: "30px",
   },
 } as ThemeUIStyleObject;
 
@@ -459,6 +450,10 @@ const btnBack = {
     background: "unset",
     color: "#AE4FD0",
   },
+  "@media screen and (max-width: 768px)": {
+    p: 0,
+    height: "20px",
+  },
 } as ThemeUIStyleObject;
 
 const textLoading = {
@@ -492,6 +487,59 @@ const delBtn = {
   },
 } as ThemeUIStyleObject;
 
+const labelUpload = {
+  variant: "forms.label",
+} as ThemeUIStyleObject;
+
+const containerUpload = {
+  flexDirection: "column",
+  "@media screen and (max-width: 768px)": {
+    flexDirection: "row-reverse",
+  },
+} as ThemeUIStyleObject;
+
+const removeContainer = {
+  variant: "text.normalTextBold",
+  fontSize: "12px",
+  lineHeight: "160%",
+  fontWeight: 700,
+  color: "#CA5CF2",
+  alignItems: "flex-start",
+  cursor: "pointer",
+  gap: "4px",
+  "&:hover": { color: "#AE4FD0", "& > div > svg > path": { stroke: "#AE4FD0" } },
+  "@media screen and (max-width: 768px)": {
+    border: "2px solid #CA5CF250",
+    width: "107px",
+    height: "46px",
+    justifyContent: "center",
+    borderRadius: "80px",
+    color: "#CA5CF2 !important",
+    fontSize: "16px",
+    alignItems: "center",
+    "&:hover": {
+      border: "2px solid #AE4FD0",
+      "& > div > svg > path": { stroke: "#CA5CF2 !important" },
+    },
+  },
+} as ThemeUIStyleObject;
+
+const flexRemove = {
+  gap: "8px",
+  alignItems: "center",
+} as ThemeUIStyleObject;
+
+const containerFlex = {
+  justifyContent: "space-between",
+  display: "flex",
+  height: "26px",
+  gap: "20px",
+  mt: "8px",
+  "@media screen and (max-width: 768px)": {
+    flexDirection: "column",
+  },
+} as ThemeUIStyleObject;
+
 export {
   inputCreactAgreement,
   inputCreateAgreementWithRightButton,
@@ -503,10 +551,15 @@ export {
   uploadTextMobile,
   secondaryTitle,
   stepsContainer,
+  containerFlex,
+  removeContainer,
   containerSides,
+  containerUpload,
   leftSideItem,
   textLoading,
   stepNumber,
+  flexRemove,
+  labelUpload,
   container,
   itemRadio,
   uploadText,

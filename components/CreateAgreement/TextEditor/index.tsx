@@ -52,8 +52,23 @@ const TextEditor = ({ page }: { page: string }) => {
 
   return (
     <Box style={{ position: "relative" }} sx={styles}>
-      <Flex sx={{ alignItems: "center" }}>
-        <Text sx={{ variant: "forms.label", minWidth: "170px" }}>Enter agreement description</Text>
+      <Flex sx={{ alignItems: "center", mt: "24px" }}>
+        <Flex sx={{ minWidth: "140px" }}>
+          <Text sx={{ variant: "forms.label", display: "inline-block", mr: "5px" }}>
+            Enter agreement{" "}
+          </Text>
+          <Text
+            sx={{
+              variant: "forms.label",
+              display: "inline-block",
+              "@media screen and (max-width: 768px)": {
+                display: "none",
+              },
+            }}
+          >
+            description
+          </Text>
+        </Flex>
         <Button sx={btnBack} className="backBtn" onClick={() => changeValue("agreementMethod", "")}>
           <Icon style={{ display: "block" }} src={iconsObj.arrowLeftPink} />
           <Text sx={{ display: "block" }}>{" < "} Choose another method</Text>

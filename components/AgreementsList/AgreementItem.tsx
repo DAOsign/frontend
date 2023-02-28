@@ -144,6 +144,7 @@ export default function AgreementItem({
             sx={{
               variant: "text.largeTextBold",
               pt: "12px",
+              pb: "16px",
               overflow: "hidden",
               textOverflow: "ellipsis",
               lineHeight: "30px",
@@ -152,54 +153,58 @@ export default function AgreementItem({
             {title}
           </Box>
           <Flex sx={{ flexWrap: "wrap" }}>
-            <Text
-              sx={{
-                variant: "text.smallTextMedium",
-                opacity: "0.5",
-                mr: "6px",
-                ...titleSigners,
-              }}
-            >
-              Signers:
-            </Text>
-            <Text sx={{ variant: "text.smallTextMediumUser", mr: "20px", ...titleSigners }}>
-              {signers.length}
-            </Text>
-            <Text
-              sx={{ variant: "text.smallTextMedium", opacity: "0.5", mr: "6px", ...titleSigners }}
-            >
-              Signed:
-            </Text>
-            <Text sx={{ variant: "text.smallTextMediumUser", mr: "20px", ...titleSigners }}>
-              {signProofAmount}
-            </Text>
-            <Text
-              sx={{ variant: "text.smallTextMedium", opacity: "0.5", mr: "6px", ...titleSigners }}
-            >
-              Observers:
-            </Text>
-            <Text sx={{ variant: "text.smallTextMediumUser", mr: "20px", ...titleSigners }}>
-              {observers.length}
-            </Text>
-            {
-              <Box sx={titleSigners}>
-                <Text
-                  sx={{
-                    variant: "text.smallTextMedium",
-                    opacity: "0.5",
-                    mr: "6px",
-                  }}
-                >
-                  Access:
-                </Text>
-                <Text sx={{ variant: "text.smallTextMediumUser", mr: "20px", ...titleSigners }}>
-                  {
-                    //@ts-ignore
-                    agreementPrivacy !== "With Link" ? agreementPrivacy : "Anyone With Link"
-                  }
-                </Text>
-              </Box>
-            }
+            <Box sx={{ mr: "20px", pb: "12px" }}>
+              <Text
+                sx={{
+                  variant: "text.smallTextMedium",
+                  opacity: "0.5",
+                  mr: "6px",
+                  ...titleSigners,
+                }}
+              >
+                Signers:
+              </Text>
+              <Text sx={{ variant: "text.smallTextMediumUser", ...titleSigners }}>
+                {signers.length}
+              </Text>
+            </Box>
+            <Box sx={{ mr: "20px", pb: "12px" }}>
+              <Text
+                sx={{ variant: "text.smallTextMedium", opacity: "0.5", mr: "4px", ...titleSigners }}
+              >
+                Signed:
+              </Text>
+              <Text sx={{ variant: "text.smallTextMediumUser", ...titleSigners }}>
+                {signProofAmount}
+              </Text>
+            </Box>
+            <Box sx={{ mr: "20px", pb: "12px" }}>
+              <Text
+                sx={{ variant: "text.smallTextMedium", opacity: "0.5", mr: "4px", ...titleSigners }}
+              >
+                Observers:
+              </Text>
+              <Text sx={{ variant: "text.smallTextMediumUser", ...titleSigners }}>
+                {observers.length}
+              </Text>
+            </Box>
+            <Box sx={{ ...titleSigners, mr: "20px", pb: "12px" }}>
+              <Text
+                sx={{
+                  variant: "text.smallTextMedium",
+                  opacity: "0.5",
+                  mr: "6px",
+                }}
+              >
+                Access:
+              </Text>
+              <Text sx={{ variant: "text.smallTextMediumUser", ...titleSigners }}>
+                {
+                  //@ts-ignore
+                  agreementPrivacy !== "With Link" ? agreementPrivacy : "Anyone With Link"
+                }
+              </Text>
+            </Box>
           </Flex>
         </Flex>
       </Link>

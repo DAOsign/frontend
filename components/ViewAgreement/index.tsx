@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import React, { useCallback, useEffect, useMemo, useState } from "react";
 import { Box, Button, Flex } from "theme-ui";
 import { useRouter } from "next/router";
