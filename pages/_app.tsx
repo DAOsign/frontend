@@ -11,6 +11,7 @@ import "../styles/tables.css";
 import { getToken } from "../utils/token";
 import Layout from "../components/Layout";
 import "react-toastify/dist/ReactToastify.css";
+import TestnetIndicator from "../components/TestnetIndicator";
 
 const client = createClient({
   url: String(process.env.NEXT_PUBLIC_GRAPHQL_ENDPOINT),
@@ -29,7 +30,10 @@ function MyApp({ Component, pageProps }: AppProps) {
         <Component {...pageProps} />
       </Layout>
     ) : (
-      <Component {...pageProps} />
+      <>
+        <TestnetIndicator sx={{ mb: "0" }} />
+        <Component {...pageProps} />
+      </>
     );
   };
 

@@ -94,6 +94,7 @@ import good from "../img/svg/good.svg";
 import link from "../img/svg/link.svg";
 import ink from "../img/svg/ink.svg";
 import m from "../img/svg/m.svg";
+import warning from "../img/svg/warning.svg";
 
 import { IconsMapper } from "./icons.types";
 
@@ -194,6 +195,7 @@ const iconsObj: IconsMapper = {
   m,
   defaultUserPicture,
   closedEye,
+  warning,
 };
 
 export default iconsObj;

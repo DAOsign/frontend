@@ -6,6 +6,7 @@ import Header from "../Header/Header";
 import { useWeb3 } from "../../hooks/useWeb3";
 import HeaderMenu from "../Header/HeaderMenu";
 import Footer from "../Footer/Footer";
+import TestnetIndicator from "../TestnetIndicator";
 
 function Layout({ children }: React.PropsWithChildren) {
   const { account } = useWeb3();
@@ -34,6 +35,7 @@ function Layout({ children }: React.PropsWithChildren) {
         setVisibleMenu={setVisible}
         address={account || ""}
       />
+      <TestnetIndicator />
       {children}
     </Container>
   );

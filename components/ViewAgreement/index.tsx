@@ -173,7 +173,7 @@ export const ViewAgreement = () => {
           )}
         </>
       )}
-      {agreement && (
+      {agreement && isOpen && (
         <ModalEditObservers
           agreement={agreement}
           onExit={() => setIsOpen(false)}

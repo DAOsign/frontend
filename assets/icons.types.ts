@@ -95,6 +95,7 @@ export interface IconsMapper extends Record<string, unknown> {
   closedEye: Icon;
   soon: Icon;
   link: Icon;
+  warning: Icon;
 }
 
 interface Icon {
