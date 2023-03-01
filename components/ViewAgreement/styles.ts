@@ -340,7 +340,9 @@ const DEFAULT_CONTENT_PREVIEW_MAX_HEIGHT = 300;
 const contentData = {
   paddingTop: "0",
   paddingX: "32px",
+  borderBottom: "1px solid white",
   minHeight: "200px",
+  pb: "20px",
   maxHeight: `${DEFAULT_CONTENT_PREVIEW_MAX_HEIGHT}px`,
   overflow: "hidden",
   ".w-md-editor": {
@@ -490,7 +492,7 @@ const verificationCard = {
 
 const showMoreLabel = {
   position: "absolute",
-  bottom: "24px",
+  bottom: "25px",
   left: "32px",
   color: "#CA5CF2",
   fontFamily: "InterBold",
@@ -525,7 +527,7 @@ const uploadedFileTitleContainer = {
   opacity: 1,
   transition: "opacity 0.3s",
   top: "3px",
-  zIndex: "100",
+  zIndex: "1",
   "&:hover": {
     opacity: 0.8,
   },
@@ -633,7 +635,7 @@ const viewFileLabel = {
   opacity: 1,
   transition: "opacity 0.3s",
   cursor: "pointer",
-  zIndex: "10",
+  zIndex: "1",
   bottom: 0,
   "&:hover": {
     color: "#AE4FD0",

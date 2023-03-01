@@ -43,7 +43,7 @@ export default function ChooseAgreementMethod({ page }: { page: string }) {
       default:
         return withFade(
           <>
-            <Container sx={{ height: "242px", position: "relative" }}>
+            <Container sx={{ height: "242px", position: "relative", mt: "24px" }}>
               <Container
                 onClick={() => {
                   changeValue("errors", { ...values.errors, agreementFile: null });

@@ -217,7 +217,13 @@ export default function StepThree({ loading, page }: { loading: boolean; page: s
             >
               <Flex sx={{ alignItems: "center" }}>
                 <Text
-                  sx={{ variant: "forms.label", ml: "3px", maxWidth: "unset", minHeight: "25px" }}
+                  sx={{
+                    variant: "forms.label",
+                    ml: "3px",
+                    mr: "5px",
+                    maxWidth: "unset",
+                    minHeight: "25px",
+                  }}
                 >
                   Signers (ENS name or address)
                 </Text>
@@ -226,8 +232,8 @@ export default function StepThree({ loading, page }: { loading: boolean; page: s
                   transform="translate(-57%, 0)"
                   minWidth="200px"
                   height="0"
-                  top="-361%"
-                  left="71%"
+                  top="-420%"
+                  left="92%"
                 >
                   <Box sx={{ width: "12px", height: "12px", display: "inline-block" }}>
                     <Icon style={{ opacity: 0.5 }} src={iconsObj.infoCircle} />
@@ -302,9 +308,15 @@ export default function StepThree({ loading, page }: { loading: boolean; page: s
             >
               <Flex sx={{ alignItems: "center" }}>
                 <Text
-                  sx={{ variant: "forms.label", ml: "3px", maxWidth: "unset", minHeight: "25px" }}
+                  sx={{
+                    variant: "forms.label",
+                    ml: "3px",
+                    mr: "5px",
+                    maxWidth: "unset",
+                    minHeight: "25px",
+                  }}
                 >
-                  Observers (ENS name or adderess)
+                  Observers (ENS name or adderess){" "}
                 </Text>
                 <Tooltip
                   title="Add users that will be able to see but not sign an agreement."
@@ -312,7 +324,7 @@ export default function StepThree({ loading, page }: { loading: boolean; page: s
                   minWidth="200px"
                   height="0"
                   top="-85px"
-                  left="71%"
+                  left="92%"
                 >
                   <Box sx={{ width: "12px", height: "12px", display: "inline-block" }}>
                     <Icon style={{ opacity: 0.5 }} src={iconsObj.infoCircle} />
@@ -390,6 +402,7 @@ export default function StepThree({ loading, page }: { loading: boolean; page: s
                     ml: "3px",
                     maxWidth: "unset",
                     minHeight: "25px",
+                    mr: "5px",
                   }}
                 >
                   Required Signed Verifications

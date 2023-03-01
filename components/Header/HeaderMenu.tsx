@@ -50,7 +50,7 @@ const HeaderMenu = ({
             <Flex sx={{ justifyContent: "left", alignItems: "center", mt: "4px" }}>
               <Tooltip
                 title={address}
-                left="-99%"
+                left="-118%"
                 top="-42px"
                 transform=""
                 minWidth="150px"

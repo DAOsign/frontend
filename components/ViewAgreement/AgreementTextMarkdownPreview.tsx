@@ -117,6 +117,7 @@ export const AgreementTextMarkdownPreview = ({ textContent }: Props) => {
     <Box
       sx={{
         ...contentData,
+        position: "relative",
         animation:
           shouldExpandTextContent === undefined ? "" : `${textExpandAnimation} 1s forwards`,
         ...loaderStyles,
@@ -135,17 +136,18 @@ export const AgreementTextMarkdownPreview = ({ textContent }: Props) => {
         }}
         onLoad={onContentPreviewDataLoaded}
       />
+      <Box
+        sx={{
+          width: "100%",
+          height: "75px",
+          bottom: "0",
+          position: "absolute",
+          backgroundColor: "white",
+        }}
+      ></Box>
       {isShowMoreLabelVisible ? (
         <Box
-          sx={{
-            ...showMoreLabel,
-            animation:
-              shouldExpandTextContent === undefined
-                ? `${showMoreFadeInAnimation} 1s forwards`
-                : shouldShowLabelFadeInAnimation
-                ? `${showMoreFadeOutAnimation} 1.7s forwards`
-                : "",
-          }}
+          sx={showMoreLabel}
           onClick={handleShowMore}
           onAnimationEnd={() => {
             setShouldShowLabelFadeInAnimation(false);

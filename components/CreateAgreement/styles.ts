@@ -350,7 +350,7 @@ const stepsContainer = {
     maxWidth: "672px",
     height: "202px",
     alignItems: "center",
-    top: "104px",
+    top: "174px",
     display: "flex",
     transform: "translate(-50%, 0)",
     left: "50%",
@@ -364,6 +364,7 @@ const stepsContainer = {
     maxWidth: "343px",
     height: "179px",
     padding: "0 5px",
+    top: "154px",
   },
 } as ThemeUIStyleObject;
 

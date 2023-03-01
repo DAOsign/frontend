@@ -49,6 +49,7 @@ export default function AgreementLocationRadioButtons({ page }: { page: string }
           sx={{
             variant: "forms.label",
             display: "block",
+            mr: "5px",
             maxWidth: "150px",
             mb: "5px",
           }}
@@ -56,7 +57,7 @@ export default function AgreementLocationRadioButtons({ page }: { page: string }
           Agreement location{" "}
         </Text>
         <Tooltip
-          top="-361%"
+          top="-420%"
           height="0"
           left="50%"
           transform="translate(-54.5%, 0px)"
