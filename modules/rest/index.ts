@@ -20,15 +20,20 @@ export const uploadFile = async (
   return error || res.data;
 };
 
-export const uploadToIpfs = async (file: File) => {
+export const uploadToIpfs = async (authToken: string, file: File) => {
   const formData = new FormData();
   formData.append("data", file);
 
-  const res = await axios.post("/api/pinToIpfs", formData, {
-    headers: {
-      "Content-Type": "multipart/form-data",
-    },
-  });
+  const res = await axios.post(
+    `${process.env.NEXT_PUBLIC_REST_ENDPOINT}/files/uploadIPFS`,
+    formData,
+    {
+      headers: {
+        "Content-Type": "multipart/form-data",
+        token: authToken,
+      },
+    }
+  );
 
   const error = res["error"];
   return error || res.data;

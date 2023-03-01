@@ -136,8 +136,10 @@ export default function NavPanel({ setLoading, page }: { setLoading: any; page: 
       return { error };
     }
 
+    const token = getToken();
+
     if (values.agreementLocation === LOCATION_PUBLIC_IPFS) {
-      const uploadResult = await uploadToIpfs(file);
+      const uploadResult = await uploadToIpfs(token!, file);
       if (!uploadResult.IpfsHash) {
         return { error: uploadResult };
       }
@@ -146,7 +148,6 @@ export default function NavPanel({ setLoading, page }: { setLoading: any; page: 
 
     if (values.agreementLocation === LOCATION_CLOUD) {
       try {
-        const token = getToken();
         const res = await uploadFile(token!, file);
         if (res && "fileLink" in res) {
           changeValue("filePath", res.fileLink);

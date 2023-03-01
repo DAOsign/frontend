@@ -1,9 +1,6 @@
 import { NextApiRequest, NextApiResponse } from "next";
 import formidable from "formidable";
 
-const api = "4a28a2e675dd910fd399";
-const apiSecret = "7bf4a9a06863fc8d4f3e8547470ac84420638b8d05bfed66fb6f5bdeaf6f2fde";
-
 const pinataSDK = require("@pinata/sdk");
 const pinata = new pinataSDK(process.env.PINATA_API_KEY, process.env.PINATA_API_SECRET_KEY);
 
