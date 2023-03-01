@@ -11,10 +11,10 @@ export default function handler(req: NextApiRequest, res: NextApiResponse) {
   const requestedHash = req.query.hash;
 
   return axios
-    .get(`https://${process.env.PINATA_GATEWAY}/ipfs/${requestedHash}`, {
-      headers: {
+    .get(`https://${process.env.NEXT_PUBLIC_PINATA_GATEWAY}/ipfs/${requestedHash}`, {
+      /* headers: {
         "x-pinata-gateway-token": process.env.PINATA_ACCESS_TOKEN,
-      },
+      }, */
       responseType: "blob",
     })
     .then(result => {
