@@ -118,7 +118,7 @@ export const AgreementInformation = ({
         s => !!s.signProof?.cid && !!s.signProof?.signature
       ).length;
 
-      const isLastSignature = agreement.signers.length - signProofsLength;
+      const isLastSignature = agreement.signers.length - signProofsLength === 0;
 
       setSuccessModalContent({
         content: (

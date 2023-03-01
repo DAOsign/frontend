@@ -288,6 +288,7 @@ const agrLabelBase = {
   fontSize: "14px",
   textAlign: "center",
   width: "initial",
+  lineHeight: "20px",
   "@media screen and (max-width: 768px)": {
     mx: 0,
     mb: "16px",

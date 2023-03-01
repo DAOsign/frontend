@@ -179,6 +179,7 @@ const labelsRow = {
 const baseLabel = {
   height: "32px",
   padding: "5px 14px",
+  lineHeight: "20px",
   fontFamily: "InterBold",
   fontStyle: "normal",
   fontWeight: 700,
