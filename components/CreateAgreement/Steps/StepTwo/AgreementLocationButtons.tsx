@@ -101,10 +101,10 @@ export default function AgreementLocationRadioButtons({ page }: { page: string }
           ))}
         </Flex>
       </Box>
-      <ModalIpfsWarning
+      {/*     <ModalIpfsWarning
         isOpen={isIpfsWarningVisible}
         onExit={() => setIsIpfsWarningVisible(false)}
-      />
+      /> */}
     </>
   );
 }
