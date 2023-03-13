@@ -190,6 +190,7 @@ const baseLabel = {
   alignItems: "center",
   justifyContent: "center",
   columnGap: "5px",
+  mb: "16px",
 } as ThemeUIStyleObject;
 
 const labelIcon = {

@@ -58,6 +58,16 @@ const iconExit = {
   },
 } as ThemeUIStyleObject;
 
+const nameTitle = {
+  variant: "text.largeTextBold",
+  display: "block",
+  textAlign: "center",
+  "@media screen and (max-width: 1200px)": {
+    textAlign: "left",
+    ml: "20px",
+  },
+} as ThemeUIStyleObject;
+
 const userFoto = {
   position: "relative",
   width: "124px",
@@ -552,6 +562,7 @@ export {
   improveBtn,
   filterItem,
   headerItem,
+  nameTitle,
   titleItem,
   container,
   iconPlus,
