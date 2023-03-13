@@ -227,12 +227,20 @@ const yellowLabel = {
   ...baseLabel,
   backgroundColor: "#F5D549",
   color: "white",
+  "@media screen and (max-width: 768px)": {
+    mx: 0,
+    mb: "16px",
+  },
 } as ThemeUIStyleObject;
 
 const greenLabel = {
   ...baseLabel,
   backgroundColor: "#44F268",
   color: "white",
+  "@media screen and (max-width: 768px)": {
+    mx: 0,
+    mb: "16px",
+  },
 } as ThemeUIStyleObject;
 
 const needSigningIcon = {
