@@ -69,7 +69,9 @@ export default function Connect() {
         sx={{ maxWidth: "220px", display: "inline-block", lineHeight: "15px", fontSize: "12px" }}
       >
         <Text variant="secondary">By connecting a wallet, you agree to our</Text>
-        <Link sx={link}>Terms of Service</Link>
+        <Link href="https://daosign.org/terms" sx={link}>
+          Terms of Service
+        </Link>
       </Text>
     </Container>
   );

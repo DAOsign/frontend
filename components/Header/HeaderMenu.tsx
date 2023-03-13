@@ -97,7 +97,7 @@ const HeaderMenu = ({
         </Button>
         <Box
           sx={{
-            width: "292px",
+            width: "343px",
             height: "2px",
             backgroundColor: "grey",
             position: "absolute",

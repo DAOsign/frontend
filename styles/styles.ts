@@ -27,13 +27,13 @@ const copyIcon = {
 } as ThemeUIStyleObject;
 
 const fotoContainer = {
-  width: "292px",
+  width: "343px",
   m: "0 auto",
   minHeight: "390px",
   background: "#FFFFFF",
   border: "1px solid #EDEDF3",
   borderRadius: "12px",
-  height: "390px",
+  height: "412px",
   p: "32px 32px 0 32px",
   boxShadow: "0px 4px 40px rgba(0, 0, 0, 0.08)",
   position: "absolute",

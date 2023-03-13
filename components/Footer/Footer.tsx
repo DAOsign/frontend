@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Flex, Box, Text, Input, Button, Container } from "theme-ui";
+import { Flex, Box, Text, Input, Button, Container, Link } from "theme-ui";
 import iconsObj from "../../assets/icons";
 import {
   iconContainer,
@@ -73,14 +73,19 @@ export default function Footer({ animationNotVisible, setVisible }: any) {
             <Text sx={{ variant: "text.normalTextBold", display: "inline-block", mb: "12px" }}>
               DAOSign
             </Text>
-            <Text sx={footerItem}>Terms of Service</Text>
-            <Text sx={footerItem}>Coockies Policy</Text>
-            <Text sx={{ ...footerItem, mb: 0 }}>Privacy Policy</Text>
+            <Link href="https://daosign.org/terms" sx={footerItem}>
+              Terms of Service
+            </Link>
+            <Link href="https://daosign.org/policy" sx={{ ...footerItem, mb: 0 }}>
+              Privacy Policy
+            </Link>
           </Box>
           <Box>
             <Text sx={socialTitle}>Resources</Text>
             <Text sx={footerItem}>GitHub</Text>
-            <Text sx={{ ...footerItem, mb: 0 }}>Support</Text>
+            <Link href="mailto:support@daosign.org" sx={{ ...footerItem, mb: 0 }}>
+              Support
+            </Link>
           </Box>
           <Box>
             <Text sx={socialTitle}>Join Community</Text>
@@ -227,7 +232,7 @@ export default function Footer({ animationNotVisible, setVisible }: any) {
         </Flex>
       </Flex>
       <Text sx={footerText}>
-        © Copywriting 2022. Created with
+        © Copywriting 2023. Created with
         <Box sx={iconFooter}>
           <Icon src={iconsObj.heartViolet} />
         </Box>

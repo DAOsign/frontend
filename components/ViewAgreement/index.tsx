@@ -137,7 +137,7 @@ export const ViewAgreement = () => {
               <Box sx={backIcon}>
                 <Icon src={iconsObj.arrowNarrowLeft} />
               </Box>
-              <Box>Back</Box>
+              <Box>Back to Dashboard</Box>
             </Flex>
             <Box sx={title}>{agreement?.title}</Box>
             <AgreementLabels
