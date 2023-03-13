@@ -570,7 +570,7 @@ const uploadedFilePreview = {
   ".react-pdf__Document": {
     width: "100%",
     padding: "0",
-    maxHeight: "300px",
+    height: "300px",
     overflow: "hidden",
   },
   ".react-pdf__Page__canvas": {
