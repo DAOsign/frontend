@@ -11,19 +11,17 @@ import { rightSide, leftSide, containerSides, title } from "../CreateAgreement/s
 import { motion, Variants } from "framer-motion";
 import { useRouter } from "next/router";
 import { agreementById } from "../../modules/graphql/queries";
-import {
-  PRIVACY_PRIVATE,
-  PRIVACY_PUBLIC_WITH_LINK,
-  PRIVACY_PUBLIC_PROOF_ONLY,
-  PRIVACY_PUBLIC_PUBLISHED,
-} from "../../types";
+
 import { useQuery } from "urql";
+import { privacyValueByName } from "./utils";
+import { METHOD_ENTER, METHOD_UPLOAD } from "../../types";
 
 const variants: Variants = {
   hidden: { opacity: 0 },
   visible: { opacity: 1 },
   enter: { opacity: 0.5 },
 };
+
 export const withFade = (component: React.ReactElement, key: number | string) => {
   return (
     <motion.main
@@ -38,97 +36,62 @@ export const withFade = (component: React.ReactElement, key: number | string) =>
     </motion.main>
   );
 };
+function shouldRequestEditData(agreementId: number | string) {
+  if (!agreementId) return false;
+  if (typeof window !== "undefined") {
+    const editItem = localStorage?.getItem("editAgreement") as any;
+
+    // console.log("editItem", JSON.parse(editItem).agreementId, agreementId.toString());
+    const res = !editItem || JSON.parse(editItem).agreementId !== agreementId.toString();
+    // console.log("shouldRequest", res);
+    return res;
+  }
+}
 
 export default function EditAgreement({ page }: { page: string }) {
   const { query } = useRouter();
   const [step, setStep] = useState(query?.step ? Number(query.step) : 0);
   const [transitioned, setTransitioned] = useState(false);
+  const agreementId = Number(query.id);
   const { values, changeValue } = useEditAgreement();
   const [loading, setLoading] = useState(false);
-  const [getValue, setGetValue] = useState(true);
+  const [loaded, setLoaded] = useState(false);
   const [{ data, fetching: agreementsLoading, error }] = useQuery({
     // @ts-ignore
     query: agreementById,
-    variables: { agreementId: Number(query.id) },
+    variables: { agreementId: agreementId },
+    pause: !shouldRequestEditData(agreementId),
   });
+
   useEffect(() => {
-    if (!!data) {
-      const valuesEditAgreemnt = [
-        "agreementLocation",
-        "agreementPrivacy",
-        "agreementMethod",
-        "textEditorValue",
-        "agreementHash",
-        "filePath",
-        "observers",
-        "signers",
-        "title",
-        "file",
-      ];
-      if (getValue && Number(query.step) === 1) {
-        valuesEditAgreemnt.forEach(el => {
-          switch (el) {
-            case "title":
-              //@ts-ignore
-              changeValue(el, !!data?.agreement.title ? data?.agreement.title : "");
-              break;
-            case "agreementPrivacy":
-              //@ts-ignore
-              if (data?.agreement?.agreementPrivacy.name === "Private") {
-                changeValue(el, PRIVACY_PRIVATE);
-                break;
-              }
-              //@ts-ignore
-              if (data?.agreement?.agreementPrivacy.name === "Proof Only") {
-                changeValue(el, PRIVACY_PUBLIC_PROOF_ONLY);
-                break;
-              }
-              //@ts-ignore
-              if (data?.agreement?.agreementPrivacy.name === "Published") {
-                changeValue(el, PRIVACY_PUBLIC_PUBLISHED);
-                break;
-              }
-              //@ts-ignore
-              if (data?.agreement?.agreementPrivacy.name === "With Link") {
-                changeValue(el, PRIVACY_PUBLIC_WITH_LINK);
-                break;
-              }
-            case "textEditorValue":
-              //@ts-ignore
-              changeValue(el, !!data?.agreement.content ? data?.agreement.content : "");
-              break;
-            case "agreementLocation":
-              changeValue(
-                el,
-                //@ts-ignore
-                !!data?.agreement.agreementLocation ? data?.agreement.agreementLocation : "Cloud"
-              );
-              break;
-            case "observers":
-              //@ts-ignore
-              const observsValue: any = data?.agreement?.observers?.map(value => {
-                return { value: value?.email || value?.wallet?.address };
-              });
-              //@ts-ignore
-              changeValue(el, observsValue);
-              break;
-            case "signers":
-              //@ts-ignore
-              const signersValue: any = data?.agreement?.signers?.map((value: any) => {
-                return { value: !!value?.email ? value?.email : value?.wallet?.address };
-              });
-              //@ts-ignore
-              changeValue(el, signersValue);
-              break;
-            default:
-              break;
-          }
-        });
+    if (!!data?.agreement) {
+      console.log("GOT DATA", data?.agreement);
+
+      changeValue("agreementId", data?.agreement?.agreementId || "");
+
+      changeValue("title", data?.agreement?.title || "");
+      const agreementPrivacy = privacyValueByName(data?.agreement?.agreementPrivacy?.name);
+      changeValue("agreementPrivacy", agreementPrivacy);
+
+      changeValue("agreementLocation", data?.agreement?.agreementLocation?.name || "");
+
+      changeValue("agreementMethod", data?.agreement?.content ? METHOD_ENTER : METHOD_UPLOAD);
+      if (data?.agreement?.content) {
+        changeValue("textEditorValue", data?.agreement?.content || "");
       }
-      changeValue("agreementId", Number(query.id));
+
+      const observers: any = data?.agreement?.observers?.map(value => {
+        return { value: value?.ens?.name || value?.email || value?.wallet?.address };
+      });
+      changeValue("observers", observers);
+
+      const signers: any = data?.agreement?.signers?.map((value: any) => {
+        return { value: value?.ens?.name || value?.email || value?.wallet?.address };
+      });
+      changeValue("signers", signers);
     }
-    setGetValue(false);
-  }, []);
+    setLoaded(true);
+  }, [data]);
 
   const steps = useMemo(() => {
     return {
@@ -145,7 +108,7 @@ export default function EditAgreement({ page }: { page: string }) {
     <Flex sx={containerSides}>
       <Container sx={leftSide} className={transitioned ? "transition" : ""}>
         <Text sx={title}>Edit Agreement</Text>
-        {values && steps[step]}
+        {loaded && values && steps[step]}
       </Container>
       <Container
         sx={{

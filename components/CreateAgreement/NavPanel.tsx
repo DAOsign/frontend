@@ -23,6 +23,7 @@ import { saveAgreementMutation } from "../../modules/graphql/mutations";
 import { LOCATION_CLOUD, LOCATION_PUBLIC_IPFS, METHOD_ENTER, METHOD_UPLOAD } from "../../types";
 import {
   clearDraft,
+  clearEdit,
   CreateAgreementFieldErrors,
   CreationState,
 } from "../../modules/createAgreementProvider";
@@ -186,6 +187,7 @@ export default function NavPanel({ setLoading, page }: { setLoading: any; page: 
       }
       if (res.data?.saveAgreement?.title) {
         clearDraft();
+        clearEdit();
         push(`/agreement/${res.data.saveAgreement.agreementId}`);
         return;
       }
@@ -271,10 +273,12 @@ export default function NavPanel({ setLoading, page }: { setLoading: any; page: 
 
   const changeStep = (step: number) => {
     const areFieldsValid = validateFields(values, true);
-    if (step === 3 || !areFieldsValid) {
+    if ((step === 3 || !areFieldsValid) && page !== "edit") {
       return;
     }
-    page === "create" ? push({ query: { step } }, undefined, { shallow: true }) : undefined; // push(`/edit/${query.id}?step=${step}`);
+    page === "create"
+      ? push({ query: { step } }, undefined, { shallow: true })
+      : push(`/edit/${query.id}?step=${step}`);
   };
 
   const ForwardButton = () => {
@@ -402,7 +406,7 @@ export default function NavPanel({ setLoading, page }: { setLoading: any; page: 
           sx={{ ...stepStyle, mt: 0, cursor: step > 1 ? "pointer" : "initial" }}
         >
           <Box sx={stepNumber}>
-            {step > 1 && page === "create" ? (
+            {(step > 1 && page === "create") || page === "edit" ? (
               <Box sx={{ width: "24px", height: "24px", m: "0 auto", cursor: "pointer" }}>
                 <Icon src={iconsObj.done} />
               </Box>
@@ -424,10 +428,10 @@ export default function NavPanel({ setLoading, page }: { setLoading: any; page: 
           sx={{ ...stepStyle, cursor: step > 2 ? "pointer" : "initial" }}
         >
           <Box sx={{ ...stepNumber, backgroundColor: step > 1 ? "#CA5CF2" : "#EDEDF3" }}>
-            {step > 2 && page === "create" ? (
+            {(step > 2 && page === "create") || page === "edit" ? (
               <Box
                 onClick={() => changeStep(2)}
-                sx={{ width: "20px", height: "20px", m: "0 auto", cursor: "pointer" }}
+                sx={{ width: "24px", height: "24px", m: "0 auto", cursor: "pointer" }}
               >
                 <Icon src={iconsObj.done} />
               </Box>
@@ -442,13 +446,18 @@ export default function NavPanel({ setLoading, page }: { setLoading: any; page: 
         </Flex>
         <Container sx={box}></Container>
         <Flex
-          onClick={() => {
-            return step > 3 ? changeStep(3) : null;
-          }}
-          sx={{ ...stepStyle, cursor: step > 3 ? "pointer" : "initial" }}
+          onClick={() => (step > 3 || page === "edit" ? changeStep(3) : null)}
+          sx={{ ...stepStyle, cursor: step > 3 || page === "edit" ? "pointer" : "initial" }}
         >
           <Box sx={{ ...stepNumber, backgroundColor: step > 2 ? "#CA5CF2" : "#EDEDF3" }}>
-            <Text sx={{ variant: "text.normalTextBold", lineHeight: "0", color: "#fff" }}>3</Text>
+            {/* <Text sx={{ variant: "text.normalTextBold", lineHeight: "0", color: "#fff" }}>3</Text> */}
+            {(step > 3 && page === "create") || page === "edit" ? (
+              <Box sx={{ width: "24px", height: "24px", m: "0 auto", cursor: "pointer" }}>
+                <Icon src={iconsObj.done} />
+              </Box>
+            ) : (
+              <Text sx={{ variant: "text.normalTextBold", lineHeight: "0", color: "#fff" }}>3</Text>
+            )}
           </Box>
           <Container sx={leftSideItem}>
             <Text sx={primaryTitleItem}>Signers</Text>
