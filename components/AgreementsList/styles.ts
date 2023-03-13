@@ -329,6 +329,7 @@ const blueAgrLabel = {
 } as ThemeUIStyleObject;
 
 const textContainer = {
+  "-webkit-tap-highlight-color": "rgba(0, 0, 0, 0)",
   justifyContent: "center",
   border: "1px solid #EDEDF3",
   borderRadius: "62px",
