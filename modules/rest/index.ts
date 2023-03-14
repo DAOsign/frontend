@@ -55,12 +55,13 @@ export const restoreCloudFile = async (url: string, abortController?: AbortContr
     });
 };
 export const getFileFromIPFS = async (hash: string) =>
-  axios.get("/api/getFromIpfs", { params: { hash }, responseType: "json" }).then(res => res.data);
+  axios
+    .get(`${process.env.NEXT_PUBLIC_PINATA_GATEWAY}/ipfs/${hash}`, { responseType: "json" })
+    .then(res => res.data);
 
 export const restoreIpfsFile = async (hash: string, abortController?: AbortController) => {
   return axios
-    .get("/api/getFromIpfs", {
-      params: { hash: hash },
+    .get(`${process.env.NEXT_PUBLIC_PINATA_GATEWAY}/ipfs/${hash}`, {
       responseType: "blob",
       signal: abortController?.signal || undefined,
     })
