@@ -74,9 +74,11 @@ export const ViewAgreement = () => {
         if (agr) setAgreement(toAgreementWithParticipants(agr)); //eslint-disable-line
         if (res?.error) {
           const errorMsg = res?.error.message;
-          notifError(errorMsg || "Failed to get agreement from server");
+          if (errorMsg.includes("Access denied")) {
+            push("/404");
+          }
+          //notifError(errorMsg || "Failed to get agreement from server");
           // eslint-disable-next-line no-console
-          console.error("[GetAgreementById]", errorMsg);
         }
       });
   }, [agreementId]);
