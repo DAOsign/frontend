@@ -131,6 +131,8 @@ export const AgreementUploadedFilePreview = ({
     }
   }, [agreementPreviewDocuments]);
 
+  const fileUrl = `${process.env.NEXT_PUBLIC_PINATA_GATEWAY}/ipfs/${fileIpfsHash}`;
+
   return (
     <Box
       sx={{ minHeight: "383px", display: "flex", alignItems: "center", justifyContent: "center" }}
@@ -143,11 +145,7 @@ export const AgreementUploadedFilePreview = ({
           }}
         >
           <Flex sx={uploadedFileTitleContainer}>
-            <Link
-              href={agreementPreviewDocuments[0]?.uri}
-              target="_blank"
-              sx={uploadedFileTitleLink}
-            >
+            <Link href={fileUrl} target="_blank" sx={uploadedFileTitleLink}>
               <Box sx={uploadedFileIconContainer}>
                 <Icon src={getIconByFileType(agreementFile?.type)} />
               </Box>
@@ -157,16 +155,12 @@ export const AgreementUploadedFilePreview = ({
             </Link>
           </Flex>
           <Box sx={uploadedFilePreview}>
-            <Link
-              href={agreementPreviewDocuments[0]?.uri}
-              target="_blank"
-              sx={uploadedFilePreviewLink}
-            >
+            <Link href={fileUrl} target="_blank" sx={uploadedFilePreviewLink}>
               <FileViewer documents={agreementPreviewDocuments} config={FILE_VIEWER_CONFIG} />
             </Link>
           </Box>
           <Box sx={viewFileLabel}>
-            <Link href={agreementPreviewDocuments[0]?.uri} target="_blank">
+            <Link href={fileUrl} target="_blank">
               View {formatFileType(agreementFile?.type || "File")}
             </Link>
           </Box>
