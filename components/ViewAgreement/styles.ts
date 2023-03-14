@@ -190,6 +190,7 @@ const baseLabel = {
   alignItems: "center",
   justifyContent: "center",
   columnGap: "5px",
+  mb: "16px",
 } as ThemeUIStyleObject;
 
 const labelIcon = {
@@ -577,10 +578,11 @@ const uploadedFilePreview = {
   ".react-pdf__Document": {
     width: "100%",
     padding: "0",
-    maxHeight: "300px",
+    height: "300px",
     overflow: "hidden",
   },
   ".react-pdf__Page__canvas": {
+    margin: "0 auto",
     "@media screen and (max-width: 768px)": {
       width: "100% !important",
       height: "auto !important",

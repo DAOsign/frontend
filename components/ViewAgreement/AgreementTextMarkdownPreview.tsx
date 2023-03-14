@@ -126,6 +126,7 @@ export const AgreementTextMarkdownPreview = ({ textContent }: Props) => {
     >
       {!hasContentDataLoadedByTextPreviewer ? <Spinner size={40} color="#CA5CF2" /> : null}
       <MDEditor
+        className="editor"
         value={textContent}
         preview={"preview"}
         hideToolbar={true}

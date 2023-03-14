@@ -58,6 +58,16 @@ const iconExit = {
   },
 } as ThemeUIStyleObject;
 
+const nameTitle = {
+  variant: "text.largeTextBold",
+  display: "block",
+  textAlign: "center",
+  "@media screen and (max-width: 1200px)": {
+    textAlign: "left",
+    ml: "20px",
+  },
+} as ThemeUIStyleObject;
+
 const userFoto = {
   position: "relative",
   width: "124px",
@@ -319,6 +329,7 @@ const blueAgrLabel = {
 } as ThemeUIStyleObject;
 
 const textContainer = {
+  "-webkit-tap-highlight-color": "rgba(0, 0, 0, 0)",
   justifyContent: "center",
   border: "1px solid #EDEDF3",
   borderRadius: "62px",
@@ -552,6 +563,7 @@ export {
   improveBtn,
   filterItem,
   headerItem,
+  nameTitle,
   titleItem,
   container,
   iconPlus,
