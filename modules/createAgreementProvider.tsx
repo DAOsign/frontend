@@ -76,6 +76,12 @@ export const clearDraft = () => {
   }
 };
 
+export const clearEdit = () => {
+  if (typeof window !== "undefined") {
+    localStorage.removeItem("editAgreement");
+  }
+};
+
 const CreateAgreementProvider = (props?: Partial<ProviderProps<CreateAgrementContext>>) => {
   const [values, setValues] = useState<CreationState>(recoverDraft());
   const { query, push } = useRouter();

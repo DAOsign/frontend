@@ -21,29 +21,33 @@ export interface Props {
 export interface PublicProps extends Props {
   setPublic: any;
 }
+const defaultIsPublic = (agreementPrivacy: string) => {
+  return [PRIVACY_PUBLIC_PROOF_ONLY, PRIVACY_PUBLIC_PUBLISHED, PRIVACY_PUBLIC_WITH_LINK].some(
+    p => p === agreementPrivacy
+  );
+};
 
 export default function StepOne({ animateContainer, page }: Props) {
   const create = useCreateAgreement();
   const edit = useEditAgreement();
   const { values, changeValue } = page === "create" ? create : edit;
-  const [isPublic, setIsPublic] = useState(false);
+  const [isPublic, setIsPublic] = useState(defaultIsPublic(values.agreementPrivacy));
   const initiated = useRef(false);
 
   useEffect(() => {
-    if (!initiated.current) {
+    if (true) {
       initiated.current = true;
-      const isPublic = [
-        PRIVACY_PUBLIC_PROOF_ONLY,
-        PRIVACY_PUBLIC_PUBLISHED,
-        PRIVACY_PUBLIC_WITH_LINK,
-      ].some(p => p === values.agreementPrivacy);
-      if (isPublic) {
+
+      if (defaultIsPublic(values.agreementPrivacy)) {
         animateContainer();
         setIsPublic(isPublic);
       }
     }
+    return () => {
+      initiated.current = false;
+    };
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [values]);
 
   const titleInputErrorStyles = values?.errors?.title ? inputCreateAgreementError : {};
 

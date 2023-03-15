@@ -157,7 +157,6 @@ const AuthProvider = (props?: Partial<ProviderProps<AuthProps>>) => {
       //@ts-ignore TODO
       if (provider?.removeAllListeners && provider?.isTorus) {
         provider.removeAllListeners();
-        console.log("remove listeners", provider?.removeAllListeners);
       }
       if (provider?.on) {
         provider.on("chainChanged", async (chainId: string) => {
