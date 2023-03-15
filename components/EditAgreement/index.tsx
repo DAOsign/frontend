@@ -14,7 +14,7 @@ import { agreementById } from "../../modules/graphql/queries";
 
 import { useQuery } from "urql";
 import { privacyValueByName } from "./utils";
-import { METHOD_ENTER, METHOD_UPLOAD } from "../../types";
+import { LOCATION_CLOUD, LOCATION_PUBLIC_IPFS, METHOD_ENTER, METHOD_UPLOAD } from "../../types";
 
 const variants: Variants = {
   hidden: { opacity: 0 },
@@ -65,17 +65,25 @@ export default function EditAgreement({ page }: { page: string }) {
 
   useEffect(() => {
     if (!!data?.agreement) {
-      console.log("GOT DATA", data?.agreement);
-
       changeValue("agreementId", data?.agreement?.agreementId || "");
 
       changeValue("title", data?.agreement?.title || "");
+
       const agreementPrivacy = privacyValueByName(data?.agreement?.agreementPrivacy?.name);
       changeValue("agreementPrivacy", agreementPrivacy);
 
-      changeValue("agreementLocation", data?.agreement?.agreementLocation?.name || "");
+      const agreementLocation = data?.agreement?.agreementLocation?.name;
+      changeValue("agreementLocation", agreementLocation || "");
+
+      if (agreementLocation === LOCATION_PUBLIC_IPFS) {
+        changeValue("agreementHash", data?.agreement?.agreementFile?.agreementHash || "");
+      }
+      if (agreementLocation === LOCATION_CLOUD) {
+        changeValue("filePath", data?.agreement?.agreementFile?.filePath);
+      }
 
       changeValue("agreementMethod", data?.agreement?.content ? METHOD_ENTER : METHOD_UPLOAD);
+
       if (data?.agreement?.content) {
         changeValue("textEditorValue", data?.agreement?.content || "");
       }

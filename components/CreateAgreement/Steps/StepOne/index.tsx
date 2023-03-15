@@ -32,7 +32,6 @@ export default function StepOne({ animateContainer, page }: Props) {
   const edit = useEditAgreement();
   const { values, changeValue } = page === "create" ? create : edit;
   const [isPublic, setIsPublic] = useState(defaultIsPublic(values.agreementPrivacy));
-  console.log("val", values.agreementPrivacy);
   const initiated = useRef(false);
 
   useEffect(() => {
