@@ -22,11 +22,11 @@ import {
   uploadedFileTitleWrapper,
   viewFileLabel,
 } from "./styles";
-import FileViewer, { DocViewerRenderers } from "@cyntler/react-doc-viewer";
+// import FileViewer, { DocViewerRenderers } from "@cyntler/react-doc-viewer";
 
-// const FileViewer = dynamic(() => import("@cyntler/react-doc-viewer"), {
-//   ssr: false,
-// });
+const FileViewer = dynamic(() => import("@cyntler/react-doc-viewer"), {
+  ssr: false,
+});
 
 function formatFileType(fileType: string): string {
   switch (fileType) {
@@ -156,12 +156,12 @@ export const AgreementUploadedFilePreview = ({
             </Link>
           </Flex>
           <Box sx={uploadedFilePreview}>
-            <Link href={fileUrl} target="_blank" sx={uploadedFilePreviewLink}>
-              <FileViewer
-                pluginRenderers={DocViewerRenderers}
-                documents={agreementPreviewDocuments}
-                config={FILE_VIEWER_CONFIG}
-              />
+            <Link
+              href={agreementPreviewDocuments[0]?.uri}
+              target="_blank"
+              sx={uploadedFilePreviewLink}
+            >
+              <FileViewer documents={agreementPreviewDocuments} config={FILE_VIEWER_CONFIG} />
             </Link>
           </Box>
           <Box sx={viewFileLabel}>
