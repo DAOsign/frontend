@@ -13,7 +13,7 @@
     "codegen": "graphql-codegen --config codegen.ts"
   },
   "dependencies": {
-    "@cyntler/react-doc-viewer": "^1.10.3",
+    "@cyntler/react-doc-viewer": "^1.12.0",
     "@emotion/react": "^11.10.5",
     "@metamask/jazzicon": "^2.0.0",
     "@pinata/sdk": "^2.1.0",
