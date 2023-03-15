@@ -15,6 +15,7 @@
   "dependencies": {
     "@cyntler/react-doc-viewer": "^1.10.3",
     "@emotion/react": "^11.10.5",
+    "@mailchimp/mailchimp_marketing": "^3.0.80",
     "@metamask/jazzicon": "^2.0.0",
     "@pinata/sdk": "^2.1.0",
     "@snapshot-labs/lock": "github:snapshot-labs/lock",
@@ -29,6 +30,7 @@
     "ipfs-only-hash": "^4.0.0",
     "jest": "^27.5.1",
     "lottie-react": "^2.3.1",
+    "md5": "^2.3.0",
     "next": "12.3.1",
     "next-remove-imports": "^1.0.8",
     "pdf-thumbnail": "^1.0.6",

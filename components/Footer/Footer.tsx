@@ -18,21 +18,36 @@ import {
   icon,
 } from "./styles";
 import Icon from "../icon";
+import { subscribeToUpdates } from "../../modules/rest";
 
 export default function Footer({ animationNotVisible, setVisible }: any) {
   const [email, setEmail] = useState("");
-  const [error, setError] = useState(false);
+  const [error, setError] = useState("");
 
   const submit = () => {
     const validationEmail =
       /^(([^<>()[\].,;:\s@"]+(\.[^<>()[\].,;:\s@"]+)*)|(".+"))@(([^<>()[\].,;:\s@"]+\.)+[^<>()[\].,;:\s@"]{2,})$/iu;
     if (!validationEmail.test(email.trim())) {
-      setError(true);
+      setError("*Please enter valid email");
       return;
     }
-    setVisible(true);
-    setEmail("");
-    setError(false);
+    return subscribeToUpdates(email)
+      .then(() => {
+        setVisible(true);
+        setEmail("");
+        setError("");
+      })
+      .catch(e => {
+        const errorText = e?.response?.data?.response?.text;
+
+        try {
+          const errorMsg = JSON.parse(errorText);
+          setError(errorMsg?.detail);
+        } catch {
+          console.log("error", e);
+          setError("Unknown error. Please try again later");
+        }
+      });
   };
 
   return (
@@ -50,7 +65,7 @@ export default function Footer({ animationNotVisible, setVisible }: any) {
             </Text>
             <Input
               onChange={e => {
-                setError(false);
+                setError("");
                 setEmail(e.target.value);
               }}
               value={email}
@@ -65,7 +80,7 @@ export default function Footer({ animationNotVisible, setVisible }: any) {
             <Box onClick={submit} sx={iconEmail}>
               <Icon src={iconsObj.send} />
             </Box>
-            {error && <Text sx={errorMessage}>*Please enter valid email</Text>}
+            {error && <Text sx={errorMessage}>{error}</Text>}
           </Box>
         </form>
         <Flex sx={rightSide}>
