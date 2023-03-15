@@ -1253,7 +1253,7 @@
   resolved "https://registry.yarnpkg.com/@csstools/selector-specificity/-/selector-specificity-2.1.1.tgz#c9c61d9fe5ca5ac664e1153bb0aa0eba1c6d6308"
   integrity sha512-jwx+WCqszn53YHOfvFMJJRd/B2GqkCBt+1MJSG6o5/s8+ytHMvDZXsJgUEWLk12UnLd7HYKac4BYU5i/Ron1Cw==
 
-"@cyntler/react-doc-viewer@^1.12.0":
+"@cyntler/react-doc-viewer@^1.10.3":
   version "1.12.0"
   resolved "https://registry.yarnpkg.com/@cyntler/react-doc-viewer/-/react-doc-viewer-1.12.0.tgz#8d43f1f89d6f0302589be4f2c0d6d06d3ba2653c"
   integrity sha512-HPwu1cgsJ0/zeUmzOq7COU4EjVK7KphFrAANr84oycUUFJWFAwX2GaK2CiCyO33XqTmuSUmQuMWbZz5OiEllrA==
