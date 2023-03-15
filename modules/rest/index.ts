@@ -54,6 +54,7 @@ export const restoreCloudFile = async (url: string, abortController?: AbortContr
       return file;
     });
 };
+
 export const getFileFromIPFS = async (hash: string) =>
   axios
     .get(`${process.env.NEXT_PUBLIC_PINATA_GATEWAY}/ipfs/${hash}`, { responseType: "json" })
@@ -71,23 +72,15 @@ export const restoreIpfsFile = async (hash: string, abortController?: AbortContr
 
       return new File([blob], fileName || hash, { type: blob.type });
     });
-  /* 
-  return axios
-    .get(
-      `https://${process.env.NEXT_PUBLIC_PINATA_GATEWAY}/ipfs/${hash}?metadata[name]=exampleName`,
-      {
-        headers: {
-          "Referrer-Policy": "no-referrer",
-          "x-pinata-gateway-token": process.env.NEXT_PUBLIC_ACCESS_TOKEN,
-        },
-      }
-    )
-    .then(result => {
-      console.log("pinata result", result);
-      const type = result.headers["content-type"];
-
-      const blob = new Blob([result.data], { type: type });
-
-      return new File([blob], hash, { type: blob.type });
-    }); */
+};
+export const subscribeToUpdates = async (email: string) => {
+  return axios.post(
+    "/api/subscribe",
+    { email },
+    {
+      headers: {
+        "Content-Type": "application/json",
+      },
+    }
+  );
 };
