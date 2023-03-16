@@ -2,7 +2,7 @@
 // /** @jsxImportSource theme-ui */
 import React, { useEffect, useMemo, useState } from "react";
 import UserCard from "./UserCard";
-import { Flex, Button, Text, Container, Link, Box } from "theme-ui";
+import { Flex, Button, Text, Container, Link, Box, Spinner } from "theme-ui";
 import {
   title,
   containerSides,
@@ -19,8 +19,6 @@ import HeaderAgreement from "./HeaderAgreement";
 import NextLink from "next/link";
 
 import AgreementItem from "./AgreementItem";
-import { toAgreement } from "../../utils/typeUtils";
-import { Agreement as AgreementRespone } from "../../modules/graphql/gql/graphql";
 import Lottie from "lottie-react";
 import loader from "../../img/json/loader.json";
 
@@ -73,45 +71,49 @@ export default function AgreementsList({ address }: any) {
             </Button>
           </NextLink>
         </Flex>
-        {/* {!!agreements.length || !(!filterValues.length && !valueSearch.length) ? (
-          <HeaderAgreement
-            value={valueSearch}
-            onChangeSearch={setValueSearch}
-            filterOptions={filterOptions}
-            setFilterOptions={setFilterOptions}
-          />
-        ) : null} */}
-        {/* {agreementsLoading ? (
-          <Lottie
-            style={{ height: "60px", marginBottom: "52px" }}
-            animationData={loader}
-            loop={true}
-          />
-        ) : agreements.length ? ( */}
-
-        {!!agreements.length || !(!filterValues.length && !valueSearch.length) ? (
-          <>
-            <HeaderAgreement
-              value={valueSearch}
-              onChangeSearch={setValueSearch}
-              filterOptions={filterOptions}
-              setFilterOptions={setFilterOptions}
-            />
-            <div>
-              {agreements.map((agr: any, index: number) => (
-                <AgreementItem key={index} {...agr} />
-              ))}
-              {(loading || hasNextPage) && (
-                <div ref={infiniteRef}>
-                  <Lottie
-                    style={{ height: "60px", marginBottom: "52px" }}
-                    animationData={loader}
-                    loop={true}
-                  />
-                </div>
-              )}
-            </div>
-          </>
+        <HeaderAgreement
+          value={valueSearch}
+          onChangeSearch={setValueSearch}
+          filterOptions={filterOptions}
+          setFilterOptions={setFilterOptions}
+        />
+        {!!agreements.length ? (
+          <div>
+            {agreements.map((agr: any, index: number) => (
+              <AgreementItem key={index} {...agr} />
+            ))}
+            {(loading || hasNextPage) && (
+              <div ref={infiniteRef}>
+                <Lottie
+                  style={{ height: "60px", marginBottom: "52px" }}
+                  animationData={loader}
+                  loop={true}
+                />
+              </div>
+            )}
+          </div>
+        ) : loading ? (
+          <Box
+            sx={{
+              minHeight: "400px",
+              display: "flex",
+              justifyContent: "center",
+              alignItems: "center",
+            }}
+          >
+            <Lottie style={{ height: "80px" }} animationData={loader} loop={true} />
+          </Box>
+        ) : filterValues.length || valueSearch.length ? (
+          <Container sx={{ ...noContentContainer }}>
+            <Flex sx={noContent}>
+              <Box sx={{ width: "75px", height: "70px" }}>
+                <Icon src={iconsObj.portfile} />
+              </Box>
+            </Flex>
+            <Text
+              sx={{ variant: "text.normalTextBold" }}
+            >{`No agreements matching selected filters`}</Text>
+          </Container>
         ) : (
           <Container sx={noContentContainer}>
             <Flex sx={noContent}>
@@ -124,18 +126,6 @@ export default function AgreementsList({ address }: any) {
             >{`You don't have any agreements yet`}</Text>
           </Container>
         )}
-        {!agreements.length ? (
-          <Container sx={{ ...noContentContainer }}>
-            <Flex sx={noContent}>
-              <Box sx={{ width: "75px", height: "70px" }}>
-                <Icon src={iconsObj.portfile} />
-              </Box>
-            </Flex>
-            <Text
-              sx={{ variant: "text.normalTextBold" }}
-            >{`No agreements matching selected filters`}</Text>
-          </Container>
-        ) : null}
       </Container>
     </Flex>
   );
