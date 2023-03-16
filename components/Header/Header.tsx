@@ -9,11 +9,11 @@ import {
   identiconIcon,
   iconBell,
   containerBtn,
+  logoIcon,
 } from "./styles";
 import Icon from "../icon";
 import { Logo } from "../Logo/Logo";
 import { useWeb3 } from "../../hooks/useWeb3";
-import NextLink from "next/link";
 import Identicon from "../Identicon/Identicon";
 import { notifComingSoon } from "../../utils/notification";
 
@@ -26,11 +26,9 @@ export default function Header({ visible, setVisible, visibleLogOut }: any) {
       sx={{ ...container, zIndex: visibleLogOut ? 3 : 10 }}
     >
       <Flex sx={{ justifyContent: "space-between" }}>
-        <NextLink href={"/"}>
-          <Link>
-            <Logo />
-          </Link>
-        </NextLink>
+        <Link href={"/"} sx={logoIcon}>
+          <Logo />
+        </Link>
         <Flex sx={containerBtn}>
           <Button
             onClick={() => notifComingSoon("Notification Center is coming soon")}
