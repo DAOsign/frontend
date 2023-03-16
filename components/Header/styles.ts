@@ -24,7 +24,7 @@ const container = {
 
 const logoIcon = {
   display: "block",
-  mt: "6",
+  mt: "6px",
 } as ThemeUIStyleObject;
 
 const addresContainer = {
