@@ -51,17 +51,6 @@ export default function AgreementsList({ address }: any) {
   useEffect(() => {
     error && console.error(error);
   }, [error]);
-  console.log(
-    "!!agreements.length || !(!filterValues.length && !valueSearch.length)",
-    !!agreements.length || !(!filterValues.length && !valueSearch.length)
-  );
-  console.log("!!agreements.length", !!agreements.length);
-  console.log(
-    "!(!filterValues.length && !valueSearch.length)",
-    !(!filterValues.length && !valueSearch.length)
-  );
-  console.log("!filterValues.length", !filterValues.length);
-  console.log("!valueSearch.length", !valueSearch.length);
 
   return (
     <Flex sx={containerSides}>
@@ -136,7 +125,7 @@ export default function AgreementsList({ address }: any) {
           </Container>
         )}
         {!agreements.length ? (
-          <Container sx={{...noContentContainer}}>
+          <Container sx={{ ...noContentContainer }}>
             <Flex sx={noContent}>
               <Box sx={{ width: "75px", height: "70px" }}>
                 <Icon src={iconsObj.portfile} />
