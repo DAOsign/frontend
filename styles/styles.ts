@@ -34,7 +34,7 @@ const fotoContainer = {
   border: "1px solid #EDEDF3",
   borderRadius: "12px",
   height: "412px",
-  p: "32px 32px 0 32px",
+  p: "16px 16px 24px 16px",
   boxShadow: "0px 4px 40px rgba(0, 0, 0, 0.08)",
   position: "absolute",
   "&.visible": {
@@ -63,7 +63,8 @@ const fotoContainer = {
 
 const btnLogaut = {
   variant: "buttons.grey",
-  mt: "29px",
+  mt: "39px",
+  // position: "absolute",
   border: "none",
   width: "100%",
   color: "#CA5CF2",
@@ -89,18 +90,19 @@ const btnLogaut = {
 } as ThemeUIStyleObject;
 
 const iconLogOut = {
-  width: "24px",
-  height: "24px",
+  width: "18px",
+  height: "18px",
   position: "absolute",
   left: "calc(50% - 48px)",
+  bottom: "24px",
   "&:hover > svg > path": {
     stroke: "#AE4FD0",
   },
 } as ThemeUIStyleObject;
 
 const foto = {
-  width: "60px",
-  height: "60px",
+  width: "80px",
+  height: "80px",
   m: 0,
   borderRadius: "50%",
 } as ThemeUIStyleObject;

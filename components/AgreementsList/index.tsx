@@ -3,7 +3,16 @@
 import React, { useEffect, useMemo, useState } from "react";
 import UserCard from "./UserCard";
 import { Flex, Button, Text, Container, Link, Box } from "theme-ui";
-import { title, containerSides, noContent, btnText, btn, iconPlus } from "./styles";
+import {
+  title,
+  containerSides,
+  noContentContainer,
+  noContent,
+  btnText,
+  btn,
+  iconPlus,
+  newAgreementTitle,
+} from "./styles";
 import Icon from "../icon/index";
 import iconsObj from "../../assets/icons";
 import HeaderAgreement from "./HeaderAgreement";
@@ -42,6 +51,17 @@ export default function AgreementsList({ address }: any) {
   useEffect(() => {
     error && console.error(error);
   }, [error]);
+  console.log(
+    "!!agreements.length || !(!filterValues.length && !valueSearch.length)",
+    !!agreements.length || !(!filterValues.length && !valueSearch.length)
+  );
+  console.log("!!agreements.length", !!agreements.length);
+  console.log(
+    "!(!filterValues.length && !valueSearch.length)",
+    !(!filterValues.length && !valueSearch.length)
+  );
+  console.log("!filterValues.length", !filterValues.length);
+  console.log("!valueSearch.length", !valueSearch.length);
 
   return (
     <Flex sx={containerSides}>
@@ -53,7 +73,7 @@ export default function AgreementsList({ address }: any) {
           },
         }}
       >
-        <Flex>
+        <Flex sx={newAgreementTitle}>
           <Text sx={title}>My Agreements</Text>
           <NextLink href={"/create?step=1"}>
             <Button sx={btn} type="button">
@@ -64,14 +84,14 @@ export default function AgreementsList({ address }: any) {
             </Button>
           </NextLink>
         </Flex>
-        {!!agreements.length || !(!filterValues.length && !valueSearch.length) ? (
+        {/* {!!agreements.length || !(!filterValues.length && !valueSearch.length) ? (
           <HeaderAgreement
             value={valueSearch}
             onChangeSearch={setValueSearch}
             filterOptions={filterOptions}
             setFilterOptions={setFilterOptions}
           />
-        ) : null}
+        ) : null} */}
         {/* {agreementsLoading ? (
           <Lottie
             style={{ height: "60px", marginBottom: "52px" }}
@@ -79,24 +99,32 @@ export default function AgreementsList({ address }: any) {
             loop={true}
           />
         ) : agreements.length ? ( */}
-        <>
-          <div>
-            {agreements.map((agr: any, index: number) => (
-              <AgreementItem key={index} {...agr} />
-            ))}
-            {(loading || hasNextPage) && (
-              <div ref={infiniteRef}>
-                <Lottie
-                  style={{ height: "60px", marginBottom: "52px" }}
-                  animationData={loader}
-                  loop={true}
-                />
-              </div>
-            )}
-          </div>
-        </>
-        {/* ) : (
-          <Container sx={{ textAlign: "center" }}>
+
+        {!!agreements.length || !(!filterValues.length && !valueSearch.length) ? (
+          <>
+            <HeaderAgreement
+              value={valueSearch}
+              onChangeSearch={setValueSearch}
+              filterOptions={filterOptions}
+              setFilterOptions={setFilterOptions}
+            />
+            <div>
+              {agreements.map((agr: any, index: number) => (
+                <AgreementItem key={index} {...agr} />
+              ))}
+              {(loading || hasNextPage) && (
+                <div ref={infiniteRef}>
+                  <Lottie
+                    style={{ height: "60px", marginBottom: "52px" }}
+                    animationData={loader}
+                    loop={true}
+                  />
+                </div>
+              )}
+            </div>
+          </>
+        ) : (
+          <Container sx={noContentContainer}>
             <Flex sx={noContent}>
               <Box sx={{ width: "75px", height: "70px" }}>
                 <Icon src={iconsObj.portfile} />
@@ -106,7 +134,19 @@ export default function AgreementsList({ address }: any) {
               sx={{ variant: "text.normalTextBold" }}
             >{`You don't have any agreements yet`}</Text>
           </Container>
-        )} */}
+        )}
+        {!agreements.length ? (
+          <Container sx={{...noContentContainer}}>
+            <Flex sx={noContent}>
+              <Box sx={{ width: "75px", height: "70px" }}>
+                <Icon src={iconsObj.portfile} />
+              </Box>
+            </Flex>
+            <Text
+              sx={{ variant: "text.normalTextBold" }}
+            >{`No agreements matching selected filters`}</Text>
+          </Container>
+        ) : null}
       </Container>
     </Flex>
   );

@@ -9,6 +9,7 @@ import {
   identiconIcon,
   iconBell,
   containerBtn,
+  logoIcon,
 } from "./styles";
 import Icon from "../icon";
 import { Logo } from "../Logo/Logo";
@@ -26,9 +27,9 @@ export default function Header({ visible, setVisible, visibleLogOut }: any) {
       sx={{ ...container, zIndex: visibleLogOut ? 3 : 10 }}
     >
       <Flex sx={{ justifyContent: "space-between" }}>
-        <NextLink href={"/"}>
+        <NextLink href={"/"} sx={logoIcon}>
           <Link>
-            <Logo />
+            <Logo/>
           </Link>
         </NextLink>
         <Flex sx={containerBtn}>

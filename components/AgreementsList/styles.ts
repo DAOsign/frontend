@@ -3,7 +3,7 @@ import { ThemeUIStyleObject } from "theme-ui";
 const container = {
   background: "white",
   position: "relative",
-  border: "3px solid #EDEDF3",
+  border: "1px solid #EDEDF3;",
   flexDirection: "column",
   borderRadius: "12px",
   width: "275px",
@@ -19,18 +19,20 @@ const container = {
     mb: "32px",
     mx: "auto",
     pl: "24px",
-    pr: "60px",
-  },
-  "@media screen and (max-width: 768px)": {
-    width: "100%",
-    minWidth: "343px",
-    flexDirection: "column",
-    minHeight: "292px",
-    px: "16px",
+    pr: "24px",
   },
   "@media screen and (min-width: 1201px)": {
     position: "fixed",
     height: "404px",
+  },
+  "@media screen and (max-width: 719px)": {
+    width: "100%",
+    minWidth: "343px",
+    flexDirection: "column",
+    minHeight: "270px",
+    px: "16px",
+    pt: "16px",
+    pb: "24px",
   },
 } as ThemeUIStyleObject;
 
@@ -64,7 +66,7 @@ const nameTitle = {
   textAlign: "center",
   "@media screen and (max-width: 1200px)": {
     textAlign: "left",
-    ml: "20px",
+    // ml: "20px",
   },
 } as ThemeUIStyleObject;
 
@@ -80,7 +82,7 @@ const userFoto = {
     m: 0,
     left: 0,
   },
-  "@media screen and (max-width: 720px)": {
+  "@media screen and (max-width: 719px)": {
     width: "80px",
     height: "80px",
   },
@@ -103,9 +105,14 @@ const normalTextBoldGreen = {
   color: "#44F268",
 } as ThemeUIStyleObject;
 
+const newAgreementTitle = {
+  display: "flex",
+} as ThemeUIStyleObject;
+
 const title = {
+  display: "flex",
   variant: "text.h3",
-  fontSize: "32px",
+  alignItems: "center",
 } as ThemeUIStyleObject;
 
 const containerSides = {
@@ -117,11 +124,37 @@ const containerSides = {
     flexDirection: "column",
     px: "24px",
   },
-  "@media screen and (max-width: 768px)": {
+  "@media screen and (max-width: 719px)": {
     flexDirection: "column",
+    paddingTop: "32px",
+    px: "24px",
+    overflow: "hidden",
+  },
+  "@media screen and (max-width: 480px)": {
+    flexDirection: "column",
+    paddingTop: "16px",
     px: "16px",
     overflow: "hidden",
   },
+} as ThemeUIStyleObject;
+
+const noContentContainer = {
+  textAlign: "center",
+  mt: "80px",
+  mb: "385px",
+  minHeight: "184px",
+  display: "flex",
+  flexDirection: "column",
+  justifyContent: "space-between",
+  "@media screen and (max-width: 1199px)": {
+    mt: "100px",
+    mb: "187px",
+  },
+  "@media screen and (max-width: 719px)": {
+    mt: "88px",
+    mb: "133px",
+  },
+  
 } as ThemeUIStyleObject;
 
 const noContent = {
@@ -132,8 +165,9 @@ const noContent = {
   margin: "0 auto",
   justifyContent: "center",
   alignItems: "center",
-  mt: "90px",
-  mb: "12px",
+  // "@media screen and (max-width: 480px)": {
+    
+  // },
 } as ThemeUIStyleObject;
 
 const percentContainer = {
@@ -147,7 +181,7 @@ const percentContainer = {
     display: "block",
     bottom: "5px",
   },
-  "@media screen and (max-width: 768px)": {
+  "@media screen and (max-width: 719px)": {
     m: "0  auto 0 ",
     bottom: "5px",
     width: "100px",
@@ -158,15 +192,20 @@ const percentContainer = {
 const improveBtn = {
   variant: "buttons.userBtn",
   opacity: 1,
-  height: "46px",
+  height: "50px",
   px: "45px",
   "@media screen and (max-width: 1200px)": {
     mr: 0,
   },
-  "@media screen and (max-width: 768px)": {
+  "@media screen and (max-width: 719px)": {
     maxWidth: "unset",
     width: "90%",
     mr: "auto",
+  },
+  "@media screen and (max-width: 480px)": {
+    maxWidth: "unset",
+    width: "calc(100%-32px)",
+    mx: "16px",
   },
 } as ThemeUIStyleObject;
 
@@ -175,12 +214,12 @@ const improveBtnContainer = {
   "@media screen and (max-width: 1200px)": {
     right: "24px",
     position: "absolute",
-    bottom: "17px",
+    bottom: "24px",
     left: "168px",
     width: "unset",
     mb: 0,
   },
-  "@media screen and (max-width: 768px)": {
+  "@media screen and (max-width: 719px)": {
     m: "0 auto",
     position: "absolute",
     bottom: "24px",
@@ -194,7 +233,12 @@ const infoContainer = {
   flexDirection: "column",
   minWidth: "195px",
   "@media screen and (max-width: 1200px)": {
-    mt: "12px",
+    mt: "8px",
+    ml: "16px",
+  },
+  "@media screen and (max-width: 719px)": {
+    mt: "15px",
+    ml: "16px",
   },
 } as ThemeUIStyleObject;
 
@@ -212,7 +256,7 @@ const inputMyAgreement = {
   pl: "48px",
   opacity: 1,
   variant: "text.normalTextMedium",
-  "@media screen and (max-width: 768px)": {
+  "@media screen and (max-width: 719px)": {
     maxWidth: "unset",
     width: "100%",
   },
@@ -242,7 +286,7 @@ const agreementConteiner = {
   transition: "linear",
   transitionDuration: "250ms",
   mb: "20px",
-  "@media screen and (min-width: 768px)": {
+  "@media screen and (min-width: 719px)": {
     "&:hover": {
       transform: "scale(1.007)",
     },
@@ -261,7 +305,7 @@ const agreementConteinerRelative = {
 const agreementLabels = {
   gap: "16px",
   alignItems: "flex-start",
-  "@media screen and (max-width: 720px)": {
+  "@media screen and (max-width: 719px)": {
     justifyContent: "flex-end",
     flexDirection: "row-reverse",
     "& .arrowTooltip": {
@@ -299,7 +343,7 @@ const agrLabelBase = {
   textAlign: "center",
   width: "initial",
   lineHeight: "20px",
-  "@media screen and (max-width: 768px)": {
+  "@media screen and (max-width: 719px)": {
     mx: 0,
     mb: "16px",
   },
@@ -431,7 +475,7 @@ const titleItem = {
 const searchContainer = {
   position: "relative",
   width: "346px",
-  "@media screen and (max-width: 768px)": {
+  "@media screen and (max-width: 719px)": {
     width: "100%",
   },
 } as ThemeUIStyleObject;
@@ -487,7 +531,7 @@ const btnClear = {
 
 const userContainer = {
   justifyContent: "center",
-  marginBottom: "24px",
+  marginBottom: "14px",
   mt: "4px",
   alignItems: "center",
   "@media screen and (min-width: 1200px)": {
@@ -496,7 +540,7 @@ const userContainer = {
       marginLeft: "46.5%",
     },
   },
-  "@media screen and (min-width: 768px) and (max-width: 1300px)": {
+  "@media screen and (min-width: 719px) and (max-width: 1300px)": {
     "& > div > div > .arrowTooltip": {
       marginLeft: "46%",
     },
@@ -504,9 +548,12 @@ const userContainer = {
   "@media screen and (max-width: 1200px)": {
     justifyContent: "flex-start",
     mt: 0,
-    ml: "20px",
-    mb: "11px",
     position: "relative",
+  "@media screen and (max-width: 719px)": {
+      justifyContent: "flex-start",
+      m: 0,
+      position: "relative",
+    },
   },
 } as ThemeUIStyleObject;
 
@@ -524,7 +571,7 @@ const verificationIconContainer = {
     marginLeft: "20px",
     marginTop: 0,
   },
-  "@media screen and (max-width: 768px)": {
+  "@media screen and (max-width: 719px)": {
     position: "absolute",
     transform: "translate(-50%, 0)",
     left: "50%",
@@ -533,7 +580,7 @@ const verificationIconContainer = {
 } as ThemeUIStyleObject;
 
 const titleSigners = {
-  "@media screen and (max-width: 768px)": {
+  "@media screen and (max-width: 719px)": {
     mt: 0,
   },
 } as ThemeUIStyleObject;
@@ -545,6 +592,8 @@ export {
   improveBtnContainer,
   iconSearchContainer,
   agreementConteiner,
+  noContentContainer,
+  newAgreementTitle,
   iconMenuAgreement,
   inputMyAgreement,
   percentContainer,

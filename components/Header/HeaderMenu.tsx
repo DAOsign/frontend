@@ -9,7 +9,6 @@ import {
   btnLogaut,
   iconLogOut,
 } from "../../styles/styles";
-
 import { formatAddress, onCopyClick } from "../../utils/formats";
 import LogOutPopap from "../modalLogout";
 import Identicon from "../Identicon/Identicon";
@@ -35,8 +34,8 @@ const HeaderMenu = ({
         sx={fotoContainer}
       >
         <Flex>
-          <Identicon account={address} size={60} sx={foto} />
-          <Container sx={{ maxWidth: "150px", ml: "20px" }}>
+          <Identicon account={address} size={80} sx={foto} />
+          <Container sx={{ maxWidth: "150px", ml: "16px", mt: "15px" }}>
             <Text
               sx={{
                 variant: "text.largeTextBold",
@@ -101,15 +100,15 @@ const HeaderMenu = ({
             height: "2px",
             backgroundColor: "grey",
             position: "absolute",
-            mt: "20px",
+            mt: "32px",
             left: 0,
           }}
         />
         <Button onClick={() => setVisibleLogOut(!visibleLogOut)} sx={btnLogaut}>
           <Box sx={iconLogOut}>
             <svg
-              width="24"
-              height="24"
+              width="18"
+              height="18"
               viewBox="0 0 24 24"
               fill="none"
               xmlns="http://www.w3.org/2000/svg"
@@ -123,7 +122,7 @@ const HeaderMenu = ({
               />
             </svg>
           </Box>
-          <Text sx={{ ml: "28px" }}>Log Out</Text>
+          <Text sx={{ display: "inline-block", ml: "28px", mt: "13px"}}>Log Out</Text>
         </Button>
       </Container>
       {visibleLogOut ? <LogOutPopap setVisible={setVisibleLogOut} /> : null}

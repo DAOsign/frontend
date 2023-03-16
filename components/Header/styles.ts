@@ -6,18 +6,25 @@ const container = {
   paddingLeft: "40px",
   paddingRight: "40px",
   backgroundColor: "#FFFFFF",
-  paddingTop: "16px",
   position: "fixed",
   top: 0,
   zIndex: 10,
+  pr: "32px",
+  pl: "30px",
+  pt: "18px",
   "@media screen and (max-width: 768px)": {
-    px: "36px",
+    px: "24px",
+    paddingTop: "12px",
     height: "66px",
   },
   "@media screen and (max-width: 480px)": {
-    paddingRight: "12px",
-    paddingLeft: "16px",
+    px: "16px",
   },
+} as ThemeUIStyleObject;
+
+const logoIcon = {
+  display: "block",
+  mt: "6",
 } as ThemeUIStyleObject;
 
 const addresContainer = {
@@ -31,7 +38,7 @@ const addresContainer = {
   fontStyle: "normal",
   fontWeight: 400,
   cursor: "pointer",
-  "@media screen and (max-width: 768px)": {
+  "@media screen and (max-width: 719px)": {
     display: "none",
   },
 } as ThemeUIStyleObject;
@@ -39,7 +46,7 @@ const addresContainer = {
 const iconMenu = {
   variant: "buttons.itemsBtn",
   display: "none",
-  ml: "16px",
+  margin: "0",
   width: "42px",
   height: "42px",
   borderRadius: "50%",
@@ -48,7 +55,8 @@ const iconMenu = {
   textAlign: "center",
   padding: 0,
   cursor: "poiner",
-  "@media screen and (max-width: 768px)": {
+  "@media screen and (max-width: 719px)": {
+    ml: "16px",
     display: "block",
   },
   "&:hover": { backgroundColor: "#F7F7FB" },
@@ -70,8 +78,8 @@ const iconBell = {
 const containerBtn = {
   alignItems: "center",
   flexDirection: "row",
-  "@media screen and (max-width: 768px)": {
-    width: "126px",
+  "@media screen and (max-width: 719px)": {
+    width: "116px",
   },
 } as ThemeUIStyleObject;
-export { addresContainer, container, iconMenu, identiconIcon, iconBell, containerBtn };
+export { addresContainer, container, iconMenu, identiconIcon, iconBell, containerBtn, logoIcon };
