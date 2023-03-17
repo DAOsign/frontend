@@ -29,7 +29,8 @@ import iconsObj from "../../assets/icons";
 import SignatureIcon from "../icon/editable/SignatureIcon";
 import ShareIcon from "../icon/editable/ShareIcon";
 import DownloadIcon from "../icon/editable/DownloadIcon";
-import { notifError, notifSucces } from "../../utils/notification";
+import { notifSucces } from "../../utils/notification";
+import { notifComingSoon } from "../../utils/notification";
 import Tooltip from "../Tooltip";
 
 const getAgreementStatusLabelStyle = (agreementStatus: string | undefined): ThemeUIStyleObject => {
@@ -65,7 +66,7 @@ export const AgreementLabels = ({
 
   // TODO: download document
   const handleDownloadDocument = () => {
-    notifError("Document download is not yet implemented");
+    notifComingSoon("Download PDF Document is coming soon");
   };
 
   const titleTooltip = (value: string | undefined) => {

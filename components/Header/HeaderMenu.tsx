@@ -70,9 +70,7 @@ const HeaderMenu = ({
           </Container>
         </Flex>
         <Button
-          onClick={() =>
-            notifComingSoon("Abilities to See and Customize My Profile are coming soon")
-          }
+          onClick={() => notifComingSoon("My Profile is coming soon")}
           sx={{ variant: "buttons.grey", mt: "32px", width: "100%" }}
         >
           My Profile
@@ -87,9 +85,7 @@ const HeaderMenu = ({
           Copy Share Link
         </Button>
         <Button
-          onClick={() =>
-            notifComingSoon("Abilities To Switch and Add Multiple Wallets are coming soon")
-          }
+          onClick={() => notifComingSoon("Switch Wallet is coming soon")}
           sx={{ variant: "buttons.grey", mt: "16px", width: "100%" }}
         >
           Switch Wallet
@@ -122,7 +118,7 @@ const HeaderMenu = ({
               />
             </svg>
           </Box>
-          <Text sx={{ display: "inline-block", ml: "28px", mt: "13px"}}>Log Out</Text>
+          <Text sx={{ display: "inline-block", ml: "28px", mt: "13px" }}>Log Out</Text>
         </Button>
       </Container>
       {visibleLogOut ? <LogOutPopap setVisible={setVisibleLogOut} /> : null}
