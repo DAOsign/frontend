@@ -30,6 +30,7 @@ import SignatureIcon from "../icon/editable/SignatureIcon";
 import ShareIcon from "../icon/editable/ShareIcon";
 import DownloadIcon from "../icon/editable/DownloadIcon";
 import { notifError, notifSucces } from "../../utils/notification";
+import { notifComingSoon } from "../../utils/notification";
 import Tooltip from "../Tooltip";
 
 const getAgreementStatusLabelStyle = (agreementStatus: string | undefined): ThemeUIStyleObject => {
@@ -149,7 +150,11 @@ export const AgreementLabels = ({
         </Flex>
         {agreementPrivacy !== PRIVACY_PUBLIC_PROOF_ONLY &&
         agreementPrivacy !== PRIVACY_PUBLIC_PROOF_ONLY_FULL_NAME ? (
-          <Flex sx={greyLabelWithHover} onClick={handleDownloadDocument}>
+          <Flex
+            sx={greyLabelWithHover}
+            // onClick={handleDownloadDocument}>
+            onClick={() => notifComingSoon("Download PDF Document is coming soon")}
+          >
             <Box sx={labelIcon}>
               <DownloadIcon />
             </Box>

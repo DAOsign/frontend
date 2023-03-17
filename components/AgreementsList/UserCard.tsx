@@ -28,10 +28,7 @@ export default function UserCard({ address }: any) {
 
   return (
     <Flex sx={container}>
-      <Box
-        onClick={() => notifComingSoon("Ability to Share Public User Profile is coming soon")}
-        sx={iconExit}
-      >
+      <Box onClick={() => notifComingSoon("Public Profile is coming soon")} sx={iconExit}>
         <svg
           width="15"
           height="15"
@@ -97,10 +94,7 @@ export default function UserCard({ address }: any) {
         </Flex>
       </Flex>
       <Container sx={improveBtnContainer}>
-        <Button
-          onClick={() => notifComingSoon("More User Verification Badges are coming soon")}
-          sx={improveBtn}
-        >
+        <Button onClick={() => notifComingSoon("More Verification coming soon")} sx={improveBtn}>
           Add Verifications
         </Button>
       </Container>
