@@ -276,7 +276,7 @@ const item = {
   "@media screen and (min-width: 768px)": {
     "&:hover": {
       width: "101%",
-      height: "108px",
+      height: "101%",
       position: "relative",
       top: "-2px",
       left: "-2px",
