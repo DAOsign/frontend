@@ -4,6 +4,7 @@ import verificationAnonymous from "../img/svg/verification_anonymous.svg";
 import verificationDigital from "../img/svg/verification_digital.svg";
 import codeSnippetPrimary from "../img/svg/codeSnippetPrimary.svg";
 import togglePrimaryRight from "../img/svg/togglePrimaryRight.svg";
+import snapshotImportIcon from "../img/svg/snapshotImportIcon.svg";
 import uploadCloudPrimary from "../img/svg/uploadCloudPrimary.svg";
 import togglePrimaryLeft from "../img/svg/togglePrimaryLeft.svg";
 import verificationReal from "../img/svg/verification_real.svg";
@@ -101,6 +102,7 @@ import { IconsMapper } from "./icons.types";
 const iconsObj: IconsMapper = {
   uploadCloudPrimary,
   codeSnippetPrimary,
+  snapshotImportIcon,
   togglePrimaryRight,
   togglePrimaryLeft,
   fileSecondarysvg,

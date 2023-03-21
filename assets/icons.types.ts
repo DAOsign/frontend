@@ -3,6 +3,7 @@ export interface IconsMapper extends Record<string, unknown> {
   uploadCloudPrimary: Icon;
   codeSnippetPrimary: Icon;
   togglePrimaryRight: Icon;
+  snapshotImportIcon: Icon;
   togglePrimaryLeft: Icon;
   fileSecondarysvg: Icon;
   arrowNarrowLeft: Icon;

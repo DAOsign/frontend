@@ -144,7 +144,12 @@ label > div {
   opacity: 0;
   position: absolute;
 }
-
+label > .switch {
+  opacity: 1;
+  position: static;
+  /* opacity: 0; */
+  /* position: absolute; */
+}
 body {
   min-height: 100vh;
   background-color: #f7f7fb;

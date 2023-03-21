@@ -26,7 +26,7 @@ const imageUploadContainer = {
   border: "1px dashed #D8D8E2",
   borderRadius: "12px",
   position: "relative",
-  width: "440px",
+  width: "600px",
   height: "280px",
   mb: "2px",
   display: "flex",
@@ -117,7 +117,7 @@ const leftSide = {
   mr: "20px",
   border: "1px solid #EDEDF3",
   borderRadius: "12px",
-  paddingX: "100px",
+  paddingX: "78px",
   paddingBottom: "60px",
   paddingTop: "60px",
   maxHeight: "fit-content",
@@ -216,7 +216,7 @@ const rightCard = {
   ...card,
   cursor: "pointer",
   right: 0,
-  width: "210px",
+  width: "186px",
   height: "232px",
   maxWidth: "210px",
   transitionProperty: "all",
@@ -228,11 +228,27 @@ const rightCard = {
   },
 } as ThemeUIStyleObject;
 
+const centerCard = {
+  ...card,
+  left: "50%",
+  transform: "translate(-50%, 0)",
+  width: "186px",
+  transitionProperty: "all",
+  transitionDuration: "300ms",
+  maxWidth: "210px",
+  height: "232px",
+  "@media screen and (min-width: 768px)": {
+    "&:hover": {
+      transform: "translate(-50%, 0) scale(1.02)",
+    },
+  },
+} as ThemeUIStyleObject;
+
 const leftCard = {
   ...card,
   cursor: "pointer",
   left: 0,
-  width: "210px",
+  width: "186px",
   height: "232px",
   maxWidth: "210px",
   transitionProperty: "all",
@@ -541,6 +557,17 @@ const containerFlex = {
   },
 } as ThemeUIStyleObject;
 
+export const titleBottom = {
+  fontFamily: "InterBold",
+  fontWeight: 700,
+  fontSize: "20px",
+  lineHeight: "120%",
+  textAlign: "center",
+  display: "inline-block",
+  color: "#212121",
+  mt: "40px",
+} as ThemeUIStyleObject;
+
 export {
   inputCreactAgreement,
   inputCreateAgreementWithRightButton,
@@ -565,6 +592,7 @@ export {
   itemRadio,
   uploadText,
   stepStyle,
+  centerCard,
   rightCard,
   rightSide,
   uploadBtn,

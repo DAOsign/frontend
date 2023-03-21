@@ -1,13 +1,13 @@
 import React from "react";
 import { Container, Flex, Text, Box } from "theme-ui";
-import { rightCard, leftCard } from "../../styles";
+import { rightCard, leftCard, centerCard } from "../../styles";
 import { useCreateAgreement } from "../../../../hooks/useCreateAgreement";
 import { useEditAgreement } from "../../../../hooks/useEditAgreement";
 import iconsObj from "../../../../assets/icons";
 import Icon from "../../../icon";
 
 import { PRIVACY_PRIVATE } from "../../../../types";
-import { PublicProps } from ".";
+import { PublicProps } from "../StepThree";
 import { motion } from "framer-motion";
 
 const chooseVariants = {
@@ -29,7 +29,7 @@ export default function ChooseMethod({ animateContainer, setPublic, page }: Publ
     >
       <Container sx={{ position: "relative", height: "242px" }}>
         <Container
-          sx={leftCard}
+          sx={{ ...leftCard, width: "290px", height: "218px", maxWidth: "300px" }}
           onClick={() => {
             changeValue("errors", { ...values.errors, agreementPrivacy: null });
             changeValue("agreementPrivacy", "");
@@ -48,7 +48,7 @@ export default function ChooseMethod({ animateContainer, setPublic, page }: Publ
           </Box>
         </Container>
         <Container
-          sx={rightCard}
+          sx={{ ...rightCard, width: "290px", height: "218px", maxWidth: "300px" }}
           onClick={() => changeValue("agreementPrivacy", PRIVACY_PRIVATE)}
           className={values?.agreementPrivacy === PRIVACY_PRIVATE ? "active" : undefined}
         >

@@ -10,12 +10,10 @@ import {
 import ChooseMethod from "./ChooseMethod";
 import PublicMethod from "./ChoosePublicMethod";
 import FieldErrorMessage from "../../../Form/FieldErrorMessage";
+import AgreementMethod from "../StepTwo/ChooseAgreementMethod";
 import { useEditAgreement } from "../../../../hooks/useEditAgreement";
 
-export type AnimateContainer = () => void;
-
 export interface Props {
-  animateContainer: AnimateContainer;
   page: string;
 }
 export interface PublicProps extends Props {
@@ -27,32 +25,32 @@ const defaultIsPublic = (agreementPrivacy: string) => {
   );
 };
 
-export default function StepOne({ animateContainer, page }: Props) {
+export default function StepOne({ page }: Props) {
   const create = useCreateAgreement();
   const edit = useEditAgreement();
   const { values, changeValue } = page === "create" ? create : edit;
-  const [isPublic, setIsPublic] = useState(defaultIsPublic(values.agreementPrivacy));
-  const initiated = useRef(false);
+  // const [isPublic, setIsPublic] = useState(defaultIsPublic(values.agreementPrivacy));
+  // const initiated = useRef(false);
 
-  useEffect(() => {
-    if (true) {
-      initiated.current = true;
-
-      if (defaultIsPublic(values.agreementPrivacy)) {
-        animateContainer();
-        setIsPublic(isPublic);
-      }
-    }
-    return () => {
-      initiated.current = false;
-    };
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [values]);
+  // useEffect(() => {
+  //   if (true) {
+  //     initiated.current = true;
+  //     if (defaultIsPublic(values.agreementPrivacy)) {
+  //       animateContainer();
+  //       setIsPublic(isPublic);
+  //     }
+  //   }
+  //   return () => {
+  //     initiated.current = false;
+  //   };
+  //   // eslint-disable-next-line react-hooks/exhaustive-deps
+  // }, [values]);
+  console.log(values);
 
   const titleInputErrorStyles = values?.errors?.title ? inputCreateAgreementError : {};
 
   return (
-    <Container sx={{ maxWidth: "440px", textAlign: "left" }}>
+    <Container sx={{ maxWidth: "600px", textAlign: "left" }}>
       <Text sx={{ variant: "forms.label", ml: "3px" }}>Title</Text>
       <Input
         value={values.title}
@@ -60,13 +58,15 @@ export default function StepOne({ animateContainer, page }: Props) {
         sx={{ variant: "forms.input", ...inputCreactAgreement, ...titleInputErrorStyles }}
       />
       <FieldErrorMessage error={values?.errors?.title} />
-      <Text sx={{ variant: "forms.label", margin: "24px auto 3px 2px" }}>Agreement privacy</Text>
-      {!isPublic ? (
+      {/* <Box> */}
+      <AgreementMethod page={page} />
+      {/* </Box> */}
+      {/* <AgreementLocationRadioButtons page={page} /> */}
+      {/* {!isPublic ? (
         <ChooseMethod page={page} animateContainer={animateContainer} setPublic={setIsPublic} />
       ) : (
         <PublicMethod page={page} animateContainer={animateContainer} setPublic={setIsPublic} />
-      )}
-      <FieldErrorMessage error={values?.errors?.agreementPrivacy} />
+      )} */}
     </Container>
   );
 }

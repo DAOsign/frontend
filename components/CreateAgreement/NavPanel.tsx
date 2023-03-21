@@ -85,11 +85,6 @@ export default function NavPanel({ setLoading, page }: { setLoading: any; page: 
           if (values.title.trim()?.length > 120) {
             errors.title = "Title should be 120 characters max";
           }
-          if (!values.agreementPrivacy) {
-            errors.agreementPrivacy = "Agreement Privacy is a required selection";
-          }
-          break;
-        case 2:
           if (!values.agreementMethod) {
             errors.agreementFile = "Agreement Description is a required selection";
           } else if (values.agreementMethod === METHOD_ENTER && !values.textEditorValue) {
@@ -100,7 +95,7 @@ export default function NavPanel({ setLoading, page }: { setLoading: any; page: 
             errors.agreementFile = "Agreement Description is a required selection";
           }
           break;
-        case 3:
+        case 2:
           if (!values.signers.length) {
             errors.signers = "At least one signer is required";
           }
@@ -114,6 +109,11 @@ export default function NavPanel({ setLoading, page }: { setLoading: any; page: 
           ) {
             extraError = "Should add yourself as signer or observer";
             setIsAuthorNotAddedPopupVisible(true);
+          }
+          break;
+        case 3:
+          if (!values.agreementPrivacy) {
+            errors.agreementPrivacy = "Agreement Privacy is a required selection";
           }
           break;
       }
@@ -295,7 +295,7 @@ export default function NavPanel({ setLoading, page }: { setLoading: any; page: 
         try {
           let uploadedFileData: { filePath?: string; agreementHash?: string; error?: any } = {};
           if (
-            step === 2 &&
+            step === 1 &&
             values.agreementMethod === METHOD_UPLOAD &&
             values.file &&
             (!values.filePath || !values.agreementHash)
@@ -313,7 +313,7 @@ export default function NavPanel({ setLoading, page }: { setLoading: any; page: 
               return;
             }
           } else if (
-            step === 2 &&
+            step === 1 &&
             values.agreementMethod === METHOD_ENTER &&
             values.textEditorValue
           ) {
@@ -336,10 +336,14 @@ export default function NavPanel({ setLoading, page }: { setLoading: any; page: 
           }
 
           const areFieldsValid = validateFields({ ...values, ...uploadedFileData });
+          console.log(areFieldsValid);
+
           if (areFieldsValid) {
             if (isFinishButton) {
               await handleCreateAgreement();
             } else {
+              console.log("nextStep");
+
               handleNextStep();
             }
           }
@@ -416,8 +420,8 @@ export default function NavPanel({ setLoading, page }: { setLoading: any; page: 
           </Box>
 
           <Container sx={leftSideItem}>
-            <Text sx={primaryTitleItem}>Privacy</Text>
-            <Text sx={secondaryTitleStep}>Enter title and privacy ot the agreement</Text>
+            <Text sx={primaryTitleItem}>Content</Text>
+            <Text sx={secondaryTitleStep}>Enter agreement content</Text>
           </Container>
         </Flex>
         <Container sx={box}></Container>
@@ -440,8 +444,8 @@ export default function NavPanel({ setLoading, page }: { setLoading: any; page: 
             )}
           </Box>
           <Container sx={leftSideItem}>
-            <Text sx={primaryTitleItem}>Content</Text>
-            <Text sx={secondaryTitleStep}>Enter agreement content</Text>
+            <Text sx={primaryTitleItem}>Signers</Text>
+            <Text sx={secondaryTitleStep}>Add signers and observers</Text>
           </Container>
         </Flex>
         <Container sx={box}></Container>
@@ -460,8 +464,8 @@ export default function NavPanel({ setLoading, page }: { setLoading: any; page: 
             )}
           </Box>
           <Container sx={leftSideItem}>
-            <Text sx={primaryTitleItem}>Signers</Text>
-            <Text sx={secondaryTitleStep}>Add signers and observers</Text>
+            <Text sx={primaryTitleItem}>Configurations</Text>
+            <Text sx={secondaryTitleStep}>Set agreement options</Text>
           </Container>
         </Flex>
       </Container>
