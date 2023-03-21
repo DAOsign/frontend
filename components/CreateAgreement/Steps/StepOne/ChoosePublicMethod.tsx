@@ -72,7 +72,7 @@ export default function PublicMethod({ animateContainer, setPublic, page }: Publ
           <Container sx={{ textAlign: "left", maxWidth: "290px", m: "0", pr: "5px" }}>
             <Text sx={{ variant: "text.smallTextBold", mb: "3px" }}>Published</Text>
             <Text sx={secondaryTitle}>
-              Public and available on the your{" "}
+            Available on {" "} 
               <NextLink href={"/"} passHref legacyBehavior prefetch={false}>
                 <Link
                   sx={{ variant: "text.linkUnderline" }}
@@ -82,9 +82,10 @@ export default function PublicMethod({ animateContainer, setPublic, page }: Publ
                     event.stopPropagation();
                   }}
                 >
-                  public signature profile
+                  Signer Profile
                 </Link>
               </NextLink>
+              {" "} with all content and proofs visible to Public users
             </Text>
           </Container>
         </Flex>
@@ -99,8 +100,20 @@ export default function PublicMethod({ animateContainer, setPublic, page }: Publ
           <Container sx={{ textAlign: "left", maxWidth: "295px", m: "0" }}>
             <Text sx={{ variant: "text.smallTextBold", mb: "3px" }}>Proof Only</Text>
             <Text sx={secondaryTitle}>
-              Public Proof of Agreement available on your Public signature profile, but agreement
-              content is hidden.
+              Available on {" "}
+              <NextLink href={"/"} passHref legacyBehavior prefetch={false}>
+                <Link
+                  sx={{ variant: "text.linkUnderline" }}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  onClick={event => {
+                    event.stopPropagation();
+                  }}
+                >
+                  Signer Profile
+                </Link>
+                </NextLink>
+                {" "} with proofs, but agreement content is NOT visible to Public users (only to Signers or Observers)
             </Text>
           </Container>
         </Flex>
@@ -115,7 +128,7 @@ export default function PublicMethod({ animateContainer, setPublic, page }: Publ
           <Container sx={{ textAlign: "left", maxWidth: "290px", m: "0" }}>
             <Text sx={{ variant: "text.smallTextBold", mb: "3px" }}>Anyone with Link</Text>
             <Text sx={secondaryTitle}>
-              Public, but only available with an{" "}
+              Available with all content and proofs visible to Public users with Agreement Link, but NOT published on {" "}
               <NextLink href={"/"} passHref legacyBehavior prefetch={false}>
                 <Link
                   sx={{ variant: "text.linkUnderline" }}
@@ -125,9 +138,9 @@ export default function PublicMethod({ animateContainer, setPublic, page }: Publ
                     event.stopPropagation();
                   }}
                 >
-                  agreement share link
-                </Link>
-              </NextLink>
+                  Signer Profile
+                  </Link>
+                </NextLink>
             </Text>
           </Container>
         </Flex>
