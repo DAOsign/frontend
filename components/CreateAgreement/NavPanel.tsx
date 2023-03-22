@@ -292,6 +292,7 @@ export default function NavPanel({ setLoading, page }: { setLoading: any; page: 
 
         setIsLoadingNextStep(true);
         setLoading(true);
+
         try {
           let uploadedFileData: { filePath?: string; agreementHash?: string; error?: any } = {};
           if (
@@ -361,6 +362,7 @@ export default function NavPanel({ setLoading, page }: { setLoading: any; page: 
       },
       disabled: isLoadingNextStep || savingAgreement,
     };
+
     return (
       <Button {...props}>
         {isLoadingNextStep ? (
