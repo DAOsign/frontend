@@ -166,7 +166,7 @@ export default function NavPanel({ setLoading, page }: { setLoading: any; page: 
 
   const [{ fetching: savingAgreement }, saveAgreement] = useMutation(saveAgreementMutation);
 
-  const handleCreateAgreement = async (isReadyToSign: boolean = false) => {
+  const handleCreateAgreement = async (filePath?: string, agreementHash?: string) => {
     await saveAgreement({
       agreementId: Number(query.id),
       title: values.title,
@@ -178,9 +178,9 @@ export default function NavPanel({ setLoading, page }: { setLoading: any; page: 
       agreementPrivacy: values.agreementPrivacy || null,
       signers: values.signers.map(s => s.value),
       observers: values.observers.map(o => o.value),
-      agreementHash: values.agreementHash,
-      agreementFilePath: values.filePath,
-      isReadyToSign,
+      agreementHash: agreementHash || values.agreementHash,
+      agreementFilePath: filePath || values.filePath,
+      isReadyToSign: false,
     }).then(res => {
       if (res.error) {
         notifError(res.error.message);
@@ -197,58 +197,8 @@ export default function NavPanel({ setLoading, page }: { setLoading: any; page: 
   const handleSaveDraft = async () => {
     const areFieldsValid = validateFields(values, true);
     if (areFieldsValid) {
-      try {
-        let uploadedFileData: { filePath?: string; agreementHash?: string; error?: any } = {};
-        if (
-          step === 2 &&
-          values.agreementMethod === METHOD_UPLOAD &&
-          values.file &&
-          (!values.filePath || !values.agreementHash)
-        ) {
-          uploadedFileData = await uploadNewFile(values.file);
-          if (!uploadedFileData || uploadedFileData.error) {
-            console.error(uploadedFileData.error || new Error(FILE_UPLOAD_ERROR_DEFAULT_MESSAGE));
-            notifError(
-              formatFileUploadErrorMessage(
-                uploadedFileData.error?.response?.data?.error ||
-                  uploadedFileData.error.message ||
-                  FILE_UPLOAD_ERROR_DEFAULT_MESSAGE
-              )
-            );
-            return;
-          }
-        } else if (
-          step === 2 &&
-          values.agreementMethod === METHOD_ENTER &&
-          values.textEditorValue
-        ) {
-          const encoded = Buffer.from(values.textEditorValue); //TODO handle encodings
-          const file = new File([encoded], "agreement.txt", {
-            type: "text/plain",
-          });
-          uploadedFileData = await uploadNewFile(file);
-          if (!uploadedFileData || uploadedFileData.error) {
-            console.error(uploadedFileData.error || new Error(FILE_UPLOAD_ERROR_DEFAULT_MESSAGE));
-            notifError(
-              formatFileUploadErrorMessage(
-                uploadedFileData.error?.response?.data?.error ||
-                  uploadedFileData.error.message ||
-                  FILE_UPLOAD_ERROR_DEFAULT_MESSAGE
-              )
-            );
-            return;
-          }
-        }
-      } catch (error) {
-        console.error(error);
-        notifError(
-          formatFileUploadErrorMessage(
-            error?.response?.data?.error || error?.message || FILE_UPLOAD_ERROR_DEFAULT_MESSAGE
-          )
-        );
-      }
-
-      return handleCreateAgreement(false);
+      const uploadFileData = await preuploadFile();
+      await handleCreateAgreement(uploadFileData?.filePath, uploadFileData?.agreementHash);
     }
   };
 
@@ -281,6 +231,56 @@ export default function NavPanel({ setLoading, page }: { setLoading: any; page: 
       : push(`/edit/${query.id}?step=${step}`);
   };
 
+  const preuploadFile = async () => {
+    if (step !== 2) return;
+    try {
+      let uploadedFileData: { filePath?: string; agreementHash?: string; error?: any } = {};
+      if (
+        values.agreementMethod === METHOD_UPLOAD &&
+        values.file &&
+        (!values.filePath || !values.agreementHash)
+      ) {
+        uploadedFileData = await uploadNewFile(values.file);
+        if (!uploadedFileData || uploadedFileData.error) {
+          console.error(uploadedFileData.error || new Error(FILE_UPLOAD_ERROR_DEFAULT_MESSAGE));
+          notifError(
+            formatFileUploadErrorMessage(
+              uploadedFileData.error?.response?.data?.error ||
+                uploadedFileData.error.message ||
+                FILE_UPLOAD_ERROR_DEFAULT_MESSAGE
+            )
+          );
+          return;
+        }
+      } else if (values.agreementMethod === METHOD_ENTER && values.textEditorValue) {
+        const encoded = Buffer.from(values.textEditorValue); //TODO handle encodings
+        const file = new File([encoded], "agreement.txt", {
+          type: "text/plain",
+        });
+        uploadedFileData = await uploadNewFile(file);
+        if (!uploadedFileData || uploadedFileData.error) {
+          console.error(uploadedFileData.error || new Error(FILE_UPLOAD_ERROR_DEFAULT_MESSAGE));
+          notifError(
+            formatFileUploadErrorMessage(
+              uploadedFileData.error?.response?.data?.error ||
+                uploadedFileData.error.message ||
+                FILE_UPLOAD_ERROR_DEFAULT_MESSAGE
+            )
+          );
+          return;
+        }
+      }
+      return uploadedFileData;
+    } catch (error) {
+      console.error(error);
+      notifError(
+        formatFileUploadErrorMessage(
+          error?.response?.data?.error || error?.message || FILE_UPLOAD_ERROR_DEFAULT_MESSAGE
+        )
+      );
+    }
+  };
+
   const ForwardButton = () => {
     const isFinishButton = step === 3;
     const props: ButtonProps = {
@@ -292,68 +292,18 @@ export default function NavPanel({ setLoading, page }: { setLoading: any; page: 
 
         setIsLoadingNextStep(true);
         setLoading(true);
-        try {
-          let uploadedFileData: { filePath?: string; agreementHash?: string; error?: any } = {};
-          if (
-            step === 2 &&
-            values.agreementMethod === METHOD_UPLOAD &&
-            values.file &&
-            (!values.filePath || !values.agreementHash)
-          ) {
-            uploadedFileData = await uploadNewFile(values.file);
-            if (!uploadedFileData || uploadedFileData.error) {
-              console.error(uploadedFileData.error || new Error(FILE_UPLOAD_ERROR_DEFAULT_MESSAGE));
-              notifError(
-                formatFileUploadErrorMessage(
-                  uploadedFileData.error?.response?.data?.error ||
-                    uploadedFileData.error.message ||
-                    FILE_UPLOAD_ERROR_DEFAULT_MESSAGE
-                )
-              );
-              return;
-            }
-          } else if (
-            step === 2 &&
-            values.agreementMethod === METHOD_ENTER &&
-            values.textEditorValue
-          ) {
-            const encoded = Buffer.from(values.textEditorValue); //TODO handle encodings
-            const file = new File([encoded], "agreement.txt", {
-              type: "text/plain",
-            });
-            uploadedFileData = await uploadNewFile(file);
-            if (!uploadedFileData || uploadedFileData.error) {
-              console.error(uploadedFileData.error || new Error(FILE_UPLOAD_ERROR_DEFAULT_MESSAGE));
-              notifError(
-                formatFileUploadErrorMessage(
-                  uploadedFileData.error?.response?.data?.error ||
-                    uploadedFileData.error.message ||
-                    FILE_UPLOAD_ERROR_DEFAULT_MESSAGE
-                )
-              );
-              return;
-            }
-          }
+        const uploadedFileData = await preuploadFile();
 
-          const areFieldsValid = validateFields({ ...values, ...uploadedFileData });
-          if (areFieldsValid) {
-            if (isFinishButton) {
-              await handleCreateAgreement();
-            } else {
-              handleNextStep();
-            }
+        const areFieldsValid = validateFields({ ...values, ...uploadedFileData });
+        if (areFieldsValid) {
+          if (isFinishButton) {
+            await handleCreateAgreement();
+          } else {
+            handleNextStep();
           }
-        } catch (error) {
-          console.error(error);
-          notifError(
-            formatFileUploadErrorMessage(
-              error?.response?.data?.error || error?.message || FILE_UPLOAD_ERROR_DEFAULT_MESSAGE
-            )
-          );
-        } finally {
-          setLoading(false);
-          setIsLoadingNextStep(false);
         }
+        setLoading(false);
+        setIsLoadingNextStep(false);
       },
       disabled: isLoadingNextStep || savingAgreement,
     };

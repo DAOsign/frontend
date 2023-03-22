@@ -44,11 +44,12 @@ const TextEditor = ({ page }: { page: string }) => {
     changeValue("textEditorValue", value || "");
   };
 
-  // const replaceValue = () => {
-  //   const str = JSON.parse(textEditorValue);
-  //   return JSON.parse(str);
-  // };
-  // console.log(state);
+  const handleChooseAnotherMethod = () => {
+    changeValue("agreementMethod", "");
+    changeValue("filePath", "");
+    changeValue("textEditorValue", "");
+    changeValue("file", undefined);
+  };
 
   return (
     <Box style={{ position: "relative" }} sx={styles}>
@@ -69,7 +70,7 @@ const TextEditor = ({ page }: { page: string }) => {
             description
           </Text>
         </Flex>
-        <Button sx={btnBack} className="backBtn" onClick={() => changeValue("agreementMethod", "")}>
+        <Button sx={btnBack} className="backBtn" onClick={handleChooseAnotherMethod}>
           <Icon style={{ display: "block" }} src={iconsObj.arrowLeftPink} />
           <Text sx={{ display: "block" }}>{" < "} Choose another method</Text>
         </Button>
