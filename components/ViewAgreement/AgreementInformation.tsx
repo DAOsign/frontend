@@ -1,3 +1,4 @@
+/* eslint-disable @next/next/no-img-element */
 import React, { ReactNode, useState } from "react";
 import {
   briefInformation,

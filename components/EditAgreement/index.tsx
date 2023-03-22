@@ -101,16 +101,18 @@ export default function EditAgreement({ page }: { page: string }) {
     setLoaded(true);
   }, [data]);
 
-  const steps = useMemo(() => {
-    return {
-      1: withFade(
-        <StepOne page={page} animateContainer={() => setTransitioned(val => !val)} />,
-        step
-      ),
-      2: withFade(<StepTwo page={page} />, step),
-      3: withFade(<StepThree page={page} loading={loading} />, step),
-    };
-  }, []);
+  const steps = {
+    1: withFade(<StepOne page={page} />, step),
+    2: withFade(<StepTwo page={page} />, step),
+    3: withFade(
+      <StepThree
+        page={page}
+        animateContainer={() => setTransitioned(val => !val)}
+        loading={loading}
+      />,
+      step
+    ),
+  };
 
   return (
     <Flex sx={containerSides}>

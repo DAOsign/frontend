@@ -1,12 +1,6 @@
 import React, { useEffect, useState, useRef } from "react";
-import { Container, Flex, Input, Text, Button, Box } from "theme-ui";
-import {
-  inputCreactAgreement,
-  inputCreateAgreementError,
-  inputCreateAgreementWithRightButton,
-  textLoading,
-  plus,
-} from "../../styles";
+import { Container, Text } from "theme-ui";
+import { textLoading } from "../../styles";
 import {
   PRIVACY_PUBLIC_PROOF_ONLY,
   PRIVACY_PUBLIC_PUBLISHED,
@@ -20,7 +14,6 @@ import { useEditAgreement } from "../../../../hooks/useEditAgreement";
 import loader from "../../../../img/json/loader.json";
 import FieldErrorMessage from "../../../Form/FieldErrorMessage";
 import AgreementLocationRadioButtons from "../StepTwo/AgreementLocationButtons";
-// import styles from "./styles";
 
 export type AnimateContainer = () => void;
 

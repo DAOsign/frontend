@@ -207,9 +207,7 @@ export default function StepTwo({ page }: { page: string }) {
 
   return (
     <Container sx={styles}>
-      {/* {!loading ? ( */}
       <>
-        {" "}
         <Box>
           <Flex
             sx={{ position: "relative", justifyContent: "space-between", alignItems: "center" }}
@@ -446,20 +444,6 @@ export default function StepTwo({ page }: { page: string }) {
           <Switch className="switch" sx={switchBtn} id="enableInvoicing" />
         </Flex>
       </>
-      {/* ) : (
-        <>
-          <Lottie
-            style={{ height: "60px", marginBottom: "52px" }}
-            animationData={loader}
-            loop={true}
-          />
-          <Text sx={textLoading}> loading... </Text>
-        </>
-      )} */}
-
-      {/* <Box>
-        <AgreementMethod page={page} />
-      </Box> */}
     </Container>
   );
 }

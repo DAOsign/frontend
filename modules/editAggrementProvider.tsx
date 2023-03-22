@@ -109,19 +109,21 @@ const EditAgreemntProvider = (props?: Partial<ProviderProps<CreateAgrementContex
       if (query.step) {
         const step = Number(query.step);
 
-        if (step > 1 && (!values.title || !values.agreementPrivacy)) {
+        if (
+          step > 1 &&
+          (!values.title ||
+            (values.agreementMethod === METHOD_ENTER && !values.textEditorValue) ||
+            (values.agreementMethod === METHOD_UPLOAD && !values.agreementHash))
+        ) {
           push({ query: { step: 1 } }, undefined, { shallow: true });
         }
         // TODO redirect if step 3 and no textEditorValue or filePath
-        if (
-          step > 2 &&
-          ((values.agreementMethod === METHOD_ENTER && !values.textEditorValue) ||
-            (values.agreementMethod === METHOD_UPLOAD && !values.agreementHash))
-        ) {
+        if (step > 2 && !values.observers.length && !values.signers.length) {
           push({ query: { step: 2 } }, undefined, { shallow: true });
         }
       }
     }
+
     return () => {
       valuesLoadedRef.current = false;
     };

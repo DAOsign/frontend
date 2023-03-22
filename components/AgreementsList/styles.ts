@@ -154,7 +154,6 @@ const noContentContainer = {
     mt: "88px",
     mb: "133px",
   },
-  
 } as ThemeUIStyleObject;
 
 const noContent = {
@@ -166,7 +165,7 @@ const noContent = {
   justifyContent: "center",
   alignItems: "center",
   // "@media screen and (max-width: 480px)": {
-    
+
   // },
 } as ThemeUIStyleObject;
 
@@ -549,7 +548,7 @@ const userContainer = {
     justifyContent: "flex-start",
     mt: 0,
     position: "relative",
-  "@media screen and (max-width: 719px)": {
+    "@media screen and (max-width: 719px)": {
       justifyContent: "flex-start",
       m: 0,
       position: "relative",
