@@ -12,6 +12,13 @@ export default function UploadLocalAgreement({ page }: { page: string }) {
   const edit = useEditAgreement();
   const { changeValue, values } = page === "create" ? create : edit;
 
+  const handleChooseAnotherMethod = () => {
+    changeValue("agreementMethod", "");
+    changeValue("filePath", "");
+    changeValue("textEditorValue", "");
+    changeValue("file", undefined);
+  };
+
   return (
     <Flex
       sx={{
@@ -43,9 +50,7 @@ export default function UploadLocalAgreement({ page }: { page: string }) {
           Upload agreement
         </Text>
         <Button
-          onClick={() => {
-            changeValue("agreementMethod", "");
-          }}
+          onClick={handleChooseAnotherMethod}
           sx={{
             variant: "buttons.back",
             ...uploadBtn,

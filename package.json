@@ -19,6 +19,7 @@
     "@metamask/jazzicon": "^2.0.0",
     "@pinata/sdk": "^2.1.0",
     "@snapshot-labs/lock": "github:snapshot-labs/lock",
+    "@types/mailchimp__mailchimp_marketing": "^3.0.8",
     "@uiw/react-md-editor": "3.18.0",
     "axios": "^1.2.1",
     "date-fns": "^2.29.3",

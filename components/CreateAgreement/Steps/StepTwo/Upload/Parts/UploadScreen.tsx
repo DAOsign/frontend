@@ -35,6 +35,15 @@ const UploadScreen = ({ page }: { page: string }) => {
     }
   };
 
+  const dropContainer = document.getElementById("file");
+  const dropBorder = document.getElementById("dropBorder");
+  dropContainer?.addEventListener("dragenter", function (event) {
+    (dropBorder as HTMLButtonElement).style.border = "1px dashed #CA5CF2";
+  });
+  dropContainer?.addEventListener("dragleave", function (event) {
+    (dropBorder as HTMLButtonElement).style.border = "1px dashed #D8D8E2";
+  });
+
   return (
     <>
       <Box
@@ -47,6 +56,7 @@ const UploadScreen = ({ page }: { page: string }) => {
           },
         }}
         className={values.file ? "uploaded" : undefined}
+        id="dropBorder"
       >
         <input
           style={{ cursor: !!values.file ? "default" : "pointer" }}
