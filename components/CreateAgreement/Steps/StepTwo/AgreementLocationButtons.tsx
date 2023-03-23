@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import { Flex, Text, Radio, Label, Box } from "theme-ui";
 import Icon from "../../../icon/index";
-import { itemRadio } from "../../styles";
 import iconsObj from "../../../../assets/icons";
 import { useCreateAgreement } from "../../../../hooks/useCreateAgreement";
 import { useEditAgreement } from "../../../../hooks/useEditAgreement";
@@ -13,6 +12,7 @@ import {
 } from "../../../../types";
 import ModalIpfsWarning from "../../../ModalIpfsWarning/ModalIpfsWarning";
 import Tooltip from "../../../Tooltip";
+import { nameItem, itemLocation } from "./styles";
 
 const agreementLocations: { name: string; value: AgreementLocation }[] = [
   {
@@ -85,18 +85,20 @@ export default function AgreementLocationRadioButtons({ page }: { page: string }
           {agreementLocations.map(el => (
             <Flex
               key={el?.name}
+              sx={{
+                ...itemLocation,
+                border:
+                  values.agreementLocation === el.value ? "2px solid #CA5CF2" : "2px solid #EDEDF3",
+              }}
               onClick={() => onAgreementLocationClick(el.value)}
               className="radio"
             >
-              <Box style={{ width: "15px", height: "15px", cursor: "pointer" }}>
-                <Icon
-                  src={values.agreementLocation === el.value ? iconsObj.radioOn : iconsObj.radioOff}
-                />
-              </Box>
-              <Label sx={itemRadio}>
-                <Radio sx={{ boxShadow: "none" }} name="letter" value={el.value} />
-                <Text sx={{ ml: "5px", variant: "text.normalTextMedium" }}>{el.name}</Text>
-              </Label>
+              <Flex sx={{ alignItems: "center" }}>
+                <Box style={{ width: "32px", height: "32px", cursor: "pointer" }}>
+                  <Icon src={el.value === LOCATION_CLOUD ? iconsObj.cloud : iconsObj.ipfs} />
+                </Box>
+                <Text sx={nameItem}>{el.name}</Text>
+              </Flex>
             </Flex>
           ))}
         </Flex>

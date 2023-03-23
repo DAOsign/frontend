@@ -52,7 +52,7 @@ const TextEditor = ({ page }: { page: string }) => {
   };
 
   return (
-    <Box style={{ position: "relative" }} sx={styles}>
+    <Box style={{ position: "relative", width: "100%" }} sx={styles}>
       <Flex sx={{ alignItems: "center", mt: "24px" }}>
         <Flex sx={{ minWidth: "140px" }}>
           <Text sx={{ variant: "forms.label", display: "inline-block", mr: "5px" }}>
@@ -70,19 +70,25 @@ const TextEditor = ({ page }: { page: string }) => {
             description
           </Text>
         </Flex>
-        <Button sx={btnBack} className="backBtn" onClick={handleChooseAnotherMethod}>
-          <Icon style={{ display: "block" }} src={iconsObj.arrowLeftPink} />
-          <Text sx={{ display: "block" }}>{" < "} Choose another method</Text>
-        </Button>
       </Flex>
 
       <Suspense fallback={<Spinner />}>
         <Flex className="tabsContainer">
           <Button onClick={() => setState("edit")} {...buttonPropsByStatus(state, "edit")}>
-            Edit
+            <Box sx={{ width: "20px", height: "20px", mr: "5px" }}>
+              <Icon width={20} height={20} src={iconsObj.editFile} />
+            </Box>
+            Edit File
           </Button>
           <Button onClick={() => setState("preview")} {...buttonPropsByStatus(state, "preview")}>
+            <Box sx={{ width: "20px", height: "20px", mr: "5px" }}>
+              <Icon src={iconsObj.preview} />
+            </Box>
             Preview
+          </Button>
+          <Button sx={btnBack} className="backBtn" onClick={handleChooseAnotherMethod}>
+            <Icon style={{ display: "block" }} src={iconsObj.arrowLeftPink} />
+            <Text sx={{ display: "block" }}>{" < "} Choose another method</Text>
           </Button>
         </Flex>
         <MDEditor

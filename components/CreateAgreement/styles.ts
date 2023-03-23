@@ -156,7 +156,7 @@ const rightSide = {
   background: "#FFFFFF",
   border: "1px solid #EDEDF3",
   borderRadius: "12px",
-  paddingX: "25px",
+  paddingX: "52px",
   ml: "20px",
   mr: 0,
   maxHeight: "636px",
@@ -166,7 +166,7 @@ const rightSide = {
     width: "100%",
     mx: "auto",
     maxWidth: "672px",
-    paddingX: "100px",
+    paddingX: "78px",
     borderTop: "none",
     borderRadius: "0 0 12px 12px",
     height: "initial",
@@ -201,7 +201,7 @@ const card = {
   m: 0,
   cursor: "pointer",
   minHeight: "230px",
-  height: "232px",
+  height: "248px",
   transition: ".3s all",
   "@media screen and (max-width: 768px)": {
     maxWidth: "150px",
@@ -217,7 +217,7 @@ const rightCard = {
   cursor: "pointer",
   right: 0,
   width: "186px",
-  height: "232px",
+  height: "248px",
   maxWidth: "210px",
   transitionProperty: "all",
   transitionDuration: "300ms",
@@ -236,7 +236,7 @@ const centerCard = {
   transitionProperty: "all",
   transitionDuration: "300ms",
   maxWidth: "210px",
-  height: "232px",
+  height: "248px",
   "@media screen and (min-width: 768px)": {
     "&:hover": {
       transform: "translate(-50%, 0) scale(1.02)",
@@ -249,7 +249,7 @@ const leftCard = {
   cursor: "pointer",
   left: 0,
   width: "186px",
-  height: "232px",
+  height: "248px",
   maxWidth: "210px",
   transitionProperty: "all",
   transitionDuration: "300ms",
@@ -267,7 +267,7 @@ const flex = {
 
 const leftSideItem = {
   textAlign: "left",
-  maxWidth: "230px",
+  maxWidth: "192px",
   ml: "16px",
   "@media screen and (max-width: 1200px)": {
     ml: 0,
@@ -280,6 +280,7 @@ const item = {
   border: "2px solid #F7F7FB",
   borderRadius: "8px",
   pl: "20px",
+  pr: "16px",
   py: "20px",
   m: 0,
   mb: "10px",
@@ -305,6 +306,7 @@ const item = {
 
 const inputCreactAgreement = {
   backgroundColor: "#F7F7FB",
+  background: "#F7F7FB",
   borderRadius: "8px",
   width: "100%",
   transition: "border-color 0.3s",

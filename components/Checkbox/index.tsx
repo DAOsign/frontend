@@ -15,7 +15,11 @@ const CheckboxComponent = ({ checked, disabled }: checkbox) => {
       <Checkbox checked={checked} disabled={disabled} />
       <Box
         sx={{
-          border: !checked ? "1.8px solid #21212150" : "1.8px solid #212121",
+          border: disabled
+            ? "1.8px solid #21212150;"
+            : !checked
+            ? "1.8px solid #21212150"
+            : "1.8px solid #212121",
           ...checkboxContainer,
         }}
       >

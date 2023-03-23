@@ -3,6 +3,7 @@ import verificationNotarized from "../img/svg/verification_notarized.svg";
 import verificationAnonymous from "../img/svg/verification_anonymous.svg";
 import verificationDigital from "../img/svg/verification_digital.svg";
 import codeSnippetPrimary from "../img/svg/codeSnippetPrimary.svg";
+import enterAggrementIcon from "../img/svg/enterAggrementIcon.svg";
 import togglePrimaryRight from "../img/svg/togglePrimaryRight.svg";
 import snapshotImportIcon from "../img/svg/snapshotImportIcon.svg";
 import uploadCloudPrimary from "../img/svg/uploadCloudPrimary.svg";
@@ -14,6 +15,7 @@ import arrowNarrowLeft from "../img/svg/arrowNarrowLeft.svg";
 import proofSecondary from "../img/svg/proofSecondary.svg";
 import LostConnection from "../img/svg/LostConnection.svg";
 import phoneSecondary from "../img/svg/phoneSecondary.svg";
+import uploadFileIcon from "../img/svg/uploadFileIcon.svg";
 import arrowLeftPink from "../img/svg/arrowLeftPink.svg";
 import calendarMinus from "../img/svg/calendarMinus.svg";
 import alertTriangle from "../img/svg/alertTriangle.svg";
@@ -52,6 +54,7 @@ import download from "../img/svg/download.svg";
 import facebook from "../img/svg/facebook.svg";
 import telegram from "../img/svg/telegram.svg";
 import portfile from "../img/svg/portfile.svg";
+import editFile from "../img/svg/editFile.svg";
 import pinkPlus from "../img/svg/pinkPlus.svg";
 import radioOff from "../img/svg/radioOff.svg";
 import fileSvg from "../img/svg/file_svg.svg";
@@ -59,6 +62,7 @@ import radioOn from "../img/svg/radioOn.svg";
 import pending from "../img/svg/pending.svg";
 import twitter from "../img/svg/twitter.svg";
 import success from "../img/svg/success.svg";
+import preview from "../img/svg/preview.svg";
 import errorSvg from "../img/svg/error.svg";
 import search from "../img/svg/search.svg";
 import logoIcon from "../img/svg/logo.svg";
@@ -79,6 +83,8 @@ import phone from "../img/svg/phone.svg";
 import award from "../img/svg/award.svg";
 import frame from "../img/svg/frame.svg";
 import alert from "../img/svg/alert.svg";
+import cloud from "../img/svg/cloud.svg";
+import ipfs from "../img/svg/ipfs.svg";
 import Bell from "../img/svg/Bell.svg";
 import user from "../img/svg/user.svg";
 import done from "../img/svg/done.svg";
@@ -104,12 +110,14 @@ const iconsObj: IconsMapper = {
   codeSnippetPrimary,
   snapshotImportIcon,
   togglePrimaryRight,
+  enterAggrementIcon,
   togglePrimaryLeft,
   fileSecondarysvg,
   arrowNarrowLeft,
   proofSecondary,
   LostConnection,
   phoneSecondary,
+  uploadFileIcon,
   calendarMinus,
   alertTriangle,
   calendarCheck,
@@ -146,11 +154,13 @@ const iconsObj: IconsMapper = {
   birthday,
   settings,
   telegram,
+  editFile,
   radioOff,
   facebook,
   success,
   download,
   calendar,
+  preview,
   errorSvg,
   twitter,
   iconExit,
@@ -158,10 +168,12 @@ const iconsObj: IconsMapper = {
   iconSix,
   pending,
   logOut,
+  cloud,
   verify,
   github,
   alert,
   wallet,
+  ipfs,
   phone,
   search,
   xClose,

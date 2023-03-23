@@ -22,8 +22,21 @@ import loader from "../../../../img/json/loader.json";
 import iconsObj from "../../../../assets/icons";
 import TagList, { ParticipantType } from "../StepThree/TagList";
 import { validateAddress, validateEnsDomains } from "../StepThree/validationUtils";
+import {
+  containerSelect,
+  flexSelect,
+  titleSelect,
+  icon,
+} from "../../../ModalImportSnapshot/styles";
+import { motion, Variants } from "framer-motion";
 import { useLock } from "../../../../hooks/useLock";
 import styles from "./styles";
+
+const variants: Variants = {
+  hidden: { opacity: 1, height: 0, overflow: "hidden" },
+  enter: { opacity: 1, height: "auto", overflow: "hidden" },
+  exit: { opacity: 1, height: 0, overflow: "hidden" },
+};
 
 interface VerificationInfo {
   title: string;
@@ -37,29 +50,30 @@ const verifications: VerificationInfo[] = [
     img: iconsObj.verificationAnonymous,
     description: "Wallet Address",
   },
-  // {
-  //   title: "Pseudonymous",
-  //   img: iconsObj.verificationPseudonymous,
-  //   description: "Name, Email address, ENS",
-  // },
-  // {
-  //   title: "Digital Identify",
-  //   img: iconsObj.verificationDigital,
-  //   description: "Social Network Verification",
-  // },
-  // {
-  //   title: "Real Identify",
-  //   img: iconsObj.verificationReal,
-  //   description: "Real world assets verification",
-  // },
-  // {
-  //   title: "Notarized Identity",
-  //   img: iconsObj.verificationNotarized,
-  //   description: "KYC verification",
-  // },
+  {
+    title: "Pseudonymous",
+    img: iconsObj.verificationPseudonymous,
+    description: "Name, Email address, ENS",
+  },
+  {
+    title: "Digital Identify",
+    img: iconsObj.verificationDigital,
+    description: "Social Network Verification",
+  },
+  {
+    title: "Real Identify",
+    img: iconsObj.verificationReal,
+    description: "Real world assets verification",
+  },
+  {
+    title: "Notarized Identity",
+    img: iconsObj.verificationNotarized,
+    description: "KYC verification",
+  },
 ];
 
 export default function StepTwo({ page }: { page: string }) {
+  const [selectsOpen, setSelectsOpen] = useState(false);
   const create = useCreateAgreement();
   const edit = useEditAgreement();
   const { values, changeValue } = page === "create" ? create : edit;
@@ -442,6 +456,48 @@ export default function StepTwo({ page }: { page: string }) {
             Enable Invoicing
           </Label>
           <Switch className="switch" sx={switchBtn} id="enableInvoicing" />
+        </Flex>
+        <Flex sx={{ mt: "16px" }}>
+          <Container>
+            <Text sx={{ variant: "forms.label", ml: "3px" }}>Contract limit amount</Text>
+            <Input
+              sx={{
+                variant: "forms.input",
+                ...inputCreactAgreement,
+                width: "97%",
+                height: "40px",
+                opacity: 1,
+                mr: "16px",
+              }}
+            />
+          </Container>
+          <Flex sx={{ flexDirection: "column", width: "112px" }}>
+            <Text sx={{ variant: "forms.label", ml: "3px", width: "112px" }}>
+              Contract currency
+            </Text>
+            <Container sx={{ ...containerSelect, mt: 0, width: "112px" }}>
+              <Flex onClick={() => setSelectsOpen(!selectsOpen)} sx={flexSelect}>
+                <Text sx={titleSelect}></Text>
+                <Box sx={icon}>
+                  <Icon src={iconsObj.arrowLeftPink} />
+                </Box>
+              </Flex>
+              <motion.div
+                animate={selectsOpen ? "enter" : "exit"}
+                transition={{ type: "linear" }}
+                variants={variants}
+                initial="hidden"
+              >
+                {["", ""]?.map((el: string, i: number) => {
+                  return (
+                    <Flex key={i} sx={flexSelect}>
+                      <Text sx={{ ...titleSelect, fontSize: "12px" }}>{el}</Text>
+                    </Flex>
+                  );
+                })}
+              </motion.div>
+            </Container>
+          </Flex>
         </Flex>
       </>
     </Container>

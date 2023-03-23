@@ -343,8 +343,6 @@ export default function NavPanel({ setLoading, page }: { setLoading: any; page: 
             if (isFinishButton) {
               await handleCreateAgreement();
             } else {
-              console.log("nextStep");
-
               handleNextStep();
             }
           }

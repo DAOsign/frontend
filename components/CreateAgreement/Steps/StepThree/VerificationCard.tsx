@@ -28,7 +28,6 @@ export default function VerificationCard({
       sx={{
         ...verificationCardStyles,
         cursor: disabled ? "no-drop" : "pointer",
-        backgroundColor: disabled ? "#EDEDF390" : "#fff",
         "&:hover": { boxShadow: disabled ? "unset" : "0 0 11px rgba(33,33,33,.2)" },
       }}
       onClick={onClick}

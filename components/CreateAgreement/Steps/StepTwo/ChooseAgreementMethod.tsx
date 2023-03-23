@@ -58,7 +58,7 @@ export default function ChooseAgreementMethod({ page }: { page: string }) {
               >
                 <Box sx={{ maxWidth: "150px", m: "0 auto" }}>
                   <div style={{ width: "50px", height: "50px", margin: "0 auto" }}>
-                    <Icon width="50px" height="50px" src={iconsObj.uploadCloudPrimary} />
+                    <Icon width="50px" height="50px" src={iconsObj.uploadFileIcon} />
                   </div>
                   <Text sx={{ ...primaryTitleItem, mb: "12px", mt: "24px" }}>Upload Agreement</Text>
                   <Text sx={{ variant: "text.smallTextMedium", maxWidth: "160px", opacity: 1 }}>
@@ -75,7 +75,7 @@ export default function ChooseAgreementMethod({ page }: { page: string }) {
               >
                 <Box sx={{ maxWidth: "150px", m: "0 auto" }}>
                   <div style={{ width: "50px", height: "50px", margin: "0 auto" }}>
-                    <Icon width="50px" height="50px" src={iconsObj.fileSecondarysvg} />
+                    <Icon width="50px" height="50px" src={iconsObj.enterAggrementIcon} />
                   </div>
                   <Text sx={{ ...primaryTitleItem, mt: "24px", mb: "8px" }}>Enter Agreement</Text>
                   <Text sx={{ variant: "text.smallTextMedium", maxWidth: "160px", opacity: 1 }}>

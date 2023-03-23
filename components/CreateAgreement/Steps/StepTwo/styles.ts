@@ -1,7 +1,7 @@
 import { ThemeUIStyleObject } from "theme-ui";
 
 export default {
-  maxWidth: "440px",
+  maxWidth: "600px",
   textAlign: "left",
   ".radio": {
     alignItems: "center",
@@ -11,4 +11,23 @@ export default {
       pointerEvents: "none",
     },
   },
+} as ThemeUIStyleObject;
+
+export const nameItem = {
+  fontFamily: "InterBold",
+  fontWeight: 700,
+  fontSize: "20px",
+  lineHeight: "120%",
+  cursor: "pointer",
+  color: "#212121",
+  ml: "16px",
+} as ThemeUIStyleObject;
+
+export const itemLocation = {
+  justifyContent: "center",
+  position: "relative",
+  borderRadius: "8px",
+  cursor: "pointer",
+  width: "290px",
+  height: "96px",
 } as ThemeUIStyleObject;
