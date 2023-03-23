@@ -81,7 +81,7 @@ export const btnBack = {
   marginRight: 0,
   backgroundColor: "transparent",
   background: "unset",
-  pr: "0 !important",
+  px: "0 !important",
   justifyContent: "flex-end",
   "&:hover": {
     backgroundColor: "transparent",
@@ -89,5 +89,42 @@ export const btnBack = {
     color: "#AE4FD0",
   },
 } as ThemeUIStyleObject;
+
+export const icon = {
+  width: "20px",
+  height: "20px",
+  mr: "5px",
+} as ThemeUIStyleObject;
+
+export const iconFileResize = {
+  backgroundColor: "inherit",
+  pointerEvents: "none",
+  position: "absolute",
+  cursor: "pointer",
+  bottom: "35px",
+  right: "5px",
+} as ThemeUIStyleObject;
+
+export const foterText = {
+  variant: "text.overscript",
+  opacity: 0.5,
+  ml: "4px",
+} as ThemeUIStyleObject;
+
+export const labelDesc = {
+  variant: "forms.label",
+  display: "inline-block",
+  "@media screen and (max-width: 768px)": {
+    display: "none",
+  },
+} as ThemeUIStyleObject;
+
+export const enterAggrement = {
+  variant: "forms.label",
+  display: "inline-block",
+  mr: "5px",
+} as ThemeUIStyleObject;
+
+export const containerEnter = { minWidth: "140px" } as ThemeUIStyleObject;
 
 export default tabStyles;

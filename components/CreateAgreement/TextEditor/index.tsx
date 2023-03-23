@@ -7,7 +7,15 @@ import Icon from "../../icon";
 import { Text, Button, Flex, Box, ButtonProps, Spinner } from "theme-ui";
 import { useCreateAgreement } from "../../../hooks/useCreateAgreement";
 import { useEditAgreement } from "../../../hooks/useEditAgreement";
-import styles, { btnBack } from "./styles";
+import styles, {
+  iconFileResize,
+  containerEnter,
+  enterAggrement,
+  foterText,
+  labelDesc,
+  btnBack,
+  icon,
+} from "./styles";
 
 const MDEditor = dynamic(() => import("@uiw/react-md-editor"), {
   ssr: false,
@@ -40,10 +48,6 @@ const TextEditor = ({ page }: { page: string }) => {
 
   const [state, setState] = useState<"edit" | "preview">("edit");
 
-  const handleOnChange = (value?: string) => {
-    changeValue("textEditorValue", value || "");
-  };
-
   const handleChooseAnotherMethod = () => {
     changeValue("agreementMethod", "");
     changeValue("filePath", "");
@@ -54,34 +58,22 @@ const TextEditor = ({ page }: { page: string }) => {
   return (
     <Box style={{ position: "relative", width: "100%" }} sx={styles}>
       <Flex sx={{ alignItems: "center", mt: "24px" }}>
-        <Flex sx={{ minWidth: "140px" }}>
-          <Text sx={{ variant: "forms.label", display: "inline-block", mr: "5px" }}>
-            Enter agreement{" "}
-          </Text>
-          <Text
-            sx={{
-              variant: "forms.label",
-              display: "inline-block",
-              "@media screen and (max-width: 768px)": {
-                display: "none",
-              },
-            }}
-          >
-            description
-          </Text>
+        <Flex sx={containerEnter}>
+          <Text sx={enterAggrement}>Enter agreement </Text>
+          <Text sx={labelDesc}>description</Text>
         </Flex>
       </Flex>
 
       <Suspense fallback={<Spinner />}>
         <Flex className="tabsContainer">
           <Button onClick={() => setState("edit")} {...buttonPropsByStatus(state, "edit")}>
-            <Box sx={{ width: "20px", height: "20px", mr: "5px" }}>
+            <Box sx={icon}>
               <Icon width={20} height={20} src={iconsObj.editFile} />
             </Box>
             Edit File
           </Button>
           <Button onClick={() => setState("preview")} {...buttonPropsByStatus(state, "preview")}>
-            <Box sx={{ width: "20px", height: "20px", mr: "5px" }}>
+            <Box sx={icon}>
               <Icon src={iconsObj.preview} />
             </Box>
             Preview
@@ -92,29 +84,17 @@ const TextEditor = ({ page }: { page: string }) => {
           </Button>
         </Flex>
         <MDEditor
-          value={textEditorValue}
-          onChange={val => handleOnChange(val)}
-          preview={state}
+          onChange={val => changeValue("textEditorValue", val || "")}
           hideToolbar={state === "preview"}
+          value={textEditorValue}
+          preview={state}
         />
-
-        <Box
-          sx={{
-            position: "absolute",
-            right: "5px",
-            backgroundColor: "inherit",
-            bottom: "35px",
-            pointerEvents: "none",
-            cursor: "pointer",
-          }}
-        >
+        <Box sx={iconFileResize}>
           <Icon width="30px" height="30px" style={{ opacity: 0.3 }} src={iconsObj.fieldResize} />
         </Box>
         <Flex className="support">
           <Icon src={iconsObj.m} />
-          <Text sx={{ variant: "text.overscript", opacity: 0.5, ml: "4px" }}>
-            Markdown is supported
-          </Text>
+          <Text sx={foterText}>Markdown is supported</Text>
         </Flex>
       </Suspense>
     </Box>

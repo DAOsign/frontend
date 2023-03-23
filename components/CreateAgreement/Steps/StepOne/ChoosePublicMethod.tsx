@@ -27,9 +27,9 @@ export interface PublicProps extends Props {
 }
 
 const variants: Variants = {
-  hidden: { opacity: 1, y: 200 },
-  enter: { opacity: 1, y: 0 },
-  exit: { opacity: 1, x: 0, y: 200 },
+  hidden: { opacity: 1, y: 80, transition: { duration: 0.5 } },
+  enter: { opacity: 1, y: 0, transition: { duration: 0.5 } },
+  exit: { opacity: 1, x: 0, y: 80, transition: { duration: 0.5 } },
 };
 
 export default function PublicMethod({ animateContainer, setPublic, page }: PublicProps) {
@@ -61,91 +61,97 @@ export default function PublicMethod({ animateContainer, setPublic, page }: Publ
             <Text sx={{ display: "block" }}>Choose another privacy</Text>
           </Button>
         </Flex>
-        <Flex
-          sx={item}
-          onClick={() => changeValue("agreementPrivacy", PRIVACY_PUBLIC_PUBLISHED)}
-          className={values.agreementPrivacy === PRIVACY_PUBLIC_PUBLISHED ? "active" : undefined}
-        >
-          <Box sx={{ width: "20px" }}>
-            <Icon width="100%" height="100%" src={iconsObj.globe} />
-          </Box>
-          <Container sx={{ textAlign: "left", m: "0", pr: "5px" }}>
-            <Text sx={{ variant: "text.smallTextBold", mb: "3px" }}>Published</Text>
-            <Text sx={secondaryTitle}>
-              Available on{" "}
-              <NextLink href={"/"} passHref legacyBehavior prefetch={false}>
-                <Link
-                  sx={{ variant: "text.linkUnderline" }}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  onClick={event => {
-                    event.stopPropagation();
-                  }}
-                >
-                  Signer Profile
-                </Link>
-              </NextLink>{" "}
-              with all content and proofs visible to Public users
-            </Text>
-          </Container>
-        </Flex>
-        <Flex
-          sx={item}
-          onClick={() => changeValue("agreementPrivacy", PRIVACY_PUBLIC_PROOF_ONLY)}
-          className={values.agreementPrivacy === PRIVACY_PUBLIC_PROOF_ONLY ? "active" : undefined}
-        >
-          <Box sx={{ width: "20px" }}>
-            <Icon src={iconsObj.proofSecondary} />
-          </Box>
-          <Container sx={{ textAlign: "left", m: "0" }}>
-            <Text sx={{ variant: "text.smallTextBold", mb: "3px" }}>Proof Only</Text>
-            <Text sx={secondaryTitle}>
-              Available on{" "}
-              <NextLink href={"/"} passHref legacyBehavior prefetch={false}>
-                <Link
-                  sx={{ variant: "text.linkUnderline" }}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  onClick={event => {
-                    event.stopPropagation();
-                  }}
-                >
-                  Signer Profile
-                </Link>
-              </NextLink>{" "}
-              with proofs, but agreement content is NOT visible to Public users (only to Signers or
-              Observers)
-            </Text>
-          </Container>
-        </Flex>
-        <Flex
-          sx={{ ...item, mb: 0 }}
-          onClick={() => changeValue("agreementPrivacy", PRIVACY_PUBLIC_WITH_LINK)}
-          className={values.agreementPrivacy === PRIVACY_PUBLIC_WITH_LINK ? "active" : undefined}
-        >
-          <Box sx={{ width: "20px" }}>
-            <Icon src={iconsObj.ink} />
-          </Box>
-          <Container sx={{ textAlign: "left", m: "0" }}>
-            <Text sx={{ variant: "text.smallTextBold", mb: "3px" }}>Anyone with Link</Text>
-            <Text sx={secondaryTitle}>
-              Available with all content and proofs visible to Public users with Agreement Link, but
-              NOT published on{" "}
-              <NextLink href={"/"} passHref legacyBehavior prefetch={false}>
-                <Link
-                  sx={{ variant: "text.linkUnderline" }}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  onClick={event => {
-                    event.stopPropagation();
-                  }}
-                >
-                  Signer Profile
-                </Link>
-              </NextLink>
-            </Text>
-          </Container>
-        </Flex>
+        <motion.div whileHover={{ scale: 1.01, transition: { duration: 0.2 } }}>
+          <Flex
+            sx={item}
+            onClick={() => changeValue("agreementPrivacy", PRIVACY_PUBLIC_PUBLISHED)}
+            className={values.agreementPrivacy === PRIVACY_PUBLIC_PUBLISHED ? "active" : undefined}
+          >
+            <Box sx={{ width: "20px" }}>
+              <Icon width="100%" height="100%" src={iconsObj.globe} />
+            </Box>
+            <Container sx={{ textAlign: "left", m: "0", pr: "5px" }}>
+              <Text sx={{ variant: "text.smallTextBold", mb: "3px" }}>Published</Text>
+              <Text sx={secondaryTitle}>
+                Available on{" "}
+                <NextLink href={"/"} passHref legacyBehavior prefetch={false}>
+                  <Link
+                    sx={{ variant: "text.linkUnderline" }}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    onClick={event => {
+                      event.stopPropagation();
+                    }}
+                  >
+                    Signer Profile
+                  </Link>
+                </NextLink>{" "}
+                with all content and proofs visible to Public users
+              </Text>
+            </Container>
+          </Flex>
+        </motion.div>
+        <motion.div whileHover={{ scale: 1.01, transition: { duration: 0.2 } }}>
+          <Flex
+            sx={item}
+            onClick={() => changeValue("agreementPrivacy", PRIVACY_PUBLIC_PROOF_ONLY)}
+            className={values.agreementPrivacy === PRIVACY_PUBLIC_PROOF_ONLY ? "active" : undefined}
+          >
+            <Box sx={{ width: "20px" }}>
+              <Icon src={iconsObj.proofSecondary} />
+            </Box>
+            <Container sx={{ textAlign: "left", m: "0" }}>
+              <Text sx={{ variant: "text.smallTextBold", mb: "3px" }}>Proof Only</Text>
+              <Text sx={secondaryTitle}>
+                Available on{" "}
+                <NextLink href={"/"} passHref legacyBehavior prefetch={false}>
+                  <Link
+                    sx={{ variant: "text.linkUnderline" }}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    onClick={event => {
+                      event.stopPropagation();
+                    }}
+                  >
+                    Signer Profile
+                  </Link>
+                </NextLink>{" "}
+                with proofs, but agreement content is NOT visible to Public users (only to Signers
+                or Observers)
+              </Text>
+            </Container>
+          </Flex>
+        </motion.div>
+        <motion.div whileHover={{ scale: 1.01, transition: { duration: 0.2 } }}>
+          <Flex
+            sx={{ ...item, mb: 0 }}
+            onClick={() => changeValue("agreementPrivacy", PRIVACY_PUBLIC_WITH_LINK)}
+            className={values.agreementPrivacy === PRIVACY_PUBLIC_WITH_LINK ? "active" : undefined}
+          >
+            <Box sx={{ width: "20px" }}>
+              <Icon src={iconsObj.ink} />
+            </Box>
+            <Container sx={{ textAlign: "left", m: "0" }}>
+              <Text sx={{ variant: "text.smallTextBold", mb: "3px" }}>Anyone with Link</Text>
+              <Text sx={secondaryTitle}>
+                Available with all content and proofs visible to Public users with Agreement Link,
+                but NOT published on{" "}
+                <NextLink href={"/"} passHref legacyBehavior prefetch={false}>
+                  <Link
+                    sx={{ variant: "text.linkUnderline" }}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    onClick={event => {
+                      event.stopPropagation();
+                    }}
+                  >
+                    Signer Profile
+                  </Link>
+                </NextLink>
+              </Text>
+            </Container>
+          </Flex>
+        </motion.div>
       </Container>
     </motion.main>
   );

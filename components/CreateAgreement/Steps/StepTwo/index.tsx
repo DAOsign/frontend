@@ -4,24 +4,25 @@ import {
   inputCreateAgreementWithRightButton,
   inputCreateAgreementError,
   inputCreactAgreement,
+  labelSigners,
   titleBottom,
+  addMeBtn,
   plus,
 } from "../../styles";
 import { switchContainer, switchBtn, labelSwitch } from "../../../ModalImportSnapshot/styles";
-import { useWeb3 } from "../../../../hooks/useWeb3";
-import { uniqueId } from "../../../../utils/formats";
+import { validateAddress, validateEnsDomains } from "../StepThree/validationUtils";
 import { useCreateAgreement } from "../../../../hooks/useCreateAgreement";
 import { useEditAgreement } from "../../../../hooks/useEditAgreement";
-import Tooltip from "../../../Tooltip";
-import AgreementMethod from "./ChooseAgreementMethod";
-import VerificationCard from "../StepThree/VerificationCard";
 import FieldErrorMessage from "../../../Form/FieldErrorMessage";
-import Lottie from "lottie-react";
-import Icon from "../../../icon";
-import loader from "../../../../img/json/loader.json";
-import iconsObj from "../../../../assets/icons";
 import TagList, { ParticipantType } from "../StepThree/TagList";
-import { validateAddress, validateEnsDomains } from "../StepThree/validationUtils";
+import VerificationCard from "../StepThree/VerificationCard";
+import { useWeb3 } from "../../../../hooks/useWeb3";
+import { uniqueId } from "../../../../utils/formats";
+import Tooltip from "../../../Tooltip";
+
+import iconsObj from "../../../../assets/icons";
+import Icon from "../../../icon";
+import { PlusIcon } from "./svg";
 import {
   containerSelect,
   flexSelect,
@@ -29,7 +30,6 @@ import {
   icon,
 } from "../../../ModalImportSnapshot/styles";
 import { motion, Variants } from "framer-motion";
-import { useLock } from "../../../../hooks/useLock";
 import styles from "./styles";
 
 const variants: Variants = {
@@ -227,17 +227,7 @@ export default function StepTwo({ page }: { page: string }) {
             sx={{ position: "relative", justifyContent: "space-between", alignItems: "center" }}
           >
             <Flex sx={{ alignItems: "center" }}>
-              <Text
-                sx={{
-                  variant: "forms.label",
-                  ml: "3px",
-                  mr: "5px",
-                  maxWidth: "unset",
-                  minHeight: "25px",
-                }}
-              >
-                Signers (ENS name or address)
-              </Text>
+              <Text sx={labelSigners}>Signers (ENS name or address)</Text>
               <Tooltip
                 title="Add users that will sign this agreement."
                 transform="translate(-57%, 0)"
@@ -256,14 +246,7 @@ export default function StepTwo({ page }: { page: string }) {
                 onClick={() => addMe("signers")}
                 className={userAlreadySigner ? "disabled" : ""}
                 variant="link"
-                sx={{
-                  justifyContent: "flex-end",
-                  height: "25px",
-                  width: "initial",
-                  "&:hover": {
-                    color: "#AE4FD0",
-                  },
-                }}
+                sx={addMeBtn}
               >
                 Add Me
               </Button>
@@ -272,24 +255,7 @@ export default function StepTwo({ page }: { page: string }) {
               onClick={() => addSigner(signerInputRef.current?.value.toLocaleLowerCase())}
               sx={plus}
             >
-              <svg
-                className="iconPlus"
-                width="24"
-                height="24"
-                viewBox="0 0 24 24"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <g>
-                  <path
-                    d="M12 5V19M5 12H19"
-                    stroke="#CA5CF2"
-                    stroke-width="2"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                  />
-                </g>
-              </svg>
+              <PlusIcon />
             </Box>
           </Flex>
           <Input
@@ -363,24 +329,7 @@ export default function StepTwo({ page }: { page: string }) {
               onClick={() => addObserver(observerInputRef.current?.value.toLocaleLowerCase())}
               sx={plus}
             >
-              <svg
-                className="iconPlus"
-                width="24"
-                height="24"
-                viewBox="0 0 24 24"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <g>
-                  <path
-                    d="M12 5V19M5 12H19"
-                    stroke="#CA5CF2"
-                    stroke-width="2"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                  />
-                </g>
-              </svg>
+              <PlusIcon />
             </Box>
           </Flex>
           <Input

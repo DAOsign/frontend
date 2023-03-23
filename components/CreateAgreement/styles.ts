@@ -286,19 +286,7 @@ const item = {
   mb: "10px",
   alignItems: "start",
   cursor: "pointer",
-  transitionProperty: "all",
-  transitionDuration: "300ms",
-  transition: ".3s all",
   gap: "10px",
-  "@media screen and (min-width: 768px)": {
-    "&:hover": {
-      width: "101%",
-      height: "101%",
-      position: "relative",
-      top: "-2px",
-      left: "-2px",
-    },
-  },
   "&.active": {
     borderColor: "pink",
   },
@@ -568,6 +556,23 @@ export const titleBottom = {
   display: "inline-block",
   color: "#212121",
   mt: "40px",
+} as ThemeUIStyleObject;
+
+export const labelSigners = {
+  variant: "forms.label",
+  ml: "3px",
+  mr: "5px",
+  maxWidth: "unset",
+  minHeight: "25px",
+} as ThemeUIStyleObject;
+
+export const addMeBtn = {
+  justifyContent: "flex-end",
+  height: "25px",
+  width: "initial",
+  "&:hover": {
+    color: "#AE4FD0",
+  },
 } as ThemeUIStyleObject;
 
 export {
