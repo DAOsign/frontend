@@ -110,9 +110,10 @@ export default function AgreementsList({ address }: any) {
                 <Icon src={iconsObj.portfile} />
               </Box>
             </Flex>
-            <Text
-              sx={{ variant: "text.normalTextBold" }}
-            >{`No agreements matching selected filters`}</Text>
+            <Text sx={{ variant: "text.normalTextBold" }}>
+              {`Sorry, no results found.`}
+              <br /> {`Please adjust your search/filter criteria and try again.`}
+            </Text>
           </Container>
         ) : (
           <Container sx={noContentContainer}>
