@@ -44,7 +44,7 @@ interface Props {
 
 export default function ModalEditObservers({ agreement, isOpen, onExit, onSuccess }: Props) {
   const [observers, setObservers] = useState<{ id: number; value: string }[]>(
-    agreement.observers.map((o, i) => ({ id: i, value: o.wallet!.address! }))
+    agreement.observers.map((o, i) => ({ id: i, value: o.ens?.name || o.wallet!.address! }))
   );
 
   const observerInputRef = useRef<HTMLInputElement>();
