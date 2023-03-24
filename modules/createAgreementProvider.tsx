@@ -99,7 +99,11 @@ const CreateAgreementProvider = (props?: Partial<ProviderProps<CreateAgrementCon
             ? value
             : state.agreementLocation,
         agreementHash:
-          key === "agreementLocation" ? "" : key === "agreementHash" ? value : state.agreementHash,
+          key === "agreementLocation" || key === "agreementMethod"
+            ? ""
+            : key === "agreementHash"
+            ? value
+            : state.agreementHash,
       };
       saveDraft({ ...newState, file: undefined, errors: {} });
       return newState;
