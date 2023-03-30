@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Box, Button, Flex, Switch, Text, Input, Label, Container } from "theme-ui";
 import iconsObj from "../../assets/icons";
 import Icon from "../icon";
@@ -29,7 +29,7 @@ import { Portal } from "../Portal/Portal";
 import { motion, Variants } from "framer-motion";
 import loader from "../../img/json/loader.json";
 import Lottie from "lottie-react";
-import { useQuery } from "urql";
+import { useClient } from "urql";
 import { initialStateSwitches, initialState } from "./initialState";
 import { snapshotUrl } from "../../modules/graphql/index";
 import { snapshotProposal } from "../../modules/graphql/queries/snapshot";
@@ -55,13 +55,24 @@ export default function ModalImportSnapshot({
   const [switches, setSwitches] = useState(initialStateSwitches);
   const [selectsOpen, setSelectsOpen] = useState({ statementWork: false });
   const [selectsValue, setSelectsValue] = useState(initialState);
-  const [res, fetch] = useQuery({
-    //@ts-ignore
-    query: snapshotProposal,
-    variables: { id: "0x1a359a4fe248efde94047365215bf3128ab0f466350ffa1472c2801f226bb1bc" },
-    context: { url: snapshotUrl },
-  });
-  console.log(res);
+  const { query } = useClient();
+
+  const queryProposal = async (
+    // remove default arg
+    proposalId: string = "0x1a359a4fe248efde94047365215bf3128ab0f466350ffa1472c2801f226bb1bc"
+  ) =>
+    query(
+      snapshotProposal,
+      { proposalId: "0x1a359a4fe248efde94047365215bf3128ab0f466350ffa1472c2801f226bb1bc" },
+      { url: snapshotUrl, requestPolicy: "network-only" }
+    )
+      .toPromise()
+      .then(r => r?.data?.proposal);
+
+  useEffect(() => {
+    // remove example
+    queryProposal().then(console.log);
+  }, []);
 
   const handleSubmit = async () => {
     if (loading) return;
