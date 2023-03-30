@@ -152,16 +152,6 @@ const title = {
 
 const rightSide = {
   maxWidth: "364px",
-  minHeight: "550px",
-  background: "#FFFFFF",
-  border: "1px solid #EDEDF3",
-  borderRadius: "12px",
-  paddingX: "52px",
-  ml: "20px",
-  mr: 0,
-  maxHeight: "636px",
-  paddingBottom: "32px",
-  paddingTop: "52px",
   "@media screen and (max-width: 1200px)": {
     width: "100%",
     mx: "auto",
@@ -174,6 +164,59 @@ const rightSide = {
     pb: "72px",
     pt: 0,
   },
+} as ThemeUIStyleObject;
+
+export const navContainer = {
+  background: "#FFFFFF",
+  border: "1px solid #EDEDF3",
+  minHeight: "550px",
+  borderRadius: "12px",
+  paddingX: "52px",
+  maxHeight: "636px",
+  ml: "20px",
+  mr: 0,
+  paddingBottom: "32px",
+  paddingTop: "52px",
+} as ThemeUIStyleObject;
+
+export const importOptions = {
+  background: "#FFFFFF",
+  border: "1px solid #EDEDF3",
+  ml: "20px",
+  borderRadius: "12px",
+  p: "52px",
+  mt: "28px",
+  textAlign: "start",
+  "& > button": {
+    border: "2px solid #CA5CF250",
+    backgroundColor: "inherit",
+    variant: "secondary",
+    color: "#CA5CF2",
+    width: "100%",
+  },
+  "& > button:hover": {
+    background: "transparent",
+    border: "2px solid #AE4FD0",
+    variant: "secondary",
+    color: "#CA5CF2",
+    width: "100%",
+  },
+} as ThemeUIStyleObject;
+
+export const importOptionsTitle = {
+  fontFamily: "InterBold",
+  fontWight: 700,
+  fontSize: "20px",
+  lineHeight: "120%",
+  color: "#212121",
+} as ThemeUIStyleObject;
+
+export const textInput = {
+  border: "none",
+  background: "#F7F7FB",
+  mb: "60px",
+  maxWidth: "260px",
+  minWidth: "260px",
 } as ThemeUIStyleObject;
 
 const container = {

@@ -29,7 +29,10 @@ import { Portal } from "../Portal/Portal";
 import { motion, Variants } from "framer-motion";
 import loader from "../../img/json/loader.json";
 import Lottie from "lottie-react";
+import { useQuery } from "urql";
 import { initialStateSwitches, initialState } from "./initialState";
+import { snapshotUrl } from "../../modules/graphql/index";
+import { snapshotProposal } from "../../modules/graphql/queries/snapshot";
 
 const variants: Variants = {
   hidden: { opacity: 1, height: 0, overflow: "hidden" },
@@ -52,6 +55,13 @@ export default function ModalImportSnapshot({
   const [switches, setSwitches] = useState(initialStateSwitches);
   const [selectsOpen, setSelectsOpen] = useState({ statementWork: false });
   const [selectsValue, setSelectsValue] = useState(initialState);
+  const [res, fetch] = useQuery({
+    //@ts-ignore
+    query: snapshotProposal,
+    variables: { id: "0x1a359a4fe248efde94047365215bf3128ab0f466350ffa1472c2801f226bb1bc" },
+    context: { url: snapshotUrl },
+  });
+  console.log(res);
 
   const handleSubmit = async () => {
     if (loading) return;
@@ -146,10 +156,12 @@ export default function ModalImportSnapshot({
                 <SwitchContent name="legalJurisdiction" />
                 {selectContent("chooseCountry")}
                 {selectContent("chooseState")}
-                <SwitchContent name="indemnificationClause" />
+                {/* <SwitchContent name="indemnificationClause" />
                 <SwitchContent name="intellectualPropertyClause" />
-                <SwitchContent name="nonSolicitationClause" />
+                <SwitchContent name="nonSolicitationClause" /> */}
               </motion.div>
+              <Text sx={{ ...labelInput, mt: "20px" }}>Tell us more</Text>
+              <Input sx={input} />
             </>
           ) : (
             <Flex sx={flexLoader}>
