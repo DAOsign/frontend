@@ -63,7 +63,7 @@ export default function ModalImportSnapshot({
   ) =>
     query(
       snapshotProposal,
-      { proposalId: "0x1a359a4fe248efde94047365215bf3128ab0f466350ffa1472c2801f226bb1bc" },
+      { proposalId: proposalId },
       { url: snapshotUrl, requestPolicy: "network-only" }
     )
       .toPromise()
