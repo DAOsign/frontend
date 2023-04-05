@@ -7,20 +7,29 @@ import { useCreateAgreement } from "../../hooks/useCreateAgreement";
 import { useEditAgreement } from "../../hooks/useEditAgreement";
 import iconsObj from "../../assets/icons";
 import {
-  box,
-  containerButtons,
-  fW,
-  leftSideItem,
-  primaryTitleItem,
+  configurationsTitle,
   secondaryTitleStep,
-  stepNumber,
+  containerButtons,
+  primaryTitleItem,
   stepsContainer,
+  leftSideItem,
+  iconNavMenu,
+  stepNumber,
   stepStyle,
+  number,
   delBtn,
+  box,
+  fW,
 } from "./styles";
 import { useMutation } from "urql";
 import { saveAgreementMutation } from "../../modules/graphql/mutations";
-import { LOCATION_CLOUD, LOCATION_PUBLIC_IPFS, METHOD_ENTER, METHOD_UPLOAD } from "../../types";
+import {
+  LOCATION_CLOUD,
+  LOCATION_PUBLIC_IPFS,
+  METHOD_ENTER,
+  METHOD_UPLOAD,
+  METOD_IMPORT_SHAPHOT,
+} from "../../types";
 import {
   clearDraft,
   clearEdit,
@@ -88,6 +97,8 @@ export default function NavPanel({ setLoading, page }: { setLoading: any; page: 
           if (!values.agreementMethod) {
             errors.agreementFile = "Agreement Description is a required selection";
           } else if (values.agreementMethod === METHOD_ENTER && !values.textEditorValue) {
+            errors.agreementFile = "Agreement entry is required";
+          } else if (values.agreementMethod === METOD_IMPORT_SHAPHOT && !values.textEditorValue) {
             errors.agreementFile = "Agreement entry is required";
           } else if (values.agreementMethod === METHOD_UPLOAD && !values.agreementHash) {
             errors.agreementFile = "Agreement file upload is required";
@@ -197,7 +208,7 @@ export default function NavPanel({ setLoading, page }: { setLoading: any; page: 
   const handleSaveDraft = async () => {
     const areFieldsValid = validateFields(values, true);
     if (areFieldsValid) {
-      const uploadFileData = await preuploadFile();
+      const uploadFileData: any = await preuploadFile();
       await handleCreateAgreement(uploadFileData?.filePath, uploadFileData?.agreementHash);
     }
   };
@@ -270,7 +281,6 @@ export default function NavPanel({ setLoading, page }: { setLoading: any; page: 
           return;
         }
       }
-      return uploadedFileData;
     } catch (error) {
       console.error(error);
       notifError(
@@ -283,6 +293,7 @@ export default function NavPanel({ setLoading, page }: { setLoading: any; page: 
 
   const ForwardButton = () => {
     const isFinishButton = step === 3;
+    let generateAggrement = true;
     const props: ButtonProps = {
       variant: "primary",
       sx: { ...fW, mt: "20px" },
@@ -335,7 +346,6 @@ export default function NavPanel({ setLoading, page }: { setLoading: any; page: 
               return;
             }
           }
-
           const areFieldsValid = validateFields({ ...values, ...uploadedFileData });
           console.log(areFieldsValid);
 
@@ -411,11 +421,11 @@ export default function NavPanel({ setLoading, page }: { setLoading: any; page: 
         >
           <Box sx={stepNumber}>
             {(step > 1 && page === "create") || page === "edit" ? (
-              <Box sx={{ width: "24px", height: "24px", m: "0 auto", cursor: "pointer" }}>
+              <Box sx={iconNavMenu}>
                 <Icon src={iconsObj.done} />
               </Box>
             ) : (
-              <Text sx={{ variant: "text.normalTextBold", lineHeight: "0", color: "#fff" }}>1</Text>
+              <Text sx={number}>1</Text>
             )}
           </Box>
 
@@ -433,14 +443,11 @@ export default function NavPanel({ setLoading, page }: { setLoading: any; page: 
         >
           <Box sx={{ ...stepNumber, backgroundColor: step > 1 ? "#CA5CF2" : "#EDEDF3" }}>
             {(step > 2 && page === "create") || page === "edit" ? (
-              <Box
-                onClick={() => changeStep(2)}
-                sx={{ width: "24px", height: "24px", m: "0 auto", cursor: "pointer" }}
-              >
+              <Box onClick={() => changeStep(2)} sx={iconNavMenu}>
                 <Icon src={iconsObj.done} />
               </Box>
             ) : (
-              <Text sx={{ variant: "text.normalTextBold", lineHeight: "0", color: "#fff" }}>2</Text>
+              <Text sx={number}>2</Text>
             )}
           </Box>
           <Container sx={leftSideItem}>
@@ -454,17 +461,24 @@ export default function NavPanel({ setLoading, page }: { setLoading: any; page: 
           sx={{ ...stepStyle, cursor: step > 3 || page === "edit" ? "pointer" : "initial" }}
         >
           <Box sx={{ ...stepNumber, backgroundColor: step > 2 ? "#CA5CF2" : "#EDEDF3" }}>
-            {/* <Text sx={{ variant: "text.normalTextBold", lineHeight: "0", color: "#fff" }}>3</Text> */}
             {(step > 3 && page === "create") || page === "edit" ? (
-              <Box sx={{ width: "24px", height: "24px", m: "0 auto", cursor: "pointer" }}>
+              <Box sx={iconNavMenu}>
                 <Icon src={iconsObj.done} />
               </Box>
             ) : (
-              <Text sx={{ variant: "text.normalTextBold", lineHeight: "0", color: "#fff" }}>3</Text>
+              <Text sx={number}>3</Text>
             )}
           </Box>
-          <Container sx={leftSideItem}>
-            <Text sx={primaryTitleItem}>Configurations</Text>
+          <Container
+            sx={{
+              ...leftSideItem,
+              "@media screen and (max-width: 480px)": {
+                maxWidth: "120px",
+                mt: "4px",
+              },
+            }}
+          >
+            <Text sx={configurationsTitle}>Configurations</Text>
             <Text sx={secondaryTitleStep}>Set agreement options</Text>
           </Container>
         </Flex>

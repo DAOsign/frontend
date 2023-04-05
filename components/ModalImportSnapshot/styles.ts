@@ -13,6 +13,9 @@ export const mainText = {
   pr: "60px",
   textAlign: "center",
   pt: "24px",
+  "@media screen and (max-width: 1200px)": {
+    px: 0,
+  },
 } as ThemeUIStyleObject;
 
 export const textContainer = {
@@ -21,9 +24,14 @@ export const textContainer = {
   textAlign: "center",
 } as ThemeUIStyleObject;
 
-export const btnContainer = {
-  mt: "40px",
-  width: "110px",
+export const subBtn = {
+  variant: "buttons.primary",
+  width: "fit-content",
+  m: 0,
+  "@media screen and (max-width: 719px)": {
+    width: "100%",
+    mt: "20px",
+  },
 } as ThemeUIStyleObject;
 
 export const closeIcon = {
@@ -58,7 +66,6 @@ export const input = {
 export const switchContainer = {
   flexDirection: "row-reverse",
   alignItems: "center",
-  mt: "21px",
   "& > label": {
     maxWidth: "33px",
     opacity: 1,
@@ -74,6 +81,9 @@ export const switchContainer = {
     width: "19px",
     height: "19px",
   },
+  "@media screen and (max-width: 719px)": {
+    height: "30px",
+  },
 } as ThemeUIStyleObject;
 
 export const labelSwitch = {
@@ -87,6 +97,9 @@ export const labelSwitch = {
   ml: "10px",
   height: "26px !important",
   maxWidth: "unset !important",
+  "@media screen and (max-width: 480px)": {
+    maxWidth: "226px",
+  },
 } as ThemeUIStyleObject;
 
 export const switchBtn = {
@@ -117,9 +130,16 @@ export const secondaryTitle = {
 } as ThemeUIStyleObject;
 
 export const icon = {
+  rotate: "270deg",
   width: "20px",
   height: "6px",
-  rotate: "270deg",
+} as ThemeUIStyleObject;
+
+export const iconInfo = {
+  cursor: "pointer",
+  height: "24px",
+  width: "24px",
+  ml: "7px",
 } as ThemeUIStyleObject;
 
 export const flexSelect = {
@@ -127,6 +147,15 @@ export const flexSelect = {
   cursor: "pointer",
   alignItems: "center",
   height: "40px",
+  px: "16px",
+  fontFamily: "InterMedium",
+  fontWeight: 500,
+  fontSize: "16px",
+  lineHeight: " 160%",
+  color: "#212121",
+  "&:last-child": {
+    borderRadius: "0 0  8px 8px",
+  },
 } as ThemeUIStyleObject;
 
 export const titleSelect = {
@@ -154,10 +183,21 @@ export const flexLoader = {
 } as ThemeUIStyleObject;
 
 export const modalBase = {
-  width: ["80%", "756px"],
+  width: "756px",
   pt: "40px",
   pb: "60px",
   px: "78px",
+  "@media screen and (max-width: 1200px)": {
+    width: "672px",
+    px: "36px",
+  },
+  "@media screen and (max-width: 719px)": {
+    width: "90%",
+    px: "16px",
+  },
+  "@media screen and (max-width: 480px)": {
+    width: "343px",
+  },
 } as ThemeUIStyleObject;
 
 export const labelInput = {
@@ -171,11 +211,55 @@ export const containerSelect = {
   borderRadius: "8px",
   minHeight: "40px",
   mt: "19px",
-  px: "16px",
+  mb: "21px",
 } as ThemeUIStyleObject;
 
 export const flexContent = {
   flexDirection: "column",
   display: "flex",
   width: "100%",
+} as ThemeUIStyleObject;
+
+export const stylesBtn = {
+  flexDirection: "row-reverse",
+  mt: "40px",
+  "@media screen and (max-width: 719px)": {
+    flexDirection: "column-reverse",
+  },
+} as ThemeUIStyleObject;
+
+export const loadingStylesBtn = {
+  mt: "40px",
+} as ThemeUIStyleObject;
+
+export const btnCancelLoading = {
+  variant: "secondary",
+  mr: "auto",
+  ml: "auto",
+} as ThemeUIStyleObject;
+
+export const btnCancel = {
+  variant: "buttons.secondary",
+  width: "90px",
+  mr: "24px",
+  ml: "0",
+  "&:hover": {
+    background: "unset",
+    borderColor: " #AE4FD0",
+  },
+  "&:focus": {
+    background: "unset",
+  },
+  "@media screen and (max-width: 719px)": {
+    width: "100%",
+  },
+} as ThemeUIStyleObject;
+
+export const labelInputTellMore = {
+  ...labelInput,
+  maxWidth: "unset",
+  mt: "33px",
+  "@media screen and (max-width: 480px)": {
+    mt: "60px",
+  },
 } as ThemeUIStyleObject;

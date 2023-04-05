@@ -7,8 +7,14 @@ export const verificationCardStyles: ThemeUIStyleObject = {
   border: "2px solid #EDEDF3",
   borderRadius: "12px",
   display: "flex",
+  justifyContent: "space-between",
   cursor: "pointer",
+  alignItems: "flex-start",
   transition: "box-shadow .3s",
+  "@media screen and (max-width: 719px)": {
+    p: "29px 16px 16px 16px",
+    alignItems: "flex-start",
+  },
   ".card_head": {
     pt: "8px",
     pb: "6px",
@@ -22,7 +28,7 @@ export const verificationCardStyles: ThemeUIStyleObject = {
     alignSelf: "center",
     py: "6px",
     pr: "10px",
-    ml: "56px",
+    ml: "38px",
     ".title": {
       fontSize: "16px",
       fontFamily: "InterBold",
@@ -38,7 +44,7 @@ export const verificationCardStyles: ThemeUIStyleObject = {
     },
   },
   ".card_tail": {
-    ml: "auto",
+    ml: "16px",
     alignSelf: "center",
     ".image_container": {
       width: "60px",
@@ -70,4 +76,15 @@ export const title = {
   fontSize: "14px",
   lineHeight: "160%",
   color: "#212121",
+} as ThemeUIStyleObject;
+
+export const iconComingSoon = {
+  width: "248px",
+  height: "60px",
+  "@media screen and (max-width: 719px)": {
+    transform: "translate(-50%, 0)",
+    position: "absolute",
+    bottom: "16px",
+    left: "50%",
+  },
 } as ThemeUIStyleObject;

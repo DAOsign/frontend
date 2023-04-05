@@ -16,6 +16,7 @@ import styles, {
   btnBack,
   icon,
 } from "./styles";
+import { METOD_IMPORT_SHAPHOT } from "../../../types";
 
 const MDEditor = dynamic(() => import("@uiw/react-md-editor"), {
   ssr: false,
@@ -42,9 +43,12 @@ const TextEditor = ({ page }: { page: string }) => {
   const create = useCreateAgreement();
   const edit = useEditAgreement();
   const {
-    values: { textEditorValue },
+    values: { textEditorValue, propousal, agreementMethod },
     changeValue,
   } = page === "create" ? create : edit;
+
+  const valueEditor =
+    agreementMethod === METOD_IMPORT_SHAPHOT ? propousal?.proposalText : textEditorValue;
 
   const [state, setState] = useState<"edit" | "preview">("edit");
 
@@ -52,12 +56,13 @@ const TextEditor = ({ page }: { page: string }) => {
     changeValue("agreementMethod", "");
     changeValue("filePath", "");
     changeValue("textEditorValue", "");
+    changeValue("propousal", undefined);
     changeValue("file", undefined);
   };
 
   return (
     <Box style={{ position: "relative", width: "100%" }} sx={styles}>
-      <Flex sx={{ alignItems: "center", mt: "24px" }}>
+      <Flex sx={{ alignItems: "center" }}>
         <Flex sx={containerEnter}>
           <Text sx={enterAggrement}>Enter agreement </Text>
           <Text sx={labelDesc}>description</Text>
@@ -86,7 +91,7 @@ const TextEditor = ({ page }: { page: string }) => {
         <MDEditor
           onChange={val => changeValue("textEditorValue", val || "")}
           hideToolbar={state === "preview"}
-          value={textEditorValue}
+          value={valueEditor}
           preview={state}
         />
         <Box sx={iconFileResize}>

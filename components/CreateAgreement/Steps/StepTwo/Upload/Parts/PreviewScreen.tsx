@@ -4,7 +4,13 @@ import { Flex, Box, Text } from "theme-ui";
 import { FileState } from "..";
 import iconsObj from "../../../../../../assets/icons";
 import Icon from "../../../../../icon";
-import { previewContainer, removeContainer, flexRemove, containerFlex } from "../../../../styles";
+import {
+  previewContainer,
+  removeContainer,
+  flexRemove,
+  containerFlex,
+  nameFile,
+} from "../../../../styles";
 import { useCreateAgreement } from "../../../../../../hooks/useCreateAgreement";
 import { useEditAgreement } from "../../../../../../hooks/useEditAgreement";
 import { Link } from "theme-ui";
@@ -79,18 +85,7 @@ const PreviewScreen = ({ file, page, onFileDelete = () => {} }: Props) => {
             <Box sx={{ width: "18px" }}>
               <Icon src={getIconByFileType(file?.type)} />
             </Box>
-            <Text
-              sx={{
-                fontFamily: "InterMedium",
-                fontWeight: "500",
-                lineHeight: "160%",
-                overflow: "hidden",
-                whiteSpace: "nowrap",
-                textOverflow: "ellipsis",
-              }}
-            >
-              {file?.name}
-            </Text>
+            <Text sx={nameFile}>{file?.name}</Text>
           </Link>
         </Flex>
         <Box sx={{ minWidth: "unset" }}>

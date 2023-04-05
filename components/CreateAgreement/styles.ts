@@ -21,6 +21,14 @@ const primaryTitleItem = {
   },
 } as ThemeUIStyleObject;
 
+export const configurationsTitle = {
+  ...primaryTitleItem,
+  "@media screen and (max-width: 480px)": {
+    position: "relative",
+    left: "-10px",
+  },
+} as ThemeUIStyleObject;
+
 const imageUploadContainer = {
   textAlign: "center",
   border: "1px dashed #D8D8E2",
@@ -61,6 +69,15 @@ const imageUploadContainer = {
   ".react-pdf__Document": {
     m: "0 auto",
   },
+} as ThemeUIStyleObject;
+
+export const nameFile = {
+  fontFamily: "InterMedium",
+  fontWeight: "500",
+  lineHeight: "160%",
+  overflow: "hidden",
+  whiteSpace: "nowrap",
+  textOverflow: "ellipsis",
 } as ThemeUIStyleObject;
 
 export const previewContainer = {
@@ -127,17 +144,22 @@ const leftSide = {
   "@media screen and (max-width: 1200px)": {
     width: "100%",
     maxWidth: "672px",
-    paddingX: "100px",
+    paddingX: "36px",
     borderBottom: "none",
     minHeight: "300px",
     borderRadius: "12px 12px 0 0",
-    mx: "auto",
+    pb: "40px",
+    m: " 0 auto !important",
   },
-  "@media screen and (max-width: 768px)": {
+  "@media screen and (max-width: 719px)": {
+    width: "90%",
+  },
+  "@media screen and (max-width: 480px)": {
     maxWidth: "343px",
     paddingX: "16px",
     minHeight: "300px",
     paddingBottom: "40px",
+    textAlign: "left",
   },
 } as ThemeUIStyleObject;
 
@@ -148,6 +170,10 @@ const title = {
   "@media screen and (max-width: 768px)": {
     variant: "text.h4",
   },
+  "@media screen and (max-width: 479px)": {
+    variant: "text.h4",
+    mb: "28px",
+  },
 } as ThemeUIStyleObject;
 
 const rightSide = {
@@ -156,13 +182,15 @@ const rightSide = {
     width: "100%",
     mx: "auto",
     maxWidth: "672px",
-    paddingX: "78px",
     borderTop: "none",
     borderRadius: "0 0 12px 12px",
     height: "initial",
     minHeight: "unset",
     pb: "72px",
     pt: 0,
+  },
+  "@media screen and (max-width: 719px)": {
+    width: "90%",
   },
 } as ThemeUIStyleObject;
 
@@ -177,6 +205,21 @@ export const navContainer = {
   mr: 0,
   paddingBottom: "32px",
   paddingTop: "52px",
+  "@media screen and (max-width: 1200px)": {
+    ml: 0,
+    border: "1px solid #EDEDF3",
+    borderRadius: "0 0 12px 12px",
+    borderTop: "none",
+    height: "fit-content",
+    minHeight: "unset",
+    px: "36px",
+    paddingTop: "0",
+    pb: "72px",
+  },
+  "@media screen and (max-width: 480px)": {
+    px: "16px",
+    pb: "40px",
+  },
 } as ThemeUIStyleObject;
 
 export const importOptions = {
@@ -246,12 +289,20 @@ const card = {
   minHeight: "230px",
   height: "248px",
   transition: ".3s all",
-  "@media screen and (max-width: 768px)": {
-    maxWidth: "150px",
+  "@media screen and (max-width: 720px)": {
     px: "12px",
   },
   "&.active": {
     borderColor: "pink",
+  },
+} as ThemeUIStyleObject;
+
+export const conteinerItems = {
+  height: "242px",
+  position: "relative",
+  mt: "8px",
+  "@media screen and (max-width: 719px)": {
+    height: "360px",
   },
 } as ThemeUIStyleObject;
 
@@ -264,10 +315,82 @@ const rightCard = {
   maxWidth: "210px",
   transitionProperty: "all",
   transitionDuration: "300ms",
-  "@media screen and (min-width: 768px)": {
+  "& > div > div > .rightTitle": { ...primaryTitleItem, variant: "text.largeTextBold", mt: "20px" },
+  "@media screen and (min-width: 719px)": {
     "&:hover": {
       transform: "scale(1.02)",
     },
+  },
+  "@media screen and (max-width: 719px)": {
+    width: "100%",
+    height: "122px",
+    maxWidth: "unset",
+    minHeight: "unset",
+    display: "flex",
+    p: "16px",
+    bottom: 0,
+    "&:hover": {
+      transform: "scale(1.02)",
+    },
+    "& > div > div > .rightTitle": {
+      mt: "0 !important",
+      mb: "2px !important",
+      fontSize: "20px !important",
+    },
+  },
+} as ThemeUIStyleObject;
+
+export const label = { variant: "forms.label", margin: "24px auto 3px 2px" } as ThemeUIStyleObject;
+
+export const iconMethod = {
+  width: "50px",
+  height: "50px",
+  margin: "0 auto",
+  "@media screen and (max-width: 719px)": {
+    mr: "12px",
+    ml: "0",
+  },
+} as ThemeUIStyleObject;
+
+export const iconNavMenu = {
+  width: "24px",
+  height: "24px",
+  m: "0 auto",
+  cursor: "pointer",
+} as ThemeUIStyleObject;
+
+export const iconUpload = {
+  width: "50px",
+  height: "50px",
+  m: "0 auto 18px",
+  "@media screen and (max-width: 768px)": {
+    display: "none",
+  },
+} as ThemeUIStyleObject;
+
+export const text = {
+  "@media screen and (max-width: 719px)": {
+    maxWidth: "217px",
+  },
+} as ThemeUIStyleObject;
+
+export const itemsContent = {
+  maxWidth: "150px",
+  m: "0 auto",
+  "@media screen and (max-width: 719px)": {
+    display: "flex",
+    maxWidth: "unset",
+    width: "100%",
+    textAlign: "left",
+  },
+} as ThemeUIStyleObject;
+
+export const secondaryText = {
+  variant: "text.smallTextMedium",
+  maxWidth: "160px",
+  opacity: 1,
+  "@media screen and (max-width: 719px)": {
+    m: 0,
   },
 } as ThemeUIStyleObject;
 
@@ -280,9 +403,33 @@ const centerCard = {
   transitionDuration: "300ms",
   maxWidth: "210px",
   height: "248px",
-  "@media screen and (min-width: 768px)": {
+  "& > div > div > .centerTitle": {
+    ...primaryTitleItem,
+    mt: "24px",
+    mb: "8px",
+  },
+  "@media screen and (min-width: 720px)": {
     "&:hover": {
       transform: "translate(-50%, 0) scale(1.02)",
+    },
+  },
+  "@media screen and (max-width: 719px)": {
+    width: "100%",
+    height: "98px",
+    maxWidth: "unset",
+    minHeight: "unset",
+    left: "0",
+    top: "47%",
+    p: "16px",
+    transform: "translate(0, -50%)",
+    "&:hover": {
+      transform: "translate(0, -50%) scale(1.02)",
+    },
+    "& > div > div > .centerTitle": {
+      ...primaryTitleItem,
+      mt: "0 !important",
+      mb: "2px !important",
+      fontSize: "20px !important",
     },
   },
 } as ThemeUIStyleObject;
@@ -296,9 +443,30 @@ const leftCard = {
   maxWidth: "210px",
   transitionProperty: "all",
   transitionDuration: "300ms",
-  "@media screen and (min-width: 768px)": {
+  "& > div > div >  .leftTitle": {
+    ...primaryTitleItem,
+    mb: "12px",
+    mt: "24px",
+  },
+  "@media screen and (min-width: 720px)": {
     "&:hover": {
       transform: "scale(1.02)",
+    },
+  },
+  "@media screen and (max-width: 719px)": {
+    width: "100%",
+    height: "98px",
+    maxWidth: "unset",
+    minHeight: "unset",
+    p: "16px",
+    "&:hover": {
+      transform: "scale(1.02)",
+    },
+    "& > div > div >  .leftTitle": {
+      ...primaryTitleItem,
+      mb: "2px !important",
+      mt: "0 !important",
+      fontSize: "20px !important",
     },
   },
 } as ThemeUIStyleObject;
@@ -316,6 +484,10 @@ const leftSideItem = {
     ml: 0,
     textAlign: "center",
     mt: "12px",
+  },
+  "@media screen and (max-width: 480px)": {
+    mt: "4px",
+    maxWidth: "88px",
   },
 } as ThemeUIStyleObject;
 
@@ -387,7 +559,7 @@ const secondaryTitleStep = {
   "@media screen and (max-width: 1200px)": {
     maxWidth: "128px",
   },
-  "@media screen and (max-width: 768px)": {
+  "@media screen and (max-width: 719px)": {
     maxWidth: "88px",
   },
 } as ThemeUIStyleObject;
@@ -407,13 +579,20 @@ const stepsContainer = {
     border: "1px solid #EDEDF3",
     borderRadius: "12px",
     justifyContent: "space-around",
+    px: "70px",
   },
-  "@media screen and (max-width: 768px)": {
-    width: "100%",
+  "@media screen and (max-width: 719px)": {
+    padding: "0 16px",
+    width: "90%",
+    top: "185px",
+  },
+  "@media screen and (min-width: 560px) and (max-width: 768px)": {
+    top: "138px",
+  },
+  "@media screen and (max-width: 480px)": {
     maxWidth: "343px",
     height: "179px",
-    padding: "0 5px",
-    top: "154px",
+    top: "200px",
   },
 } as ThemeUIStyleObject;
 
@@ -425,13 +604,14 @@ const stepStyle = {
     flexDirection: "column",
     textAlign: "center",
   },
-  "@media screen and (max-width: 768px)": {
+  "@media screen and (max-width: 719px)": {
     height: "100%",
     pt: "24px",
   },
 } as ThemeUIStyleObject;
 
 const uploadBtn = {
+  variant: "buttons.back",
   fontFamily: "InterRegular",
   fontStyle: "normal",
   fontWeight: 400,
@@ -442,7 +622,7 @@ const uploadBtn = {
   pt: 0,
   lineHeight: "160%",
   alignItems: "center",
-  width: "180px",
+  width: "fit-content",
   marginLeft: "auto",
   marginRight: 0,
   backgroundColor: "transparent",
@@ -452,20 +632,25 @@ const uploadBtn = {
     background: "unset",
     backgroundColor: "transparent",
   },
+  "@media screen and (max-width: 480px)": {
+    width: "fit-content",
+  },
 } as ThemeUIStyleObject;
 
 const box = {
-  width: "100px",
+  maxWidth: "147px",
   height: "32px",
   borderLeft: "2px dashed #EDEDF3",
   borderTop: "none",
   margin: "12px 25px 12px",
-
   "@media screen and (max-width: 1200px)": {
     width: "15%",
     margin: "0 0 40px",
     borderTop: "2px dashed #EDEDF3",
     borderLeft: "none",
+  },
+  "@media screen and (max-width: 480px)": {
+    width: "10%",
   },
 };
 
@@ -541,11 +726,19 @@ const labelUpload = {
   variant: "forms.label",
 } as ThemeUIStyleObject;
 
+export const uploadHeader = {
+  height: "20px",
+  alignItems: "center",
+  position: "relative",
+  mb: "8px",
+  "@media screen and (max-width: 720px)": {
+    width: "100%",
+  },
+} as ThemeUIStyleObject;
+
 const containerUpload = {
   flexDirection: "column",
-  "@media screen and (max-width: 768px)": {
-    flexDirection: "row-reverse",
-  },
+  mt: "24px",
 } as ThemeUIStyleObject;
 
 const removeContainer = {
@@ -571,6 +764,17 @@ const removeContainer = {
       border: "2px solid #AE4FD0",
       "& > div > svg > path": { stroke: "#CA5CF2 !important" },
     },
+  },
+} as ThemeUIStyleObject;
+
+export const backBtn = {
+  display: "block",
+  fontFamily: "InterBold",
+  fontStyle: "normal",
+  fontWeight: 700,
+  fontSize: "14px",
+  "&:hover": {
+    color: "#AE4FD0",
   },
 } as ThemeUIStyleObject;
 
@@ -616,6 +820,12 @@ export const addMeBtn = {
   "&:hover": {
     color: "#AE4FD0",
   },
+} as ThemeUIStyleObject;
+
+export const number = {
+  variant: "text.normalTextBold",
+  lineHeight: "0",
+  color: "#fff",
 } as ThemeUIStyleObject;
 
 export {

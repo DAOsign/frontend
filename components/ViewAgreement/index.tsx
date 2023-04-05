@@ -4,11 +4,7 @@ import { Box, Button, Flex } from "theme-ui";
 import { useRouter } from "next/router";
 import { useMutation, useQuery, useClient } from "urql";
 
-import {
-  agreementById,
-  getAgreementFileProofData as getAgreementFileProofDataRequest,
-  getAgreementSignProofData as getAgreementSignProofDataRequest,
-} from "../../modules/graphql/queries";
+import { agreementById } from "../../modules/graphql/queries";
 import {
   backContainer,
   backIcon,

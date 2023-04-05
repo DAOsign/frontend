@@ -22,12 +22,16 @@ export default function StepOne({ page }: Props) {
 
   return (
     <Container sx={{ maxWidth: "600px", textAlign: "left" }}>
-      <Text sx={{ variant: "forms.label", ml: "3px" }}>Title</Text>
-      <Input
-        value={values.title}
-        onChange={e => changeValue("title", e.target.value)}
-        sx={{ variant: "forms.input", ...inputCreactAgreement, ...titleInputErrorStyles }}
-      />
+      {!values?.agreementMethod ? (
+        <>
+          <Text sx={{ variant: "forms.label", ml: "3px" }}>Title</Text>
+          <Input
+            value={values.title}
+            onChange={e => changeValue("title", e.target.value)}
+            sx={{ variant: "forms.input", ...inputCreactAgreement, ...titleInputErrorStyles }}
+          />{" "}
+        </>
+      ) : null}
       <FieldErrorMessage error={values?.errors?.title} />
       <AgreementMethod page={page} />
     </Container>

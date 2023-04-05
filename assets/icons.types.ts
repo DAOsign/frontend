@@ -34,8 +34,10 @@ export interface IconsMapper extends Record<string, unknown> {
   whitoutUser: Icon;
   heartViolet: Icon;
   publicIcon: Icon;
+  comingSoon: Icon;
   logoHeader: Icon;
   infoCircle: Icon;
+  uploadIcon: Icon;
   checkboxOn: Icon;
   plusCircle: Icon;
   chevronUp: Icon;

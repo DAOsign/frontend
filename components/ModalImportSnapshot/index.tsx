@@ -1,83 +1,121 @@
-import { useEffect, useState } from "react";
+/* eslint-disable react-hooks/exhaustive-deps */
+import { useState } from "react";
 import { Box, Button, Flex, Switch, Text, Input, Label, Container } from "theme-ui";
 import iconsObj from "../../assets/icons";
 import Icon from "../icon";
 import { ModalBase } from "../ModalBase/ModalBase";
+import { Portal } from "../Portal/Portal";
+import {
+  INTELLECTUAL_PROPERTY_CLAUSE,
+  NON_SOLICITATION_CLAUSE,
+  INDEMNIFICATION_CLAUSE,
+  METOD_IMPORT_SHAPHOT,
+  LEGAL_JURISDICTION,
+  ENABLE_TRANSFORM,
+  STATEMENT_WORK,
+  CHOOSE_COUNTRY,
+  CONTRACT_TYPE,
+  CHOOSE_STATE,
+  UNITED_STATES,
+} from "../../types";
+import { variants, variantsSelect } from "../../utils/animation";
+import { motion } from "framer-motion";
+import loader from "../../img/json/loader.json";
+import Lottie from "lottie-react";
+import { useClient } from "urql";
+import { snapshotUrl } from "../../modules/graphql/index";
+import { useCreateAgreement } from "../../hooks/useCreateAgreement";
+import { useEditAgreement } from "../../hooks/useEditAgreement";
+import { snapshotProposal } from "../../modules/graphql/queries/snapshot";
+import { generateAgreement } from "../../modules/graphql/queries";
+import { initialStateSwitches, initialState } from "./initialState";
 
 import {
+  labelInputTellMore,
+  loadingStylesBtn,
+  btnCancelLoading,
   switchContainer,
   containerSelect,
   secondaryTitle,
-  flexContainer,
   importingText,
-  containerIcon,
-  btnContainer,
   labelSwitch,
   flexLoader,
   flexContent,
   titleSelect,
   labelInput,
   flexSelect,
+  stylesBtn,
   switchBtn,
   closeIcon,
   modalBase,
+  btnCancel,
+  iconInfo,
   mainText,
+  subBtn,
   input,
   icon,
 } from "./styles";
-import { Portal } from "../Portal/Portal";
-import { motion, Variants } from "framer-motion";
-import loader from "../../img/json/loader.json";
-import Lottie from "lottie-react";
-import { useClient } from "urql";
-import { initialStateSwitches, initialState } from "./initialState";
-import { snapshotUrl } from "../../modules/graphql/index";
-import { snapshotProposal } from "../../modules/graphql/queries/snapshot";
-
-const variants: Variants = {
-  hidden: { opacity: 1, height: 0, overflow: "hidden" },
-  enter: { opacity: 1, height: "auto", overflow: "hidden" },
-  exit: { opacity: 1, height: 0, overflow: "hidden" },
-};
 
 interface Props {
   isOpen: boolean;
-  // onSubmit: () => Promise<any>;
+  page: string;
   onExit: () => any;
 }
 
-export default function ModalImportSnapshot({
-  isOpen,
-  // onSubmit,
-  onExit,
-}: Props) {
+export default function ModalImportSnapshot({ isOpen, page, onExit }: Props) {
   const [loading, setLoading] = useState(false);
   const [switches, setSwitches] = useState(initialStateSwitches);
+  const [id, setId] = useState("");
+  const create = useCreateAgreement();
+  const edit = useEditAgreement();
+  const { values, changeValue } = page === "create" ? create : edit;
   const [selectsOpen, setSelectsOpen] = useState({ statementWork: false });
   const [selectsValue, setSelectsValue] = useState(initialState);
   const { query } = useClient();
 
-  const queryProposal = async (
-    // remove default arg
-    proposalId: string = "0x1a359a4fe248efde94047365215bf3128ab0f466350ffa1472c2801f226bb1bc"
-  ) =>
-    query(
-      snapshotProposal,
-      { proposalId: proposalId },
-      { url: snapshotUrl, requestPolicy: "network-only" }
-    )
+  const queryProposal = async () =>
+    query(snapshotProposal, { proposalId: id }, { url: snapshotUrl, requestPolicy: "network-only" })
       .toPromise()
       .then(r => r?.data?.proposal);
 
-  useEffect(() => {
-    // remove example
-    queryProposal().then(console.log);
-  }, []);
-
   const handleSubmit = async () => {
-    if (loading) return;
     setLoading(true);
+    await queryProposal()
+      .then(data => {
+        return data?.body;
+      })
+      .then(async data => {
+        if (!!data) {
+          const generetedValue = await generate(data);
+          return generetedValue;
+        }
+      })
+      .then(data => {
+        if (!!data) {
+          onExit();
+          // changeValue("propousal", { proposalText: data?.body });
+          // changeValue("agreementMethod", METOD_IMPORT_SHAPHOT);
+        }
+        setLoading(false);
+      })
+      .catch(e => console.error(e))
+      .finally(() => setLoading(false));
   };
+
+  const generate = async (proposalText: string) =>
+    query(
+      generateAgreement,
+      {
+        proposalText,
+        legalJurisdictionState: undefined,
+        legalJurisdictionCountry: "",
+        contractType: "",
+      },
+      { url: process.env.NEXT_PUBLIC_REST_ENDPOINT, requestPolicy: "network-only" }
+    )
+      .toPromise()
+      .then(data => console.log(data))
+      .catch(() => false);
 
   const onChangeSelect = (name: string, el: string) => {
     setSelectsValue({
@@ -103,13 +141,22 @@ export default function ModalImportSnapshot({
         <motion.div
           animate={selectsOpen[name] ? "enter" : "exit"}
           transition={{ type: "linear" }}
-          variants={variants}
+          variants={name === STATEMENT_WORK ? variants : variantsSelect}
           initial="hidden"
         >
           {options?.map((el: string, i: number) => {
             return (
               el !== value && (
-                <Flex onClick={() => onChangeSelect(name, el)} key={i} sx={flexSelect}>
+                <Flex
+                  onClick={() => onChangeSelect(name, el)}
+                  key={i}
+                  sx={{
+                    ...flexSelect,
+                    "&:hover": {
+                      backgroundColor: "#D8D8E2",
+                    },
+                  }}
+                >
                   <Text sx={{ ...titleSelect, fontSize: "12px" }}>{el}</Text>
                 </Flex>
               )
@@ -122,22 +169,30 @@ export default function ModalImportSnapshot({
 
   const SwitchContent = ({ name }: { name: string }) => {
     return (
-      <Flex sx={switchContainer}>
-        <Label
-          htmlFor={name}
-          sx={{ ...labelSwitch, ml: switches[name].isOpen ? "12px !important" : "8px" }}
-        >
-          {switches[name].title}
-        </Label>
-        <Switch
-          onChange={({ target }) =>
-            setSwitches({ ...switches, [name]: { ...switches[name], isOpen: target.checked } })
-          }
-          checked={switches[name].isOpen}
-          className="switch"
-          sx={switchBtn}
-          id={name}
-        />
+      <Flex sx={{ mb: "19px" }}>
+        <Flex sx={switchContainer}>
+          <Label
+            htmlFor={name}
+            sx={{ ...labelSwitch, ml: switches[name].isOpen ? "12px !important" : "8px" }}
+          >
+            {switches[name].title}
+          </Label>
+          <Switch
+            onChange={({ target }) => {
+              return setSwitches({
+                ...switches,
+                [name]: { ...switches[name], isOpen: target.checked },
+              });
+            }}
+            checked={switches[name].isOpen}
+            className="switch"
+            sx={switchBtn}
+            id={name}
+          />
+        </Flex>
+        <Box sx={iconInfo}>
+          <Icon src={iconsObj.infoCircle} />
+        </Box>
       </Flex>
     );
   };
@@ -153,8 +208,12 @@ export default function ModalImportSnapshot({
           {!loading ? (
             <>
               <Text sx={labelInput}>Proposal link</Text>
-              <Input sx={input} />
-              <SwitchContent name="enableTransform" />
+              <Input
+                value={id}
+                onChange={e => setId(e.target.value)}
+                sx={{ ...input, mb: "45px" }}
+              />
+              <SwitchContent name={ENABLE_TRANSFORM} />
               <motion.div
                 animate={switches.enableTransform.isOpen ? "enter" : "exit"}
                 transition={{ type: "linear" }}
@@ -162,16 +221,23 @@ export default function ModalImportSnapshot({
                 initial="hidden"
               >
                 <Text sx={secondaryTitle}>Transformation Configurations</Text>
-                <SwitchContent name="contractType" />
-                {selectContent("statementWork")}
-                <SwitchContent name="legalJurisdiction" />
-                {selectContent("chooseCountry")}
-                {selectContent("chooseState")}
-                {/* <SwitchContent name="indemnificationClause" />
-                <SwitchContent name="intellectualPropertyClause" />
-                <SwitchContent name="nonSolicitationClause" /> */}
+                <SwitchContent name={CONTRACT_TYPE} />
+                {switches[CONTRACT_TYPE].isOpen && selectContent(STATEMENT_WORK)}
+
+                <SwitchContent name={LEGAL_JURISDICTION} />
+
+                {switches[LEGAL_JURISDICTION].isOpen && selectContent(CHOOSE_COUNTRY)}
+                {selectsValue[CHOOSE_COUNTRY].value === UNITED_STATES &&
+                  switches[LEGAL_JURISDICTION].isOpen &&
+                  selectContent(CHOOSE_STATE)}
+
+                <SwitchContent name={INDEMNIFICATION_CLAUSE} />
+                <Box sx={{ m: "21px 0" }}>
+                  <SwitchContent name={INTELLECTUAL_PROPERTY_CLAUSE} />
+                </Box>
+                <SwitchContent name={NON_SOLICITATION_CLAUSE} />
               </motion.div>
-              <Text sx={{ ...labelInput, mt: "20px" }}>Tell us more</Text>
+              <Text sx={labelInputTellMore}>Additional ChatGPT Instructions</Text>
               <Input sx={input} />
             </>
           ) : (
@@ -180,21 +246,13 @@ export default function ModalImportSnapshot({
               <Text sx={importingText}>Importing...</Text>
             </Flex>
           )}
-          <Flex sx={{ mt: loading ? 0 : "40px", flexDirection: "row-reverse" }}>
+          <Flex sx={loading ? loadingStylesBtn : stylesBtn}>
             {!loading && (
-              <Button
-                onClick={handleSubmit}
-                sx={{ ...btnContainer, m: "0", width: "215px" }}
-                disabled={loading}
-              >
+              <Button onClick={handleSubmit} sx={subBtn} disabled={loading || !id}>
                 Transform and Import
               </Button>
             )}
-            <Button
-              onClick={onExit}
-              variant="secondary"
-              sx={{ mr: loading ? "auto" : "24px", ml: loading ? "auto" : "0" }}
-            >
+            <Button onClick={onExit} sx={loading ? btnCancelLoading : btnCancel}>
               Cancel
             </Button>
           </Flex>

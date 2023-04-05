@@ -1,10 +1,11 @@
 import React from "react";
-import { Box, Checkbox, Text } from "theme-ui";
-import { verificationCardStyles } from "./styles";
+import { Box, Text, Flex } from "theme-ui";
+import { verificationCardStyles, iconComingSoon } from "./styles";
 import Image from "next/image";
 import Icon from "../../../icon";
-import "react-tooltip/dist/react-tooltip.css";
 import CheckboxComponent from "../../../Checkbox";
+import iconsObj from "../../../../assets/icons";
+import "react-tooltip/dist/react-tooltip.css";
 
 export interface Props {
   title: string;
@@ -23,29 +24,46 @@ export default function VerificationCard({
   onClick,
   disabled,
 }: Props) {
+  const isAnonymus = title === "Anonymus";
+  const isNotarizedIdentity = title === "Notarized Identity";
+
   return (
     <Box
       sx={{
         ...verificationCardStyles,
+
         cursor: disabled ? "no-drop" : "pointer",
+        backgroundColor: isAnonymus ? "#fff" : "#F7F7FB",
         "&:hover": { boxShadow: disabled ? "unset" : "0 0 11px rgba(33,33,33,.2)" },
+        "@media screen and (max-width: 719px)": {
+          height: isNotarizedIdentity ? "167px" : "183px",
+        },
       }}
       onClick={onClick}
     >
-      <Box style={{ position: "relative" }} className="card_head">
-        <CheckboxComponent disabled={disabled} checked={checked} />
-      </Box>
-      <Box className="card_body">
-        <Text className="title">{title}</Text>
-        <Text as="p" className="description">
-          {description}
-        </Text>
-      </Box>
-      <Box className="card_tail">
-        <Box className="image_container">
-          <Image src={img} alt={title} />
+      <Flex>
+        <Box style={{ position: "relative" }} className="card_head">
+          <CheckboxComponent disabled={disabled} checked={checked} />
         </Box>
-      </Box>
+        <Box className="card_body">
+          <Text className="title">{title}</Text>
+          <Text as="p" className="description">
+            {description}
+          </Text>
+        </Box>
+      </Flex>
+      <Flex>
+        {!isAnonymus && (
+          <Box sx={iconComingSoon}>
+            <Icon src={iconsObj.comingSoon} />
+          </Box>
+        )}
+        <Box className="card_tail">
+          <Box className="image_container">
+            <Image src={img} alt={title} />
+          </Box>
+        </Box>
+      </Flex>
     </Box>
   );
 }

@@ -9,6 +9,7 @@ import {
   addMeBtn,
   plus,
 } from "../../styles";
+import { verificationCardStyles, iconComingSoon } from "../StepThree/styles";
 import { switchContainer, switchBtn, labelSwitch } from "../../../ModalImportSnapshot/styles";
 import { validateAddress, validateEnsDomains } from "../StepThree/validationUtils";
 import { useCreateAgreement } from "../../../../hooks/useCreateAgreement";
@@ -23,20 +24,7 @@ import Tooltip from "../../../Tooltip";
 import iconsObj from "../../../../assets/icons";
 import Icon from "../../../icon";
 import { PlusIcon } from "./svg";
-import {
-  containerSelect,
-  flexSelect,
-  titleSelect,
-  icon,
-} from "../../../ModalImportSnapshot/styles";
-import { motion, Variants } from "framer-motion";
 import styles from "./styles";
-
-const variants: Variants = {
-  hidden: { opacity: 1, height: 0, overflow: "hidden" },
-  enter: { opacity: 1, height: "auto", overflow: "hidden" },
-  exit: { opacity: 1, height: 0, overflow: "hidden" },
-};
 
 interface VerificationInfo {
   title: string;
@@ -73,7 +61,6 @@ const verifications: VerificationInfo[] = [
 ];
 
 export default function StepTwo({ page }: { page: string }) {
-  const [selectsOpen, setSelectsOpen] = useState(false);
   const create = useCreateAgreement();
   const edit = useEditAgreement();
   const { values, changeValue } = page === "create" ? create : edit;
@@ -386,8 +373,8 @@ export default function StepTwo({ page }: { page: string }) {
               <VerificationCard
                 key={verification.title}
                 {...verification}
-                disabled={verification.title === "Anonymus"}
-                checked={checkedVerifications[index] || verification.title === "Anonymus"}
+                disabled
+                checked={verification.title === "Anonymus"}
                 onClick={() => {
                   setCheckedVerifications(prevState => [
                     ...prevState.slice(0, index),
@@ -400,53 +387,28 @@ export default function StepTwo({ page }: { page: string }) {
           </Box>
         </Box>
         <Text sx={titleBottom}>Agreement Configuration</Text>
-        <Flex sx={switchContainer}>
-          <Label htmlFor="enableInvoicing" sx={labelSwitch}>
-            Enable Invoicing
-          </Label>
-          <Switch className="switch" sx={switchBtn} id="enableInvoicing" />
-        </Flex>
-        <Flex sx={{ mt: "16px" }}>
-          <Container>
-            <Text sx={{ variant: "forms.label", ml: "3px" }}>Contract limit amount</Text>
-            <Input
-              sx={{
-                variant: "forms.input",
-                ...inputCreactAgreement,
-                width: "97%",
-                height: "40px",
-                opacity: 1,
-                mr: "16px",
-              }}
-            />
-          </Container>
-          <Flex sx={{ flexDirection: "column", width: "112px" }}>
-            <Text sx={{ variant: "forms.label", ml: "3px", width: "112px" }}>
-              Contract currency
-            </Text>
-            <Container sx={{ ...containerSelect, mt: 0, width: "112px" }}>
-              <Flex onClick={() => setSelectsOpen(!selectsOpen)} sx={flexSelect}>
-                <Text sx={titleSelect}></Text>
-                <Box sx={icon}>
-                  <Icon src={iconsObj.arrowLeftPink} />
-                </Box>
-              </Flex>
-              <motion.div
-                animate={selectsOpen ? "enter" : "exit"}
-                transition={{ type: "linear" }}
-                variants={variants}
-                initial="hidden"
-              >
-                {["", ""]?.map((el: string, i: number) => {
-                  return (
-                    <Flex key={i} sx={flexSelect}>
-                      <Text sx={{ ...titleSelect, fontSize: "12px" }}>{el}</Text>
-                    </Flex>
-                  );
-                })}
-              </motion.div>
-            </Container>
+        <Flex
+          sx={{
+            ...verificationCardStyles,
+            backgroundColor: "#F7F7FB",
+            cursor: "no-drop",
+            height: "84px",
+            mt: "12px",
+            "@media screen and (max-width: 719px)": {
+              height: "150px",
+            },
+            pr: 0,
+          }}
+        >
+          <Flex sx={switchContainer}>
+            <Label htmlFor="enableInvoicing" sx={labelSwitch}>
+              Enable Invoicing
+            </Label>
+            <Switch disabled className="switch" sx={switchBtn} id="enableInvoicing" />
           </Flex>
+          <Box sx={{ ...iconComingSoon, mr: "92px" }}>
+            <Icon src={iconsObj.comingSoon} />
+          </Box>
         </Flex>
       </>
     </Container>

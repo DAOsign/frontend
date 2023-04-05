@@ -37,7 +37,9 @@ import checkboxOff from "../img/svg/checkboxOff.svg";
 import checkCircle from "../img/svg/checkCircle.svg";
 import greyPercent from "../img/svg/greyPercent.svg";
 import infoCircle from "../img/svg/infoCircle.svg";
+import comingSoon from "../img/svg/comingSoon.svg";
 import plusCircle from "../img/svg/plusCircle.svg";
+import uploadIcon from "../img/svg/uploadIcon.svg";
 import logoHeader from "../img/svg/logoHeader.svg";
 import checkboxOn from "../img/svg/checkboxOn.svg";
 import closedEye from "../img/svg/closedEye.svg";
@@ -106,12 +108,18 @@ import warning from "../img/svg/warning.svg";
 import { IconsMapper } from "./icons.types";
 
 const iconsObj: IconsMapper = {
+  verificationPseudonymous,
+  verificationAnonymous,
+  verificationNotarized,
+  verificationDigital,
   uploadCloudPrimary,
   codeSnippetPrimary,
   snapshotImportIcon,
+  defaultUserPicture,
   togglePrimaryRight,
   enterAggrementIcon,
   togglePrimaryLeft,
+  verificationReal,
   fileSecondarysvg,
   arrowNarrowLeft,
   proofSecondary,
@@ -128,6 +136,7 @@ const iconsObj: IconsMapper = {
   bookmarkVote,
   chevronRight,
   heartViolet,
+  comingSoon,
   greyPercent,
   privateIcon,
   checkboxOff,
@@ -138,12 +147,14 @@ const iconsObj: IconsMapper = {
   shareFourth,
   fieldResize,
   chevronLeft,
+  uploadIcon,
   iconSetting,
   infoCircle,
   logoHeader,
   checkboxOn,
   plusCircle,
   publicIcon,
+  closedEye,
   chevronUp,
   pinkArrow,
   published,
@@ -155,6 +166,7 @@ const iconsObj: IconsMapper = {
   settings,
   telegram,
   editFile,
+  fileSvg,
   radioOff,
   facebook,
   success,
@@ -166,6 +178,7 @@ const iconsObj: IconsMapper = {
   iconExit,
   radioOn,
   iconSix,
+  warning,
   pending,
   logOut,
   cloud,
@@ -173,12 +186,12 @@ const iconsObj: IconsMapper = {
   github,
   alert,
   wallet,
-  ipfs,
   phone,
   search,
   xClose,
   frame,
   email,
+  ipfs,
   world,
   award,
   aLogo,
@@ -200,16 +213,7 @@ const iconsObj: IconsMapper = {
   mail,
   user,
   drag,
-  fileSvg,
-  verificationAnonymous,
-  verificationPseudonymous,
-  verificationDigital,
-  verificationReal,
-  verificationNotarized,
   m,
-  defaultUserPicture,
-  closedEye,
-  warning,
 };
 
 export default iconsObj;

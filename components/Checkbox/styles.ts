@@ -1,7 +1,7 @@
 import { ThemeUIStyleObject } from "theme-ui";
 const checkboxContainer = {
-  width: "15px",
-  height: "15px",
+  width: "18px",
+  height: "18px",
   position: "absolute",
   zIndex: 1,
   left: "2px",

@@ -4,17 +4,32 @@ import React, { useCallback, useEffect, useMemo, useState } from "react";
 import StepOne from "../CreateAgreement/Steps/StepOne";
 import StepTwo from "../CreateAgreement/Steps/StepTwo";
 import StepThree from "../CreateAgreement/Steps/StepThree";
-import { Container, Flex, Text } from "theme-ui";
+import { Container, Flex, Text, Textarea, Button } from "theme-ui";
 import NavPanel from "../CreateAgreement/NavPanel";
 import { useEditAgreement } from "../../hooks/useEditAgreement";
-import { rightSide, leftSide, containerSides, title } from "../CreateAgreement/styles";
+import {
+  importOptionsTitle,
+  containerSides,
+  importOptions,
+  navContainer,
+  textInput,
+  rightSide,
+  leftSide,
+  title,
+} from "../CreateAgreement/styles";
 import { motion, Variants } from "framer-motion";
 import { useRouter } from "next/router";
 import { agreementById } from "../../modules/graphql/queries";
 
 import { useQuery } from "urql";
 import { privacyValueByName } from "./utils";
-import { LOCATION_CLOUD, LOCATION_PUBLIC_IPFS, METHOD_ENTER, METHOD_UPLOAD } from "../../types";
+import {
+  METOD_IMPORT_SHAPHOT,
+  LOCATION_PUBLIC_IPFS,
+  LOCATION_CLOUD,
+  METHOD_UPLOAD,
+  METHOD_ENTER,
+} from "../../types";
 
 const variants: Variants = {
   hidden: { opacity: 0 },
@@ -116,22 +131,54 @@ export default function EditAgreement({ page }: { page: string }) {
 
   return (
     <Flex sx={containerSides}>
-      <Container sx={leftSide} className={transitioned ? "transition" : ""}>
-        <Text sx={title}>Edit Agreement</Text>
-        {loaded && values && steps[step]}
+      <Container
+        sx={{
+          ...leftSide,
+          "@media screen and (max-width: 720px)": {
+            pb: !values.file ? "40px" : "130px !important",
+          },
+        }}
+        className={transitioned ? "transition" : ""}
+      >
+        <Text sx={title}>Create New Agreement</Text>
+        {steps[step]}
       </Container>
       <Container
         sx={{
           ...rightSide,
-          "@media screen and (max-width: 768px)": {
+          "@media screen and (max-width: 480px)": {
             maxWidth: "343px",
-            paddingX: "16px",
             pb: "40px",
-            pt: !values.file ? "0" : "95px",
           },
         }}
       >
-        <NavPanel page={page} setLoading={setLoading} />
+        <Container sx={navContainer}>
+          <NavPanel page={page} setLoading={setLoading} />
+        </Container>
+        {
+          //@ts-ignore
+          step === 1 && values.agreementMethod === METOD_IMPORT_SHAPHOT && (
+            <Container sx={importOptions}>
+              <Text sx={importOptionsTitle}>Proposal Import Options</Text>
+              <Text
+                sx={{
+                  variant: "forms.label",
+                  textAlign: "inherit",
+                  maxWidth: "unset",
+                  minHeight: "25px",
+                  ml: "3px",
+                  mr: "5px",
+                  mt: "20px",
+                }}
+              >
+                Provide additional instructions{" "}
+              </Text>
+              <Textarea sx={textInput} rows={8} />
+              <Button sx={{ mb: "20px" }}>Update Proposal</Button>
+              <Button>Reimport From Snapshot</Button>
+            </Container>
+          )
+        }
       </Container>
     </Flex>
   );

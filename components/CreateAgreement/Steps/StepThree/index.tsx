@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useRef } from "react";
-import { Container, Text } from "theme-ui";
+import { Container, Text, Flex, Label, Switch } from "theme-ui";
 import { textLoading } from "../../styles";
 import {
   PRIVACY_PUBLIC_PROOF_ONLY,
@@ -10,6 +10,7 @@ import ChooseMethod from "../StepOne/ChooseMethod";
 import Lottie from "lottie-react";
 import PublicMethod from "../StepOne/ChoosePublicMethod";
 import { useCreateAgreement } from "../../../../hooks/useCreateAgreement";
+import { labelSwitch, switchBtn, switchContainer } from "../../../ModalImportSnapshot/styles";
 import { useEditAgreement } from "../../../../hooks/useEditAgreement";
 import loader from "../../../../img/json/loader.json";
 import FieldErrorMessage from "../../../Form/FieldErrorMessage";
@@ -59,7 +60,6 @@ export default function StepThree({ page, animateContainer, loading }: Props) {
     <Container>
       {!loading ? (
         <>
-          <AgreementLocationRadioButtons page={page} />
           <Text sx={{ variant: "forms.label", margin: "24px auto 3px 2px", textAlign: "left" }}>
             Agreement privacy
           </Text>
@@ -74,6 +74,13 @@ export default function StepThree({ page, animateContainer, loading }: Props) {
             <PublicMethod page={page} animateContainer={animateContainer} setPublic={setIsPublic} />
           )}
           <FieldErrorMessage error={values?.errors.agreementPrivacy} />
+          <AgreementLocationRadioButtons page={page} />
+          <Flex sx={{ ...switchContainer, width: "fit-content" }}>
+            <Label htmlFor="storeBlockchain" sx={labelSwitch}>
+              Store Proofs on Blockchain
+            </Label>
+            <Switch disabled className="switch" sx={switchBtn} id="storeBlockchain" />
+          </Flex>
         </>
       ) : (
         <>

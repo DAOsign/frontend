@@ -54,6 +54,13 @@ a {
     margin-top: 0;
   }
 }
+@media screen and (max-width: 480px) {
+  canvas {
+    margin: 10px auto;
+    width: 100% !important;
+  }
+}
+
 .bg {
   position: relative;
   min-height: 900px;
@@ -150,6 +157,7 @@ label > .switch {
   /* opacity: 0; */
   /* position: absolute; */
 }
+
 body {
   min-height: 100vh;
   background-color: #f7f7fb;

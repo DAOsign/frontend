@@ -207,3 +207,21 @@ export const getAgreementSignProofData = graphql(`
     }
   }
 `);
+
+export const generateAgreement = graphql(`
+  query GenerateAgreement(
+    $proposalText: String!
+    $contractType: String!
+    $legalJurisdictionCountry: String!
+    $legalJurisdictionState: String
+  ) {
+    generateAgreement(
+      proposalText: $proposalText
+      contractType: $contractType
+      legalJurisdictionCountry: $legalJurisdictionCountry
+      legalJurisdictionState: $legalJurisdictionState
+    ) {
+      text
+    }
+  }
+`);

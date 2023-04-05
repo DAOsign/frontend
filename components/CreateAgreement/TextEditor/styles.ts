@@ -1,6 +1,10 @@
 import { ThemeUIStyleObject } from "theme-ui";
 
 const tabStyles: ThemeUIStyleObject = {
+  mb: "36px",
+  "@media screen and (max-width: 480px)": {
+    mb: "40px",
+  },
   ".tabsContainer": {
     display: "flex",
     borderTopRightRadius: "8px",
@@ -88,6 +92,12 @@ export const btnBack = {
     background: "unset",
     color: "#AE4FD0",
   },
+  "@media screen and (max-width: 580px)": {
+    position: "absolute",
+    right: 0,
+    paddingTop: 0,
+    top: "-3px",
+  },
 } as ThemeUIStyleObject;
 
 export const icon = {
@@ -123,6 +133,10 @@ export const enterAggrement = {
   variant: "forms.label",
   display: "inline-block",
   mr: "5px",
+  mb: "8px",
+  "@media screen and (max-width: 480px)": {
+    mb: "5px",
+  },
 } as ThemeUIStyleObject;
 
 export const containerEnter = { minWidth: "140px" } as ThemeUIStyleObject;
