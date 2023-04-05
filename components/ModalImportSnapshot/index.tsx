@@ -124,7 +124,7 @@ export default function ModalImportSnapshot({ isOpen, page, onExit }: Props) {
         addIntellectualPropertyClause: switches.intellectualPropertyClause.isOpen,
         addNonSolicitationClause: switches.nonSolicitationClause.isOpen,
       },
-      { url: process.env.NEXT_PUBLIC_REST_ENDPOINT, requestPolicy: "network-only" }
+      { url: process.env.NEXT_PUBLIC_GRAPHQL_ENDPOINT, requestPolicy: "network-only" }
     )
       .toPromise()
       .then(data => data?.data?.generateAgreement)
