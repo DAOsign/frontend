@@ -76,7 +76,7 @@ export default function AgreementLocationRadioButtons({ page }: { page: string }
             "@media screen and (max-width: 1200px)": {
               mb: "24px",
             },
-            "@media screen and (max-width: 768px)": {
+            "@media screen and (max-width: 719x)": {
               mb: !values.file ? "36px" : "24px",
             },
             display: "flex",

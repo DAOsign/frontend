@@ -14,6 +14,11 @@ const containerSides = {
   },
 } as ThemeUIStyleObject;
 
+export const itemsContentMethod = {
+  maxWidth: "150px",
+  m: "0 auto",
+} as ThemeUIStyleObject;
+
 const primaryTitleItem = {
   variant: "text.largeTextBold",
   "@media screen and (max-width: 768px)": {
@@ -244,6 +249,9 @@ export const importOptions = {
     color: "#CA5CF2",
     width: "100%",
   },
+  "@media screen and (max-width: 1200px)": {
+    m: "28px auto 0",
+  },
 } as ThemeUIStyleObject;
 
 export const importOptionsTitle = {
@@ -260,6 +268,10 @@ export const textInput = {
   mb: "60px",
   maxWidth: "260px",
   minWidth: "260px",
+  position: "relative",
+  "@media screen and (max-width: 1200px)": {
+    maxWidth: "100%",
+  },
 } as ThemeUIStyleObject;
 
 const container = {
@@ -471,9 +483,28 @@ const leftCard = {
   },
 } as ThemeUIStyleObject;
 
+export const secondaryTextMethod = {
+  variant: "text.overscript",
+  mt: "20px",
+  maxWidth: "160px",
+  "@media screen and (max-width: 719px)": {
+    mt: "8px",
+    fontSize: "12px",
+    fontFamily: "InterRegular",
+  },
+} as ThemeUIStyleObject;
+
 const flex = {
   display: "flex",
   alignItems: "center",
+} as ThemeUIStyleObject;
+
+export const titleMethodCard = {
+  variant: "text.largeTextBold",
+  mt: "20px",
+  "@media screen and (max-width: 719px)": {
+    mt: "12px",
+  },
 } as ThemeUIStyleObject;
 
 const leftSideItem = {
