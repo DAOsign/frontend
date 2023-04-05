@@ -5,6 +5,13 @@ export const formatAddress = (address: string) => {
   return address?.length > 14 ? `${address.slice(0, 6)}...${address.slice(-4)}` : address;
 };
 
+export function extractProposalId(url: string) {
+  const regex = /0x[a-fA-F0-9]{64}/;
+  const match = url.match(regex);
+
+  return match ? match[0] : null;
+}
+
 export function uniqueId() {
   let first: number = (Math.random() * 46656) | 0;
   let second: number = (Math.random() * 46656) | 0;

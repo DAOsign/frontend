@@ -28,9 +28,10 @@ import { snapshotUrl } from "../../modules/graphql/index";
 import { useCreateAgreement } from "../../hooks/useCreateAgreement";
 import { useEditAgreement } from "../../hooks/useEditAgreement";
 import { snapshotProposal } from "../../modules/graphql/queries/snapshot";
+import FieldErrorMessage from "../Form/FieldErrorMessage";
 import { generateAgreement } from "../../modules/graphql/queries";
 import { initialStateSwitches, initialState } from "./initialState";
-
+import { extractProposalId } from "../../utils/formats";
 import {
   labelInputTellMore,
   loadingStylesBtn,
@@ -66,6 +67,7 @@ interface Props {
 export default function ModalImportSnapshot({ isOpen, page, onExit }: Props) {
   const [loading, setLoading] = useState(false);
   const [switches, setSwitches] = useState(initialStateSwitches);
+  const [error, setError] = useState({ value: false, text: "" });
   const [id, setId] = useState("");
   const create = useCreateAgreement();
   const edit = useEditAgreement();
@@ -74,15 +76,36 @@ export default function ModalImportSnapshot({ isOpen, page, onExit }: Props) {
   const [selectsValue, setSelectsValue] = useState(initialState);
   const { query } = useClient();
 
-  const queryProposal = async () =>
-    query(snapshotProposal, { proposalId: id }, { url: snapshotUrl, requestPolicy: "network-only" })
-      .toPromise()
-      .then(r => r?.data?.proposal);
+  const validationPropousalLink = () => {
+    console.log(id.trim());
+    if (!!id.trim()) {
+      if (!extractProposalId(id)) {
+        setError({ value: true, text: "Not valid Proposal link" });
+      }
+    } else {
+      setError({ value: true, text: "Proposal link field is require" });
+    }
+  };
+
+  const queryProposal = async () => {
+    const getIdRes = extractProposalId(id);
+    if (!!getIdRes) {
+      setLoading(true);
+      return query(
+        snapshotProposal,
+        { proposalId: getIdRes },
+        { url: snapshotUrl, requestPolicy: "network-only" }
+      )
+        .toPromise()
+        .then(r => r?.data?.proposal);
+    }
+  };
 
   const handleSubmit = async () => {
-    setLoading(true);
+    validationPropousalLink();
     await queryProposal()
       .then(data => {
+        //@ts-ignore
         return data?.body;
       })
       .then(async data => {
@@ -211,6 +234,7 @@ export default function ModalImportSnapshot({ isOpen, page, onExit }: Props) {
       </Flex>
     );
   };
+  console.log(error);
 
   return (
     <Portal isOpen={isOpen} onClose={onExit}>
@@ -223,11 +247,20 @@ export default function ModalImportSnapshot({ isOpen, page, onExit }: Props) {
           {!loading ? (
             <>
               <Text sx={labelInput}>Proposal link</Text>
+
               <Input
                 value={id}
-                onChange={e => setId(e.target.value)}
-                sx={{ ...input, mb: "45px" }}
+                onChange={e => {
+                  setError({ value: false, text: "" });
+                  setId(e.target.value);
+                }}
+                sx={{ ...input, mb: error.value ? "3px" : "45px" }}
               />
+              {error.value && (
+                <Box sx={{ mb: "45px" }}>
+                  <FieldErrorMessage error={error.text} />
+                </Box>
+              )}
               <SwitchContent name={ENABLE_TRANSFORM} />
               <motion.div
                 animate={switches.enableTransform.isOpen ? "enter" : "exit"}
@@ -263,7 +296,7 @@ export default function ModalImportSnapshot({ isOpen, page, onExit }: Props) {
           )}
           <Flex sx={loading ? loadingStylesBtn : stylesBtn}>
             {!loading && (
-              <Button onClick={handleSubmit} sx={subBtn} disabled={loading || !id}>
+              <Button onClick={handleSubmit} sx={subBtn} disabled={loading}>
                 Transform and Import
               </Button>
             )}
