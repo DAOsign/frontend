@@ -97,6 +97,8 @@ export default function ModalImportSnapshot({ isOpen, page, onExit }: Props) {
           onExit();
           //@ts-ignore
           changeValue("propousal", { proposalText: data.text });
+          //@ts-ignore
+          changeValue("textEditorValue", data.text);
           changeValue("agreementMethod", METOD_IMPORT_SHAPHOT);
         }
         setLoading(false);

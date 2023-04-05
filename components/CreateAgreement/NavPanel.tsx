@@ -60,7 +60,7 @@ export default function NavPanel({ setLoading, page }: { setLoading: any; page: 
   const { values, changeValue } = page === "create" ? create : edit;
   const { push, query } = useRouter();
   const { account } = useWeb3();
-
+  console.log(values);
   const step = query?.step ? Number(query.step) : 1;
 
   const [isLoadingNextStep, setIsLoadingNextStep] = useState<boolean>(false);
