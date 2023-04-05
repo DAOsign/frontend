@@ -1,5 +1,6 @@
+/* eslint-disable no-console */
 /* eslint-disable react-hooks/exhaustive-deps */
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Box, Button, Flex, Switch, Text, Input, Label, Container } from "theme-ui";
 import iconsObj from "../../assets/icons";
 import Icon from "../icon";
@@ -91,10 +92,12 @@ export default function ModalImportSnapshot({ isOpen, page, onExit }: Props) {
         }
       })
       .then(data => {
+        console.log(data);
         if (!!data) {
           onExit();
-          // changeValue("propousal", { proposalText: data?.body });
-          // changeValue("agreementMethod", METOD_IMPORT_SHAPHOT);
+          //@ts-ignore
+          changeValue("propousal", { proposalText: data.text });
+          changeValue("agreementMethod", METOD_IMPORT_SHAPHOT);
         }
         setLoading(false);
       })
@@ -108,13 +111,23 @@ export default function ModalImportSnapshot({ isOpen, page, onExit }: Props) {
       {
         proposalText,
         legalJurisdictionState: undefined,
-        legalJurisdictionCountry: "",
-        contractType: "",
+        legalJurisdictionCountry:
+          switches.enableTransform.isOpen && switches.legalJurisdiction.isOpen
+            ? selectsValue.chooseCountry.value
+            : "",
+        contractType:
+          switches.enableTransform.isOpen && switches.legalJurisdiction.isOpen
+            ? selectsValue.statementWork.value
+            : "",
+        additionalDetails: undefined,
+        addIndemnificationClause: switches.indemnificationClause.isOpen,
+        addIntellectualPropertyClause: switches.intellectualPropertyClause.isOpen,
+        addNonSolicitationClause: switches.nonSolicitationClause.isOpen,
       },
       { url: process.env.NEXT_PUBLIC_REST_ENDPOINT, requestPolicy: "network-only" }
     )
       .toPromise()
-      .then(data => console.log(data))
+      .then(data => data?.data?.generateAgreement)
       .catch(() => false);
 
   const onChangeSelect = (name: string, el: string) => {

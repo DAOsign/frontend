@@ -211,15 +211,23 @@ export const getAgreementSignProofData = graphql(`
 export const generateAgreement = graphql(`
   query GenerateAgreement(
     $proposalText: String!
-    $contractType: String!
-    $legalJurisdictionCountry: String!
+    $contractType: String
+    $legalJurisdictionCountry: String
     $legalJurisdictionState: String
+    $additionalDetails: String
+    $addIndemnificationClause: Boolean
+    $addIntellectualPropertyClause: Boolean
+    $addNonSolicitationClause: Boolean
   ) {
     generateAgreement(
       proposalText: $proposalText
       contractType: $contractType
       legalJurisdictionCountry: $legalJurisdictionCountry
       legalJurisdictionState: $legalJurisdictionState
+      additionalDetails: $additionalDetails
+      addIndemnificationClause: $addIndemnificationClause
+      addIntellectualPropertyClause: $addIntellectualPropertyClause
+      addNonSolicitationClause: $addNonSolicitationClause
     ) {
       text
     }

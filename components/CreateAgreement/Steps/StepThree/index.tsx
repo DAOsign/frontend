@@ -60,7 +60,7 @@ export default function StepThree({ page, animateContainer, loading }: Props) {
     <Container>
       {!loading ? (
         <>
-          <Text sx={{ variant: "forms.label", margin: "24px auto 3px 2px", textAlign: "left" }}>
+          <Text sx={{ variant: "forms.label", margin: "0 auto 3px 2px", textAlign: "left" }}>
             Agreement privacy
           </Text>
           {!isPublic ? (
@@ -75,7 +75,7 @@ export default function StepThree({ page, animateContainer, loading }: Props) {
           )}
           <FieldErrorMessage error={values?.errors.agreementPrivacy} />
           <AgreementLocationRadioButtons page={page} />
-          <Flex sx={{ ...switchContainer, width: "fit-content" }}>
+          <Flex sx={{ ...switchContainer, width: "fit-content", mt: "45px" }}>
             <Label htmlFor="storeBlockchain" sx={labelSwitch}>
               Store Proofs on Blockchain
             </Label>

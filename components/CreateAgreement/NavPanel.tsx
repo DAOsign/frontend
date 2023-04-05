@@ -485,15 +485,17 @@ export default function NavPanel({ setLoading, page }: { setLoading: any; page: 
       </Container>
       <Container sx={containerButtons}>
         <BackwardButton />
-        <Button
-          variant="secondary"
-          sx={{ ...fW, mt: "20px" }}
-          type="button"
-          onClick={handleSaveDraft}
-          disabled={isLoadingNextStep || savingAgreement}
-        >
-          Save Draft
-        </Button>
+        {step < 3 && (
+          <Button
+            variant="secondary"
+            sx={{ ...fW, mt: "20px" }}
+            type="button"
+            onClick={handleSaveDraft}
+            disabled={isLoadingNextStep || savingAgreement}
+          >
+            Save Draft
+          </Button>
+        )}
         <ForwardButton />
         {page === "edit" ? (
           <Button sx={delBtn} onClick={handleDeleteAgreement}>
