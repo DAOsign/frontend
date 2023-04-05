@@ -183,7 +183,10 @@ export default function NavPanel({ setLoading, page }: { setLoading: any; page: 
       title: values.title,
       agreementLocation: values.agreementLocation || null,
       content:
-        values.agreementMethod === METHOD_ENTER && values.textEditorValue
+        (values.agreementMethod === METHOD_ENTER ||
+          values.agreementMethod ||
+          METOD_IMPORT_SHAPHOT) &&
+        values.textEditorValue
           ? values.textEditorValue
           : "",
       agreementPrivacy: values.agreementPrivacy || null,
