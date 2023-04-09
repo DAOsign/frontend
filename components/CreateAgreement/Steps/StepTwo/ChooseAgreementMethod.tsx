@@ -25,7 +25,7 @@ import { useEditAgreement } from "../../../../hooks/useEditAgreement";
 import { isEmpty } from "../../../../utils/common";
 import { withFade } from "../..";
 import UploadLocalAgreement from "./UploadLocal";
-import { METHOD_ENTER, METHOD_UPLOAD, METOD_IMPORT_SHAPHOT } from "../../../../types";
+import { METHOD_ENTER, METHOD_UPLOAD, METHOD_IMPORT_SHAPSHOT } from "../../../../types";
 import FieldErrorMessage from "../../../Form/FieldErrorMessage";
 import useWindowDimensions from "../../../../hooks/useWindowDimensions";
 import ModalImportSnapshot from "../../../ModalImportSnapshot";
@@ -53,7 +53,7 @@ export default function ChooseAgreementMethod({ page }: { page: string }) {
     const validateRes = validateTitle();
     if (validateRes) {
       changeValue("errors", { ...values.errors, agreementFile: null });
-      if (method === METOD_IMPORT_SHAPHOT) {
+      if (method === METHOD_IMPORT_SHAPSHOT) {
         setIsOpen(true);
         return;
       }
@@ -63,7 +63,7 @@ export default function ChooseAgreementMethod({ page }: { page: string }) {
 
   const renderMethods = () => {
     switch (values.agreementMethod) {
-      case METOD_IMPORT_SHAPHOT:
+      case METHOD_IMPORT_SHAPSHOT:
         return withFade(
           <>
             <TextEditor page={page} />
@@ -120,7 +120,7 @@ export default function ChooseAgreementMethod({ page }: { page: string }) {
               >
                 <Box sx={itemsContent}>
                   <Box sx={iconMethod}>
-                    <Icon width="50px" height="50px" src={iconsObj.enterAggrementIcon} />
+                    <Icon width="50px" height="50px" src={iconsObj.enterAgreementIcon} />
                   </Box>
                   <Box>
                     <Text className="centerTitle">Enter Agreement</Text>
@@ -138,7 +138,7 @@ export default function ChooseAgreementMethod({ page }: { page: string }) {
               <Container
                 sx={rightCard}
                 onClick={() => {
-                  chengeMethod("agreementMethod", METOD_IMPORT_SHAPHOT);
+                  chengeMethod("agreementMethod", METHOD_IMPORT_SHAPSHOT);
                 }}
               >
                 <Box sx={itemsContent}>

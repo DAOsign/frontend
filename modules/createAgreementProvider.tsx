@@ -32,7 +32,7 @@ export interface CreationState {
   signers: { id: number; value: string }[];
   file: File | undefined;
   errors: CreateAgreementFieldErrors;
-  propousal: {
+  proposal: {
     legalJurisdictionCountry: string;
     legalJurisdictionState: string;
     proposalText: string;
@@ -59,7 +59,7 @@ const defaultState: CreationState = {
   signers: [],
   file: undefined,
   errors: {},
-  propousal: {
+  proposal: {
     legalJurisdictionCountry: "",
     legalJurisdictionState: "",
     proposalText: "",

@@ -10,13 +10,13 @@ import { useEditAgreement } from "../../../hooks/useEditAgreement";
 import styles, {
   iconFileResize,
   containerEnter,
-  enterAggrement,
-  foterText,
+  enterAgreement,
+  footerText,
   labelDesc,
   btnBack,
   icon,
 } from "./styles";
-import { METOD_IMPORT_SHAPHOT } from "../../../types";
+import { METHOD_IMPORT_SHAPSHOT } from "../../../types";
 
 const MDEditor = dynamic(() => import("@uiw/react-md-editor"), {
   ssr: false,
@@ -43,12 +43,12 @@ const TextEditor = ({ page }: { page: string }) => {
   const create = useCreateAgreement();
   const edit = useEditAgreement();
   const {
-    values: { textEditorValue, propousal, agreementMethod },
+    values: { textEditorValue, proposal, agreementMethod },
     changeValue,
   } = page === "create" ? create : edit;
 
   const valueEditor =
-    agreementMethod === METOD_IMPORT_SHAPHOT ? propousal?.proposalText : textEditorValue;
+    agreementMethod === METHOD_IMPORT_SHAPSHOT ? proposal?.proposalText : textEditorValue;
 
   const [state, setState] = useState<"edit" | "preview">("edit");
 
@@ -56,7 +56,7 @@ const TextEditor = ({ page }: { page: string }) => {
     changeValue("agreementMethod", "");
     changeValue("filePath", "");
     changeValue("textEditorValue", "");
-    changeValue("propousal", undefined);
+    changeValue("proposal", undefined);
     changeValue("file", undefined);
   };
 
@@ -64,7 +64,7 @@ const TextEditor = ({ page }: { page: string }) => {
     <Box style={{ position: "relative", width: "100%" }} sx={styles}>
       <Flex sx={{ alignItems: "center" }}>
         <Flex sx={containerEnter}>
-          <Text sx={enterAggrement}>Enter agreement </Text>
+          <Text sx={enterAgreement}>Enter agreement </Text>
           <Text sx={labelDesc}>description</Text>
         </Flex>
       </Flex>
@@ -99,7 +99,7 @@ const TextEditor = ({ page }: { page: string }) => {
         </Box>
         <Flex className="support">
           <Icon src={iconsObj.m} />
-          <Text sx={foterText}>Markdown is supported</Text>
+          <Text sx={footerText}>Markdown is supported</Text>
         </Flex>
       </Suspense>
     </Box>

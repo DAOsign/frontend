@@ -10,7 +10,7 @@ import {
   INTELLECTUAL_PROPERTY_CLAUSE,
   NON_SOLICITATION_CLAUSE,
   INDEMNIFICATION_CLAUSE,
-  METOD_IMPORT_SHAPHOT,
+  METHOD_IMPORT_SHAPSHOT,
   LEGAL_JURISDICTION,
   ENABLE_TRANSFORM,
   STATEMENT_WORK,
@@ -18,6 +18,7 @@ import {
   CONTRACT_TYPE,
   CHOOSE_STATE,
   UNITED_STATES,
+  DataProposalProps,
 } from "../../types";
 import { variants, variantsSelect } from "../../utils/animation";
 import { motion } from "framer-motion";
@@ -76,8 +77,7 @@ export default function ModalImportSnapshot({ isOpen, page, onExit }: Props) {
   const [selectsValue, setSelectsValue] = useState(initialState);
   const { query } = useClient();
 
-  const validationPropousalLink = () => {
-    console.log(id.trim());
+  const validationproposalLink = () => {
     if (!!id.trim()) {
       if (!extractProposalId(id)) {
         setError({ value: true, text: "Not valid Proposal link" });
@@ -102,10 +102,9 @@ export default function ModalImportSnapshot({ isOpen, page, onExit }: Props) {
   };
 
   const handleSubmit = async () => {
-    validationPropousalLink();
+    validationproposalLink();
     await queryProposal()
       .then(data => {
-        //@ts-ignore
         return data?.body;
       })
       .then(async data => {
@@ -114,15 +113,12 @@ export default function ModalImportSnapshot({ isOpen, page, onExit }: Props) {
           return generetedValue;
         }
       })
-      .then(data => {
-        console.log(data);
+      .then((data: DataProposalProps) => {
         if (!!data) {
           onExit();
-          //@ts-ignore
-          changeValue("propousal", { proposalText: data.text });
-          //@ts-ignore
-          changeValue("textEditorValue", data.text);
-          changeValue("agreementMethod", METOD_IMPORT_SHAPHOT);
+          changeValue("proposal", { proposalText: data?.text });
+          changeValue("textEditorValue", data?.text);
+          changeValue("agreementMethod", METHOD_IMPORT_SHAPSHOT);
         }
         setLoading(false);
       })

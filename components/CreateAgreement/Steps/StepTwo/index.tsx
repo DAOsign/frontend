@@ -34,7 +34,7 @@ interface VerificationInfo {
 
 const verifications: VerificationInfo[] = [
   {
-    title: "Anonymus",
+    title: "Anonymous",
     img: iconsObj.verificationAnonymous,
     description: "Wallet Address",
   },
@@ -44,12 +44,12 @@ const verifications: VerificationInfo[] = [
     description: "Name, Email address, ENS",
   },
   {
-    title: "Digital Identify",
+    title: "Digital Identity",
     img: iconsObj.verificationDigital,
     description: "Social Network Verification",
   },
   {
-    title: "Real Identify",
+    title: "Real Identity",
     img: iconsObj.verificationReal,
     description: "Real world assets verification",
   },
@@ -374,7 +374,7 @@ export default function StepTwo({ page }: { page: string }) {
                 key={verification.title}
                 {...verification}
                 disabled
-                checked={verification.title === "Anonymus"}
+                checked={verification.title === "Anonymous"}
                 onClick={() => {
                   setCheckedVerifications(prevState => [
                     ...prevState.slice(0, index),

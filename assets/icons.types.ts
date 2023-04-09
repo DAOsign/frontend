@@ -4,7 +4,7 @@ export interface IconsMapper extends Record<string, unknown> {
   codeSnippetPrimary: Icon;
   togglePrimaryRight: Icon;
   snapshotImportIcon: Icon;
-  enterAggrementIcon: Icon;
+  enterAgreementIcon: Icon;
   togglePrimaryLeft: Icon;
   fileSecondarysvg: Icon;
   arrowNarrowLeft: Icon;

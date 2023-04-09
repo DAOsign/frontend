@@ -24,7 +24,7 @@ export default function VerificationCard({
   onClick,
   disabled,
 }: Props) {
-  const isAnonymus = title === "Anonymus";
+  const isAnonymous = title === "Anonymous";
   const isNotarizedIdentity = title === "Notarized Identity";
 
   return (
@@ -33,7 +33,7 @@ export default function VerificationCard({
         ...verificationCardStyles,
 
         cursor: disabled ? "no-drop" : "pointer",
-        backgroundColor: isAnonymus ? "#fff" : "#F7F7FB",
+        backgroundColor: isAnonymous ? "#fff" : "#F7F7FB",
         "&:hover": { boxShadow: disabled ? "unset" : "0 0 11px rgba(33,33,33,.2)" },
         "@media screen and (max-width: 719px)": {
           height: isNotarizedIdentity ? "167px" : "183px",
@@ -53,7 +53,7 @@ export default function VerificationCard({
         </Box>
       </Flex>
       <Flex>
-        {!isAnonymus && (
+        {!isAnonymous && (
           <Box sx={iconComingSoon}>
             <Icon src={iconsObj.comingSoon} />
           </Box>

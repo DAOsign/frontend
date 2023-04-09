@@ -27,12 +27,24 @@ export const PRIVACY_PUBLIC_WITH_LINK = "with_link";
 
 export const METHOD_UPLOAD = "Upload";
 export const METHOD_ENTER = "Enter";
-export const METOD_IMPORT_SHAPHOT = "Shapshot";
+export const METHOD_IMPORT_SHAPSHOT = "Shapshot";
 
 export const STATUS_DRAFT = "Draft";
 export const STATUS_READY_TO_SIGN = "Ready to sign";
 export const STATUS_PARTIALLY_SIGNED = "Partially signed";
 export const STATUS_SIGNED = "Signed";
+
+export type AnimateContainer = () => void;
+
+export interface Props {
+  animateContainer: AnimateContainer;
+  page: string;
+  loading: any;
+}
+
+export interface PublicProps extends Props {
+  setPublic: any;
+}
 
 export type AgreementStatus =
   | typeof STATUS_DRAFT
@@ -51,7 +63,7 @@ export type AgreementPrivacy =
 export type AgreementMethod =
   | typeof METHOD_UPLOAD
   | typeof METHOD_ENTER
-  | typeof METOD_IMPORT_SHAPHOT
+  | typeof METHOD_IMPORT_SHAPSHOT
   | "";
 
 export type AgreementLocation =
@@ -76,6 +88,10 @@ export interface Agreement {
   createdAt: Date;
   agreementFile?: AgreementFile;
   signProofAmount: number;
+}
+
+export interface DataProposalProps {
+  text: string;
 }
 
 interface AgreementFile {

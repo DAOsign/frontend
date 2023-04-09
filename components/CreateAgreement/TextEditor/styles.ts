@@ -115,7 +115,7 @@ export const iconFileResize = {
   right: "5px",
 } as ThemeUIStyleObject;
 
-export const foterText = {
+export const footerText = {
   variant: "text.overscript",
   opacity: 0.5,
   ml: "4px",
@@ -129,7 +129,7 @@ export const labelDesc = {
   },
 } as ThemeUIStyleObject;
 
-export const enterAggrement = {
+export const enterAgreement = {
   variant: "forms.label",
   display: "inline-block",
   mr: "5px",

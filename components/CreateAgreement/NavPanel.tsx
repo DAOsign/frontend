@@ -28,7 +28,7 @@ import {
   LOCATION_PUBLIC_IPFS,
   METHOD_ENTER,
   METHOD_UPLOAD,
-  METOD_IMPORT_SHAPHOT,
+  METHOD_IMPORT_SHAPSHOT,
 } from "../../types";
 import {
   clearDraft,
@@ -97,7 +97,7 @@ export default function NavPanel({ setLoading, page }: { setLoading: any; page: 
             errors.agreementFile = "Agreement Description is a required selection";
           } else if (values.agreementMethod === METHOD_ENTER && !values.textEditorValue) {
             errors.agreementFile = "Agreement entry is required";
-          } else if (values.agreementMethod === METOD_IMPORT_SHAPHOT && !values.textEditorValue) {
+          } else if (values.agreementMethod === METHOD_IMPORT_SHAPSHOT && !values.textEditorValue) {
             errors.agreementFile = "Agreement entry is required";
           } else if (values.agreementMethod === METHOD_UPLOAD && !values.agreementHash) {
             errors.agreementFile = "Agreement file upload is required";
@@ -184,7 +184,7 @@ export default function NavPanel({ setLoading, page }: { setLoading: any; page: 
       content:
         (values.agreementMethod === METHOD_ENTER ||
           values.agreementMethod ||
-          METOD_IMPORT_SHAPHOT) &&
+          METHOD_IMPORT_SHAPSHOT) &&
         values.textEditorValue
           ? values.textEditorValue
           : "",

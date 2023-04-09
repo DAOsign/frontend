@@ -5,6 +5,7 @@ import {
   PRIVACY_PUBLIC_PROOF_ONLY,
   PRIVACY_PUBLIC_PUBLISHED,
   PRIVACY_PUBLIC_WITH_LINK,
+  Props,
 } from "../../../../types";
 import ChooseMethod from "../StepOne/ChooseMethod";
 import Lottie from "lottie-react";
@@ -15,18 +16,6 @@ import { useEditAgreement } from "../../../../hooks/useEditAgreement";
 import loader from "../../../../img/json/loader.json";
 import FieldErrorMessage from "../../../Form/FieldErrorMessage";
 import AgreementLocationRadioButtons from "../StepTwo/AgreementLocationButtons";
-
-export type AnimateContainer = () => void;
-
-export interface Props {
-  animateContainer: AnimateContainer;
-  page: string;
-  loading: any;
-}
-
-export interface PublicProps extends Props {
-  setPublic: any;
-}
 
 const defaultIsPublic = (agreementPrivacy: string) => {
   return [PRIVACY_PUBLIC_PROOF_ONLY, PRIVACY_PUBLIC_PUBLISHED, PRIVACY_PUBLIC_WITH_LINK].some(

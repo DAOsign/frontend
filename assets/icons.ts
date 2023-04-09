@@ -3,7 +3,7 @@ import verificationNotarized from "../img/svg/verification_notarized.svg";
 import verificationAnonymous from "../img/svg/verification_anonymous.svg";
 import verificationDigital from "../img/svg/verification_digital.svg";
 import codeSnippetPrimary from "../img/svg/codeSnippetPrimary.svg";
-import enterAggrementIcon from "../img/svg/enterAggrementIcon.svg";
+import enterAgreementIcon from "../img/svg/enterAgreementIcon.svg";
 import togglePrimaryRight from "../img/svg/togglePrimaryRight.svg";
 import snapshotImportIcon from "../img/svg/snapshotImportIcon.svg";
 import uploadCloudPrimary from "../img/svg/uploadCloudPrimary.svg";
@@ -117,7 +117,7 @@ const iconsObj: IconsMapper = {
   snapshotImportIcon,
   defaultUserPicture,
   togglePrimaryRight,
-  enterAggrementIcon,
+  enterAgreementIcon,
   togglePrimaryLeft,
   verificationReal,
   fileSecondarysvg,

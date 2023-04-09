@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import StepOne from "./Steps/StepOne";
 import StepTwo from "./Steps/StepTwo";
 import StepThree from "./Steps/StepThree";
-import { METOD_IMPORT_SHAPHOT } from "../../types";
+import { METHOD_IMPORT_SHAPSHOT } from "../../types";
 import { Container, Flex, Text, Button, Textarea } from "theme-ui";
 import { useCreateAgreement } from "../../hooks/useCreateAgreement";
 import { useEditAgreement } from "../../hooks/useEditAgreement";
@@ -90,7 +90,7 @@ export default function CreateAgreement({ page }: { page: string }) {
         </Container>
         {
           //@ts-ignore
-          step === 1 && values.agreementMethod === METOD_IMPORT_SHAPHOT && (
+          step === 1 && values.agreementMethod === METHOD_IMPORT_SHAPSHOT && (
             <Container sx={importOptions}>
               <Text sx={importOptionsTitle}>Proposal Import Options</Text>
               <Text

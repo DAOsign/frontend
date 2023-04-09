@@ -24,7 +24,7 @@ import { agreementById } from "../../modules/graphql/queries";
 import { useQuery } from "urql";
 import { privacyValueByName } from "./utils";
 import {
-  METOD_IMPORT_SHAPHOT,
+  METHOD_IMPORT_SHAPSHOT,
   LOCATION_PUBLIC_IPFS,
   LOCATION_CLOUD,
   METHOD_UPLOAD,
@@ -155,30 +155,27 @@ export default function EditAgreement({ page }: { page: string }) {
         <Container sx={navContainer}>
           <NavPanel page={page} setLoading={setLoading} />
         </Container>
-        {
-          //@ts-ignore
-          step === 1 && values.agreementMethod === METOD_IMPORT_SHAPHOT && (
-            <Container sx={importOptions}>
-              <Text sx={importOptionsTitle}>Proposal Import Options</Text>
-              <Text
-                sx={{
-                  variant: "forms.label",
-                  textAlign: "inherit",
-                  maxWidth: "unset",
-                  minHeight: "25px",
-                  ml: "3px",
-                  mr: "5px",
-                  mt: "20px",
-                }}
-              >
-                Provide additional instructions{" "}
-              </Text>
-              <Textarea sx={textInput} rows={8} />
-              <Button sx={{ mb: "20px" }}>Update Proposal</Button>
-              <Button>Reimport From Snapshot</Button>
-            </Container>
-          )
-        }
+        {step === 1 && values.agreementMethod === METHOD_IMPORT_SHAPSHOT && (
+          <Container sx={importOptions}>
+            <Text sx={importOptionsTitle}>Proposal Import Options</Text>
+            <Text
+              sx={{
+                variant: "forms.label",
+                textAlign: "inherit",
+                maxWidth: "unset",
+                minHeight: "25px",
+                ml: "3px",
+                mr: "5px",
+                mt: "20px",
+              }}
+            >
+              Provide additional instructions{" "}
+            </Text>
+            <Textarea sx={textInput} rows={8} />
+            <Button sx={{ mb: "20px" }}>Update Proposal</Button>
+            <Button>Reimport From Snapshot</Button>
+          </Container>
+        )}
       </Container>
     </Flex>
   );
