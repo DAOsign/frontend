@@ -12,8 +12,7 @@ import { useEditAgreement } from "../../../../hooks/useEditAgreement";
 import iconsObj from "../../../../assets/icons";
 import Icon from "../../../icon";
 
-import { PRIVACY_PRIVATE } from "../../../../types";
-import { PublicProps } from "../StepThree";
+import { PRIVACY_PRIVATE, PublicProps } from "../../../../types";
 import { motion } from "framer-motion";
 
 const chooseVariants = {

@@ -113,7 +113,7 @@ export default function ModalImportSnapshot({ isOpen, page, onExit }: Props) {
           return generetedValue;
         }
       })
-      .then((data: DataProposalProps) => {
+      .then((data: any) => {
         if (!!data) {
           onExit();
           changeValue("proposal", { proposalText: data?.text });
