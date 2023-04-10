@@ -22,6 +22,7 @@ export const saveAgreementMutation = graphql(`
     $agreementHash: String
     $agreementFilePath: String
     $isReadyToSign: Boolean!
+    $snapshotProposalUrl: String!
   ) {
     saveAgreement(
       agreementId: $agreementId
@@ -34,6 +35,7 @@ export const saveAgreementMutation = graphql(`
       agreementHash: $agreementHash
       agreementFilePath: $agreementFilePath
       isReadyToSign: $isReadyToSign
+      snapshotProposalUrl: $snapshotProposalUrl
     ) {
       agreementId
       title

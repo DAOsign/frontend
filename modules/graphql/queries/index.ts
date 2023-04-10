@@ -19,6 +19,7 @@ export const agreementById = graphql(`
   query Query($agreementId: Int!) {
     agreement(agreementId: $agreementId) {
       agreementId
+      snapshotProposalUrl
       agreementFile {
         agreementFileId
         agreementHash
@@ -64,6 +65,7 @@ export const agreementById = graphql(`
       title
       content
       isWaitingForMySignature
+      snapshotProposalUrl
       isAllowedToEditObservers
       createdAt
       signProofs {

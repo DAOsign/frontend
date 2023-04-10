@@ -5,6 +5,12 @@ const tabStyles: ThemeUIStyleObject = {
   "@media screen and (max-width: 480px)": {
     mb: "40px",
   },
+  ".w-md-editor-aree::-webkit-scrollbar": {
+    width: 0,
+  },
+  ".w-md-editor-preview::-webkit-scrollbar": {
+    width: 0,
+  },
   ".tabsContainer": {
     display: "flex",
     borderTopRightRadius: "8px",

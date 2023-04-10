@@ -37,6 +37,7 @@ export interface CreationState {
     legalJurisdictionState: string;
     proposalText: string;
     contractType: string;
+    snapshotProposalUrl: string;
   };
 }
 interface CreateAgrementContext {
@@ -64,6 +65,7 @@ const defaultState: CreationState = {
     legalJurisdictionState: "",
     proposalText: "",
     contractType: "",
+    snapshotProposalUrl: "",
   },
 };
 

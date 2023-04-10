@@ -55,10 +55,7 @@ function shouldRequestEditData(agreementId: number | string) {
   if (!agreementId) return false;
   if (typeof window !== "undefined") {
     const editItem = localStorage?.getItem("editAgreement") as any;
-
-    // console.log("editItem", JSON.parse(editItem).agreementId, agreementId.toString());
     const res = !editItem || JSON.parse(editItem).agreementId !== agreementId.toString();
-    // console.log("shouldRequest", res);
     return res;
   }
 }

@@ -47,9 +47,6 @@ const TextEditor = ({ page }: { page: string }) => {
     changeValue,
   } = page === "create" ? create : edit;
 
-  const valueEditor =
-    agreementMethod === METHOD_IMPORT_SHAPSHOT ? proposal?.proposalText : textEditorValue;
-
   const [state, setState] = useState<"edit" | "preview">("edit");
 
   const handleChooseAnotherMethod = () => {
@@ -91,7 +88,7 @@ const TextEditor = ({ page }: { page: string }) => {
         <MDEditor
           onChange={val => changeValue("textEditorValue", val || "")}
           hideToolbar={state === "preview"}
-          value={valueEditor}
+          value={textEditorValue}
           preview={state}
         />
         <Box sx={iconFileResize}>

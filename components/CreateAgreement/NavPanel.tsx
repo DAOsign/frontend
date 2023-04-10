@@ -76,7 +76,6 @@ export default function NavPanel({ setLoading, page }: { setLoading: any; page: 
       if (!values.title) {
         errors.title = "Title can not be blank";
       }
-      //@ts-ignore
       if (values.title.trim()?.length > 120) {
         errors.title = "Title should be 120 characters max";
       }
@@ -89,7 +88,6 @@ export default function NavPanel({ setLoading, page }: { setLoading: any; page: 
           if (!values.title.trim()) {
             errors.title = "Title can not be blank";
           }
-          //@ts-ignore
           if (values.title.trim()?.length > 120) {
             errors.title = "Title should be 120 characters max";
           }
@@ -181,6 +179,7 @@ export default function NavPanel({ setLoading, page }: { setLoading: any; page: 
       agreementId: Number(query.id),
       title: values.title,
       agreementLocation: values.agreementLocation || null,
+      snapshotProposalUrl: values.proposal.snapshotProposalUrl,
       content:
         (values.agreementMethod === METHOD_ENTER ||
           values.agreementMethod ||
@@ -349,8 +348,6 @@ export default function NavPanel({ setLoading, page }: { setLoading: any; page: 
             }
           }
           const areFieldsValid = validateFields({ ...values, ...uploadedFileData });
-          console.log(areFieldsValid);
-
           if (areFieldsValid) {
             if (isFinishButton) {
               await handleCreateAgreement();

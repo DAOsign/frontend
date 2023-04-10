@@ -65,7 +65,6 @@ export const ViewAgreement = () => {
       .toPromise()
       .then(res => {
         const agr = res.data?.agreement;
-
         //@ts-ignore
         if (agr) setAgreement(toAgreementWithParticipants(agr)); //eslint-disable-line
         if (res?.error) {
@@ -156,18 +155,18 @@ export const ViewAgreement = () => {
           </Flex>
           {agreement && (
             <AgreementInformation
-              agreement={agreement}
-              agreementId={Number(agreementId)}
-              agreementStatus={agreement?.agreementStatus}
-              agreementPrivacy={agreement?.agreementPrivacy}
-              agreementLocation={agreement?.agreementLocation}
-              createdAt={agreement?.createdAt}
               isWaitingForMySignature={agreement?.isWaitingForMySignature || false}
+              onSetAgreementReadyToSign={handleOpenReadyToSignModal}
+              authorWalletAddress={agreement?.authorWalletAddress}
+              agreementLocation={agreement?.agreementLocation}
+              agreementPrivacy={agreement?.agreementPrivacy}
+              agreementStatus={agreement?.agreementStatus}
+              agreementId={Number(agreementId)}
+              onSignAgreement={onSignAgreement}
+              createdAt={agreement?.createdAt}
               userIsAuthor={userIsAuthor}
               setIsOpen={setIsOpen}
-              authorWalletAddress={agreement?.authorWalletAddress}
-              onSetAgreementReadyToSign={handleOpenReadyToSignModal}
-              onSignAgreement={onSignAgreement}
+              agreement={agreement}
             />
           )}
         </>

@@ -18,7 +18,6 @@ import {
   CONTRACT_TYPE,
   CHOOSE_STATE,
   UNITED_STATES,
-  DataProposalProps,
 } from "../../types";
 import { variants, variantsSelect } from "../../utils/animation";
 import { motion } from "framer-motion";
@@ -116,7 +115,7 @@ export default function ModalImportSnapshot({ isOpen, page, onExit }: Props) {
       .then((data: any) => {
         if (!!data) {
           onExit();
-          changeValue("proposal", { proposalText: data?.text });
+          changeValue("proposal", { proposalText: data?.text, snapshotProposalUrl: id });
           changeValue("textEditorValue", data?.text);
           changeValue("agreementMethod", METHOD_IMPORT_SHAPSHOT);
         }

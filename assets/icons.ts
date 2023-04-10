@@ -50,6 +50,7 @@ import privateIcon from "../img/svg/private.svg";
 import pinkArrow from "../img/svg/pinkArrow.svg";
 import publicIcon from "../img/svg/public.svg";
 import iconExit from "../img/svg/IconExit.svg";
+import lightning from "../img/svg/lightning.svg";
 import calendar from "../img/svg/calendar.svg";
 import settings from "../img/svg/settings.svg";
 import download from "../img/svg/download.svg";
@@ -75,10 +76,10 @@ import verify from "../img/svg/verify.svg";
 import iconSix from "../img/svg/icon6.svg";
 import birthday from "../img/birthday.png";
 import logOut from "../img/svg/logOut.svg";
+import aLogo from "../img/svg/aLogo.svg";
 import world from "../img/svg/world.svg";
 import email from "../img/svg/email.svg";
 import globe from "../img/svg/globe.svg";
-import aLogo from "../img/svg/aLogo.svg";
 import dLogo from "../img/svg/dLogo.svg";
 import oLogo from "../img/svg/oLogo.svg";
 import phone from "../img/svg/phone.svg";
@@ -157,6 +158,7 @@ const iconsObj: IconsMapper = {
   closedEye,
   chevronUp,
   pinkArrow,
+  lightning,
   published,
   pinkPlus,
   portfile,

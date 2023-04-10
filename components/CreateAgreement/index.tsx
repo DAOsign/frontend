@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import StepOne from "./Steps/StepOne";
 import StepTwo from "./Steps/StepTwo";
 import StepThree from "./Steps/StepThree";
@@ -8,14 +8,14 @@ import { useCreateAgreement } from "../../hooks/useCreateAgreement";
 import { useEditAgreement } from "../../hooks/useEditAgreement";
 import NavPanel from "./NavPanel";
 import {
-  rightSide,
-  leftSide,
+  importOptionsTitle,
   containerSides,
-  title,
   importOptions,
   navContainer,
+  rightSide,
   textInput,
-  importOptionsTitle,
+  leftSide,
+  title,
 } from "./styles";
 import { motion, Variants } from "framer-motion";
 import { useRouter } from "next/router";
@@ -88,30 +88,27 @@ export default function CreateAgreement({ page }: { page: string }) {
         <Container sx={navContainer}>
           <NavPanel page={page} setLoading={setLoading} />
         </Container>
-        {
-          //@ts-ignore
-          step === 1 && values.agreementMethod === METHOD_IMPORT_SHAPSHOT && (
-            <Container sx={importOptions}>
-              <Text sx={importOptionsTitle}>Proposal Import Options</Text>
-              <Text
-                sx={{
-                  variant: "forms.label",
-                  textAlign: "inherit",
-                  maxWidth: "unset",
-                  minHeight: "25px",
-                  ml: "3px",
-                  mr: "5px",
-                  mt: "20px",
-                }}
-              >
-                Provide additional instructions{" "}
-              </Text>
-              <Textarea sx={textInput} rows={8} />
-              <Button sx={{ mb: "20px" }}>Update Proposal</Button>
-              <Button>Reimport From Snapshot</Button>
-            </Container>
-          )
-        }
+        {step === 1 && values.agreementMethod === METHOD_IMPORT_SHAPSHOT && (
+          <Container sx={importOptions}>
+            <Text sx={importOptionsTitle}>Proposal Import Options</Text>
+            <Text
+              sx={{
+                variant: "forms.label",
+                textAlign: "inherit",
+                maxWidth: "unset",
+                minHeight: "25px",
+                ml: "3px",
+                mr: "5px",
+                mt: "20px",
+              }}
+            >
+              Provide additional instructions{" "}
+            </Text>
+            <Textarea sx={textInput} rows={8} />
+            <Button sx={{ mb: "20px" }}>Update Proposal</Button>
+            <Button>Reimport From Snapshot</Button>
+          </Container>
+        )}
       </Container>
     </Flex>
   );
