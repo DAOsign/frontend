@@ -6,6 +6,13 @@ export const flexContainer = {
   margin: "0 auto",
 } as ThemeUIStyleObject;
 
+export const overflowContentStyles = {
+  overflow: "scroll",
+  "&::-webkit-scrollbar": {
+    width: 0,
+  },
+} as ThemeUIStyleObject;
+
 export const mainText = {
   variant: "text.h2",
   fontSize: "28px",
@@ -60,7 +67,7 @@ export const input = {
   borderRadius: "8px",
   width: "100%",
   transition: "border-color 0.3s",
-  border: "2px solid transparent",
+  border: "1px solid transparent",
 } as ThemeUIStyleObject;
 
 export const switchContainer = {
@@ -184,6 +191,7 @@ export const flexLoader = {
 
 export const modalBase = {
   width: "756px",
+  maxHeight: "90vh",
   pt: "40px",
   pb: "60px",
   px: "78px",

@@ -265,7 +265,7 @@ export default function NavPanel({ setLoading, page }: { setLoading: any; page: 
           return;
         }
       } else if (values.agreementMethod === METHOD_ENTER && values.textEditorValue) {
-        const encoded = Buffer.from(values.textEditorValue); //TODO handle encodings
+        const encoded = Buffer.from(values.textEditorValue);
         const file = new File([encoded], "agreement.txt", {
           type: "text/plain",
         });
@@ -330,7 +330,7 @@ export default function NavPanel({ setLoading, page }: { setLoading: any; page: 
             values.agreementMethod === METHOD_ENTER &&
             values.textEditorValue
           ) {
-            const encoded = Buffer.from(values.textEditorValue); //TODO handle encodings
+            const encoded = Buffer.from(values.textEditorValue);
             const file = new File([encoded], "agreement.txt", {
               type: "text/plain",
             });

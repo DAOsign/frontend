@@ -33,6 +33,7 @@ import { generateAgreement } from "../../modules/graphql/queries";
 import { initialStateSwitches, initialState } from "./initialState";
 import { extractProposalId } from "../../utils/formats";
 import {
+  overflowContentStyles,
   labelInputTellMore,
   loadingStylesBtn,
   btnCancelLoading,
@@ -174,6 +175,7 @@ export default function ModalImportSnapshot({ isOpen, page, onExit }: Props) {
         <motion.div
           animate={selectsOpen[name] ? "enter" : "exit"}
           transition={{ type: "linear" }}
+          className="settingImportSnapshotProposal"
           variants={name === STATEMENT_WORK ? variants : variantsSelect}
           initial="hidden"
         >
@@ -229,7 +231,6 @@ export default function ModalImportSnapshot({ isOpen, page, onExit }: Props) {
       </Flex>
     );
   };
-  console.log(error);
 
   return (
     <Portal isOpen={isOpen} onClose={onExit}>
@@ -239,65 +240,67 @@ export default function ModalImportSnapshot({ isOpen, page, onExit }: Props) {
             <Icon src={iconsObj.xClose} />
           </Box>
           <Text sx={{ ...mainText, mb: "40px" }}>Import From Snapshot</Text>
-          {!loading ? (
-            <>
-              <Text sx={labelInput}>Proposal link</Text>
+          <Flex sx={{ ...flexContent, ...overflowContentStyles }}>
+            {!loading ? (
+              <>
+                <Text sx={labelInput}>Proposal link</Text>
+                <Input
+                  value={id}
+                  onChange={e => {
+                    setError({ value: false, text: "" });
+                    setId(e.target.value);
+                  }}
+                  sx={{ ...input, mb: error.value ? "3px" : "45px" }}
+                />
+                {error.value && (
+                  <Box sx={{ mb: "45px" }}>
+                    <FieldErrorMessage error={error.text} />
+                  </Box>
+                )}
+                <SwitchContent name={ENABLE_TRANSFORM} />
+                <motion.div
+                  className="settingImportSnapshotProposal"
+                  animate={switches.enableTransform.isOpen ? "enter" : "exit"}
+                  transition={{ type: "linear" }}
+                  variants={variants}
+                  initial={switches.enableTransform.isOpen ? "enter" : "hidden"}
+                >
+                  <Text sx={secondaryTitle}>Transformation Configurations</Text>
+                  <SwitchContent name={CONTRACT_TYPE} />
+                  {switches[CONTRACT_TYPE].isOpen && selectContent(STATEMENT_WORK)}
 
-              <Input
-                value={id}
-                onChange={e => {
-                  setError({ value: false, text: "" });
-                  setId(e.target.value);
-                }}
-                sx={{ ...input, mb: error.value ? "3px" : "45px" }}
-              />
-              {error.value && (
-                <Box sx={{ mb: "45px" }}>
-                  <FieldErrorMessage error={error.text} />
-                </Box>
-              )}
-              <SwitchContent name={ENABLE_TRANSFORM} />
-              <motion.div
-                animate={switches.enableTransform.isOpen ? "enter" : "exit"}
-                transition={{ type: "linear" }}
-                variants={variants}
-                initial="hidden"
-              >
-                <Text sx={secondaryTitle}>Transformation Configurations</Text>
-                <SwitchContent name={CONTRACT_TYPE} />
-                {switches[CONTRACT_TYPE].isOpen && selectContent(STATEMENT_WORK)}
+                  <SwitchContent name={LEGAL_JURISDICTION} />
 
-                <SwitchContent name={LEGAL_JURISDICTION} />
+                  {switches[LEGAL_JURISDICTION].isOpen && selectContent(CHOOSE_COUNTRY)}
+                  {selectsValue[CHOOSE_COUNTRY].value === UNITED_STATES &&
+                    switches[LEGAL_JURISDICTION].isOpen &&
+                    selectContent(CHOOSE_STATE)}
 
-                {switches[LEGAL_JURISDICTION].isOpen && selectContent(CHOOSE_COUNTRY)}
-                {selectsValue[CHOOSE_COUNTRY].value === UNITED_STATES &&
-                  switches[LEGAL_JURISDICTION].isOpen &&
-                  selectContent(CHOOSE_STATE)}
-
-                <SwitchContent name={INDEMNIFICATION_CLAUSE} />
-                <Box sx={{ m: "21px 0" }}>
-                  <SwitchContent name={INTELLECTUAL_PROPERTY_CLAUSE} />
-                </Box>
-                <SwitchContent name={NON_SOLICITATION_CLAUSE} />
-              </motion.div>
-              <Text sx={labelInputTellMore}>Additional ChatGPT Instructions</Text>
-              <Input sx={input} />
-            </>
-          ) : (
-            <Flex sx={flexLoader}>
-              <Lottie style={{ height: "80px" }} animationData={loader} loop={true} />
-              <Text sx={importingText}>Importing...</Text>
-            </Flex>
-          )}
-          <Flex sx={loading ? loadingStylesBtn : stylesBtn}>
-            {!loading && (
-              <Button onClick={handleSubmit} sx={subBtn} disabled={loading}>
-                Transform and Import
-              </Button>
+                  <SwitchContent name={INDEMNIFICATION_CLAUSE} />
+                  <Box sx={{ m: "21px 0" }}>
+                    <SwitchContent name={INTELLECTUAL_PROPERTY_CLAUSE} />
+                  </Box>
+                  <SwitchContent name={NON_SOLICITATION_CLAUSE} />
+                  <Text sx={labelInputTellMore}>Additional ChatGPT Instructions</Text>
+                  <Input sx={input} />
+                </motion.div>
+                <Flex sx={loading ? loadingStylesBtn : stylesBtn}>
+                  {!loading && (
+                    <Button onClick={handleSubmit} sx={subBtn} disabled={loading}>
+                      Transform and Import
+                    </Button>
+                  )}
+                  <Button onClick={onExit} sx={loading ? btnCancelLoading : btnCancel}>
+                    Cancel
+                  </Button>
+                </Flex>
+              </>
+            ) : (
+              <Flex sx={flexLoader}>
+                <Lottie style={{ height: "80px" }} animationData={loader} loop={true} />
+                <Text sx={importingText}>Importing...</Text>
+              </Flex>
             )}
-            <Button onClick={onExit} sx={loading ? btnCancelLoading : btnCancel}>
-              Cancel
-            </Button>
           </Flex>
         </Flex>
       </ModalBase>

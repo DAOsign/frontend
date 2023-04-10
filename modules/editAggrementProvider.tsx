@@ -131,7 +131,6 @@ const EditAgreemntProvider = (props?: Partial<ProviderProps<CreateAgrementContex
         ) {
           push({ query: { step: 1 } }, undefined, { shallow: true });
         }
-        // TODO redirect if step 3 and no textEditorValue or filePath
         if (step > 2 && !values.observers.length && !values.signers.length) {
           push({ query: { step: 2 } }, undefined, { shallow: true });
         }

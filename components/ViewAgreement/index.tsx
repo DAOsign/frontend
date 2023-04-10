@@ -64,16 +64,13 @@ export const ViewAgreement = () => {
       .query(agreementById, { agreementId: Number(agreementId) }, { requestPolicy: "network-only" })
       .toPromise()
       .then(res => {
-        const agr = res.data?.agreement;
-        //@ts-ignore
-        if (agr) setAgreement(toAgreementWithParticipants(agr)); //eslint-disable-line
+        const agr: any = res.data?.agreement;
+        if (agr) setAgreement(toAgreementWithParticipants(agr));
         if (res?.error) {
           const errorMsg = res?.error.message;
           if (errorMsg.includes("Access denied")) {
             push("/404");
           }
-          //notifError(errorMsg || "Failed to get agreement from server");
-          // eslint-disable-next-line no-console
         }
       });
   }, [agreementId]);

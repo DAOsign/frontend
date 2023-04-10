@@ -125,12 +125,9 @@ export default function ChooseAgreementMethod({ page }: { page: string }) {
                   <Box>
                     <Text className="centerTitle">Enter Agreement</Text>
                     <Text sx={secondaryText}>
-                      {
-                        //@ts-ignore
-                        width > 480
-                          ? "Enter Text or Markdown content for the Agreement"
-                          : "Accessed only by Signers or Observes"
-                      }
+                      {!!width && width > 480
+                        ? "Enter Text or Markdown content for the Agreement"
+                        : "Accessed only by Signers or Observes"}
                     </Text>
                   </Box>
                 </Box>
