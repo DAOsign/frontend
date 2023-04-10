@@ -8,6 +8,17 @@ export enum TOOLTIP_VALUES {
   WITH_LINK = "With Link",
 }
 
+export const STATEMENT_WORK = "statementWork";
+export const CHOOSE_COUNTRY = "chooseCountry";
+export const CHOOSE_STATE = "chooseState";
+export const UNITED_STATES = "United States";
+export const ENABLE_TRANSFORM = "enableTransform";
+export const CONTRACT_TYPE = "contractType";
+export const INDEMNIFICATION_CLAUSE = "indemnificationClause";
+export const INTELLECTUAL_PROPERTY_CLAUSE = "intellectualPropertyClause";
+export const NON_SOLICITATION_CLAUSE = "nonSolicitationClause";
+export const LEGAL_JURISDICTION = "legalJurisdiction";
+
 export const PRIVACY_PRIVATE = "Private";
 export const PRIVACY_PUBLIC_PUBLISHED = "Published";
 export const PRIVACY_PUBLIC_PROOF_ONLY = "proof_only";
@@ -16,11 +27,24 @@ export const PRIVACY_PUBLIC_WITH_LINK = "with_link";
 
 export const METHOD_UPLOAD = "Upload";
 export const METHOD_ENTER = "Enter";
+export const METHOD_IMPORT_SHAPSHOT = "Shapshot";
 
 export const STATUS_DRAFT = "Draft";
 export const STATUS_READY_TO_SIGN = "Ready to sign";
 export const STATUS_PARTIALLY_SIGNED = "Partially signed";
 export const STATUS_SIGNED = "Signed";
+
+export type AnimateContainer = () => void;
+
+export interface Props {
+  animateContainer: AnimateContainer;
+  page: string;
+  loading: any;
+}
+
+export interface PublicProps extends Props {
+  setPublic: any;
+}
 
 export type AgreementStatus =
   | typeof STATUS_DRAFT
@@ -36,7 +60,11 @@ export type AgreementPrivacy =
   | typeof PRIVACY_PUBLIC_WITH_LINK
   | "";
 
-export type AgreementMethod = typeof METHOD_UPLOAD | typeof METHOD_ENTER | "";
+export type AgreementMethod =
+  | typeof METHOD_UPLOAD
+  | typeof METHOD_ENTER
+  | typeof METHOD_IMPORT_SHAPSHOT
+  | "";
 
 export type AgreementLocation =
   | typeof LOCATION_CLOUD
@@ -60,6 +88,11 @@ export interface Agreement {
   createdAt: Date;
   agreementFile?: AgreementFile;
   signProofAmount: number;
+  snapshotProposalUrl: string;
+}
+
+export interface DataProposalProps {
+  text: string;
 }
 
 interface AgreementFile {

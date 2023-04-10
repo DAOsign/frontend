@@ -1,7 +1,7 @@
 import React from "react";
 import { Flex, Text, Box, Button } from "theme-ui";
 import Icon from "../../../icon/index";
-import { uploadBtn, labelUpload, containerUpload } from "../../styles";
+import { uploadBtn, labelUpload, containerUpload, backBtn, uploadHeader } from "../../styles";
 import iconsObj from "../../../../assets/icons";
 import { useCreateAgreement } from "../../../../hooks/useCreateAgreement";
 import { useEditAgreement } from "../../../../hooks/useEditAgreement";
@@ -20,55 +20,21 @@ export default function UploadLocalAgreement({ page }: { page: string }) {
   };
 
   return (
-    <Flex
-      sx={{
-        ...containerUpload,
-        mt: "24px",
-        //@ts-ignore
-        "@media screen and (max-width: 768px)": {
-          flexDirection: !values.file ? "row-reverse" : "column !important",
-          alignItems: !values.file ? "center" : "",
-          justifyContent: "space-between",
-        },
-      }}
-    >
+    <Flex sx={{ ...containerUpload, mt: "0" }}>
       <Flex
         sx={{
-          height: "20px",
-          alignItems: "center",
-          position: "relative",
+          ...uploadHeader,
+          "@media screen and (max-width: 720px)": {
+            mb: !values.file ? "31px" : "8px",
+          },
         }}
       >
-        <Text
-          sx={{
-            ...labelUpload,
-            "@media screen and (max-width: 768px)": {
-              display: !values.file ? "none" : "block",
-            },
-          }}
-        >
-          Upload agreement
-        </Text>
-        <Button
-          onClick={handleChooseAnotherMethod}
-          sx={{
-            variant: "buttons.back",
-            ...uploadBtn,
-          }}
-        >
-          <Box sx={{ width: "14px" }}>
+        <Text sx={labelUpload}>Upload agreement</Text>
+        <Button onClick={handleChooseAnotherMethod} sx={uploadBtn}>
+          <Box sx={{ width: "20px" }}>
             <Icon style={{ display: "block" }} src={iconsObj.arrowLeftPink} />
           </Box>
-          <Text
-            sx={{
-              display: "block",
-              "&:hover": {
-                color: "#AE4FD0",
-              },
-            }}
-          >
-            Choose another method
-          </Text>
+          <Text sx={backBtn}>Choose another method</Text>
         </Button>
       </Flex>
       <Upload page={page} />

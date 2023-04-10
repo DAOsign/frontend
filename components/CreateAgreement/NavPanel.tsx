@@ -7,20 +7,29 @@ import { useCreateAgreement } from "../../hooks/useCreateAgreement";
 import { useEditAgreement } from "../../hooks/useEditAgreement";
 import iconsObj from "../../assets/icons";
 import {
-  box,
-  containerButtons,
-  fW,
-  leftSideItem,
-  primaryTitleItem,
+  configurationsTitle,
   secondaryTitleStep,
-  stepNumber,
+  containerButtons,
+  primaryTitleItem,
   stepsContainer,
+  leftSideItem,
+  iconNavMenu,
+  stepNumber,
   stepStyle,
+  number,
   delBtn,
+  box,
+  fW,
 } from "./styles";
 import { useMutation } from "urql";
 import { saveAgreementMutation } from "../../modules/graphql/mutations";
-import { LOCATION_CLOUD, LOCATION_PUBLIC_IPFS, METHOD_ENTER, METHOD_UPLOAD } from "../../types";
+import {
+  LOCATION_CLOUD,
+  LOCATION_PUBLIC_IPFS,
+  METHOD_ENTER,
+  METHOD_UPLOAD,
+  METHOD_IMPORT_SHAPSHOT,
+} from "../../types";
 import {
   clearDraft,
   clearEdit,
@@ -51,7 +60,6 @@ export default function NavPanel({ setLoading, page }: { setLoading: any; page: 
   const { values, changeValue } = page === "create" ? create : edit;
   const { push, query } = useRouter();
   const { account } = useWeb3();
-
   const step = query?.step ? Number(query.step) : 1;
 
   const [isLoadingNextStep, setIsLoadingNextStep] = useState<boolean>(false);
@@ -68,7 +76,6 @@ export default function NavPanel({ setLoading, page }: { setLoading: any; page: 
       if (!values.title) {
         errors.title = "Title can not be blank";
       }
-      //@ts-ignore
       if (values.title.trim()?.length > 120) {
         errors.title = "Title should be 120 characters max";
       }
@@ -81,18 +88,14 @@ export default function NavPanel({ setLoading, page }: { setLoading: any; page: 
           if (!values.title.trim()) {
             errors.title = "Title can not be blank";
           }
-          //@ts-ignore
           if (values.title.trim()?.length > 120) {
             errors.title = "Title should be 120 characters max";
           }
-          if (!values.agreementPrivacy) {
-            errors.agreementPrivacy = "Agreement Privacy is a required selection";
-          }
-          break;
-        case 2:
           if (!values.agreementMethod) {
             errors.agreementFile = "Agreement Description is a required selection";
           } else if (values.agreementMethod === METHOD_ENTER && !values.textEditorValue) {
+            errors.agreementFile = "Agreement entry is required";
+          } else if (values.agreementMethod === METHOD_IMPORT_SHAPSHOT && !values.textEditorValue) {
             errors.agreementFile = "Agreement entry is required";
           } else if (values.agreementMethod === METHOD_UPLOAD && !values.agreementHash) {
             errors.agreementFile = "Agreement file upload is required";
@@ -100,7 +103,7 @@ export default function NavPanel({ setLoading, page }: { setLoading: any; page: 
             errors.agreementFile = "Agreement Description is a required selection";
           }
           break;
-        case 3:
+        case 2:
           if (!values.signers.length) {
             errors.signers = "At least one signer is required";
           }
@@ -114,6 +117,11 @@ export default function NavPanel({ setLoading, page }: { setLoading: any; page: 
           ) {
             extraError = "Should add yourself as signer or observer";
             setIsAuthorNotAddedPopupVisible(true);
+          }
+          break;
+        case 3:
+          if (!values.agreementPrivacy) {
+            errors.agreementPrivacy = "Agreement Privacy is a required selection";
           }
           break;
       }
@@ -171,8 +179,12 @@ export default function NavPanel({ setLoading, page }: { setLoading: any; page: 
       agreementId: Number(query.id),
       title: values.title,
       agreementLocation: values.agreementLocation || null,
+      snapshotProposalUrl: values.proposal.snapshotProposalUrl,
       content:
-        values.agreementMethod === METHOD_ENTER && values.textEditorValue
+        (values.agreementMethod === METHOD_ENTER ||
+          values.agreementMethod ||
+          METHOD_IMPORT_SHAPSHOT) &&
+        values.textEditorValue
           ? values.textEditorValue
           : "",
       agreementPrivacy: values.agreementPrivacy || null,
@@ -197,7 +209,7 @@ export default function NavPanel({ setLoading, page }: { setLoading: any; page: 
   const handleSaveDraft = async () => {
     const areFieldsValid = validateFields(values, true);
     if (areFieldsValid) {
-      const uploadFileData = await preuploadFile();
+      const uploadFileData: any = await preuploadFile();
       await handleCreateAgreement(uploadFileData?.filePath, uploadFileData?.agreementHash);
     }
   };
@@ -253,7 +265,7 @@ export default function NavPanel({ setLoading, page }: { setLoading: any; page: 
           return;
         }
       } else if (values.agreementMethod === METHOD_ENTER && values.textEditorValue) {
-        const encoded = Buffer.from(values.textEditorValue); //TODO handle encodings
+        const encoded = Buffer.from(values.textEditorValue);
         const file = new File([encoded], "agreement.txt", {
           type: "text/plain",
         });
@@ -270,7 +282,6 @@ export default function NavPanel({ setLoading, page }: { setLoading: any; page: 
           return;
         }
       }
-      return uploadedFileData;
     } catch (error) {
       console.error(error);
       notifError(
@@ -283,6 +294,7 @@ export default function NavPanel({ setLoading, page }: { setLoading: any; page: 
 
   const ForwardButton = () => {
     const isFinishButton = step === 3;
+    let generateAggrement = true;
     const props: ButtonProps = {
       variant: "primary",
       sx: { ...fW, mt: "20px" },
@@ -292,21 +304,72 @@ export default function NavPanel({ setLoading, page }: { setLoading: any; page: 
 
         setIsLoadingNextStep(true);
         setLoading(true);
-        const uploadedFileData = await preuploadFile();
 
-        const areFieldsValid = validateFields({ ...values, ...uploadedFileData });
-        if (areFieldsValid) {
-          if (isFinishButton) {
-            await handleCreateAgreement();
-          } else {
-            handleNextStep();
+        try {
+          let uploadedFileData: { filePath?: string; agreementHash?: string; error?: any } = {};
+          if (
+            step === 1 &&
+            values.agreementMethod === METHOD_UPLOAD &&
+            values.file &&
+            (!values.filePath || !values.agreementHash)
+          ) {
+            uploadedFileData = await uploadNewFile(values.file);
+            if (!uploadedFileData || uploadedFileData.error) {
+              console.error(uploadedFileData.error || new Error(FILE_UPLOAD_ERROR_DEFAULT_MESSAGE));
+              notifError(
+                formatFileUploadErrorMessage(
+                  uploadedFileData.error?.response?.data?.error ||
+                    uploadedFileData.error.message ||
+                    FILE_UPLOAD_ERROR_DEFAULT_MESSAGE
+                )
+              );
+              return;
+            }
+          } else if (
+            step === 1 &&
+            values.agreementMethod === METHOD_ENTER &&
+            values.textEditorValue
+          ) {
+            const encoded = Buffer.from(values.textEditorValue);
+            const file = new File([encoded], "agreement.txt", {
+              type: "text/plain",
+            });
+            uploadedFileData = await uploadNewFile(file);
+            if (!uploadedFileData || uploadedFileData.error) {
+              console.error(uploadedFileData.error || new Error(FILE_UPLOAD_ERROR_DEFAULT_MESSAGE));
+              notifError(
+                formatFileUploadErrorMessage(
+                  uploadedFileData.error?.response?.data?.error ||
+                    uploadedFileData.error.message ||
+                    FILE_UPLOAD_ERROR_DEFAULT_MESSAGE
+                )
+              );
+              return;
+            }
           }
+          const areFieldsValid = validateFields({ ...values, ...uploadedFileData });
+          if (areFieldsValid) {
+            if (isFinishButton) {
+              await handleCreateAgreement();
+            } else {
+              handleNextStep();
+            }
+          }
+        } catch (error) {
+          console.error(error);
+          notifError(
+            formatFileUploadErrorMessage(
+              error?.response?.data?.error || error?.message || FILE_UPLOAD_ERROR_DEFAULT_MESSAGE
+            )
+          );
+        } finally {
+          setLoading(false);
+          setIsLoadingNextStep(false);
         }
-        setLoading(false);
-        setIsLoadingNextStep(false);
       },
       disabled: isLoadingNextStep || savingAgreement,
     };
+
     return (
       <Button {...props}>
         {isLoadingNextStep ? (
@@ -357,17 +420,17 @@ export default function NavPanel({ setLoading, page }: { setLoading: any; page: 
         >
           <Box sx={stepNumber}>
             {(step > 1 && page === "create") || page === "edit" ? (
-              <Box sx={{ width: "24px", height: "24px", m: "0 auto", cursor: "pointer" }}>
+              <Box sx={iconNavMenu}>
                 <Icon src={iconsObj.done} />
               </Box>
             ) : (
-              <Text sx={{ variant: "text.normalTextBold", lineHeight: "0", color: "#fff" }}>1</Text>
+              <Text sx={number}>1</Text>
             )}
           </Box>
 
           <Container sx={leftSideItem}>
-            <Text sx={primaryTitleItem}>Privacy</Text>
-            <Text sx={secondaryTitleStep}>Enter title and privacy ot the agreement</Text>
+            <Text sx={primaryTitleItem}>Content</Text>
+            <Text sx={secondaryTitleStep}>Enter agreement content</Text>
           </Container>
         </Flex>
         <Container sx={box}></Container>
@@ -379,19 +442,16 @@ export default function NavPanel({ setLoading, page }: { setLoading: any; page: 
         >
           <Box sx={{ ...stepNumber, backgroundColor: step > 1 ? "#CA5CF2" : "#EDEDF3" }}>
             {(step > 2 && page === "create") || page === "edit" ? (
-              <Box
-                onClick={() => changeStep(2)}
-                sx={{ width: "24px", height: "24px", m: "0 auto", cursor: "pointer" }}
-              >
+              <Box onClick={() => changeStep(2)} sx={iconNavMenu}>
                 <Icon src={iconsObj.done} />
               </Box>
             ) : (
-              <Text sx={{ variant: "text.normalTextBold", lineHeight: "0", color: "#fff" }}>2</Text>
+              <Text sx={number}>2</Text>
             )}
           </Box>
           <Container sx={leftSideItem}>
-            <Text sx={primaryTitleItem}>Content</Text>
-            <Text sx={secondaryTitleStep}>Enter agreement content</Text>
+            <Text sx={primaryTitleItem}>Signers</Text>
+            <Text sx={secondaryTitleStep}>Add signers and observers</Text>
           </Container>
         </Flex>
         <Container sx={box}></Container>
@@ -400,32 +460,41 @@ export default function NavPanel({ setLoading, page }: { setLoading: any; page: 
           sx={{ ...stepStyle, cursor: step > 3 || page === "edit" ? "pointer" : "initial" }}
         >
           <Box sx={{ ...stepNumber, backgroundColor: step > 2 ? "#CA5CF2" : "#EDEDF3" }}>
-            {/* <Text sx={{ variant: "text.normalTextBold", lineHeight: "0", color: "#fff" }}>3</Text> */}
             {(step > 3 && page === "create") || page === "edit" ? (
-              <Box sx={{ width: "24px", height: "24px", m: "0 auto", cursor: "pointer" }}>
+              <Box sx={iconNavMenu}>
                 <Icon src={iconsObj.done} />
               </Box>
             ) : (
-              <Text sx={{ variant: "text.normalTextBold", lineHeight: "0", color: "#fff" }}>3</Text>
+              <Text sx={number}>3</Text>
             )}
           </Box>
-          <Container sx={leftSideItem}>
-            <Text sx={primaryTitleItem}>Signers</Text>
-            <Text sx={secondaryTitleStep}>Add signers and observers</Text>
+          <Container
+            sx={{
+              ...leftSideItem,
+              "@media screen and (max-width: 480px)": {
+                maxWidth: "120px",
+                mt: "4px",
+              },
+            }}
+          >
+            <Text sx={configurationsTitle}>Configurations</Text>
+            <Text sx={secondaryTitleStep}>Set agreement options</Text>
           </Container>
         </Flex>
       </Container>
       <Container sx={containerButtons}>
         <BackwardButton />
-        <Button
-          variant="secondary"
-          sx={{ ...fW, mt: "20px" }}
-          type="button"
-          onClick={handleSaveDraft}
-          disabled={isLoadingNextStep || savingAgreement}
-        >
-          Save Draft
-        </Button>
+        {step < 3 && (
+          <Button
+            variant="secondary"
+            sx={{ ...fW, mt: "20px" }}
+            type="button"
+            onClick={handleSaveDraft}
+            disabled={isLoadingNextStep || savingAgreement}
+          >
+            Save Draft
+          </Button>
+        )}
         <ForwardButton />
         {page === "edit" ? (
           <Button sx={delBtn} onClick={handleDeleteAgreement}>

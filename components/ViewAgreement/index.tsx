@@ -4,11 +4,7 @@ import { Box, Button, Flex } from "theme-ui";
 import { useRouter } from "next/router";
 import { useMutation, useQuery, useClient } from "urql";
 
-import {
-  agreementById,
-  getAgreementFileProofData as getAgreementFileProofDataRequest,
-  getAgreementSignProofData as getAgreementSignProofDataRequest,
-} from "../../modules/graphql/queries";
+import { agreementById } from "../../modules/graphql/queries";
 import {
   backContainer,
   backIcon,
@@ -68,17 +64,13 @@ export const ViewAgreement = () => {
       .query(agreementById, { agreementId: Number(agreementId) }, { requestPolicy: "network-only" })
       .toPromise()
       .then(res => {
-        const agr = res.data?.agreement;
-
-        //@ts-ignore
-        if (agr) setAgreement(toAgreementWithParticipants(agr)); //eslint-disable-line
+        const agr: any = res.data?.agreement;
+        if (agr) setAgreement(toAgreementWithParticipants(agr));
         if (res?.error) {
           const errorMsg = res?.error.message;
           if (errorMsg.includes("Access denied")) {
             push("/404");
           }
-          //notifError(errorMsg || "Failed to get agreement from server");
-          // eslint-disable-next-line no-console
         }
       });
   }, [agreementId]);
@@ -160,18 +152,18 @@ export const ViewAgreement = () => {
           </Flex>
           {agreement && (
             <AgreementInformation
-              agreement={agreement}
-              agreementId={Number(agreementId)}
-              agreementStatus={agreement?.agreementStatus}
-              agreementPrivacy={agreement?.agreementPrivacy}
-              agreementLocation={agreement?.agreementLocation}
-              createdAt={agreement?.createdAt}
               isWaitingForMySignature={agreement?.isWaitingForMySignature || false}
+              onSetAgreementReadyToSign={handleOpenReadyToSignModal}
+              authorWalletAddress={agreement?.authorWalletAddress}
+              agreementLocation={agreement?.agreementLocation}
+              agreementPrivacy={agreement?.agreementPrivacy}
+              agreementStatus={agreement?.agreementStatus}
+              agreementId={Number(agreementId)}
+              onSignAgreement={onSignAgreement}
+              createdAt={agreement?.createdAt}
               userIsAuthor={userIsAuthor}
               setIsOpen={setIsOpen}
-              authorWalletAddress={agreement?.authorWalletAddress}
-              onSetAgreementReadyToSign={handleOpenReadyToSignModal}
-              onSignAgreement={onSignAgreement}
+              agreement={agreement}
             />
           )}
         </>

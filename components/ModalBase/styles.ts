@@ -10,4 +10,7 @@ export const modalContainer = {
   // minHeight: "466px",
   borderRadius: "12px",
   backgroundColor: "white",
+  "&::-webkit-scrollbar": {
+    width: 0,
+  },
 } as ThemeUIStyleObject;

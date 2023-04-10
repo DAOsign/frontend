@@ -1,25 +1,76 @@
-import React from "react";
+import React, { useState } from "react";
 import { Container, Text, Box } from "theme-ui";
 import Icon from "../../../icon/index";
-import { card, primaryTitleItem, rightCard, leftCard } from "../../styles";
+import {
+  card,
+  primaryTitleItem,
+  rightCard,
+  leftCard,
+  label,
+  iconMethod,
+  centerCard,
+  secondaryText,
+  itemsContent,
+  text,
+  conteinerItems,
+} from "../../styles";
 import iconsObj from "../../../../assets/icons";
 import TextEditor from "../../TextEditor/index";
 import { useCreateAgreement } from "../../../../hooks/useCreateAgreement";
+import {
+  CreateAgreementFieldErrors,
+  CreationState,
+} from "../../../../modules/createAgreementProvider";
 import { useEditAgreement } from "../../../../hooks/useEditAgreement";
+import { isEmpty } from "../../../../utils/common";
 import { withFade } from "../..";
 import UploadLocalAgreement from "./UploadLocal";
-import { METHOD_ENTER, METHOD_UPLOAD } from "../../../../types";
+import { METHOD_ENTER, METHOD_UPLOAD, METHOD_IMPORT_SHAPSHOT } from "../../../../types";
 import FieldErrorMessage from "../../../Form/FieldErrorMessage";
 import useWindowDimensions from "../../../../hooks/useWindowDimensions";
+import ModalImportSnapshot from "../../../ModalImportSnapshot";
 
 export default function ChooseAgreementMethod({ page }: { page: string }) {
   const { width } = useWindowDimensions();
   const create = useCreateAgreement();
   const edit = useEditAgreement();
   const { values, changeValue } = page === "create" ? create : edit;
+  const [isOpen, setIsOpen] = useState(false);
+
+  const validateTitle = () => {
+    const errors: CreateAgreementFieldErrors = {};
+    if (!values.title.trim()) {
+      errors.title = "Title can not be blank";
+    }
+    if (values.title.trim()?.length > 120) {
+      errors.title = "Title should be 120 characters max";
+    }
+    changeValue("errors", errors);
+    return isEmpty(errors);
+  };
+
+  const chengeMethod = (name: keyof CreationState, method: string) => {
+    const validateRes = validateTitle();
+    if (validateRes) {
+      changeValue("errors", { ...values.errors, agreementFile: null });
+      if (method === METHOD_IMPORT_SHAPSHOT) {
+        setIsOpen(true);
+        return;
+      }
+      changeValue(name, method);
+    }
+  };
 
   const renderMethods = () => {
     switch (values.agreementMethod) {
+      case METHOD_IMPORT_SHAPSHOT:
+        return withFade(
+          <>
+            <TextEditor page={page} />
+            <FieldErrorMessage error={values?.errors?.agreementFile} />
+          </>,
+          1
+        );
       case METHOD_ENTER:
         return withFade(
           <>
@@ -43,48 +94,67 @@ export default function ChooseAgreementMethod({ page }: { page: string }) {
       default:
         return withFade(
           <>
-            <Container sx={{ height: "242px", position: "relative", mt: "24px" }}>
+            <Text sx={label}>Agreement content</Text>
+            <Container sx={conteinerItems}>
               <Container
                 onClick={() => {
-                  changeValue("errors", { ...values.errors, agreementFile: null });
-                  changeValue("agreementMethod", METHOD_UPLOAD);
+                  chengeMethod("agreementMethod", METHOD_UPLOAD);
                 }}
                 sx={leftCard}
               >
-                <Box sx={{ maxWidth: "150px", m: "0 auto" }}>
-                  <div style={{ width: "50px", height: "50px", margin: "0 auto" }}>
-                    <Icon width="50px" height="50px" src={iconsObj.uploadCloudPrimary} />
-                  </div>
-                  <Text sx={{ ...primaryTitleItem, mb: "12px", mt: "24px" }}>Upload Agreement</Text>
-                  <Text sx={{ variant: "text.smallTextMedium", maxWidth: "160px", opacity: 1 }}>
-                    Upload PDF file
-                  </Text>
+                <Box sx={itemsContent}>
+                  <Box sx={iconMethod}>
+                    <Icon width="50px" height="50px" src={iconsObj.uploadFileIcon} />
+                  </Box>
+                  <Box>
+                    <Text className="leftTitle">Upload Agreement</Text>
+                    <Text sx={secondaryText}>Upload PDF file</Text>
+                  </Box>
                 </Box>
               </Container>
               <Container
                 onClick={() => {
-                  changeValue("errors", { ...values.errors, agreementFile: null });
-                  changeValue("agreementMethod", METHOD_ENTER);
+                  chengeMethod("agreementMethod", METHOD_ENTER);
                 }}
-                sx={rightCard}
+                sx={centerCard}
               >
-                <Box sx={{ maxWidth: "150px", m: "0 auto" }}>
-                  <div style={{ width: "50px", height: "50px", margin: "0 auto" }}>
-                    <Icon width="50px" height="50px" src={iconsObj.fileSecondarysvg} />
-                  </div>
-                  <Text sx={{ ...primaryTitleItem, mt: "24px", mb: "8px" }}>Enter Agreement</Text>
-                  <Text sx={{ variant: "text.smallTextMedium", maxWidth: "160px", opacity: 1 }}>
-                    {
-                      //@ts-ignore
-                      width > 480
+                <Box sx={itemsContent}>
+                  <Box sx={iconMethod}>
+                    <Icon width="50px" height="50px" src={iconsObj.enterAgreementIcon} />
+                  </Box>
+                  <Box>
+                    <Text className="centerTitle">Enter Agreement</Text>
+                    <Text sx={secondaryText}>
+                      {!!width && width > 480
                         ? "Enter Text or Markdown content for the Agreement"
-                        : "Accessed only by Signers or Observes"
-                    }
-                  </Text>
+                        : "Accessed only by Signers or Observes"}
+                    </Text>
+                  </Box>
+                </Box>
+              </Container>
+              <Container
+                sx={rightCard}
+                onClick={() => {
+                  chengeMethod("agreementMethod", METHOD_IMPORT_SHAPSHOT);
+                }}
+              >
+                <Box sx={itemsContent}>
+                  <Box sx={iconMethod}>
+                    <Icon width="50px" height="50px" src={iconsObj.snapshotImportIcon} />
+                  </Box>
+                  <Box sx={text}>
+                    <Text className="rightTitle">Import From Snapshot</Text>
+                    <Text sx={secondaryText}>
+                      Import Snapshot proposal using the advantages of AI
+                    </Text>
+                  </Box>
                 </Box>
               </Container>
             </Container>
             <FieldErrorMessage error={values?.errors?.agreementFile} />
+            {isOpen && (
+              <ModalImportSnapshot page={page} onExit={() => setIsOpen(false)} isOpen={isOpen} />
+            )}
           </>,
           3
         );

@@ -1,3 +1,4 @@
+/* eslint-disable @next/next/no-img-element */
 import React, { ReactNode, useState } from "react";
 import {
   briefInformation,
@@ -12,7 +13,7 @@ import {
   verificationsRow,
   verificationsTitle,
 } from "./styles";
-import { Box, Button, Flex, Link, Spinner } from "theme-ui";
+import { Box, Button, Flex, Link, Spinner, Text } from "theme-ui";
 import iconsObj from "../../assets/icons";
 import { InformationRow } from "./InformationRow";
 import { formatAddress, formatAgreementCreationDate, onCopyClick } from "../../utils/formats";
@@ -30,13 +31,13 @@ import ModalConfirmAgreementDeletion from "../ModalConfirmAgreementDeletion/Moda
 import { sleep } from "../../utils/common";
 import { useRouter } from "next/router";
 import { notifError, notifSucces } from "../../utils/notification";
-import Image from "next/image";
 import ModalSignStatus from "../ModalSignStatus";
 import ModalProof from "../ModalProof";
 import { toAgreementWithParticipants } from "../../utils/typeUtils";
-import SignedIcon from "../icon/editable/SignedIcon";
+import { extractProposalId } from "../../utils/formats";
 import SignatureIcon from "../icon/editable/SignatureIcon";
 import CopyIcon from "../CopyIcon";
+import Icon from "../icon";
 
 const formatAgreementPrivacy = (agreementPrivacy: string | undefined) => {
   if (!agreementPrivacy) return "";
@@ -67,18 +68,18 @@ export const AGREEMENT_PROOF = "Agreement Proof";
 export const AUTHORITY_PROOF = "Authority Proof";
 
 export const AgreementInformation = ({
-  agreement,
-  agreementId,
-  agreementStatus,
-  agreementPrivacy,
-  agreementLocation,
-  createdAt,
-  isWaitingForMySignature,
-  userIsAuthor,
-  setIsOpen,
-  authorWalletAddress,
   onSetAgreementReadyToSign = () => {},
   onSignAgreement = async () => {},
+  isWaitingForMySignature,
+  authorWalletAddress,
+  agreementLocation,
+  agreementPrivacy,
+  agreementStatus,
+  userIsAuthor,
+  agreementId,
+  createdAt,
+  setIsOpen,
+  agreement,
 }: Props) => {
   const { push } = useRouter();
   const [isConfirmAgreementDeletionPopupVisible, setIsConfirmAgreementDeletionPopupVisible] =
@@ -169,10 +170,27 @@ export const AgreementInformation = ({
         <InformationRow
           name="Signed Date"
           value={
-            agreement?.agreementProof?.signedAt
-              ? formatAgreementCreationDate(agreement?.agreementProof?.signedAt)
-              : "-"
+            <Box>
+              {agreement?.agreementProof?.signedAt
+                ? formatAgreementCreationDate(agreement?.agreementProof?.signedAt)
+                : "-"}
+            </Box>
           }
+        />
+        <InformationRow
+          value={
+            <Link href={agreement?.snapshotProposalUrl} target="_blank">
+              <Flex>
+                <Text>
+                  {formatAddress(extractProposalId(agreement?.snapshotProposalUrl) || "")}
+                </Text>
+                <Box sx={{ width: "16px", height: "16px", ml: "4px" }}>
+                  <Icon src={iconsObj.lightning} />
+                </Box>
+              </Flex>
+            </Link>
+          }
+          name="Snapshot proposal"
         />
         <InformationRow
           name="Creator"

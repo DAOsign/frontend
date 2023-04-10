@@ -10,13 +10,23 @@ interface checkbox {
 }
 
 const CheckboxComponent = ({ checked, disabled }: checkbox) => {
+  const borderValue = disabled
+    ? "1.8px solid #21212150"
+    : !checked
+    ? "1.8px solid #21212150"
+    : "1.8px solid #212121";
+
   return (
     <>
       <Checkbox checked={checked} disabled={disabled} />
       <Box
         sx={{
-          border: !checked ? "1.8px solid #21212150" : "1.8px solid #212121",
+          border: borderValue,
           ...checkboxContainer,
+          "&:hover": {
+            border: borderValue,
+            opacity: 1,
+          },
         }}
       >
         <Box sx={{ width: "8px", height: "9px", mt: "3px" }}>

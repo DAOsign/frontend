@@ -50,8 +50,8 @@ const UploadScreen = ({ page }: { page: string }) => {
         sx={{
           ...imageUploadContainer,
           "@media screen and (max-width: 768px)": {
-            width: !values.file ? "124px" : "100% !important",
-            height: !values.file ? "46px" : "140px !important",
+            width: "100% !important",
+            height: !values.file ? "46px" : "310px !important",
             borderRadius: !values.file ? "80px" : "12px",
           },
         }}

@@ -1,13 +1,18 @@
 import React from "react";
 import { Container, Flex, Text, Box } from "theme-ui";
-import { rightCard, leftCard } from "../../styles";
+import {
+  rightCard,
+  leftCard,
+  itemsContentMethod,
+  secondaryTextMethod,
+  titleMethodCard,
+} from "../../styles";
 import { useCreateAgreement } from "../../../../hooks/useCreateAgreement";
 import { useEditAgreement } from "../../../../hooks/useEditAgreement";
 import iconsObj from "../../../../assets/icons";
 import Icon from "../../../icon";
 
-import { PRIVACY_PRIVATE } from "../../../../types";
-import { PublicProps } from ".";
+import { PRIVACY_PRIVATE, PublicProps } from "../../../../types";
 import { motion } from "framer-motion";
 
 const chooseVariants = {
@@ -29,7 +34,17 @@ export default function ChooseMethod({ animateContainer, setPublic, page }: Publ
     >
       <Container sx={{ position: "relative", height: "242px" }}>
         <Container
-          sx={leftCard}
+          sx={{
+            ...leftCard,
+            width: "290px",
+            height: "218px",
+            maxWidth: "300px",
+            "@media screen and (max-width: 719px)": {
+              width: "48%",
+              height: "189px",
+              minHeight: "unset",
+            },
+          }}
           onClick={() => {
             changeValue("errors", { ...values.errors, agreementPrivacy: null });
             changeValue("agreementPrivacy", "");
@@ -37,29 +52,37 @@ export default function ChooseMethod({ animateContainer, setPublic, page }: Publ
             setPublic(true);
           }}
         >
-          <Box sx={{ maxWidth: "150px", m: "0 auto" }}>
+          <Box sx={itemsContentMethod}>
             <div style={{ width: "50px", height: "50px", margin: "0 auto" }}>
               <Icon width="50px" height="50px" src={iconsObj.publicIcon} />
             </div>
-            <Text sx={{ variant: "text.largeTextBold", mt: "20px" }}>Public</Text>
-            <Text sx={{ variant: "text.overscript", mt: "20px", maxWidth: "160px" }}>
-              Accessed Publicly based on sharing options
-            </Text>
+            <Box>
+              <Text sx={titleMethodCard}>Public</Text>
+              <Text sx={secondaryTextMethod}>Accessed Publicly based on sharing options</Text>
+            </Box>
           </Box>
         </Container>
         <Container
-          sx={rightCard}
+          sx={{
+            ...rightCard,
+            width: "290px",
+            height: "218px",
+            maxWidth: "300px",
+            "@media screen and (max-width: 719px)": {
+              width: "48%",
+              height: "189px",
+              minHeight: "unset",
+            },
+          }}
           onClick={() => changeValue("agreementPrivacy", PRIVACY_PRIVATE)}
           className={values?.agreementPrivacy === PRIVACY_PRIVATE ? "active" : undefined}
         >
-          <Box sx={{ maxWidth: "150px", m: "0 auto" }}>
+          <Box sx={itemsContentMethod}>
             <div style={{ width: "50px", height: "50px", margin: "0 auto" }}>
               <Icon width="50px" height="50px" src={iconsObj.privateIcon} />
             </div>
-            <Text sx={{ variant: "text.largeTextBold", mt: "20px" }}>Private</Text>
-            <Text sx={{ variant: "text.overscript", mt: "20px", maxWidth: "160px" }}>
-              Accessed only by Signers or Observes
-            </Text>
+            <Text sx={titleMethodCard}>Private</Text>
+            <Text sx={secondaryTextMethod}>Accessed only by Signers or Observes</Text>
           </Box>
         </Container>
       </Container>

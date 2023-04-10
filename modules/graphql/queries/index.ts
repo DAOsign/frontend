@@ -19,6 +19,7 @@ export const agreementById = graphql(`
   query Query($agreementId: Int!) {
     agreement(agreementId: $agreementId) {
       agreementId
+      snapshotProposalUrl
       agreementFile {
         agreementFileId
         agreementHash
@@ -64,6 +65,7 @@ export const agreementById = graphql(`
       title
       content
       isWaitingForMySignature
+      snapshotProposalUrl
       isAllowedToEditObservers
       createdAt
       signProofs {
@@ -204,6 +206,32 @@ export const getAgreementSignProofData = graphql(`
         signer
         timestamp
       }
+    }
+  }
+`);
+
+export const generateAgreement = graphql(`
+  query GenerateAgreement(
+    $proposalText: String!
+    $contractType: String
+    $legalJurisdictionCountry: String
+    $legalJurisdictionState: String
+    $additionalDetails: String
+    $addIndemnificationClause: Boolean
+    $addIntellectualPropertyClause: Boolean
+    $addNonSolicitationClause: Boolean
+  ) {
+    generateAgreement(
+      proposalText: $proposalText
+      contractType: $contractType
+      legalJurisdictionCountry: $legalJurisdictionCountry
+      legalJurisdictionState: $legalJurisdictionState
+      additionalDetails: $additionalDetails
+      addIndemnificationClause: $addIndemnificationClause
+      addIntellectualPropertyClause: $addIntellectualPropertyClause
+      addNonSolicitationClause: $addNonSolicitationClause
+    ) {
+      text
     }
   }
 `);
