@@ -394,13 +394,9 @@ export default function StepTwo({ page }: { page: string }) {
         <Flex
           sx={{
             ...verificationCardStyles,
-            backgroundColor: "#F7F7FB",
             cursor: "no-drop",
             height: "84px",
             mt: "12px",
-            "@media screen and (max-width: 719px)": {
-              height: "150px",
-            },
             pr: 0,
           }}
         >

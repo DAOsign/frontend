@@ -143,9 +143,6 @@ const leftSide = {
   paddingBottom: "60px",
   paddingTop: "60px",
   maxHeight: "fit-content",
-  "&.transition": {
-    maxHeight: "795px",
-  },
   "@media screen and (max-width: 1200px)": {
     width: "100%",
     maxWidth: "672px",

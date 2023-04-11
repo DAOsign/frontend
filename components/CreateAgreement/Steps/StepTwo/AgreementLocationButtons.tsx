@@ -44,7 +44,7 @@ export default function AgreementLocationRadioButtons({ page }: { page: string }
 
   return (
     <>
-      <Flex sx={{ alignItems: "center" }}>
+      <Flex sx={{ alignItems: "center", mt: "24px" }}>
         <Text
           sx={{
             variant: "forms.label",
@@ -52,7 +52,6 @@ export default function AgreementLocationRadioButtons({ page }: { page: string }
             mr: "5px",
             maxWidth: "150px",
             mb: "5px",
-            mt: "24px",
           }}
         >
           Agreement location{" "}

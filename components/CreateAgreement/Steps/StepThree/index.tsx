@@ -75,7 +75,7 @@ export default function StepThree({ page, animateContainer, loading }: Props) {
                   notifComingSoon(`Store Proofs on Blockchain is coming soon`);
                 }
               }}
-              disabled
+              disabled={false}
               className="switch"
               sx={switchBtn}
               id="storeBlockchain"
