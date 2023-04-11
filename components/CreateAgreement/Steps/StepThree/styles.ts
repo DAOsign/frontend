@@ -11,10 +11,6 @@ export const verificationCardStyles: ThemeUIStyleObject = {
   cursor: "pointer",
   alignItems: "flex-start",
   transition: "box-shadow .3s",
-  // "@media screen and (max-width: 719px)": {
-  //   p: "29px 16px 16px 16px",
-  //   alignItems: "flex-start",
-  // },
   ".card_head": {
     pt: "8px",
     pb: "6px",

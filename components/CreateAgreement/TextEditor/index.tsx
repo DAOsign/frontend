@@ -40,6 +40,7 @@ const buttonPropsByStatus = (
 };
 
 const TextEditor = ({ page }: { page: string }) => {
+  const [isOpen, setIsOpen] = useState(false);
   const create = useCreateAgreement();
   const edit = useEditAgreement();
   const {
@@ -85,12 +86,22 @@ const TextEditor = ({ page }: { page: string }) => {
             <Text sx={{ display: "block" }}>{" < "} Choose another method</Text>
           </Button>
         </Flex>
-        <MDEditor
-          onChange={val => changeValue("textEditorValue", val || "")}
-          hideToolbar={state === "preview"}
-          value={textEditorValue}
-          preview={state}
-        />
+        <Box
+          onClick={event => {
+            if (event.detail === 2) {
+              setIsOpen(!isOpen);
+            }
+          }}
+        >
+          <MDEditor
+            onChange={val => changeValue("textEditorValue", val || "")}
+            hideToolbar={state === "preview"}
+            minHeight={200}
+            height={isOpen ? "fit-content" : "200px"}
+            value={textEditorValue}
+            preview={state}
+          />
+        </Box>
         <Box sx={iconFileResize}>
           <Icon width="30px" height="30px" style={{ opacity: 0.3 }} src={iconsObj.fieldResize} />
         </Box>
