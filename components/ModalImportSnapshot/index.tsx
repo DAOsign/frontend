@@ -73,10 +73,9 @@ export default function ModalImportSnapshot({ isOpen, page, onExit }: Props) {
   const [id, setId] = useState("");
   const create = useCreateAgreement();
   const edit = useEditAgreement();
-  const { values, changeValue } = page === "create" ? create : edit;
+  const { changeValue } = page === "create" ? create : edit;
   const [selectsOpen, setSelectsOpen] = useState(initialStateSelects);
   const [selectsValue, setSelectsValue] = useState(initialState);
-  const [searchIsOpen, setSearchIsOpen] = useState(false);
   const [searchValue, setSearchValue] = useState("");
   const { query } = useClient();
 
@@ -162,54 +161,6 @@ export default function ModalImportSnapshot({ isOpen, page, onExit }: Props) {
     setSelectsOpen({ ...selectsOpen, [name]: !selectsOpen[name] });
     setSearchValue("");
   };
-  console.log(searchValue);
-
-  // const SelectCountries = () => {
-  //   const { value, options, defaultValue } = selectsValue[CHOOSE_COUNTRY];
-  //   return (
-  //     <Container sx={containerSelect}>
-  //       <Flex sx={flexSelect}>
-  //         {/* <Text sx={{ ...titleSelect, opacity: value === defaultValue ? 0.5 : 1 }}>
-  //           {searchValue === "" ? value : searchValue}
-  //         </Text> */}
-  //         <Box
-  //           // onClick={() =>
-  //           //   setSelectsOpen({ ...selectsOpen, [CHOOSE_COUNTRY]: !selectsOpen[CHOOSE_COUNTRY] })
-  //           // }
-  //           sx={icon}
-  //         >
-  //           <Icon src={iconsObj.arrowLeftPink} />
-  //         </Box>
-  //       </Flex>
-  //       <motion.div
-  //         variants={variantsSelect}
-  //         animate={selectsOpen[CHOOSE_COUNTRY] ? "enter" : "exit"}
-  //         className="settingImportSnapshotProposal"
-  //         transition={{ type: "linear" }}
-  //         initial="hidden"
-  //       >
-  //         {options?.map((el: string, i: number) => {
-  //           return (
-  //             el !== value && (
-  //               <Flex
-  //                 onClick={() => onChangeSelect(CHOOSE_COUNTRY, el)}
-  //                 key={i}
-  //                 sx={{
-  //                   ...flexSelect,
-  //                   "&:hover": {
-  //                     backgroundColor: "#D8D8E2",
-  //                   },
-  //                 }}
-  //               >
-  //                 <Text sx={{ ...titleSelect, fontSize: "12px" }}>{el}</Text>
-  //               </Flex>
-  //             )
-  //           );
-  //         })}
-  //       </motion.div>
-  //     </Container>
-  //   );
-  // };
 
   const selectContent = (name: string) => {
     const { value, options, defaultValue } = selectsValue[name];
@@ -217,7 +168,6 @@ export default function ModalImportSnapshot({ isOpen, page, onExit }: Props) {
       searchValue !== ""
         ? options.filter((el: string) => el.toLowerCase().includes(searchValue.toLowerCase()))
         : options;
-    console.log(optionsFilter);
 
     return (
       <Container sx={containerSelect}>
@@ -304,7 +254,6 @@ export default function ModalImportSnapshot({ isOpen, page, onExit }: Props) {
       </Flex>
     );
   };
-  console.log(selectsValue[CHOOSE_COUNTRY].value);
 
   return (
     <Portal isOpen={isOpen} onClose={onExit}>

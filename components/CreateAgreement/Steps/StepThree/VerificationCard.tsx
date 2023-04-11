@@ -31,13 +31,8 @@ export default function VerificationCard({
     <Box
       sx={{
         ...verificationCardStyles,
-
         cursor: disabled ? "no-drop" : "pointer",
-        backgroundColor: isAnonymous ? "#fff" : "#F7F7FB",
-        "&:hover": { boxShadow: disabled ? "unset" : "0 0 11px rgba(33,33,33,.2)" },
-        "@media screen and (max-width: 719px)": {
-          height: isNotarizedIdentity ? "167px" : "183px",
-        },
+        "&:hover": { boxShadow: "unset" },
       }}
       onClick={onClick}
     >
@@ -53,11 +48,11 @@ export default function VerificationCard({
         </Box>
       </Flex>
       <Flex>
-        {!isAnonymous && (
+        {/* {!isAnonymous && (
           <Box sx={iconComingSoon}>
             <Icon src={iconsObj.comingSoon} />
           </Box>
-        )}
+        )} */}
         <Box className="card_tail">
           <Box className="image_container">
             <Image src={img} alt={title} />

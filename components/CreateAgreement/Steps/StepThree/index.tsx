@@ -11,6 +11,7 @@ import ChooseMethod from "../StepOne/ChooseMethod";
 import Lottie from "lottie-react";
 import PublicMethod from "../StepOne/ChoosePublicMethod";
 import { useCreateAgreement } from "../../../../hooks/useCreateAgreement";
+import { notifComingSoon } from "../../../../utils/notification";
 import { labelSwitch, switchBtn, switchContainer } from "../../../ModalImportSnapshot/styles";
 import { useEditAgreement } from "../../../../hooks/useEditAgreement";
 import loader from "../../../../img/json/loader.json";
@@ -68,7 +69,17 @@ export default function StepThree({ page, animateContainer, loading }: Props) {
             <Label htmlFor="storeBlockchain" sx={labelSwitch}>
               Store Proofs on Blockchain
             </Label>
-            <Switch disabled className="switch" sx={switchBtn} id="storeBlockchain" />
+            <Switch
+              onChange={e => {
+                if (e.target.checked) {
+                  notifComingSoon(`Store Proofs on Blockchain is coming soon`);
+                }
+              }}
+              disabled
+              className="switch"
+              sx={switchBtn}
+              id="storeBlockchain"
+            />
           </Flex>
         </>
       ) : (
