@@ -160,6 +160,12 @@ export const initialStateSwitches = {
   },
 };
 
+export const initialStateSelects = {
+  [STATEMENT_WORK]: false,
+  [CHOOSE_COUNTRY]: false,
+  [CHOOSE_STATE]: false,
+};
+
 export const initialState = {
   [STATEMENT_WORK]: {
     value: "Statement of Work",

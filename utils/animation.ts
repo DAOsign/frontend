@@ -9,9 +9,19 @@ export const variants: Variants = {
 export const variantsSelect: Variants = {
   hidden: { opacity: 1, height: 0, overflow: "hidden" },
   enter: {
-    opacity: 1,
-    height: "200px",
     overflow: "scroll",
+    height: "200px",
+    opacity: 1,
+  },
+  exit: { opacity: 1, height: 0, overflow: "hidden" },
+};
+
+export const variantSelectStatmentWork: Variants = {
+  hidden: { opacity: 1, height: 0, overflow: "hidden" },
+  enter: {
+    overflow: "scroll",
+    height: "170px",
+    opacity: 1,
   },
   exit: { opacity: 1, height: 0, overflow: "hidden" },
 };
