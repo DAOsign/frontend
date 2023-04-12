@@ -16,7 +16,6 @@ import styles, {
   btnBack,
   icon,
 } from "./styles";
-import { METHOD_IMPORT_SHAPSHOT } from "../../../types";
 
 const MDEditor = dynamic(() => import("@uiw/react-md-editor"), {
   ssr: false,
@@ -99,8 +98,6 @@ const TextEditor = ({ page }: { page: string }) => {
               hideToolbar={state === "preview"}
               height={"fit-content"}
               value={textEditorValue}
-              fullscreen={false}
-              minHeight={200}
               preview={state}
             />
           ) : (
@@ -108,7 +105,6 @@ const TextEditor = ({ page }: { page: string }) => {
               onChange={val => changeValue("textEditorValue", val || "")}
               hideToolbar={state === "preview"}
               value={textEditorValue}
-              minHeight={200}
               preview={state}
             />
           )}

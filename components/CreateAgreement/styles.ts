@@ -53,7 +53,7 @@ const imageUploadContainer = {
     mt: "10px",
   },
   "&.uploaded": {
-    borderStyle: "solid",
+    border: "1px dashed rgba(202, 92, 242, 1)",
   },
   "[id='proxy-renderer']": {
     overflow: "hidden",
@@ -328,6 +328,7 @@ const rightCard = {
   "@media screen and (min-width: 719px)": {
     "&:hover": {
       transform: "scale(1.02)",
+      border: "2px solid rgba(237, 237, 243, 1)",
     },
   },
   "@media screen and (max-width: 719px)": {
@@ -420,6 +421,7 @@ const centerCard = {
   "@media screen and (min-width: 720px)": {
     "&:hover": {
       transform: "translate(-50%, 0) scale(1.02)",
+      border: "2px solid rgba(237, 237, 243, 1)",
     },
   },
   "@media screen and (max-width: 719px)": {
@@ -460,6 +462,7 @@ const leftCard = {
   "@media screen and (min-width: 720px)": {
     "&:hover": {
       transform: "scale(1.02)",
+      border: "2px solid rgba(237, 237, 243, 1)",
     },
   },
   "@media screen and (max-width: 719px)": {

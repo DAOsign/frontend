@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { Container, Text, Box } from "theme-ui";
+import Image from "next/image";
 import Icon from "../../../icon/index";
 import {
   card,
@@ -97,9 +98,7 @@ export default function ChooseAgreementMethod({ page }: { page: string }) {
             <Text sx={label}>Agreement content</Text>
             <Container sx={conteinerItems}>
               <Container
-                onClick={() => {
-                  chengeMethod("agreementMethod", METHOD_UPLOAD);
-                }}
+                onClick={() => chengeMethod("agreementMethod", METHOD_UPLOAD)}
                 sx={leftCard}
               >
                 <Box sx={itemsContent}>
@@ -113,9 +112,7 @@ export default function ChooseAgreementMethod({ page }: { page: string }) {
                 </Box>
               </Container>
               <Container
-                onClick={() => {
-                  chengeMethod("agreementMethod", METHOD_ENTER);
-                }}
+                onClick={() => chengeMethod("agreementMethod", METHOD_ENTER)}
                 sx={centerCard}
               >
                 <Box sx={itemsContent}>
@@ -140,7 +137,7 @@ export default function ChooseAgreementMethod({ page }: { page: string }) {
               >
                 <Box sx={itemsContent}>
                   <Box sx={iconMethod}>
-                    <Icon width="50px" height="50px" src={iconsObj.snapshotImportIcon} />
+                    <Image width="50px" height="50px" alt="img" src="/importSnapshotIcon.png" />
                   </Box>
                   <Box sx={text}>
                     <Text className="rightTitle">Import From Snapshot</Text>
@@ -151,7 +148,7 @@ export default function ChooseAgreementMethod({ page }: { page: string }) {
                 </Box>
               </Container>
             </Container>
-            <FieldErrorMessage error={values?.errors?.agreementFile} />
+            <FieldErrorMessage sx={{ mb: "-35px" }} error={values?.errors?.agreementFile} />
             {isOpen && (
               <ModalImportSnapshot page={page} onExit={() => setIsOpen(false)} isOpen={isOpen} />
             )}
