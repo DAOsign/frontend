@@ -13,6 +13,28 @@ export const overflowContentStyles = {
   },
 } as ThemeUIStyleObject;
 
+export const inputSearch = {
+  width: "95%",
+  height: "40px",
+  left: 0,
+  borderRadius: " 8px",
+  position: "absolute",
+  fontFamily: "InterMedium",
+  fontWeight: 500,
+  fontSize: "16px",
+  opacity: 1,
+  lineHeight: "160%",
+  background: "#F7F7FB",
+  color: "#212121",
+  top: 0,
+  zIndex: 3,
+  ml: "auto",
+  border: "none",
+  "&:hover": {
+    border: "none",
+  },
+} as ThemeUIStyleObject;
+
 export const mainText = {
   variant: "text.h2",
   fontSize: "28px",
@@ -140,6 +162,7 @@ export const icon = {
   rotate: "270deg",
   width: "20px",
   height: "6px",
+  ml: "auto",
 } as ThemeUIStyleObject;
 
 export const iconInfo = {
@@ -167,6 +190,7 @@ export const flexSelect = {
 
 export const titleSelect = {
   fontFamily: "InterMedium",
+  width: "95%",
   fontWeight: 500,
   fontSize: "16px",
   lineHeight: "160%",
@@ -220,6 +244,15 @@ export const containerSelect = {
   minHeight: "40px",
   mt: "19px",
   mb: "21px",
+  position: "relative",
+  "& > .settingImportSnapshotProposal": {
+    position: "absolute",
+    backgroundColor: "#F7F7FB",
+    borderRadius: "0 0 8px 8px",
+    zIndex: 1,
+    top: "35px",
+    width: "100%",
+  },
 } as ThemeUIStyleObject;
 
 export const flexContent = {

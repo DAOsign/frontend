@@ -25,6 +25,7 @@ import iconsObj from "../../../../assets/icons";
 import Icon from "../../../icon";
 import { PlusIcon } from "./svg";
 import styles from "./styles";
+import { notifComingSoon } from "../../../../utils/notification";
 
 interface VerificationInfo {
   title: string;
@@ -373,9 +374,12 @@ export default function StepTwo({ page }: { page: string }) {
               <VerificationCard
                 key={verification.title}
                 {...verification}
-                disabled
-                checked={verification.title === "Anonymous"}
+                disabled={false}
+                checked={verification.title === "Anonymous" || checkedVerifications[index]}
                 onClick={() => {
+                  if (!checkedVerifications[index] && verification.title !== "Anonymous") {
+                    notifComingSoon(`${verification.title} Verification is coming soon`);
+                  }
                   setCheckedVerifications(prevState => [
                     ...prevState.slice(0, index),
                     !prevState[index],
@@ -390,13 +394,9 @@ export default function StepTwo({ page }: { page: string }) {
         <Flex
           sx={{
             ...verificationCardStyles,
-            backgroundColor: "#F7F7FB",
             cursor: "no-drop",
             height: "84px",
             mt: "12px",
-            "@media screen and (max-width: 719px)": {
-              height: "150px",
-            },
             pr: 0,
           }}
         >
@@ -404,11 +404,18 @@ export default function StepTwo({ page }: { page: string }) {
             <Label htmlFor="enableInvoicing" sx={labelSwitch}>
               Enable Invoicing
             </Label>
-            <Switch disabled className="switch" sx={switchBtn} id="enableInvoicing" />
+            <Switch
+              onChange={e => {
+                if (e.target.checked) {
+                  notifComingSoon(`Enable Invoicing is coming soon`);
+                }
+              }}
+              disabled={false}
+              className="switch"
+              sx={switchBtn}
+              id="enableInvoicing"
+            />
           </Flex>
-          <Box sx={{ ...iconComingSoon, mr: "92px" }}>
-            <Icon src={iconsObj.comingSoon} />
-          </Box>
         </Flex>
       </>
     </Container>

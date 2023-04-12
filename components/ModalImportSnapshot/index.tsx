@@ -13,13 +13,13 @@ import {
   METHOD_IMPORT_SHAPSHOT,
   LEGAL_JURISDICTION,
   ENABLE_TRANSFORM,
-  STATEMENT_WORK,
+  STATEMENT_OF_WORK,
   CHOOSE_COUNTRY,
   CONTRACT_TYPE,
   CHOOSE_STATE,
   UNITED_STATES,
 } from "../../types";
-import { variants, variantsSelect } from "../../utils/animation";
+import { variants, variantsSelect, variantsSelectStatmentOfWork } from "../../utils/animation";
 import { motion } from "framer-motion";
 import loader from "../../img/json/loader.json";
 import Lottie from "lottie-react";
@@ -30,7 +30,7 @@ import { useEditAgreement } from "../../hooks/useEditAgreement";
 import { snapshotProposal } from "../../modules/graphql/queries/snapshot";
 import FieldErrorMessage from "../Form/FieldErrorMessage";
 import { generateAgreement } from "../../modules/graphql/queries";
-import { initialStateSwitches, initialState } from "./initialState";
+import { initialStateSwitches, initialState, initialStateSelects } from "./initialState";
 import { extractProposalId } from "../../utils/formats";
 import {
   overflowContentStyles,
@@ -42,6 +42,7 @@ import {
   secondaryTitle,
   importingText,
   labelSwitch,
+  inputSearch,
   flexLoader,
   flexContent,
   titleSelect,
@@ -72,9 +73,10 @@ export default function ModalImportSnapshot({ isOpen, page, onExit }: Props) {
   const [id, setId] = useState("");
   const create = useCreateAgreement();
   const edit = useEditAgreement();
-  const { values, changeValue } = page === "create" ? create : edit;
-  const [selectsOpen, setSelectsOpen] = useState({ statementWork: false });
+  const { changeValue } = page === "create" ? create : edit;
+  const [selectsOpen, setSelectsOpen] = useState(initialStateSelects);
   const [selectsValue, setSelectsValue] = useState(initialState);
+  const [searchValue, setSearchValue] = useState("");
   const { query } = useClient();
 
   const validationproposalLink = () => {
@@ -157,29 +159,50 @@ export default function ModalImportSnapshot({ isOpen, page, onExit }: Props) {
       [name]: { ...selectsValue[name], value: el },
     });
     setSelectsOpen({ ...selectsOpen, [name]: !selectsOpen[name] });
+    setSearchValue("");
   };
 
   const selectContent = (name: string) => {
     const { value, options, defaultValue } = selectsValue[name];
+    const optionsFilter =
+      searchValue !== ""
+        ? options.filter((el: string) => el.toLowerCase().includes(searchValue.toLowerCase()))
+        : options;
+
     return (
       <Container sx={containerSelect}>
-        <Flex
-          onClick={() => setSelectsOpen({ ...selectsOpen, [name]: !selectsOpen[name] })}
-          sx={flexSelect}
-        >
-          <Text sx={{ ...titleSelect, opacity: value === defaultValue ? 0.5 : 1 }}>{value}</Text>
-          <Box sx={icon}>
+        <Flex sx={flexSelect}>
+          {name === CHOOSE_COUNTRY && selectsOpen[name] ? (
+            <Input
+              sx={inputSearch}
+              onChange={e => {
+                setSearchValue(e.target.value);
+              }}
+              value={searchValue}
+            />
+          ) : (
+            <Text
+              onClick={() => setSelectsOpen({ ...selectsOpen, [name]: true })}
+              sx={{ ...titleSelect, opacity: value === defaultValue ? 0.5 : 1 }}
+            >
+              {value}
+            </Text>
+          )}
+          <Box
+            onClick={() => setSelectsOpen({ ...selectsOpen, [name]: !selectsOpen[name] })}
+            sx={icon}
+          >
             <Icon src={iconsObj.arrowLeftPink} />
           </Box>
         </Flex>
         <motion.div
+          variants={name === STATEMENT_OF_WORK ? variantsSelectStatmentOfWork : variantsSelect}
           animate={selectsOpen[name] ? "enter" : "exit"}
-          transition={{ type: "linear" }}
           className="settingImportSnapshotProposal"
-          variants={name === STATEMENT_WORK ? variants : variantsSelect}
+          transition={{ type: "linear" }}
           initial="hidden"
         >
-          {options?.map((el: string, i: number) => {
+          {optionsFilter?.map((el: string, i: number) => {
             return (
               el !== value && (
                 <Flex
@@ -260,14 +283,14 @@ export default function ModalImportSnapshot({ isOpen, page, onExit }: Props) {
                 <SwitchContent name={ENABLE_TRANSFORM} />
                 <motion.div
                   className="settingImportSnapshotProposal"
+                  initial={switches.enableTransform.isOpen ? "enter" : "hidden"}
                   animate={switches.enableTransform.isOpen ? "enter" : "exit"}
                   transition={{ type: "linear" }}
                   variants={variants}
-                  initial={switches.enableTransform.isOpen ? "enter" : "hidden"}
                 >
                   <Text sx={secondaryTitle}>Transformation Configurations</Text>
                   <SwitchContent name={CONTRACT_TYPE} />
-                  {switches[CONTRACT_TYPE].isOpen && selectContent(STATEMENT_WORK)}
+                  {switches[CONTRACT_TYPE].isOpen && selectContent(STATEMENT_OF_WORK)}
 
                   <SwitchContent name={LEGAL_JURISDICTION} />
 

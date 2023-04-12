@@ -8,7 +8,7 @@ export enum TOOLTIP_VALUES {
   WITH_LINK = "With Link",
 }
 
-export const STATEMENT_WORK = "statementWork";
+export const STATEMENT_OF_WORK = "statementWork";
 export const CHOOSE_COUNTRY = "chooseCountry";
 export const CHOOSE_STATE = "chooseState";
 export const UNITED_STATES = "United States";

@@ -5,7 +5,7 @@ import {
   INDEMNIFICATION_CLAUSE,
   LEGAL_JURISDICTION,
   ENABLE_TRANSFORM,
-  STATEMENT_WORK,
+  STATEMENT_OF_WORK,
   CHOOSE_COUNTRY,
   CONTRACT_TYPE,
   CHOOSE_STATE,
@@ -160,8 +160,14 @@ export const initialStateSwitches = {
   },
 };
 
+export const initialStateSelects = {
+  [STATEMENT_OF_WORK]: false,
+  [CHOOSE_COUNTRY]: false,
+  [CHOOSE_STATE]: false,
+};
+
 export const initialState = {
-  [STATEMENT_WORK]: {
+  [STATEMENT_OF_WORK]: {
     value: "Statement of Work",
     options: contractType,
   },
