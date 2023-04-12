@@ -34,12 +34,12 @@ interface Props {
 }
 
 export const AgreementContentPreview = ({
-  agreement,
-  textContent,
-  filePath,
-  fileIpfsHash,
   agreementLocation,
   agreementPrivacy,
+  fileIpfsHash,
+  textContent,
+  agreement,
+  filePath,
 }: Props) => {
   const { account } = useWeb3();
 
@@ -81,8 +81,8 @@ export const AgreementContentPreview = ({
       ) : agreementLocation && (filePath || fileIpfsHash) ? (
         <AgreementUploadedFilePreview
           agreementLocation={agreementLocation}
-          filePath={filePath}
           fileIpfsHash={fileIpfsHash}
+          filePath={filePath}
         />
       ) : (
         <div>

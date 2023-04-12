@@ -14,6 +14,12 @@ const tabStyles: ThemeUIStyleObject = {
   ".w-md-editor-preview::-webkit-scrollbar": {
     width: 0,
   },
+  ".w-md-editor-content:-webkit-scrollbar": {
+    width: 0,
+  },
+  ".editor wmde-markdown-var.w-md-editor.w-md-editor-show-preview::-webkit-scrollbar": {
+    width: 0,
+  },
   ".tabsContainer": {
     display: "flex",
     borderTopRightRadius: "8px",
