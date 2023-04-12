@@ -93,14 +93,25 @@ const TextEditor = ({ page }: { page: string }) => {
             }
           }}
         >
-          <MDEditor
-            onChange={val => changeValue("textEditorValue", val || "")}
-            hideToolbar={state === "preview"}
-            minHeight={200}
-            height={isOpen ? "fit-content" : "200px"}
-            value={textEditorValue}
-            preview={state}
-          />
+          {isOpen ? (
+            <MDEditor
+              onChange={val => changeValue("textEditorValue", val || "")}
+              hideToolbar={state === "preview"}
+              height={"fit-content"}
+              value={textEditorValue}
+              fullscreen={false}
+              minHeight={200}
+              preview={state}
+            />
+          ) : (
+            <MDEditor
+              onChange={val => changeValue("textEditorValue", val || "")}
+              hideToolbar={state === "preview"}
+              value={textEditorValue}
+              minHeight={200}
+              preview={state}
+            />
+          )}
         </Box>
         <Box sx={iconFileResize}>
           <Icon width="30px" height="30px" style={{ opacity: 0.3 }} src={iconsObj.fieldResize} />
