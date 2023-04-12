@@ -44,7 +44,7 @@ export default function Footer({ animationNotVisible, setVisible }: any) {
           const errorMsg = JSON.parse(errorText);
           setError(errorMsg?.detail);
         } catch {
-          console.log("error", e);
+          console.error(e);
           setError("Unknown error. Please try again later");
         }
       });

@@ -13,13 +13,13 @@ import {
   METHOD_IMPORT_SHAPSHOT,
   LEGAL_JURISDICTION,
   ENABLE_TRANSFORM,
-  STATEMENT_WORK,
+  STATEMENT_OF_WORK,
   CHOOSE_COUNTRY,
   CONTRACT_TYPE,
   CHOOSE_STATE,
   UNITED_STATES,
 } from "../../types";
-import { variants, variantsSelect, variantSelectStatmentWork } from "../../utils/animation";
+import { variants, variantsSelect, variantsSelectStatmentOfWork } from "../../utils/animation";
 import { motion } from "framer-motion";
 import loader from "../../img/json/loader.json";
 import Lottie from "lottie-react";
@@ -196,7 +196,7 @@ export default function ModalImportSnapshot({ isOpen, page, onExit }: Props) {
           </Box>
         </Flex>
         <motion.div
-          variants={name === STATEMENT_WORK ? variantSelectStatmentWork : variantsSelect}
+          variants={name === STATEMENT_OF_WORK ? variantsSelectStatmentOfWork : variantsSelect}
           animate={selectsOpen[name] ? "enter" : "exit"}
           className="settingImportSnapshotProposal"
           transition={{ type: "linear" }}
@@ -290,7 +290,7 @@ export default function ModalImportSnapshot({ isOpen, page, onExit }: Props) {
                 >
                   <Text sx={secondaryTitle}>Transformation Configurations</Text>
                   <SwitchContent name={CONTRACT_TYPE} />
-                  {switches[CONTRACT_TYPE].isOpen && selectContent(STATEMENT_WORK)}
+                  {switches[CONTRACT_TYPE].isOpen && selectContent(STATEMENT_OF_WORK)}
 
                   <SwitchContent name={LEGAL_JURISDICTION} />
 

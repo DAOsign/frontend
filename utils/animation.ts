@@ -16,7 +16,7 @@ export const variantsSelect: Variants = {
   exit: { opacity: 1, height: 0, overflow: "hidden" },
 };
 
-export const variantSelectStatmentWork: Variants = {
+export const variantsSelectStatmentOfWork: Variants = {
   hidden: { opacity: 1, height: 0, overflow: "hidden" },
   enter: {
     overflow: "scroll",
