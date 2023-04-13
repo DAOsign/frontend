@@ -229,10 +229,7 @@ export default function ModalImportSnapshot({ isOpen, page, onExit }: Props) {
     return (
       <Flex sx={{ mb: "19px" }}>
         <Flex sx={switchContainer}>
-          <Label
-            htmlFor={name}
-            sx={{ ...labelSwitch, ml: switches[name].isOpen ? "12px !important" : "8px" }}
-          >
+          <Label htmlFor={name} sx={{ ...labelSwitch, ml: "8px" }}>
             {switches[name].title}
           </Label>
           <Switch

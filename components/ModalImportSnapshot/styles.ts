@@ -95,6 +95,7 @@ export const input = {
 export const switchContainer = {
   flexDirection: "row-reverse",
   alignItems: "center",
+  position: "relative",
   "& > label": {
     maxWidth: "33px",
     opacity: 1,
@@ -145,6 +146,7 @@ export const switchBtn = {
   "input:checked ~ & > div": {
     backgroundColor: "#CA5CF2",
     border: "2px solid #CA5CF2",
+    transform: "translateX(60%) !important",
   },
 } as ThemeUIStyleObject;
 

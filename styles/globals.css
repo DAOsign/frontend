@@ -174,8 +174,6 @@ label > div {
 label > .switch {
   opacity: 1;
   position: static;
-  /* opacity: 0; */
-  /* position: absolute; */
 }
 
 body {
