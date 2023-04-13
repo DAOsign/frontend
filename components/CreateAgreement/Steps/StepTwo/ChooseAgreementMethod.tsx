@@ -102,7 +102,7 @@ export default function ChooseAgreementMethod({ page }: { page: string }) {
                 sx={leftCard}
               >
                 <Box sx={itemsContent}>
-                  <Box sx={iconMethod}>
+                  <Box className="iconMethod" sx={iconMethod}>
                     <Icon width="50px" height="50px" src={iconsObj.uploadFileIcon} />
                   </Box>
                   <Box>
@@ -116,7 +116,7 @@ export default function ChooseAgreementMethod({ page }: { page: string }) {
                 sx={centerCard}
               >
                 <Box sx={itemsContent}>
-                  <Box sx={iconMethod}>
+                  <Box className="iconMethod" sx={iconMethod}>
                     <Icon width="50px" height="50px" src={iconsObj.enterAgreementIcon} />
                   </Box>
                   <Box>
@@ -131,12 +131,10 @@ export default function ChooseAgreementMethod({ page }: { page: string }) {
               </Container>
               <Container
                 sx={rightCard}
-                onClick={() => {
-                  chengeMethod("agreementMethod", METHOD_IMPORT_SHAPSHOT);
-                }}
+                onClick={() => chengeMethod("agreementMethod", METHOD_IMPORT_SHAPSHOT)}
               >
                 <Box sx={itemsContent}>
-                  <Box sx={iconMethod}>
+                  <Box className="iconMethod" sx={iconMethod}>
                     <Image width="50px" height="50px" alt="img" src="/importSnapshotIcon.png" />
                   </Box>
                   <Box sx={text}>

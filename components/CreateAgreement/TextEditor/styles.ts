@@ -5,9 +5,9 @@ const tabStyles: ThemeUIStyleObject = {
   "@media screen and (max-width: 480px)": {
     mb: "40px",
   },
-  ".w-md-editor": {
-    minHeight: "387px !important",
-  },
+  // ".w-md-editor": {
+  //   minHeight: "387px !important",
+  // },
   ".w-md-editor-aree::-webkit-scrollbar": {
     width: 0,
   },
