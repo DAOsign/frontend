@@ -58,11 +58,12 @@ export const AgreementTextMarkdownPreview = ({ textContent }: Props) => {
 
   useEffect(() => {
     const contentPreview = document.getElementsByClassName("w-md-editor-content");
-    if (!contentPreview?.length) return;
 
+    if (!contentPreview?.length) return;
     if (
-      contentPreview[0]?.scrollHeight &&
-      contentPreview[0]?.scrollHeight > DEFAULT_CONTENT_PREVIEW_MAX_HEIGHT
+      (contentPreview[0]?.scrollHeight &&
+        contentPreview[0]?.scrollHeight > DEFAULT_CONTENT_PREVIEW_MAX_HEIGHT,
+      contentPreview[0]?.scrollHeight)
     ) {
       setIsShowMoreLabelVisible(true);
     } else {
@@ -73,7 +74,7 @@ export const AgreementTextMarkdownPreview = ({ textContent }: Props) => {
   useEffect(() => {
     const id = setTimeout(() => {
       setHasContentDataLoadedByTextPreviewer(true);
-    }, 500);
+    }, 400);
     return () => clearTimeout(id);
   }, [textContent]);
 

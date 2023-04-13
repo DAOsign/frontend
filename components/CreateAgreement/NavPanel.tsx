@@ -79,9 +79,6 @@ export default function NavPanel({ setLoading, page }: { setLoading: any; page: 
       if (values.title.trim()?.length > 120) {
         errors.title = "Title should be 120 characters max";
       }
-      if (!values.agreementPrivacy) {
-        errors.agreementPrivacy = "Agreement Privacy is a required selection";
-      }
     } else {
       switch (step) {
         case 1:

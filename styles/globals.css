@@ -134,6 +134,18 @@ a {
 .w-md-editor-toolbar > ul:last-child {
   display: none;
 }
+.w-md-editor-aree::-webkit-scrollbar {
+  width: 0 !important;
+}
+.w-md-editor-preview::-webkit-scrollbar {
+  width: 0 !important;
+}
+.w-md-editor-content:-webkit-scrollbar {
+  width: 0 !important;
+}
+.editor wmde-markdown-var.w-md-editor.w-md-editor-show-preview::-webkit-scrollbar {
+  width: 0,
+}
 @font-face {
   font-family: "InterRegular";
   src: url("../fonts/Inter-Regular.ttf");

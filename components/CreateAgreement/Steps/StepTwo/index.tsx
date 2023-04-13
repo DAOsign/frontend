@@ -225,7 +225,7 @@ export default function StepTwo({ page }: { page: string }) {
                 left="92%"
               >
                 <Box sx={{ width: "12px", height: "12px", display: "inline-block" }}>
-                  <Icon style={{ opacity: 0.5 }} src={iconsObj.infoCircle} />
+                  <Icon src={iconsObj.infoCircle} />
                 </Box>
               </Tooltip>
             </Flex>
@@ -288,11 +288,11 @@ export default function StepTwo({ page }: { page: string }) {
                 transform="translate(-57%, 0)"
                 minWidth="200px"
                 height="0"
-                top="-85px"
+                top="-66px"
                 left="92%"
               >
                 <Box sx={{ width: "12px", height: "12px", display: "inline-block" }}>
-                  <Icon style={{ opacity: 0.5 }} src={iconsObj.infoCircle} />
+                  <Icon src={iconsObj.infoCircle} />
                 </Box>
               </Tooltip>
             </Flex>
@@ -357,14 +357,14 @@ export default function StepTwo({ page }: { page: string }) {
               </Text>
               <Tooltip
                 title="Required level of verification. More levels are coming soon."
-                transform="translate(-56%, 0)"
+                transform="translate(-55.5%, 0)"
                 minWidth="200px"
                 top="-65px"
                 left="65%"
                 height="0"
               >
                 <Box sx={{ width: "12px", height: "12px", display: "inline-block" }}>
-                  <Icon style={{ opacity: 0.5 }} src={iconsObj.infoCircle} />
+                  <Icon src={iconsObj.infoCircle} />
                 </Box>
               </Tooltip>
             </Flex>

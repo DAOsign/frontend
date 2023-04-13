@@ -69,8 +69,8 @@ const getIpfsUri = (fileIpfsHash: string) =>
 
 export const AgreementUploadedFilePreview = ({
   agreementLocation,
-  filePath,
   fileIpfsHash,
+  filePath,
 }: Props) => {
   const [agreementFile, setAgreementFile] = useState<File | null>(null);
   const [agreementPreviewDocuments, setAgreementPreviewDocuments] = useState<

@@ -73,7 +73,13 @@ const PreviewScreen = ({ file, page, onFileDelete = () => {} }: Props) => {
   return file ? (
     <Box sx={previewContainer} className="previewContainer">
       <Box className="preview">
-        <FileViewer documents={documents} config={FILE_VIEWER_CONFIG} />
+        <Link
+          href={documents[0]?.uri}
+          target={"_blank"}
+          sx={{ display: "flex", alignItems: "center", gap: "8px" }}
+        >
+          <FileViewer documents={documents} config={FILE_VIEWER_CONFIG} />
+        </Link>
       </Box>
       <Box sx={containerFlex}>
         <Flex sx={flexRemove}>

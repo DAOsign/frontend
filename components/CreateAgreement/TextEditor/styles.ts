@@ -5,10 +5,19 @@ const tabStyles: ThemeUIStyleObject = {
   "@media screen and (max-width: 480px)": {
     mb: "40px",
   },
+  ".w-md-editor": {
+    minHeight: "387px !important",
+  },
   ".w-md-editor-aree::-webkit-scrollbar": {
     width: 0,
   },
   ".w-md-editor-preview::-webkit-scrollbar": {
+    width: 0,
+  },
+  ".w-md-editor-content:-webkit-scrollbar": {
+    width: 0,
+  },
+  ".editor wmde-markdown-var.w-md-editor.w-md-editor-show-preview::-webkit-scrollbar": {
     width: 0,
   },
   ".tabsContainer": {
@@ -30,6 +39,9 @@ const tabStyles: ThemeUIStyleObject = {
       opacity: 0.7,
       pl: "20px",
       pr: "20px",
+      "&:hover": {
+        opacity: 1,
+      },
     },
     "button.active": {
       opacity: "1",
@@ -72,6 +84,7 @@ const tabStyles: ThemeUIStyleObject = {
     "&:hover": {
       background: "unset",
       backgroundColor: "transparent",
+      opacity: 1,
     },
   },
 };
@@ -81,7 +94,7 @@ export const btnBack = {
   fontStyle: "normal",
   fontWeight: 400,
   fontSize: "12px",
-  color: " #CA5CF2",
+  color: "#CA5CF2",
   display: "flex",
   lineHeight: "160%",
   alignItems: "center",
