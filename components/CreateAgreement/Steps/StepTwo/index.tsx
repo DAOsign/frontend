@@ -5,12 +5,9 @@ import {
   inputCreateAgreementError,
   inputCreactAgreement,
   labelSigners,
-  titleBottom,
   addMeBtn,
   plus,
 } from "../../styles";
-import { verificationCardStyles, iconComingSoon } from "../StepThree/styles";
-import { switchContainer, switchBtn, labelSwitch } from "../../../ModalImportSnapshot/styles";
 import { validateAddress, validateEnsDomains } from "../StepThree/validationUtils";
 import { useCreateAgreement } from "../../../../hooks/useCreateAgreement";
 import { useEditAgreement } from "../../../../hooks/useEditAgreement";
