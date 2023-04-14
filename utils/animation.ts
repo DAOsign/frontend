@@ -7,21 +7,21 @@ export const variants: Variants = {
 };
 
 export const variantsSelect: Variants = {
-  hidden: { opacity: 1, height: 0, overflow: "hidden" },
-  enter: {
-    overflow: "scroll",
-    height: "200px",
-    opacity: 1,
-  },
-  exit: { opacity: 1, height: 0, overflow: "hidden" },
+  hidden: { height: "40px", overflow: "hidden" },
+  enter: { height: "fit-content", overflow: "auto" },
+};
+
+export const iconsRotate: Variants = {
+  hidden: { rotate: "0deg", x: 0, marginLeft: "auto" },
+  enter: { rotate: "-180deg", x: 10, marginLeft: "auto" },
 };
 
 export const variantsSelectStatmentOfWork: Variants = {
-  hidden: { opacity: 1, height: 0, overflow: "hidden" },
-  enter: {
-    overflow: "scroll",
-    height: "170px",
-    opacity: 1,
-  },
-  exit: { opacity: 1, height: 0, overflow: "hidden" },
+  hidden: { height: "40px", overflow: "hidden" },
+  enter: { height: "fit-content", overflow: "auto" },
+};
+
+export const iconsRotateMobile: Variants = {
+  hidden: { rotate: "0deg", x: -5, marginLeft: "auto" },
+  enter: { rotate: "-180deg", x: 10, marginLeft: "auto" },
 };

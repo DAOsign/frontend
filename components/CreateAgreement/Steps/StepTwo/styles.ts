@@ -30,4 +30,7 @@ export const itemLocation = {
   cursor: "pointer",
   width: "290px",
   height: "96px",
+  "&:hover": {
+    border: "2px solid #D8D8E2",
+  },
 } as ThemeUIStyleObject;

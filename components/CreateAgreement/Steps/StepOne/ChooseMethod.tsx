@@ -1,11 +1,11 @@
 import React from "react";
 import { Container, Flex, Text, Box } from "theme-ui";
 import {
-  rightCard,
-  leftCard,
   itemsContentMethod,
   secondaryTextMethod,
   titleMethodCard,
+  leftCardMethod,
+  rightCardMethod,
 } from "../../styles";
 import { useCreateAgreement } from "../../../../hooks/useCreateAgreement";
 import { useEditAgreement } from "../../../../hooks/useEditAgreement";
@@ -34,17 +34,7 @@ export default function ChooseMethod({ animateContainer, setPublic, page }: Publ
     >
       <Container sx={{ position: "relative", height: "242px" }}>
         <Container
-          sx={{
-            ...leftCard,
-            width: "290px",
-            height: "218px",
-            maxWidth: "300px",
-            "@media screen and (max-width: 719px)": {
-              width: "48%",
-              height: "189px",
-              minHeight: "unset",
-            },
-          }}
+          sx={leftCardMethod}
           onClick={() => {
             changeValue("errors", { ...values.errors, agreementPrivacy: null });
             changeValue("agreementPrivacy", "");
@@ -53,35 +43,29 @@ export default function ChooseMethod({ animateContainer, setPublic, page }: Publ
           }}
         >
           <Box sx={itemsContentMethod}>
-            <div style={{ width: "50px", height: "50px", margin: "0 auto" }}>
+            <div className="iconMethod" style={{ width: "50px", height: "50px", margin: "0 auto" }}>
               <Icon width="50px" height="50px" src={iconsObj.publicIcon} />
             </div>
             <Box>
-              <Text sx={titleMethodCard}>Public</Text>
+              <Text className="titleMethodCard" sx={titleMethodCard}>
+                Public
+              </Text>
               <Text sx={secondaryTextMethod}>Accessed Publicly based on sharing options</Text>
             </Box>
           </Box>
         </Container>
         <Container
-          sx={{
-            ...rightCard,
-            width: "290px",
-            height: "218px",
-            maxWidth: "300px",
-            "@media screen and (max-width: 719px)": {
-              width: "48%",
-              height: "189px",
-              minHeight: "unset",
-            },
-          }}
+          sx={rightCardMethod}
           onClick={() => changeValue("agreementPrivacy", PRIVACY_PRIVATE)}
           className={values?.agreementPrivacy === PRIVACY_PRIVATE ? "active" : undefined}
         >
           <Box sx={itemsContentMethod}>
-            <div style={{ width: "50px", height: "50px", margin: "0 auto" }}>
+            <div className="iconMethod" style={{ width: "50px", height: "50px", margin: "0 auto" }}>
               <Icon width="50px" height="50px" src={iconsObj.privateIcon} />
             </div>
-            <Text sx={titleMethodCard}>Private</Text>
+            <Text className="titleMethodCard" sx={titleMethodCard}>
+              Private
+            </Text>
             <Text sx={secondaryTextMethod}>Accessed only by Signers or Observes</Text>
           </Box>
         </Container>

@@ -278,7 +278,7 @@ const container = {
   px: "32px",
   py: "24px",
   position: "relative",
-  "@media screen and (max-width: 768px)": {
+  "@media screen and (max-width: 480px)": {
     maxWidth: "343px",
     p: "16px",
   },
@@ -287,22 +287,28 @@ const container = {
 const card = {
   textAlign: "center",
   position: "absolute",
-  border: "2px solid #F7F7FB",
+  border: "2px solid #EDEDF3",
   borderRadius: "8px",
-  px: "24px",
-  pt: "20px",
-  pb: "27px",
+  px: "16px",
+  pt: "28px",
+  pb: "40px",
   maxWidth: "210px",
   m: 0,
   cursor: "pointer",
   minHeight: "230px",
   height: "248px",
   transition: ".3s all",
-  "@media screen and (max-width: 720px)": {
+  "@media screen and (min-width: 720px)": {
+    "&:hover .iconMethod": {
+      position: "relative",
+      top: "-1.5px",
+    },
+  },
+  "@media screen and (max-width: 719px)": {
     px: "12px",
   },
   "&.active": {
-    borderColor: "pink",
+    borderColor: "#CA5CF2!important",
   },
 } as ThemeUIStyleObject;
 
@@ -324,11 +330,22 @@ const rightCard = {
   maxWidth: "210px",
   transitionProperty: "all",
   transitionDuration: "300ms",
-  "& > div > div > .rightTitle": { ...primaryTitleItem, variant: "text.largeTextBold", mt: "20px" },
-  "@media screen and (min-width: 719px)": {
+  "& > div > div > .rightTitle": {
+    ...primaryTitleItem,
+    variant: "text.largeTextBold",
+    mt: "20px",
+    mb: "12px",
+  },
+  "&:hover > div > div > .rightTitle": {
+    mt: "22px",
+  },
+  "@media screen and (min-width: 720px)": {
     "&:hover": {
-      transform: "scale(1.02)",
-      border: "2px solid rgba(237, 237, 243, 1)",
+      border: "2px solid #D8D8E2",
+      pt: "28px",
+    },
+    "&:hover  .titleMethodCard": {
+      marginTop: "22px",
     },
   },
   "@media screen and (max-width: 719px)": {
@@ -339,9 +356,6 @@ const rightCard = {
     display: "flex",
     p: "16px",
     bottom: 0,
-    "&:hover": {
-      transform: "scale(1.02)",
-    },
     "& > div > div > .rightTitle": {
       mt: "0 !important",
       mb: "2px !important",
@@ -415,13 +429,15 @@ const centerCard = {
   height: "248px",
   "& > div > div > .centerTitle": {
     ...primaryTitleItem,
-    mt: "24px",
+    mt: "20px",
     mb: "8px",
+  },
+  "&:hover > div > div > .centerTitle": {
+    mt: "22px",
   },
   "@media screen and (min-width: 720px)": {
     "&:hover": {
-      transform: "translate(-50%, 0) scale(1.02)",
-      border: "2px solid rgba(237, 237, 243, 1)",
+      border: "2px solid #D8D8E2",
     },
   },
   "@media screen and (max-width: 719px)": {
@@ -434,7 +450,7 @@ const centerCard = {
     p: "16px",
     transform: "translate(0, -50%)",
     "&:hover": {
-      transform: "translate(0, -50%) scale(1.02)",
+      transform: "translate(0, -50%)",
     },
     "& > div > div > .centerTitle": {
       ...primaryTitleItem,
@@ -457,12 +473,17 @@ const leftCard = {
   "& > div > div >  .leftTitle": {
     ...primaryTitleItem,
     mb: "12px",
-    mt: "24px",
+    mt: "20px",
+  },
+  "&:hover > div > div >  .leftTitle": {
+    mt: "22px",
   },
   "@media screen and (min-width: 720px)": {
     "&:hover": {
-      transform: "scale(1.02)",
-      border: "2px solid rgba(237, 237, 243, 1)",
+      border: "2px solid #D8D8E2",
+    },
+    "&:hover  .titleMethodCard": {
+      marginTop: "22px",
     },
   },
   "@media screen and (max-width: 719px)": {
@@ -471,9 +492,6 @@ const leftCard = {
     maxWidth: "unset",
     minHeight: "unset",
     p: "16px",
-    "&:hover": {
-      transform: "scale(1.02)",
-    },
     "& > div > div >  .leftTitle": {
       ...primaryTitleItem,
       mb: "2px !important",
@@ -483,9 +501,41 @@ const leftCard = {
   },
 } as ThemeUIStyleObject;
 
+export const leftCardMethod = {
+  ...leftCard,
+  width: "290px",
+  height: "218px",
+  maxWidth: "300px",
+  pt: "34px",
+  "&:hover": {
+    pt: "34px",
+  },
+  "@media screen and (max-width: 719px)": {
+    width: "48%",
+    height: "189px",
+    minHeight: "unset",
+  },
+} as ThemeUIStyleObject;
+
+export const rightCardMethod = {
+  ...rightCard,
+  width: "290px",
+  height: "218px",
+  maxWidth: "300px",
+  pt: "34px",
+  "&:hover": {
+    pt: "34px",
+  },
+  "@media screen and (max-width: 719px)": {
+    width: "48%",
+    height: "189px",
+    minHeight: "unset",
+  },
+} as ThemeUIStyleObject;
+
 export const secondaryTextMethod = {
   variant: "text.overscript",
-  mt: "20px",
+  mt: "12px",
   maxWidth: "160px",
   "@media screen and (max-width: 719px)": {
     mt: "8px",
@@ -533,8 +583,11 @@ const item = {
   alignItems: "start",
   cursor: "pointer",
   gap: "10px",
+  "&:hover": {
+    border: "2px solid #D8D8E2",
+  },
   "&.active": {
-    borderColor: "pink",
+    borderColor: "#CA5CF2!important",
   },
 } as ThemeUIStyleObject;
 

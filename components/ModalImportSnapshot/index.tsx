@@ -1,7 +1,17 @@
 /* eslint-disable no-console */
 /* eslint-disable react-hooks/exhaustive-deps */
 import { useEffect, useState } from "react";
-import { Box, Button, Flex, Switch, Text, Input, Label, Container } from "theme-ui";
+import {
+  Box,
+  Button,
+  Flex,
+  Switch,
+  Text,
+  Input,
+  Label,
+  Container,
+  ThemeUICSSObject,
+} from "theme-ui";
 import iconsObj from "../../assets/icons";
 import Icon from "../icon";
 import { ModalBase } from "../ModalBase/ModalBase";
@@ -19,7 +29,13 @@ import {
   CHOOSE_STATE,
   UNITED_STATES,
 } from "../../types";
-import { variants, variantsSelect, variantsSelectStatmentOfWork } from "../../utils/animation";
+import {
+  variantsSelectStatmentOfWork,
+  iconsRotateMobile,
+  variantsSelect,
+  iconsRotate,
+  variants,
+} from "../../utils/animation";
 import { motion } from "framer-motion";
 import loader from "../../img/json/loader.json";
 import Lottie from "lottie-react";
@@ -33,17 +49,21 @@ import { generateAgreement } from "../../modules/graphql/queries";
 import { initialStateSwitches, initialState, initialStateSelects } from "./initialState";
 import { extractProposalId } from "../../utils/formats";
 import {
+  iconInfoEnableTransform,
   overflowContentStyles,
   labelInputTellMore,
+  tellMoreContainer,
   loadingStylesBtn,
   btnCancelLoading,
   switchContainer,
   containerSelect,
+  flexSelectItem,
   secondaryTitle,
   importingText,
   labelSwitch,
   inputSearch,
   flexLoader,
+  itemOption,
   flexContent,
   titleSelect,
   labelInput,
@@ -58,7 +78,9 @@ import {
   subBtn,
   input,
   icon,
+  bg,
 } from "./styles";
+import useWindowDimensions from "../../hooks/useWindowDimensions";
 
 interface Props {
   isOpen: boolean;
@@ -67,13 +89,15 @@ interface Props {
 }
 
 export default function ModalImportSnapshot({ isOpen, page, onExit }: Props) {
+  const { width }: any = useWindowDimensions();
   const [loading, setLoading] = useState(false);
-  const [switches, setSwitches] = useState(initialStateSwitches);
-  const [error, setError] = useState({ value: false, text: "" });
   const [id, setId] = useState("");
   const create = useCreateAgreement();
   const edit = useEditAgreement();
   const { changeValue } = page === "create" ? create : edit;
+
+  const [switches, setSwitches] = useState(initialStateSwitches);
+  const [error, setError] = useState({ value: false, text: "" });
   const [selectsOpen, setSelectsOpen] = useState(initialStateSelects);
   const [selectsValue, setSelectsValue] = useState(initialState);
   const [searchValue, setSearchValue] = useState("");
@@ -162,77 +186,114 @@ export default function ModalImportSnapshot({ isOpen, page, onExit }: Props) {
     setSearchValue("");
   };
 
+  const getStylesSelectContainer = (name: string): ThemeUICSSObject => {
+    const zIndexSelect: number = name === STATEMENT_OF_WORK ? 3 : name === CHOOSE_COUNTRY ? 2 : 1;
+    return {
+      ...containerSelect,
+      // boxShadow: selectsOpen[name] ? "0px 4px 32px rgba(33, 33, 33, 0.16)" : "none",
+      borderRadius: selectsOpen[name] ? "8px 8px 0 0" : "8px",
+      zIndex: zIndexSelect,
+    };
+  };
+
   const selectContent = (name: string) => {
-    const { value, options, defaultValue } = selectsValue[name];
+    const { value, options } = selectsValue[name];
+    const inputIsHidden =
+      (name === CHOOSE_COUNTRY && selectsOpen[name]) || !selectsValue[name].value;
     const optionsFilter =
-      searchValue !== ""
+      searchValue !== "" && name === CHOOSE_COUNTRY
         ? options.filter((el: string) => el.toLowerCase().includes(searchValue.toLowerCase()))
-        : options;
+        : options.filter((el: string) => el !== selectsValue[name].value);
+
+    const onInputSearchClick = () => {
+      if (!selectsOpen[name]) {
+        setSelectsOpen({ ...initialStateSelects, [name]: true });
+      }
+      return;
+    };
 
     return (
-      <Container sx={containerSelect}>
-        <Flex sx={flexSelect}>
-          {name === CHOOSE_COUNTRY && selectsOpen[name] ? (
-            <Input
-              sx={inputSearch}
-              onChange={e => {
-                setSearchValue(e.target.value);
-              }}
-              value={searchValue}
-            />
-          ) : (
-            <Text
-              onClick={() => setSelectsOpen({ ...selectsOpen, [name]: true })}
-              sx={{ ...titleSelect, opacity: value === defaultValue ? 0.5 : 1 }}
-            >
-              {value}
-            </Text>
-          )}
-          <Box
-            onClick={() => setSelectsOpen({ ...selectsOpen, [name]: !selectsOpen[name] })}
-            sx={icon}
-          >
-            <Icon src={iconsObj.arrowLeftPink} />
-          </Box>
-        </Flex>
+      <Container sx={getStylesSelectContainer(name)}>
         <motion.div
           variants={name === STATEMENT_OF_WORK ? variantsSelectStatmentOfWork : variantsSelect}
-          animate={selectsOpen[name] ? "enter" : "exit"}
+          animate={selectsOpen[name] ? "enter" : "hidden"}
           className="settingImportSnapshotProposal"
           transition={{ type: "linear" }}
           initial="hidden"
+          style={{
+            filter: selectsOpen[name] ? "drop-shadow(0px 4px 32px rgba(33, 33, 33, 0.16))" : "none",
+          }}
         >
-          {optionsFilter?.map((el: string, i: number) => {
-            return (
-              el !== value && (
-                <Flex
-                  onClick={() => onChangeSelect(name, el)}
-                  key={i}
-                  sx={{
-                    ...flexSelect,
-                    "&:hover": {
-                      backgroundColor: "#D8D8E2",
-                    },
-                  }}
-                >
-                  <Text sx={{ ...titleSelect, fontSize: "12px" }}>{el}</Text>
-                </Flex>
-              )
-            );
-          })}
+          <Flex sx={{ ...flexSelect, borderRadius: selectsOpen[name] ? "8px 8px 0 0" : "8px" }}>
+            {inputIsHidden ? (
+              <Input
+                onChange={e => setSearchValue(e.target.value)}
+                onClick={onInputSearchClick}
+                placeholder="Choose country"
+                value={searchValue}
+                sx={inputSearch}
+              />
+            ) : (
+              <Text
+                onClick={() => setSelectsOpen({ ...initialStateSelects, [name]: true })}
+                sx={titleSelect}
+              >
+                {value}
+              </Text>
+            )}
+            <motion.div
+              variants={width < 480 ? iconsRotateMobile : iconsRotate}
+              animate={selectsOpen[name] ? "enter" : "hidden"}
+              transition={{ type: "linear" }}
+              initial="hidden"
+            >
+              <Box
+                onClick={() =>
+                  setSelectsOpen({ ...initialStateSelects, [name]: !selectsOpen[name] })
+                }
+                sx={icon}
+              >
+                <Icon src={iconsObj.arrowLeftPink} />
+              </Box>
+            </motion.div>
+          </Flex>
+          <Container
+            sx={{ ...itemOption, maxHeight: name === STATEMENT_OF_WORK ? "138px" : "178px" }}
+          >
+            {name === CHOOSE_COUNTRY && (
+              <Flex
+                onClick={() => onChangeSelect(name, UNITED_STATES)}
+                sx={{ ...flexSelectItem, borderRadius: "0 !important" }}
+              >
+                <Text sx={titleSelect}>{UNITED_STATES}</Text>
+              </Flex>
+            )}
+            {optionsFilter?.map((el: string, i: number) => {
+              return (
+                el !== UNITED_STATES && (
+                  <Flex
+                    sx={{ ...flexSelect, "&:hover": { backgroundColor: "#D8D8E2" } }}
+                    onClick={() => onChangeSelect(name, el)}
+                    className="itemSelect"
+                    key={i}
+                  >
+                    <Text sx={titleSelect}>{el}</Text>
+                  </Flex>
+                )
+              );
+            })}
+          </Container>
         </motion.div>
       </Container>
     );
   };
 
-  const SwitchContent = ({ name }: { name: string }) => {
+  const SwitchContent = ({ name, sx }: { name: string; sx: ThemeUICSSObject }) => {
+    const stylesIcon = name === ENABLE_TRANSFORM ? iconInfoEnableTransform : iconInfo;
     return (
-      <Flex sx={{ mb: "19px" }}>
+      <Flex sx={sx}>
         <Flex sx={switchContainer}>
-          <Label
-            htmlFor={name}
-            sx={{ ...labelSwitch, ml: switches[name].isOpen ? "12px !important" : "8px" }}
-          >
+          <Label htmlFor={name} sx={{ ...labelSwitch, ml: "8px" }}>
             {switches[name].title}
           </Label>
           <Switch
@@ -248,15 +309,18 @@ export default function ModalImportSnapshot({ isOpen, page, onExit }: Props) {
             id={name}
           />
         </Flex>
-        <Box sx={iconInfo}>
+        <Box sx={stylesIcon}>
           <Icon src={iconsObj.infoCircle} />
         </Box>
       </Flex>
     );
   };
 
+  const isHiddenSelectChooseState =
+    selectsValue[CHOOSE_COUNTRY].value === UNITED_STATES && switches[LEGAL_JURISDICTION].isOpen;
+
   return (
-    <Portal isOpen={isOpen} onClose={onExit}>
+    <Portal sx={bg} isOpen={isOpen} onClose={onExit}>
       <ModalBase height="auto" sx={modalBase}>
         <Flex sx={flexContent}>
           <Box onClick={onExit} sx={closeIcon}>
@@ -280,7 +344,7 @@ export default function ModalImportSnapshot({ isOpen, page, onExit }: Props) {
                     <FieldErrorMessage error={error.text} />
                   </Box>
                 )}
-                <SwitchContent name={ENABLE_TRANSFORM} />
+                <SwitchContent sx={{ mb: 0, position: "relative" }} name={ENABLE_TRANSFORM} />
                 <motion.div
                   className="settingImportSnapshotProposal"
                   initial={switches.enableTransform.isOpen ? "enter" : "hidden"}
@@ -289,23 +353,22 @@ export default function ModalImportSnapshot({ isOpen, page, onExit }: Props) {
                   variants={variants}
                 >
                   <Text sx={secondaryTitle}>Transformation Configurations</Text>
-                  <SwitchContent name={CONTRACT_TYPE} />
-                  {switches[CONTRACT_TYPE].isOpen && selectContent(STATEMENT_OF_WORK)}
 
-                  <SwitchContent name={LEGAL_JURISDICTION} />
+                  <SwitchContent sx={{ mb: "19px" }} name={CONTRACT_TYPE} />
+                  {switches[CONTRACT_TYPE].isOpen && selectContent(STATEMENT_OF_WORK)}
+                  <SwitchContent sx={{ mb: "19px" }} name={LEGAL_JURISDICTION} />
 
                   {switches[LEGAL_JURISDICTION].isOpen && selectContent(CHOOSE_COUNTRY)}
-                  {selectsValue[CHOOSE_COUNTRY].value === UNITED_STATES &&
-                    switches[LEGAL_JURISDICTION].isOpen &&
-                    selectContent(CHOOSE_STATE)}
+                  {isHiddenSelectChooseState && selectContent(CHOOSE_STATE)}
 
-                  <SwitchContent name={INDEMNIFICATION_CLAUSE} />
-                  <Box sx={{ m: "21px 0" }}>
-                    <SwitchContent name={INTELLECTUAL_PROPERTY_CLAUSE} />
+                  <SwitchContent sx={{ mb: "21px" }} name={INDEMNIFICATION_CLAUSE} />
+                  <SwitchContent sx={{ m: "21px 0" }} name={INTELLECTUAL_PROPERTY_CLAUSE} />
+                  <SwitchContent sx={{ mb: "24px" }} name={NON_SOLICITATION_CLAUSE} />
+
+                  <Box sx={tellMoreContainer}>
+                    <Text sx={labelInputTellMore}>Additional Instructions for AI</Text>
+                    <Input sx={input} />
                   </Box>
-                  <SwitchContent name={NON_SOLICITATION_CLAUSE} />
-                  <Text sx={labelInputTellMore}>Additional ChatGPT Instructions</Text>
-                  <Input sx={input} />
                 </motion.div>
                 <Flex sx={loading ? loadingStylesBtn : stylesBtn}>
                   {!loading && (

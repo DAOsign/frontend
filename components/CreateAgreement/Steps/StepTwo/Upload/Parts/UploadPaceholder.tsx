@@ -11,17 +11,7 @@ const UploadPaceholder = () => (
     </Box>
     <Text sx={uploadText}>
       Upload Agreement file using Drag & Drop or <br />
-      <span
-        style={{
-          fontFamily: "InterBold",
-          fontSize: "14px",
-          cursor: "pointer",
-          color: "#CA5CF2",
-          opacity: "0.7",
-        }}
-      >
-        Choose File
-      </span>
+      <span className="chooseFileText">Choose File</span>
     </Text>
     <Text sx={uploadTextMobile}>Choose File</Text>
   </Flex>

@@ -29,6 +29,7 @@ export default function StepThree({ page, animateContainer, loading }: Props) {
   const edit = useEditAgreement();
   const { values, changeValue } = page === "create" ? create : edit;
   const [isPublic, setIsPublic] = useState(defaultIsPublic(values.agreementPrivacy));
+  const [checked, setChecked] = useState(false);
   const initiated = useRef(false);
 
   useEffect(() => {
@@ -75,10 +76,11 @@ export default function StepThree({ page, animateContainer, loading }: Props) {
                   notifComingSoon(`Store Proofs on Blockchain is coming soon`);
                 }
               }}
+              id="storeBlockchain"
               disabled={false}
               className="switch"
+              checked={checked}
               sx={switchBtn}
-              id="storeBlockchain"
             />
           </Flex>
         </>

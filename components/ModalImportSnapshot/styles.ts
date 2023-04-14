@@ -1,5 +1,19 @@
 import { ThemeUIStyleObject } from "theme-ui";
 
+export const bg = {
+  position: "absolute",
+  height: "120vh",
+  "@media screen and (max-width: 1200px)": {
+    height: "135vh",
+  },
+  "@media screen and (max-width: 720px)": {
+    height: "150vh",
+  },
+  "@media screen and (max-width: 480px)": {
+    height: "1400px",
+  },
+} as ThemeUIStyleObject;
+
 export const flexContainer = {
   flexDirection: "column",
   justifyContent: "center",
@@ -7,16 +21,24 @@ export const flexContainer = {
 } as ThemeUIStyleObject;
 
 export const overflowContentStyles = {
-  overflow: "scroll",
   "&::-webkit-scrollbar": {
     width: 0,
   },
 } as ThemeUIStyleObject;
 
+export const itemOption = {
+  overflow: "auto",
+  pt: "9px",
+  "&::-webkit-scrollbar": {
+    width: "0 !important",
+  },
+} as ThemeUIStyleObject;
+
 export const inputSearch = {
-  width: "95%",
+  width: "93%",
   height: "40px",
   left: 0,
+  pl: "16px",
   borderRadius: " 8px",
   position: "absolute",
   fontFamily: "InterMedium",
@@ -27,11 +49,23 @@ export const inputSearch = {
   background: "#F7F7FB",
   color: "#212121",
   top: 0,
-  zIndex: 3,
+  zIndex: 1,
   ml: "auto",
   border: "none",
   "&:hover": {
     border: "none",
+  },
+  "&:placeholder": {
+    fontFamily: "InterMedium",
+    fontStyle: "normal",
+    fontWeight: 500,
+    fontSize: "16px",
+    lineHeight: "160%",
+    color: "#212121",
+    opacity: "0.5",
+  },
+  "@media screen and (max-width: 480px)": {
+    width: "85%",
   },
 } as ThemeUIStyleObject;
 
@@ -41,7 +75,6 @@ export const mainText = {
   pl: "60px",
   pr: "60px",
   textAlign: "center",
-  pt: "24px",
   "@media screen and (max-width: 1200px)": {
     px: 0,
   },
@@ -66,11 +99,17 @@ export const subBtn = {
 export const closeIcon = {
   position: "absolute",
   opacity: "0.5",
-  top: "30px",
-  right: "30px",
-  width: "20px",
-  height: "20px",
+  top: "24px",
+  right: "24px",
+  width: "24px",
+  height: "24px",
   cursor: "pointer",
+  "@media screen and (max-width: 480px)": {
+    top: "12px",
+    right: "12px",
+    width: "20px",
+    height: "20px",
+  },
 } as ThemeUIStyleObject;
 
 export const containerIcon = {
@@ -95,6 +134,7 @@ export const input = {
 export const switchContainer = {
   flexDirection: "row-reverse",
   alignItems: "center",
+  position: "relative",
   "& > label": {
     maxWidth: "33px",
     opacity: 1,
@@ -112,6 +152,15 @@ export const switchContainer = {
   },
   "@media screen and (max-width: 719px)": {
     height: "30px",
+  },
+  "@media screen and (max-width: 480px)": {
+    alignItems: "center",
+  },
+} as ThemeUIStyleObject;
+
+export const tellMoreContainer = {
+  "@media screen and (max-width: 480px)": {
+    display: "none",
   },
 } as ThemeUIStyleObject;
 
@@ -145,6 +194,7 @@ export const switchBtn = {
   "input:checked ~ & > div": {
     backgroundColor: "#CA5CF2",
     border: "2px solid #CA5CF2",
+    transform: "translateX(60%) !important",
   },
 } as ThemeUIStyleObject;
 
@@ -156,6 +206,9 @@ export const secondaryTitle = {
   color: "#212121",
   display: "inline-block",
   my: "33px",
+  "@media screen and (max-width: 480px)": {
+    mt: "56px",
+  },
 } as ThemeUIStyleObject;
 
 export const icon = {
@@ -172,20 +225,32 @@ export const iconInfo = {
   ml: "7px",
 } as ThemeUIStyleObject;
 
+export const iconInfoEnableTransform = {
+  cursor: "pointer",
+  height: "24px",
+  width: "24px",
+  ml: "7px",
+  "@media screen and (max-width: 480px)": {
+    position: "absolute",
+    top: "20px",
+    right: 0,
+  },
+} as ThemeUIStyleObject;
+
 export const flexSelect = {
   justifyContent: "space-between",
   cursor: "pointer",
   alignItems: "center",
   height: "40px",
   px: "16px",
+  position: "relative",
+  zIndex: 2,
   fontFamily: "InterMedium",
   fontWeight: 500,
   fontSize: "16px",
   lineHeight: " 160%",
+  transform: "translate3d(1px, 1px, 0)",
   color: "#212121",
-  "&:last-child": {
-    borderRadius: "0 0  8px 8px",
-  },
 } as ThemeUIStyleObject;
 
 export const titleSelect = {
@@ -215,10 +280,13 @@ export const flexLoader = {
 
 export const modalBase = {
   width: "756px",
-  maxHeight: "90vh",
   pt: "40px",
   pb: "60px",
   px: "78px",
+  backgroundColor: "#FFFFFF",
+  top: "60px",
+  position: "absolute",
+  transform: "translate(-50%, 0)",
   "@media screen and (max-width: 1200px)": {
     width: "672px",
     px: "36px",
@@ -240,6 +308,7 @@ export const labelInput = {
 export const containerSelect = {
   backgroundColor: "#F7F7FB",
   height: "fit-content",
+  zIndex: 1,
   borderRadius: "8px",
   minHeight: "40px",
   mt: "19px",
@@ -248,10 +317,13 @@ export const containerSelect = {
   "& > .settingImportSnapshotProposal": {
     position: "absolute",
     backgroundColor: "#F7F7FB",
-    borderRadius: "0 0 8px 8px",
-    zIndex: 1,
-    top: "35px",
+    borderRadius: "8px",
+    zIndex: 3,
+    top: "0",
     width: "100%",
+    "& > .settingImportSnapshotProposal > .itemSelect": {
+      borderRadius: 0,
+    },
   },
 } as ThemeUIStyleObject;
 
@@ -259,6 +331,14 @@ export const flexContent = {
   flexDirection: "column",
   display: "flex",
   width: "100%",
+} as ThemeUIStyleObject;
+
+export const flexSelectItem = {
+  ...flexSelect,
+  "&:hover": {
+    backgroundColor: "#D8D8E2",
+    alignItems: "center",
+  },
 } as ThemeUIStyleObject;
 
 export const stylesBtn = {

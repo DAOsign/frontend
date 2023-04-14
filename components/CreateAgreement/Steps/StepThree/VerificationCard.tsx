@@ -1,10 +1,9 @@
 import React from "react";
 import { Box, Text, Flex } from "theme-ui";
-import { verificationCardStyles, iconComingSoon } from "./styles";
+import { verificationCardStyles } from "./styles";
 import Image from "next/image";
 import Icon from "../../../icon";
 import CheckboxComponent from "../../../Checkbox";
-import iconsObj from "../../../../assets/icons";
 import "react-tooltip/dist/react-tooltip.css";
 
 export interface Props {
@@ -24,15 +23,12 @@ export default function VerificationCard({
   onClick,
   disabled,
 }: Props) {
-  const isAnonymous = title === "Anonymous";
-  const isNotarizedIdentity = title === "Notarized Identity";
-
   return (
     <Box
       sx={{
         ...verificationCardStyles,
         cursor: disabled ? "no-drop" : "pointer",
-        "&:hover": { boxShadow: "unset" },
+        "&:hover": { boxShadow: "unset", border: "2px solid #D8D8E2" },
       }}
       onClick={onClick}
     >
@@ -48,11 +44,6 @@ export default function VerificationCard({
         </Box>
       </Flex>
       <Flex>
-        {/* {!isAnonymous && (
-          <Box sx={iconComingSoon}>
-            <Icon src={iconsObj.comingSoon} />
-          </Box>
-        )} */}
         <Box className="card_tail">
           <Box className="image_container">
             <Image src={img} alt={title} />

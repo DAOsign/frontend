@@ -88,7 +88,9 @@ export default function AgreementLocationRadioButtons({ page }: { page: string }
               sx={{
                 ...itemLocation,
                 border:
-                  values.agreementLocation === el.value ? "2px solid #CA5CF2" : "2px solid #EDEDF3",
+                  values.agreementLocation === el.value
+                    ? "2px solid #CA5CF2 !important"
+                    : "2px solid #EDEDF3",
               }}
               onClick={() => onAgreementLocationClick(el.value)}
               className="radio"

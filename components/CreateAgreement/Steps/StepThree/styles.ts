@@ -73,14 +73,3 @@ export const title = {
   lineHeight: "160%",
   color: "#212121",
 } as ThemeUIStyleObject;
-
-export const iconComingSoon = {
-  width: "248px",
-  height: "60px",
-  "@media screen and (max-width: 719px)": {
-    transform: "translate(-50%, 0)",
-    position: "absolute",
-    bottom: "16px",
-    left: "50%",
-  },
-} as ThemeUIStyleObject;

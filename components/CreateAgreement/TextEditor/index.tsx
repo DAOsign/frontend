@@ -38,8 +38,11 @@ const buttonPropsByStatus = (
   return props;
 };
 
+const minHeightTextEditor = 387;
+
 const TextEditor = ({ page }: { page: string }) => {
   const [isOpen, setIsOpen] = useState(false);
+  const [heightValue, setHeightValue] = useState(minHeightTextEditor);
   const create = useCreateAgreement();
   const edit = useEditAgreement();
   const {
@@ -85,31 +88,24 @@ const TextEditor = ({ page }: { page: string }) => {
             <Text sx={{ display: "block" }}>{" < "} Choose another method</Text>
           </Button>
         </Flex>
-        <Box
-          onClick={event => {
-            if (event.detail === 2) {
-              setIsOpen(!isOpen);
-            }
-          }}
-        >
-          {isOpen ? (
-            <MDEditor
-              onChange={val => changeValue("textEditorValue", val || "")}
-              hideToolbar={state === "preview"}
-              height={"fit-content"}
-              value={textEditorValue}
-              preview={state}
-            />
-          ) : (
-            <MDEditor
-              onChange={val => changeValue("textEditorValue", val || "")}
-              hideToolbar={state === "preview"}
-              value={textEditorValue}
-              preview={state}
-            />
-          )}
+        <Box>
+          <MDEditor
+            onChange={val => changeValue("textEditorValue", val || "")}
+            // @ts-ignore
+            onHeightChange={(e: number) => {
+              if (!isNaN(e)) {
+                setHeightValue(e);
+              } else {
+                setHeightValue(minHeightTextEditor);
+              }
+            }}
+            hideToolbar={state === "preview"}
+            value={textEditorValue}
+            height={heightValue}
+            preview={state}
+          />
         </Box>
-        <Box sx={iconFileResize}>
+        <Box onClick={() => setIsOpen(false)} sx={iconFileResize}>
           <Icon width="30px" height="30px" style={{ opacity: 0.3 }} src={iconsObj.fieldResize} />
         </Box>
         <Flex className="support">

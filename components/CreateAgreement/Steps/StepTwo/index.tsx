@@ -5,12 +5,9 @@ import {
   inputCreateAgreementError,
   inputCreactAgreement,
   labelSigners,
-  titleBottom,
   addMeBtn,
   plus,
 } from "../../styles";
-import { verificationCardStyles, iconComingSoon } from "../StepThree/styles";
-import { switchContainer, switchBtn, labelSwitch } from "../../../ModalImportSnapshot/styles";
 import { validateAddress, validateEnsDomains } from "../StepThree/validationUtils";
 import { useCreateAgreement } from "../../../../hooks/useCreateAgreement";
 import { useEditAgreement } from "../../../../hooks/useEditAgreement";
@@ -347,9 +344,9 @@ export default function StepTwo({ page }: { page: string }) {
               <Text
                 sx={{
                   variant: "forms.label",
-                  ml: "3px",
                   maxWidth: "unset",
                   minHeight: "25px",
+                  ml: "3px",
                   mr: "5px",
                 }}
               >
@@ -380,43 +377,11 @@ export default function StepTwo({ page }: { page: string }) {
                   if (!checkedVerifications[index] && verification.title !== "Anonymous") {
                     notifComingSoon(`${verification.title} Verification is coming soon`);
                   }
-                  setCheckedVerifications(prevState => [
-                    ...prevState.slice(0, index),
-                    !prevState[index],
-                    ...prevState.slice(index + 1),
-                  ]);
                 }}
               />
             ))}
           </Box>
         </Box>
-        <Text sx={titleBottom}>Agreement Configuration</Text>
-        <Flex
-          sx={{
-            ...verificationCardStyles,
-            cursor: "no-drop",
-            height: "84px",
-            mt: "12px",
-            pr: 0,
-          }}
-        >
-          <Flex sx={switchContainer}>
-            <Label htmlFor="enableInvoicing" sx={labelSwitch}>
-              Enable Invoicing
-            </Label>
-            <Switch
-              onChange={e => {
-                if (e.target.checked) {
-                  notifComingSoon(`Enable Invoicing is coming soon`);
-                }
-              }}
-              disabled={false}
-              className="switch"
-              sx={switchBtn}
-              id="enableInvoicing"
-            />
-          </Flex>
-        </Flex>
       </>
     </Container>
   );
