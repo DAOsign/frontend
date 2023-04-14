@@ -7,7 +7,7 @@ export const formatAddress = (address: string) => {
 
 export function extractProposalId(url: string) {
   const regex = /0x[a-fA-F0-9]{64}/;
-  const match = url.match(regex);
+  const match = url?.match(regex);
 
   return match ? match[0] : null;
 }

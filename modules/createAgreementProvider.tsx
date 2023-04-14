@@ -37,7 +37,7 @@ export interface CreationState {
     legalJurisdictionState: string;
     proposalText: string;
     contractType: string;
-    snapshotProposalUrl: string;
+    snapshotProposalUrl?: string;
   };
 }
 interface CreateAgrementContext {

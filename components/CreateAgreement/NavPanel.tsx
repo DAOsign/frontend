@@ -176,7 +176,7 @@ export default function NavPanel({ setLoading, page }: { setLoading: any; page: 
       agreementId: Number(query.id),
       title: values.title,
       agreementLocation: values.agreementLocation || null,
-      snapshotProposalUrl: values.proposal.snapshotProposalUrl,
+      snapshotProposalUrl: values.proposal?.snapshotProposalUrl,
       content:
         (values.agreementMethod === METHOD_ENTER ||
           values.agreementMethod ||

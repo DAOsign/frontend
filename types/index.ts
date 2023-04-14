@@ -88,7 +88,7 @@ export interface Agreement {
   createdAt: Date;
   agreementFile?: AgreementFile;
   signProofAmount: number;
-  snapshotProposalUrl: string;
+  snapshotProposalUrl?: string;
 }
 
 export interface DataProposalProps {
