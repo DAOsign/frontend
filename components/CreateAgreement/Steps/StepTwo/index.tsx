@@ -347,9 +347,9 @@ export default function StepTwo({ page }: { page: string }) {
               <Text
                 sx={{
                   variant: "forms.label",
-                  ml: "3px",
                   maxWidth: "unset",
                   minHeight: "25px",
+                  ml: "3px",
                   mr: "5px",
                 }}
               >
@@ -390,33 +390,6 @@ export default function StepTwo({ page }: { page: string }) {
             ))}
           </Box>
         </Box>
-        <Text sx={titleBottom}>Agreement Configuration</Text>
-        <Flex
-          sx={{
-            ...verificationCardStyles,
-            cursor: "no-drop",
-            height: "84px",
-            mt: "12px",
-            pr: 0,
-          }}
-        >
-          <Flex sx={switchContainer}>
-            <Label htmlFor="enableInvoicing" sx={labelSwitch}>
-              Enable Invoicing
-            </Label>
-            <Switch
-              onChange={e => {
-                if (e.target.checked) {
-                  notifComingSoon(`Enable Invoicing is coming soon`);
-                }
-              }}
-              disabled={false}
-              className="switch"
-              sx={switchBtn}
-              id="enableInvoicing"
-            />
-          </Flex>
-        </Flex>
       </>
     </Container>
   );
