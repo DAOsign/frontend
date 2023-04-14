@@ -172,7 +172,7 @@ export const initialState = {
     options: contractType,
   },
   [CHOOSE_COUNTRY]: {
-    value: "United States",
+    value: "",
     options: countriesData,
     defaultValue: "Choose country",
   },

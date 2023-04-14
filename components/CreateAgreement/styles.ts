@@ -298,11 +298,13 @@ const card = {
   minHeight: "230px",
   height: "248px",
   transition: ".3s all",
-  "&:hover .iconMethod": {
-    position: "relative",
-    top: "-1.5px",
+  "@media screen and (min-width: 720px)": {
+    "&:hover .iconMethod": {
+      position: "relative",
+      top: "-1.5px",
+    },
   },
-  "@media screen and (max-width: 720px)": {
+  "@media screen and (max-width: 719px)": {
     px: "12px",
   },
   "&.active": {
