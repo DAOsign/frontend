@@ -38,9 +38,11 @@ const buttonPropsByStatus = (
   return props;
 };
 
+const minHeightTextEditor = 387;
+
 const TextEditor = ({ page }: { page: string }) => {
   const [isOpen, setIsOpen] = useState(false);
-  const [heightValue, setHeightValue] = useState(387);
+  const [heightValue, setHeightValue] = useState(minHeightTextEditor);
   const create = useCreateAgreement();
   const edit = useEditAgreement();
   const {
@@ -94,7 +96,7 @@ const TextEditor = ({ page }: { page: string }) => {
               if (!isNaN(e)) {
                 setHeightValue(e);
               } else {
-                setHeightValue(387);
+                setHeightValue(minHeightTextEditor);
               }
             }}
             hideToolbar={state === "preview"}
