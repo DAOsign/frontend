@@ -63,6 +63,7 @@ import {
   labelSwitch,
   inputSearch,
   flexLoader,
+  itemOption,
   flexContent,
   titleSelect,
   labelInput,
@@ -189,7 +190,7 @@ export default function ModalImportSnapshot({ isOpen, page, onExit }: Props) {
     const zIndexSelect: number = name === STATEMENT_OF_WORK ? 3 : name === CHOOSE_COUNTRY ? 2 : 1;
     return {
       ...containerSelect,
-      boxShadow: selectsOpen[name] ? "0px 4px 32px rgba(33, 33, 33, 0.16)" : "none",
+      // boxShadow: selectsOpen[name] ? "0px 4px 32px rgba(33, 33, 33, 0.16)" : "none",
       borderRadius: selectsOpen[name] ? "8px 8px 0 0" : "8px",
       zIndex: zIndexSelect,
     };
@@ -213,67 +214,75 @@ export default function ModalImportSnapshot({ isOpen, page, onExit }: Props) {
 
     return (
       <Container sx={getStylesSelectContainer(name)}>
-        <Flex sx={flexSelect}>
-          {inputIsHidden ? (
-            <Input
-              onChange={e => setSearchValue(e.target.value)}
-              onClick={onInputSearchClick}
-              placeholder="Choose country"
-              value={searchValue}
-              sx={inputSearch}
-            />
-          ) : (
-            <Text
-              onClick={() => setSelectsOpen({ ...initialStateSelects, [name]: true })}
-              sx={titleSelect}
-            >
-              {value}
-            </Text>
-          )}
-          <motion.div
-            animate={selectsOpen[name] ? "enter" : "hidden"}
-            transition={{ type: "linear" }}
-            variants={width < 480 ? iconsRotateMobile : iconsRotate}
-            initial="hidden"
-          >
-            <Box
-              onClick={() => setSelectsOpen({ ...initialStateSelects, [name]: !selectsOpen[name] })}
-              sx={icon}
-            >
-              <Icon src={iconsObj.arrowLeftPink} />
-            </Box>
-          </motion.div>
-        </Flex>
         <motion.div
           variants={name === STATEMENT_OF_WORK ? variantsSelectStatmentOfWork : variantsSelect}
           animate={selectsOpen[name] ? "enter" : "hidden"}
           className="settingImportSnapshotProposal"
           transition={{ type: "linear" }}
           initial="hidden"
-          // style={{ boxShadow: selectsOpen[name] ? "0px 4px 32px rgba(33, 33, 33, 0.16)" : "none" }}
+          style={{
+            filter: selectsOpen[name] ? "drop-shadow(0px 4px 32px rgba(33, 33, 33, 0.16))" : "none",
+          }}
         >
-          {name === CHOOSE_COUNTRY && (
-            <Flex
-              onClick={() => onChangeSelect(name, UNITED_STATES)}
-              sx={{ ...flexSelectItem, borderRadius: "0 !important" }}
+          <Flex sx={{ ...flexSelect, borderRadius: selectsOpen[name] ? "8px 8px 0 0" : "8px" }}>
+            {inputIsHidden ? (
+              <Input
+                onChange={e => setSearchValue(e.target.value)}
+                onClick={onInputSearchClick}
+                placeholder="Choose country"
+                value={searchValue}
+                sx={inputSearch}
+              />
+            ) : (
+              <Text
+                onClick={() => setSelectsOpen({ ...initialStateSelects, [name]: true })}
+                sx={titleSelect}
+              >
+                {value}
+              </Text>
+            )}
+            <motion.div
+              variants={width < 480 ? iconsRotateMobile : iconsRotate}
+              animate={selectsOpen[name] ? "enter" : "hidden"}
+              transition={{ type: "linear" }}
+              initial="hidden"
             >
-              <Text sx={titleSelect}>{UNITED_STATES}</Text>
-            </Flex>
-          )}
-          {optionsFilter?.map((el: string, i: number) => {
-            return (
-              el !== UNITED_STATES && (
-                <Flex
-                  sx={{ ...flexSelect, "&:hover": { backgroundColor: "#D8D8E2" } }}
-                  onClick={() => onChangeSelect(name, el)}
-                  className="itemSelect"
-                  key={i}
-                >
-                  <Text sx={titleSelect}>{el}</Text>
-                </Flex>
-              )
-            );
-          })}
+              <Box
+                onClick={() =>
+                  setSelectsOpen({ ...initialStateSelects, [name]: !selectsOpen[name] })
+                }
+                sx={icon}
+              >
+                <Icon src={iconsObj.arrowLeftPink} />
+              </Box>
+            </motion.div>
+          </Flex>
+          <Container
+            sx={{ ...itemOption, maxHeight: name === STATEMENT_OF_WORK ? "138px" : "178px" }}
+          >
+            {name === CHOOSE_COUNTRY && (
+              <Flex
+                onClick={() => onChangeSelect(name, UNITED_STATES)}
+                sx={{ ...flexSelectItem, borderRadius: "0 !important" }}
+              >
+                <Text sx={titleSelect}>{UNITED_STATES}</Text>
+              </Flex>
+            )}
+            {optionsFilter?.map((el: string, i: number) => {
+              return (
+                el !== UNITED_STATES && (
+                  <Flex
+                    sx={{ ...flexSelect, "&:hover": { backgroundColor: "#D8D8E2" } }}
+                    onClick={() => onChangeSelect(name, el)}
+                    className="itemSelect"
+                    key={i}
+                  >
+                    <Text sx={titleSelect}>{el}</Text>
+                  </Flex>
+                )
+              );
+            })}
+          </Container>
         </motion.div>
       </Container>
     );

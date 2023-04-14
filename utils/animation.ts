@@ -7,8 +7,8 @@ export const variants: Variants = {
 };
 
 export const variantsSelect: Variants = {
-  hidden: { height: 0, overflow: "hidden", y: -10 },
-  enter: { height: "200px", overflow: "auto", y: 0 },
+  hidden: { height: "40px", overflow: "hidden" },
+  enter: { height: "fit-content", overflow: "auto" },
 };
 
 export const iconsRotate: Variants = {
@@ -17,8 +17,8 @@ export const iconsRotate: Variants = {
 };
 
 export const variantsSelectStatmentOfWork: Variants = {
-  hidden: { height: 0, overflow: "hidden", y: -10 },
-  enter: { height: "138px", overflow: "auto", y: 0 },
+  hidden: { height: "40px", overflow: "hidden" },
+  enter: { height: "fit-content", overflow: "auto" },
 };
 
 export const iconsRotateMobile: Variants = {

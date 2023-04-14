@@ -23,6 +23,14 @@ export const overflowContentStyles = {
   },
 } as ThemeUIStyleObject;
 
+export const itemOption = {
+  overflow: "auto",
+  pt: "9px",
+  "&::-webkit-scrollbar": {
+    width: "0 !important",
+  },
+} as ThemeUIStyleObject;
+
 export const inputSearch = {
   width: "93%",
   height: "40px",
@@ -240,12 +248,6 @@ export const flexSelect = {
   lineHeight: " 160%",
   transform: "translate3d(1px, 1px, 0)",
   color: "#212121",
-  "&:last-child": {
-    borderRadius: "0 0  8px 8px",
-  },
-  "&:first-child": {
-    borderRadius: "8px 8px 0 0",
-  },
 } as ThemeUIStyleObject;
 
 export const titleSelect = {
@@ -312,9 +314,9 @@ export const containerSelect = {
   "& > .settingImportSnapshotProposal": {
     position: "absolute",
     backgroundColor: "#F7F7FB",
-    borderRadius: "0 0 8px 8px",
+    borderRadius: "8px",
     zIndex: 3,
-    top: "40px",
+    top: "0",
     width: "100%",
     "& > .settingImportSnapshotProposal > .itemSelect": {
       borderRadius: 0,
