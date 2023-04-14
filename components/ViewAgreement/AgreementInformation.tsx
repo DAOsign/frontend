@@ -177,21 +177,21 @@ export const AgreementInformation = ({
             </Box>
           }
         />
-        <InformationRow
-          value={
-            <Link href={agreement?.snapshotProposalUrl} target="_blank">
-              <Flex>
-                <Text>
-                  {formatAddress(extractProposalId(agreement?.snapshotProposalUrl) || "")}
-                </Text>
-                <Box sx={{ width: "16px", height: "16px", ml: "4px" }}>
-                  <Icon src={iconsObj.lightning} />
-                </Box>
-              </Flex>
-            </Link>
-          }
-          name="Snapshot proposal"
-        />
+        {agreement?.snapshotProposalUrl && (
+          <InformationRow
+            value={
+              <Link href={agreement?.snapshotProposalUrl} target="_blank">
+                <Flex>
+                  <Text>{formatAddress(extractProposalId(agreement.snapshotProposalUrl)!)}</Text>
+                  <Box sx={{ width: "16px", height: "16px", ml: "4px" }}>
+                    <Icon src={iconsObj.lightning} />
+                  </Box>
+                </Flex>
+              </Link>
+            }
+            name="Snapshot proposal"
+          />
+        )}
         <InformationRow
           name="Creator"
           tooltipValue={authorWalletAddress}

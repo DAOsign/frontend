@@ -3,7 +3,7 @@ import { Agreement, AgreementLocation, AgreementPrivacy, AgreementStatus } from 
 
 export const toAgreement = (agreement: AgreementResponse): Agreement => {
   return {
-    snapshotProposalUrl: agreement?.snapshotProposalUrl,
+    snapshotProposalUrl: agreement?.snapshotProposalUrl || "",
     agreementId: Number(agreement.agreementId),
     title: agreement.title,
     agreementLocation: agreement.agreementLocation?.name as unknown as AgreementLocation,
