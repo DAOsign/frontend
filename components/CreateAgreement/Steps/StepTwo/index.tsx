@@ -380,11 +380,6 @@ export default function StepTwo({ page }: { page: string }) {
                   if (!checkedVerifications[index] && verification.title !== "Anonymous") {
                     notifComingSoon(`${verification.title} Verification is coming soon`);
                   }
-                  setCheckedVerifications(prevState => [
-                    ...prevState.slice(0, index),
-                    !prevState[index],
-                    ...prevState.slice(index + 1),
-                  ]);
                 }}
               />
             ))}
