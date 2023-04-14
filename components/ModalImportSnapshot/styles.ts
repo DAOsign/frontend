@@ -10,7 +10,7 @@ export const bg = {
     height: "150vh",
   },
   "@media screen and (max-width: 480px)": {
-    height: "160vh",
+    height: "1400px",
   },
 } as ThemeUIStyleObject;
 
