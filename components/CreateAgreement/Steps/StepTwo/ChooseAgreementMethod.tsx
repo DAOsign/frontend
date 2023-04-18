@@ -41,7 +41,7 @@ export default function ChooseAgreementMethod({ page }: { page: string }) {
   const validateTitle = () => {
     const errors: CreateAgreementFieldErrors = {};
     if (!values.title.trim()) {
-      errors.title = "Title can not be blank";
+      errors.title = "Tittle can not be blank (spelling mistake)";
     }
     if (values.title.trim()?.length > 120) {
       errors.title = "Title should be 120 characters max";
@@ -95,7 +95,7 @@ export default function ChooseAgreementMethod({ page }: { page: string }) {
       default:
         return withFade(
           <>
-            <Text sx={label}>Agreement content</Text>
+            <Text sx={label}>Agreement content *</Text>
             <Container sx={conteinerItems}>
               <Container
                 onClick={() => chengeMethod("agreementMethod", METHOD_UPLOAD)}

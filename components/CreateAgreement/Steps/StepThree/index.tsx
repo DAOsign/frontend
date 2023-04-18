@@ -52,7 +52,7 @@ export default function StepThree({ page, animateContainer, loading }: Props) {
       {!loading ? (
         <>
           <Text sx={{ variant: "forms.label", margin: "0 auto 3px 2px", textAlign: "left" }}>
-            Agreement privacy
+            Agreement privacy *
           </Text>
           {!isPublic ? (
             <ChooseMethod

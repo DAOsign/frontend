@@ -19,7 +19,7 @@ function FieldErrorMessage({ error, isAbsolutePosition = true, sx = {} }: Props)
           ...sx,
         }}
       >
-        * {error}
+        {error}
       </Text>
     </Box>
   ) : null;

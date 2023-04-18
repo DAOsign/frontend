@@ -24,7 +24,7 @@ export default function StepOne({ page }: Props) {
     <Container sx={{ maxWidth: "600px", textAlign: "left" }}>
       {!values?.agreementMethod ? (
         <>
-          <Text sx={{ variant: "forms.label", ml: "3px" }}>Title</Text>
+          <Text sx={{ variant: "forms.label", ml: "3px" }}>Title *</Text>
           <Input
             value={values.title}
             onChange={e => changeValue("title", e.target.value)}

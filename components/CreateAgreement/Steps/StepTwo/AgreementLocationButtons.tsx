@@ -44,17 +44,16 @@ export default function AgreementLocationRadioButtons({ page }: { page: string }
 
   return (
     <>
-      <Flex sx={{ alignItems: "center", mt: "24px" }}>
+      <Flex sx={{ alignItems: "center", mt: "24px", mb: "5px" }}>
         <Text
           sx={{
             variant: "forms.label",
             display: "block",
             mr: "5px",
             maxWidth: "150px",
-            mb: "5px",
           }}
         >
-          Agreement location{" "}
+          Agreement location *{" "}
         </Text>
         <Tooltip
           top="-420%"
