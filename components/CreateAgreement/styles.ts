@@ -53,7 +53,7 @@ const imageUploadContainer = {
     mt: "10px",
   },
   "&.uploaded": {
-    border: "1px dashed rgba(202, 92, 242, 1)",
+    border: "1px solid #EDEDF3",
   },
   "[id='proxy-renderer']": {
     overflow: "hidden",
