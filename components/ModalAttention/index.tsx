@@ -22,6 +22,19 @@ interface Props {
 }
 
 export default function ModalAttention({ isOpen, onExit, onSubmit, method }: Props) {
+  const getMethotName = () => {
+    switch (method) {
+      case "Shapshot":
+        return "Import From Snapshot";
+      case "Enter":
+        return "Enter Agreement";
+      case "Upload":
+        return "Upload Agreement";
+      default:
+        break;
+    }
+  };
+
   return (
     <Portal isOpen={isOpen} onClose={onExit}>
       <ModalBase height="442px">
@@ -34,7 +47,7 @@ export default function ModalAttention({ isOpen, onExit, onSubmit, method }: Pro
           </Box>
           <Text sx={mainText}>Attention!</Text>
           <Text sx={textContainer}>
-            You have {method} method in progress. <br />
+            You have {getMethotName()} method in progress. <br />
             You will lose your progress if you select other method. <br />
             Are you sure you want to continue ?
           </Text>
