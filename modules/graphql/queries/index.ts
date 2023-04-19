@@ -212,6 +212,7 @@ export const getAgreementSignProofData = graphql(`
 
 export const generateAgreement = graphql(`
   query GenerateAgreement(
+    $agreementId: Int!
     $proposalText: String!
     $contractType: String
     $legalJurisdictionCountry: String
@@ -222,6 +223,7 @@ export const generateAgreement = graphql(`
     $addNonSolicitationClause: Boolean
   ) {
     generateAgreement(
+      agreementId: $agreementId
       proposalText: $proposalText
       contractType: $contractType
       legalJurisdictionCountry: $legalJurisdictionCountry
@@ -231,6 +233,14 @@ export const generateAgreement = graphql(`
       addIntellectualPropertyClause: $addIntellectualPropertyClause
       addNonSolicitationClause: $addNonSolicitationClause
     ) {
+      text
+    }
+  }
+`);
+
+export const refineGeneratedAgreement = graphql(`
+  query RefineGeneratedAgreement($userRequest: String!, $agreementId: Int!) {
+    refineGeneratedAgreement(userRequest: $userRequest, agreementId: $agreementId) {
       text
     }
   }

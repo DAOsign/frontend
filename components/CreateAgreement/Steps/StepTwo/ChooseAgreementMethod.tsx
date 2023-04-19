@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Container, Text, Box } from "theme-ui";
 import Image from "next/image";
 import Icon from "../../../icon/index";
@@ -21,6 +21,7 @@ import { useCreateAgreement } from "../../../../hooks/useCreateAgreement";
 import {
   CreateAgreementFieldErrors,
   CreationState,
+  initialStateProposal,
 } from "../../../../modules/createAgreementProvider";
 import { useEditAgreement } from "../../../../hooks/useEditAgreement";
 import { isEmpty } from "../../../../utils/common";
@@ -30,13 +31,23 @@ import { METHOD_ENTER, METHOD_UPLOAD, METHOD_IMPORT_SHAPSHOT } from "../../../..
 import FieldErrorMessage from "../../../Form/FieldErrorMessage";
 import useWindowDimensions from "../../../../hooks/useWindowDimensions";
 import ModalImportSnapshot from "../../../ModalImportSnapshot";
+import ModalAttention from "../../../ModalAttention";
 
-export default function ChooseAgreementMethod({ page }: { page: string }) {
+export default function ChooseAgreementMethod({
+  setMethod,
+  method,
+  page,
+}: {
+  setMethod: React.Dispatch<React.SetStateAction<string>>;
+  method: string;
+  page: string;
+}) {
   const { width } = useWindowDimensions();
   const create = useCreateAgreement();
   const edit = useEditAgreement();
   const { values, changeValue } = page === "create" ? create : edit;
   const [isOpen, setIsOpen] = useState(false);
+  const [modalAttention, setModalAttention] = useState({ isOpen: false, method: "" });
 
   const validateTitle = () => {
     const errors: CreateAgreementFieldErrors = {};
@@ -50,32 +61,71 @@ export default function ChooseAgreementMethod({ page }: { page: string }) {
     return isEmpty(errors);
   };
 
-  const chengeMethod = (name: keyof CreationState, method: string) => {
+  useEffect(() => {
+    if (
+      values.agreementMethod === METHOD_IMPORT_SHAPSHOT &&
+      values.textEditorValue &&
+      !!values.agreementId
+    ) {
+      setMethod(METHOD_IMPORT_SHAPSHOT);
+    }
+  }, []);
+
+  const chengeMethod = (name: keyof CreationState, method: string, beforeModal: boolean) => {
     const validateRes = validateTitle();
-    if (validateRes) {
+    if (beforeModal) {
+      setModalAttention({ isOpen: false, method });
+      changeValue("filePath", "");
+      changeValue("textEditorValue", "");
+      changeValue("proposal", initialStateProposal);
+      changeValue("file", undefined);
       changeValue("errors", { ...values.errors, agreementFile: null });
-      if (method === METHOD_IMPORT_SHAPSHOT) {
+    }
+    if (
+      values.agreementMethod !== "" &&
+      values.agreementMethod !== method &&
+      !beforeModal &&
+      validateRes
+    ) {
+      setModalAttention({ isOpen: true, method });
+      return;
+    }
+    if (validateRes) {
+      changeValue("agreementMethod", modalAttention.method);
+      if (method === METHOD_IMPORT_SHAPSHOT && !values.textEditorValue) {
         setIsOpen(true);
+        changeValue(name, method);
         return;
       }
       changeValue(name, method);
+      setMethod(method);
     }
   };
 
+  const getBorderCard = (method: string) => {
+    return {
+      border:
+        values.agreementMethod === method ? "2px solid #CA5CF2!important" : "2px solid #EDEDF3",
+      "&:hover": {
+        border:
+          values.agreementMethod === method ? "2px solid #CA5CF2!important" : "2px solid #EDEDF3",
+      },
+    };
+  };
   const renderMethods = () => {
-    switch (values.agreementMethod) {
+    switch (method) {
       case METHOD_IMPORT_SHAPSHOT:
         return withFade(
           <>
-            <TextEditor page={page} />
+            <TextEditor handleChooseAnotherMethod={() => setMethod("")} page={page} />
             <FieldErrorMessage error={values?.errors?.agreementFile} />
           </>,
-          1
+          0
         );
       case METHOD_ENTER:
         return withFade(
           <>
-            <TextEditor page={page} />
+            <TextEditor handleChooseAnotherMethod={() => setMethod("")} page={page} />
             <FieldErrorMessage error={values?.errors?.agreementFile} />
           </>,
           1
@@ -83,7 +133,7 @@ export default function ChooseAgreementMethod({ page }: { page: string }) {
       case METHOD_UPLOAD: {
         return withFade(
           <>
-            <UploadLocalAgreement page={page} />
+            <UploadLocalAgreement handleChooseAnotherMethod={() => setMethod("")} page={page} />
             <FieldErrorMessage
               error={values?.errors?.agreementFile}
               sx={values?.file ? { marginBottom: "-45px !important" } : {}}
@@ -98,8 +148,11 @@ export default function ChooseAgreementMethod({ page }: { page: string }) {
             <Text sx={label}>Agreement content *</Text>
             <Container sx={conteinerItems}>
               <Container
-                onClick={() => chengeMethod("agreementMethod", METHOD_UPLOAD)}
-                sx={leftCard}
+                onClick={() => chengeMethod("agreementMethod", METHOD_UPLOAD, false)}
+                sx={{
+                  ...leftCard,
+                  ...getBorderCard(METHOD_UPLOAD),
+                }}
               >
                 <Box sx={itemsContent}>
                   <Box className="iconMethod" sx={iconMethod}>
@@ -112,8 +165,8 @@ export default function ChooseAgreementMethod({ page }: { page: string }) {
                 </Box>
               </Container>
               <Container
-                onClick={() => chengeMethod("agreementMethod", METHOD_ENTER)}
-                sx={centerCard}
+                onClick={() => chengeMethod("agreementMethod", METHOD_ENTER, false)}
+                sx={{ ...centerCard, ...getBorderCard(METHOD_ENTER) }}
               >
                 <Box sx={itemsContent}>
                   <Box className="iconMethod" sx={iconMethod}>
@@ -130,8 +183,8 @@ export default function ChooseAgreementMethod({ page }: { page: string }) {
                 </Box>
               </Container>
               <Container
-                sx={rightCard}
-                onClick={() => chengeMethod("agreementMethod", METHOD_IMPORT_SHAPSHOT)}
+                sx={{ ...rightCard, ...getBorderCard(METHOD_IMPORT_SHAPSHOT) }}
+                onClick={() => chengeMethod("agreementMethod", METHOD_IMPORT_SHAPSHOT, false)}
               >
                 <Box sx={itemsContent}>
                   <Box className="iconMethod" sx={iconMethod}>
@@ -148,7 +201,20 @@ export default function ChooseAgreementMethod({ page }: { page: string }) {
             </Container>
             <FieldErrorMessage sx={{ mb: "-35px" }} error={values?.errors?.agreementFile} />
             {isOpen && (
-              <ModalImportSnapshot page={page} onExit={() => setIsOpen(false)} isOpen={isOpen} />
+              <ModalImportSnapshot
+                onExit={() => setIsOpen(false)}
+                setMethod={setMethod}
+                isOpen={isOpen}
+                page={page}
+              />
+            )}
+            {modalAttention.isOpen && (
+              <ModalAttention
+                onSubmit={() => chengeMethod("agreementMethod", modalAttention.method, true)}
+                onExit={() => setModalAttention({ isOpen: false, method: "" })}
+                isOpen={modalAttention.isOpen}
+                method={values.agreementMethod}
+              />
             )}
           </>,
           3

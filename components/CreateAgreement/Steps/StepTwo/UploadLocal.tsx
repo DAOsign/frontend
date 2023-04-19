@@ -7,17 +7,16 @@ import { useCreateAgreement } from "../../../../hooks/useCreateAgreement";
 import { useEditAgreement } from "../../../../hooks/useEditAgreement";
 import Upload from "./Upload";
 
-export default function UploadLocalAgreement({ page }: { page: string }) {
+export default function UploadLocalAgreement({
+  page,
+  handleChooseAnotherMethod,
+}: {
+  page: string;
+  handleChooseAnotherMethod: () => void;
+}) {
   const create = useCreateAgreement();
   const edit = useEditAgreement();
-  const { changeValue, values } = page === "create" ? create : edit;
-
-  const handleChooseAnotherMethod = () => {
-    changeValue("agreementMethod", "");
-    changeValue("filePath", "");
-    changeValue("textEditorValue", "");
-    changeValue("file", undefined);
-  };
+  const { values } = page === "create" ? create : edit;
 
   return (
     <Flex sx={{ ...containerUpload, mt: "0" }}>

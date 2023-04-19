@@ -712,7 +712,7 @@ const uploadBtn = {
   backgroundColor: "transparent",
   background: "unset",
   justifyContent: "flex-end",
-  "&:hover": {
+  "&:hover, &:focus": {
     background: "unset",
     backgroundColor: "transparent",
   },

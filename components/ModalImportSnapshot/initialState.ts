@@ -1,14 +1,14 @@
 import { countries } from "countries-list";
 import {
   INTELLECTUAL_PROPERTY_CLAUSE,
+  LEGAL_JURISDICTION_COUNTRY,
+  LEGAL_JURISDICTION_STATE,
   NON_SOLICITATION_CLAUSE,
   INDEMNIFICATION_CLAUSE,
   LEGAL_JURISDICTION,
   ENABLE_TRANSFORM,
   STATEMENT_OF_WORK,
-  CHOOSE_COUNTRY,
   CONTRACT_TYPE,
-  CHOOSE_STATE,
 } from "../../types";
 
 const states = [
@@ -75,7 +75,7 @@ const contractType = [
   "Work Order Agreement",
 ];
 
-export const initialStateSwitches = {
+export const switches = {
   [ENABLE_TRANSFORM]: {
     title: "Enable Transform to Contract (Utilizing GPT-3 OpenAI API)",
     isOpen: true,
@@ -162,23 +162,20 @@ export const initialStateSwitches = {
 
 export const initialStateSelects = {
   [STATEMENT_OF_WORK]: false,
-  [CHOOSE_COUNTRY]: false,
-  [CHOOSE_STATE]: false,
+  [LEGAL_JURISDICTION_COUNTRY]: false,
+  [LEGAL_JURISDICTION_STATE]: false,
 };
 
-export const initialState = {
+export const selectsValue = {
   [STATEMENT_OF_WORK]: {
-    value: "Statement of Work",
     options: contractType,
+    value: "Statement of Work",
   },
-  [CHOOSE_COUNTRY]: {
-    value: "",
+  [LEGAL_JURISDICTION_COUNTRY]: {
     options: countriesData,
-    defaultValue: "Choose country",
   },
-  [CHOOSE_STATE]: {
-    value: "Choose state",
+  [LEGAL_JURISDICTION_STATE]: {
     options: states,
-    defaultValue: "Choose state",
+    value: "Choose state",
   },
 };

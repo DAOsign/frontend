@@ -103,7 +103,7 @@ export const btnBack = {
   background: "unset",
   px: "0 !important",
   justifyContent: "flex-end",
-  "&:hover": {
+  "&:hover, &:focus": {
     backgroundColor: "transparent",
     background: "unset",
     color: "#AE4FD0",

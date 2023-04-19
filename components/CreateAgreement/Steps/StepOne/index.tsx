@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { Container, Input, Text } from "theme-ui";
 import { inputCreactAgreement, inputCreateAgreementError } from "../../styles";
 import { useCreateAgreement } from "../../../../hooks/useCreateAgreement";
@@ -17,12 +17,13 @@ export default function StepOne({ page }: Props) {
   const create = useCreateAgreement();
   const edit = useEditAgreement();
   const { values, changeValue } = page === "create" ? create : edit;
+  const [method, setMethod] = useState("");
 
   const titleInputErrorStyles = values?.errors?.title ? inputCreateAgreementError : {};
 
   return (
     <Container sx={{ maxWidth: "600px", textAlign: "left" }}>
-      {!values?.agreementMethod ? (
+      {!method ? (
         <>
           <Text sx={{ variant: "forms.label", ml: "3px" }}>Title *</Text>
           <Input
@@ -33,7 +34,7 @@ export default function StepOne({ page }: Props) {
         </>
       ) : null}
       <FieldErrorMessage error={values?.errors?.title} />
-      <AgreementMethod page={page} />
+      <AgreementMethod method={method} setMethod={setMethod} page={page} />
     </Container>
   );
 }
