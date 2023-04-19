@@ -52,7 +52,7 @@ export default function ChooseAgreementMethod({
   const validateTitle = () => {
     const errors: CreateAgreementFieldErrors = {};
     if (!values.title.trim()) {
-      errors.title = "Tittle can not be blank (spelling mistake)";
+      errors.title = "Tittle can not be blank";
     }
     if (values.title.trim()?.length > 120) {
       errors.title = "Title should be 120 characters max";
