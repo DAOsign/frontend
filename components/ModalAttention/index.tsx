@@ -25,7 +25,7 @@ export default function ModalAttention({ isOpen, onExit, onSubmit, method }: Pro
   const getMethotName = () => {
     switch (method) {
       case "Shapshot":
-        return "Import From Snapshot";
+        return "Import from Snapshot";
       case "Enter":
         return "Enter Agreement";
       case "Upload":
