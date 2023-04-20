@@ -91,13 +91,13 @@ export const downloadPdf = async (agreementId: string) => {
     .get(`${process.env.NEXT_PUBLIC_REST_ENDPOINT}/files/generatePdf`, {
       params: { agreementId },
       responseType: "blob",
+      /*
       headers: {
         "Content-Type": "application/pdf",
         //token: authToken,
-      },
+      }, */
     })
     .then(res => {
-      console.log("res", res.headers);
       fileDownload(res.data, "hello.pdf");
     })
     .catch(e => console.error(e));
