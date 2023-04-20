@@ -324,7 +324,8 @@ export default function NavPanel({ setLoading, page }: { setLoading: any; page: 
             }
           } else if (
             step === 1 &&
-            values.agreementMethod === METHOD_ENTER &&
+            (values.agreementMethod === METHOD_ENTER ||
+              values.agreementMethod === METHOD_IMPORT_SHAPSHOT) &&
             values.textEditorValue
           ) {
             const encoded = Buffer.from(values.textEditorValue);
