@@ -51,7 +51,7 @@ export default function ChooseAgreementMethod({
   const create = useCreateAgreement();
   const edit = useEditAgreement();
   const { values, changeValue } = page === "create" ? create : edit;
-  const [isOpen, setIsOpen] = useState(true);
+  const [isOpen, setIsOpen] = useState(false);
   const [modalAttention, setModalAttention] = useState({ isOpen: false, method: "" });
   const {
     legalJurisdictionCountry,
