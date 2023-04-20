@@ -27,7 +27,12 @@ import { useEditAgreement } from "../../../../hooks/useEditAgreement";
 import { isEmpty } from "../../../../utils/common";
 import { withFade } from "../..";
 import UploadLocalAgreement from "./UploadLocal";
-import { METHOD_ENTER, METHOD_UPLOAD, METHOD_IMPORT_SHAPSHOT } from "../../../../types";
+import {
+  METHOD_ENTER,
+  METHOD_UPLOAD,
+  METHOD_IMPORT_SHAPSHOT,
+  UNITED_STATES,
+} from "../../../../types";
 import FieldErrorMessage from "../../../Form/FieldErrorMessage";
 import useWindowDimensions from "../../../../hooks/useWindowDimensions";
 import ModalImportSnapshot from "../../../ModalImportSnapshot";
@@ -46,8 +51,18 @@ export default function ChooseAgreementMethod({
   const create = useCreateAgreement();
   const edit = useEditAgreement();
   const { values, changeValue } = page === "create" ? create : edit;
-  const [isOpen, setIsOpen] = useState(false);
+  const [isOpen, setIsOpen] = useState(true);
   const [modalAttention, setModalAttention] = useState({ isOpen: false, method: "" });
+  const {
+    legalJurisdictionCountry,
+    legalJurisdictionState,
+    snapshotProposalUrl,
+    additionalDetails,
+    legalJurisdiction,
+    enableTransform,
+    contractType,
+    statementWork,
+  } = values.proposal;
 
   const validateTitle = () => {
     const errors: CreateAgreementFieldErrors = {};
@@ -71,24 +86,48 @@ export default function ChooseAgreementMethod({
     }
   }, []);
 
+  const propousalIsEmpty = () => {
+    const urlIsEmpty =
+      (!snapshotProposalUrl && !enableTransform) || (!snapshotProposalUrl && enableTransform);
+    const contractTypeIsEmpty = (contractType && !statementWork) || !contractType;
+    const countriesIsEmpty =
+      !legalJurisdiction ||
+      (legalJurisdiction && !legalJurisdictionCountry) ||
+      (legalJurisdiction && legalJurisdictionCountry === UNITED_STATES && !legalJurisdictionState);
+    const detailsIsEmpty = !additionalDetails;
+    return urlIsEmpty && contractTypeIsEmpty && countriesIsEmpty && detailsIsEmpty;
+  };
+
+  const validateMethod = (method: string) => {
+    switch (values.agreementMethod) {
+      case METHOD_IMPORT_SHAPSHOT:
+        return propousalIsEmpty();
+      case METHOD_ENTER:
+        return !values.textEditorValue;
+      case METHOD_UPLOAD:
+        return !values.file;
+      default:
+        return false;
+    }
+  };
+
   const chengeMethod = (name: keyof CreationState, method: string, beforeModal: boolean) => {
+    const isSameMethod = values.agreementMethod !== method;
     const validateRes = validateTitle();
     if (beforeModal) {
-      setModalAttention({ isOpen: false, method });
-      changeValue("filePath", "");
       changeValue("textEditorValue", "");
       changeValue("proposal", initialStateProposal);
-      changeValue("file", undefined);
+      changeValue("filePath", "");
       changeValue("errors", { ...values.errors, agreementFile: null });
+      changeValue("file", undefined);
+      setModalAttention({ isOpen: false, method });
     }
-    if (
-      values.agreementMethod !== "" &&
-      values.agreementMethod !== method &&
-      !beforeModal &&
-      validateRes
-    ) {
-      setModalAttention({ isOpen: true, method });
-      return;
+    if (!!values.agreementMethod && isSameMethod && !beforeModal && validateRes) {
+      const isEmptyMethods = validateMethod(method);
+      if (!isEmptyMethods) {
+        setModalAttention({ isOpen: true, method });
+        return;
+      }
     }
     if (validateRes) {
       changeValue("agreementMethod", modalAttention.method);

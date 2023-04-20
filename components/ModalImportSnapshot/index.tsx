@@ -86,6 +86,8 @@ import useWindowDimensions from "../../hooks/useWindowDimensions";
 import { notifError } from "../../utils/notification";
 import { useMutation } from "urql";
 import { saveAgreementMutation } from "../../modules/graphql/mutations";
+import { GenerateAgreementQuery } from "../../modules/graphql/gql/graphql";
+import { ProposalState } from "../../modules/createAgreementProvider";
 
 interface Props {
   isOpen: boolean;
@@ -192,23 +194,35 @@ export default function ModalImportSnapshot({ isOpen, page, onExit, setMethod }:
     changeValue("agreementId", Number(agreementId));
     return Number(agreementId);
   };
-  console.log(values);
 
   const generate = async (proposalText: string) => {
     const id: number = !!values.agreementId ? values.agreementId : await handleCreateAgreement();
+    let dataGenerateAggrement: any = {
+      addIntellectualPropertyClause,
+      addNonSolicitationClause,
+      addIndemnificationClause,
+      legalJurisdiction,
+    };
+    if (enableTransform) {
+      if (legalJurisdiction && !!legalJurisdictionCountry) {
+        dataGenerateAggrement = { ...dataGenerateAggrement, legalJurisdictionCountry };
+      }
+      if (!!legalJurisdictionCountry && legalJurisdictionCountry === UNITED_STATES) {
+        dataGenerateAggrement = { ...dataGenerateAggrement, legalJurisdictionState };
+      }
+      if (contractType) {
+        dataGenerateAggrement = { ...dataGenerateAggrement, statementWork };
+      }
+      if (!!additionalDetails) {
+        dataGenerateAggrement = { ...dataGenerateAggrement, statementWork };
+      }
+    }
     return query(
       generateAgreement,
       {
         agreementId: id,
         proposalText,
-        legalJurisdictionState,
-        legalJurisdictionCountry:
-          enableTransform && legalJurisdiction ? legalJurisdictionCountry : "",
-        contractType: enableTransform && legalJurisdiction ? statementWork : "",
-        addIntellectualPropertyClause,
-        addIndemnificationClause,
-        addNonSolicitationClause,
-        additionalDetails,
+        ...dataGenerateAggrement,
       },
       { url: process.env.NEXT_PUBLIC_GRAPHQL_ENDPOINT, requestPolicy: "network-only" }
     )
@@ -237,17 +251,12 @@ export default function ModalImportSnapshot({ isOpen, page, onExit, setMethod }:
       zIndex: zIndexSelect,
     };
   };
-  console.log(values.proposal);
 
   const selectContent = (name: string) => {
-    console.log(name);
-
     const { options, value } = selectsValue[name];
     const inputIsHidden =
       (name === LEGAL_JURISDICTION_COUNTRY && selectsOpen[name]) ||
       (name === LEGAL_JURISDICTION_COUNTRY && !values.proposal[LEGAL_JURISDICTION_COUNTRY]);
-
-    console.log(inputIsHidden);
 
     const optionsFilter =
       searchValue !== "" && name === LEGAL_JURISDICTION_COUNTRY
