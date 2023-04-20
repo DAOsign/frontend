@@ -8,16 +8,25 @@ import { useEditAgreement } from "../../../../hooks/useEditAgreement";
 
 export interface Props {
   page: string;
+  setMethod: React.Dispatch<React.SetStateAction<string>>;
+  setIsOpenModalImport: React.Dispatch<React.SetStateAction<boolean>>;
+  isOpenModalImport: boolean;
+  method: string;
 }
 export interface PublicProps extends Props {
   setPublic: any;
 }
 
-export default function StepOne({ page }: Props) {
+export default function StepOne({
+  setIsOpenModalImport,
+  isOpenModalImport,
+  setMethod,
+  method,
+  page,
+}: Props) {
   const create = useCreateAgreement();
   const edit = useEditAgreement();
   const { values, changeValue } = page === "create" ? create : edit;
-  const [method, setMethod] = useState("");
 
   const titleInputErrorStyles = values?.errors?.title ? inputCreateAgreementError : {};
 
@@ -34,7 +43,13 @@ export default function StepOne({ page }: Props) {
         </>
       ) : null}
       <FieldErrorMessage error={values?.errors?.title} />
-      <AgreementMethod method={method} setMethod={setMethod} page={page} />
+      <AgreementMethod
+        setIsOpenModalImport={setIsOpenModalImport}
+        isOpenModalImport={isOpenModalImport}
+        setMethod={setMethod}
+        method={method}
+        page={page}
+      />
     </Container>
   );
 }

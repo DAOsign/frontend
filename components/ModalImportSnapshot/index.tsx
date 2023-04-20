@@ -86,8 +86,6 @@ import useWindowDimensions from "../../hooks/useWindowDimensions";
 import { notifError } from "../../utils/notification";
 import { useMutation } from "urql";
 import { saveAgreementMutation } from "../../modules/graphql/mutations";
-import { GenerateAgreementQuery } from "../../modules/graphql/gql/graphql";
-import { ProposalState } from "../../modules/createAgreementProvider";
 
 interface Props {
   isOpen: boolean;
@@ -164,7 +162,12 @@ export default function ModalImportSnapshot({ isOpen, page, onExit, setMethod }:
       });
       return false;
     }
-    if (legalJurisdiction && !!legalJurisdictionCountry && !legalJurisdictionState) {
+    if (
+      legalJurisdiction &&
+      !!legalJurisdictionCountry &&
+      legalJurisdictionCountry === LEGAL_JURISDICTION_COUNTRY &&
+      !legalJurisdictionState
+    ) {
       setErrors({
         ...errors,
         errorLegalJurisdiction: { value: true, text: "Choose State" },
@@ -216,6 +219,7 @@ export default function ModalImportSnapshot({ isOpen, page, onExit, setMethod }:
         .then(text => {
           if (!!text) {
             onExit();
+            changeValue("proposal", { ...values.proposal, propousalText: text });
             changeValue("textEditorValue", text);
             setMethod(METHOD_IMPORT_SHAPSHOT);
           }

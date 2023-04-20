@@ -39,11 +39,15 @@ import ModalImportSnapshot from "../../../ModalImportSnapshot";
 import ModalAttention from "../../../ModalAttention";
 
 export default function ChooseAgreementMethod({
+  setIsOpenModalImport,
+  isOpenModalImport,
   setMethod,
   method,
   page,
 }: {
+  setIsOpenModalImport: React.Dispatch<React.SetStateAction<boolean>>;
   setMethod: React.Dispatch<React.SetStateAction<string>>;
+  isOpenModalImport: boolean;
   method: string;
   page: string;
 }) {
@@ -51,7 +55,6 @@ export default function ChooseAgreementMethod({
   const create = useCreateAgreement();
   const edit = useEditAgreement();
   const { values, changeValue } = page === "create" ? create : edit;
-  const [isOpen, setIsOpen] = useState(false);
   const [modalAttention, setModalAttention] = useState({ isOpen: false, method: "" });
   const {
     legalJurisdictionCountry,
@@ -132,7 +135,7 @@ export default function ChooseAgreementMethod({
     if (validateRes) {
       changeValue("agreementMethod", modalAttention.method);
       if (method === METHOD_IMPORT_SHAPSHOT && !values.textEditorValue) {
-        setIsOpen(true);
+        setIsOpenModalImport(true);
         changeValue(name, method);
         return;
       }
@@ -239,11 +242,11 @@ export default function ChooseAgreementMethod({
               </Container>
             </Container>
             <FieldErrorMessage sx={{ mb: "-35px" }} error={values?.errors?.agreementFile} />
-            {isOpen && (
+            {isOpenModalImport && (
               <ModalImportSnapshot
-                onExit={() => setIsOpen(false)}
+                onExit={() => setIsOpenModalImport(false)}
+                isOpen={isOpenModalImport}
                 setMethod={setMethod}
-                isOpen={isOpen}
                 page={page}
               />
             )}

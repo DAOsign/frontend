@@ -23,6 +23,7 @@ export interface ProposalState {
   legalJurisdictionState: string | undefined;
   addIntellectualPropertyClause: boolean;
   additionalDetails: string | undefined;
+  propousalText: string | undefined;
   addIndemnificationClause: boolean;
   addNonSolicitationClause: boolean;
   legalJurisdictionCountry: string;
@@ -62,6 +63,7 @@ export const initialStateProposal = {
   addNonSolicitationClause: false,
   additionalDetails: undefined,
   legalJurisdictionCountry: "",
+  propousalText: undefined,
   snapshotProposalUrl: "",
   legalJurisdiction: true,
   enableTransform: true,

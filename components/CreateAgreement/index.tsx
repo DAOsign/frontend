@@ -53,9 +53,20 @@ export default function CreateAgreement({ page }: { page: string }) {
   const [transitioned, setTransitioned] = useState(false);
   const [loading, setLoading] = useState(false);
   const [loadingUpdateOptions, setLoadingUpdateOptions] = useState(false);
+  const [method, setMethod] = useState("");
+  const [isOpenModalImport, setIsOpenModalImport] = useState(false);
 
   const steps = {
-    1: withFade(<StepOne page={page} />, step),
+    1: withFade(
+      <StepOne
+        setIsOpenModalImport={setIsOpenModalImport}
+        isOpenModalImport={isOpenModalImport}
+        setMethod={setMethod}
+        method={method}
+        page={page}
+      />,
+      step
+    ),
     2: withFade(<StepTwo page={page} />, step),
     3: withFade(
       <StepThree
@@ -149,7 +160,15 @@ export default function CreateAgreement({ page }: { page: string }) {
               >
                 {loadingUpdateOptions ? <Spinner size={16} color="pink" /> : " Update Proposal"}
               </Button>
-              <Button>Reimport From Snapshot</Button>
+              <Button
+                onClick={() => {
+                  setMethod("");
+                  setIsOpenModalImport(true);
+                  changeValue("textEditorValue", "");
+                }}
+              >
+                Reimport From Snapshot
+              </Button>
             </Container>
           )}
       </Container>
