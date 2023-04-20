@@ -1,9 +1,8 @@
 import { Variants } from "framer-motion";
 
 export const variants: Variants = {
-  hidden: { opacity: 1, height: 0, overflow: "hidden" },
-  enter: { opacity: 1, height: "fit-content", overflow: "visible" },
-  exit: { opacity: 1, height: 0, overflow: "hidden" },
+  hidden: { opacity: 1, height: 0, overflow: "hidden", transition: { type: "linear" } },
+  enter: { opacity: 1, height: "fit-content", overflow: "visible", transition: { type: "linear" } },
 };
 
 export const variantsSelect: Variants = {

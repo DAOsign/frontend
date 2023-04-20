@@ -9,14 +9,16 @@ export enum TOOLTIP_VALUES {
 }
 
 export const STATEMENT_OF_WORK = "statementWork";
-export const CHOOSE_COUNTRY = "chooseCountry";
-export const CHOOSE_STATE = "chooseState";
+export const LEGAL_JURISDICTION_COUNTRY = "legalJurisdictionCountry";
+export const LEGAL_JURISDICTION_STATE = "legalJurisdictionState";
 export const UNITED_STATES = "United States";
 export const ENABLE_TRANSFORM = "enableTransform";
+export const ADDITIONAL_DETAILS = "additionalDetails";
 export const CONTRACT_TYPE = "contractType";
-export const INDEMNIFICATION_CLAUSE = "indemnificationClause";
-export const INTELLECTUAL_PROPERTY_CLAUSE = "intellectualPropertyClause";
-export const NON_SOLICITATION_CLAUSE = "nonSolicitationClause";
+export const INDEMNIFICATION_CLAUSE = "addIndemnificationClause";
+export const INTELLECTUAL_PROPERTY_CLAUSE = "addIntellectualPropertyClause";
+export const SNAPSHOT_PROPOSAL_URL = "snapshotProposalUrl";
+export const NON_SOLICITATION_CLAUSE = "addNonSolicitationClause";
 export const LEGAL_JURISDICTION = "legalJurisdiction";
 
 export const PRIVACY_PRIVATE = "Private";

@@ -1,5 +1,6 @@
 import { useRouter } from "next/router";
 import { useState, createContext, ProviderProps, useEffect, useRef } from "react";
+import { initialStateProposal, ProposalState } from "./createAgreementProvider";
 import {
   AgreementLocation,
   AgreementMethod,
@@ -31,13 +32,7 @@ export interface CreationState {
   signers: { id: number; value: string }[];
   file: File | undefined;
   errors: CreateAgreementFieldErrors;
-  proposal: {
-    legalJurisdictionCountry: string;
-    legalJurisdictionState: string;
-    proposalText: string;
-    contractType: string;
-    snapshotProposalUrl: string;
-  };
+  proposal: ProposalState;
 }
 interface CreateAgrementContext {
   values: CreationState;
@@ -59,13 +54,7 @@ const defaultState: CreationState = {
   signers: [],
   file: undefined,
   errors: {},
-  proposal: {
-    legalJurisdictionCountry: "",
-    legalJurisdictionState: "",
-    proposalText: "",
-    contractType: "",
-    snapshotProposalUrl: "",
-  },
+  proposal: initialStateProposal,
 };
 
 const recoverDraft = (): CreationState => {

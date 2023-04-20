@@ -4,7 +4,9 @@ import React, { useCallback, useEffect, useMemo, useState } from "react";
 import StepOne from "../CreateAgreement/Steps/StepOne";
 import StepTwo from "../CreateAgreement/Steps/StepTwo";
 import StepThree from "../CreateAgreement/Steps/StepThree";
-import { Container, Flex, Text, Textarea, Button } from "theme-ui";
+import { useClient } from "urql";
+import { Container, Flex, Text, Textarea, Button, Spinner } from "theme-ui";
+import { refineGeneratedAgreement } from "../../modules/graphql/queries";
 import NavPanel from "../CreateAgreement/NavPanel";
 import { useEditAgreement } from "../../hooks/useEditAgreement";
 import {
@@ -64,10 +66,15 @@ export default function EditAgreement({ page }: { page: string }) {
   const { query } = useRouter();
   const [step, setStep] = useState(query?.step ? Number(query.step) : 0);
   const [transitioned, setTransitioned] = useState(false);
+  const [optionsValue, setOptionsValue] = useState("");
   const agreementId = Number(query.id);
   const { values, changeValue } = useEditAgreement();
   const [loading, setLoading] = useState(false);
   const [loaded, setLoaded] = useState(false);
+  const [method, setMethod] = useState("");
+  const [isOpenModalImport, setIsOpenModalImport] = useState(false);
+  const [loadingUpdateOptions, setLoadingUpdateOptions] = useState(false);
+  const { query: queryClient } = useClient();
   const [{ data, fetching: agreementsLoading, error }] = useQuery({
     // @ts-ignore
     query: agreementById,
@@ -114,7 +121,16 @@ export default function EditAgreement({ page }: { page: string }) {
   }, [data]);
 
   const steps = {
-    1: withFade(<StepOne page={page} />, step),
+    1: withFade(
+      <StepOne
+        setIsOpenModalImport={setIsOpenModalImport}
+        isOpenModalImport={isOpenModalImport}
+        setMethod={setMethod}
+        method={method}
+        page={page}
+      />,
+      step
+    ),
     2: withFade(<StepTwo page={page} />, step),
     3: withFade(
       <StepThree
@@ -124,6 +140,29 @@ export default function EditAgreement({ page }: { page: string }) {
       />,
       step
     ),
+  };
+
+  const updateProposal = async () => {
+    if (!!optionsValue && !!values.agreementId) {
+      setLoadingUpdateOptions(true);
+      await queryClient(
+        refineGeneratedAgreement,
+        {
+          agreementId: values.agreementId,
+          userRequest: optionsValue,
+        },
+        { url: process.env.NEXT_PUBLIC_GRAPHQL_ENDPOINT, requestPolicy: "network-only" }
+      )
+        .toPromise()
+        .then(data => {
+          if (data?.data?.refineGeneratedAgreement?.text) {
+            changeValue("textEditorValue", data?.data?.refineGeneratedAgreement?.text);
+          }
+        })
+        .catch(() => false)
+        .finally(() => setLoadingUpdateOptions(false));
+    }
+    setOptionsValue("");
   };
 
   return (
@@ -152,27 +191,50 @@ export default function EditAgreement({ page }: { page: string }) {
         <Container sx={navContainer}>
           <NavPanel page={page} setLoading={setLoading} />
         </Container>
-        {step === 1 && values.agreementMethod === METHOD_IMPORT_SHAPSHOT && (
-          <Container sx={importOptions}>
-            <Text sx={importOptionsTitle}>Proposal Import Options</Text>
-            <Text
-              sx={{
-                variant: "forms.label",
-                textAlign: "inherit",
-                maxWidth: "unset",
-                minHeight: "25px",
-                ml: "3px",
-                mr: "5px",
-                mt: "20px",
-              }}
-            >
-              Provide additional instructions{" "}
-            </Text>
-            <Textarea sx={textInput} rows={8} />
-            <Button sx={{ mb: "20px" }}>Update Proposal</Button>
-            <Button>Reimport From Snapshot</Button>
-          </Container>
-        )}
+        {step === 1 &&
+          values.agreementMethod === METHOD_IMPORT_SHAPSHOT &&
+          !!values.textEditorValue && (
+            <Container sx={importOptions}>
+              <Text sx={importOptionsTitle}>Proposal Import Options</Text>
+              <Text
+                sx={{
+                  variant: "forms.label",
+                  textAlign: "inherit",
+                  maxWidth: "unset",
+                  minHeight: "25px",
+                  ml: "3px",
+                  mr: "5px",
+                  mt: "20px",
+                }}
+              >
+                Provide additional instructions{" "}
+              </Text>
+              <Textarea
+                disabled={loadingUpdateOptions}
+                onChange={e => setOptionsValue(e.target.value)}
+                value={optionsValue}
+                sx={textInput}
+                rows={8}
+              />
+              <Button
+                disabled={!optionsValue || loadingUpdateOptions}
+                onClick={updateProposal}
+                variant="secondary"
+                sx={{ mb: "20px" }}
+              >
+                {loadingUpdateOptions ? <Spinner size={16} color="pink" /> : " Update Proposal"}
+              </Button>
+              <Button
+                onClick={() => {
+                  setMethod("");
+                  setIsOpenModalImport(true);
+                  changeValue("textEditorValue", "");
+                }}
+              >
+                Reimport From Snapshot
+              </Button>
+            </Container>
+          )}
       </Container>
     </Flex>
   );

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { Container, Input, Text } from "theme-ui";
 import { inputCreactAgreement, inputCreateAgreementError } from "../../styles";
 import { useCreateAgreement } from "../../../../hooks/useCreateAgreement";
@@ -8,12 +8,22 @@ import { useEditAgreement } from "../../../../hooks/useEditAgreement";
 
 export interface Props {
   page: string;
+  setMethod: React.Dispatch<React.SetStateAction<string>>;
+  setIsOpenModalImport: React.Dispatch<React.SetStateAction<boolean>>;
+  isOpenModalImport: boolean;
+  method: string;
 }
 export interface PublicProps extends Props {
   setPublic: any;
 }
 
-export default function StepOne({ page }: Props) {
+export default function StepOne({
+  setIsOpenModalImport,
+  isOpenModalImport,
+  setMethod,
+  method,
+  page,
+}: Props) {
   const create = useCreateAgreement();
   const edit = useEditAgreement();
   const { values, changeValue } = page === "create" ? create : edit;
@@ -22,9 +32,9 @@ export default function StepOne({ page }: Props) {
 
   return (
     <Container sx={{ maxWidth: "600px", textAlign: "left" }}>
-      {!values?.agreementMethod ? (
+      {!method ? (
         <>
-          <Text sx={{ variant: "forms.label", ml: "3px" }}>Title</Text>
+          <Text sx={{ variant: "forms.label", ml: "3px" }}>Title *</Text>
           <Input
             value={values.title}
             onChange={e => changeValue("title", e.target.value)}
@@ -33,7 +43,13 @@ export default function StepOne({ page }: Props) {
         </>
       ) : null}
       <FieldErrorMessage error={values?.errors?.title} />
-      <AgreementMethod page={page} />
+      <AgreementMethod
+        setIsOpenModalImport={setIsOpenModalImport}
+        isOpenModalImport={isOpenModalImport}
+        setMethod={setMethod}
+        method={method}
+        page={page}
+      />
     </Container>
   );
 }

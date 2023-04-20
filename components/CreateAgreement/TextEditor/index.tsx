@@ -40,25 +40,23 @@ const buttonPropsByStatus = (
 
 const minHeightTextEditor = 387;
 
-const TextEditor = ({ page }: { page: string }) => {
+const TextEditor = ({
+  page,
+  handleChooseAnotherMethod,
+}: {
+  page: string;
+  handleChooseAnotherMethod: () => void;
+}) => {
   const [isOpen, setIsOpen] = useState(false);
   const [heightValue, setHeightValue] = useState(minHeightTextEditor);
   const create = useCreateAgreement();
   const edit = useEditAgreement();
   const {
-    values: { textEditorValue, proposal, agreementMethod },
+    values: { textEditorValue, agreementMethod },
     changeValue,
   } = page === "create" ? create : edit;
 
   const [state, setState] = useState<"edit" | "preview">("edit");
-
-  const handleChooseAnotherMethod = () => {
-    changeValue("agreementMethod", "");
-    changeValue("filePath", "");
-    changeValue("textEditorValue", "");
-    changeValue("proposal", undefined);
-    changeValue("file", undefined);
-  };
 
   return (
     <Box style={{ position: "relative", width: "100%" }} sx={styles}>

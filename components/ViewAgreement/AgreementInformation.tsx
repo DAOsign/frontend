@@ -179,6 +179,7 @@ export const AgreementInformation = ({
         />
         {agreement?.snapshotProposalUrl && (
           <InformationRow
+            tooltipValue={extractProposalId(agreement.snapshotProposalUrl)!}
             value={
               <Link href={agreement?.snapshotProposalUrl} target="_blank">
                 <Flex>

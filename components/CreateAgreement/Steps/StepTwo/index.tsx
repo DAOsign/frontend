@@ -212,7 +212,7 @@ export default function StepTwo({ page }: { page: string }) {
             sx={{ position: "relative", justifyContent: "space-between", alignItems: "center" }}
           >
             <Flex sx={{ alignItems: "center" }}>
-              <Text sx={labelSigners}>Signers (ENS name or address)</Text>
+              <Text sx={labelSigners}>Signers (ENS name or address) *</Text>
               <Tooltip
                 title="Add users that will sign this agreement."
                 transform="translate(-57%, 0)"

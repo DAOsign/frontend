@@ -19,6 +19,21 @@ export interface CreateAgreementFieldErrors {
   signers?: FieldError;
 }
 
+export interface ProposalState {
+  legalJurisdictionState: string | undefined;
+  addIntellectualPropertyClause: boolean;
+  additionalDetails: string | undefined;
+  propousalText: string | undefined;
+  addIndemnificationClause: boolean;
+  addNonSolicitationClause: boolean;
+  legalJurisdictionCountry: string;
+  snapshotProposalUrl: string;
+  legalJurisdiction: boolean;
+  enableTransform: boolean;
+  contractType: boolean;
+  statementWork: string;
+}
+
 export interface CreationState {
   agreementId: number | undefined;
   title: string;
@@ -32,13 +47,7 @@ export interface CreationState {
   signers: { id: number; value: string }[];
   file: File | undefined;
   errors: CreateAgreementFieldErrors;
-  proposal: {
-    legalJurisdictionCountry: string;
-    legalJurisdictionState: string;
-    proposalText: string;
-    contractType: string;
-    snapshotProposalUrl?: string;
-  };
+  proposal: ProposalState;
 }
 interface CreateAgrementContext {
   values: CreationState;
@@ -46,6 +55,21 @@ interface CreateAgrementContext {
 }
 
 const DRAFT_STORAGE_KEY = "draftAgreement";
+
+export const initialStateProposal = {
+  addIntellectualPropertyClause: false,
+  legalJurisdictionState: undefined,
+  addIndemnificationClause: false,
+  addNonSolicitationClause: false,
+  additionalDetails: undefined,
+  legalJurisdictionCountry: "",
+  propousalText: undefined,
+  snapshotProposalUrl: "",
+  legalJurisdiction: true,
+  enableTransform: true,
+  contractType: true,
+  statementWork: "",
+};
 
 const defaultState: CreationState = {
   agreementId: undefined,
@@ -60,13 +84,7 @@ const defaultState: CreationState = {
   signers: [],
   file: undefined,
   errors: {},
-  proposal: {
-    legalJurisdictionCountry: "",
-    legalJurisdictionState: "",
-    proposalText: "",
-    contractType: "",
-    snapshotProposalUrl: "",
-  },
+  proposal: initialStateProposal,
 };
 
 const recoverDraft = (): CreationState => {

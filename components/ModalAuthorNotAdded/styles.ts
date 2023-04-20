@@ -43,3 +43,21 @@ export const containerIcon = {
   height: "100px",
   m: "0 auto",
 } as ThemeUIStyleObject;
+
+export const cancelBtn = {
+  variant: "buttons.secondary",
+  width: "90px",
+  border: "none",
+  margin: "5px auto 0",
+  textAlign: "center",
+  opacity: 0.7,
+  px: 0,
+  "&:hover, &:focus": {
+    background: "unset",
+    border: "none",
+    opacity: 1,
+  },
+  "@media screen and (max-width: 719px)": {
+    width: "100%",
+  },
+} as ThemeUIStyleObject;
