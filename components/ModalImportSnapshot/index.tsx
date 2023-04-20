@@ -116,8 +116,12 @@ export default function ModalImportSnapshot({ isOpen, page, onExit, setMethod }:
     statementWork,
     contractType,
   } = values.proposal;
-
-  const [error, setError] = useState({ value: false, text: "" });
+  const initialErrorObj = { value: false, text: "" };
+  const [errors, setErrors] = useState({
+    errorLegalJurisdiction: initialErrorObj,
+    errorProposalLink: initialErrorObj,
+    errorContractType: initialErrorObj,
+  });
   const [selectsOpen, setSelectsOpen] = useState(initialStateSelects);
   const [searchValue, setSearchValue] = useState("");
   const { query } = useClient();
@@ -125,10 +129,56 @@ export default function ModalImportSnapshot({ isOpen, page, onExit, setMethod }:
   const validationproposalLink = () => {
     if (!!values.proposal.snapshotProposalUrl.trim()) {
       if (!extractProposalId(values.proposal.snapshotProposalUrl)) {
-        setError({ value: true, text: "Not valid Proposal link" });
+        setErrors({
+          ...errors,
+          errorProposalLink: { value: true, text: "Not valid Proposal link" },
+        });
+        return false;
       }
     } else {
-      setError({ value: true, text: "Proposal link field is require" });
+      setErrors({
+        ...errors,
+        errorProposalLink: { value: true, text: "Proposal link field is require" },
+      });
+      return false;
+    }
+    return true;
+  };
+
+  const validationContractType = () => {
+    if (contractType && !statementWork) {
+      setErrors({
+        ...errors,
+        errorContractType: { value: true, text: "Select Contract type" },
+      });
+      return false;
+    }
+    return true;
+  };
+
+  const validationLegalJurisdiction = () => {
+    if (legalJurisdiction && !legalJurisdictionCountry) {
+      setErrors({
+        ...errors,
+        errorLegalJurisdiction: { value: true, text: "Choose Country" },
+      });
+      return false;
+    }
+    if (legalJurisdiction && !!legalJurisdictionCountry && !legalJurisdictionState) {
+      setErrors({
+        ...errors,
+        errorLegalJurisdiction: { value: true, text: "Choose State" },
+      });
+      return false;
+    }
+    return true;
+  };
+
+  const validationData = () => {
+    const isValid =
+      validationproposalLink() && validationContractType() && validationLegalJurisdiction();
+    if (isValid) {
+      handleSubmit();
     }
   };
 
@@ -147,28 +197,33 @@ export default function ModalImportSnapshot({ isOpen, page, onExit, setMethod }:
   };
 
   const handleSubmit = async () => {
-    validationproposalLink();
-    await queryProposal()
-      .then(async data => {
-        if (!!values.agreementId) {
-          await handleCreateAgreement();
-        }
-        return data?.body;
-      })
-      .then(async data => {
-        const text = await generate(data);
-        return text;
-      })
-      .then(text => {
-        if (!!text) {
-          onExit();
-          changeValue("textEditorValue", text);
-          setMethod(METHOD_IMPORT_SHAPSHOT);
-        }
-        setLoading(false);
-      })
-      .catch(e => console.error(e))
-      .finally(() => setLoading(false));
+    const isValid =
+      !errors.errorLegalJurisdiction.value &&
+      !errors.errorContractType.value &&
+      !errors.errorProposalLink.value;
+    if (isValid) {
+      await queryProposal()
+        .then(async data => {
+          if (!!values.agreementId) {
+            await handleCreateAgreement();
+          }
+          return data?.body;
+        })
+        .then(async data => {
+          const text = await generate(data);
+          return text;
+        })
+        .then(text => {
+          if (!!text) {
+            onExit();
+            changeValue("textEditorValue", text);
+            setMethod(METHOD_IMPORT_SHAPSHOT);
+          }
+          setLoading(false);
+        })
+        .catch(e => console.error(e))
+        .finally(() => setLoading(false));
+    }
   };
 
   const handleCreateAgreement = async () => {
@@ -232,6 +287,11 @@ export default function ModalImportSnapshot({ isOpen, page, onExit, setMethod }:
   };
 
   const onChangeSelect = (name: string, el: string) => {
+    const field =
+      name === LEGAL_JURISDICTION_COUNTRY || name === LEGAL_JURISDICTION_STATE
+        ? "errorLegalJurisdiction"
+        : "errorContractType";
+    setErrors({ ...errors, [field]: initialErrorObj });
     if (name === LEGAL_JURISDICTION_COUNTRY && el !== UNITED_STATES) {
       changeValue("proposal", { ...values.proposal, LEGAL_JURISDICTION_STATE: undefined });
       changeValue("proposal", { ...values.proposal, [name]: el });
@@ -347,6 +407,7 @@ export default function ModalImportSnapshot({ isOpen, page, onExit, setMethod }:
   };
 
   const SwitchContent = ({ name, sx }: { name: string; sx: ThemeUICSSObject }) => {
+    const field = name === CONTRACT_TYPE ? "errorContractType" : "errorLegalJurisdiction";
     const stylesIcon = name === ENABLE_TRANSFORM ? iconInfoEnableTransform : iconInfo;
     return (
       <Flex sx={sx}>
@@ -355,9 +416,10 @@ export default function ModalImportSnapshot({ isOpen, page, onExit, setMethod }:
             {switches[name].title}
           </Label>
           <Switch
-            onChange={({ target }) =>
-              changeValue("proposal", { ...values.proposal, [name]: target.checked })
-            }
+            onChange={({ target }) => {
+              changeValue("proposal", { ...values.proposal, [name]: target.checked });
+              if (name !== ENABLE_TRANSFORM) setErrors({ ...errors, [field]: initialErrorObj });
+            }}
             checked={values.proposal[name]}
             className="switch"
             sx={switchBtn}
@@ -375,7 +437,7 @@ export default function ModalImportSnapshot({ isOpen, page, onExit, setMethod }:
     legalJurisdictionCountry === UNITED_STATES && legalJurisdiction;
 
   const onChangeInputProposal = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setError({ value: false, text: "" });
+    setErrors({ ...errors, errorProposalLink: initialErrorObj });
     changeValue("proposal", {
       ...values.proposal,
       [SNAPSHOT_PROPOSAL_URL]: e.target.value,
@@ -397,11 +459,11 @@ export default function ModalImportSnapshot({ isOpen, page, onExit, setMethod }:
                 <Input
                   value={snapshotProposalUrl}
                   onChange={onChangeInputProposal}
-                  sx={{ ...input, mb: error.value ? "3px" : "45px" }}
+                  sx={{ ...input, mb: errors.errorProposalLink.value ? "3px" : "45px" }}
                 />
-                {error.value && (
+                {errors.errorProposalLink.value && (
                   <Box sx={{ mb: "45px" }}>
-                    <FieldErrorMessage error={error.text} />
+                    <FieldErrorMessage error={errors.errorProposalLink.text} />
                   </Box>
                 )}
                 <SwitchContent sx={{ mb: 0, position: "relative" }} name={ENABLE_TRANSFORM} />
@@ -415,10 +477,26 @@ export default function ModalImportSnapshot({ isOpen, page, onExit, setMethod }:
 
                   <SwitchContent sx={{ mb: "19px" }} name={CONTRACT_TYPE} />
                   {contractType && selectContent(STATEMENT_OF_WORK)}
+                  {errors.errorContractType.value && (
+                    <Box sx={{ mb: "45px" }}>
+                      <FieldErrorMessage
+                        sx={{ marginBottom: "0px" }}
+                        error={errors.errorContractType.text}
+                      />
+                    </Box>
+                  )}
                   <SwitchContent sx={{ mb: "19px" }} name={LEGAL_JURISDICTION} />
 
                   {legalJurisdiction && selectContent(LEGAL_JURISDICTION_COUNTRY)}
                   {isVisibleSelectChooseState && selectContent(LEGAL_JURISDICTION_STATE)}
+                  {errors.errorLegalJurisdiction.value && (
+                    <Box sx={{ mb: "45px" }}>
+                      <FieldErrorMessage
+                        sx={{ marginBottom: "0px" }}
+                        error={errors.errorLegalJurisdiction.text}
+                      />
+                    </Box>
+                  )}
 
                   <SwitchContent sx={{ mb: "21px" }} name={INDEMNIFICATION_CLAUSE} />
                   <SwitchContent sx={{ m: "21px 0" }} name={INTELLECTUAL_PROPERTY_CLAUSE} />
@@ -440,7 +518,16 @@ export default function ModalImportSnapshot({ isOpen, page, onExit, setMethod }:
                 </motion.div>
                 <Flex sx={loading ? loadingStylesBtn : stylesBtn}>
                   {!loading && (
-                    <Button onClick={handleSubmit} sx={subBtn} disabled={loading}>
+                    <Button
+                      disabled={
+                        loading ||
+                        errors.errorProposalLink.value ||
+                        errors.errorLegalJurisdiction.value ||
+                        errors.errorContractType.value
+                      }
+                      onClick={validationData}
+                      sx={subBtn}
+                    >
                       Transform and Import
                     </Button>
                   )}
