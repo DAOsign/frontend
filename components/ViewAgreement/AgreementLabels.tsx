@@ -32,6 +32,7 @@ import DownloadIcon from "../icon/editable/DownloadIcon";
 import { notifSucces } from "../../utils/notification";
 import { notifComingSoon } from "../../utils/notification";
 import Tooltip from "../Tooltip";
+import { downloadPdf } from "../../modules/rest";
 
 const getAgreementStatusLabelStyle = (agreementStatus: string | undefined): ThemeUIStyleObject => {
   switch (agreementStatus) {
@@ -49,12 +50,16 @@ const getAgreementStatusLabelStyle = (agreementStatus: string | undefined): Them
 };
 
 interface Props {
+  agreementId: string;
+  agreementTitle?: string;
   agreementStatus?: AgreementStatus;
   agreementPrivacy?: AgreementPrivacy | string;
   isWaitingForMySignature: boolean;
 }
 
 export const AgreementLabels = ({
+  agreementTitle,
+  agreementId,
   agreementStatus,
   agreementPrivacy,
   isWaitingForMySignature,
@@ -66,7 +71,8 @@ export const AgreementLabels = ({
 
   // TODO: download document
   const handleDownloadDocument = () => {
-    notifComingSoon("Download PDF Document is coming soon");
+    downloadPdf(agreementId, agreementTitle);
+    //notifComingSoon("Download PDF Document is coming soon");
   };
 
   const titleTooltip = (value: string | undefined) => {
