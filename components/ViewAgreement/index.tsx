@@ -135,6 +135,7 @@ export const ViewAgreement = () => {
             </Flex>
             <Box sx={title}>{agreement?.title}</Box>
             <AgreementLabels
+              agreementTitle={agreement?.title}
               agreementId={String(agreement?.agreementId)}
               agreementStatus={agreement?.agreementStatus}
               agreementPrivacy={agreement?.agreementPrivacy}

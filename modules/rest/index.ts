@@ -1,5 +1,6 @@
 import axios, { AxiosResponse, AxiosError } from "axios";
 import fileDownload from "js-file-download";
+import { getToken } from "../../utils/token";
 
 export const uploadFile = async (
   authToken: string,
@@ -86,19 +87,18 @@ export const subscribeToUpdates = async (email: string) => {
   );
 };
 
-export const downloadPdf = async (agreementId: string) => {
+export const downloadPdf = async (agreementId: string, fileName = agreementId) => {
   return axios
     .get(`${process.env.NEXT_PUBLIC_REST_ENDPOINT}/files/generatePdf`, {
       params: { agreementId },
       responseType: "blob",
-      /*
+
       headers: {
-        "Content-Type": "application/pdf",
-        //token: authToken,
-      }, */
+        token: getToken(),
+      },
     })
     .then(res => {
-      fileDownload(res.data, "hello.pdf");
+      fileDownload(res.data, `${fileName}.pdf`);
     })
     .catch(e => console.error(e));
 };
