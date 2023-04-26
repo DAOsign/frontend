@@ -134,12 +134,12 @@ export default function ChooseAgreementMethod({
       }
     }
     if (validateRes) {
-      changeValue("agreementMethod", modalAttention.method);
-      if (method === METHOD_IMPORT_SHAPSHOT && !values.textEditorValue) {
+      if (method === METHOD_IMPORT_SHAPSHOT && (!values.textEditorValue || beforeModal)) {
         setIsOpenModalImport(true);
         changeValue(name, method);
         return;
       }
+      changeValue("agreementMethod", modalAttention.method);
       changeValue(name, method);
       setMethod(method);
     }
