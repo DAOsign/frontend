@@ -90,9 +90,10 @@ export default function ChooseAgreementMethod({
   }, []);
 
   const propousalIsEmpty = () => {
+    const contractTypeIsEmpty = (contractType && !statementWork) || !contractType;
     const urlIsEmpty =
       (!snapshotProposalUrl && !enableTransform) || (!snapshotProposalUrl && enableTransform);
-    const contractTypeIsEmpty = (contractType && !statementWork) || !contractType;
+
     const countriesIsEmpty =
       !legalJurisdiction ||
       (legalJurisdiction && !legalJurisdictionCountry) ||

@@ -144,7 +144,7 @@ export default function ModalImportSnapshot({ isOpen, page, onExit, setMethod }:
   };
 
   const validationContractType = () => {
-    if (contractType && !statementWork) {
+    if (enableTransform && contractType && !statementWork) {
       setErrors({
         ...errors,
         errorContractType: { value: true, text: "Select Contract type" },
@@ -155,7 +155,7 @@ export default function ModalImportSnapshot({ isOpen, page, onExit, setMethod }:
   };
 
   const validationLegalJurisdiction = () => {
-    if (legalJurisdiction && !legalJurisdictionCountry) {
+    if (enableTransform && legalJurisdiction && !legalJurisdictionCountry) {
       setErrors({
         ...errors,
         errorLegalJurisdiction: { value: true, text: "Choose Country" },
@@ -163,9 +163,10 @@ export default function ModalImportSnapshot({ isOpen, page, onExit, setMethod }:
       return false;
     }
     if (
+      enableTransform &&
       legalJurisdiction &&
       !!legalJurisdictionCountry &&
-      legalJurisdictionCountry === LEGAL_JURISDICTION_COUNTRY &&
+      legalJurisdictionCountry === UNITED_STATES &&
       !legalJurisdictionState
     ) {
       setErrors({
@@ -207,27 +208,23 @@ export default function ModalImportSnapshot({ isOpen, page, onExit, setMethod }:
     if (isValid) {
       await queryProposal()
         .then(async data => {
-          if (!!values.agreementId) {
-            await handleCreateAgreement();
+          if (!enableTransform) {
+            setData(data?.body);
+            setLoading(false);
+            return;
+          } else {
+            await generate(data?.body);
           }
-          return data?.body;
         })
-        .then(async data => {
-          const text = await generate(data);
-          return text;
-        })
-        .then(text => {
-          if (!!text) {
-            onExit();
-            changeValue("proposal", { ...values.proposal, propousalText: text });
-            changeValue("textEditorValue", text);
-            setMethod(METHOD_IMPORT_SHAPSHOT);
-          }
-          setLoading(false);
-        })
-        .catch(e => console.error(e))
-        .finally(() => setLoading(false));
+        .catch(e => console.error(e));
     }
+  };
+
+  const setData = (text: string) => {
+    onExit();
+    changeValue("proposal", { ...values.proposal, propousalText: text });
+    changeValue("textEditorValue", text);
+    setMethod(METHOD_IMPORT_SHAPSHOT);
   };
 
   const handleCreateAgreement = async () => {
@@ -276,18 +273,22 @@ export default function ModalImportSnapshot({ isOpen, page, onExit, setMethod }:
         dataGenerateAggrement = { ...dataGenerateAggrement, statementWork };
       }
     }
-    return query(
-      generateAgreement,
-      {
-        agreementId: id,
-        proposalText,
-        ...dataGenerateAggrement,
-      },
-      { url: process.env.NEXT_PUBLIC_GRAPHQL_ENDPOINT, requestPolicy: "network-only" }
-    )
-      .toPromise()
-      .then(data => data?.data?.generateAgreement?.text)
-      .catch(() => false);
+    return (
+      query(
+        generateAgreement,
+        {
+          agreementId: id,
+          proposalText,
+          ...dataGenerateAggrement,
+        },
+        { url: process.env.NEXT_PUBLIC_GRAPHQL_ENDPOINT, requestPolicy: "network-only" }
+      )
+        .toPromise()
+        //@ts-ignore
+        .then(data => setData(data?.data?.generateAgreement?.text))
+        .catch(() => false)
+        .finally(() => setLoading(false))
+    );
   };
 
   const onChangeSelect = (name: string, el: string) => {
