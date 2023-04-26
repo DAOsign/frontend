@@ -86,6 +86,7 @@ import useWindowDimensions from "../../hooks/useWindowDimensions";
 import { notifError } from "../../utils/notification";
 import { useMutation } from "urql";
 import { saveAgreementMutation } from "../../modules/graphql/mutations";
+import { Tooltip } from "react-tooltip";
 
 interface Props {
   isOpen: boolean;
@@ -432,7 +433,10 @@ export default function ModalImportSnapshot({ isOpen, page, onExit, setMethod }:
           />
         </Flex>
         <Box sx={stylesIcon}>
-          <Icon src={iconsObj.infoCircle} />
+          <Tooltip style={{ maxWidth: "300px", zIndex: 4 }} id={`${name}-tooltip`} />
+          <Box data-tooltip-id={`${name}-tooltip`} data-tooltip-content={switches[name].tooltip}>
+            <Icon src={iconsObj.infoCircle} />
+          </Box>
         </Box>
       </Flex>
     );
