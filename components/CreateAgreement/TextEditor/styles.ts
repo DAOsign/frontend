@@ -58,6 +58,9 @@ const tabStyles: ThemeUIStyleObject = {
     alignItems: "center",
     pl: "12px",
   },
+  ".support > div": {
+    alignItems: "center",
+  },
   ".wmde-markdown": {
     background: "none",
   },
@@ -78,7 +81,7 @@ const tabStyles: ThemeUIStyleObject = {
     backgroundColor: "transparent",
     background: "unset",
     height: "30px",
-    "&:hover": {
+    "&:hover, &:focus": {
       background: "unset",
       backgroundColor: "transparent",
       opacity: 1,
@@ -106,7 +109,6 @@ export const btnBack = {
   "&:hover, &:focus": {
     backgroundColor: "transparent",
     background: "unset",
-    color: "#AE4FD0",
   },
   "@media screen and (max-width: 580px)": {
     position: "absolute",
@@ -122,13 +124,22 @@ export const icon = {
   mr: "5px",
 } as ThemeUIStyleObject;
 
-export const iconFileResize = {
-  backgroundColor: "inherit",
-  pointerEvents: "none",
-  position: "absolute",
-  cursor: "pointer",
-  bottom: "35px",
-  right: "5px",
+export const expandBtn = {
+  ...btnBack,
+  fontFamily: "InterBold",
+  fontWeight: 700,
+  fontSize: "14px",
+  mr: "12px",
+  mb: "5px",
+  opacity: 0.7,
+  "&:hover, &:focus": {
+    backgroundColor: "transparent",
+    background: "unset",
+    opacity: 1,
+  },
+  "@media screen and (max-width: 580px)": {
+    position: "static",
+  },
 } as ThemeUIStyleObject;
 
 export const footerText = {

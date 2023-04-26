@@ -1,4 +1,4 @@
-import React, { Suspense, useState } from "react";
+import React, { Suspense, useEffect, useState } from "react";
 import dynamic from "next/dynamic";
 import "@uiw/react-md-editor/markdown-editor.css";
 import "@uiw/react-markdown-preview/markdown.css";
@@ -8,11 +8,11 @@ import { Text, Button, Flex, Box, ButtonProps, Spinner } from "theme-ui";
 import { useCreateAgreement } from "../../../hooks/useCreateAgreement";
 import { useEditAgreement } from "../../../hooks/useEditAgreement";
 import styles, {
-  iconFileResize,
   containerEnter,
   enterAgreement,
   footerText,
   labelDesc,
+  expandBtn,
   btnBack,
   icon,
 } from "./styles";
@@ -47,9 +47,9 @@ const TextEditor = ({
   page: string;
   handleChooseAnotherMethod: () => void;
 }) => {
-  const [isOpen, setIsOpen] = useState(false);
   const [heightValue, setHeightValue] = useState(minHeightTextEditor);
   const create = useCreateAgreement();
+  const [expand, setExpand] = useState(false);
   const edit = useEditAgreement();
   const {
     values: { textEditorValue, agreementMethod },
@@ -57,6 +57,17 @@ const TextEditor = ({
   } = page === "create" ? create : edit;
 
   const [state, setState] = useState<"edit" | "preview">("edit");
+
+  const heightControl = (e: number) => {
+    if (e === minHeightTextEditor) {
+      return;
+    }
+    if (!isNaN(e)) {
+      setHeightValue(e);
+    } else {
+      setHeightValue(minHeightTextEditor);
+    }
+  };
 
   return (
     <Box style={{ position: "relative", width: "100%" }} sx={styles}>
@@ -87,28 +98,42 @@ const TextEditor = ({
           </Button>
         </Flex>
         <Box>
-          <MDEditor
-            onChange={val => changeValue("textEditorValue", val || "")}
-            // @ts-ignore
-            onHeightChange={(e: number) => {
-              if (!isNaN(e)) {
-                setHeightValue(e);
-              } else {
-                setHeightValue(minHeightTextEditor);
-              }
-            }}
-            hideToolbar={state === "preview"}
-            value={textEditorValue}
-            height={heightValue}
-            preview={state}
-          />
-        </Box>
-        <Box onClick={() => setIsOpen(false)} sx={iconFileResize}>
-          <Icon width="30px" height="30px" style={{ opacity: 0.3 }} src={iconsObj.fieldResize} />
+          {expand ? (
+            <MDEditor
+              onChange={val => changeValue("textEditorValue", val || "")}
+              hideToolbar={state === "preview"}
+              value={textEditorValue}
+              height="fit-content"
+              className="expand"
+              preview={state}
+            />
+          ) : (
+            <MDEditor
+              onChange={val => changeValue("textEditorValue", val || "")}
+              // @ts-ignore
+              onHeightChange={(e: number) => heightControl(e)}
+              hideToolbar={state === "preview"}
+              value={textEditorValue}
+              height={heightValue}
+              preview={state}
+            />
+          )}
         </Box>
         <Flex className="support">
-          <Icon src={iconsObj.m} />
-          <Text sx={footerText}>Markdown is supported</Text>
+          <Flex>
+            <Box sx={{ ...icon, height: "12px" }}>
+              <Icon src={iconsObj.m} />
+            </Box>
+            <Text sx={footerText}>Markdown is supported</Text>
+          </Flex>
+          <Button
+            onClick={() => {
+              setExpand(!expand);
+            }}
+            sx={expandBtn}
+          >
+            Expand
+          </Button>
         </Flex>
       </Suspense>
     </Box>

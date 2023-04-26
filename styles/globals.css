@@ -121,6 +121,9 @@ a {
   background-image: url("../img/svg/drag.svg");
   background-size: cover;
 }
+.expand .w-md-editor-bar {
+  display: none !important;
+}
 .w-md-editor-bar svg {
   display: none !important;
 }
