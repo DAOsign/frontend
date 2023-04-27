@@ -433,10 +433,10 @@ export default function ModalImportSnapshot({ isOpen, page, onExit, setMethod }:
           />
         </Flex>
         <Box sx={stylesIcon}>
-          <Tooltip style={{ maxWidth: "300px", zIndex: 4 }} id={`${name}-tooltip`} />
           <Box data-tooltip-id={`${name}-tooltip`} data-tooltip-content={switches[name].tooltip}>
             <Icon src={iconsObj.infoCircle} />
           </Box>
+          <Tooltip style={{ maxWidth: "300px", zIndex: 4 }} id={`${name}-tooltip`} />
         </Box>
       </Flex>
     );
