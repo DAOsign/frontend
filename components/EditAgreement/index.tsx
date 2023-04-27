@@ -100,8 +100,14 @@ export default function EditAgreement({ page }: { page: string }) {
       if (agreementLocation === LOCATION_CLOUD) {
         changeValue("filePath", data?.agreement?.agreementFile?.filePath);
       }
-
-      changeValue("agreementMethod", data?.agreement?.content ? METHOD_ENTER : METHOD_UPLOAD);
+      changeValue(
+        "agreementMethod",
+        !!data?.agreement?.snapshotProposalUrl
+          ? METHOD_IMPORT_SHAPSHOT
+          : data?.agreement?.content
+          ? METHOD_ENTER
+          : METHOD_UPLOAD
+      );
 
       if (data?.agreement?.content) {
         changeValue("textEditorValue", data?.agreement?.content || "");
