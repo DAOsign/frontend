@@ -243,14 +243,6 @@ export default function ChooseAgreementMethod({
               </Container>
             </Container>
             <FieldErrorMessage sx={{ mb: "-35px" }} error={values?.errors?.agreementFile} />
-            {isOpenModalImport && (
-              <ModalImportSnapshot
-                onExit={() => setIsOpenModalImport(false)}
-                isOpen={isOpenModalImport}
-                setMethod={setMethod}
-                page={page}
-              />
-            )}
             {modalAttention.isOpen && (
               <ModalAttention
                 onSubmit={() => chengeMethod("agreementMethod", modalAttention.method, true)}

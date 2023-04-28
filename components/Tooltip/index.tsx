@@ -20,6 +20,7 @@ const Tooltip = ({ children, left, top, transform, minWidth, title, height }: Pr
       <button className={`${styles.tooltip_button} tooltip_button`}> {children} </button>
       <div
         style={{
+          zIndex: 4,
           top: top,
           left: left,
           transform: transform,

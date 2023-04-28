@@ -32,6 +32,7 @@ import {
   METHOD_UPLOAD,
   METHOD_ENTER,
 } from "../../types";
+import ModalImportSnapshot from "../ModalImportSnapshot";
 
 const variants: Variants = {
   hidden: { opacity: 0 },
@@ -232,9 +233,7 @@ export default function EditAgreement({ page }: { page: string }) {
               </Button>
               <Button
                 onClick={() => {
-                  setMethod("");
                   setIsOpenModalImport(true);
-                  changeValue("textEditorValue", "");
                 }}
               >
                 Reimport From Snapshot
@@ -242,6 +241,14 @@ export default function EditAgreement({ page }: { page: string }) {
             </Container>
           )}
       </Container>
+      {isOpenModalImport && (
+        <ModalImportSnapshot
+          onExit={() => setIsOpenModalImport(false)}
+          isOpen={isOpenModalImport}
+          setMethod={setMethod}
+          page={page}
+        />
+      )}
     </Flex>
   );
 }
