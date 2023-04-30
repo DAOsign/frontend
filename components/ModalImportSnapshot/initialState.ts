@@ -79,20 +79,17 @@ export const switches = {
   [ENABLE_TRANSFORM]: {
     title: "Enable Transform to Contract (Utilizing GPT-3 OpenAI API)",
     isOpen: true,
-    tooltip:
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt",
+    tooltip: "Transform Snapshot to Contract with AI",
   },
   [CONTRACT_TYPE]: {
     title: "Contract Type",
     isOpen: true,
-    tooltip:
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt",
+    tooltip: "Select the type of contract that best suits your agreement",
   },
   [LEGAL_JURISDICTION]: {
     title: "Legal Jurisdiction",
     isOpen: true,
-    tooltip:
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt",
+    tooltip: "Select agreement's legal jurisdiction country",
   },
   [INDEMNIFICATION_CLAUSE]: {
     title: "Indemnification Clause",
