@@ -238,7 +238,6 @@ const greenLabel = {
   color: "white",
   "@media screen and (max-width: 768px)": {
     mx: 0,
-    mb: "16px",
   },
 } as ThemeUIStyleObject;
 

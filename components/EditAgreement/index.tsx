@@ -32,6 +32,7 @@ import {
   METHOD_UPLOAD,
   METHOD_ENTER,
 } from "../../types";
+import ModalImportSnapshot from "../ModalImportSnapshot";
 
 const variants: Variants = {
   hidden: { opacity: 0 },
@@ -100,8 +101,14 @@ export default function EditAgreement({ page }: { page: string }) {
       if (agreementLocation === LOCATION_CLOUD) {
         changeValue("filePath", data?.agreement?.agreementFile?.filePath);
       }
-
-      changeValue("agreementMethod", data?.agreement?.content ? METHOD_ENTER : METHOD_UPLOAD);
+      changeValue(
+        "agreementMethod",
+        !!data?.agreement?.snapshotProposalUrl
+          ? METHOD_IMPORT_SHAPSHOT
+          : data?.agreement?.content
+          ? METHOD_ENTER
+          : METHOD_UPLOAD
+      );
 
       if (data?.agreement?.content) {
         changeValue("textEditorValue", data?.agreement?.content || "");
@@ -226,9 +233,7 @@ export default function EditAgreement({ page }: { page: string }) {
               </Button>
               <Button
                 onClick={() => {
-                  setMethod("");
                   setIsOpenModalImport(true);
-                  changeValue("textEditorValue", "");
                 }}
               >
                 Reimport From Snapshot
@@ -236,6 +241,14 @@ export default function EditAgreement({ page }: { page: string }) {
             </Container>
           )}
       </Container>
+      {isOpenModalImport && (
+        <ModalImportSnapshot
+          onExit={() => setIsOpenModalImport(false)}
+          isOpen={isOpenModalImport}
+          setMethod={setMethod}
+          page={page}
+        />
+      )}
     </Flex>
   );
 }

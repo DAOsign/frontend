@@ -90,9 +90,10 @@ export default function ChooseAgreementMethod({
   }, []);
 
   const propousalIsEmpty = () => {
+    const contractTypeIsEmpty = (contractType && !statementWork) || !contractType;
     const urlIsEmpty =
       (!snapshotProposalUrl && !enableTransform) || (!snapshotProposalUrl && enableTransform);
-    const contractTypeIsEmpty = (contractType && !statementWork) || !contractType;
+
     const countriesIsEmpty =
       !legalJurisdiction ||
       (legalJurisdiction && !legalJurisdictionCountry) ||
@@ -133,12 +134,12 @@ export default function ChooseAgreementMethod({
       }
     }
     if (validateRes) {
-      changeValue("agreementMethod", modalAttention.method);
-      if (method === METHOD_IMPORT_SHAPSHOT && !values.textEditorValue) {
+      if (method === METHOD_IMPORT_SHAPSHOT && (!values.textEditorValue || beforeModal)) {
         setIsOpenModalImport(true);
         changeValue(name, method);
         return;
       }
+      changeValue("agreementMethod", modalAttention.method);
       changeValue(name, method);
       setMethod(method);
     }
@@ -242,14 +243,6 @@ export default function ChooseAgreementMethod({
               </Container>
             </Container>
             <FieldErrorMessage sx={{ mb: "-35px" }} error={values?.errors?.agreementFile} />
-            {isOpenModalImport && (
-              <ModalImportSnapshot
-                onExit={() => setIsOpenModalImport(false)}
-                isOpen={isOpenModalImport}
-                setMethod={setMethod}
-                page={page}
-              />
-            )}
             {modalAttention.isOpen && (
               <ModalAttention
                 onSubmit={() => chengeMethod("agreementMethod", modalAttention.method, true)}

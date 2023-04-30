@@ -8,6 +8,7 @@ import { refineGeneratedAgreement } from "../../modules/graphql/queries";
 import { useCreateAgreement } from "../../hooks/useCreateAgreement";
 import { useEditAgreement } from "../../hooks/useEditAgreement";
 import { useClient } from "urql";
+import ModalImportSnapshot from "../ModalImportSnapshot";
 import NavPanel from "./NavPanel";
 import {
   importOptionsTitle,
@@ -162,9 +163,7 @@ export default function CreateAgreement({ page }: { page: string }) {
               </Button>
               <Button
                 onClick={() => {
-                  setMethod("");
                   setIsOpenModalImport(true);
-                  changeValue("textEditorValue", "");
                 }}
               >
                 Reimport From Snapshot
@@ -172,6 +171,14 @@ export default function CreateAgreement({ page }: { page: string }) {
             </Container>
           )}
       </Container>
+      {isOpenModalImport && (
+        <ModalImportSnapshot
+          onExit={() => setIsOpenModalImport(false)}
+          isOpen={isOpenModalImport}
+          setMethod={setMethod}
+          page={page}
+        />
+      )}
     </Flex>
   );
 }
