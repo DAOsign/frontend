@@ -1,6 +1,6 @@
 /* eslint-disable no-console */
 /* eslint-disable react-hooks/exhaustive-deps */
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import {
   Box,
   Button,
@@ -45,7 +45,7 @@ import { useClient } from "urql";
 import { snapshotUrl } from "../../modules/graphql/index";
 import { useCreateAgreement } from "../../hooks/useCreateAgreement";
 import { useEditAgreement } from "../../hooks/useEditAgreement";
-import { snapshotProposal } from "../../modules/graphql/queries/snapshot";
+import { snapshotProposal } from "../../modules/graphql/queries";
 import FieldErrorMessage from "../Form/FieldErrorMessage";
 import { generateAgreement } from "../../modules/graphql/queries";
 import { switches, selectsValue, initialStateSelects } from "./initialState";

@@ -1,6 +1,5 @@
 /* eslint-disable no-console */
-import { createContext, ProviderProps, useRef } from "react";
-import { useEffect, useState } from "react";
+import { createContext, ProviderProps, useRef, useEffect, useState } from "react";
 import { Web3Provider } from "@ethersproject/providers";
 import networks from "../lib/snapshot/networks.json";
 import { formatUnits } from "@ethersproject/units";
@@ -9,9 +8,8 @@ import { useLock } from "../hooks/useLock";
 import { ConnectorType } from "../lib/snapshot/options";
 import { clearToken, getToken, setToken } from "../utils/token";
 import { useMutation } from "urql";
-import { loginMutation } from "./graphql/mutations";
+import { loginMutation, verifyMyEmailMutation } from "./graphql/mutations";
 import { useRouter } from "next/router";
-//import { TypedDataDomainType, TypedDataFieldType } from "./graphql/gql/graphql";
 
 interface AuthProps {}
 
@@ -64,8 +62,9 @@ const AuthProvider = (props?: Partial<ProviderProps<AuthProps>>) => {
     profile: null,
     //isTrezor: false,
   });
-  const { push } = useRouter();
+  const { push, pathname } = useRouter();
   const [, loginRequest] = useMutation(loginMutation);
+  const [, verifyMyEmailRequest] = useMutation(verifyMyEmailMutation);
 
   const auth = useLock();
 
@@ -73,7 +72,7 @@ const AuthProvider = (props?: Partial<ProviderProps<AuthProps>>) => {
 
   const web3ProviderRef = useRef<Web3Provider>();
 
-  async function login(connector?: ConnectorType) {
+  async function login(connector?: ConnectorType, email?: string, emailVerificationSalt?: string) {
     // Prevent double loginRequest due to react dev useEffect[] runs twice
     if (loginStarted.current) return;
     loginStarted.current = true;
@@ -82,7 +81,7 @@ const AuthProvider = (props?: Partial<ProviderProps<AuthProps>>) => {
       const hasToken = Boolean(getToken());
       if (!connector) {
         const loadedConnector = await auth.getConnector();
-        if (!loadedConnector || !hasToken) {
+        if ((!loadedConnector || !hasToken) && pathname !== "/connect") {
           clearToken();
           await push("/connect");
           loginStarted.current = false;
@@ -105,7 +104,9 @@ const AuthProvider = (props?: Partial<ProviderProps<AuthProps>>) => {
       const loadedState = await loadProvider(provider);
 
       if (!loadedState.account) return;
-      await onAfterConnect(loadedState.account);
+      console.log(1);
+      await onAfterConnect(loadedState.account, email, emailVerificationSalt);
+      console.log(2);
 
       setState(state => ({ ...state, ...loadedState, authLoading: false }));
       loginStarted.current = false;
@@ -118,34 +119,39 @@ const AuthProvider = (props?: Partial<ProviderProps<AuthProps>>) => {
     }
   }
 
-  const onAfterConnect = async (account: string) => {
-    if (account) {
-      const currentToken = getToken();
+  async function onAfterConnect(account: string, email?: string, emailVerificationSalt?: string) {
+    console.log("onAfterConnect");
+    console.log({ account });
+    if (!account) return;
+    console.log({ token: getToken() });
+    if (getToken()) return; // user already has a token
 
-      if (currentToken) return;
-      const res = await loginRequest({ address: account });
+    const res = await loginRequest({ address: account });
 
-      if (res.data) {
-        const payload = res.data.login.payload;
-        if (payload) {
-          const signature = await sign(payload);
+    const payload = res?.data?.login?.payload;
+    console.log(res);
+    if (!payload) return;
 
-          const tokenRes = await loginRequest({
-            address: account,
-            signature: signature,
-          });
+    const signature = await sign(payload);
+    const tokenRes = await loginRequest({
+      address: account,
+      signature: signature,
+    });
 
-          if (tokenRes.data) {
-            const token = tokenRes.data.login.token;
-            if (token) {
-              setToken(token);
-              push("/");
-            }
-          }
-        }
-      }
+    const token = tokenRes?.data?.login?.token;
+    if (!token) return;
+
+    setToken(token);
+    push("/");
+
+    // Sign up by email
+    console.log("Sign up by email");
+    if (email) {
+      console.log({ email });
+      verifyMyEmailRequest({ email, emailVerificationSalt });
     }
-  };
+  }
+
   function logout() {
     auth.logout();
     setState(state => ({ ...state, account: "" }));
