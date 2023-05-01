@@ -142,14 +142,23 @@ const AuthProvider = (props?: Partial<ProviderProps<AuthProps>>) => {
     if (!token) return;
 
     setToken(token);
-    push("/");
 
     // Sign up by email
     console.log("Sign up by email");
     if (email) {
       console.log({ email });
-      verifyMyEmailRequest({ email, emailVerificationSalt });
+      const isVerified = await verifyMyEmailRequest({
+        email,
+        emailVerificationSalt: emailVerificationSalt ?? "",
+      });
+      console.log(!isVerified?.data?.verifyMyEmail);
+      if (!isVerified?.data?.verifyMyEmail) {
+        clearToken();
+        return;
+      }
     }
+
+    push("/");
   }
 
   function logout() {
