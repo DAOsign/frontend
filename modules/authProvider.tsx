@@ -108,9 +108,7 @@ const AuthProvider = (props?: Partial<ProviderProps<AuthProps>>) => {
       const loadedState = await loadProvider(provider);
 
       if (!loadedState.account) return;
-      console.log(1);
       await onAfterConnect(loadedState.account, email, emailVerificationSalt);
-      console.log(2);
 
       setState(state => ({ ...state, ...loadedState, authLoading: false }));
       loginStarted.current = false;
@@ -124,16 +122,12 @@ const AuthProvider = (props?: Partial<ProviderProps<AuthProps>>) => {
   }
 
   async function onAfterConnect(account: string, email?: string, emailVerificationSalt?: string) {
-    console.log("onAfterConnect");
-    console.log({ account });
     if (!account) return;
-    console.log({ token: getToken() });
     if (getToken()) return; // user already has a token
 
     const res = await loginRequest({ address: account });
 
     const payload = res?.data?.login?.payload;
-    console.log(res);
     if (!payload) return;
 
     const signature = await sign(payload);
@@ -148,14 +142,11 @@ const AuthProvider = (props?: Partial<ProviderProps<AuthProps>>) => {
     setToken(token);
 
     // Sign up by email
-    console.log("Sign up by email");
     if (email) {
-      console.log({ email });
       const isVerified = await verifyMyEmailRequest({
         email,
         emailVerificationSalt: emailVerificationSalt ?? "",
       });
-      console.log(!isVerified?.data?.verifyMyEmail);
       if (!isVerified?.data?.verifyMyEmail) {
         clearToken();
         return;

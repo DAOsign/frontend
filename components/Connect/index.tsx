@@ -17,7 +17,6 @@ export default function Connect() {
 
   const connect = async (name: any) => {
     setLoadingConnect(true);
-    console.log({ email: query.email, salt: query.salt });
     await login(name, query.email as string, query.salt as string);
     setLoadingConnect(false);
   };
