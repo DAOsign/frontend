@@ -11,3 +11,10 @@ export const validateAddress = (value: string): string | undefined => {
     return "Invalid wallet address";
   }
 };
+
+export const validateEmail = (value: string): string | undefined => {
+  const isValidEmail = value.match(/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/);
+  if (!isValidEmail) {
+    return "Invalid email address";
+  }
+};
