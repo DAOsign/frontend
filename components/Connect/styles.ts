@@ -23,6 +23,29 @@ const container = {
   },
 } as ThemeUIStyleObject;
 
+const userGreeting = {
+  bottom: "30px",
+  animation: "connect 4s 1 linear",
+  width: "100%",
+  lineHeight: "1.5",
+  fontSize: "1.8em",
+  mt: "45px",
+  paddingTop: "32px",
+  paddingX: "60px",
+  textAlign: "center",
+  pb: "32px",
+  button: {
+    mb: "12px",
+    "&:last-of-type": {
+      mb: "40px",
+    },
+  },
+  "@media screen and (max-width: 720px)": {
+    width: "303px",
+    paddingX: "35px",
+  },
+} as ThemeUIStyleObject;
+
 const title = {
   variant: "text.h3",
   mb: "40px",
@@ -50,4 +73,4 @@ const link = {
   },
 } as ThemeUIStyleObject;
 
-export { container, title, link };
+export { container, title, link, userGreeting };
