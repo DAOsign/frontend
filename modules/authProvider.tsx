@@ -14,7 +14,11 @@ import { useRouter } from "next/router";
 interface AuthProps {}
 
 interface AuthContext {
-  login: (connector?: ConnectorType) => Promise<any>;
+  login: (
+    connector?: ConnectorType,
+    email?: string,
+    emailVerificationSalt?: string
+  ) => Promise<any>;
   logout: () => void;
   account: string | null;
   authLoading: boolean;
