@@ -1,5 +1,5 @@
 import React, { useRef, useMemo, useState } from "react";
-import { Container, Flex, Input, Text, Button, Box, Switch, Label } from "theme-ui";
+import { Container, Flex, Input, Text, Button, Box } from "theme-ui";
 import {
   inputCreateAgreementWithRightButton,
   inputCreateAgreementError,
@@ -23,12 +23,20 @@ import Icon from "../../../icon";
 import { PlusIcon } from "./svg";
 import styles from "./styles";
 import { notifComingSoon } from "../../../../utils/notification";
+import { createUserByEmail, sendInvitationEmail } from "../../../agreements/helpers";
+import {
+  createUserByEmailMutation,
+  sendEmailVerificationLinkMutation,
+} from "../../../../modules/graphql/mutations";
+import { useMutation } from "urql";
 
 interface VerificationInfo {
   title: string;
   img: Icon;
   description: string;
 }
+
+const isEmail = (x: string) => x?.includes("@");
 
 const verifications: VerificationInfo[] = [
   {
@@ -63,6 +71,8 @@ export default function StepTwo({ page }: { page: string }) {
   const edit = useEditAgreement();
   const { values, changeValue } = page === "create" ? create : edit;
   const { account, resolveEns } = useWeb3();
+  const [, createUserByEmailRequest] = useMutation(createUserByEmailMutation);
+  const [, sendEmailVerificationLinkRequest] = useMutation(sendEmailVerificationLinkMutation);
 
   const signersInputErrorStyles = values?.errors?.signers ? inputCreateAgreementError : {};
   const observersInputErrorStyles = values?.errors?.observers ? inputCreateAgreementError : {};
@@ -146,13 +156,12 @@ export default function StepTwo({ page }: { page: string }) {
       if (error) return error;
     }
 
-    const isEmail = value?.includes("@");
-    if (isEmail) {
+    if (isEmail(value)) {
       const error = validateEmail(value);
       if (error) return error;
     }
 
-    if (!isEns && !isAddress && !isEmail) {
+    if (!isEns && !isAddress && !isEmail(value)) {
       return "Invalid value";
     }
 
@@ -172,6 +181,16 @@ export default function StepTwo({ page }: { page: string }) {
         changeValue("errors", { ...values.errors, signers: validationError });
         return;
       }
+
+      if (isEmail(value)) {
+        await createUserByEmailRequest({ email: value });
+        await sendEmailVerificationLinkRequest({
+          email: value,
+          isSigner: true,
+          agreementNumber: 12345, // TODO: replace with a real agreement number
+        });
+      }
+
       changeValue("signers", [
         ...values.signers,
         { value: value.toLocaleLowerCase(), id: uniqueId() },
@@ -192,6 +211,15 @@ export default function StepTwo({ page }: { page: string }) {
       if (validationError) {
         changeValue("errors", { ...values.errors, observers: validationError });
         return;
+      }
+
+      if (isEmail(value)) {
+        await createUserByEmailRequest({ email: value });
+        await sendEmailVerificationLinkRequest({
+          email: value,
+          isSigner: false,
+          agreementNumber: 12345, // TODO: replace with a real agreement number
+        });
       }
 
       changeValue("observers", [
