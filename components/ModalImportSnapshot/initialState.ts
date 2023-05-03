@@ -80,31 +80,37 @@ export const switches = {
     title: "Enable Transform to Contract (Utilizing GPT-3 OpenAI API)",
     isOpen: true,
     tooltip: "Transform Snapshot to Contract with AI",
+    top: "-45px",
   },
   [CONTRACT_TYPE]: {
     title: "Contract Type",
     isOpen: true,
     tooltip: "Select the type of contract that best suits your agreement",
+    top: "-65px",
   },
   [LEGAL_JURISDICTION]: {
     title: "Legal Jurisdiction",
     isOpen: true,
     tooltip: "Select agreement's legal jurisdiction country",
+    top: "-45px",
   },
   [INDEMNIFICATION_CLAUSE]: {
     title: "Indemnification Clause",
     tooltip: `Indemnification clause allocates risks/costs, covers losses/damages, and is common in high-risk industries.`,
     isOpen: false,
+    top: "-85px",
   },
   [INTELLECTUAL_PROPERTY_CLAUSE]: {
     title: "Intellectual Property Clause",
     tooltip: `IP clause addresses IP ownership, use, protection; clarifies rights/obligations to prevent disputes.`,
     isOpen: false,
+    top: "-85px",
   },
   [NON_SOLICITATION_CLAUSE]: {
     title: "Non-solicitation Clause",
     tooltip: `Restricts soliciting/hiring, protects business interests; enforceable if reasonable scope/duration.`,
     isOpen: false,
+    top: "-85px",
   },
 };
 
