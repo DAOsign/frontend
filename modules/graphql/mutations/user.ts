@@ -18,12 +18,6 @@ export const logoutMutation = graphql(`
   }
 `);
 
-export const createUserByEmailMutation = graphql(`
-  mutation createUserByEmail($email: String!) {
-    createUserByEmail(email: $email)
-  }
-`);
-
 export const sendEmailVerificationLinkMutation = graphql(`
   mutation sendEmailVerificationLink(
     $email: String!
