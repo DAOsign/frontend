@@ -93,13 +93,18 @@ export default function ChooseAgreementMethod({
     const contractTypeIsEmpty = (contractType && !statementWork) || !contractType;
     const urlIsEmpty =
       (!snapshotProposalUrl && !enableTransform) || (!snapshotProposalUrl && enableTransform);
-
     const countriesIsEmpty =
       !legalJurisdiction ||
       (legalJurisdiction && !legalJurisdictionCountry) ||
       (legalJurisdiction && legalJurisdictionCountry === UNITED_STATES && !legalJurisdictionState);
     const detailsIsEmpty = !additionalDetails;
-    return urlIsEmpty && contractTypeIsEmpty && countriesIsEmpty && detailsIsEmpty;
+    return page === "create"
+      ? urlIsEmpty && contractTypeIsEmpty && countriesIsEmpty && detailsIsEmpty
+      : urlIsEmpty &&
+          contractTypeIsEmpty &&
+          countriesIsEmpty &&
+          detailsIsEmpty &&
+          !values.textEditorValue;
   };
 
   const validateMethod = (method: string) => {
@@ -155,6 +160,7 @@ export default function ChooseAgreementMethod({
       },
     };
   };
+
   const renderMethods = () => {
     switch (method) {
       case METHOD_IMPORT_SHAPSHOT:

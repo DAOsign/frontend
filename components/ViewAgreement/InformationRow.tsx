@@ -1,28 +1,35 @@
 import React from "react";
-import { Box, Container, Flex } from "theme-ui";
+import { Box, Container, Flex, Text } from "theme-ui";
+import Tooltip from "../Tooltip";
 import { informationRow, informationRowName, informationRowValue } from "./styles";
-import { Tooltip } from "react-tooltip";
-import "react-tooltip/dist/react-tooltip.css";
 
 interface Props {
   name: string;
   value: string | React.ReactElement;
   tooltipValue?: string;
+  left?: string;
 }
 
-export const InformationRow = ({ name, value, tooltipValue }: Props) => {
+export const InformationRow = ({ name, value, tooltipValue, left }: Props) => {
   return (
     <Container>
       <Flex sx={informationRow}>
         <Box sx={informationRowName}>{name}</Box>
-        <Flex
-          sx={informationRowValue}
-          data-tooltip-id={tooltipValue}
-          data-tooltip-content={tooltipValue}
-        >
-          {value}
+        <Flex className="rowInformation" sx={informationRowValue}>
+          {left && tooltipValue ? (
+            <Tooltip
+              title={tooltipValue}
+              height={undefined}
+              minWidth="300px"
+              left={left}
+              top="-46px"
+            >
+              <Text sx={{ fontSize: "16px" }}>{value}</Text>
+            </Tooltip>
+          ) : (
+            value
+          )}
         </Flex>
-        {tooltipValue && <Tooltip content={tooltipValue} id={tooltipValue} />}
       </Flex>
     </Container>
   );

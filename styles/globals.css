@@ -31,6 +31,9 @@ a {
     opacity: 0.7;
 
 }
+.rowInformation .arrowTooltip {
+  margin-left: 80.5%;
+}
 .Toastify__toast-body {
   font-family: "InterBold";
   font-style: normal;
