@@ -76,6 +76,8 @@ const AuthProvider = (props?: Partial<ProviderProps<AuthProps>>) => {
 
   const web3ProviderRef = useRef<Web3Provider>();
 
+  // const redirectToConnectScreenIfNeeded = () => {}
+
   async function login(connector?: ConnectorType, email?: string, emailVerificationSalt?: string) {
     console.log(`Login. ${email}`);
     email = email ?? (query.email as string);
@@ -303,9 +305,18 @@ const AuthProvider = (props?: Partial<ProviderProps<AuthProps>>) => {
     return await web3ProviderRef.current?.resolveName(name);
   }
 
-  // useEffect(() => {
-  //   login();
-  // }, []); // eslint-disable-line react-hooks/exhaustive-deps
+  useEffect(() => {
+    // Auto redirect to /connect page from the home page when needed
+    (async () => {
+      const hasToken = Boolean(getToken());
+      const loadedConnector = await auth.getConnector();
+      if ((!loadedConnector || !hasToken) && pathname !== "/connect") {
+        clearToken();
+        await push("/connect");
+        loginStarted.current = false;
+      }
+    })();
+  });
 
   return (
     <AuthContext.Provider
