@@ -23,7 +23,6 @@ import Icon from "../../../icon";
 import { PlusIcon } from "./svg";
 import styles from "./styles";
 import { notifComingSoon } from "../../../../utils/notification";
-import { createUserByEmail, sendInvitationEmail } from "../../../agreements/helpers";
 import { sendEmailVerificationLinkMutation } from "../../../../modules/graphql/mutations";
 import { useMutation } from "urql";
 

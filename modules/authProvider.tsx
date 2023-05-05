@@ -71,18 +71,12 @@ const AuthProvider = (props?: Partial<ProviderProps<AuthProps>>) => {
   const [, verifyMyEmailRequest] = useMutation(verifyMyEmailMutation);
 
   const auth = useLock();
-
   const loginStarted = useRef(false);
-
   const web3ProviderRef = useRef<Web3Provider>();
 
-  // const redirectToConnectScreenIfNeeded = () => {}
-
   async function login(connector?: ConnectorType, email?: string, emailVerificationSalt?: string) {
-    console.log(`Login. ${email}`);
     email = email ?? (query.email as string);
     emailVerificationSalt = emailVerificationSalt ?? (query.emailVerificationSalt as string);
-    console.log({ query });
     // Prevent double loginRequest due to react dev useEffect[] runs twice
     if (loginStarted.current) return;
     loginStarted.current = true;
@@ -128,7 +122,6 @@ const AuthProvider = (props?: Partial<ProviderProps<AuthProps>>) => {
   }
 
   async function onAfterConnect(account: string, email?: string, emailVerificationSalt?: string) {
-    console.log(`onAfterConnect. ${email}`);
     if (!account) return;
     if (getToken()) return; // user already has a token
 
@@ -150,7 +143,6 @@ const AuthProvider = (props?: Partial<ProviderProps<AuthProps>>) => {
     setToken(token);
 
     // Sign up by email
-    console.log({ email });
     if (email) {
       const isVerified = await verifyMyEmailRequest({
         email,
@@ -236,7 +228,7 @@ const AuthProvider = (props?: Partial<ProviderProps<AuthProps>>) => {
         //@ts-ignore
         provider.value?.wc?.peerMeta?.name || null;
     } catch (e) {
-      console.log("ERROR load web3", e);
+      console.error("ERROR load web3", e);
       //setState((state) => ({ ...state, account: "" }));
       loadedState.account = "";
 
