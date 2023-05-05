@@ -66,7 +66,7 @@ const AuthProvider = (props?: Partial<ProviderProps<AuthProps>>) => {
     profile: null,
     //isTrezor: false,
   });
-  const { push, pathname } = useRouter();
+  const { push, pathname, query } = useRouter();
   const [, loginRequest] = useMutation(loginMutation);
   const [, verifyMyEmailRequest] = useMutation(verifyMyEmailMutation);
 
@@ -77,6 +77,10 @@ const AuthProvider = (props?: Partial<ProviderProps<AuthProps>>) => {
   const web3ProviderRef = useRef<Web3Provider>();
 
   async function login(connector?: ConnectorType, email?: string, emailVerificationSalt?: string) {
+    console.log(`Login. ${email}`);
+    email = email ?? (query.email as string);
+    emailVerificationSalt = emailVerificationSalt ?? (query.emailVerificationSalt as string);
+    console.log({ query });
     // Prevent double loginRequest due to react dev useEffect[] runs twice
     if (loginStarted.current) return;
     loginStarted.current = true;
@@ -122,10 +126,11 @@ const AuthProvider = (props?: Partial<ProviderProps<AuthProps>>) => {
   }
 
   async function onAfterConnect(account: string, email?: string, emailVerificationSalt?: string) {
+    console.log(`onAfterConnect. ${email}`);
     if (!account) return;
     if (getToken()) return; // user already has a token
 
-    const res = await loginRequest({ address: account });
+    const res = await loginRequest({ address: account, email });
 
     const payload = res?.data?.login?.payload;
     if (!payload) return;
@@ -133,6 +138,7 @@ const AuthProvider = (props?: Partial<ProviderProps<AuthProps>>) => {
     const signature = await sign(payload);
     const tokenRes = await loginRequest({
       address: account,
+      email,
       signature: signature,
     });
 
@@ -142,6 +148,7 @@ const AuthProvider = (props?: Partial<ProviderProps<AuthProps>>) => {
     setToken(token);
 
     // Sign up by email
+    console.log({ email });
     if (email) {
       const isVerified = await verifyMyEmailRequest({
         email,
@@ -296,9 +303,9 @@ const AuthProvider = (props?: Partial<ProviderProps<AuthProps>>) => {
     return await web3ProviderRef.current?.resolveName(name);
   }
 
-  useEffect(() => {
-    login();
-  }, []); // eslint-disable-line react-hooks/exhaustive-deps
+  // useEffect(() => {
+  //   login();
+  // }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
   return (
     <AuthContext.Provider

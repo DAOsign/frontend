@@ -24,10 +24,7 @@ import { PlusIcon } from "./svg";
 import styles from "./styles";
 import { notifComingSoon } from "../../../../utils/notification";
 import { createUserByEmail, sendInvitationEmail } from "../../../agreements/helpers";
-import {
-  createUserByEmailMutation,
-  sendEmailVerificationLinkMutation,
-} from "../../../../modules/graphql/mutations";
+import { sendEmailVerificationLinkMutation } from "../../../../modules/graphql/mutations";
 import { useMutation } from "urql";
 
 interface VerificationInfo {
@@ -71,7 +68,6 @@ export default function StepTwo({ page }: { page: string }) {
   const edit = useEditAgreement();
   const { values, changeValue } = page === "create" ? create : edit;
   const { account, resolveEns } = useWeb3();
-  const [, createUserByEmailRequest] = useMutation(createUserByEmailMutation);
   const [, sendEmailVerificationLinkRequest] = useMutation(sendEmailVerificationLinkMutation);
 
   const signersInputErrorStyles = values?.errors?.signers ? inputCreateAgreementError : {};
@@ -183,11 +179,10 @@ export default function StepTwo({ page }: { page: string }) {
       }
 
       if (isEmail(value)) {
-        await createUserByEmailRequest({ email: value });
         await sendEmailVerificationLinkRequest({
           email: value,
           isSigner: true,
-          agreementNumber: 12345, // TODO: replace with a real agreement number
+          agreementTitle: values.title,
         });
       }
 
@@ -214,11 +209,10 @@ export default function StepTwo({ page }: { page: string }) {
       }
 
       if (isEmail(value)) {
-        await createUserByEmailRequest({ email: value });
         await sendEmailVerificationLinkRequest({
           email: value,
           isSigner: false,
-          agreementNumber: 12345, // TODO: replace with a real agreement number
+          agreementTitle: values.title,
         });
       }
 

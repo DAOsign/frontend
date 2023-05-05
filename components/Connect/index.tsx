@@ -38,6 +38,10 @@ export default function Connect() {
     init();
   }, []);
 
+  // useEffect(() => {
+  //   await login(name, query.email as string, query.salt as string);
+  // }, []); // eslint-disable-line react-hooks/exhaustive-deps
+
   return (
     <span>
       <Container
