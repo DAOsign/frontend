@@ -66,7 +66,7 @@ const AuthProvider = (props?: Partial<ProviderProps<AuthProps>>) => {
     profile: null,
     //isTrezor: false,
   });
-  const { push, pathname, query } = useRouter();
+  const { push, pathname, query, isReady } = useRouter();
   const [, loginRequest] = useMutation(loginMutation);
   const [, verifyMyEmailRequest] = useMutation(verifyMyEmailMutation);
 
@@ -75,8 +75,14 @@ const AuthProvider = (props?: Partial<ProviderProps<AuthProps>>) => {
   const web3ProviderRef = useRef<Web3Provider>();
 
   async function login(connector?: ConnectorType, email?: string, emailVerificationSalt?: string) {
+    console.log("login()");
+    console.log({ query });
     email = email ?? (query.email as string);
     emailVerificationSalt = emailVerificationSalt ?? (query.emailVerificationSalt as string);
+    console.log({
+      email,
+      emailVerificationSalt,
+    });
     // Prevent double loginRequest due to react dev useEffect[] runs twice
     if (loginStarted.current) return;
     loginStarted.current = true;
@@ -124,6 +130,9 @@ const AuthProvider = (props?: Partial<ProviderProps<AuthProps>>) => {
   async function onAfterConnect(account: string, email?: string, emailVerificationSalt?: string) {
     if (!account) return;
     if (getToken()) return; // user already has a token
+
+    console.log("onAfterConnect");
+    console.log({ email, emailVerificationSalt });
 
     const res = await loginRequest({ address: account, email });
 
@@ -297,18 +306,25 @@ const AuthProvider = (props?: Partial<ProviderProps<AuthProps>>) => {
     return await web3ProviderRef.current?.resolveName(name);
   }
 
-  useEffect(() => {
-    // Auto redirect to /connect page from the home page when needed
-    (async () => {
-      const hasToken = Boolean(getToken());
-      const loadedConnector = await auth.getConnector();
-      if ((!loadedConnector || !hasToken) && pathname !== "/connect") {
-        clearToken();
-        await push("/connect");
-        loginStarted.current = false;
+  async function loginWhenNecessary() {
+    const hasToken = Boolean(getToken());
+    const loadedConnector = await auth.getConnector();
+    if ((!loadedConnector || !hasToken) && pathname !== "/connect") {
+      // Redirect to the connect page
+      clearToken();
+      await push("/connect");
+      loginStarted.current = false;
+    } else {
+      // Perform user login
+      if (isReady && pathname !== "/connect") {
+        login();
       }
-    })();
-  });
+    }
+  }
+
+  useEffect(() => {
+    loginWhenNecessary();
+  }, [isReady]); // eslint-disable-line react-hooks/exhaustive-deps
 
   return (
     <AuthContext.Provider
@@ -320,9 +336,6 @@ const AuthProvider = (props?: Partial<ProviderProps<AuthProps>>) => {
         signTypedData,
         _signTypedData,
         resolveEns,
-        //loadProvider,
-        //handleChainChanged,
-        //web3: state,
         ...state,
       }}
     />
