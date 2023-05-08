@@ -28,7 +28,6 @@ const variants: Variants = {
   visible: { opacity: 1 },
   enter: { opacity: 0.5 },
 };
-
 export const withFade = (component: React.ReactElement, key: number | string) => {
   return (
     <motion.main

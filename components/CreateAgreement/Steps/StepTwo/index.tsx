@@ -1,5 +1,5 @@
 import React, { useRef, useMemo, useState } from "react";
-import { Container, Flex, Input, Text, Button, Box } from "theme-ui";
+import { Container, Flex, Input, Text, Button, Box, Switch, Label } from "theme-ui";
 import {
   inputCreateAgreementWithRightButton,
   inputCreateAgreementError,
@@ -8,7 +8,7 @@ import {
   addMeBtn,
   plus,
 } from "../../styles";
-import { validateAddress, validateEmail, validateEnsDomains } from "../StepThree/validationUtils";
+import { validateAddress, validateEnsDomains } from "../StepThree/validationUtils";
 import { useCreateAgreement } from "../../../../hooks/useCreateAgreement";
 import { useEditAgreement } from "../../../../hooks/useEditAgreement";
 import FieldErrorMessage from "../../../Form/FieldErrorMessage";
@@ -23,16 +23,12 @@ import Icon from "../../../icon";
 import { PlusIcon } from "./svg";
 import styles from "./styles";
 import { notifComingSoon } from "../../../../utils/notification";
-import { sendEmailVerificationLinkMutation } from "../../../../modules/graphql/mutations";
-import { useMutation } from "urql";
 
 interface VerificationInfo {
   title: string;
   img: Icon;
   description: string;
 }
-
-const isEmail = (x: string) => x?.includes("@");
 
 const verifications: VerificationInfo[] = [
   {
@@ -67,7 +63,6 @@ export default function StepTwo({ page }: { page: string }) {
   const edit = useEditAgreement();
   const { values, changeValue } = page === "create" ? create : edit;
   const { account, resolveEns } = useWeb3();
-  const [, sendEmailVerificationLinkRequest] = useMutation(sendEmailVerificationLinkMutation);
 
   const signersInputErrorStyles = values?.errors?.signers ? inputCreateAgreementError : {};
   const observersInputErrorStyles = values?.errors?.observers ? inputCreateAgreementError : {};
@@ -135,7 +130,6 @@ export default function StepTwo({ page }: { page: string }) {
     if (userAlreadyObserver) {
       return userRole === "signer" ? "Already exists as Observer" : "Observer is already added";
     }
-
     const isEns = value?.includes(".eth");
     if (isEns) {
       const error = validateEnsDomains(value);
@@ -146,17 +140,13 @@ export default function StepTwo({ page }: { page: string }) {
     }
 
     const isAddress = value?.startsWith("0x");
+
     if (isAddress) {
       const error = validateAddress(value);
       if (error) return error;
     }
 
-    if (isEmail(value)) {
-      const error = validateEmail(value);
-      if (error) return error;
-    }
-
-    if (!isEns && !isAddress && !isEmail(value)) {
+    if (!isEns && !isAddress) {
       return "Invalid value";
     }
 
@@ -176,15 +166,6 @@ export default function StepTwo({ page }: { page: string }) {
         changeValue("errors", { ...values.errors, signers: validationError });
         return;
       }
-
-      if (isEmail(value)) {
-        await sendEmailVerificationLinkRequest({
-          email: value,
-          isSigner: true,
-          agreementTitle: values.title,
-        });
-      }
-
       changeValue("signers", [
         ...values.signers,
         { value: value.toLocaleLowerCase(), id: uniqueId() },
@@ -205,14 +186,6 @@ export default function StepTwo({ page }: { page: string }) {
       if (validationError) {
         changeValue("errors", { ...values.errors, observers: validationError });
         return;
-      }
-
-      if (isEmail(value)) {
-        await sendEmailVerificationLinkRequest({
-          email: value,
-          isSigner: false,
-          agreementTitle: values.title,
-        });
       }
 
       changeValue("observers", [
@@ -239,7 +212,7 @@ export default function StepTwo({ page }: { page: string }) {
             sx={{ position: "relative", justifyContent: "space-between", alignItems: "center" }}
           >
             <Flex sx={{ alignItems: "center" }}>
-              <Text sx={labelSigners}>Signers (ENS name, Ethereum address, or email) *</Text>
+              <Text sx={labelSigners}>Signers (ENS name or address) *</Text>
               <Tooltip
                 title="Add users that will sign this agreement."
                 transform="translate(-57%, 0)"
@@ -305,7 +278,7 @@ export default function StepTwo({ page }: { page: string }) {
                   minHeight: "25px",
                 }}
               >
-                Observers (ENS name, Ethereum adderess, or email){" "}
+                Observers (ENS name or adderess){" "}
               </Text>
               <Tooltip
                 title="Add users that will be able to see but not sign an agreement."
