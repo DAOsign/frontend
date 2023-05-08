@@ -434,7 +434,7 @@ export default function ModalImportSnapshot({ isOpen, page, onExit, setMethod }:
         </Flex>
         <Box sx={stylesIcon}>
           <Tooltip
-            top="-85px"
+            top={switches[name].top}
             left="-148px"
             transform=""
             minWidth="300px"

@@ -179,6 +179,7 @@ export const AgreementInformation = ({
         />
         {agreement?.snapshotProposalUrl && (
           <InformationRow
+            left="-329px"
             tooltipValue={extractProposalId(agreement.snapshotProposalUrl)!}
             value={
               <Link href={agreement?.snapshotProposalUrl} target="_blank">
@@ -195,6 +196,7 @@ export const AgreementInformation = ({
         )}
         <InformationRow
           name="Creator"
+          left="-195px"
           tooltipValue={authorWalletAddress}
           value={
             <Box className="signature_icon" sx={{ cursor: "pointer" }} onClick={handleCopyAddress}>
