@@ -23,16 +23,13 @@ import Icon from "../../../icon";
 import { PlusIcon } from "./svg";
 import styles from "./styles";
 import { notifComingSoon } from "../../../../utils/notification";
-import { sendEmailVerificationLinkMutation } from "../../../../modules/graphql/mutations";
-import { useMutation } from "urql";
+import { isEmail } from "../../utils";
 
 interface VerificationInfo {
   title: string;
   img: Icon;
   description: string;
 }
-
-const isEmail = (x: string) => x?.includes("@");
 
 const verifications: VerificationInfo[] = [
   {
@@ -67,7 +64,6 @@ export default function StepTwo({ page }: { page: string }) {
   const edit = useEditAgreement();
   const { values, changeValue } = page === "create" ? create : edit;
   const { account, resolveEns } = useWeb3();
-  const [, sendEmailVerificationLinkRequest] = useMutation(sendEmailVerificationLinkMutation);
 
   const signersInputErrorStyles = values?.errors?.signers ? inputCreateAgreementError : {};
   const observersInputErrorStyles = values?.errors?.observers ? inputCreateAgreementError : {};
@@ -177,14 +173,6 @@ export default function StepTwo({ page }: { page: string }) {
         return;
       }
 
-      if (isEmail(value)) {
-        await sendEmailVerificationLinkRequest({
-          email: value,
-          isSigner: true,
-          agreementTitle: values.title,
-        });
-      }
-
       changeValue("signers", [
         ...values.signers,
         { value: value.toLocaleLowerCase(), id: uniqueId() },
@@ -207,14 +195,6 @@ export default function StepTwo({ page }: { page: string }) {
         return;
       }
 
-      if (isEmail(value)) {
-        await sendEmailVerificationLinkRequest({
-          email: value,
-          isSigner: false,
-          agreementTitle: values.title,
-        });
-      }
-
       changeValue("observers", [
         ...values.observers,
         { value: value.toLocaleLowerCase(), id: uniqueId() },
@@ -234,6 +214,7 @@ export default function StepTwo({ page }: { page: string }) {
   return (
     <Container sx={styles}>
       <>
+        {/* Signers */}
         <Box>
           <Flex
             sx={{ position: "relative", justifyContent: "space-between", alignItems: "center" }}
@@ -286,6 +267,8 @@ export default function StepTwo({ page }: { page: string }) {
           <FieldErrorMessage error={values?.errors?.signers} isAbsolutePosition={false} />
           <TagList items={values.signers} type="signers" onDelete={onDelete} />
         </Box>
+
+        {/* Observers */}
         <Box>
           <Flex
             sx={{
@@ -360,6 +343,8 @@ export default function StepTwo({ page }: { page: string }) {
           <FieldErrorMessage error={values?.errors?.observers} isAbsolutePosition={false} />
           <TagList items={values.observers} type="observers" onDelete={onDelete} />
         </Box>
+
+        {/* Required Verifications */}
         <Box sx={{ mt: "10px" }}>
           <Flex
             sx={{
