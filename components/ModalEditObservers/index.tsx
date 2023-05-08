@@ -155,7 +155,7 @@ export default function ModalEditObservers({ agreement, isOpen, onExit, onSucces
                 <Text
                   sx={{ variant: "forms.label", ml: "3px", maxWidth: "unset", minHeight: "25px" }}
                 >
-                  Observers (ENS name, Ethereum adderess, or email)
+                  Observers (ENS name or adderess)
                 </Text>
                 <Tooltip
                   title="Add users that will be able to see but not sign an agreement."
