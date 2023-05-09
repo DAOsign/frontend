@@ -26,10 +26,10 @@ export const ObserverRow = ({ observer }: Props) => {
 
   const address = useMemo<string>(
     () =>
-      observer?.wallet?.address
-        ? observer.wallet.address
-        : !!observer?.email?.startsWith("0x")
+      !!observer?.email?.length
         ? observer?.email
+        : observer?.wallet?.address
+        ? observer?.wallet?.address
         : "",
     [observer]
   );

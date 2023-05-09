@@ -35,8 +35,8 @@ export const AgreementSignersList = ({ signers }: Props) => {
             <table className="participantsTable">
               <thead>
                 <tr>
-                  <th>Signer Name</th>
-                  <th>Signer Address</th>
+                  <th>Name</th>
+                  <th>Address/Email</th>
                   <th>Signature status</th>
                   <th>Proof of signature</th>
                 </tr>
