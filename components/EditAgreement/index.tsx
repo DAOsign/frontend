@@ -183,7 +183,7 @@ export default function EditAgreement({ page }: { page: string }) {
         }}
         className={transitioned ? "transition" : ""}
       >
-        <Text sx={title}>Create New Agreement</Text>
+        <Text sx={title}>Edit Agreement</Text>
         {steps[step]}
       </Container>
       <Container
