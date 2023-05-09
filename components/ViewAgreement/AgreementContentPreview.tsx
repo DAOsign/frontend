@@ -20,7 +20,6 @@ import { AgreementUploadedFilePreview } from "./AgreementUploadedFilePreview";
 import { AgreementTextMarkdownPreview } from "./AgreementTextMarkdownPreview";
 import Icon from "../icon";
 import iconsObj from "../../assets/icons";
-import { noContent } from "../AgreementsList/styles";
 import { toAgreementWithParticipants } from "../../utils/typeUtils";
 import { useWeb3 } from "../../hooks/useWeb3";
 

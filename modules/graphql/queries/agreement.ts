@@ -1,9 +1,85 @@
 import { graphql } from "../gql";
 
-export const agreementById = graphql(`
+// export const agreementById = graphql(`
+//   query Query($agreementId: Int!) {
+//     agreement(agreementId: $agreementId) {
+//       agreementId
+//       agreementUri
+//       snapshotProposalUrl
+//       agreementFile {
+//         agreementFileId
+//         agreementHash
+//         createdAt
+//         filePath
+//       }
+//       agreementLocation {
+//         agreementLocationId
+//         isActive
+//         name
+//       }
+//       agreementPrivacy {
+//         name
+//       }
+//       agreementStatus {
+//         name
+//       }
+//       authorWallet {
+//         address
+//         networkId
+//         userId
+//         walletId
+//       }
+//       observers {
+//         email
+//         observerId
+//         wallet {
+//           address
+//         }
+//         ens {
+//           name
+//         }
+//       }
+//       signers {
+//         email
+//         wallet {
+//           address
+//         }
+//         ens {
+//           name
+//         }
+//       }
+//       title
+//       content
+//       isWaitingForMySignature
+//       snapshotProposalUrl
+//       isAllowedToEditObservers
+//       createdAt
+//       signProofs {
+//         signature
+//         cid
+//         signerWalletId
+//         signerWallet {
+//           address
+//         }
+//       }
+//       agreementFileProof {
+//         cid
+//         signature
+//         signers
+//       }
+//       agreementProof {
+//         cid
+//         signedAt
+//       }
+//     }
+//   }
+// `);
+
+export const agreementByUri = graphql(`
   query Query($agreementId: Int!) {
-    agreement(agreementId: $agreementId) {
+    agreementByUri(agreementId: $agreementId) {
       agreementId
+      agreementUri
       snapshotProposalUrl
       agreementFile {
         agreementFileId
@@ -73,11 +149,13 @@ export const agreementById = graphql(`
     }
   }
 `);
+
 export const myAgreementsQuery = graphql(`
   query MyAgreements($take: Int, $filterBy: [String!], $search: String, $skip: Int) {
     myAgreements(take: $take, filterBy: $filterBy, search: $search, skip: $skip) {
       agreements {
         agreementId
+        agreementUri
         title
         content
         isWaitingForMySignature

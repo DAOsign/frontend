@@ -197,8 +197,7 @@ export default function NavPanel({ setLoading, page }: { setLoading: any; page: 
       if (res.data?.saveAgreement?.title) {
         clearDraft();
         clearEdit();
-        push(`/agreement/${res.data.saveAgreement.agreementId}`);
-        return;
+        push(`/agreement/${res.data.saveAgreement.agreementUri}`);
       }
     });
   };

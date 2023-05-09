@@ -1,5 +1,5 @@
 import * as React from "react";
-import { useClient, useQuery } from "urql";
+import { useClient } from "urql";
 import { myAgreementsQuery } from "../modules/graphql/queries";
 import { useWeb3 } from "../hooks/useWeb3";
 import { Agreement as AgreementResponse } from "../modules/graphql/gql/graphql";
@@ -13,7 +13,6 @@ import { Agreement } from "../types";
 import { notifError } from "./notification";
 import { useEffect } from "react";
 import useDebounce from "../hooks/useDebounce";
-const RESPONSE_TIME_IN_MS = 1000;
 
 interface Response {
   hasNextPage: boolean;

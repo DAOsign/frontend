@@ -32,7 +32,7 @@ import { greenLabel, yellowLabel } from "../ViewAgreement/styles";
 export default function AgreementItem({
   agreementPrivacy,
   agreementStatus,
-  agreementId,
+  agreementUri,
   observers,
   signers,
   title,
@@ -70,7 +70,7 @@ export default function AgreementItem({
   };
 
   return (
-    <NextLink href={`/agreement/${agreementId}`}>
+    <NextLink href={`/agreement/${agreementUri}`}>
       <Link sx={agreementConteinerRelative}>
         <Flex sx={agreementConteiner}>
           <Flex sx={headerItem}>

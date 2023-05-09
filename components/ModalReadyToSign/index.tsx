@@ -1,17 +1,9 @@
 import { useState } from "react";
 import { Box, Button, Flex, Spinner, Text } from "theme-ui";
 import iconsObj from "../../assets/icons";
-import { notifError } from "../../utils/notification";
-import { textContainer } from "../AgreementsList/styles";
 import Icon from "../icon";
 import { ModalBase } from "../ModalBase/ModalBase";
-import {
-  flexContainer,
-  closeIcon,
-  containerIcon,
-  mainText,
-  btnContainer,
-} from "../ModalIpfsWarning/styles";
+import { closeIcon, containerIcon, mainText, btnContainer } from "../ModalIpfsWarning/styles";
 import ModalSignStatus from "../ModalSignStatus";
 import { Portal } from "../Portal/Portal";
 

@@ -77,6 +77,7 @@ export type AgreementLocation =
 
 export interface Agreement {
   agreementId: number;
+  agreementUri: string;
   agreementLocation: AgreementLocation;
   agreementPrivacy: AgreementPrivacy;
   agreementStatus: AgreementStatus;

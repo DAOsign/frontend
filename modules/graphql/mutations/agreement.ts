@@ -28,6 +28,7 @@ export const saveAgreementMutation = graphql(`
       snapshotProposalUrl: $snapshotProposalUrl
     ) {
       agreementId
+      agreementUri
       title
       content
       authorWallet {
