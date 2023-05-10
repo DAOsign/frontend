@@ -166,7 +166,11 @@ export default function ChooseAgreementMethod({
       case METHOD_IMPORT_SHAPSHOT:
         return withFade(
           <>
-            <TextEditor handleChooseAnotherMethod={() => setMethod("")} page={page} />
+            <TextEditor
+              handleChooseAnotherMethod={() => setMethod("")}
+              setIsOpenModalImport={setIsOpenModalImport}
+              page={page}
+            />
             <FieldErrorMessage error={values?.errors?.agreementFile} />
           </>,
           0
@@ -174,7 +178,11 @@ export default function ChooseAgreementMethod({
       case METHOD_ENTER:
         return withFade(
           <>
-            <TextEditor handleChooseAnotherMethod={() => setMethod("")} page={page} />
+            <TextEditor
+              setIsOpenModalImport={setIsOpenModalImport}
+              handleChooseAnotherMethod={() => setMethod("")}
+              page={page}
+            />
             <FieldErrorMessage error={values?.errors?.agreementFile} />
           </>,
           1

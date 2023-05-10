@@ -95,6 +95,22 @@ export const previewContainer = {
   },
 } as ThemeUIStyleObject;
 
+export const textSecondary = {
+  variant: "forms.label",
+  fontFamily: "InterRegular",
+  fontStyle: "normal",
+  fontWeight: 400,
+  fontSize: "12px",
+  lineHeight: "160%",
+  color: "#212121",
+  opacity: 0.5,
+  textAlign: "inherit",
+  maxWidth: "unset",
+  ml: "3px",
+  mr: "5px",
+  mt: "20px",
+} as ThemeUIStyleObject;
+
 const uploadText = {
   variant: "text.smallTextMedium",
   display: "block",
@@ -155,6 +171,7 @@ const leftSide = {
   },
   "@media screen and (max-width: 719px)": {
     width: "90%",
+    paddingTop: "40px",
   },
   "@media screen and (max-width: 480px)": {
     maxWidth: "343px",
@@ -180,17 +197,6 @@ const title = {
 
 const rightSide = {
   maxWidth: "364px",
-  "@media screen and (max-width: 1200px)": {
-    width: "100%",
-    mx: "auto",
-    maxWidth: "672px",
-    borderTop: "none",
-    borderRadius: "0 0 12px 12px",
-    height: "initial",
-    minHeight: "unset",
-    pb: "72px",
-    pt: 0,
-  },
   "@media screen and (max-width: 719px)": {
     width: "90%",
   },
@@ -220,7 +226,28 @@ export const navContainer = {
   },
   "@media screen and (max-width: 480px)": {
     px: "16px",
-    pb: "40px",
+    pb: "24px",
+    pt: "0",
+  },
+} as ThemeUIStyleObject;
+
+export const navContainerOptionsIsVisible = {
+  ...navContainer,
+  "@media screen and (max-width: 1200px)": {
+    ml: 0,
+    border: "1px solid #EDEDF3",
+    borderRadius: "12px",
+    borderTop: "none",
+    height: "fit-content",
+    minHeight: "unset",
+    p: "36px",
+    width: "90%",
+    m: "0 auto !important",
+  },
+  "@media screen and (max-width: 480px)": {
+    px: "16px",
+    py: "24px",
+    width: "100%",
   },
 } as ThemeUIStyleObject;
 
@@ -247,7 +274,26 @@ export const importOptions = {
     width: "100%",
   },
   "@media screen and (max-width: 1200px)": {
-    m: "28px auto 0",
+    m: "0 auto 0",
+    pt: 0,
+    borderTop: 0,
+    borderRadius: "0 0 12px 12px",
+    paddingLeft: "36px",
+    paddingRight: "36px",
+    paddingBottom: "36px",
+    width: "90%",
+    mb: "20px",
+  },
+  "@media screen and (max-width: 480px)": {
+    m: "0 auto 0",
+    pt: 0,
+    borderTop: 0,
+    borderRadius: "0 0 12px 12px",
+    paddingLeft: "16px",
+    paddingRight: "16px",
+    paddingBottom: "24px",
+    width: "100%",
+    mb: "20px",
   },
 } as ThemeUIStyleObject;
 
@@ -263,11 +309,15 @@ export const textInput = {
   border: "none",
   background: "#F7F7FB",
   mb: "60px",
+  height: "102px",
   maxWidth: "260px",
   minWidth: "260px",
+  borderRadius: "8px",
   position: "relative",
   "@media screen and (max-width: 1200px)": {
-    maxWidth: "100%",
+    width: "100%",
+    maxWidth: "unset",
+    mb: "40px",
   },
 } as ThemeUIStyleObject;
 
@@ -636,6 +686,15 @@ const containerButtons = {
     },
   },
 } as ThemeUIStyleObject;
+
+// export const containerButtonsTablet = {
+//   ...containerButtons,
+//   "@media screen and (max-width: 1200px)": {
+//     "&": {
+//       marginTop: "40px",
+//     },
+//   },
+// } as ThemeUIStyleObject;
 
 const secondaryTitleStep = {
   variant: "text.overscript",

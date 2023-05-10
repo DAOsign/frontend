@@ -407,6 +407,9 @@ export default function NavPanel({ setLoading, page }: { setLoading: any; page: 
     push("/agreements", "/agreements", { shallow: false });
   };
 
+  const optionsIsVisible =
+    step === 1 && values.agreementMethod === METHOD_IMPORT_SHAPSHOT && !!values.textEditorValue;
+
   return (
     <>
       <Container sx={stepsContainer}>

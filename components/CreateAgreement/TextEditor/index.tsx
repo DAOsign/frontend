@@ -16,6 +16,8 @@ import styles, {
   btnBack,
   icon,
 } from "./styles";
+import ProposalImportOptions from "../Steps/StepOne/ProposalImportOptions";
+import { METHOD_IMPORT_SHAPSHOT } from "../../../types";
 
 const MDEditor = dynamic(() => import("@uiw/react-md-editor"), {
   ssr: false,
@@ -43,9 +45,11 @@ const minHeightTextEditor = 387;
 const TextEditor = ({
   page,
   handleChooseAnotherMethod,
+  setIsOpenModalImport,
 }: {
   page: string;
   handleChooseAnotherMethod: () => void;
+  setIsOpenModalImport: any;
 }) => {
   const [heightValue, setHeightValue] = useState(minHeightTextEditor);
   const create = useCreateAgreement();
@@ -70,7 +74,7 @@ const TextEditor = ({
   };
 
   return (
-    <Box style={{ position: "relative", width: "100%" }} sx={styles}>
+    <Box style={{ position: "relative", width: "100%" }} className="textEditor" sx={styles}>
       <Flex sx={{ alignItems: "center" }}>
         <Flex sx={containerEnter}>
           <Text sx={enterAgreement}>Enter agreement </Text>

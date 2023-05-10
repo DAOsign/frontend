@@ -2,6 +2,7 @@ import { ThemeUIStyleObject } from "theme-ui";
 
 export const bg = {
   position: "absolute",
+  overflow: "hidden",
   height: "120vh",
   "@media screen and (max-width: 1200px)": {
     height: "135vh",
