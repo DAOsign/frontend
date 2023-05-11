@@ -55,7 +55,7 @@ const formatAgreementPrivacy = (agreementPrivacy: string | undefined) => {
 
 interface Props {
   agreement: ReturnType<typeof toAgreementWithParticipants>;
-  agreementUri: number;
+  agreementId: string;
   agreementStatus?: AgreementStatus;
   agreementPrivacy?: AgreementPrivacy;
   agreementLocation?: AgreementLocation;
@@ -80,7 +80,7 @@ export const AgreementInformation = ({
   agreementPrivacy,
   agreementStatus,
   userIsAuthor,
-  agreementUri,
+  agreementId,
   createdAt,
   setIsOpen,
   agreement,
@@ -271,7 +271,7 @@ export const AgreementInformation = ({
         {
           <>
             {userIsAuthor && agreementStatus === STATUS_DRAFT ? (
-              <NextLink href={`/edit/${agreementUri}?step=1`}>
+              <NextLink href={`/edit/${agreementId}?step=1`}>
                 <Link>
                   <Button sx={btnSecondary}>Edit Agreement</Button>
                 </Link>
@@ -303,7 +303,7 @@ export const AgreementInformation = ({
         ) : null}
       </Flex>
       <ModalConfirmAgreementDeletion
-        agreementUri={Number(agreementUri)}
+        agreementId={agreementId}
         isOpen={isConfirmAgreementDeletionPopupVisible}
         onSuccess={onAgreementDeletionSuccess}
         onExit={() => setIsConfirmAgreementDeletionPopupVisible(false)}

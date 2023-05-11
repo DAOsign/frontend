@@ -20,7 +20,7 @@ export type Agreement = {
   __typename?: 'Agreement';
   agreementFile?: Maybe<AgreementFile>;
   agreementFileProof?: Maybe<AgreementFileProof>;
-  agreementId: Scalars['ID'];
+  agreementId: Scalars['String'];
   agreementLocation?: Maybe<AgreementLocation>;
   agreementLocationId?: Maybe<Scalars['Int']>;
   agreementPrivacy?: Maybe<AgreementPrivacy>;
@@ -153,7 +153,7 @@ export type AgreementProof = {
 
 export type AgreementSignProof = {
   __typename?: 'AgreementSignProof';
-  agreementId: Scalars['Int'];
+  agreementId: Scalars['String'];
   agreementSignProofId: Scalars['ID'];
   agreementSignProofMetadataId: Scalars['Int'];
   cid?: Maybe<Scalars['String']>;
@@ -459,7 +459,7 @@ export type QueryGetAgreementSignProofDataArgs = {
 
 
 export type QueryGetOpenAiMessagesForAgreementArgs = {
-  agreementId: Scalars['Int'];
+  agreementId: Scalars['String'];
 };
 
 

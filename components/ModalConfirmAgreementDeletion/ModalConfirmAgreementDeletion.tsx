@@ -21,14 +21,14 @@ import { deleteAgreementMutation } from "../../modules/graphql/mutations";
 import { notifError, notifSucces } from "../../utils/notification";
 
 interface Props {
-  agreementUri: number;
+  agreementId: string;
   isOpen: boolean;
   onSuccess: () => Promise<void>;
   onExit: () => void;
 }
 
 export default function ModalConfirmAgreementDeletion({
-  agreementUri,
+  agreementId,
   isOpen,
   onSuccess,
   onExit,
@@ -42,7 +42,7 @@ export default function ModalConfirmAgreementDeletion({
     setIsDeletingAgreement(true);
 
     try {
-      const response = await deleteAgreement({ agreementUri });
+      const response = await deleteAgreement({ agreementId });
       if (!response?.error) {
         await onSuccess();
         notifSucces("Agreement was deleted");

@@ -50,7 +50,7 @@ const getAgreementStatusLabelStyle = (agreementStatus: string | undefined): Them
 };
 
 interface Props {
-  agreementUri: string;
+  agreementId: string;
   agreementTitle?: string;
   agreementStatus?: AgreementStatus;
   agreementPrivacy?: AgreementPrivacy | string;
@@ -59,7 +59,7 @@ interface Props {
 
 export const AgreementLabels = ({
   agreementTitle,
-  agreementUri,
+  agreementId,
   agreementStatus,
   agreementPrivacy,
   isWaitingForMySignature,
@@ -71,7 +71,7 @@ export const AgreementLabels = ({
 
   // TODO: download document
   const handleDownloadDocument = () => {
-    downloadPdf(agreementUri, agreementTitle);
+    downloadPdf(agreementId, agreementTitle);
     //notifComingSoon("Download PDF Document is coming soon");
   };
 
