@@ -7,7 +7,7 @@ import { getAgreementFileProofData, getAgreementSignProofData } from "../modules
 import { notifError } from "../utils/notification";
 import { useWeb3 } from "./useWeb3";
 
-const useSignAgreement = (agreementId: number) => {
+const useSignAgreement = (agreementId: string) => {
   const client = useClient();
 
   const { signTypedData } = useWeb3();
@@ -46,7 +46,7 @@ const useSignAgreement = (agreementId: number) => {
     return sendSignedFileProofData({
       data: signingPayload,
       signature: signature,
-      agreementId: Number(agreementId),
+      agreementId,
     }).then(res => {
       if (res.error) {
         throw new Error(res.error.message);
@@ -59,7 +59,7 @@ const useSignAgreement = (agreementId: number) => {
     return sendSignedSignProofData({
       data: signingPayload,
       signature: signature,
-      agreementId: Number(agreementId),
+      agreementId,
     }).then(res => {
       if (res.error) {
         throw new Error(res.error.message);

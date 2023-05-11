@@ -76,7 +76,7 @@ export type AgreementLocation =
   | "";
 
 export interface Agreement {
-  agreementId: number;
+  agreementId: string;
   agreementLocation: AgreementLocation;
   agreementPrivacy: AgreementPrivacy;
   agreementStatus: AgreementStatus;

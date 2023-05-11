@@ -61,7 +61,9 @@ export function useLoadItems() {
     });
 
   const refetch = async (reset = false) => {
+    console.log("refetch");
     setData(prev => ({ ...prev, loading: true }));
+    console.log("1");
     return await client
       .query(
         myAgreementsQuery,
@@ -99,21 +101,26 @@ export function useLoadItems() {
   useEffect(() => {
     initLoaded.current = false;
     if (account) {
-      refetch(true).then(res => {
-        const agreements = res.data?.myAgreements.agreements;
-        if (!res.error && agreements) {
-          setData({
-            data: agreements.map(a => toAgreement(a as AgreementResponse)),
-            loading: false,
-            error: "",
-          });
-          setHasNextPage(agreements.length < res.data!.myAgreements.count);
-          initLoaded.current = true;
-        } else {
-          notifError(res.error!.message);
-          setData(prev => ({ ...prev, loading: false, error: res.error?.message || "" }));
-        }
-      });
+      console.log("try to refetch");
+      refetch(true)
+        .then(res => {
+          console.log({ res });
+          const agreements = res.data?.myAgreements.agreements;
+          console.log({ agreements });
+          if (!res.error && agreements) {
+            setData({
+              data: agreements.map(a => toAgreement(a as AgreementResponse)),
+              loading: false,
+              error: "",
+            });
+            setHasNextPage(agreements.length < res.data!.myAgreements.count);
+            initLoaded.current = true;
+          } else {
+            notifError(res.error!.message);
+            setData(prev => ({ ...prev, loading: false, error: res.error?.message || "" }));
+          }
+        })
+        .catch(err => console.error({ err }));
     }
   }, [account, JSON.stringify(filterValues), debouncedSearch]);
 

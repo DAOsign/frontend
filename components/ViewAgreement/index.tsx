@@ -33,8 +33,8 @@ import ModalReadyToSign from "../ModalReadyToSign";
 
 export const ViewAgreement = () => {
   const { push, query } = useRouter();
-  const { agreementId } = query;
-  const idIsWrong = !!agreementId && !Number(agreementId);
+  const { agreementUri } = query;
+  const idIsWrong = !!agreementUri && !Number(agreementUri);
   const [isOpen, setIsOpen] = useState(false);
   const [readyToSignModalOpen, setReadyToSignModalOpen] = useState(false);
   const client = useClient();
@@ -51,17 +51,21 @@ export const ViewAgreement = () => {
     [account, agreement?.authorWalletAddress]
   );
 
-  const { makeProofOfAuthority, makeProofOfSignature } = useSignAgreement(Number(agreementId));
+  const { makeProofOfAuthority, makeProofOfSignature } = useSignAgreement(Number(agreementUri));
 
   useEffect(() => {
-    if (agreementId) {
+    if (agreementUri) {
       refetchAgreement();
     }
-  }, [agreementId]);
+  }, [agreementUri]);
 
   const refetchAgreement = useCallback(async () => {
     return await client
-      .query(agreementById, { agreementId: Number(agreementId) }, { requestPolicy: "network-only" })
+      .query(
+        agreementById,
+        { agreementUri: Number(agreementUri) },
+        { requestPolicy: "network-only" }
+      )
       .toPromise()
       .then(res => {
         const agr: any = res.data?.agreement;
@@ -73,7 +77,7 @@ export const ViewAgreement = () => {
           }
         }
       });
-  }, [agreementId]);
+  }, [agreementUri]);
 
   const handleOpenReadyToSignModal = () => {
     const agreementComplete =
@@ -136,7 +140,7 @@ export const ViewAgreement = () => {
             <Box sx={title}>{agreement?.title}</Box>
             <AgreementLabels
               agreementTitle={agreement?.title}
-              agreementId={String(agreement?.agreementId)}
+              agreementUri={String(agreement?.agreementUri)}
               agreementStatus={agreement?.agreementStatus}
               agreementPrivacy={agreement?.agreementPrivacy}
               isWaitingForMySignature={agreement?.isWaitingForMySignature || false}
@@ -160,7 +164,7 @@ export const ViewAgreement = () => {
               agreementLocation={agreement?.agreementLocation}
               agreementPrivacy={agreement?.agreementPrivacy}
               agreementStatus={agreement?.agreementStatus}
-              agreementId={Number(agreementId)}
+              agreementUri={Number(agreementUri)}
               onSignAgreement={onSignAgreement}
               createdAt={agreement?.createdAt}
               userIsAuthor={userIsAuthor}

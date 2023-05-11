@@ -173,7 +173,7 @@ export default function NavPanel({ setLoading, page }: { setLoading: any; page: 
 
   const handleCreateAgreement = async (filePath?: string, agreementHash?: string) => {
     await saveAgreement({
-      agreementId: Number(query.id),
+      agreementId: query.id,
       title: values.title,
       agreementLocation: values.agreementLocation || null,
       snapshotProposalUrl: values.proposal?.snapshotProposalUrl,
@@ -506,7 +506,7 @@ export default function NavPanel({ setLoading, page }: { setLoading: any; page: 
       />
       {page === "edit" && query.id ? (
         <ModalConfirmAgreementDeletion
-          agreementId={Number(query.id)}
+          agreementId={query.id}
           isOpen={isConfirmAgreementDeletionPopupVisible}
           onSuccess={onAgreementDeletionSuccess}
           onExit={() => setIsConfirmAgreementDeletionPopupVisible(false)}

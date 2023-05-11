@@ -35,7 +35,7 @@ export interface ProposalState {
 }
 
 export interface CreationState {
-  agreementId: number | undefined;
+  agreementId: string;
   title: string;
   agreementPrivacy: AgreementPrivacy;
   agreementMethod: AgreementMethod;
@@ -72,7 +72,7 @@ export const initialStateProposal = {
 };
 
 const defaultState: CreationState = {
-  agreementId: undefined,
+  agreementId: "",
   agreementPrivacy: "",
   title: "",
   textEditorValue: "",

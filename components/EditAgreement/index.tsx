@@ -51,7 +51,7 @@ export const withFade = (component: React.ReactElement, key: number | string) =>
     </motion.main>
   );
 };
-function shouldRequestEditData(agreementId: number | string) {
+function shouldRequestEditData(agreementId: string) {
   if (!agreementId) return false;
   if (typeof window !== "undefined") {
     const editItem = localStorage?.getItem("editAgreement") as any;
@@ -65,7 +65,7 @@ export default function EditAgreement({ page }: { page: string }) {
   const [step, setStep] = useState(query?.step ? Number(query.step) : 0);
   const [transitioned, setTransitioned] = useState(false);
   const [optionsValue, setOptionsValue] = useState("");
-  const agreementId = Number(query.id);
+  const agreementId = query?.id?.toString() || "";
   const { values, changeValue } = useEditAgreement();
   const [loading, setLoading] = useState(false);
   const [loaded, setLoaded] = useState(false);
@@ -76,7 +76,7 @@ export default function EditAgreement({ page }: { page: string }) {
   const [{ data, fetching: agreementsLoading, error }] = useQuery({
     // @ts-ignore
     query: agreementById,
-    variables: { agreementId: agreementId },
+    variables: { agreementId },
     pause: !shouldRequestEditData(agreementId),
   });
 
