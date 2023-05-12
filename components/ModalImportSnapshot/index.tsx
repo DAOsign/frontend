@@ -230,7 +230,7 @@ export default function ModalImportSnapshot({ isOpen, page, onExit, setMethod }:
 
   const handleCreateAgreement = async () => {
     const agreementId = await saveAgreement({
-      agreementId: values.agreementId || "",
+      agreementId: values.agreementId || null,
       title: values.title,
       agreementLocation: null,
       snapshotProposalUrl: values.proposal?.snapshotProposalUrl,
