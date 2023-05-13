@@ -67,6 +67,7 @@ export default function NavPanel({ setLoading, page }: { setLoading: any; page: 
 
   const [isConfirmAgreementDeletionPopupVisible, setIsConfirmAgreementDeletionPopupVisible] =
     useState<boolean>(false);
+  console.log(values);
 
   const validateFields = (values: CreationState, isSavingDraft: boolean = false): boolean => {
     const errors: CreateAgreementFieldErrors = {};
