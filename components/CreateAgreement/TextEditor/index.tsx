@@ -90,7 +90,14 @@ const TextEditor = ({
             </Box>
             Edit File
           </Button>
-          <Button onClick={() => setState("preview")} {...buttonPropsByStatus(state, "preview")}>
+          <Button
+            onClick={() => {
+              setState("preview");
+              setHeightValue(minHeightTextEditor);
+              setExpand(false);
+            }}
+            {...buttonPropsByStatus(state, "preview")}
+          >
             <Box sx={icon}>
               <Icon src={iconsObj.preview} />
             </Box>
@@ -107,6 +114,7 @@ const TextEditor = ({
               onChange={val => changeValue("textEditorValue", val || "")}
               hideToolbar={state === "preview"}
               value={textEditorValue}
+              minHeight={minHeightTextEditor}
               height="fit-content"
               className="expand"
               preview={state}
@@ -130,14 +138,16 @@ const TextEditor = ({
             </Box>
             <Text sx={footerText}>Markdown is supported</Text>
           </Flex>
-          <Button
-            onClick={() => {
-              setExpand(!expand);
-            }}
-            sx={expandBtn}
-          >
-            Expand
-          </Button>
+          {state === "edit" && (
+            <Button
+              onClick={() => {
+                if (!!textEditorValue?.length && textEditorValue?.length > 1000) setExpand(!expand);
+              }}
+              sx={expandBtn}
+            >
+              Expand
+            </Button>
+          )}
         </Flex>
       </Suspense>
     </Box>
