@@ -156,7 +156,13 @@ export const AgreementLabels = ({
         </Flex>
         {agreementPrivacy !== PRIVACY_PUBLIC_PROOF_ONLY &&
         agreementPrivacy !== PRIVACY_PUBLIC_PROOF_ONLY_FULL_NAME ? (
-          <Flex sx={greyLabelWithHover} onClick={handleDownloadDocument}>
+          <Flex
+            sx={greyLabelWithHover}
+            onClick={() => {
+              // handleDownloadDocument
+              notifComingSoon("Download Document is coming soon");
+            }}
+          >
             <Box sx={labelIcon}>
               <DownloadIcon />
             </Box>
