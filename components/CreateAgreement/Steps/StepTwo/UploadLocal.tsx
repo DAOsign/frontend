@@ -10,11 +10,9 @@ import Upload from "./Upload";
 export default function UploadLocalAgreement({
   page,
   handleChooseAnotherMethod,
-  fileLoading,
 }: {
   page: string;
   handleChooseAnotherMethod: () => void;
-  fileLoading: boolean;
 }) {
   const create = useCreateAgreement();
   const edit = useEditAgreement();
@@ -38,7 +36,7 @@ export default function UploadLocalAgreement({
           <Text sx={backBtn}>Choose another method</Text>
         </Button>
       </Flex>
-      <Upload fileLoading={fileLoading} page={page} />
+      <Upload page={page} />
     </Flex>
   );
 }

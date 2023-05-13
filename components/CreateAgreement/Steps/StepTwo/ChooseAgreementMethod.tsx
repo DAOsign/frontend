@@ -1,19 +1,17 @@
-import React, { useEffect, useState, useRef } from "react";
+import React, { useEffect, useState } from "react";
 import { Container, Text, Box } from "theme-ui";
 import Image from "next/image";
 import Icon from "../../../icon/index";
 import {
-  card,
-  primaryTitleItem,
+  conteinerItems,
+  secondaryText,
+  itemsContent,
+  iconMethod,
+  centerCard,
   rightCard,
   leftCard,
   label,
-  iconMethod,
-  centerCard,
-  secondaryText,
-  itemsContent,
   text,
-  conteinerItems,
 } from "../../styles";
 import iconsObj from "../../../../assets/icons";
 import TextEditor from "../../TextEditor/index";
@@ -32,14 +30,11 @@ import {
   METHOD_UPLOAD,
   METHOD_IMPORT_SHAPSHOT,
   UNITED_STATES,
-  LOCATION_PUBLIC_IPFS,
-  LOCATION_CLOUD,
 } from "../../../../types";
 import FieldErrorMessage from "../../../Form/FieldErrorMessage";
 import useWindowDimensions from "../../../../hooks/useWindowDimensions";
 import ModalImportSnapshot from "../../../ModalImportSnapshot";
 import ModalAttention from "../../../ModalAttention";
-import { restoreCloudFile, restoreIpfsFile } from "../../../../modules/rest";
 
 export default function ChooseAgreementMethod({
   setIsOpenModalImport,
@@ -70,9 +65,6 @@ export default function ChooseAgreementMethod({
     statementWork,
   } = values.proposal;
 
-  const restoreFileStarted = useRef(false);
-  const [fileLoading, setFileLoading] = useState(false);
-
   const validateTitle = () => {
     const errors: CreateAgreementFieldErrors = {};
     if (!values.title.trim()) {
@@ -93,34 +85,7 @@ export default function ChooseAgreementMethod({
     ) {
       setMethod(METHOD_IMPORT_SHAPSHOT);
     }
-    if (!values.file && (values.filePath || values.agreementHash)) {
-      if (restoreFileStarted.current) return;
-      restoreFileStarted.current = true;
-      setFileLoading(true);
-      restoreFile().then(res => {
-        restoreFileStarted.current = false;
-        setFileLoading(false);
-      });
-    }
   }, []);
-
-  const restoreFile = async () => {
-    if (!values.file && (values.filePath || values.agreementHash)) {
-      if (values.agreementLocation === LOCATION_CLOUD && values.filePath) {
-        return restoreCloudFile(values.filePath)
-          .then(file => changeValue("file", file))
-          .then(console.error);
-      }
-
-      if (values.agreementLocation === LOCATION_PUBLIC_IPFS && values.agreementHash) {
-        return restoreIpfsFile(values.agreementHash)
-          .then(file => changeValue("file", file))
-          .catch(e => {
-            console.error(e);
-          });
-      }
-    }
-  };
 
   const propousalIsEmpty = () => {
     const contractTypeIsEmpty = (contractType && !statementWork) || !contractType;
@@ -223,11 +188,7 @@ export default function ChooseAgreementMethod({
       case METHOD_UPLOAD: {
         return withFade(
           <>
-            <UploadLocalAgreement
-              handleChooseAnotherMethod={() => setMethod("")}
-              fileLoading={fileLoading}
-              page={page}
-            />
+            <UploadLocalAgreement handleChooseAnotherMethod={() => setMethod("")} page={page} />
             <FieldErrorMessage
               error={values?.errors?.agreementFile}
               sx={values?.file ? { marginBottom: "-45px !important" } : {}}
