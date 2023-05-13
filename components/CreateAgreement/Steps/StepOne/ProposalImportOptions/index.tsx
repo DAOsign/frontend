@@ -5,6 +5,7 @@ import { refineGeneratedAgreement } from "../../../../../modules/graphql/queries
 import { useCreateAgreement } from "../../../../../hooks/useCreateAgreement";
 import { useEditAgreement } from "../../../../../hooks/useEditAgreement";
 import { useClient } from "urql";
+import FieldErrorMessage from "../../../../Form/FieldErrorMessage";
 
 const ProposalImportOptions = ({
   setIsOpenModalImport,
@@ -16,17 +17,27 @@ const ProposalImportOptions = ({
   const [loadingUpdateOptions, setLoadingUpdateOptions] = useState(false);
   const create = useCreateAgreement();
   const edit = useEditAgreement();
+  const initialError = { isVisible: false, textError: "" };
   const { values, changeValue } = page === "create" ? create : edit;
   const [optionsValue, setOptionsValue] = useState("");
+  const [error, setError] = useState(initialError);
   const { query: queryClient } = useClient();
 
   const updateProposal = async () => {
+    if (!optionsValue) {
+      setError({ isVisible: true, textError: "Please enter instructions" });
+      return;
+    }
+    if (!!optionsValue && optionsValue?.length < 3) {
+      setError({ isVisible: true, textError: "Instructions should be min 3 words" });
+      return;
+    }
     if (!!optionsValue && !!values.agreementId) {
       setLoadingUpdateOptions(true);
       await queryClient(
         refineGeneratedAgreement,
         {
-          agreementId: +values.agreementId,
+          agreementId: Number(values.agreementId),
           userRequest: optionsValue,
         },
         { url: process.env.NEXT_PUBLIC_GRAPHQL_ENDPOINT, requestPolicy: "network-only" }
@@ -49,13 +60,29 @@ const ProposalImportOptions = ({
       <Text sx={textSecondary}>Provide additional instructions </Text>
       <Textarea
         disabled={loadingUpdateOptions}
-        onChange={e => setOptionsValue(e.target.value)}
+        onChange={e => {
+          setError(initialError);
+          setOptionsValue(e.target.value);
+        }}
         value={optionsValue}
         sx={textInput}
         rows={8}
       />
+      {error.isVisible && (
+        <FieldErrorMessage
+          sx={{
+            mb: "40px",
+            "@media screen and (max-width: 1200px)": {
+              "&": {
+                mb: "17px",
+              },
+            },
+          }}
+          error={error.textError}
+        />
+      )}
       <Button
-        disabled={!optionsValue || loadingUpdateOptions}
+        disabled={loadingUpdateOptions}
         onClick={updateProposal}
         variant="secondary"
         sx={{ mb: "20px" }}
