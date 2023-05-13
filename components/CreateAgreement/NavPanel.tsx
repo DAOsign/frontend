@@ -68,6 +68,9 @@ export default function NavPanel({ setLoading, page }: { setLoading: any; page: 
   const [isConfirmAgreementDeletionPopupVisible, setIsConfirmAgreementDeletionPopupVisible] =
     useState<boolean>(false);
   console.log(values);
+  console.log(
+    values.agreementMethod === METHOD_UPLOAD && !values.agreementHash && !values.filePath
+  );
 
   const validateFields = (values: CreationState, isSavingDraft: boolean = false): boolean => {
     const errors: CreateAgreementFieldErrors = {};
@@ -97,10 +100,11 @@ export default function NavPanel({ setLoading, page }: { setLoading: any; page: 
             errors.agreementFile = "Agreement entry is required";
           } else if (
             values.agreementMethod === METHOD_UPLOAD &&
-            (!values.agreementHash || !values.filePath)
+            !values.agreementHash &&
+            !values.filePath
           ) {
             errors.agreementFile = "Agreement file upload is required";
-          } else if (!values.textEditorValue.trim() && !values.agreementHash) {
+          } else if (!values.textEditorValue.trim() && !values.agreementHash && !values.filePath) {
             errors.agreementFile = "Agreement content is a required selection";
           }
           break;

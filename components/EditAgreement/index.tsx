@@ -93,13 +93,8 @@ export default function EditAgreement({ page }: { page: string }) {
 
       const agreementLocation = data?.agreement?.agreementLocation?.name;
       changeValue("agreementLocation", agreementLocation || "");
-
-      if (agreementLocation === LOCATION_PUBLIC_IPFS) {
-        changeValue("agreementHash", data?.agreement?.agreementFile?.agreementHash || "");
-      }
-      if (agreementLocation === LOCATION_CLOUD) {
-        changeValue("filePath", data?.agreement?.agreementFile?.filePath);
-      }
+      changeValue("agreementHash", data?.agreement?.agreementFile?.agreementHash || "");
+      changeValue("filePath", data?.agreement?.agreementFile?.filePath || "");
       changeValue(
         "agreementMethod",
         !!data?.agreement?.snapshotProposalUrl

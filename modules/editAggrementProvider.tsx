@@ -120,7 +120,7 @@ const EditAgreemntProvider = (props?: Partial<ProviderProps<CreateAgrementContex
           step > 1 &&
           (!values.title ||
             (values.agreementMethod === METHOD_ENTER && !values.textEditorValue) ||
-            (values.agreementMethod === METHOD_UPLOAD && !values.agreementHash))
+            (values.agreementMethod === METHOD_UPLOAD && !values.agreementHash && !values.filePath))
         ) {
           push({ query: { step: 1 } }, undefined, { shallow: true });
         }
