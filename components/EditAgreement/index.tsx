@@ -108,7 +108,12 @@ export default function EditAgreement({ page }: { page: string }) {
           ? METHOD_ENTER
           : METHOD_UPLOAD
       );
-
+      if (!!data?.agreement?.snapshotProposalUrl) {
+        changeValue("proposal", {
+          ...values?.proposal,
+          snapshotProposalUrl: data?.agreement?.snapshotProposalUrl,
+        });
+      }
       if (data?.agreement?.content) {
         changeValue("textEditorValue", data?.agreement?.content || "");
       }
