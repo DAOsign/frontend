@@ -285,7 +285,7 @@ export default function StepTwo({ page }: { page: string }) {
                 transform="translate(-57%, 0)"
                 minWidth="200px"
                 height="0"
-                top="-66px"
+                top="-86px"
                 left="92%"
               >
                 <Box sx={{ width: "12px", height: "12px", display: "inline-block" }}>
