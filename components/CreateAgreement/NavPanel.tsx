@@ -170,10 +170,10 @@ export default function NavPanel({ setLoading, page }: { setLoading: any; page: 
   };
 
   const [{ fetching: savingAgreement }, saveAgreement] = useMutation(saveAgreementMutation);
-
+  console.log("query", query.id, "values", values.agreementId);
   const handleCreateAgreement = async (filePath?: string, agreementHash?: string) => {
     await saveAgreement({
-      agreementId: Number(query.id),
+      agreementId: Number(query.id) || Number(values.agreementId),
       title: values.title,
       agreementLocation: values.agreementLocation || null,
       snapshotProposalUrl: values.proposal?.snapshotProposalUrl,
