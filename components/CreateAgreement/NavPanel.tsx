@@ -95,7 +95,10 @@ export default function NavPanel({ setLoading, page }: { setLoading: any; page: 
             errors.agreementFile = "Agreement entry is required";
           } else if (values.agreementMethod === METHOD_IMPORT_SHAPSHOT && !values.textEditorValue) {
             errors.agreementFile = "Agreement entry is required";
-          } else if (values.agreementMethod === METHOD_UPLOAD && !values.agreementHash) {
+          } else if (
+            values.agreementMethod === METHOD_UPLOAD &&
+            (!values.agreementHash || !values.filePath)
+          ) {
             errors.agreementFile = "Agreement file upload is required";
           } else if (!values.textEditorValue.trim() && !values.agreementHash) {
             errors.agreementFile = "Agreement content is a required selection";
