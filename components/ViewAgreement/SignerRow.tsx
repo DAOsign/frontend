@@ -19,7 +19,7 @@ import { notifSucces } from "../../utils/notification";
 import SignedIcon from "../icon/editable/SignedIcon";
 import SignatureIcon from "../icon/editable/SignatureIcon";
 import CopyIcon from "../CopyIcon";
-import { Tooltip } from "react-tooltip";
+import Tooltip from "../Tooltip";
 
 interface Props {
   signer: Signer;
@@ -69,10 +69,9 @@ export const SignerRow = ({ signer, signProof, viewProof }: Props) => {
             sx={tableAddressCell}
             onClick={() => handleCopyAddress(address)}
           >
-            <Box data-tooltip-id={`${address}-signer`} data-tooltip-content={address}>
-              {formatAddress(address)}
-            </Box>
-            <Tooltip id={`${address}-signer`} />
+            <Tooltip top="-45px" left="-115px" title={address}>
+              <Box sx={{ cursor: "pointer" }}>{formatAddress(address)}</Box>
+            </Tooltip>
             <Box sx={informationRowIcon}>
               <CopyIcon />
             </Box>
@@ -100,17 +99,17 @@ export const SignerRow = ({ signer, signProof, viewProof }: Props) => {
           )}
         </Flex>
       </td>
-
       {signProof?.cid ? (
         <td
           onClick={() => viewProof(signProof)}
           style={{ cursor: "pointer" }}
           className="signature_icon"
         >
-          <Box data-tooltip-id={signProof.cid} data-tooltip-content={signProof.cid}>
-            {formatAddress(signProof.cid)} <SignatureIcon color="#CA5CF2" />
-          </Box>
-          <Tooltip id={signProof.cid} />
+          <Tooltip top="-45px" left="-130px" title={signProof.cid}>
+            <Box sx={{ cursor: "pointer" }}>
+              {formatAddress(signProof.cid)} <SignatureIcon color="#CA5CF2" />
+            </Box>
+          </Tooltip>
         </td>
       ) : (
         <td>-</td>
