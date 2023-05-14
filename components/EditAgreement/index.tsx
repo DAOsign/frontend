@@ -1,12 +1,12 @@
 /* eslint-disable no-console */
 /* eslint-disable react-hooks/exhaustive-deps */
-import React, { useCallback, useEffect, useMemo, useState } from "react";
+import React, { useEffect, useState } from "react";
 import StepOne from "../CreateAgreement/Steps/StepOne";
 import StepTwo from "../CreateAgreement/Steps/StepTwo";
 import StepThree from "../CreateAgreement/Steps/StepThree";
-import { useClient } from "urql";
+import { useClient, useQuery } from "urql";
 import { Container, Flex, Text, Textarea, Button, Spinner } from "theme-ui";
-import { refineGeneratedAgreement } from "../../modules/graphql/queries";
+import { refineGeneratedAgreement, agreementById } from "../../modules/graphql/queries";
 import NavPanel from "../CreateAgreement/NavPanel";
 import { useEditAgreement } from "../../hooks/useEditAgreement";
 import {
@@ -21,9 +21,6 @@ import {
 } from "../CreateAgreement/styles";
 import { motion, Variants } from "framer-motion";
 import { useRouter } from "next/router";
-import { agreementById } from "../../modules/graphql/queries";
-
-import { useQuery } from "urql";
 import { privacyValueByName } from "./utils";
 import {
   METHOD_IMPORT_SHAPSHOT,
@@ -183,7 +180,7 @@ export default function EditAgreement({ page }: { page: string }) {
         }}
         className={transitioned ? "transition" : ""}
       >
-        <Text sx={title}>Create New Agreement</Text>
+        <Text sx={title}>Edit Agreement</Text>
         {steps[step]}
       </Container>
       <Container
@@ -200,6 +197,7 @@ export default function EditAgreement({ page }: { page: string }) {
         </Container>
         {step === 1 &&
           values.agreementMethod === METHOD_IMPORT_SHAPSHOT &&
+          method === METHOD_IMPORT_SHAPSHOT &&
           !!values.textEditorValue && (
             <Container sx={importOptions}>
               <Text sx={importOptionsTitle}>Proposal Import Options</Text>

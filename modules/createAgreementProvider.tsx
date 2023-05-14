@@ -90,7 +90,7 @@ const recoverDraft = (): CreationState => {
   if (typeof window !== "undefined") {
     const draft = localStorage.getItem(DRAFT_STORAGE_KEY);
     if (draft) {
-      return JSON.parse(draft);
+      return { ...defaultState, ...JSON.parse(draft) };
     }
   }
   return defaultState;
