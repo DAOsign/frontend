@@ -14,6 +14,15 @@ const containerSides = {
   },
 } as ThemeUIStyleObject;
 
+export const reimportBtn = {
+  "&:focus": {
+    outline: "none",
+    background: "white",
+    color: "#CA5CF2",
+    border: "2px solid #CA5CF2",
+  },
+} as ThemeUIStyleObject;
+
 export const itemsContentMethod = {
   maxWidth: "150px",
   m: "0 auto",

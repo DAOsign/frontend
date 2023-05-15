@@ -1,6 +1,6 @@
 import React, { useState } from "react";
-import { importOptionsTitle, textSecondary, importOptions, textInput } from "../../../styles";
-import { Container, Flex, Text, Button, Textarea, Spinner } from "theme-ui";
+import { importOptionsTitle, textSecondary, importOptions, textInput, reimportBtn } from "../../../styles";
+import { Container, Text, Button, Textarea, Spinner } from "theme-ui";
 import { refineGeneratedAgreement } from "../../../../../modules/graphql/queries";
 import { useCreateAgreement } from "../../../../../hooks/useCreateAgreement";
 import { useEditAgreement } from "../../../../../hooks/useEditAgreement";
@@ -90,6 +90,7 @@ const ProposalImportOptions = ({
         {loadingUpdateOptions ? <Spinner size={16} color="pink" /> : " Update Proposal"}
       </Button>
       <Button
+        sx={reimportBtn}
         onClick={() => {
           setIsOpenModalImport(true);
         }}
