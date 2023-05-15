@@ -14,6 +14,19 @@ const containerSides = {
   },
 } as ThemeUIStyleObject;
 
+export const containerInput = {
+  position: "relative",
+} as ThemeUIStyleObject;
+
+export const iconDrag = {
+  position: "absolute",
+  bottom: 0,
+  borderRadius: "8px",
+  right: "1px",
+  backgroundColor: "#F7F7FB",
+  pointerEvents: "none",
+} as ThemeUIStyleObject;
+
 export const reimportBtn = {
   "&:focus": {
     outline: "none",
@@ -250,8 +263,10 @@ export const navContainerOptionsIsVisible = {
     height: "fit-content",
     minHeight: "unset",
     p: "36px",
-    width: "90%",
     m: "0 auto !important",
+  },
+  "@media screen and (max-width: 719px)": {
+    width: "90%",
   },
   "@media screen and (max-width: 480px)": {
     px: "16px",
@@ -290,9 +305,12 @@ export const importOptions = {
     paddingLeft: "36px",
     paddingRight: "36px",
     paddingBottom: "36px",
-    width: "90%",
     mb: "20px",
   },
+  "@media screen and (max-width: 719px)": {
+    width: "90%",
+  },
+
   "@media screen and (max-width: 480px)": {
     m: "0 auto 0",
     pt: 0,

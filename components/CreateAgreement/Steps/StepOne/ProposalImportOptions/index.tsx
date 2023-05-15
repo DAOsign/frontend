@@ -1,11 +1,21 @@
 import React, { useState } from "react";
-import { importOptionsTitle, textSecondary, importOptions, textInput, reimportBtn } from "../../../styles";
-import { Container, Text, Button, Textarea, Spinner } from "theme-ui";
+import {
+  importOptionsTitle,
+  containerInput,
+  textSecondary,
+  importOptions,
+  reimportBtn,
+  textInput,
+  iconDrag,
+} from "../../../styles";
+import { Container, Text, Button, Textarea, Spinner, Box } from "theme-ui";
 import { refineGeneratedAgreement } from "../../../../../modules/graphql/queries";
 import { useCreateAgreement } from "../../../../../hooks/useCreateAgreement";
 import { useEditAgreement } from "../../../../../hooks/useEditAgreement";
 import { useClient } from "urql";
 import FieldErrorMessage from "../../../../Form/FieldErrorMessage";
+import drag from "../../../../../img/svg/drag.svg";
+import Image from "next/image";
 
 const ProposalImportOptions = ({
   setIsOpenModalImport,
@@ -58,16 +68,21 @@ const ProposalImportOptions = ({
     <Container sx={importOptions}>
       <Text sx={importOptionsTitle}>Proposal Import Options</Text>
       <Text sx={textSecondary}>Provide additional instructions </Text>
-      <Textarea
-        disabled={loadingUpdateOptions}
-        onChange={e => {
-          setError(initialError);
-          setOptionsValue(e.target.value);
-        }}
-        value={optionsValue}
-        sx={textInput}
-        rows={8}
-      />
+      <Box sx={containerInput}>
+        <Textarea
+          disabled={loadingUpdateOptions}
+          onChange={e => {
+            setError(initialError);
+            setOptionsValue(e.target.value);
+          }}
+          value={optionsValue}
+          sx={textInput}
+          rows={8}
+        />
+        <Box sx={iconDrag}>
+          <Image style={{ position: "absolute", bottom: 0, right: 0 }} alt=">" src={drag} />
+        </Box>
+      </Box>
       {error.isVisible && (
         <FieldErrorMessage
           sx={{
