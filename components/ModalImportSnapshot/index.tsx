@@ -322,10 +322,12 @@ export default function ModalImportSnapshot({ isOpen, page, onExit, setMethod }:
     const { options, value } = selectsValue[name];
     const inputIsHidden =
       (name === LEGAL_JURISDICTION_COUNTRY && selectsOpen[name]) ||
+      (name === LEGAL_JURISDICTION_STATE && selectsOpen[name]) ||
       (name === LEGAL_JURISDICTION_COUNTRY && !values.proposal[LEGAL_JURISDICTION_COUNTRY]);
 
     const optionsFilter =
-      searchValue !== "" && name === LEGAL_JURISDICTION_COUNTRY
+      (searchValue !== "" && name === LEGAL_JURISDICTION_COUNTRY) ||
+      (searchValue !== "" && name === LEGAL_JURISDICTION_STATE)
         ? options.filter((el: string) => el.toLowerCase().includes(searchValue.toLowerCase()))
         : options.filter((el: string) => el !== values.proposal[name]);
 
