@@ -35,10 +35,10 @@ export const SignerRow = ({ signer, signProof, viewProof }: Props) => {
 
   const address = useMemo<string>(
     () =>
-      signer?.wallet?.address
-        ? signer.wallet.address
-        : !!signer?.email?.startsWith("0x")
+      !!signer?.email?.length
         ? signer?.email
+        : signer?.wallet?.address
+        ? signer?.wallet?.address
         : "",
     [signer]
   );
