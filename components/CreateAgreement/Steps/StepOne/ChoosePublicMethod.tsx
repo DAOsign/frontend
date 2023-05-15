@@ -54,7 +54,7 @@ export default function PublicMethod({ animateContainer, setPublic, page }: Publ
             }}
             sx={btnBack}
           >
-            <Box sx={{ width: "14px" }}>
+            <Box sx={{ width: "18px" }}>
               <Icon style={{ display: "block" }} width="14px" src={iconsObj.arrowLeftPink} />
             </Box>
             <Text sx={{ display: "block" }}>Choose another privacy</Text>

@@ -71,13 +71,14 @@ export default function AgreementLocationRadioButtons({ page }: { page: string }
       <Box as="form" onSubmit={e => e.preventDefault()}>
         <Flex
           sx={{
+            "@media screen and (max-width: 719px)": {
+              mb: !values.file ? "36px" : "24px",
+              flexDirection: "column",
+            },
             "@media screen and (max-width: 1200px)": {
               mb: "24px",
             },
-            "@media screen and (max-width: 719x)": {
-              mb: !values.file ? "36px" : "24px",
-            },
-            display: "flex",
+
             gap: "22px",
           }}
         >

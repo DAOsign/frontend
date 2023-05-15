@@ -571,7 +571,8 @@ export const leftCardMethod = {
   },
   "@media screen and (max-width: 719px)": {
     width: "48%",
-    height: "189px",
+    height: "191px",
+    pt: "24px",
     minHeight: "unset",
   },
 } as ThemeUIStyleObject;
@@ -587,8 +588,9 @@ export const rightCardMethod = {
   },
   "@media screen and (max-width: 719px)": {
     width: "48%",
-    height: "189px",
+    height: "191px",
     minHeight: "unset",
+    pt: "24px",
   },
 } as ThemeUIStyleObject;
 
@@ -817,9 +819,9 @@ const plus = {
 } as ThemeUIStyleObject;
 
 const btnBack = {
-  fontFamily: "InterRegular",
+  fontFamily: "InterBold",
   fontStyle: "normal",
-  fontWeight: 400,
+  fontWeight: 700,
   fontSize: "12px",
   color: " #CA5CF2",
   display: "flex",
@@ -831,11 +833,13 @@ const btnBack = {
   backgroundColor: "transparent",
   background: "unset",
   pr: 0,
+  opacity: "0.7",
   justifyContent: "flex-end",
   "&:hover": {
     backgroundColor: "transparent",
     background: "unset",
     color: "#AE4FD0",
+    opacity: 1,
   },
   "@media screen and (max-width: 768px)": {
     p: 0,
