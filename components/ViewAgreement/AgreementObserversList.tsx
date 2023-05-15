@@ -33,8 +33,8 @@ export const AgreementObserversList = ({ observers }: Props) => {
             <table className="participantsTable">
               <thead>
                 <tr>
-                  <th>Observer Name</th>
-                  <th>Observer Address</th>
+                  <th>Name</th>
+                  <th>Address/Email/ENS</th>
                 </tr>
               </thead>
               <tbody>

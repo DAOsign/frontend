@@ -1,6 +1,5 @@
 import { useRouter } from "next/router";
 import { useState, createContext, ProviderProps, useEffect, useRef } from "react";
-import { StringDecoder } from "string_decoder";
 import {
   AgreementLocation,
   AgreementMethod,

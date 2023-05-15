@@ -1,5 +1,5 @@
 import React, { useRef, useMemo, useState } from "react";
-import { Container, Flex, Input, Text, Button, Box, Switch, Label } from "theme-ui";
+import { Container, Flex, Input, Text, Button, Box } from "theme-ui";
 import {
   inputCreateAgreementWithRightButton,
   inputCreateAgreementError,
@@ -8,7 +8,7 @@ import {
   addMeBtn,
   plus,
 } from "../../styles";
-import { validateAddress, validateEnsDomains } from "../StepThree/validationUtils";
+import { validateAddress, validateEmail, validateEnsDomains } from "../StepThree/validationUtils";
 import { useCreateAgreement } from "../../../../hooks/useCreateAgreement";
 import { useEditAgreement } from "../../../../hooks/useEditAgreement";
 import FieldErrorMessage from "../../../Form/FieldErrorMessage";
@@ -23,6 +23,7 @@ import Icon from "../../../icon";
 import { PlusIcon } from "./svg";
 import styles from "./styles";
 import { notifComingSoon } from "../../../../utils/notification";
+import { isEmail } from "../../utils";
 
 interface VerificationInfo {
   title: string;
@@ -130,6 +131,7 @@ export default function StepTwo({ page }: { page: string }) {
     if (userAlreadyObserver) {
       return userRole === "signer" ? "Already exists as Observer" : "Observer is already added";
     }
+
     const isEns = value?.includes(".eth");
     if (isEns) {
       const error = validateEnsDomains(value);
@@ -140,13 +142,17 @@ export default function StepTwo({ page }: { page: string }) {
     }
 
     const isAddress = value?.startsWith("0x");
-
     if (isAddress) {
       const error = validateAddress(value);
       if (error) return error;
     }
 
-    if (!isEns && !isAddress) {
+    if (isEmail(value)) {
+      const error = validateEmail(value);
+      if (error) return error;
+    }
+
+    if (!isEns && !isAddress && !isEmail(value)) {
       return "Invalid value";
     }
 
@@ -166,6 +172,7 @@ export default function StepTwo({ page }: { page: string }) {
         changeValue("errors", { ...values.errors, signers: validationError });
         return;
       }
+
       changeValue("signers", [
         ...values.signers,
         { value: value.toLocaleLowerCase(), id: uniqueId() },
@@ -207,12 +214,13 @@ export default function StepTwo({ page }: { page: string }) {
   return (
     <Container sx={styles}>
       <>
+        {/* Signers */}
         <Box>
           <Flex
             sx={{ position: "relative", justifyContent: "space-between", alignItems: "center" }}
           >
             <Flex sx={{ alignItems: "center" }}>
-              <Text sx={labelSigners}>Signers (ENS name or address) *</Text>
+              <Text sx={labelSigners}>Signers (ENS name, Ethereum address, or email) *</Text>
               <Tooltip
                 title="Add users that will sign this agreement."
                 transform="translate(-57%, 0)"
@@ -259,6 +267,8 @@ export default function StepTwo({ page }: { page: string }) {
           <FieldErrorMessage error={values?.errors?.signers} isAbsolutePosition={false} />
           <TagList items={values.signers} type="signers" onDelete={onDelete} />
         </Box>
+
+        {/* Observers */}
         <Box>
           <Flex
             sx={{
@@ -278,7 +288,7 @@ export default function StepTwo({ page }: { page: string }) {
                   minHeight: "25px",
                 }}
               >
-                Observers (ENS name or adderess){" "}
+                Observers (ENS name, Ethereum adderess, or email){" "}
               </Text>
               <Tooltip
                 title="Add users that will be able to see but not sign an agreement."
@@ -333,6 +343,8 @@ export default function StepTwo({ page }: { page: string }) {
           <FieldErrorMessage error={values?.errors?.observers} isAbsolutePosition={false} />
           <TagList items={values.observers} type="observers" onDelete={onDelete} />
         </Box>
+
+        {/* Required Verifications */}
         <Box sx={{ mt: "10px" }}>
           <Flex
             sx={{

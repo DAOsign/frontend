@@ -1,8 +1,8 @@
 import { graphql } from "../gql";
 
 export const loginMutation = graphql(`
-  mutation login($address: String!, $signature: String) {
-    login(address: $address, signature: $signature) {
+  mutation login($address: String!, $email: String, $signature: String) {
+    login(address: $address, email: $email, signature: $signature) {
       message
       payload
       token
@@ -15,6 +15,16 @@ export const logoutMutation = graphql(`
     logout {
       message
     }
+  }
+`);
+
+export const sendEmailVerificationLinkMutation = graphql(`
+  mutation sendEmailVerificationLink(
+    $email: String!
+    $isSigner: Boolean!
+    $agreementTitle: String!
+  ) {
+    sendEmailVerificationLink(email: $email, isSigner: $isSigner, agreementTitle: $agreementTitle)
   }
 `);
 

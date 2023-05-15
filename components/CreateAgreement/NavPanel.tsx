@@ -22,7 +22,10 @@ import {
   fW,
 } from "./styles";
 import { useMutation } from "urql";
-import { saveAgreementMutation } from "../../modules/graphql/mutations";
+import {
+  saveAgreementMutation,
+  sendEmailVerificationLinkMutation,
+} from "../../modules/graphql/mutations";
 import {
   LOCATION_CLOUD,
   LOCATION_PUBLIC_IPFS,
@@ -44,6 +47,7 @@ import { uploadFile, uploadToIpfs } from "../../modules/rest";
 import { notifError } from "../../utils/notification";
 import ModalConfirmAgreementDeletion from "../ModalConfirmAgreementDeletion/ModalConfirmAgreementDeletion";
 import { getToken } from "../../utils/token";
+import { isEmail } from "./utils";
 
 const FILE_UPLOAD_ERROR_DEFAULT_MESSAGE = "Failed to upload file";
 
@@ -64,9 +68,9 @@ export default function NavPanel({ setLoading, page }: { setLoading: any; page: 
 
   const [isLoadingNextStep, setIsLoadingNextStep] = useState<boolean>(false);
   const [isAuthorNotAddedPopupVisible, setIsAuthorNotAddedPopupVisible] = useState<boolean>(false);
-
   const [isConfirmAgreementDeletionPopupVisible, setIsConfirmAgreementDeletionPopupVisible] =
     useState<boolean>(false);
+  const [, sendEmailVerificationLinkRequest] = useMutation(sendEmailVerificationLinkMutation);
 
   const validateFields = (values: CreationState, isSavingDraft: boolean = false): boolean => {
     const errors: CreateAgreementFieldErrors = {};
@@ -203,8 +207,41 @@ export default function NavPanel({ setLoading, page }: { setLoading: any; page: 
     });
   };
 
+  const sendEmailVerificationEmails = async (signers: string[], observers: string[]) => {
+    console.log("sendEmailVerificationEmails");
+    console.log({ signers, observers });
+
+    signers.forEach(async signer => {
+      if (isEmail(signer)) {
+        console.log(`seding an email to ${signer}`);
+        await sendEmailVerificationLinkRequest({
+          email: signer,
+          isSigner: true,
+          agreementTitle: values.title,
+        });
+      }
+    });
+
+    observers.forEach(async observer => {
+      if (isEmail(observer)) {
+        console.log(`seding an email to ${observer}`);
+        await sendEmailVerificationLinkRequest({
+          email: observer,
+          isSigner: false,
+          agreementTitle: values.title,
+        });
+      }
+    });
+  };
+
   const handleSaveDraft = async () => {
+    console.log("handleSaveDraft");
     const areFieldsValid = validateFields(values, true);
+    await sendEmailVerificationEmails(
+      values.signers.map(x => x.value),
+      values.observers.map(x => x.value)
+    );
+    console.log({ values });
     if (areFieldsValid) {
       const uploadFileData: any = await preuploadFile();
       await handleCreateAgreement(uploadFileData?.filePath, uploadFileData?.agreementHash);
@@ -348,6 +385,10 @@ export default function NavPanel({ setLoading, page }: { setLoading: any; page: 
           const areFieldsValid = validateFields({ ...values, ...uploadedFileData });
           if (areFieldsValid) {
             if (isFinishButton) {
+              await sendEmailVerificationEmails(
+                values.signers.map(x => x.value),
+                values.observers.map(x => x.value)
+              );
               await handleCreateAgreement();
             } else {
               handleNextStep();

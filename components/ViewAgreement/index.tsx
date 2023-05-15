@@ -2,7 +2,7 @@
 import React, { useCallback, useEffect, useMemo, useState } from "react";
 import { Box, Button, Flex } from "theme-ui";
 import { useRouter } from "next/router";
-import { useMutation, useQuery, useClient } from "urql";
+import { useClient } from "urql";
 
 import { agreementById } from "../../modules/graphql/queries";
 import {

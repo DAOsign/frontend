@@ -66,17 +66,23 @@ const AuthProvider = (props?: Partial<ProviderProps<AuthProps>>) => {
     profile: null,
     //isTrezor: false,
   });
-  const { push, pathname } = useRouter();
+  const { push, pathname, query, isReady } = useRouter();
   const [, loginRequest] = useMutation(loginMutation);
   const [, verifyMyEmailRequest] = useMutation(verifyMyEmailMutation);
 
   const auth = useLock();
-
   const loginStarted = useRef(false);
-
   const web3ProviderRef = useRef<Web3Provider>();
 
   async function login(connector?: ConnectorType, email?: string, emailVerificationSalt?: string) {
+    console.log("login()");
+    console.log({ query });
+    email = email ?? (query.email as string);
+    emailVerificationSalt = emailVerificationSalt ?? (query.emailVerificationSalt as string);
+    console.log({
+      email,
+      emailVerificationSalt,
+    });
     // Prevent double loginRequest due to react dev useEffect[] runs twice
     if (loginStarted.current) return;
     loginStarted.current = true;
@@ -125,7 +131,10 @@ const AuthProvider = (props?: Partial<ProviderProps<AuthProps>>) => {
     if (!account) return;
     if (getToken()) return; // user already has a token
 
-    const res = await loginRequest({ address: account });
+    console.log("onAfterConnect");
+    console.log({ email, emailVerificationSalt });
+
+    const res = await loginRequest({ address: account, email });
 
     const payload = res?.data?.login?.payload;
     if (!payload) return;
@@ -133,6 +142,7 @@ const AuthProvider = (props?: Partial<ProviderProps<AuthProps>>) => {
     const signature = await sign(payload);
     const tokenRes = await loginRequest({
       address: account,
+      email,
       signature: signature,
     });
 
@@ -227,7 +237,7 @@ const AuthProvider = (props?: Partial<ProviderProps<AuthProps>>) => {
         //@ts-ignore
         provider.value?.wc?.peerMeta?.name || null;
     } catch (e) {
-      console.log("ERROR load web3", e);
+      console.error("ERROR load web3", e);
       //setState((state) => ({ ...state, account: "" }));
       loadedState.account = "";
 
@@ -296,9 +306,25 @@ const AuthProvider = (props?: Partial<ProviderProps<AuthProps>>) => {
     return await web3ProviderRef.current?.resolveName(name);
   }
 
+  async function loginWhenNecessary() {
+    const hasToken = Boolean(getToken());
+    const loadedConnector = await auth.getConnector();
+    if ((!loadedConnector || !hasToken) && pathname !== "/connect") {
+      // Redirect to the connect page
+      clearToken();
+      await push("/connect");
+      loginStarted.current = false;
+    } else {
+      // Perform user login
+      if (isReady && pathname !== "/connect") {
+        login();
+      }
+    }
+  }
+
   useEffect(() => {
-    login();
-  }, []); // eslint-disable-line react-hooks/exhaustive-deps
+    loginWhenNecessary();
+  }, [isReady]); // eslint-disable-line react-hooks/exhaustive-deps
 
   return (
     <AuthContext.Provider
@@ -310,9 +336,6 @@ const AuthProvider = (props?: Partial<ProviderProps<AuthProps>>) => {
         signTypedData,
         _signTypedData,
         resolveEns,
-        //loadProvider,
-        //handleChainChanged,
-        //web3: state,
         ...state,
       }}
     />
