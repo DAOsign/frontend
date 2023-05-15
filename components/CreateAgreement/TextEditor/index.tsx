@@ -78,7 +78,7 @@ const TextEditor = ({
       <Flex sx={{ alignItems: "center" }}>
         <Flex sx={containerEnter}>
           <Text sx={enterAgreement}>Enter agreement </Text>
-          <Text sx={labelDesc}>description</Text>
+          <Text sx={labelDesc}>description *</Text>
         </Flex>
       </Flex>
 

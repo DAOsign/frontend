@@ -28,7 +28,7 @@ export default function UploadLocalAgreement({
           },
         }}
       >
-        <Text sx={labelUpload}>Upload agreement</Text>
+        <Text sx={labelUpload}>Upload agreement *</Text>
         <Button onClick={handleChooseAnotherMethod} sx={uploadBtn}>
           <Box sx={{ width: "20px" }}>
             <Icon style={{ display: "block" }} src={iconsObj.arrowLeftPink} />

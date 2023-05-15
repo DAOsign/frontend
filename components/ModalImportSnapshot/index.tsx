@@ -472,7 +472,7 @@ export default function ModalImportSnapshot({ isOpen, page, onExit, setMethod }:
           <Flex sx={{ ...flexContent, ...overflowContentStyles }}>
             {!loading ? (
               <>
-                <Text sx={labelInput}>Proposal link</Text>
+                <Text sx={labelInput}>Proposal link *</Text>
                 <Input
                   value={snapshotProposalUrl}
                   onChange={onChangeInputProposal}
