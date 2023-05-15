@@ -522,6 +522,7 @@ export default function ModalImportSnapshot({ isOpen, page, onExit, setMethod }:
                   <Box sx={tellMoreContainer}>
                     <Text sx={labelInputTellMore}>Additional Instructions for AI</Text>
                     <Input
+                      placeholder="Add Non-disclosure clause for the agreement"
                       value={additionalDetails}
                       onChange={e =>
                         changeValue("proposal", {

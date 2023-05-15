@@ -77,7 +77,7 @@ const contractType = [
 
 export const switches = {
   [ENABLE_TRANSFORM]: {
-    title: "Enable Transform to Contract (Utilizing GPT-3 OpenAI API)",
+    title: "Enable Transform to Agreement (Using GPT AI)",
     isOpen: true,
     tooltip: "Transform Snapshot to Contract with AI",
     top: "-45px",
