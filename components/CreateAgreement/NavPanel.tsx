@@ -177,9 +177,9 @@ export default function NavPanel({ setLoading, page }: { setLoading: any; page: 
 
   const handleCreateAgreement = async (filePath?: string, agreementHash?: string) => {
     await saveAgreement({
-      agreementId: String(query.id),
+      agreementId: query?.id ? String(query.id) : undefined,
       title: values.title,
-      agreementLocation: values.agreementLocation || null,
+      agreementLocation: values.agreementLocation || undefined,
       snapshotProposalUrl: values.proposal?.snapshotProposalUrl,
       content:
         (values.agreementMethod === METHOD_ENTER ||
@@ -188,7 +188,7 @@ export default function NavPanel({ setLoading, page }: { setLoading: any; page: 
         values.textEditorValue
           ? values.textEditorValue
           : "",
-      agreementPrivacy: values.agreementPrivacy || null,
+      agreementPrivacy: values.agreementPrivacy || undefined,
       signers: values.signers.map(s => s.value),
       observers: values.observers.map(o => o.value),
       agreementHash: agreementHash || values.agreementHash,
