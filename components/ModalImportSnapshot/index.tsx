@@ -248,8 +248,8 @@ export default function ModalImportSnapshot({ isOpen, page, onExit, setMethod }:
       }
       return res.data.saveAgreement.agreementId;
     });
-    changeValue("agreementId", Number(agreementId));
-    return Number(agreementId);
+    changeValue("agreementId", agreementId);
+    return agreementId;
   };
 
   const generate = async (proposalText: string) => {

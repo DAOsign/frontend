@@ -34,7 +34,7 @@ import ModalReadyToSign from "../ModalReadyToSign";
 export const ViewAgreement = () => {
   const { push, query } = useRouter();
   const { agreementId } = query;
-  const idIsWrong = !!agreementId && !Number(agreementId);
+  const idIsWrong = !(agreementId && agreementId?.toString()?.length > 0);
   const [isOpen, setIsOpen] = useState(false);
   const [readyToSignModalOpen, setReadyToSignModalOpen] = useState(false);
   const client = useClient();
@@ -51,7 +51,9 @@ export const ViewAgreement = () => {
     [account, agreement?.authorWalletAddress]
   );
 
-  const { makeProofOfAuthority, makeProofOfSignature } = useSignAgreement(Number(agreementId));
+  const { makeProofOfAuthority, makeProofOfSignature } = useSignAgreement(
+    agreementId?.toString() || ""
+  );
 
   useEffect(() => {
     if (agreementId) {
@@ -61,7 +63,11 @@ export const ViewAgreement = () => {
 
   const refetchAgreement = useCallback(async () => {
     return await client
-      .query(agreementById, { agreementId: Number(agreementId) }, { requestPolicy: "network-only" })
+      .query(
+        agreementById,
+        { agreementId: agreementId?.toString() || "" },
+        { requestPolicy: "network-only" }
+      )
       .toPromise()
       .then(res => {
         const agr: any = res.data?.agreement;
@@ -160,7 +166,7 @@ export const ViewAgreement = () => {
               agreementLocation={agreement?.agreementLocation}
               agreementPrivacy={agreement?.agreementPrivacy}
               agreementStatus={agreement?.agreementStatus}
-              agreementId={Number(agreementId)}
+              agreementId={agreementId.toString()}
               onSignAgreement={onSignAgreement}
               createdAt={agreement?.createdAt}
               userIsAuthor={userIsAuthor}

@@ -16,7 +16,12 @@ import {
 import { Box, Button, Flex, Link, Spinner, Text } from "theme-ui";
 import iconsObj from "../../assets/icons";
 import { InformationRow } from "./InformationRow";
-import { formatAddress, formatAgreementCreationDate, onCopyClick } from "../../utils/formats";
+import {
+  formatAddress,
+  formatAgreementCreationDate,
+  onCopyClick,
+  extractProposalId,
+} from "../../utils/formats";
 import Tooltip from "../../components/Tooltip";
 import {
   AgreementLocation,
@@ -34,7 +39,6 @@ import { notifError, notifSucces } from "../../utils/notification";
 import ModalSignStatus from "../ModalSignStatus";
 import ModalProof from "../ModalProof";
 import { toAgreementWithParticipants } from "../../utils/typeUtils";
-import { extractProposalId } from "../../utils/formats";
 import SignatureIcon from "../icon/editable/SignatureIcon";
 import CopyIcon from "../CopyIcon";
 import Icon from "../icon";
@@ -51,7 +55,7 @@ const formatAgreementPrivacy = (agreementPrivacy: string | undefined) => {
 
 interface Props {
   agreement: ReturnType<typeof toAgreementWithParticipants>;
-  agreementId: number;
+  agreementId: string;
   agreementStatus?: AgreementStatus;
   agreementPrivacy?: AgreementPrivacy;
   agreementLocation?: AgreementLocation;
@@ -299,7 +303,7 @@ export const AgreementInformation = ({
         ) : null}
       </Flex>
       <ModalConfirmAgreementDeletion
-        agreementId={Number(agreementId)}
+        agreementId={agreementId}
         isOpen={isConfirmAgreementDeletionPopupVisible}
         onSuccess={onAgreementDeletionSuccess}
         onExit={() => setIsConfirmAgreementDeletionPopupVisible(false)}

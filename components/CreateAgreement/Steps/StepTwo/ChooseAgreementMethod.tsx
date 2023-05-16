@@ -85,7 +85,7 @@ export default function ChooseAgreementMethod({
     ) {
       setMethod(METHOD_IMPORT_SHAPSHOT);
     }
-  }, []);
+  }, [values]);
 
   const propousalIsEmpty = () => {
     const contractTypeIsEmpty = (contractType && !statementWork) || !contractType;

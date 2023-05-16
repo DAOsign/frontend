@@ -2,7 +2,7 @@ import { graphql } from "../gql";
 
 export const saveAgreementMutation = graphql(`
   mutation SaveAgreement(
-    $agreementId: Int
+    $agreementId: String
     $agreementPrivacy: String
     $agreementLocation: String
     $content: String
@@ -38,7 +38,7 @@ export const saveAgreementMutation = graphql(`
 `);
 
 export const deleteAgreementMutation = graphql(`
-  mutation DeleteAgreementMutation($agreementId: Int!) {
+  mutation DeleteAgreementMutation($agreementId: String!) {
     deleteAgreement(agreementId: $agreementId) {
       agreementId
       message
@@ -50,7 +50,7 @@ export const sendSignedAgreementFileData = graphql(`
   mutation sendSignedFileProofData(
     $data: AgreementFileProofDataInput!
     $signature: String!
-    $agreementId: Int!
+    $agreementId: String!
   ) {
     sendSignedFileProofData(data: $data, signature: $signature, agreementId: $agreementId) {
       cid
@@ -62,7 +62,7 @@ export const sendSignedAgreementSignData = graphql(`
   mutation sendSignedSignProofData(
     $data: AgreementSignProofDataInput!
     $signature: String!
-    $agreementId: Int!
+    $agreementId: String!
   ) {
     sendSignedSignProofData(data: $data, signature: $signature, agreementId: $agreementId) {
       cid
@@ -71,7 +71,7 @@ export const sendSignedAgreementSignData = graphql(`
 `);
 
 export const editObservers = graphql(`
-  mutation EditObservers($agreementId: Int, $observers: [String!]) {
+  mutation EditObservers($agreementId: String, $observers: [String!]) {
     editObservers(agreementId: $agreementId, observers: $observers) {
       message
     }

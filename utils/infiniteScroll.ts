@@ -62,7 +62,7 @@ export function useLoadItems() {
 
   const refetch = async (reset = false) => {
     setData(prev => ({ ...prev, loading: true }));
-    return await client
+    return client
       .query(
         myAgreementsQuery,
         {

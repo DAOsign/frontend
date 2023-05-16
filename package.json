@@ -6,7 +6,6 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "prettier:check": "npx prettier --check .",
     "prettier:fix": "npx prettier --write .",
     "test": "jest",
     "lint": "next lint",
