@@ -47,7 +47,7 @@ const ProposalImportOptions = ({
       await queryClient(
         refineGeneratedAgreement,
         {
-          agreementId: Number(values.agreementId),
+          agreementId: values.agreementId,
           userRequest: optionsValue,
         },
         { url: process.env.NEXT_PUBLIC_GRAPHQL_ENDPOINT, requestPolicy: "network-only" }
