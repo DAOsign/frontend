@@ -1,7 +1,7 @@
 import { graphql } from "../gql";
 
 export const agreementById = graphql(`
-  query Query($agreementId: Int!) {
+  query Query($agreementId: String!) {
     agreement(agreementId: $agreementId) {
       agreementId
       snapshotProposalUrl
@@ -73,6 +73,7 @@ export const agreementById = graphql(`
     }
   }
 `);
+
 export const myAgreementsQuery = graphql(`
   query MyAgreements($take: Int, $filterBy: [String!], $search: String, $skip: Int) {
     myAgreements(take: $take, filterBy: $filterBy, search: $search, skip: $skip) {
@@ -136,7 +137,7 @@ export const myAgreementsQuery = graphql(`
 `);
 
 export const getAgreementFileProofData = graphql(`
-  query GetAgreementFileProofData($agreementId: Int!) {
+  query GetAgreementFileProofData($agreementId: String!) {
     getAgreementFileProofData(agreementId: $agreementId) {
       domain {
         name
@@ -170,7 +171,7 @@ export const getAgreementFileProofData = graphql(`
 `);
 
 export const getAgreementSignProofData = graphql(`
-  query GetAgreementSignProofData($agreementId: Int!) {
+  query GetAgreementSignProofData($agreementId: String!) {
     getAgreementSignProofData(agreementId: $agreementId) {
       domain {
         name
@@ -197,7 +198,7 @@ export const getAgreementSignProofData = graphql(`
 
 export const generateAgreement = graphql(`
   query GenerateAgreement(
-    $agreementId: Int!
+    $agreementId: String!
     $proposalText: String!
     $contractType: String
     $legalJurisdictionCountry: String
@@ -224,7 +225,7 @@ export const generateAgreement = graphql(`
 `);
 
 export const refineGeneratedAgreement = graphql(`
-  query RefineGeneratedAgreement($userRequest: String!, $agreementId: Int!) {
+  query RefineGeneratedAgreement($userRequest: String!, $agreementId: String!) {
     refineGeneratedAgreement(userRequest: $userRequest, agreementId: $agreementId) {
       text
     }

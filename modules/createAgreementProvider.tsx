@@ -35,7 +35,7 @@ export interface ProposalState {
 }
 
 export interface CreationState {
-  agreementId: number | undefined;
+  agreementId: string | undefined;
   title: string;
   agreementPrivacy: AgreementPrivacy;
   agreementMethod: AgreementMethod;

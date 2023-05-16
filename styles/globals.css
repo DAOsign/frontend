@@ -23,13 +23,12 @@ a {
   display: none;
 }
 .chooseFileText {
-    pointer-events: none;
-    font-family: 'InterBold';
-    cursor: pointer;
-    font-size: 14px;
-    color: #CA5CF2;
-    opacity: 0.7;
-
+  pointer-events: none;
+  font-family: "InterBold";
+  cursor: pointer;
+  font-size: 14px;
+  color: #ca5cf2;
+  opacity: 0.7;
 }
 .rowInformation .arrowTooltip {
   margin-left: 80.5%;
@@ -158,7 +157,7 @@ a {
   width: 0 !important;
 }
 .editor wmde-markdown-var.w-md-editor.w-md-editor-show-preview::-webkit-scrollbar {
-  width: 0,
+  width: 0;
 }
 @font-face {
   font-family: "InterRegular";
@@ -871,5 +870,5 @@ body {
   stroke: #ae4fd0;
 }
 .settingImportSnapshotProposal::-webkit-scrollbar {
-  width: 0 
+  width: 0;
 }
