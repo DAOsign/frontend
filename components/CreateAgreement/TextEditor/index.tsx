@@ -16,6 +16,8 @@ import styles, {
   btnBack,
   icon,
 } from "./styles";
+import ProposalImportOptions from "../Steps/StepOne/ProposalImportOptions";
+import { METHOD_IMPORT_SHAPSHOT } from "../../../types";
 
 const MDEditor = dynamic(() => import("@uiw/react-md-editor"), {
   ssr: false,
@@ -43,9 +45,11 @@ const minHeightTextEditor = 387;
 const TextEditor = ({
   page,
   handleChooseAnotherMethod,
+  setIsOpenModalImport,
 }: {
   page: string;
   handleChooseAnotherMethod: () => void;
+  setIsOpenModalImport: any;
 }) => {
   const [heightValue, setHeightValue] = useState(minHeightTextEditor);
   const create = useCreateAgreement();
@@ -70,11 +74,11 @@ const TextEditor = ({
   };
 
   return (
-    <Box style={{ position: "relative", width: "100%" }} sx={styles}>
+    <Box style={{ position: "relative", width: "100%" }} className="textEditor" sx={styles}>
       <Flex sx={{ alignItems: "center" }}>
         <Flex sx={containerEnter}>
           <Text sx={enterAgreement}>Enter agreement </Text>
-          <Text sx={labelDesc}>description</Text>
+          <Text sx={labelDesc}>description *</Text>
         </Flex>
       </Flex>
 
@@ -86,7 +90,14 @@ const TextEditor = ({
             </Box>
             Edit File
           </Button>
-          <Button onClick={() => setState("preview")} {...buttonPropsByStatus(state, "preview")}>
+          <Button
+            onClick={() => {
+              setState("preview");
+              setHeightValue(minHeightTextEditor);
+              setExpand(false);
+            }}
+            {...buttonPropsByStatus(state, "preview")}
+          >
             <Box sx={icon}>
               <Icon src={iconsObj.preview} />
             </Box>
@@ -103,6 +114,7 @@ const TextEditor = ({
               onChange={val => changeValue("textEditorValue", val || "")}
               hideToolbar={state === "preview"}
               value={textEditorValue}
+              minHeight={minHeightTextEditor}
               height="fit-content"
               className="expand"
               preview={state}
@@ -126,14 +138,16 @@ const TextEditor = ({
             </Box>
             <Text sx={footerText}>Markdown is supported</Text>
           </Flex>
-          <Button
-            onClick={() => {
-              setExpand(!expand);
-            }}
-            sx={expandBtn}
-          >
-            Expand
-          </Button>
+          {state === "edit" && (
+            <Button
+              onClick={() => {
+                if (!!textEditorValue?.length && textEditorValue?.length > 1000) setExpand(!expand);
+              }}
+              sx={expandBtn}
+            >
+              Expand
+            </Button>
+          )}
         </Flex>
       </Suspense>
     </Box>

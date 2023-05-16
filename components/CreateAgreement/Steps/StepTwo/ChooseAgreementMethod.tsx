@@ -3,17 +3,15 @@ import { Container, Text, Box } from "theme-ui";
 import Image from "next/image";
 import Icon from "../../../icon/index";
 import {
-  card,
-  primaryTitleItem,
+  conteinerItems,
+  secondaryText,
+  itemsContent,
+  iconMethod,
+  centerCard,
   rightCard,
   leftCard,
   label,
-  iconMethod,
-  centerCard,
-  secondaryText,
-  itemsContent,
   text,
-  conteinerItems,
 } from "../../styles";
 import iconsObj from "../../../../assets/icons";
 import TextEditor from "../../TextEditor/index";
@@ -70,7 +68,7 @@ export default function ChooseAgreementMethod({
   const validateTitle = () => {
     const errors: CreateAgreementFieldErrors = {};
     if (!values.title.trim()) {
-      errors.title = "Tittle can not be blank";
+      errors.title = "Title can not be blank";
     }
     if (values.title.trim()?.length > 120) {
       errors.title = "Title should be 120 characters max";
@@ -166,7 +164,11 @@ export default function ChooseAgreementMethod({
       case METHOD_IMPORT_SHAPSHOT:
         return withFade(
           <>
-            <TextEditor handleChooseAnotherMethod={() => setMethod("")} page={page} />
+            <TextEditor
+              handleChooseAnotherMethod={() => setMethod("")}
+              setIsOpenModalImport={setIsOpenModalImport}
+              page={page}
+            />
             <FieldErrorMessage error={values?.errors?.agreementFile} />
           </>,
           0
@@ -174,7 +176,11 @@ export default function ChooseAgreementMethod({
       case METHOD_ENTER:
         return withFade(
           <>
-            <TextEditor handleChooseAnotherMethod={() => setMethod("")} page={page} />
+            <TextEditor
+              setIsOpenModalImport={setIsOpenModalImport}
+              handleChooseAnotherMethod={() => setMethod("")}
+              page={page}
+            />
             <FieldErrorMessage error={values?.errors?.agreementFile} />
           </>,
           1

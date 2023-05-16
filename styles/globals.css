@@ -30,6 +30,7 @@ a {
   color: #ca5cf2;
   opacity: 0.7;
 }
+
 .rowInformation .arrowTooltip {
   margin-left: 80.5%;
 }
@@ -64,6 +65,7 @@ a {
     margin-top: 0;
   }
 }
+
 @media screen and (max-width: 480px) {
   canvas {
     margin: 10px auto;

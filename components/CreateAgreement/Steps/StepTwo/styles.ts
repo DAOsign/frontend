@@ -33,4 +33,7 @@ export const itemLocation = {
   "&:hover": {
     border: "2px solid #D8D8E2",
   },
+  "@media screen and (max-width: 768px)": {
+    height: "191px",
+  },
 } as ThemeUIStyleObject;

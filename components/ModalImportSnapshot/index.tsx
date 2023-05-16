@@ -322,10 +322,12 @@ export default function ModalImportSnapshot({ isOpen, page, onExit, setMethod }:
     const { options, value } = selectsValue[name];
     const inputIsHidden =
       (name === LEGAL_JURISDICTION_COUNTRY && selectsOpen[name]) ||
+      (name === LEGAL_JURISDICTION_STATE && selectsOpen[name]) ||
       (name === LEGAL_JURISDICTION_COUNTRY && !values.proposal[LEGAL_JURISDICTION_COUNTRY]);
 
     const optionsFilter =
-      searchValue !== "" && name === LEGAL_JURISDICTION_COUNTRY
+      (searchValue !== "" && name === LEGAL_JURISDICTION_COUNTRY) ||
+      (searchValue !== "" && name === LEGAL_JURISDICTION_STATE)
         ? options.filter((el: string) => el.toLowerCase().includes(searchValue.toLowerCase()))
         : options.filter((el: string) => el !== values.proposal[name]);
 
@@ -472,7 +474,7 @@ export default function ModalImportSnapshot({ isOpen, page, onExit, setMethod }:
           <Flex sx={{ ...flexContent, ...overflowContentStyles }}>
             {!loading ? (
               <>
-                <Text sx={labelInput}>Proposal link</Text>
+                <Text sx={labelInput}>Proposal link *</Text>
                 <Input
                   value={snapshotProposalUrl}
                   onChange={onChangeInputProposal}
@@ -522,6 +524,7 @@ export default function ModalImportSnapshot({ isOpen, page, onExit, setMethod }:
                   <Box sx={tellMoreContainer}>
                     <Text sx={labelInputTellMore}>Additional Instructions for AI</Text>
                     <Input
+                      placeholder="Add Non-disclosure clause for the agreement"
                       value={additionalDetails}
                       onChange={e =>
                         changeValue("proposal", {

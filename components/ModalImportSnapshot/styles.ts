@@ -2,6 +2,7 @@ import { ThemeUIStyleObject } from "theme-ui";
 
 export const bg = {
   position: "absolute",
+  overflow: "hidden",
   height: "120vh",
   "@media screen and (max-width: 1200px)": {
     height: "135vh",
@@ -126,9 +127,21 @@ export const input = {
   backgroundColor: "#F7F7FB",
   height: "40px",
   borderRadius: "8px",
+  opacity: 1,
   width: "100%",
+  color: "#21212150 !important",
+  pl: "16px",
   transition: "border-color 0.3s",
   border: "1px solid transparent",
+  "&::placeholder": {
+    fontFamily: "InterMedium",
+    fontStyle: "normal",
+    fontWeight: 500,
+    fontSize: "16px",
+    lineHeight: "160%",
+    color: "#212121 !important",
+    opacity: "0.5 !important",
+  },
 } as ThemeUIStyleObject;
 
 export const switchContainer = {

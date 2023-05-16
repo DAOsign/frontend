@@ -2,8 +2,8 @@ import { ThemeUIStyleObject } from "theme-ui";
 
 const tabStyles: ThemeUIStyleObject = {
   mb: "36px",
-  "@media screen and (max-width: 480px)": {
-    mb: "40px",
+  "@media screen and (max-width: 720px)": {
+    mb: "0",
   },
   ".w-md-editor-aree::-webkit-scrollbar": {
     width: 0,
@@ -139,6 +139,7 @@ export const expandBtn = {
   },
   "@media screen and (max-width: 580px)": {
     position: "static",
+    width: "fit-content !important",
   },
 } as ThemeUIStyleObject;
 

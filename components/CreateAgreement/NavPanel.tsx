@@ -83,7 +83,7 @@ export default function NavPanel({ setLoading, page }: { setLoading: any; page: 
       switch (step) {
         case 1:
           if (!values.title.trim()) {
-            errors.title = "Tittle can not be blank";
+            errors.title = "Title can not be blank";
           }
           if (values.title.trim()?.length > 120) {
             errors.title = "Title should be 120 characters max";
@@ -91,10 +91,14 @@ export default function NavPanel({ setLoading, page }: { setLoading: any; page: 
           if (!values.agreementMethod) {
             errors.agreementFile = "Agreement content is a required selection";
           } else if (values.agreementMethod === METHOD_ENTER && !values.textEditorValue) {
-            errors.agreementFile = "Agreement entry is required";
+            errors.agreementFile = "Agreement content is a required selection";
           } else if (values.agreementMethod === METHOD_IMPORT_SHAPSHOT && !values.textEditorValue) {
-            errors.agreementFile = "Agreement entry is required";
-          } else if (values.agreementMethod === METHOD_UPLOAD && !values.agreementHash) {
+            errors.agreementFile = "Agreement content is a required selection";
+          } else if (
+            values.agreementMethod === METHOD_UPLOAD &&
+            !values.agreementHash &&
+            !values.filePath
+          ) {
             errors.agreementFile = "Agreement file upload is required";
           } else if (!values.textEditorValue.trim() && !values.agreementHash) {
             errors.agreementFile = "Agreement content is a required selection";
@@ -406,6 +410,9 @@ export default function NavPanel({ setLoading, page }: { setLoading: any; page: 
     await sleep(500);
     push("/agreements", "/agreements", { shallow: false });
   };
+
+  const optionsIsVisible =
+    step === 1 && values.agreementMethod === METHOD_IMPORT_SHAPSHOT && !!values.textEditorValue;
 
   return (
     <>
