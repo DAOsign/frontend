@@ -20,7 +20,7 @@ export type Agreement = {
   __typename?: "Agreement";
   agreementFile?: Maybe<AgreementFile>;
   agreementFileProof?: Maybe<AgreementFileProof>;
-  agreementId: Scalars["String"];
+  agreementId: Scalars["ID"];
   agreementLocation?: Maybe<AgreementLocation>;
   agreementLocationId?: Maybe<Scalars["Int"]>;
   agreementPrivacy?: Maybe<AgreementPrivacy>;
