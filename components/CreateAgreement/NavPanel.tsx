@@ -287,6 +287,7 @@ export default function NavPanel({ setLoading, page }: { setLoading: any; page: 
           return;
         }
       }
+      return uploadedFileData;
     } catch (error) {
       console.error(error);
       notifError(
