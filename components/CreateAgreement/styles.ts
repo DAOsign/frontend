@@ -271,7 +271,7 @@ export const navContainerOptionsIsVisible = {
   "@media screen and (max-width: 480px)": {
     px: "16px",
     py: "24px",
-    width: "100%",
+    width: "100% !important",
   },
 } as ThemeUIStyleObject;
 
