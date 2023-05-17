@@ -274,22 +274,28 @@ export default function ModalImportSnapshot({ isOpen, page, onExit, setMethod }:
         dataGenerateAggrement = { ...dataGenerateAggrement, statementWork };
       }
     }
-    return (
-      query(
-        generateAgreement,
-        {
-          agreementId: id,
-          proposalText,
-          ...dataGenerateAggrement,
-        },
-        { url: process.env.NEXT_PUBLIC_GRAPHQL_ENDPOINT, requestPolicy: "network-only" }
-      )
-        .toPromise()
-        //@ts-ignore
-        .then(data => setData(data?.data?.generateAgreement?.text))
-        .catch(() => false)
-        .finally(() => setLoading(false))
-    );
+    return query(
+      generateAgreement,
+      {
+        agreementId: id,
+        proposalText,
+        ...dataGenerateAggrement,
+      },
+      { url: process.env.NEXT_PUBLIC_GRAPHQL_ENDPOINT, requestPolicy: "network-only" }
+    )
+      .toPromise()
+      .then(data => {
+        if (data?.error) {
+          throw new Error(data?.error?.message || "OpenAI internal error");
+        } else {
+          setData(data?.data?.generateAgreement?.text || "");
+        }
+      })
+      .catch(err => {
+        notifError(err?.message as string);
+        return false;
+      })
+      .finally(() => setLoading(false));
   };
 
   const onChangeSelect = (name: string, el: string) => {

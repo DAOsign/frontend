@@ -295,7 +295,6 @@ export default function NavPanel({ setLoading, page }: { setLoading: any; page: 
 
   const ForwardButton = () => {
     const isFinishButton = step === 3;
-    let generateAggrement = true;
     const props: ButtonProps = {
       variant: "primary",
       sx: { ...fW, mt: "20px" },
