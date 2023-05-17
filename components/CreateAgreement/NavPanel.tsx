@@ -210,11 +210,8 @@ export default function NavPanel({ setLoading, page }: { setLoading: any; page: 
 
   const handleSaveDraft = async () => {
     const areFieldsValid = validateFields(values, true);
-    console.log(areFieldsValid);
-
     if (areFieldsValid) {
       const uploadFileData: any = await preuploadFile();
-      console.log(uploadFileData);
       await handleCreateAgreement(uploadFileData?.filePath, uploadFileData?.agreementHash);
     }
   };
