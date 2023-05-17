@@ -81,7 +81,8 @@ export default function ChooseAgreementMethod({
     if (
       values.agreementMethod === METHOD_IMPORT_SHAPSHOT &&
       values.textEditorValue &&
-      !!values.agreementId
+      !!values.agreementId &&
+      page === "create"
     ) {
       setMethod(METHOD_IMPORT_SHAPSHOT);
     }

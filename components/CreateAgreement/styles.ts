@@ -285,7 +285,6 @@ export const navContainerOptionsIsVisible = {
 export const importOptions = {
   background: "#FFFFFF",
   border: "1px solid #EDEDF3",
-  ml: "20px",
   borderRadius: "12px",
   p: "52px",
   mt: "28px",

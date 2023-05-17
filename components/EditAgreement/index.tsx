@@ -66,15 +66,12 @@ export default function EditAgreement({ page }: { page: string }) {
   const { query } = useRouter();
   const [step, setStep] = useState(query?.step ? Number(query.step) : 0);
   const [transitioned, setTransitioned] = useState(false);
-  const [optionsValue, setOptionsValue] = useState("");
   const agreementId = query?.id?.toString() || "";
   const { values, changeValue } = useEditAgreement();
   const [loading, setLoading] = useState(false);
   const [loaded, setLoaded] = useState(false);
   const [method, setMethod] = useState("");
   const [isOpenModalImport, setIsOpenModalImport] = useState(false);
-  const [loadingUpdateOptions, setLoadingUpdateOptions] = useState(false);
-  const { query: queryClient } = useClient();
   const [{ data, fetching: agreementsLoading, error }] = useQuery({
     // @ts-ignore
     query: agreementById,
@@ -148,31 +145,8 @@ export default function EditAgreement({ page }: { page: string }) {
     ),
   };
 
-  const updateProposal = async () => {
-    if (!!optionsValue && !!values.agreementId) {
-      setLoadingUpdateOptions(true);
-      await queryClient(
-        refineGeneratedAgreement,
-        {
-          agreementId: values.agreementId,
-          userRequest: optionsValue,
-        },
-        { url: process.env.NEXT_PUBLIC_GRAPHQL_ENDPOINT, requestPolicy: "network-only" }
-      )
-        .toPromise()
-        .then(data => {
-          if (data?.data?.refineGeneratedAgreement?.text) {
-            changeValue("textEditorValue", data?.data?.refineGeneratedAgreement?.text);
-          }
-        })
-        .catch(() => false)
-        .finally(() => setLoadingUpdateOptions(false));
-    }
-    setOptionsValue("");
-  };
-
   const optionsIsVisible =
-    step === 1 && values.agreementMethod === METHOD_IMPORT_SHAPSHOT && !!values.textEditorValue;
+    step === 1 && method === METHOD_IMPORT_SHAPSHOT && !!values.textEditorValue;
 
   return (
     <Flex sx={containerSides}>
