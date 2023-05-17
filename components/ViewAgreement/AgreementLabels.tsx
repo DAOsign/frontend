@@ -159,8 +159,8 @@ export const AgreementLabels = ({
           <Flex
             sx={greyLabelWithHover}
             onClick={() => {
-              handleDownloadDocument();
-              // notifComingSoon("Download Document is coming soon");
+              // handleDownloadDocument();
+              notifComingSoon("Download Document is coming soon");
             }}
           >
             <Box sx={labelIcon}>
