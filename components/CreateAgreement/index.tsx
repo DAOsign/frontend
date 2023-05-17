@@ -79,7 +79,7 @@ export default function CreateAgreement({ page }: { page: string }) {
     ),
   };
   const optionsIsVisible =
-    step === 1 && values.agreementMethod === METHOD_IMPORT_SHAPSHOT && !!values.textEditorValue;
+    step === 1 && method === METHOD_IMPORT_SHAPSHOT && !!values.textEditorValue;
 
   return (
     <Flex sx={containerSides} className="containerSides">
@@ -111,8 +111,7 @@ export default function CreateAgreement({ page }: { page: string }) {
             display: optionsIsVisible ? "flex" : "inherit",
             flexDirection: optionsIsVisible ? "column-reverse" : "inherit",
           },
-          "@media screen and (max-width: 480px)": {
-            maxWidth: "343px",
+          "@media screen and (max-width: 375px)": {
             pb: "0",
           },
         }}

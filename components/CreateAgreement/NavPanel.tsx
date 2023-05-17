@@ -440,7 +440,14 @@ export default function NavPanel({ setLoading, page }: { setLoading: any; page: 
             <Text sx={secondaryTitleStep}>Enter agreement content</Text>
           </Container>
         </Flex>
-        <Container sx={box}></Container>
+        <Container
+          sx={{
+            ...box,
+            "@media screen and (max-width: 1119px)": {
+              borderTop: "1px dashed #CA5CF2",
+            },
+          }}
+        ></Container>
         <Flex
           onClick={() => {
             return step > 2 ? changeStep(2) : null;
@@ -461,7 +468,14 @@ export default function NavPanel({ setLoading, page }: { setLoading: any; page: 
             <Text sx={secondaryTitleStep}>Add signers and observers</Text>
           </Container>
         </Flex>
-        <Container sx={box}></Container>
+        <Container
+          sx={{
+            ...box,
+            "@media screen and (max-width: 1119px)": {
+              borderTop: step > 2 ? "1px dashed #CA5CF2" : "2px dashed #EDEDF3",
+            },
+          }}
+        ></Container>
         <Flex
           onClick={() => (step > 3 || page === "edit" ? changeStep(3) : null)}
           sx={{ ...stepStyle, cursor: step > 3 || page === "edit" ? "pointer" : "initial" }}

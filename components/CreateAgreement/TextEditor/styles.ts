@@ -152,7 +152,8 @@ export const footerText = {
 export const labelDesc = {
   variant: "forms.label",
   display: "inline-block",
-  "@media screen and (max-width: 768px)": {
+  mr: "5px",
+  "@media screen and (max-width: 480px)": {
     display: "none",
   },
 } as ThemeUIStyleObject;

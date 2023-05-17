@@ -77,8 +77,9 @@ const TextEditor = ({
     <Box style={{ position: "relative", width: "100%" }} className="textEditor" sx={styles}>
       <Flex sx={{ alignItems: "center" }}>
         <Flex sx={containerEnter}>
-          <Text sx={enterAgreement}>Enter agreement </Text>
-          <Text sx={labelDesc}>description *</Text>
+          <Text sx={enterAgreement}>Enter</Text>
+          <Text sx={labelDesc}>agreement </Text>
+          <Text sx={enterAgreement}>description *</Text>
         </Flex>
       </Flex>
 

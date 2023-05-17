@@ -179,8 +179,9 @@ export default function EditAgreement({ page }: { page: string }) {
       <Container
         sx={{
           ...leftSide,
-          "@media screen and (max-width: 720px)": {
+          "@media screen and (max-width: 480px)": {
             pb: !values.file ? "40px" : "130px !important",
+            px: "16px",
           },
         }}
         className={transitioned ? "transition" : ""}
@@ -205,7 +206,6 @@ export default function EditAgreement({ page }: { page: string }) {
             flexDirection: optionsIsVisible ? "column-reverse" : "inherit",
           },
           "@media screen and (max-width: 480px)": {
-            maxWidth: "343px",
             pb: "0",
           },
         }}
