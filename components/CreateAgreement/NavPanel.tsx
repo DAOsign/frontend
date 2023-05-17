@@ -90,9 +90,12 @@ export default function NavPanel({ setLoading, page }: { setLoading: any; page: 
           }
           if (!values.agreementMethod) {
             errors.agreementFile = "Agreement content is a required selection";
-          } else if (values.agreementMethod === METHOD_ENTER && !values.textEditorValue) {
+          } else if (values.agreementMethod === METHOD_ENTER && !values.textEditorValue.trim()) {
             errors.agreementFile = "Agreement content is a required selection";
-          } else if (values.agreementMethod === METHOD_IMPORT_SHAPSHOT && !values.textEditorValue) {
+          } else if (
+            values.agreementMethod === METHOD_IMPORT_SHAPSHOT &&
+            !values.textEditorValue.trim()
+          ) {
             errors.agreementFile = "Agreement content is a required selection";
           } else if (
             values.agreementMethod === METHOD_UPLOAD &&
@@ -100,8 +103,6 @@ export default function NavPanel({ setLoading, page }: { setLoading: any; page: 
             !values.filePath
           ) {
             errors.agreementFile = "Agreement file upload is required";
-          } else if (!values.textEditorValue.trim() && !values.agreementHash) {
-            errors.agreementFile = "Agreement content is a required selection";
           }
           break;
         case 2:
