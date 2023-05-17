@@ -341,6 +341,13 @@ export const textInput = {
   minWidth: "260px",
   borderRadius: "8px",
   position: "relative",
+  padding: "15px 20px",
+  fontFamily: "InterMedium",
+  color: "#21212170",
+  fontSize: "16px",
+  "&:focus": {
+    outline: "none",
+  },
   "@media screen and (max-width: 1200px)": {
     width: "100%",
     maxWidth: "unset",

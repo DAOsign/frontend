@@ -38,7 +38,7 @@ const ProposalImportOptions = ({
       setError({ isVisible: true, textError: "Please enter instructions" });
       return;
     }
-    if (!!optionsValue && optionsValue?.length < 3) {
+    if (!!optionsValue && optionsValue?.trim()?.length < 3) {
       setError({ isVisible: true, textError: "Instructions should be min 3 words" });
       return;
     }
