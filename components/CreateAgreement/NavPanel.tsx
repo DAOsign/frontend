@@ -210,6 +210,8 @@ export default function NavPanel({ setLoading, page }: { setLoading: any; page: 
 
   const handleSaveDraft = async () => {
     const areFieldsValid = validateFields(values, true);
+    console.log(areFieldsValid);
+
     if (areFieldsValid) {
       const uploadFileData: any = await preuploadFile();
       await handleCreateAgreement(uploadFileData?.filePath, uploadFileData?.agreementHash);
@@ -246,7 +248,7 @@ export default function NavPanel({ setLoading, page }: { setLoading: any; page: 
   };
 
   const preuploadFile = async () => {
-    if (step !== 2) return;
+    if (step !== 1) return;
     try {
       let uploadedFileData: { filePath?: string; agreementHash?: string; error?: any } = {};
       if (
