@@ -34,6 +34,10 @@ export const itemLocation = {
     border: "2px solid #D8D8E2",
   },
   "@media screen and (max-width: 768px)": {
-    height: "191px",
+    height: "96px",
+  },
+  "@media screen and (max-width: 719px)": {
+    width: "100%",
+    height: "80px",
   },
 } as ThemeUIStyleObject;
