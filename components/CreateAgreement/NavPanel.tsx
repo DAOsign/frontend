@@ -177,7 +177,7 @@ export default function NavPanel({ setLoading, page }: { setLoading: any; page: 
 
   const handleCreateAgreement = async (filePath?: string, agreementHash?: string) => {
     await saveAgreement({
-      agreementId: query?.id ? String(query.id) : undefined,
+      agreementId: query?.id ? String(query.id) : values.agreementId || undefined,
       title: values.title,
       agreementLocation: values.agreementLocation || undefined,
       snapshotProposalUrl: values.proposal?.snapshotProposalUrl,
