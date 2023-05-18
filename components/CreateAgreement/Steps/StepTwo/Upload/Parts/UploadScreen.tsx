@@ -49,7 +49,7 @@ const UploadScreen = ({ page }: { page: string }) => {
       <Box
         sx={{
           ...imageUploadContainer,
-          "@media screen and (max-width: 768px)": {
+          "@media screen and (max-width: 480px)": {
             width: "100% !important",
             height: !values.file ? "46px" : "310px !important",
             borderRadius: !values.file ? "80px" : "12px",

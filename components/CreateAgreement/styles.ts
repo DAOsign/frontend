@@ -1,7 +1,7 @@
 import { ThemeUIStyleObject } from "theme-ui";
 const containerSides = {
-  maxWidth: "1200px",
-  justifyContent: "center",
+  maxWidth: "1160px",
+  justifyContent: "space-between",
   margin: "40px auto 0",
   textAlign: "center",
   "@media screen and (max-width: 1200px)": {
@@ -45,6 +45,10 @@ const primaryTitleItem = {
   variant: "text.largeTextBold",
   "@media screen and (max-width: 768px)": {
     variant: "text.smallTextBold",
+    fontSize: "20px",
+  },
+  "@media screen and (max-width: 480px)": {
+    fontSize: "14px",
   },
 } as ThemeUIStyleObject;
 
@@ -53,6 +57,7 @@ export const configurationsTitle = {
   "@media screen and (max-width: 480px)": {
     position: "relative",
     left: "-10px",
+    fontSize: "14px",
   },
 } as ThemeUIStyleObject;
 
@@ -67,7 +72,10 @@ const imageUploadContainer = {
   display: "flex",
   alignItems: "center",
   justifyContent: "center",
-  "@media screen and (max-width: 768px)": {
+  "@media screen and (max-width: 720px)": {
+    width: "100%",
+  },
+  "@media screen and (max-width: 480px)": {
     width: "124px",
     height: "46px",
     border: "2px solid #EDEDF3",
@@ -138,14 +146,14 @@ const uploadText = {
   display: "block",
   padding: "10px 16px",
   opacity: 1,
-  "@media screen and (max-width: 768px)": {
+  "@media screen and (max-width: 480px)": {
     display: "none",
   },
 } as ThemeUIStyleObject;
 
 const uploadTextMobile = {
   display: "none",
-  "@media screen and (max-width: 768px)": {
+  "@media screen and (max-width: 480px)": {
     display: "inline-block",
     variant: "text.normalTextBold",
   },
@@ -173,8 +181,7 @@ const leftSide = {
   minHeight: "550px",
   transition: ".3s all",
   background: "#FFFFFF",
-  ml: 0,
-  mr: "20px",
+  mx: 0,
   border: "1px solid #EDEDF3",
   borderRadius: "12px",
   paddingX: "78px",
@@ -194,12 +201,12 @@ const leftSide = {
   "@media screen and (max-width: 719px)": {
     width: "90%",
     paddingTop: "40px",
+    pb: "36px  !important",
   },
   "@media screen and (max-width: 480px)": {
-    maxWidth: "343px",
     paddingX: "16px",
     minHeight: "300px",
-    paddingBottom: "40px",
+    paddingBottom: "px",
     textAlign: "left",
   },
 } as ThemeUIStyleObject;
@@ -219,8 +226,9 @@ const title = {
 
 const rightSide = {
   maxWidth: "364px",
+  mx: "0",
   "@media screen and (max-width: 719px)": {
-    width: "90%",
+    width: "90% !important",
   },
 } as ThemeUIStyleObject;
 
@@ -231,9 +239,8 @@ export const navContainer = {
   borderRadius: "12px",
   paddingX: "52px",
   maxHeight: "636px",
-  ml: "20px",
-  mr: 0,
-  paddingBottom: "32px",
+  mx: 0,
+  paddingBottom: "52px",
   paddingTop: "52px",
   "@media screen and (max-width: 1200px)": {
     ml: 0,
@@ -271,14 +278,13 @@ export const navContainerOptionsIsVisible = {
   "@media screen and (max-width: 480px)": {
     px: "16px",
     py: "24px",
-    width: "100%",
+    width: "100% !important",
   },
 } as ThemeUIStyleObject;
 
 export const importOptions = {
   background: "#FFFFFF",
   border: "1px solid #EDEDF3",
-  ml: "20px",
   borderRadius: "12px",
   p: "52px",
   mt: "28px",
@@ -341,6 +347,13 @@ export const textInput = {
   minWidth: "260px",
   borderRadius: "8px",
   position: "relative",
+  padding: "15px 20px",
+  fontFamily: "InterMedium",
+  color: "#21212170",
+  fontSize: "16px",
+  "&:focus": {
+    outline: "none",
+  },
   "@media screen and (max-width: 1200px)": {
     width: "100%",
     maxWidth: "unset",
@@ -356,7 +369,6 @@ const container = {
   py: "24px",
   position: "relative",
   "@media screen and (max-width: 480px)": {
-    maxWidth: "343px",
     p: "16px",
   },
 } as ThemeUIStyleObject;
@@ -464,7 +476,7 @@ export const iconUpload = {
   width: "50px",
   height: "50px",
   m: "0 auto 18px",
-  "@media screen and (max-width: 768px)": {
+  "@media screen and (max-width: 480px)": {
     display: "none",
   },
 } as ThemeUIStyleObject;
@@ -677,6 +689,9 @@ const inputCreactAgreement = {
   width: "100%",
   transition: "border-color 0.3s",
   border: "2px solid transparent",
+  "@media screen and (max-width: 768px)": {
+    height: "40px",
+  },
 } as ThemeUIStyleObject;
 
 const inputCreateAgreementError = {
@@ -716,15 +731,6 @@ const containerButtons = {
   },
 } as ThemeUIStyleObject;
 
-// export const containerButtonsTablet = {
-//   ...containerButtons,
-//   "@media screen and (max-width: 1200px)": {
-//     "&": {
-//       marginTop: "40px",
-//     },
-//   },
-// } as ThemeUIStyleObject;
-
 const secondaryTitleStep = {
   variant: "text.overscript",
   opacity: 0.5,
@@ -733,6 +739,7 @@ const secondaryTitleStep = {
   },
   "@media screen and (max-width: 719px)": {
     maxWidth: "88px",
+    mx: "auto",
   },
 } as ThemeUIStyleObject;
 
@@ -762,7 +769,6 @@ const stepsContainer = {
     top: "138px",
   },
   "@media screen and (max-width: 480px)": {
-    maxWidth: "343px",
     height: "179px",
     top: "200px",
   },
@@ -823,6 +829,7 @@ const box = {
   },
   "@media screen and (max-width: 480px)": {
     width: "10%",
+    margin: "0 0 45px",
   },
 };
 
@@ -925,7 +932,7 @@ const removeContainer = {
   cursor: "pointer",
   gap: "4px",
   "&:hover": { color: "#AE4FD0", "& > div > svg > path": { stroke: "#AE4FD0" } },
-  "@media screen and (max-width: 768px)": {
+  "@media screen and (max-width: 480px)": {
     border: "2px solid #CA5CF250",
     width: "107px",
     height: "46px",
@@ -963,7 +970,7 @@ const containerFlex = {
   height: "26px",
   gap: "20px",
   mt: "8px",
-  "@media screen and (max-width: 768px)": {
+  "@media screen and (max-width: 480px)": {
     flexDirection: "column",
   },
 } as ThemeUIStyleObject;

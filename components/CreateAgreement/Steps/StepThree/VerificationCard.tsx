@@ -36,7 +36,14 @@ export default function VerificationCard({
         <Box style={{ position: "relative" }} className="card_head">
           <CheckboxComponent disabled={disabled} checked={checked} />
         </Box>
-        <Box className="card_body">
+        <Box
+          sx={{
+            "@media screen and (max-width: 480px)": {
+              maxWidth: "140px",
+            },
+          }}
+          className="card_body"
+        >
           <Text className="title">{title}</Text>
           <Text as="p" className="description">
             {description}

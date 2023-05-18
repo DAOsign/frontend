@@ -189,7 +189,7 @@ export const labelSwitch = {
   height: "26px !important",
   maxWidth: "unset !important",
   "@media screen and (max-width: 480px)": {
-    maxWidth: "226px",
+    maxWidth: "226px !important",
   },
 } as ThemeUIStyleObject;
 
@@ -236,6 +236,7 @@ export const iconInfo = {
   height: "24px",
   width: "24px",
   ml: "7px",
+  pt: "4px",
 } as ThemeUIStyleObject;
 
 export const iconInfoEnableTransform = {
@@ -243,9 +244,10 @@ export const iconInfoEnableTransform = {
   height: "24px",
   width: "24px",
   ml: "7px",
+  pt: "3px",
   "@media screen and (max-width: 480px)": {
     position: "absolute",
-    top: "20px",
+    top: "13px",
     right: 0,
   },
 } as ThemeUIStyleObject;

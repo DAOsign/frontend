@@ -81,7 +81,8 @@ export default function ChooseAgreementMethod({
     if (
       values.agreementMethod === METHOD_IMPORT_SHAPSHOT &&
       values.textEditorValue &&
-      !!values.agreementId
+      !!values.agreementId &&
+      page === "create"
     ) {
       setMethod(METHOD_IMPORT_SHAPSHOT);
     }
@@ -105,14 +106,14 @@ export default function ChooseAgreementMethod({
           !values.textEditorValue;
   };
 
-  const validateMethod = (method: string) => {
+  const validateMethod = () => {
     switch (values.agreementMethod) {
       case METHOD_IMPORT_SHAPSHOT:
         return propousalIsEmpty();
       case METHOD_ENTER:
         return !values.textEditorValue;
       case METHOD_UPLOAD:
-        return !values.file;
+        return !values.file && !values.agreementHash && !values.filePath;
       default:
         return false;
     }
@@ -130,7 +131,7 @@ export default function ChooseAgreementMethod({
       setModalAttention({ isOpen: false, method });
     }
     if (!!values.agreementMethod && isSameMethod && !beforeModal && validateRes) {
-      const isEmptyMethods = validateMethod(method);
+      const isEmptyMethods = validateMethod();
       if (!isEmptyMethods) {
         setModalAttention({ isOpen: true, method });
         return;

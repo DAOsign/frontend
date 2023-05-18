@@ -90,9 +90,12 @@ export default function NavPanel({ setLoading, page }: { setLoading: any; page: 
           }
           if (!values.agreementMethod) {
             errors.agreementFile = "Agreement content is a required selection";
-          } else if (values.agreementMethod === METHOD_ENTER && !values.textEditorValue) {
+          } else if (values.agreementMethod === METHOD_ENTER && !values.textEditorValue.trim()) {
             errors.agreementFile = "Agreement content is a required selection";
-          } else if (values.agreementMethod === METHOD_IMPORT_SHAPSHOT && !values.textEditorValue) {
+          } else if (
+            values.agreementMethod === METHOD_IMPORT_SHAPSHOT &&
+            !values.textEditorValue.trim()
+          ) {
             errors.agreementFile = "Agreement content is a required selection";
           } else if (
             values.agreementMethod === METHOD_UPLOAD &&
@@ -100,8 +103,6 @@ export default function NavPanel({ setLoading, page }: { setLoading: any; page: 
             !values.filePath
           ) {
             errors.agreementFile = "Agreement file upload is required";
-          } else if (!values.textEditorValue.trim() && !values.agreementHash) {
-            errors.agreementFile = "Agreement content is a required selection";
           }
           break;
         case 2:
@@ -245,7 +246,7 @@ export default function NavPanel({ setLoading, page }: { setLoading: any; page: 
   };
 
   const preuploadFile = async () => {
-    if (step !== 2) return;
+    if (step === 3) return;
     try {
       let uploadedFileData: { filePath?: string; agreementHash?: string; error?: any } = {};
       if (
@@ -283,6 +284,7 @@ export default function NavPanel({ setLoading, page }: { setLoading: any; page: 
           return;
         }
       }
+      return uploadedFileData;
     } catch (error) {
       console.error(error);
       notifError(
@@ -437,7 +439,14 @@ export default function NavPanel({ setLoading, page }: { setLoading: any; page: 
             <Text sx={secondaryTitleStep}>Enter agreement content</Text>
           </Container>
         </Flex>
-        <Container sx={box}></Container>
+        <Container
+          sx={{
+            ...box,
+            "@media screen and (max-width: 1119px)": {
+              borderTop: "1px dashed #CA5CF2",
+            },
+          }}
+        ></Container>
         <Flex
           onClick={() => {
             return step > 2 ? changeStep(2) : null;
@@ -458,7 +467,14 @@ export default function NavPanel({ setLoading, page }: { setLoading: any; page: 
             <Text sx={secondaryTitleStep}>Add signers and observers</Text>
           </Container>
         </Flex>
-        <Container sx={box}></Container>
+        <Container
+          sx={{
+            ...box,
+            "@media screen and (max-width: 1119px)": {
+              borderTop: step > 2 ? "1px dashed #CA5CF2" : "2px dashed #EDEDF3",
+            },
+          }}
+        ></Container>
         <Flex
           onClick={() => (step > 3 || page === "edit" ? changeStep(3) : null)}
           sx={{ ...stepStyle, cursor: step > 3 || page === "edit" ? "pointer" : "initial" }}
