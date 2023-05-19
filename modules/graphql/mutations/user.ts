@@ -4,6 +4,7 @@ export const loginMutation = graphql(`
   mutation login($address: String!, $signature: String) {
     login(address: $address, signature: $signature) {
       message
+      error
       payload
       token
     }

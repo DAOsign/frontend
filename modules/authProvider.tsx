@@ -7,9 +7,10 @@ import { TypedDataDomain, TypedDataField } from "ethers";
 import { useLock } from "../hooks/useLock";
 import { ConnectorType } from "../lib/snapshot/options";
 import { clearToken, getToken, setToken } from "../utils/token";
-import { useMutation } from "urql";
+import { OperationResult, useMutation } from "urql";
 import { loginMutation, verifyMyEmailMutation } from "./graphql/mutations";
 import { useRouter } from "next/router";
+import { notifError } from "../utils/notification";
 
 interface AuthProps {}
 
@@ -41,6 +42,13 @@ interface Web3State {
   walletConnectType: string | null;
   profile: null;
   //isTrezor: boolean;
+}
+
+interface LoginResponse {
+  message?: string;
+  error?: string;
+  payload?: string;
+  token?: string;
 }
 
 const defaultNetwork = (process.env.NEXT_PUBLIC_DEFAULT_NETWORK ||
@@ -125,16 +133,28 @@ const AuthProvider = (props?: Partial<ProviderProps<AuthProps>>) => {
     if (!account) return;
     if (getToken()) return; // user already has a token
 
-    const res = await loginRequest({ address: account });
+    const res = (await loginRequest({ address: account })) as OperationResult<{
+      login: LoginResponse;
+    }>;
+
+    if (res?.data?.login?.error) {
+      notifError(res?.data?.login?.error || "Login error");
+      return;
+    }
 
     const payload = res?.data?.login?.payload;
     if (!payload) return;
 
     const signature = await sign(payload);
-    const tokenRes = await loginRequest({
+    const tokenRes = (await loginRequest({
       address: account,
       signature: signature,
-    });
+    })) as OperationResult<{ login: LoginResponse }>;
+
+    if (tokenRes?.data?.login?.error) {
+      notifError(tokenRes?.data?.login?.error || "Login error");
+      return;
+    }
 
     const token = tokenRes?.data?.login?.token;
     if (!token) return;
