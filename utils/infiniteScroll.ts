@@ -68,6 +68,7 @@ export function useLoadItems() {
         {
           filterBy: !!filterValues.length ? filterValues : null,
           search: debouncedSearch.length ? debouncedSearch : null,
+          sortByField: "createdAt",
           take: take,
           skip: reset ? 0 : skip,
         },
