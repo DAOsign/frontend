@@ -19,7 +19,7 @@ jobs:
         run: |
           docker build -t stage-frontend:${{steps.vars.outputs.tag}} \
             --build-arg NEXT_PUBLIC_REST_ENDPOINT=${{ secrets.NEXT_PUBLIC_REST_ENDPOINT_UAT }} \
-            --build-arg NEXT_PUBLIC_GRAPHQL_ENDPOINT=${{ secrets.NEXT_PUBLIC_GRAPHQL_ENDPOINT_UAT }} \
+            --build-arg NEXT_PUBLIC_GRAPHQL_ENDPOINT=${{ secrets.NEXT_PUBLIC_GRAPHQL_ENDPOINT_STAGE }} \
             --build-arg NEXT_PUBLIC_PINATA_GATEWAY=${{ secrets.NEXT_PUBLIC_PINATA_GATEWAY_STAGE }} \
             .
       - name: Push to ECR
