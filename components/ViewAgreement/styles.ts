@@ -349,7 +349,7 @@ const contentData = {
   paddingX: "32px",
   borderBottom: "1px solid white",
   minHeight: "200px",
-  pb: "20px",
+  pb: "40px",
   maxHeight: `${DEFAULT_CONTENT_PREVIEW_MAX_HEIGHT}px`,
   overflow: "hidden",
   ".w-md-editor": {
@@ -499,7 +499,7 @@ const verificationCard = {
 
 const showMoreLabel = {
   position: "absolute",
-  bottom: "25px",
+  bottom: "15px",
   left: "32px",
   color: "#CA5CF2",
   fontFamily: "InterBold",

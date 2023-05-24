@@ -162,6 +162,7 @@ a {
 .editor wmde-markdown-var.w-md-editor.w-md-editor-show-preview::-webkit-scrollbar {
   width: 0;
 }
+
 @font-face {
   font-family: "InterRegular";
   src: url("../fonts/Inter-Regular.ttf");
