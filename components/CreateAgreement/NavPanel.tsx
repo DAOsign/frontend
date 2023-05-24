@@ -268,7 +268,7 @@ export default function NavPanel({ setLoading, page }: { setLoading: any; page: 
         }
       } else if (values.agreementMethod === METHOD_ENTER && values.textEditorValue) {
         const encoded = Buffer.from(values.textEditorValue);
-        const file = new File([encoded], "agreement.txt", {
+        const file = new File([encoded], "agreement.md", {
           type: "text/plain",
         });
         uploadedFileData = await uploadNewFile(file);
@@ -334,7 +334,7 @@ export default function NavPanel({ setLoading, page }: { setLoading: any; page: 
             values.textEditorValue
           ) {
             const encoded = Buffer.from(values.textEditorValue);
-            const file = new File([encoded], "agreement.txt", {
+            const file = new File([encoded], "agreement.md", {
               type: "text/plain",
             });
             uploadedFileData = await uploadNewFile(file);
