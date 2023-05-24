@@ -272,7 +272,7 @@ export default function ModalImportSnapshot({ isOpen, page, onExit, setMethod }:
         dataGenerateAggrement = { ...dataGenerateAggrement, statementWork };
       }
       if (!!additionalDetails) {
-        dataGenerateAggrement = { ...dataGenerateAggrement, statementWork };
+        dataGenerateAggrement = { ...dataGenerateAggrement, additionalDetails };
       }
     }
     return query(
