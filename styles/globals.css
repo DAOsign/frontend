@@ -22,6 +22,7 @@ a {
 .Toastify__close-button.Toastify__close-button--light {
   display: none;
 }
+
 .chooseFileText {
   pointer-events: none;
   font-family: "InterBold";
