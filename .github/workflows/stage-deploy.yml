@@ -1,8 +1,8 @@
 name: Build & Push Staging Release
 
 on:
-  release:
-    types: [published]
+  push:
+    tags: ["v*.*.*"]
 
 jobs:
   build:
@@ -35,8 +35,6 @@ jobs:
     runs-on: ubuntu-latest
     needs: [build]
     env:
-      NAMESPACE_STAGE: "stage"
-      PRIVATE_REGISTRY: "099077447883.dkr.ecr.us-east-1.amazonaws.com"
       # Ingress
       HOST: "testnet.daosign.org"
     steps:
@@ -62,13 +60,15 @@ jobs:
         uses: koslib/helm-eks-action@v1.25.2
         env:
           KUBE_CONFIG_DATA: ${{ secrets.KUBE_CONFIG_DATA_DEV }}
+          PRIVATE_REGISTRY: "099077447883.dkr.ecr.us-east-1.amazonaws.com"
+          NAMESPACE: "stage"
           HELM_VERSION: 0.1.1
         with:
           plugins: |
             https://github.com/jkroepke/helm-secrets
           command: |
             aws ecr get-login-password --region us-east-1 | helm registry login --username AWS --password-stdin ${{ env.PRIVATE_REGISTRY }} && \
-              kubectl get pods -n ${{ env.NAMESPACE_STAGE }} && helm ls -n ${{ env.NAMESPACE_STAGE }} && \
-              helm upgrade helm-frontend -i -n ${{ env.NAMESPACE_STAGE }} --atomic -f .env.yaml oci://${{ env.PRIVATE_REGISTRY }}/helm-frontend  --version $HELM_VERSION \
+              kubectl get pods -n ${{ env.NAMESPACE }} && helm ls -n ${{ env.NAMESPACE }} && \
+              helm upgrade helm-frontend -i -n ${{ env.NAMESPACE }} --atomic -f .env.yaml oci://${{ env.PRIVATE_REGISTRY }}/helm-frontend  --version $HELM_VERSION \
               --set=frontend.image.repository=${{ env.PRIVATE_REGISTRY }}/stage-frontend,frontend.image.tag=${{needs.build.outputs.image_tag}} && \
-              helm ls -n ${{ env.NAMESPACE_STAGE }} && kubectl get pods -n ${{ env.NAMESPACE_STAGE }}
+              helm ls -n ${{ env.NAMESPACE }} && kubectl get pods -n ${{ env.NAMESPACE }}
