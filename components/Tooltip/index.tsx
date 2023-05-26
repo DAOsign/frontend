@@ -12,9 +12,10 @@ type Props = {
   minWidth?: string;
   height?: undefined | string;
   children: string | JSX.Element | JSX.Element[];
+  className?: string;
 };
 
-const Tooltip = ({ children, left, top, transform, minWidth, title, height }: Props) => {
+const Tooltip = ({ children, left, top, transform, minWidth, title, height, className }: Props) => {
   return (
     <div style={{ paddingTop: 0 }} className={`${styles.tooltip} tooltip`}>
       <button className={`${styles.tooltip_button} tooltip_button`}> {children} </button>
@@ -28,7 +29,7 @@ const Tooltip = ({ children, left, top, transform, minWidth, title, height }: Pr
           minWidth: minWidth,
           height: height ? height : "100px",
         }}
-        className={`${styles.tooltip_container}`}
+        className={`${styles.tooltip_container} ${className}`}
       >
         <div
           style={{ justifyContent: "center", pointerEvents: "none" }}

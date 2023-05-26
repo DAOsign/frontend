@@ -183,6 +183,7 @@ export const AgreementInformation = ({
         />
         {agreement?.snapshotProposalUrl && (
           <InformationRow
+            className="proposalId"
             left="-329px"
             tooltipValue={extractProposalId(agreement.snapshotProposalUrl)!}
             value={
@@ -257,7 +258,8 @@ export const AgreementInformation = ({
             <Tooltip
               top="-111%"
               left="-47px"
-              transform=""
+              className=""
+              transform="anonymousTooltip"
               minWidth="132px"
               title={"Anonymous Badge"}
               height={undefined}

@@ -443,6 +443,7 @@ export default function ModalImportSnapshot({ isOpen, page, onExit, setMethod }:
         </Flex>
         <Box sx={stylesIcon}>
           <Tooltip
+            className={`${[name]}Toltip`}
             top={switches[name].top}
             left="-148px"
             transform=""

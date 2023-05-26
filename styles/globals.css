@@ -876,3 +876,92 @@ body {
 .settingImportSnapshotProposal::-webkit-scrollbar {
   width: 0;
 }
+/* tooltip mobile */
+@media screen and (max-width: 480px)  { 
+   .legalJurisdictionToltip .arrowTooltip {
+  margin-left: 59.5% !important;
+}
+.addIndemnificationClauseToltip ,.arrowTooltip {
+  margin-left: 53.5% !important;
+}
+}
+@media screen and (max-width: 550px) {
+  .proposalId {
+     display: none;
+  }
+  .userCardAddress { 
+    left: -112px !important;
+  }
+  .statusTooltip { 
+    left: 102% !important;
+  }
+  .publicOrPrivate {
+    left: 214% !important;
+  }
+  .signatureTooltip {
+    left: 204% !important; 
+  }
+  .statusViews {
+    left: 125% !important;
+  }
+  .statusViews .arrowTooltip { 
+    margin-left: 22.5% !important; 
+  }
+  .anonymousTooltip {
+    top: -83% !important;
+    left: -13px !important;
+  }
+  .enableTransformToltip {
+    top: -66px !important;
+    left: -125px !important;
+    min-width: 163px !important;
+    height: 100px !important;
+  }
+  .enableTransformToltip .arrowTooltip {
+    margin-left: 78.5% !important;
+  }
+  .contractTypeToltip { 
+    top: -69px !important;
+    left: -119px !important;
+    min-width: 206px !important;
+    height: 100px !important;
+  }
+  .contractTypeToltip .arrowTooltip {
+    margin-left: 59.5% !important;
+  }
+  .legalJurisdictionToltip {
+    top: -67px !important;
+    left: -117px !important;
+    min-width: 200px !important;
+    height: 100px !important;
+  }
+  .legalJurisdictionToltip .arrowTooltip {
+    margin-left: 59.5% !important;
+  }
+  .addIndemnificationClauseToltip {
+    top: -107px !important;
+    left: -128px !important;
+    min-width: 220px !important;
+    height: 100px !important;
+  }
+  .addIndemnificationClauseToltip .arrowTooltip {
+    margin-left: 58.5% !important;
+  }
+  .addIntellectualPropertyClauseToltip {
+    top: -103px !important;
+    left: -148px !important;
+    min-width: 200px !important;
+    height: 101px !important;
+  }
+  .addIntellectualPropertyClauseToltip .arrowTooltip {
+    margin-left: 75.5% !important;
+  }
+  .addNonSolicitationClauseToltip {
+    min-width: 200px !important;
+    top: -103px !important;
+  }
+  .addNonSolicitationClauseToltip .arrowTooltip {
+    margin-left: 74.5% !important;
+  }
+  
+}
