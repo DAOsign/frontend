@@ -2,7 +2,7 @@
 import React, { useCallback, useEffect, useMemo, useState } from "react";
 import { Box, Button, Flex } from "theme-ui";
 import { useRouter } from "next/router";
-import { useMutation, useQuery, useClient } from "urql";
+import { useClient } from "urql";
 
 import { agreementById } from "../../modules/graphql/queries";
 import {
@@ -30,6 +30,7 @@ import ModalEditObservers from "../../components/ModalEditObservers";
 
 import useSignAgreement from "../../hooks/useSignAgreement";
 import ModalReadyToSign from "../ModalReadyToSign";
+import { ZERO_ADDRESS } from "../../constants/common";
 
 export const ViewAgreement = () => {
   const { push, query } = useRouter();
@@ -44,6 +45,7 @@ export const ViewAgreement = () => {
   > | null>();
 
   const { account } = useWeb3();
+  const isViewingAgreementWithoutLogIn = account === ZERO_ADDRESS;
 
   // TODO: compare by user, not wallet
   const userIsAuthor = useMemo<boolean>(
@@ -133,12 +135,16 @@ export const ViewAgreement = () => {
       ) : (
         <>
           <Flex sx={mainData}>
-            <Flex onClick={handleBack} sx={backContainer}>
-              <Box sx={backIcon}>
-                <Icon src={iconsObj.arrowNarrowLeft} />
-              </Box>
-              <Box>Back to Dashboard</Box>
-            </Flex>
+            {isViewingAgreementWithoutLogIn ? (
+              <></>
+            ) : (
+              <Flex onClick={handleBack} sx={backContainer}>
+                <Box sx={backIcon}>
+                  <Icon src={iconsObj.arrowNarrowLeft} />
+                </Box>
+                <Box>Back to Dashboard</Box>
+              </Flex>
+            )}
             <Box sx={title}>{agreement?.title}</Box>
             <AgreementLabels
               agreementTitle={agreement?.title}

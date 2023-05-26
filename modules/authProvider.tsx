@@ -11,6 +11,7 @@ import { OperationResult, useMutation } from "urql";
 import { loginMutation, verifyMyEmailMutation } from "./graphql/mutations";
 import { useRouter } from "next/router";
 import { notifError } from "../utils/notification";
+import { ZERO_ADDRESS } from "../constants/common";
 
 interface AuthProps {}
 
@@ -83,6 +84,17 @@ const AuthProvider = (props?: Partial<ProviderProps<AuthProps>>) => {
   const loginStarted = useRef(false);
 
   const web3ProviderRef = useRef<Web3Provider>();
+
+  async function viewPublicAgreement() {
+    const loadedStateNotConnectedUser = {
+      account: ZERO_ADDRESS,
+      network: {},
+      authLoading: false,
+      walletConnectType: null,
+      profile: null,
+    } as Web3State;
+    setState(state => ({ ...state, ...loadedStateNotConnectedUser, authLoading: false }));
+  }
 
   async function login(connector?: ConnectorType, email?: string, emailVerificationSalt?: string) {
     // Prevent double loginRequest due to react dev useEffect[] runs twice
@@ -317,7 +329,12 @@ const AuthProvider = (props?: Partial<ProviderProps<AuthProps>>) => {
   }
 
   useEffect(() => {
-    login();
+    const hasToken = Boolean(getToken());
+    if (!hasToken && pathname === "/agreement/[agreementId]") {
+      viewPublicAgreement();
+    } else {
+      login();
+    }
   }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
   return (
