@@ -31,7 +31,14 @@ a {
   color: #ca5cf2;
   opacity: 0.7;
 }
-
+input {
+  font-family: 'InterMedium' !important;
+  font-style: normal;
+  font-weight: 500 !important;
+  font-size: 16px !important;
+  line-height: 160% !important;
+  color: #212121 !important;
+}
 .rowInformation .arrowTooltip {
   margin-left: 80.5%;
 }
