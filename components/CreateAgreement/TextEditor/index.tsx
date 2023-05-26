@@ -63,7 +63,7 @@ const TextEditor = ({
   const [state, setState] = useState<"edit" | "preview">("edit");
 
   const heightControl = (e: number) => {
-    if (e === minHeightTextEditor) {
+    if (e <= minHeightTextEditor) {
       return;
     }
     if (!isNaN(e)) {

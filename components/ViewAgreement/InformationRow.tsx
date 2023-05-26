@@ -8,9 +8,10 @@ interface Props {
   value: string | React.ReactElement;
   tooltipValue?: string;
   left?: string;
+  className?: string;
 }
 
-export const InformationRow = ({ name, value, tooltipValue, left }: Props) => {
+export const InformationRow = ({ name, value, tooltipValue, left, className }: Props) => {
   return (
     <Container>
       <Flex sx={informationRow}>
@@ -18,6 +19,7 @@ export const InformationRow = ({ name, value, tooltipValue, left }: Props) => {
         <Flex className="rowInformation" sx={informationRowValue}>
           {left && tooltipValue ? (
             <Tooltip
+              className={className}
               title={tooltipValue}
               height={undefined}
               minWidth="300px"

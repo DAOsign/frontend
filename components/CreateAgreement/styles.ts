@@ -22,7 +22,7 @@ export const iconDrag = {
   position: "absolute",
   bottom: 0,
   borderRadius: "8px",
-  right: "1px",
+  right: 0,
   backgroundColor: "#F7F7FB",
   pointerEvents: "none",
 } as ThemeUIStyleObject;
@@ -339,12 +339,11 @@ export const importOptionsTitle = {
 } as ThemeUIStyleObject;
 
 export const textInput = {
-  border: "none",
+  border: "3px solid #F7F7FB ",
   background: "#F7F7FB",
   mb: "60px",
   height: "102px",
   maxWidth: "260px",
-  minWidth: "260px",
   borderRadius: "8px",
   position: "relative",
   padding: "15px 20px",

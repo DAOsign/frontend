@@ -88,6 +88,7 @@ export default function AgreementItem({
             <Flex sx={agreementLabels}>
               {isWaitingForMySignature ? (
                 <Tooltip
+                  className="signatureTooltip"
                   title="Your signature is missing"
                   transform="translate(-58%, -3%)"
                   minWidth="170px"
@@ -102,6 +103,7 @@ export default function AgreementItem({
                 </Tooltip>
               ) : null}
               <Tooltip
+                className="statusTooltip"
                 top="-46px"
                 height="0"
                 left="58%"
@@ -115,6 +117,7 @@ export default function AgreementItem({
                 <Tooltip
                   top="-68px"
                   height="0"
+                  className="publicOrPrivate"
                   //@ts-ignore
                   left={width < 720 ? "151% " : "65%"}
                   transform={
