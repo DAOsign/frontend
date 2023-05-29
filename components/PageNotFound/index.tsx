@@ -14,6 +14,10 @@ import {
   pageText,
 } from "./styles";
 
+/*
+  TODO: on click on "Go Home" if the user isn't authorized the error will occur.
+        If the user isn't authorized they should be redirected to the /connect page 
+*/
 export default function PageNotFound() {
   const { push } = useRouter();
   return (

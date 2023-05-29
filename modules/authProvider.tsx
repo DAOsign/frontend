@@ -2,7 +2,6 @@
 import { createContext, ProviderProps, useRef, useEffect, useState } from "react";
 import { Web3Provider } from "@ethersproject/providers";
 import networks from "../lib/snapshot/networks.json";
-import { formatUnits } from "@ethersproject/units";
 import { TypedDataDomain, TypedDataField } from "ethers";
 import { useLock } from "../hooks/useLock";
 import { ConnectorType } from "../lib/snapshot/options";
@@ -12,6 +11,7 @@ import { loginMutation, verifyMyEmailMutation } from "./graphql/mutations";
 import { useRouter } from "next/router";
 import { notifError } from "../utils/notification";
 import { ZERO_ADDRESS } from "../constants/common";
+import { EthereumProvider } from "hardhat/types";
 
 interface AuthProps {}
 
@@ -80,10 +80,17 @@ const AuthProvider = (props?: Partial<ProviderProps<AuthProps>>) => {
   const [, verifyMyEmailRequest] = useMutation(verifyMyEmailMutation);
 
   const auth = useLock();
-
   const loginStarted = useRef(false);
-
   const web3ProviderRef = useRef<Web3Provider>();
+
+  useEffect(() => {
+    const hasToken = Boolean(getToken());
+    if (!hasToken && pathname === "/agreement/[agreementId]") {
+      viewPublicAgreement();
+    } else {
+      login();
+    }
+  }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
   async function viewPublicAgreement() {
     const loadedStateNotConnectedUser = {
@@ -193,7 +200,7 @@ const AuthProvider = (props?: Partial<ProviderProps<AuthProps>>) => {
     setState(state => ({ ...state, account: "" }));
   }
 
-  async function loadProvider(provider: Web3Provider) {
+  async function loadProvider(provider: EthereumProvider) {
     const loadedState: Partial<Web3State> = {};
     try {
       //@ts-ignore TODO
@@ -202,7 +209,8 @@ const AuthProvider = (props?: Partial<ProviderProps<AuthProps>>) => {
       }
       if (provider?.on) {
         provider.on("chainChanged", async (chainId: string) => {
-          handleChainChanged(formatUnits(chainId, 0) as ChainId);
+          console.log("chainChanged");
+          await _switchToMainnet(provider);
         });
         provider.on("accountsChanged", async (accounts: string[]) => {
           clearToken();
@@ -244,7 +252,7 @@ const AuthProvider = (props?: Partial<ProviderProps<AuthProps>>) => {
       }
       //console.log("Network", network);
       // console.log("Accounts", accounts);
-      handleChainChanged(network?.chainId);
+      await _switchToMainnet(provider);
       const acc = accounts && accounts?.length > 0 ? accounts[0] : null;
 
       /*       setState((state) => ({
@@ -270,19 +278,11 @@ const AuthProvider = (props?: Partial<ProviderProps<AuthProps>>) => {
     return newState;
   }
 
-  function handleChainChanged(chainId: ChainId) {
-    let network = networks[chainId];
-    if (!network) {
-      network = {
-        ...networks[defaultNetwork],
-        chainId: Number(chainId),
-        name: "Unknown",
-        network: "unknown",
-        //@ts-ignore
-        unknown: true,
-      };
-    }
-    setState(state => ({ ...state, network: network }));
+  async function _switchToMainnet(provider: EthereumProvider /*,chainId: ChainId*/) {
+    await provider.request({
+      method: "wallet_switchEthereumChain",
+      params: [{ chainId: "0x1" }], // Ethereum Mainnet
+    });
   }
 
   async function sign(value: string): Promise<string> {
