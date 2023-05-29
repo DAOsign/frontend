@@ -11,7 +11,6 @@ import { loginMutation, verifyMyEmailMutation } from "./graphql/mutations";
 import { useRouter } from "next/router";
 import { notifError } from "../utils/notification";
 import { ZERO_ADDRESS } from "../constants/common";
-import { EthereumProvider } from "hardhat/types";
 
 interface AuthProps {}
 
@@ -200,7 +199,7 @@ const AuthProvider = (props?: Partial<ProviderProps<AuthProps>>) => {
     setState(state => ({ ...state, account: "" }));
   }
 
-  async function loadProvider(provider: EthereumProvider) {
+  async function loadProvider(provider: Web3Provider) {
     const loadedState: Partial<Web3State> = {};
     try {
       //@ts-ignore TODO
@@ -278,7 +277,7 @@ const AuthProvider = (props?: Partial<ProviderProps<AuthProps>>) => {
     return newState;
   }
 
-  async function _switchToMainnet(provider: EthereumProvider /*,chainId: ChainId*/) {
+  async function _switchToMainnet(provider: any) {
     await provider.request({
       method: "wallet_switchEthereumChain",
       params: [{ chainId: "0x1" }], // Ethereum Mainnet
