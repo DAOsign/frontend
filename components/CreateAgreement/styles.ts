@@ -220,6 +220,8 @@ const title = {
   },
   "@media screen and (max-width: 479px)": {
     variant: "text.h4",
+    display: "block",
+    textAlign: "center",
     mb: "28px",
   },
 } as ThemeUIStyleObject;

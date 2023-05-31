@@ -44,10 +44,11 @@ export default function AgreementLocationRadioButtons({ page }: { page: string }
 
   return (
     <>
-      <Flex sx={{ alignItems: "center", mt: "24px", mb: "5px" }}>
+      <Flex sx={{ alignItems: "center", mt: "24px", mb: "2px" }}>
         <Text
           sx={{
             variant: "forms.label",
+            fontFamily: "InterRegular",
             display: "block",
             mr: "5px",
             maxWidth: "150px",

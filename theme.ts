@@ -13,7 +13,7 @@ const linkBase = {
 export const theme: Theme = {
   forms: {
     label: {
-      fontFamily: "InterMedium",
+      fontFamily: "InterRegular",
       fontStyle: "normal",
       fontWeight: 400,
       maxWidth: "150px",
