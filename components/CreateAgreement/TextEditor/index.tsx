@@ -105,8 +105,10 @@ const TextEditor = ({
             Preview
           </Button>
           <Button sx={btnBack} className="backBtn" onClick={handleChooseAnotherMethod}>
-            <Icon style={{ display: "block" }} src={iconsObj.arrowLeftPink} />
-            <Text sx={{ display: "block" }}>{" < "} Choose another method</Text>
+            <Box sx={{ width: "20px" }}>
+              <Icon style={{ display: "block" }} src={iconsObj.arrowLeftPink} />
+            </Box>
+            <Text sx={{ display: "block" }}>Choose another method</Text>
           </Button>
         </Flex>
         <Box>

@@ -405,7 +405,6 @@ const card = {
 export const conteinerItems = {
   height: "242px",
   position: "relative",
-  mt: "8px",
   "@media screen and (max-width: 719px)": {
     height: "360px",
   },
@@ -912,7 +911,7 @@ export const uploadHeader = {
   height: "20px",
   alignItems: "center",
   position: "relative",
-  mb: "8px",
+  mb: "2px",
   "@media screen and (max-width: 720px)": {
     width: "100%",
   },
@@ -954,6 +953,7 @@ export const backBtn = {
   fontFamily: "InterBold",
   fontStyle: "normal",
   fontWeight: 700,
+  lineHeight: "22.4px",
   fontSize: "14px",
   "&:hover": {
     color: "#AE4FD0",
@@ -970,7 +970,7 @@ const containerFlex = {
   display: "flex",
   height: "26px",
   gap: "20px",
-  mt: "8px",
+  mt: "12px",
   "@media screen and (max-width: 480px)": {
     flexDirection: "column",
   },

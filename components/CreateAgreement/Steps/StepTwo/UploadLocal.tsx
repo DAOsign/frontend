@@ -24,7 +24,7 @@ export default function UploadLocalAgreement({
         sx={{
           ...uploadHeader,
           "@media screen and (max-width: 720px)": {
-            mb: !values.file ? "31px" : "8px",
+            mb: !values.file ? "31px" : "2px",
           },
         }}
       >

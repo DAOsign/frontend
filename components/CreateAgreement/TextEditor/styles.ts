@@ -98,7 +98,7 @@ export const btnBack = {
   display: "flex",
   lineHeight: "160%",
   alignItems: "center",
-  width: "220px",
+  width: "fit-content !important",
   marginLeft: "auto",
   pb: 0,
   marginRight: 0,
