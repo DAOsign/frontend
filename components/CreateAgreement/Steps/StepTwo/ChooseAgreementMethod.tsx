@@ -18,22 +18,21 @@ import TextEditor from "../../TextEditor/index";
 import { useCreateAgreement } from "../../../../hooks/useCreateAgreement";
 import {
   CreateAgreementFieldErrors,
-  CreationState,
   initialStateProposal,
+  CreationState,
 } from "../../../../modules/createAgreementProvider";
 import { useEditAgreement } from "../../../../hooks/useEditAgreement";
 import { isEmpty } from "../../../../utils/common";
 import { withFade } from "../..";
 import UploadLocalAgreement from "./UploadLocal";
 import {
-  METHOD_ENTER,
-  METHOD_UPLOAD,
   METHOD_IMPORT_SHAPSHOT,
+  METHOD_UPLOAD,
   UNITED_STATES,
+  METHOD_ENTER,
 } from "../../../../types";
 import FieldErrorMessage from "../../../Form/FieldErrorMessage";
 import useWindowDimensions from "../../../../hooks/useWindowDimensions";
-import ModalImportSnapshot from "../../../ModalImportSnapshot";
 import ModalAttention from "../../../ModalAttention";
 
 export default function ChooseAgreementMethod({
