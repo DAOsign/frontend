@@ -129,7 +129,6 @@ export const input = {
   borderRadius: "8px",
   opacity: 1,
   width: "100%",
-  color: "#21212150 !important",
   pl: "16px",
   transition: "border-color 0.3s",
   border: "1px solid transparent",

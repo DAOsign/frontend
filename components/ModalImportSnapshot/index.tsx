@@ -228,7 +228,7 @@ export default function ModalImportSnapshot({ isOpen, page, onExit, setMethod }:
     setMethod(METHOD_IMPORT_SHAPSHOT);
   };
 
-  const handleCreateAgreement = async () => {
+  const handleCreateAgreement = async (): Promise<string> => {
     const agreementId = await saveAgreement({
       agreementId: values.agreementId || undefined,
       title: values.title,
@@ -253,7 +253,8 @@ export default function ModalImportSnapshot({ isOpen, page, onExit, setMethod }:
   };
 
   const generate = async (proposalText: string) => {
-    const id: number = !!values.agreementId ? values.agreementId : await handleCreateAgreement();
+    const id = !!values.agreementId ? values.agreementId : await handleCreateAgreement();
+    changeValue("agreementId", id);
     let dataGenerateAggrement: any = {
       addIntellectualPropertyClause,
       addNonSolicitationClause,
@@ -271,7 +272,7 @@ export default function ModalImportSnapshot({ isOpen, page, onExit, setMethod }:
         dataGenerateAggrement = { ...dataGenerateAggrement, statementWork };
       }
       if (!!additionalDetails) {
-        dataGenerateAggrement = { ...dataGenerateAggrement, statementWork };
+        dataGenerateAggrement = { ...dataGenerateAggrement, additionalDetails };
       }
     }
     return query(
@@ -442,6 +443,7 @@ export default function ModalImportSnapshot({ isOpen, page, onExit, setMethod }:
         </Flex>
         <Box sx={stylesIcon}>
           <Tooltip
+            className={`${[name]}Toltip`}
             top={switches[name].top}
             left="-148px"
             transform=""

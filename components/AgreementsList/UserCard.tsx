@@ -57,6 +57,7 @@ export default function UserCard({ address }: any) {
               minWidth=""
               title={address}
               height={undefined}
+              className="userCardAddress"
             >
               <Text
                 sx={{

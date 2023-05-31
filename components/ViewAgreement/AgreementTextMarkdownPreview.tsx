@@ -141,7 +141,7 @@ export const AgreementTextMarkdownPreview = ({ textContent }: Props) => {
       <Box
         sx={{
           width: "100%",
-          height: "75px",
+          height: "50px",
           bottom: "0",
           position: "absolute",
           backgroundColor: "white",

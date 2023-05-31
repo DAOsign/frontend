@@ -94,6 +94,7 @@ export const AgreementLabels = ({
         <Tooltip
           top="-46px"
           height="0"
+          className="statusViews"
           left="58%"
           transform={"translate(-60%, -3%)"}
           title={"Agreement Status"}

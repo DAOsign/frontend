@@ -35,7 +35,6 @@ export const theme: Theme = {
       border: "1px solid #EDEDF3",
       fontStyle: "normal",
       color: "#212121",
-      opacity: 0.5,
       display: "block",
       paddingX: "20px",
       "&:hover": {
