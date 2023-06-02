@@ -63,7 +63,7 @@ export const configurationsTitle = {
 
 const imageUploadContainer = {
   textAlign: "center",
-  border: "1px dashed #D8D8E2",
+  border: "1px solid #D8D8E2",
   borderRadius: "12px",
   position: "relative",
   width: "600px",
