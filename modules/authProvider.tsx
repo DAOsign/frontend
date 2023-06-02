@@ -48,7 +48,6 @@ const AuthProvider = (props?: Partial<ProviderProps<AuthProps>>) => {
   const { push, pathname } = useRouter();
   const [, loginRequest] = useMutation(loginMutation);
   const [, verifyMyEmailRequest] = useMutation(verifyMyEmailMutation);
-
   const auth = useLock();
   const loginStarted = useRef(false);
   const web3ProviderRef = useRef<Web3Provider>();
@@ -170,7 +169,7 @@ const AuthProvider = (props?: Partial<ProviderProps<AuthProps>>) => {
       }
       if (provider?.on) {
         provider.on("chainChanged", async (chainId: string) => {
-          await handleChainChanged(formatUnits(chainId, 0) as ChainId);
+          handleChainChanged(formatUnits(chainId, 0) as ChainId);
         });
         provider.on("accountsChanged", async (accounts: string[]) => {
           clearToken();
@@ -210,35 +209,22 @@ const AuthProvider = (props?: Partial<ProviderProps<AuthProps>>) => {
       } catch (e) {
         console.error(e);
       }
-      //console.log("Network", network);
-      // console.log("Accounts", accounts);
-      await handleChainChanged(network?.chainId);
+
+      handleChainChanged(network?.chainId);
       const acc = accounts && accounts?.length > 0 ? accounts[0] : null;
 
-      /*       setState((state) => ({
-        ...state,
-        account: acc,
-        //@ts-ignore
-        walletConnectType: provider.value?.wc?.peerMeta?.name || null,
-    })); */
-
       loadedState.account = acc;
-      loadedState.walletConnectType =
-        //@ts-ignore
-        provider.value?.wc?.peerMeta?.name || null;
+      //@ts-ignore
+      loadedState.walletConnectType = provider.value?.wc?.peerMeta?.name || null;
     } catch (e) {
       console.log("ERROR load web3", e);
-      //setState((state) => ({ ...state, account: "" }));
       loadedState.account = "";
-
-      //return Promise.reject(e);
     }
-    const newState = { ...state, ...loadedState };
 
-    return newState;
+    return loadedState;
   }
 
-  async function handleChainChanged(chainId: ChainId) {
+  function handleChainChanged(chainId: ChainId) {
     let network = networks[chainId];
     if (!network) {
       network = {
