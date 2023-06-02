@@ -72,7 +72,7 @@ const TextEditor = ({
       setHeightValue(minHeightTextEditor);
     }
   };
-
+  console.log(expand);
   return (
     <Box style={{ position: "relative", width: "100%" }} className="textEditor" sx={styles}>
       <Flex sx={{ alignItems: "center" }}>
@@ -141,7 +141,16 @@ const TextEditor = ({
             </Box>
             <Text sx={footerText}>Markdown is supported</Text>
           </Flex>
-          {state === "edit" && (
+          {state === "edit" && expand === true ? (
+            <Button
+              onClick={() => {
+                if (!!textEditorValue?.length && textEditorValue?.length > 1000) setExpand(!expand);
+              }}
+              sx={expandBtn}
+            >
+              Collapse
+            </Button>
+          ) : (
             <Button
               onClick={() => {
                 if (!!textEditorValue?.length && textEditorValue?.length > 1000) setExpand(!expand);
