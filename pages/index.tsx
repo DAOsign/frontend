@@ -4,11 +4,11 @@ import { useWeb3 } from "../hooks/useWeb3";
 import AgreementsList from "../components/AgreementsList";
 import { Container } from "theme-ui";
 import ModalSwitchNetwork from "../components/ModalSwitchNetwork";
-import { ETH_MAINNET_CHAIN_ID } from "../constants/common";
+import { DEFAULT_CHAIN_ID } from "../constants/common";
 
 const Home: NextPage = () => {
   const { account, network } = useWeb3();
-  const isWrongNetwork = network?.chainId !== ETH_MAINNET_CHAIN_ID;
+  const isWrongNetwork = network?.chainId.toString() !== DEFAULT_CHAIN_ID;
   return (
     <Container>
       <ModalSwitchNetwork isOpen={isWrongNetwork} />

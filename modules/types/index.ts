@@ -23,7 +23,7 @@ export interface AuthContext {
   ) => Promise<string>;
   _signTypedData: (msg: any) => Promise<any>;
   resolveEns: (name: string) => Promise<string | undefined | null>;
-  switchToMainnet: () => void;
+  switchToDefaultNetwork: () => void;
 }
 
 export type ChainId = keyof typeof networks;

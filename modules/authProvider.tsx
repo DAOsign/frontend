@@ -11,7 +11,7 @@ import { OperationResult, useMutation } from "urql";
 import { loginMutation, verifyMyEmailMutation } from "./graphql/mutations";
 import { useRouter } from "next/router";
 import { notifError } from "../utils/notification";
-import { ZERO_ADDRESS } from "../constants/common";
+import { ZERO_ADDRESS, DEFAULT_CHAIN_ID } from "../constants/common";
 import {
   AuthContext as AuthContextInterface,
   AuthProps,
@@ -19,9 +19,7 @@ import {
   Web3State,
   LoginResponse,
 } from "./types";
-
-const defaultNetwork = (process.env.NEXT_PUBLIC_DEFAULT_NETWORK ||
-  Object.keys(networks)[0]) as ChainId;
+import { numberToHex } from "../utils/common";
 
 export const AuthContext = createContext<AuthContextInterface>({
   account: null,
@@ -34,13 +32,13 @@ export const AuthContext = createContext<AuthContextInterface>({
   signTypedData: async () => "",
   _signTypedData: async (msg: any) => "",
   resolveEns: async (name: string) => "",
-  switchToMainnet: () => {},
+  switchToDefaultNetwork: () => {},
 });
 
 const AuthProvider = (props?: Partial<ProviderProps<AuthProps>>) => {
   const [state, setState] = useState<Web3State>({
     account: null,
-    network: networks[defaultNetwork],
+    network: networks[DEFAULT_CHAIN_ID],
     authLoading: false,
     walletConnectType: null,
     profile: null,
@@ -220,7 +218,7 @@ const AuthProvider = (props?: Partial<ProviderProps<AuthProps>>) => {
     let network = networks[chainId];
     if (!network) {
       network = {
-        ...networks[defaultNetwork],
+        ...networks[DEFAULT_CHAIN_ID],
         chainId: Number(chainId),
         name: "Unknown",
         network: "unknown",
@@ -235,11 +233,12 @@ const AuthProvider = (props?: Partial<ProviderProps<AuthProps>>) => {
     });
   }
 
-  async function switchToMainnet() {
+  async function switchToDefaultNetwork() {
     const request = web3ProviderRef.current!.provider.request!;
+    const chainId = numberToHex(parseInt(DEFAULT_CHAIN_ID, 10));
     await request({
       method: "wallet_switchEthereumChain",
-      params: [{ chainId: "0x1" }], // Ethereum Mainnet
+      params: [{ chainId }], // default chainId
     });
   }
 
@@ -305,7 +304,7 @@ const AuthProvider = (props?: Partial<ProviderProps<AuthProps>>) => {
         signTypedData,
         _signTypedData,
         resolveEns,
-        switchToMainnet,
+        switchToDefaultNetwork,
         ...state,
       }}
     />
