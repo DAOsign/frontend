@@ -72,7 +72,7 @@ const TextEditor = ({
       setHeightValue(minHeightTextEditor);
     }
   };
-  console.log(expand);
+
   return (
     <Box style={{ position: "relative", width: "100%" }} className="textEditor" sx={styles}>
       <Flex sx={{ alignItems: "center" }}>
