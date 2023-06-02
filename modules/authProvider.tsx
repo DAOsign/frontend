@@ -174,15 +174,7 @@ const AuthProvider = (props?: Partial<ProviderProps<AuthProps>>) => {
         provider.on("accountsChanged", async (accounts: string[]) => {
           clearToken();
           await login();
-          // TODO: swap between different wallets without deleting token
-          // if (accounts.length !== 0) {
-          //   loadedState.account = accounts[0];
-          //   //setState((state) => ({ ...state, account: accounts[0] }));
-          //
-          //   await login();
-          // }
         });
-        // auth.provider.on('disconnect', async () => {});
       }
 
       let network,
