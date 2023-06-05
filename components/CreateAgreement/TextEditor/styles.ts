@@ -1,8 +1,8 @@
 import { ThemeUIStyleObject } from "theme-ui";
 
 const tabStyles: ThemeUIStyleObject = {
-  mb: "36px",
-  "@media screen and (max-width: 720px)": {
+  mb: "40px",
+  "@media screen and (max-width: 1200px)": {
     mb: "0",
   },
   ".w-md-editor-aree::-webkit-scrollbar": {

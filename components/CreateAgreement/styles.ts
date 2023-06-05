@@ -185,7 +185,7 @@ const leftSide = {
   border: "1px solid #EDEDF3",
   borderRadius: "12px",
   paddingX: "78px",
-  paddingBottom: "60px",
+  // paddingBottom: "60px",
   paddingTop: "60px",
   maxHeight: "fit-content",
   "@media screen and (max-width: 1200px)": {
