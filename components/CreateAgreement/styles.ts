@@ -911,9 +911,10 @@ export const uploadHeader = {
   height: "20px",
   alignItems: "center",
   position: "relative",
-  mb: "2px",
+  mb: "14px",
   "@media screen and (max-width: 720px)": {
     width: "100%",
+    mb:"2px",
   },
 } as ThemeUIStyleObject;
 
