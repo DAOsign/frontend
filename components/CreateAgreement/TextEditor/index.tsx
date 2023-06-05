@@ -141,23 +141,14 @@ const TextEditor = ({
             </Box>
             <Text sx={footerText}>Markdown is supported</Text>
           </Flex>
-          {state === "edit" && expand === true ? (
+          {state === "edit" && (
             <Button
               onClick={() => {
                 if (!!textEditorValue?.length && textEditorValue?.length > 1000) setExpand(!expand);
               }}
               sx={expandBtn}
             >
-              Collapse
-            </Button>
-          ) : (
-            <Button
-              onClick={() => {
-                if (!!textEditorValue?.length && textEditorValue?.length > 1000) setExpand(!expand);
-              }}
-              sx={expandBtn}
-            >
-              Expand
+              {!expand ? "Expand" : "Collapse"}
             </Button>
           )}
         </Flex>
