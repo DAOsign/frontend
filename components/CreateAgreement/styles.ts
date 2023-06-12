@@ -324,7 +324,6 @@ export const importOptions = {
     paddingLeft: "16px",
     paddingRight: "16px",
     paddingBottom: "24px",
-    // width: "100%",
     mb: "20px",
   },
 } as ThemeUIStyleObject;
