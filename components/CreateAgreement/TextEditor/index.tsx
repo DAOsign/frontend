@@ -144,7 +144,12 @@ const TextEditor = ({
           {state === "edit" && (
             <Button
               onClick={() => {
-                if (!!textEditorValue?.length && textEditorValue?.length > 1000) setExpand(!expand);
+                if (
+                  !!textEditorValue?.length &&
+                  +textEditorValue?.split(/\n/)?.length > 20 &&
+                  textEditorValue?.trim()?.length > 30
+                )
+                  setExpand(!expand);
               }}
               sx={expandBtn}
             >
