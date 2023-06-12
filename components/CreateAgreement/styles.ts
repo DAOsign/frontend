@@ -185,7 +185,6 @@ const leftSide = {
   border: "1px solid #EDEDF3",
   borderRadius: "12px",
   paddingX: "78px",
-  // paddingBottom: "60px",
   paddingTop: "60px",
   maxHeight: "fit-content",
   "@media screen and (max-width: 1200px)": {
@@ -229,9 +228,6 @@ const title = {
 const rightSide = {
   maxWidth: "364px",
   mx: "0",
-  // "@media screen and (max-width: 719px)": {
-  //   width: "90% !important",
-  // },
 } as ThemeUIStyleObject;
 
 export const navContainer = {
@@ -282,7 +278,6 @@ export const navContainerOptionsIsVisible = {
   "@media screen and (max-width: 480px)": {
     px: "16px",
     py: "24px",
-    // width: "100% !important",
   },
 } as ThemeUIStyleObject;
 
@@ -916,7 +911,7 @@ export const uploadHeader = {
   mb: "8px",
   "@media screen and (max-width: 720px)": {
     width: "100%",
-    mb:"2px",
+    mb: "2px",
   },
 } as ThemeUIStyleObject;
 
