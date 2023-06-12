@@ -146,8 +146,8 @@ const TextEditor = ({
               onClick={() => {
                 if (
                   !!textEditorValue?.length &&
-                  +textEditorValue.split(/\n/).length > 20 &&
-                  textEditorValue.trim().length > 30
+                  +textEditorValue?.split(/\n/)?.length > 20 &&
+                  textEditorValue?.trim()?.length > 30
                 )
                   setExpand(!expand);
               }}
