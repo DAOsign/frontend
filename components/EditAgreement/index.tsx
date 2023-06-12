@@ -153,9 +153,11 @@ export default function EditAgreement({ page }: { page: string }) {
       <Container
         sx={{
           ...leftSide,
-          "@media screen and (max-width: 480px)": {
+          "@media screen and (max-width: 721px)": {
+            pb: !values.file ? "40px" : "74px !important",
+          },
+          "@media screen and (max-width: 479px)": {
             pb: !values.file ? "40px" : "130px !important",
-            px: "16px",
           },
         }}
         className={transitioned ? "transition" : ""}
