@@ -148,7 +148,7 @@ const TextEditor = ({
               }}
               sx={expandBtn}
             >
-              Expand
+              {!expand ? "Expand" : "Collapse"}
             </Button>
           )}
         </Flex>
