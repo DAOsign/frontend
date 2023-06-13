@@ -11,78 +11,43 @@ import { OperationResult, useMutation } from "urql";
 import { loginMutation, verifyMyEmailMutation } from "./graphql/mutations";
 import { useRouter } from "next/router";
 import { notifError } from "../utils/notification";
-import { ZERO_ADDRESS } from "../constants/common";
+import { ZERO_ADDRESS, DEFAULT_CHAIN_ID } from "../constants/common";
+import {
+  AuthContext as AuthContextInterface,
+  AuthProps,
+  ChainId,
+  Web3State,
+  LoginResponse,
+} from "./types";
+import { numberToHex } from "../utils/common";
 
-interface AuthProps {}
-
-interface AuthContext {
-  login: (
-    connector?: ConnectorType,
-    email?: string,
-    emailVerificationSalt?: string
-  ) => Promise<any>;
-  logout: () => void;
-  account: string | null;
-  authLoading: boolean;
-  sign: (message: string) => Promise<string>;
-  signTypedData: (
-    domain: TypedDataDomain,
-    types: Record<string, TypedDataField[]>,
-    value: Record<string, any>
-  ) => Promise<string>;
-  _signTypedData: (msg: any) => Promise<any>;
-  resolveEns: (name: string) => Promise<string | undefined | null>;
-}
-
-type ChainId = keyof typeof networks;
-
-interface Web3State {
-  account: string | null;
-  network: (typeof networks)[ChainId];
-  authLoading: boolean;
-  walletConnectType: string | null;
-  profile: null;
-  //isTrezor: boolean;
-}
-
-interface LoginResponse {
-  message?: string;
-  error?: string;
-  payload?: string;
-  token?: string;
-}
-
-const defaultNetwork = (process.env.NEXT_PUBLIC_DEFAULT_NETWORK ||
-  Object.keys(networks)[0]) as ChainId;
-
-export const AuthContext = createContext<AuthContext>({
+export const AuthContext = createContext<AuthContextInterface>({
   account: null,
   authLoading: false,
+  network: null,
+  walletConnectType: "",
   login: async () => {},
   logout: () => {},
   sign: async () => "",
   signTypedData: async () => "",
   _signTypedData: async (msg: any) => "",
   resolveEns: async (name: string) => "",
+  switchToDefaultNetwork: () => {},
 });
 
 const AuthProvider = (props?: Partial<ProviderProps<AuthProps>>) => {
   const [state, setState] = useState<Web3State>({
     account: null,
-    network: networks[defaultNetwork],
+    network: networks[DEFAULT_CHAIN_ID],
     authLoading: false,
     walletConnectType: null,
     profile: null,
-    //isTrezor: false,
   });
   const { push, pathname } = useRouter();
   const [, loginRequest] = useMutation(loginMutation);
   const [, verifyMyEmailRequest] = useMutation(verifyMyEmailMutation);
-
   const auth = useLock();
-
   const loginStarted = useRef(false);
-
   const web3ProviderRef = useRef<Web3Provider>();
 
   async function viewPublicAgreement() {
@@ -207,15 +172,7 @@ const AuthProvider = (props?: Partial<ProviderProps<AuthProps>>) => {
         provider.on("accountsChanged", async (accounts: string[]) => {
           clearToken();
           await login();
-          // TODO: swap between different wallets without deleting token
-          // if (accounts.length !== 0) {
-          //   loadedState.account = accounts[0];
-          //   //setState((state) => ({ ...state, account: accounts[0] }));
-          //
-          //   await login();
-          // }
         });
-        // auth.provider.on('disconnect', async () => {});
       }
 
       let network,
@@ -242,39 +199,26 @@ const AuthProvider = (props?: Partial<ProviderProps<AuthProps>>) => {
       } catch (e) {
         console.error(e);
       }
-      //console.log("Network", network);
-      // console.log("Accounts", accounts);
+
       handleChainChanged(network?.chainId);
       const acc = accounts && accounts?.length > 0 ? accounts[0] : null;
 
-      /*       setState((state) => ({
-        ...state,
-        account: acc,
-        //@ts-ignore
-        walletConnectType: provider.value?.wc?.peerMeta?.name || null,
-    })); */
-
       loadedState.account = acc;
-      loadedState.walletConnectType =
-        //@ts-ignore
-        provider.value?.wc?.peerMeta?.name || null;
+      //@ts-ignore
+      loadedState.walletConnectType = provider.value?.wc?.peerMeta?.name || null;
     } catch (e) {
       console.log("ERROR load web3", e);
-      //setState((state) => ({ ...state, account: "" }));
       loadedState.account = "";
-
-      //return Promise.reject(e);
     }
-    const newState = { ...state, ...loadedState };
 
-    return newState;
+    return loadedState;
   }
 
   function handleChainChanged(chainId: ChainId) {
     let network = networks[chainId];
     if (!network) {
       network = {
-        ...networks[defaultNetwork],
+        ...networks[DEFAULT_CHAIN_ID],
         chainId: Number(chainId),
         name: "Unknown",
         network: "unknown",
@@ -282,7 +226,20 @@ const AuthProvider = (props?: Partial<ProviderProps<AuthProps>>) => {
         unknown: true,
       };
     }
-    setState(state => ({ ...state, network: network }));
+    setState(state => {
+      const newState = state;
+      newState.network = network;
+      return { ...state, network: network, authLoading: false };
+    });
+  }
+
+  async function switchToDefaultNetwork() {
+    const request = web3ProviderRef.current!.provider.request!;
+    const chainId = numberToHex(parseInt(DEFAULT_CHAIN_ID, 10));
+    await request({
+      method: "wallet_switchEthereumChain",
+      params: [{ chainId }], // default chainId
+    });
   }
 
   async function sign(value: string): Promise<string> {
@@ -347,9 +304,7 @@ const AuthProvider = (props?: Partial<ProviderProps<AuthProps>>) => {
         signTypedData,
         _signTypedData,
         resolveEns,
-        //loadProvider,
-        //handleChainChanged,
-        //web3: state,
+        switchToDefaultNetwork,
         ...state,
       }}
     />

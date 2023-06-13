@@ -15,3 +15,5 @@ export function sleep(millisecondsToSleep: number): Promise<boolean> {
     }, millisecondsToSleep)
   );
 }
+
+export const numberToHex = (x: number) => `0x${x.toString(16)}`;
