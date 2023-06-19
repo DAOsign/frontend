@@ -64,7 +64,7 @@ export const getFileFromIPFS = async (hash: string) =>
 
 export const restoreIpfsFile = async (hash: string, abortController?: AbortController) => {
   return axios
-    .get(`${process.env.NEXT_PUBLIC_PINATA_GATEWAY}/ipfs/${hash}`, {
+    .get(`${hash}`, {
       responseType: "blob",
       signal: abortController?.signal || undefined,
     })
