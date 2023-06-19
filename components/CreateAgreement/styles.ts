@@ -350,7 +350,8 @@ export const textInput = {
   position: "relative",
   padding: "15px 20px",
   fontFamily: "InterMedium",
-  color: "#21212170",
+  color: "#212121 !important",
+  resize: "vertical",
   fontSize: "16px",
   "&:focus": {
     outline: "none",
