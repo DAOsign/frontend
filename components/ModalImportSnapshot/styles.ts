@@ -1,18 +1,10 @@
 import { ThemeUIStyleObject } from "theme-ui";
 
 export const bg = {
-  position: "absolute",
-  overflow: "hidden",
-  height: "120vh",
-  "@media screen and (max-width: 1200px)": {
-    height: "135vh",
-  },
-  "@media screen and (max-width: 720px)": {
-    height: "150vh",
-  },
-  "@media screen and (max-width: 480px)": {
-    height: "1400px",
-  },
+  position: "fixed",
+  overflow: "auto",
+  height: "100%",
+  width: "100%",
 } as ThemeUIStyleObject;
 
 export const flexContainer = {
