@@ -70,9 +70,12 @@ export const restoreIpfsFile = async (hash: string, abortController?: AbortContr
     })
     .then(res => {
       const blob: Blob = res.data;
-      const fileName = res.headers["content-disposition"]?.split("=")[1];
-
-      return new File([blob], fileName || hash, { type: blob.type });
+      const split = hash.split("/")!;
+      const fullFileName = split[split.length - 1];
+      const [, ...filenameArray] = fullFileName.split("-");
+      const fileName = filenameArray.join("-");
+      const file = new File([blob], fileName, { type: blob.type });
+      return file;
     });
 };
 export const subscribeToUpdates = async (email: string) => {
