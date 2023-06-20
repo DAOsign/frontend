@@ -205,7 +205,6 @@ const leftSide = {
   "@media screen and (max-width: 480px)": {
     paddingX: "16px",
     minHeight: "300px",
-    paddingBottom: "px",
     textAlign: "left",
   },
 } as ThemeUIStyleObject;
@@ -228,6 +227,9 @@ const title = {
 const rightSide = {
   maxWidth: "364px",
   mx: "0",
+  "@media screen and (max-width: 719px)": {
+    width: "90% !important",
+  },
 } as ThemeUIStyleObject;
 
 export const navContainer = {
@@ -255,7 +257,6 @@ export const navContainer = {
     px: "16px",
     pb: "24px",
     pt: "0",
-    width: "90%",
     margin: "0 auto",
   },
 } as ThemeUIStyleObject;
