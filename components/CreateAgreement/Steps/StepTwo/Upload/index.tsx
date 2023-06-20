@@ -20,7 +20,6 @@ export default function Upload({ page }: { page: string }) {
   const [fileLoading, setFileLoading] = useState(false);
 
   const restoreFileStarted = useRef(false);
-  console.log(values);
 
   //Restore file
   useEffect(() => {
