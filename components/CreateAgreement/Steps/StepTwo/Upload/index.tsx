@@ -20,6 +20,7 @@ export default function Upload({ page }: { page: string }) {
   const [fileLoading, setFileLoading] = useState(false);
 
   const restoreFileStarted = useRef(false);
+  console.log(values);
 
   //Restore file
   useEffect(() => {
@@ -44,6 +45,14 @@ export default function Upload({ page }: { page: string }) {
 
       if (values.agreementLocation === LOCATION_PUBLIC_IPFS && values.agreementHash) {
         return restoreIpfsFile(values.agreementHash)
+          .then(file => changeValue("file", file))
+          .catch(e => {
+            console.error(e);
+          });
+      }
+
+      if (values.agreementLocation === LOCATION_PUBLIC_IPFS && values.filePath) {
+        return restoreIpfsFile(values.filePath)
           .then(file => changeValue("file", file))
           .catch(e => {
             console.error(e);
