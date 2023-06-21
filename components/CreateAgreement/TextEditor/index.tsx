@@ -116,8 +116,8 @@ const TextEditor = ({
             <MDEditor
               onChange={val => changeValue("textEditorValue", val || "")}
               hideToolbar={state === "preview"}
-              value={textEditorValue}
               minHeight={minHeightTextEditor}
+              value={textEditorValue}
               height="fit-content"
               className="expand"
               preview={state}
@@ -145,8 +145,7 @@ const TextEditor = ({
             <Button
               onClick={() => {
                 if (
-                  !!textEditorValue?.length &&
-                  +textEditorValue?.split(/\n/)?.length > 20 &&
+                  (!!textEditorValue?.length && +textEditorValue?.split(/\n/)?.length > 20) ||
                   textEditorValue?.trim()?.length > 30
                 )
                   setExpand(!expand);
