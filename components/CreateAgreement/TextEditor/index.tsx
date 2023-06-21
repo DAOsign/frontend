@@ -16,8 +16,6 @@ import styles, {
   btnBack,
   icon,
 } from "./styles";
-import ProposalImportOptions from "../Steps/StepOne/ProposalImportOptions";
-import { METHOD_IMPORT_SHAPSHOT } from "../../../types";
 
 const MDEditor = dynamic(() => import("@uiw/react-md-editor"), {
   ssr: false,
@@ -40,12 +38,11 @@ const buttonPropsByStatus = (
   return props;
 };
 
-const minHeightTextEditor = 387;
+const minHeightTextEditor = 300;
 
 const TextEditor = ({
   page,
   handleChooseAnotherMethod,
-  setIsOpenModalImport,
 }: {
   page: string;
   handleChooseAnotherMethod: () => void;
@@ -61,17 +58,6 @@ const TextEditor = ({
   } = page === "create" ? create : edit;
 
   const [state, setState] = useState<"edit" | "preview">("edit");
-
-  const heightControl = (e: number) => {
-    if (e <= minHeightTextEditor) {
-      return;
-    }
-    if (!isNaN(e)) {
-      setHeightValue(e);
-    } else {
-      setHeightValue(minHeightTextEditor);
-    }
-  };
 
   return (
     <Box style={{ position: "relative", width: "100%" }} className="textEditor" sx={styles}>
@@ -116,8 +102,8 @@ const TextEditor = ({
             <MDEditor
               onChange={val => changeValue("textEditorValue", val || "")}
               hideToolbar={state === "preview"}
-              value={textEditorValue}
               minHeight={minHeightTextEditor}
+              value={textEditorValue}
               height="fit-content"
               className="expand"
               preview={state}
@@ -125,11 +111,8 @@ const TextEditor = ({
           ) : (
             <MDEditor
               onChange={val => changeValue("textEditorValue", val || "")}
-              // @ts-ignore
-              onHeightChange={(e: number) => heightControl(e)}
               hideToolbar={state === "preview"}
               value={textEditorValue}
-              height={heightValue}
               preview={state}
             />
           )}

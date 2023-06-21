@@ -114,6 +114,9 @@ input {
   height: 100% !important;
   width: 100% !important;
 }
+.wmde-markdown-var.w-md-editor {
+  min-height: 300px !important;
+}
 .w-md-editor {
   border: unset;
   box-shadow: unset !important;
