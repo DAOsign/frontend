@@ -303,10 +303,8 @@ export default function NavPanel({ setLoading, page }: { setLoading: any; page: 
       type: "button",
       onClick: async () => {
         if (isLoadingNextStep) return;
-
         setIsLoadingNextStep(true);
         setLoading(true);
-
         try {
           let uploadedFileData: { filePath?: string; agreementHash?: string; error?: any } = {};
           if (
@@ -448,9 +446,7 @@ export default function NavPanel({ setLoading, page }: { setLoading: any; page: 
           }}
         ></Container>
         <Flex
-          onClick={() => {
-            return step > 2 ? changeStep(2) : null;
-          }}
+          onClick={() => (step > 2 ? changeStep(2) : null)}
           sx={{ ...stepStyle, cursor: step > 2 ? "pointer" : "initial" }}
         >
           <Box sx={{ ...stepNumber, backgroundColor: step > 1 ? "#CA5CF2" : "#EDEDF3" }}>
