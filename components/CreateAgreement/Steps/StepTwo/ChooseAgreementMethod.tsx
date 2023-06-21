@@ -76,17 +76,6 @@ export default function ChooseAgreementMethod({
     return isEmpty(errors);
   };
 
-  useEffect(() => {
-    if (
-      values.agreementMethod === METHOD_IMPORT_SHAPSHOT &&
-      values.textEditorValue &&
-      !!values.agreementId &&
-      page === "create"
-    ) {
-      setMethod(METHOD_IMPORT_SHAPSHOT);
-    }
-  }, [values]);
-
   const propousalIsEmpty = () => {
     const contractTypeIsEmpty = (contractType && !statementWork) || !contractType;
     const urlIsEmpty =
