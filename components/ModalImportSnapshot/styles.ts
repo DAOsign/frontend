@@ -163,9 +163,6 @@ export const switchContainer = {
 } as ThemeUIStyleObject;
 
 export const tellMoreContainer = {
-  "@media screen and (max-width: 480px)": {
-    display: "none",
-  },
 } as ThemeUIStyleObject;
 
 export const labelSwitch = {
