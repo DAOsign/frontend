@@ -360,7 +360,6 @@ const contentData = {
   },
   ".wmde-markdown": {
     background: "#fff !important",
-    color: "#212121 !important",
   },
 } as ThemeUIStyleObject;
 
