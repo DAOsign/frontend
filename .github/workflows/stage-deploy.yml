@@ -62,7 +62,7 @@ jobs:
           KUBE_CONFIG_DATA: ${{ secrets.KUBE_CONFIG_DATA_DEV }}
           PRIVATE_REGISTRY: "099077447883.dkr.ecr.us-east-1.amazonaws.com"
           NAMESPACE: "stage"
-          HELM_VERSION: 0.1.1
+          HELM_VERSION: 0.1.2
         with:
           plugins: |
             https://github.com/jkroepke/helm-secrets
