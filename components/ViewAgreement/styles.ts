@@ -499,7 +499,7 @@ const verificationCard = {
 
 const showMoreLabel = {
   position: "absolute",
-  bottom: "15px",
+  bottom: "10px",
   left: "32px",
   color: "#CA5CF2",
   fontFamily: "InterBold",
