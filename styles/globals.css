@@ -127,7 +127,7 @@ input {
   background-color: #f7f7fb !important;
   border-bottom: 1px solid #d8d8e2 !important;
 }
-.wmde-markdown > p > img {
+.wmde-markdown > p > img,  .wmde-markdown > h1 > img{
   width: 100%;
 }
 .w-md-editor-bar {
