@@ -58,6 +58,24 @@ const TextEditor = ({
   } = page === "create" ? create : edit;
 
   const [state, setState] = useState<"edit" | "preview">("edit");
+  const [expandIsVisible, setExpandIsVisible] = useState(true);
+
+  const isOverflown = () => {
+    const mdContainer = window.document.getElementsByClassName("w-md-editor-text");
+
+    if (!!mdContainer) {
+      if (mdContainer[0]?.scrollHeight < 320) {
+        setExpand(false);
+        setExpandIsVisible(false);
+      } else {
+        setExpandIsVisible(true);
+      }
+    }
+  };
+
+  useEffect(() => {
+    isOverflown();
+  }, [textEditorValue]);
 
   return (
     <Box style={{ position: "relative", width: "100%" }} className="textEditor" sx={styles}>
@@ -125,13 +143,8 @@ const TextEditor = ({
             <Text sx={footerText}>Markdown is supported</Text>
           </Flex>
           {state === "edit" && (
-            <Button
-              onClick={() => {
-                if (!!textEditorValue?.length && textEditorValue?.length > 1000) setExpand(!expand);
-              }}
-              sx={expandBtn}
-            >
-              Expand
+            <Button disabled={!expandIsVisible} onClick={() => setExpand(!expand)} sx={expandBtn}>
+              {!expand ? "Expand" : "Collapse"}
             </Button>
           )}
         </Flex>
