@@ -132,6 +132,9 @@ export const expandBtn = {
   mr: "12px",
   mb: "5px",
   opacity: 0.7,
+  "&:disabled": {
+    cursor: "no-drop",
+  },
   "&:hover, &:focus": {
     backgroundColor: "transparent",
     background: "unset",

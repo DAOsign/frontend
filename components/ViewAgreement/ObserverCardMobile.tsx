@@ -25,7 +25,7 @@ const ObserverCardMobile = ({ observer }: Props) => {
 
   const handleCopyAddress = (address: string) => {
     onCopyClick(address);
-    notifSucces("Link Copied");
+    notifSucces("Address copied");
   };
 
   const address = useMemo<string>(

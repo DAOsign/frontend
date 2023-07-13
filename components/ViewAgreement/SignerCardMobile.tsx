@@ -32,7 +32,7 @@ const SignerCardMobile = ({ signer, signProof, viewProof }: Props) => {
   const { width } = useWindowDimensions();
   const handleCopyAddress = (address: string) => {
     onCopyClick(address);
-    notifSucces("Link Copied");
+    notifSucces("Address copied");
   };
   const address = useMemo<string>(
     () =>
