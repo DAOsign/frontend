@@ -349,7 +349,7 @@ const contentData = {
   paddingX: "32px",
   borderBottom: "1px solid white",
   minHeight: "200px",
-  pb: "40px",
+  pb: "60px",
   maxHeight: `${DEFAULT_CONTENT_PREVIEW_MAX_HEIGHT}px`,
   overflow: "hidden",
   ".w-md-editor": {
