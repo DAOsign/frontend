@@ -54,7 +54,6 @@ import {
   iconInfoEnableTransform,
   overflowContentStyles,
   labelInputTellMore,
-  tellMoreContainer,
   loadingStylesBtn,
   btnCancelLoading,
   switchContainer,
@@ -529,10 +528,14 @@ export default function ModalImportSnapshot({ isOpen, page, onExit, setMethod }:
                   <SwitchContent sx={{ m: "21px 0" }} name={INTELLECTUAL_PROPERTY_CLAUSE} />
                   <SwitchContent sx={{ mb: "24px" }} name={NON_SOLICITATION_CLAUSE} />
 
-                  <Box sx={tellMoreContainer}>
+                  <Box>
                     <Text sx={labelInputTellMore}>Additional Instructions for AI</Text>
                     <Input
-                      placeholder="Add Non-disclosure clause for the agreement"
+                      placeholder={
+                        width > 480
+                          ? "Add Non-disclosure clause for the agreement"
+                          : "Add Non-disclosure clause "
+                      }
                       value={additionalDetails}
                       onChange={e =>
                         changeValue("proposal", {

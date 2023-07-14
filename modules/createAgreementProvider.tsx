@@ -9,7 +9,6 @@ import {
   LOCATION_CLOUD,
   METHOD_ENTER,
   METHOD_UPLOAD,
-  STATEMENT_OF_WORK,
 } from "../types";
 
 export interface CreateAgreementFieldErrors {
