@@ -124,7 +124,6 @@ export default function ChooseAgreementMethod({
     }
     if (!!values.agreementMethod && isSameMethod && !beforeModal && validateRes) {
       const isEmptyMethods = validateMethod();
-      console.log({ isEmptyMethods, values, method, name });
 
       if (!isEmptyMethods) {
         setModalAttention({ isOpen: true, method });
