@@ -16,8 +16,6 @@ import styles, {
   btnBack,
   icon,
 } from "./styles";
-import ProposalImportOptions from "../Steps/StepOne/ProposalImportOptions";
-import { METHOD_IMPORT_SHAPSHOT } from "../../../types";
 
 const MDEditor = dynamic(() => import("@uiw/react-md-editor"), {
   ssr: false,
@@ -40,12 +38,11 @@ const buttonPropsByStatus = (
   return props;
 };
 
-const minHeightTextEditor = 387;
+const minHeightTextEditor = 300;
 
 const TextEditor = ({
   page,
   handleChooseAnotherMethod,
-  setIsOpenModalImport,
 }: {
   page: string;
   handleChooseAnotherMethod: () => void;
@@ -61,17 +58,24 @@ const TextEditor = ({
   } = page === "create" ? create : edit;
 
   const [state, setState] = useState<"edit" | "preview">("edit");
+  const [expandIsVisible, setExpandIsVisible] = useState(true);
 
-  const heightControl = (e: number) => {
-    if (e <= minHeightTextEditor) {
-      return;
-    }
-    if (!isNaN(e)) {
-      setHeightValue(e);
-    } else {
-      setHeightValue(minHeightTextEditor);
+  const isOverflown = () => {
+    const mdContainer = window.document.getElementsByClassName("w-md-editor-text");
+
+    if (!!mdContainer) {
+      if (mdContainer[0]?.scrollHeight < 320) {
+        setExpand(false);
+        setExpandIsVisible(false);
+      } else {
+        setExpandIsVisible(true);
+      }
     }
   };
+
+  useEffect(() => {
+    isOverflown();
+  }, [textEditorValue]);
 
   return (
     <Box style={{ position: "relative", width: "100%" }} className="textEditor" sx={styles}>
@@ -125,11 +129,8 @@ const TextEditor = ({
           ) : (
             <MDEditor
               onChange={val => changeValue("textEditorValue", val || "")}
-              // @ts-ignore
-              onHeightChange={(e: number) => heightControl(e)}
               hideToolbar={state === "preview"}
               value={textEditorValue}
-              height={heightValue}
               preview={state}
             />
           )}
@@ -142,16 +143,7 @@ const TextEditor = ({
             <Text sx={footerText}>Markdown is supported</Text>
           </Flex>
           {state === "edit" && (
-            <Button
-              onClick={() => {
-                if (
-                  (!!textEditorValue?.length && +textEditorValue?.split(/\n/)?.length > 20) ||
-                  textEditorValue?.trim()?.length > 30
-                )
-                  setExpand(!expand);
-              }}
-              sx={expandBtn}
-            >
+            <Button disabled={!expandIsVisible} onClick={() => setExpand(!expand)} sx={expandBtn}>
               {!expand ? "Expand" : "Collapse"}
             </Button>
           )}

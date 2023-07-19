@@ -76,19 +76,10 @@ export default function ChooseAgreementMethod({
     return isEmpty(errors);
   };
 
-  useEffect(() => {
-    if (
-      values.agreementMethod === METHOD_IMPORT_SHAPSHOT &&
-      values.textEditorValue &&
-      !!values.agreementId &&
-      page === "create"
-    ) {
-      setMethod(METHOD_IMPORT_SHAPSHOT);
-    }
-  }, [values]);
-
   const propousalIsEmpty = () => {
-    const contractTypeIsEmpty = (contractType && !statementWork) || !contractType;
+    const contractTypeIsEmpty =
+      (contractType && statementWork === "Statement of Work") || !contractType;
+
     const urlIsEmpty =
       (!snapshotProposalUrl && !enableTransform) || (!snapshotProposalUrl && enableTransform);
     const countriesIsEmpty =
@@ -96,6 +87,7 @@ export default function ChooseAgreementMethod({
       (legalJurisdiction && !legalJurisdictionCountry) ||
       (legalJurisdiction && legalJurisdictionCountry === UNITED_STATES && !legalJurisdictionState);
     const detailsIsEmpty = !additionalDetails;
+
     return page === "create"
       ? urlIsEmpty && contractTypeIsEmpty && countriesIsEmpty && detailsIsEmpty
       : urlIsEmpty &&
@@ -121,6 +113,7 @@ export default function ChooseAgreementMethod({
   const chengeMethod = (name: keyof CreationState, method: string, beforeModal: boolean) => {
     const isSameMethod = values.agreementMethod !== method;
     const validateRes = validateTitle();
+
     if (beforeModal) {
       changeValue("textEditorValue", "");
       changeValue("proposal", initialStateProposal);
@@ -131,6 +124,7 @@ export default function ChooseAgreementMethod({
     }
     if (!!values.agreementMethod && isSameMethod && !beforeModal && validateRes) {
       const isEmptyMethods = validateMethod();
+
       if (!isEmptyMethods) {
         setModalAttention({ isOpen: true, method });
         return;

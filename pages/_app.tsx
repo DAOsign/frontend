@@ -8,6 +8,7 @@ import AuthProvider from "../modules/authProvider";
 import { theme } from "../theme";
 import "../styles/globals.css";
 import "../styles/tables.css";
+import "../styles/textEditorNormalise.css";
 import { getToken } from "../utils/token";
 import Layout from "../components/Layout";
 import "react-toastify/dist/ReactToastify.css";

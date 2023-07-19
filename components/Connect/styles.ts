@@ -56,6 +56,12 @@ const title = {
   },
 } as ThemeUIStyleObject;
 
+const hiddenInMobile = {
+  "@media screen and (max-width: 600px)": {
+    display: "none",
+  },
+} as ThemeUIStyleObject;
+
 const link = {
   color: "#CA5CF2",
   cursor: "pointer",
@@ -73,4 +79,4 @@ const link = {
   },
 } as ThemeUIStyleObject;
 
-export { container, title, link, userGreeting };
+export { container, title, link, userGreeting, hiddenInMobile };

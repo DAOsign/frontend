@@ -1,7 +1,7 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, { useEffect, useRef, useState } from "react";
 import { Button, Container, Heading, Link, Text } from "theme-ui";
-import { title, container, link, userGreeting } from "./styles";
+import { title, container, link, userGreeting, hiddenInMobile } from "./styles";
 import { useWeb3 } from "../../hooks/useWeb3";
 import { getToken } from "../../utils/token";
 import { useRouter } from "next/router";
@@ -70,13 +70,23 @@ export default function Connect() {
           </>
         ) : (
           <>
-            <Button type="button" variant="primary" onClick={() => connect("injected")}>
+            <Button
+              onClick={() => connect("injected")}
+              sx={hiddenInMobile}
+              variant="primary"
+              type="button"
+            >
               MetaMask
             </Button>
             <Button type="button" variant="primary" onClick={() => connect("walletconnect")}>
               Wallet Connect
             </Button>
-            <Button type="button" variant="primary" onClick={() => connect("walletlink")}>
+            <Button
+              onClick={() => connect("walletlink")}
+              sx={hiddenInMobile}
+              variant="primary"
+              type="button"
+            >
               Coinbase Wallet
             </Button>
           </>
