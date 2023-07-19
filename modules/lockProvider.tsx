@@ -14,13 +14,11 @@ import { getInjected } from "../lib/lock/utils";
 import type WalletConnectProvider from "@walletconnect/web3-provider";
 import type { CoinbaseWalletProvider } from "@coinbase/wallet-sdk/dist/provider/CoinbaseWalletProvider";
 
-import { Web3Provider } from "@ethersproject/providers";
-
 type ProviderType = WalletConnectProvider | any;
 
-interface LockContext {
-  isLoading: Boolean;
-  isAuthenticated: Boolean;
+interface LockContextInterface {
+  isLoading: boolean;
+  isAuthenticated: boolean;
   provider?: ProviderType;
   lockClient: Lock;
   login: (connector: ConnectorType) => Promise<ProviderType>;
@@ -32,14 +30,13 @@ interface LockContext {
 export const LockContext = createContext<LockContext>({});
 
 interface State {
-  isLoading: Boolean;
-  isAuthenticated: Boolean;
-  // provider: ProviderType | null;
+  isLoading: boolean;
+  isAuthenticated: boolean;
 }
 
 const name = "lock";
 
-const LockProvider = (props?: Partial<ProviderProps<LockContext>>) => {
+const LockProvider = (props?: Partial<ProviderProps<LockContextInterface>>) => {
   const [state, setState] = useState<State>({
     isLoading: true,
     isAuthenticated: false,
@@ -110,7 +107,7 @@ const LockProvider = (props?: Partial<ProviderProps<LockContext>>) => {
   async function getConnector(): Promise<ConnectorType | false> {
     const connector = localStorage.getItem(`_${name}.connector`) as ConnectorType;
     if (connector) {
-      const lockConnector = lockInstanceRef.current.getConnector(connector as ConnectorType);
+      const lockConnector = lockInstanceRef.current.getConnector(connector);
       const isLoggedIn = await lockConnector.isLoggedIn();
 
       return isLoggedIn ? connector : false;

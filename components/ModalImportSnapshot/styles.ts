@@ -162,12 +162,6 @@ export const switchContainer = {
   },
 } as ThemeUIStyleObject;
 
-export const tellMoreContainer = {
-  "@media screen and (max-width: 480px)": {
-    display: "none",
-  },
-} as ThemeUIStyleObject;
-
 export const labelSwitch = {
   fontFamily: "InterMedium",
   fontWeight: 500,
@@ -387,6 +381,6 @@ export const labelInputTellMore = {
   maxWidth: "unset",
   mt: "33px",
   "@media screen and (max-width: 480px)": {
-    mt: "60px",
+    mt: "24px",
   },
 } as ThemeUIStyleObject;

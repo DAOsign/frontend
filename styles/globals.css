@@ -115,6 +115,32 @@ input {
   width: 100% !important;
 }
 
+.w-md-editor {
+  border: unset;
+  box-shadow: unset !important;
+  background-color: #f7f7fb !important;
+}
+.w-md-editor-toolbar {
+  box-shadow: unset !important;
+  background-color: #f7f7fb !important;
+  border-bottom: 1px solid #d8d8e2 !important;
+}
+.wmde-markdown img {
+  width: 100%;
+}
+.w-md-editor-bar {
+  width: 30px !important;
+  height: 30px !important;
+  background-image: url("../img/svg/drag.svg");
+  background-size: cover;
+}
+.expand .w-md-editor-bar {
+  display: none !important;
+}
+.w-md-editor-bar svg {
+  display: none !important;
+}
+
 
 @font-face {
   font-family: "InterRegular";

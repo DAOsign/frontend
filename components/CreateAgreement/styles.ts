@@ -63,7 +63,7 @@ export const configurationsTitle = {
 
 const imageUploadContainer = {
   textAlign: "center",
-  border: "1px dashed #D8D8E2",
+  border: "1px solid #D8D8E2",
   borderRadius: "12px",
   position: "relative",
   width: "600px",
@@ -185,7 +185,6 @@ const leftSide = {
   border: "1px solid #EDEDF3",
   borderRadius: "12px",
   paddingX: "78px",
-  paddingBottom: "60px",
   paddingTop: "60px",
   maxHeight: "fit-content",
   "@media screen and (max-width: 1200px)": {
@@ -206,7 +205,6 @@ const leftSide = {
   "@media screen and (max-width: 480px)": {
     paddingX: "16px",
     minHeight: "300px",
-    paddingBottom: "px",
     textAlign: "left",
   },
 } as ThemeUIStyleObject;
@@ -259,6 +257,7 @@ export const navContainer = {
     px: "16px",
     pb: "24px",
     pt: "0",
+    margin: "0 auto",
   },
 } as ThemeUIStyleObject;
 
@@ -280,7 +279,6 @@ export const navContainerOptionsIsVisible = {
   "@media screen and (max-width: 480px)": {
     px: "16px",
     py: "24px",
-    width: "100% !important",
   },
 } as ThemeUIStyleObject;
 
@@ -327,7 +325,6 @@ export const importOptions = {
     paddingLeft: "16px",
     paddingRight: "16px",
     paddingBottom: "24px",
-    width: "100%",
     mb: "20px",
   },
 } as ThemeUIStyleObject;
@@ -912,9 +909,10 @@ export const uploadHeader = {
   height: "20px",
   alignItems: "center",
   position: "relative",
-  mb: "2px",
+  mb: "8px",
   "@media screen and (max-width: 720px)": {
     width: "100%",
+    mb: "2px",
   },
 } as ThemeUIStyleObject;
 

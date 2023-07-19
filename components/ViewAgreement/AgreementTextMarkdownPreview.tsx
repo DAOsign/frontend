@@ -4,6 +4,7 @@ import { Box, Flex, Spinner } from "theme-ui";
 import rehypeSanitize from "rehype-sanitize";
 import { keyframes, Keyframes } from "@emotion/react";
 import dynamic from "next/dynamic";
+import "@uiw/react-markdown-preview/markdown.css";
 
 const MDEditor = dynamic(() => import("@uiw/react-md-editor"), {
   ssr: false,

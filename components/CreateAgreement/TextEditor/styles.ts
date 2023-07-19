@@ -1,8 +1,8 @@
 import { ThemeUIStyleObject } from "theme-ui";
 
 const tabStyles: ThemeUIStyleObject = {
-  mb: "36px",
-  "@media screen and (max-width: 720px)": {
+  mb: "40px",
+  "@media screen and (max-width: 1200px)": {
     mb: "0",
   },
   ".w-md-editor-aree::-webkit-scrollbar": {
@@ -33,11 +33,10 @@ const tabStyles: ThemeUIStyleObject = {
       fontSize: "14px",
       lineHeight: "160%",
       color: "#CA5CF2",
-      opacity: 0.7,
       pl: "20px",
       pr: "20px",
       "&:hover": {
-        opacity: 1,
+        color: "#AE4FD0",
       },
     },
     "button.active": {
@@ -84,7 +83,6 @@ const tabStyles: ThemeUIStyleObject = {
     "&:hover, &:focus": {
       background: "unset",
       backgroundColor: "transparent",
-      opacity: 1,
     },
   },
 };
