@@ -90,7 +90,7 @@ export default function Connect() {
           </>
         ) : (
           <>
-            {!!windowSize && windowSize < 992 && (
+            {!!windowSize?.width && windowSize?.width > 992 && (
               <Button
                 onClick={() => connect("injected")}
                 sx={hiddenInMobile}
@@ -103,7 +103,7 @@ export default function Connect() {
             <Button type="button" variant="primary" onClick={() => connect("walletconnect")}>
               Wallet Connect
             </Button>
-            {!!windowSize && windowSize < 992 && (
+            {!!windowSize?.width && windowSize?.width > 992 && (
               <Button
                 onClick={() => connect("walletlink")}
                 sx={hiddenInMobile}
