@@ -11,6 +11,13 @@ import loader from "../../img/json/loader.json";
 
 export default function Connect() {
   const [loadingConnect, setLoadingConnect] = useState(false);
+  const [windowSize, setWindowSize] = useState<{
+    width?: number;
+    height?: number;
+  }>({
+    width: undefined,
+    height: undefined,
+  });
   const { login } = useWeb3();
   const { getConnector } = useLock();
   const { push, query } = useRouter();
@@ -78,6 +85,7 @@ export default function Connect() {
             >
               MetaMask
             </Button>
+
             <Button type="button" variant="primary" onClick={() => connect("walletconnect")}>
               Wallet Connect
             </Button>
