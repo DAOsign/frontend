@@ -2,7 +2,7 @@ import { ThemeUIStyleObject } from "theme-ui";
 
 const menuContainer = {
   position: "absolute",
-  height: "100vh",
+  height: "550px",
   backgroundColor: "inherit",
   width: "100%",
   zIndex: 3,
@@ -38,9 +38,9 @@ const fotoContainer = {
   boxShadow: "0px 4px 40px rgba(0, 0, 0, 0.08)",
   position: "absolute",
   "&.visible": {
-    position: "fixed",
+    position: "relative",
     animation: "headerDesctop 0.2s 1 linear",
-    right: "36px",
+    right: "-226px",
   },
   "&.close": {
     animation: "headerDesctopClose 0.3s 1 linear",
@@ -49,9 +49,10 @@ const fotoContainer = {
   "@media screen and (max-width: 768px)": {
     margin: "0 0 0 auto",
     "&.visible": {
-      position: "fixed",
+      // position: "fixed",
       animation: "headerMobile 0.2s 1 linear",
-      right: "50%",
+      right: "26%",
+      top: "-20px",
       transform: "translate(50%, 0)",
     },
     "&.close": {
