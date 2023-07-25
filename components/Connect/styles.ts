@@ -57,7 +57,10 @@ const title = {
 } as ThemeUIStyleObject;
 
 const hiddenInMobile = {
-  "@media screen and (max-width: 600px)": {
+  "@media screen and (max-width: 700px) and (orientation: portrait)": {
+    display: "none",
+  },
+  "@media screen and (max-height: 600px) and (orientation: landscape)": {
     display: "none",
   },
 } as ThemeUIStyleObject;
