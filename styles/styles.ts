@@ -1,18 +1,21 @@
 import { ThemeUIStyleObject } from "theme-ui";
 
 const menuContainer = {
-  position: "absolute",
-  height: "550px",
+  position: "fixed",
+  height: "100%",
   backgroundColor: "inherit",
   width: "100%",
   zIndex: 3,
   top: 0,
   left: 0,
-  overflow: "hidden",
+  overflow: "scroll",
   pt: "90px",
+  pb: "30px",
+
   "&.visible": {
     display: "block",
   },
+
   "&.close": {
     display: "none",
   },
@@ -28,7 +31,6 @@ const copyIcon = {
 
 const fotoContainer = {
   width: "343px",
-  m: "0 auto",
   minHeight: "390px",
   background: "#FFFFFF",
   border: "1px solid #EDEDF3",
@@ -37,24 +39,30 @@ const fotoContainer = {
   p: "16px 16px 24px 16px",
   boxShadow: "0px 4px 40px rgba(0, 0, 0, 0.08)",
   position: "absolute",
+
   "&.visible": {
     position: "relative",
     animation: "headerDesctop 0.2s 1 linear",
-    right: "-226px",
+    right: "30px",
+    ml: "auto",
+    mr: 0,
   },
+
   "&.close": {
     animation: "headerDesctopClose 0.3s 1 linear",
     right: "-100%",
   },
+
   "@media screen and (max-width: 768px)": {
     margin: "0 0 0 auto",
+
     "&.visible": {
-      // position: "fixed",
+      position: "relative",
       animation: "headerMobile 0.2s 1 linear",
-      right: "26%",
-      top: "-20px",
+      right: "50%",
       transform: "translate(50%, 0)",
     },
+
     "&.close": {
       animation: "headerMobileClose 0.3s 1 linear",
       right: "-100%",
