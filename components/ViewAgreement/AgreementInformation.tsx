@@ -69,7 +69,7 @@ interface Props {
 }
 
 export const AGREEMENT_PROOF = "Agreement Proof";
-export const AUTHORITY_PROOF = "Authority Proof";
+export const AUTHORITY_PROOF = "Identity Proof";
 
 export const AgreementInformation = ({
   onSetAgreementReadyToSign = () => {},
@@ -210,7 +210,7 @@ export const AgreementInformation = ({
           }
         />
         <InformationRow
-          name="Agreement proof"
+          name="Agreement Proof"
           tooltipValue={agreement?.agreementProof?.cid}
           value={
             agreement.agreementProof ? (
@@ -228,7 +228,7 @@ export const AgreementInformation = ({
         />
 
         <InformationRow
-          name="Authority proof"
+          name="Identity Proof"
           tooltipValue={agreement?.agreementFileProof?.cid || undefined}
           value={
             agreement.agreementFileProof ? (
@@ -245,6 +245,7 @@ export const AgreementInformation = ({
             )
           }
         />
+        <InformationRow name="Authority Proof" value="<Not required>" />
         <InformationRow name="Location" value={agreementLocation || ""} />
         <InformationRow
           name="Access"
