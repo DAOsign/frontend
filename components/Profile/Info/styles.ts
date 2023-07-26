@@ -2,11 +2,21 @@ import { ThemeUIStyleObject } from "theme-ui";
 
 export const container = {
   flexDirection: "column",
-  p: "40px",
+  // pl: "215px",
+} as ThemeUIStyleObject;
 
-  //   "@media screen and (max-width: 719px)": {
-  //     m: "0 auto",
-  //   },
+export const walletContainer = {
+  pb: "5px",
+} as ThemeUIStyleObject;
+
+export const userName = {
+  variant: "text.h2",
+  display: "block",
+  textAlign: "center",
+  pb: "8px",
+  "@media screen and (max-width: 1200px)": {
+    textAlign: "left",
+  },
 } as ThemeUIStyleObject;
 
 export const title = {
