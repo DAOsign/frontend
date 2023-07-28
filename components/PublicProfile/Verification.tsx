@@ -1,6 +1,7 @@
+/* eslint-disable prettier/prettier */
 /* eslint-disable @next/next/no-img-element */
-import React from "react";
-import { Box, Container, Flex, Text } from "theme-ui";
+import React, { useState } from "react";
+import { Box, Button, Container, Flex, Link, Text } from "theme-ui";
 import iconsObj from "../../assets/icons";
 import Icon from "../icon";
 import Image from "next/image";
@@ -18,14 +19,26 @@ const verificationIcon: Social[] = [
 ];
 
 export const Verification = () => {
+  const [values, changeValue] = useState("b");
+
+  const getBorder = () => {
+    return {
+      borderBottom: values === "Badges" ? "2px solid #212121!important" : "none",
+    };
+  };
   return (
     <Container sx={{ paddingTop: "60px" }}>
       <Text sx={title}>Verifications</Text>
-      <Flex sx={{ paddingBottom: "38px" }}>
-        <Text sx={badges}>Badges</Text>
-        <Text sx={references}>References</Text>
-      </Flex>
       <Flex>
+        <Link sx={{ ...badges, ...getBorder() }} onClick={() => changeValue("b")}>
+          Badges
+        </Link>
+        <Link sx={{ ...references, ...getBorder() }} onClick={() => changeValue("p")}>
+          References
+        </Link>
+      </Flex>
+      <div className="line" />
+      <Flex sx={{ paddingTop: "38px" }}>
         {verificationIcon.map((el: any, i: number) => {
           return (
             <Box key={i} sx={{ marginRight: "40px" }}>

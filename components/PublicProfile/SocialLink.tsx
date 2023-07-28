@@ -20,7 +20,7 @@ export const SocialLink = () => {
     <Flex>
       {socialIcon.map((el: any, i: number) => {
         return (
-          <Link key={i} sx={{ marginRight: "16px" }}>
+          <Link key={i} sx={{ marginRight: "16px", cursor: "pointer" }}>
             <Image src={el.img} width={24} alt="socialIcon" />
           </Link>
         );

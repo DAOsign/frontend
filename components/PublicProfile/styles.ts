@@ -5,6 +5,7 @@ const profileContainer = {
   backgroundColor: "#F7F7FB",
   "@media screen and (max-width: 1440px)": {
     pl: "140px",
+    pr: "140px",
   },
 };
 const iconCopy = {
@@ -19,7 +20,6 @@ const nameTitle = {
   variant: "text.h2",
   display: "block",
   textAlign: "center",
-  pb: "8px",
   "@media screen and (max-width: 1200px)": {
     textAlign: "left",
     // ml: "20px",
@@ -80,19 +80,54 @@ const badges = {
   variant: "text.normalTextBold",
   display: "block",
   pr: "24px",
+  cursor: "pointer",
 } as ThemeUIStyleObject;
 
 const references = {
   variant: "text.normalTextBold",
   display: "block",
   opacity: "0.5",
-};
+  cursor: "pointer",
+} as ThemeUIStyleObject;
+
+const noContentContainer = {
+  textAlign: "center",
+  mt: "80px",
+  mb: "385px",
+  minHeight: "184px",
+  display: "flex",
+  flexDirection: "column",
+  justifyContent: "space-between",
+  "@media screen and (max-width: 1199px)": {
+    mt: "100px",
+    mb: "187px",
+  },
+  "@media screen and (max-width: 719px)": {
+    mt: "88px",
+    mb: "133px",
+  },
+} as ThemeUIStyleObject;
+
+const noContent = {
+  width: "146px",
+  height: "146px",
+  backgroundColor: "#fff",
+  borderRadius: "50%",
+  margin: "0 auto",
+  justifyContent: "center",
+  alignItems: "center",
+  // "@media screen and (max-width: 480px)": {
+
+  // },
+} as ThemeUIStyleObject;
 
 export {
+  noContentContainer,
   profileContainer,
   userContainer,
   references,
   nameTitle,
+  noContent,
   userFoto,
   iconCopy,
   badges,
