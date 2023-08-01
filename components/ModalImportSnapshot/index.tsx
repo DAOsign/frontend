@@ -326,14 +326,16 @@ export default function ModalImportSnapshot({ isOpen, page, onExit, setMethod }:
 
   const selectContent = (name: string) => {
     const { options, value } = selectsValue[name];
+    const isCountry = name === LEGAL_JURISDICTION_COUNTRY;
+    const isState = name === LEGAL_JURISDICTION_STATE;
+
     const inputIsHidden =
-      (name === LEGAL_JURISDICTION_COUNTRY && selectsOpen[name]) ||
-      (name === LEGAL_JURISDICTION_STATE && selectsOpen[name]) ||
-      (name === LEGAL_JURISDICTION_COUNTRY && !values.proposal[LEGAL_JURISDICTION_COUNTRY]);
+      (isCountry && selectsOpen[name]) ||
+      (isState && selectsOpen[name]) ||
+      (isCountry && !values.proposal[LEGAL_JURISDICTION_COUNTRY]);
 
     const optionsFilter =
-      (searchValue !== "" && name === LEGAL_JURISDICTION_COUNTRY) ||
-      (searchValue !== "" && name === LEGAL_JURISDICTION_STATE)
+      (searchValue !== "" && isCountry) || (searchValue !== "" && isState)
         ? options.filter((el: string) => el.toLowerCase().includes(searchValue.toLowerCase()))
         : options.filter((el: string) => el !== values.proposal[name]);
 
@@ -361,7 +363,7 @@ export default function ModalImportSnapshot({ isOpen, page, onExit, setMethod }:
               <Input
                 onChange={e => setSearchValue(e.target.value)}
                 onClick={onInputSearchClick}
-                placeholder="Choose country"
+                placeholder={isCountry ? "Choose country" : "Choose state"}
                 value={searchValue}
                 sx={inputSearch}
               />
@@ -392,7 +394,7 @@ export default function ModalImportSnapshot({ isOpen, page, onExit, setMethod }:
           <Container
             sx={{ ...itemOption, maxHeight: name === STATEMENT_OF_WORK ? "138px" : "178px" }}
           >
-            {name === LEGAL_JURISDICTION_COUNTRY && (
+            {isCountry && (
               <Flex
                 onClick={() => onChangeSelect(name, UNITED_STATES)}
                 sx={{ ...flexSelectItem, borderRadius: "0 !important" }}

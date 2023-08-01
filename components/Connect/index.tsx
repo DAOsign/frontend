@@ -8,9 +8,11 @@ import { useRouter } from "next/router";
 import { useLock } from "../../hooks/useLock";
 import Lottie from "lottie-react";
 import loader from "../../img/json/loader.json";
+import ModalInstallMetamask from "../ModalInstallMetamask";
 
 export default function Connect() {
   const [loadingConnect, setLoadingConnect] = useState(false);
+  const [isVisible, setIsVisible] = useState(false);
   const [windowSize, setWindowSize] = useState<{
     width?: number;
     height?: number;
@@ -24,7 +26,12 @@ export default function Connect() {
 
   const connect = async (name: any) => {
     setLoadingConnect(true);
-    await login(name, query.email as string, query.salt as string);
+
+    const loginState = await login(name, query.email as string, query.salt as string);
+
+    if (name === "injected" && loginState?.account === null) {
+      setIsVisible(true);
+    }
     setLoadingConnect(false);
   };
 
@@ -108,6 +115,7 @@ export default function Connect() {
           </Link>
         </Text>
       </Container>
+      {isVisible && <ModalInstallMetamask setVisible={setIsVisible} />}
     </span>
   );
 }
