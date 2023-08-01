@@ -57,7 +57,12 @@ const title = {
 } as ThemeUIStyleObject;
 
 const hiddenInMobile = {
-  "@media (hover: none)": {
+  /* For iOS devices and Mozilla on Android */
+  "@media only screen and (hover: none) and (pointer: coarse)": {
+    display: "none",
+  },
+  /* For Chromium on Android */
+  "@media only screen and (hover: hover) and (pointer: coarse)": {
     display: "none",
   },
 } as ThemeUIStyleObject;
