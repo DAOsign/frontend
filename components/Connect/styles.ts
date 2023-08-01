@@ -57,7 +57,7 @@ const title = {
 } as ThemeUIStyleObject;
 
 const hiddenInMobile = {
-  "@media (hover: none) and (max-width: 1170px)": {
+  "@media (hover: none)": {
     display: "none",
   },
 } as ThemeUIStyleObject;
