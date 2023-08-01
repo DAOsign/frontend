@@ -65,7 +65,6 @@ const AuthProvider = (props?: Partial<ProviderProps<AuthProps>>) => {
     // Prevent double loginRequest due to react dev useEffect[] runs twice
     if (loginStarted.current) return;
     loginStarted.current = true;
-    console.log("fnc login");
 
     try {
       const hasToken = Boolean(getToken());
