@@ -18,7 +18,7 @@ import { Portal } from "../Portal/Portal";
 import { ModalBase } from "../ModalBase/ModalBase";
 import { useMutation } from "urql";
 import { deleteAgreementMutation } from "../../modules/graphql/mutations";
-import { notifError, notifSucces } from "../../utils/notification";
+import { notifError, notifSuccess } from "../../utils/notification";
 
 interface Props {
   agreementId: string;
@@ -45,7 +45,7 @@ export default function ModalConfirmAgreementDeletion({
       const response = await deleteAgreement({ agreementId });
       if (!response?.error) {
         await onSuccess();
-        notifSucces("Agreement was deleted");
+        notifSuccess("Agreement was deleted");
         onExit();
       } else {
         notifError(response.error?.message || "Failed to delete agreement");

@@ -12,7 +12,7 @@ import Icon from "../icon";
 import iconsObj from "../../assets/icons";
 import { onCopyClick } from "../../utils/formats";
 import { Observer } from "../../modules/graphql/gql/graphql";
-import { notifSucces } from "../../utils/notification";
+import { notifSuccess } from "../../utils/notification";
 
 interface Props {
   observer: Observer;
@@ -21,7 +21,7 @@ interface Props {
 export const ObserverRow = ({ observer }: Props) => {
   const handleCopyAddress = (address: string) => {
     onCopyClick(address);
-    notifSucces("Address copied");
+    notifSuccess("Address copied");
   };
 
   const address = useMemo<string>(

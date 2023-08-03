@@ -35,7 +35,7 @@ import NextLink from "next/link";
 import ModalConfirmAgreementDeletion from "../ModalConfirmAgreementDeletion/ModalConfirmAgreementDeletion";
 import { sleep } from "../../utils/common";
 import { useRouter } from "next/router";
-import { notifError, notifSucces } from "../../utils/notification";
+import { notifError, notifSuccess } from "../../utils/notification";
 import ModalSignStatus from "../ModalSignStatus";
 import ModalProof from "../ModalProof";
 import { toAgreementWithParticipants } from "../../utils/typeUtils";
@@ -101,7 +101,7 @@ export const AgreementInformation = ({
 
   const handleCopyAddress = () => {
     onCopyClick(authorWalletAddress || "");
-    notifSucces("Address Copied");
+    notifSuccess("Address Copied");
   };
 
   // TODO: edit observers

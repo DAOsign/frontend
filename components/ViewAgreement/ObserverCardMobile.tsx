@@ -3,7 +3,7 @@ import { Box, Flex, Container } from "theme-ui";
 import useWindowDimensions from "../../hooks/useWindowDimensions";
 import { Observer } from "../../modules/graphql/gql/graphql";
 import { formatAddress, onCopyClick } from "../../utils/formats";
-import { notifSucces } from "../../utils/notification";
+import { notifSuccess } from "../../utils/notification";
 import Identicon from "../Identicon/Identicon";
 import Icon from "../icon";
 import iconsObj from "../../assets/icons";
@@ -25,7 +25,7 @@ const ObserverCardMobile = ({ observer }: Props) => {
 
   const handleCopyAddress = (address: string) => {
     onCopyClick(address);
-    notifSucces("Address copied");
+    notifSuccess("Address copied");
   };
 
   const address = useMemo<string>(

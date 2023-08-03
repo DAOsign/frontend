@@ -9,7 +9,7 @@ const toastList = new Set();
 // This container is required for the first parameter of the toast function
 const ToastContainer = (props: any) => <div>{props.children}</div>;
 
-export const notifSucces = (text: string) => {
+export const notifSuccess = (text: string) => {
   const id = toast(
     <ToastContainer>
       <Flex sx={{ alignItems: "center" }}>

@@ -15,7 +15,7 @@ import iconsObj from "../../assets/icons";
 import { formatAddress, onCopyClick } from "../../utils/formats";
 import PendingIcon from "../icon/editable/PendingIcon";
 import { AgreementSignProof, Signer } from "../../modules/graphql/gql/graphql";
-import { notifSucces } from "../../utils/notification";
+import { notifSuccess } from "../../utils/notification";
 import SignedIcon from "../icon/editable/SignedIcon";
 import SignatureIcon from "../icon/editable/SignatureIcon";
 import CopyIcon from "../CopyIcon";
@@ -30,7 +30,7 @@ interface Props {
 export const SignerRow = ({ signer, signProof, viewProof }: Props) => {
   const handleCopyAddress = (address: string) => {
     onCopyClick(address);
-    notifSucces("Address Copied");
+    notifSuccess("Address Copied");
   };
 
   const address = useMemo<string>(

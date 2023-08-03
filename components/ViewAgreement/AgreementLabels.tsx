@@ -29,7 +29,7 @@ import iconsObj from "../../assets/icons";
 import SignatureIcon from "../icon/editable/SignatureIcon";
 import ShareIcon from "../icon/editable/ShareIcon";
 import DownloadIcon from "../icon/editable/DownloadIcon";
-import { notifSucces } from "../../utils/notification";
+import { notifSuccess } from "../../utils/notification";
 import { notifComingSoon } from "../../utils/notification";
 import Tooltip from "../Tooltip";
 import { downloadPdf } from "../../modules/rest";
@@ -66,7 +66,7 @@ export const AgreementLabels = ({
 }: Props) => {
   const handleShareLink = () => {
     onCopyClick(window?.location?.href);
-    notifSucces("Link Copied");
+    notifSuccess("Link Copied");
   };
 
   // TODO: download document
@@ -153,7 +153,7 @@ export const AgreementLabels = ({
           <Box sx={labelIcon}>
             <ShareIcon />
           </Box>
-          Share link
+          Share Link
         </Flex>
         {agreementPrivacy !== PRIVACY_PUBLIC_PROOF_ONLY &&
         agreementPrivacy !== PRIVACY_PUBLIC_PROOF_ONLY_FULL_NAME ? (

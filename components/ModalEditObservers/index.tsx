@@ -33,7 +33,7 @@ import {
 import { toAgreementWithParticipants } from "../../utils/typeUtils";
 import { useMutation } from "urql";
 import { editObservers as editObserversMutation } from "../../modules/graphql/mutations";
-import { notifError, notifSucces } from "../../utils/notification";
+import { notifError, notifSuccess } from "../../utils/notification";
 
 interface Props {
   agreement: ReturnType<typeof toAgreementWithParticipants>;
@@ -131,7 +131,7 @@ export default function ModalEditObservers({ agreement, isOpen, onExit, onSucces
         error?.graphQLErrors?.map(e => notifError(e.message));
         return;
       }
-      notifSucces("Observers edited");
+      notifSuccess("Observers edited");
       onSuccess && onSuccess();
       onExit();
     });
