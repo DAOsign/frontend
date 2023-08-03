@@ -9,22 +9,16 @@ import { useLock } from "../../hooks/useLock";
 import Lottie from "lottie-react";
 import loader from "../../img/json/loader.json";
 import ModalInstallMetamask from "../ModalInstallMetamask";
+import { ConnectorType } from "../../lib/snapshot/options";
 
 export default function Connect() {
   const [loadingConnect, setLoadingConnect] = useState(false);
   const [isVisible, setIsVisible] = useState(false);
-  const [windowSize, setWindowSize] = useState<{
-    width?: number;
-    height?: number;
-  }>({
-    width: undefined,
-    height: undefined,
-  });
   const { login } = useWeb3();
   const { getConnector } = useLock();
   const { push, query } = useRouter();
 
-  const connect = async (name: any) => {
+  const connect = async (name: ConnectorType) => {
     setLoadingConnect(true);
 
     const loginState = await login(name, query.email as string, query.salt as string);
