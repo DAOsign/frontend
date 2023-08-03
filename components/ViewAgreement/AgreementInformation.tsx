@@ -69,7 +69,7 @@ interface Props {
 }
 
 export const AGREEMENT_PROOF = "Agreement Proof";
-export const AUTHORITY_PROOF = "Identity Proof";
+export const IDENTITY_PROOF = "Identity Proof";
 
 export const AgreementInformation = ({
   onSetAgreementReadyToSign = () => {},
@@ -151,13 +151,13 @@ export const AgreementInformation = ({
     push("/agreements", "/agreements", { shallow: false });
   };
 
-  const onShowProof = (type: typeof AGREEMENT_PROOF | typeof AUTHORITY_PROOF) => {
+  const onShowProof = (type: typeof AGREEMENT_PROOF | typeof IDENTITY_PROOF) => {
     if (type === AGREEMENT_PROOF && agreement.agreementProof) {
       showProof({ title: AGREEMENT_PROOF, proof: agreement.agreementProof });
     }
-    if (type === AUTHORITY_PROOF && agreement.agreementFileProof) {
+    if (type === IDENTITY_PROOF && agreement.agreementFileProof) {
       //@ts-ignore
-      showProof({ title: AUTHORITY_PROOF, proof: agreement.agreementFileProof });
+      showProof({ title: IDENTITY_PROOF, proof: agreement.agreementFileProof });
     }
   };
 
@@ -233,7 +233,7 @@ export const AgreementInformation = ({
           value={
             agreement.agreementFileProof ? (
               <Box
-                onClick={() => (agreement.agreementFileProof ? onShowProof(AUTHORITY_PROOF) : {})}
+                onClick={() => (agreement.agreementFileProof ? onShowProof(IDENTITY_PROOF) : {})}
                 sx={{ cursor: "pointer", display: "flex", alignItems: "center", gap: "4px" }}
                 className="signature_icon"
               >

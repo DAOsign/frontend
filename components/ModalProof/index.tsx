@@ -23,7 +23,7 @@ import dynamic from "next/dynamic";
 import { AgreementSignProof } from "../../modules/graphql/gql/graphql";
 import { getFileFromIPFS } from "../../modules/rest";
 import { formatAddress, onCopyClick } from "../../utils/formats";
-import { AGREEMENT_PROOF, AUTHORITY_PROOF } from "../ViewAgreement/AgreementInformation";
+import { AGREEMENT_PROOF, IDENTITY_PROOF } from "../ViewAgreement/AgreementInformation";
 import CopyIcon from "../CopyIcon";
 import { informationRowIcon, tableAddressCell } from "../ViewAgreement/styles";
 import Tooltip from "../Tooltip";
@@ -53,7 +53,7 @@ export default function ModalProof({ isOpen, onExit, title, proof }: Props) {
 
   const nameTitle = () => {
     if (title === AGREEMENT_PROOF) return "Agreement";
-    if (title === AUTHORITY_PROOF) return "Identity";
+    if (title === IDENTITY_PROOF) return "Identity";
     return "Signature";
   };
 

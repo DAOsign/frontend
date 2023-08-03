@@ -68,7 +68,7 @@ const useSignAgreement = (agreementId: string) => {
     });
   };
 
-  const makeProofOfAuthority = async () => {
+  const makeProofOfIdentity = async () => {
     const signingPayload = await requestFileProofData();
 
     const { domain, types, message } = signingPayload;
@@ -95,7 +95,7 @@ const useSignAgreement = (agreementId: string) => {
   };
 
   return {
-    makeProofOfAuthority,
+    makeProofOfIdentity,
     makeProofOfSignature,
   };
 };

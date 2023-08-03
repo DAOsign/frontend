@@ -53,7 +53,7 @@ export const ViewAgreement = () => {
     [account, agreement?.authorWalletAddress]
   );
 
-  const { makeProofOfAuthority, makeProofOfSignature } = useSignAgreement(
+  const { makeProofOfIdentity, makeProofOfSignature } = useSignAgreement(
     agreementId?.toString() || ""
   );
 
@@ -100,7 +100,7 @@ export const ViewAgreement = () => {
   };
 
   const onSetAgreementReadyToSign = async () => {
-    return makeProofOfAuthority()
+    return makeProofOfIdentity()
       .then(async () => {
         await refetchAgreement();
         return true;
