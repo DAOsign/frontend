@@ -128,9 +128,9 @@ export const AgreementInformation = ({
       setSuccessModalContent({
         content: (
           <>
-            <p>You have successfully generated Proof-of-signature </p>
+            <p>You have successfully generated Proof-of-Signature</p>
             {isLastSignature && (
-              <p> Proof-of-agreement was generated because all signers signed the Agreement.</p>
+              <p> Proof-of-Agreement was generated because all signers signed the Agreement.</p>
             )}
           </>
         ),

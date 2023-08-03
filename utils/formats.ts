@@ -24,12 +24,7 @@ export const onCopyClick = (text: string) => {
 
 export const formatAgreementStatus = (agreementStatus: string | undefined): string => {
   if (!agreementStatus) return "";
-  switch (agreementStatus) {
-    case STATUS_READY_TO_SIGN:
-      return "Ready to Sign";
-    default:
-      return agreementStatus;
-  }
+  return agreementStatus === STATUS_READY_TO_SIGN ? "Ready to Sign" : agreementStatus;
 };
 
 export const formatAgreementCreationDate = (date: Date | string | number): string => {

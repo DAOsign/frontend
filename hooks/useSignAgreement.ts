@@ -4,7 +4,6 @@ import {
   sendSignedAgreementSignData,
 } from "../modules/graphql/mutations";
 import { getAgreementFileProofData, getAgreementSignProofData } from "../modules/graphql/queries";
-import { notifError } from "../utils/notification";
 import { useWeb3 } from "./useWeb3";
 
 const useSignAgreement = (agreementId: string) => {

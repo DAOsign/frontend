@@ -38,7 +38,7 @@ export const AgreementSignersList = ({ signers }: Props) => {
                   <th>Signer Name</th>
                   <th>Signer Address</th>
                   <th>Signature status</th>
-                  <th>Proof of signature</th>
+                  <th>Signature Proof</th>
                 </tr>
               </thead>
               <tbody>

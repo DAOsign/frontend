@@ -96,7 +96,7 @@ const SignerCardMobile = ({ signer, signProof, viewProof }: Props) => {
         </Box>
       </Flex>
       <Flex sx={tableSignatureCell}>
-        <Box sx={textMobile}>Proof of signature</Box>
+        <Box sx={textMobile}>Signature Proof</Box>
         <Box onClick={() => viewProof(signProof)}>
           {signProof?.cid && (
             <>
