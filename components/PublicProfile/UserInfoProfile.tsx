@@ -9,7 +9,7 @@ import useWindowDimensions from "../../hooks/useWindowDimensions";
 import { notifSucces } from "../../utils/notification";
 import { userContainer, userFoto, iconCopy, nameTitle } from "./styles";
 import { SocialLink } from "./SocialLink";
-import Info from "../Profile/Info/index";
+import Info from "../Profile/Info";
 
 export default function UserInFoProfile({ address }: any) {
   const { width } = useWindowDimensions();
@@ -26,7 +26,7 @@ export default function UserInFoProfile({ address }: any) {
         >
           <Text sx={nameTitle}>John Doe</Text>
           <Flex sx={userContainer}>
-            {/* <Tooltip
+            <Tooltip
               title={address}
               left="-118%"
               top="-42px"
@@ -35,10 +35,7 @@ export default function UserInFoProfile({ address }: any) {
               height="0"
             >
               <Text sx={{ variant: "text.smallTextMediumUser" }}>{formatAddress(address)}</Text>
-            </Tooltip> */}
-            <Text sx={{ variant: "text.smallTextMediumUser", cursor: "pointer" }}>
-              {formatAddress(address)}
-            </Text>
+            </Tooltip>
 
             <Box
               onClick={() => {

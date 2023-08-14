@@ -11,15 +11,11 @@ import iconsObj from "../../assets/icons";
 
 export default function Agreements() {
   const {
-    setValueSearch,
-    setFilterOptions,
-    filterOptions,
     filterValues,
     hasNextPage,
     valueSearch,
     loadMore,
     loading,
-    error,
     data: agreements,
   } = useLoadItems();
 
@@ -29,8 +25,9 @@ export default function Agreements() {
     onLoadMore: loadMore,
     disabled: loading,
   });
+
   return (
-    <Flex sx={{ paddingTop: "104px" }}>
+    <Flex sx={{ paddingTop: "104px", flexDirection: "column" }}>
       <Text sx={title}>Agreements</Text>
       {!!agreements.length ? (
         <div>

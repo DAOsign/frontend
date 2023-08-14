@@ -22,7 +22,6 @@ const nameTitle = {
   textAlign: "center",
   "@media screen and (max-width: 1200px)": {
     textAlign: "left",
-    // ml: "20px",
   },
 } as ThemeUIStyleObject;
 
@@ -32,10 +31,6 @@ const userFoto = {
   height: "180px",
   borderRadius: "50%",
   mr: "40px",
-  //   "@media screen and (max-width: 1200px)": {
-  //     m: 0,
-  //     left: 0,
-  //   },
   "@media screen and (max-width: 719px)": {
     width: "120px",
     height: "120px",
@@ -83,11 +78,17 @@ const badges = {
   cursor: "pointer",
 } as ThemeUIStyleObject;
 
-const references = {
+const btn = {
   variant: "text.normalTextBold",
   display: "block",
   opacity: "0.5",
   cursor: "pointer",
+  backgroundColor: "transparent",
+  borderRadius: 0,
+  width: "fit-content",
+  borderBottom: "2px solid #EDEDF3",
+  "&:hover": { background: "transparent", boxShadow: "unset" },
+  "&:focus": { background: "transparent", boxShadow: "unset" },
 } as ThemeUIStyleObject;
 
 const noContentContainer = {
@@ -116,20 +117,17 @@ const noContent = {
   margin: "0 auto",
   justifyContent: "center",
   alignItems: "center",
-  // "@media screen and (max-width: 480px)": {
-
-  // },
 } as ThemeUIStyleObject;
 
 export {
   noContentContainer,
   profileContainer,
   userContainer,
-  references,
   nameTitle,
   noContent,
   userFoto,
   iconCopy,
   badges,
   title,
+  btn,
 };
