@@ -2,10 +2,18 @@ import { ThemeUIStyleObject } from "theme-ui";
 const profileContainer = {
   maxWidth: "1440px",
   margin: "80px auto 0",
+  pl: "140px",
+  pr: "140px",
   backgroundColor: "#F7F7FB",
-  "@media screen and (max-width: 1440px)": {
-    pl: "140px",
-    pr: "140px",
+  "@media screen and (max-width: 1000px)": {
+    margin: "40px auto 0",
+    pl: "24px",
+    pr: "24px",
+  },
+  "@media screen and (max-width: 480px)": {
+    margin: "16px auto 0",
+    pl: "16px",
+    pr: "16px",
   },
 };
 const iconCopy = {
@@ -16,12 +24,46 @@ const iconCopy = {
   },
 } as ThemeUIStyleObject;
 
+const infoContainer = {
+  width: "70%",
+  justifyContent: "space-between",
+  "@media screen and (max-width: 1000px)": {
+    width: "100%",
+    flexDirection: "column",
+    marginLeft: "40px",
+  },
+  "@media screen and (max-width: 480px)": {
+    marginLeft: "0",
+    alignItems: "center",
+  },
+} as ThemeUIStyleObject;
+
+const profile = {
+  flexDirection: "column",
+  alignItems: "baseline",
+  paddingTop: "40px",
+  "@media screen and (max-width: 1000px)": {
+    paddingTop: "0",
+  },
+  "@media screen and (max-width: 720px)": {
+    paddingBottom: "40px",
+  },
+  "@media screen and (max-width: 480px)": {
+    alignItems: "center",
+    pt: "16px",
+  },
+} as ThemeUIStyleObject;
+
 const nameTitle = {
   variant: "text.h2",
   display: "block",
   textAlign: "center",
   "@media screen and (max-width: 1200px)": {
     textAlign: "left",
+  },
+  "@media screen and (max-width: 720px)": {
+    fontSize: "20px",
+    display: "block",
   },
 } as ThemeUIStyleObject;
 
@@ -31,7 +73,10 @@ const userFoto = {
   height: "180px",
   borderRadius: "50%",
   mr: "40px",
-  "@media screen and (max-width: 719px)": {
+  "@media screen and (max-width: 480px)": {
+    mr: "0",
+  },
+  "@media screen and (max-width: 375px)": {
     width: "120px",
     height: "120px",
   },
@@ -39,7 +84,7 @@ const userFoto = {
 
 const userContainer = {
   justifyContent: "center",
-  marginBottom: "14px",
+  marginBottom: "24px",
   mt: "4px",
   alignItems: "center",
   "@media screen and (min-width: 1200px)": {
@@ -59,6 +104,7 @@ const userContainer = {
     position: "relative",
     "@media screen and (max-width: 719px)": {
       justifyContent: "flex-start",
+      mb: "24px!important",
       m: 0,
       position: "relative",
     },
@@ -119,15 +165,36 @@ const noContent = {
   alignItems: "center",
 } as ThemeUIStyleObject;
 
+const container = {
+  "@media screen and (max-width: 480px)": {
+    flexDirection: "column",
+    alignItems: "center",
+  },
+} as ThemeUIStyleObject;
+
+const img = {
+  width: "100px",
+  height: "100px",
+  mr: "40px",
+  "@media screen and (max-width: 480px)": {
+    mr: "21px",
+    mb: "21px",
+  },
+} as ThemeUIStyleObject;
+
 export {
   noContentContainer,
   profileContainer,
   userContainer,
+  infoContainer,
+  container,
   nameTitle,
   noContent,
   userFoto,
   iconCopy,
+  profile,
   badges,
   title,
   btn,
+  img,
 };

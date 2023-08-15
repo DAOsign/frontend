@@ -6,11 +6,24 @@ export const profileSection = {
   pl: "140px",
   pr: "140px",
   backgroundColor: "#F7F7FB",
+  "@media screen and (max-width: 1000px)": {
+    pl: "24px",
+    pr: "24px",
+  },
+  "@media screen and (max-width: 480px)": {
+    flexDirection: "column",
+    margin: "16px auto 0",
+    pl: "16px",
+    pr: "16px",
+  },
 } as ThemeUIStyleObject;
 
 export const infoSection = {
   pl: "40px",
   backgroundColor: "#F7F7FB",
+  "@media screen and (max-width: 480px)": {
+    pl: "0px",
+  },
 } as ThemeUIStyleObject;
 
 export const userFoto = {
@@ -18,7 +31,7 @@ export const userFoto = {
   width: "180px",
   height: "180px",
   borderRadius: "50%",
-  "@media screen and (max-width: 719px)": {
+  "@media screen and (max-width: 375px)": {
     width: "120px",
     height: "120px",
   },
@@ -26,6 +39,15 @@ export const userFoto = {
 
 export const container = {
   flexDirection: "column",
+  "@media screen and (max-width: 480px)": {
+    maxWidth: "343px",
+  },
+} as ThemeUIStyleObject;
+
+export const profile = {
+  "@media screen and (max-width: 720px)": {
+    flexDirection: "column",
+  },
 } as ThemeUIStyleObject;
 
 export const walletContainer = {
@@ -40,6 +62,9 @@ export const userName = {
   pb: "16px",
   "@media screen and (max-width: 1200px)": {
     textAlign: "left",
+  },
+  "@media screen and (max-width: 720px)": {
+    fontSize: "20px",
   },
 } as ThemeUIStyleObject;
 
@@ -77,4 +102,24 @@ export const references = {
   variant: "text.normalTextBold",
   display: "block",
   opacity: "0.5",
+};
+
+export const containerName = {
+  // flexDirection: "column",
+  alignItems: "baseline",
+  flexDirection: "column",
+  "@media screen and (max-width: 480px)": {
+    alignItems: "center",
+    marginTop: "16px",
+  },
+};
+
+export const verification = {
+  ml: "73px",
+  "@media screen and (max-width: 720px)": {
+    ml: "40px",
+  },
+  "@media screen and (max-width: 480px)": {
+    ml: "0px",
+  },
 };

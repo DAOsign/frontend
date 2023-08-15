@@ -7,23 +7,25 @@ import Identicon from "../Identicon/Identicon";
 import { formatAddress, onCopyClick } from "../../utils/formats";
 import useWindowDimensions from "../../hooks/useWindowDimensions";
 import { notifSucces } from "../../utils/notification";
-import { userContainer, userFoto, iconCopy, nameTitle } from "./styles";
+import {
+  container,
+  userContainer,
+  infoContainer,
+  userFoto,
+  profile,
+  iconCopy,
+  nameTitle,
+} from "./styles";
 import { SocialLink } from "./SocialLink";
 import Info from "../Profile/Info";
 
 export default function UserInFoProfile({ address }: any) {
   const { width } = useWindowDimensions();
   return (
-    <Flex sx={{ alignItems: "center", justifyContent: "space-between" }}>
-      <Flex>
-        <Identicon account={address} size={width && width > 720 ? 180 : 120} sx={userFoto} />
-        <Flex
-          sx={{
-            flexDirection: "column",
-            alignItems: "baseline",
-            paddingTop: "40px",
-          }}
-        >
+    <Flex sx={container}>
+      <Identicon account={address} size={width && width > 375 ? 180 : 120} sx={userFoto} />
+      <Flex sx={infoContainer}>
+        <Flex sx={profile}>
           <Text sx={nameTitle}>John Doe</Text>
           <Flex sx={userContainer}>
             <Tooltip
@@ -49,8 +51,8 @@ export default function UserInFoProfile({ address }: any) {
           </Flex>
           <SocialLink />
         </Flex>
+        <Info />
       </Flex>
-      <Info />
     </Flex>
   );
 }

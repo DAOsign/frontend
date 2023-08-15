@@ -4,7 +4,7 @@ import { Box, Container, Flex, Text } from "theme-ui";
 import iconsObj from "../../assets/icons";
 import Icon from "../icon";
 import Image from "next/image";
-import { title, badges, references, titleVerif } from "./styles";
+import { title, badges, references, verification, titleVerif } from "./styles";
 
 interface Social {
   img: Icon;
@@ -16,7 +16,7 @@ const verificationIcon: Social[] = [
 
 export const VerificationBadges = () => {
   return (
-    <Container sx={{ marginLeft: "73px" }}>
+    <Container sx={verification}>
       <Text sx={titleVerif}>Verification Badges</Text>
       <Flex sx={{ marginTop: "16px" }}>
         {verificationIcon.map((el: any, i: number) => {

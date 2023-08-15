@@ -14,7 +14,7 @@ export default function UserFoto({ address }: any) {
         minWidth: "fit-content",
       }}
     >
-      <Identicon account={address} size={width && width > 720 ? 180 : 120} sx={userFoto} />
+      <Identicon account={address} size={width && width > 375 ? 180 : 120} sx={userFoto} />
       <Button sx={btnUserFoto}>Edit Profile</Button>
     </Flex>
   );
