@@ -26,7 +26,7 @@ const WalletAddress = ({ address }: any) => {
               paddingRight: "4px",
             }}
           >
-            {address ? formatAddress(address) : "\u00A0"}
+            {address ? address : "\u00A0"}
           </Text>
         </Tooltip>
         <Box

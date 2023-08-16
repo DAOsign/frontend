@@ -25,8 +25,9 @@ const iconCopy = {
 } as ThemeUIStyleObject;
 
 const infoContainer = {
-  width: "70%",
+  width: "80%",
   justifyContent: "space-between",
+  ml: "40px",
   "@media screen and (max-width: 1000px)": {
     width: "100%",
     flexDirection: "column",
@@ -72,9 +73,10 @@ const userFoto = {
   width: "180px",
   height: "180px",
   borderRadius: "50%",
-  mr: "40px",
+  maxWidth: "25%",
   "@media screen and (max-width: 480px)": {
     mr: "0",
+    maxWidth: "100%",
   },
   "@media screen and (max-width: 375px)": {
     width: "120px",
@@ -167,6 +169,7 @@ const noContent = {
 } as ThemeUIStyleObject;
 
 const container = {
+  width: "100%",
   "@media screen and (max-width: 480px)": {
     flexDirection: "column",
     alignItems: "center",
