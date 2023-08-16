@@ -49,6 +49,7 @@ import errorSign from "../img/svg/errorSign.svg";
 import privateIcon from "../img/svg/private.svg";
 import pinkArrow from "../img/svg/pinkArrow.svg";
 import publicIcon from "../img/svg/public.svg";
+import greenArrow from "../img/svg/greenArrow.svg";
 import iconExit from "../img/svg/IconExit.svg";
 import lightning from "../img/svg/lightning.svg";
 import calendar from "../img/svg/calendar.svg";
@@ -158,6 +159,7 @@ const iconsObj: IconsMapper = {
   closedEye,
   chevronUp,
   pinkArrow,
+  greenArrow,
   lightning,
   published,
   pinkPlus,

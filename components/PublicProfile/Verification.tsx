@@ -5,7 +5,7 @@ import { Box, Button, Container, Flex, Link, Text } from "theme-ui";
 import iconsObj from "../../assets/icons";
 import Icon from "../icon";
 import Image from "next/image";
-import { title, btn, img } from "./styles";
+import { title, btn, grid } from "./styles";
 
 interface Social {
   img: Icon;
@@ -40,10 +40,10 @@ export const Verification = () => {
         </Button>
       </Flex>
       {isBadges ? (
-        <Flex sx={{ paddingTop: "38px", flexWrap: "wrap" }}>
+        <Flex sx={grid}>
           {verificationIcon.map((el: any, i: number) => {
             return (
-              <Box key={i} sx={img}>
+              <Box key={i}>
                 <Image src={el.img} width={100} height={100} alt="socialIcon" />
               </Box>
             );

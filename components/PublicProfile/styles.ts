@@ -172,13 +172,24 @@ const container = {
   },
 } as ThemeUIStyleObject;
 
-const img = {
-  width: "100px",
-  height: "100px",
-  mr: "40px",
-  "@media screen and (max-width: 480px)": {
-    mr: "21px",
-    mb: "21px",
+// const img = {
+//   width: "100px",
+//   height: "100px",
+//   mr: "40px",
+//   "@media screen and (max-width: 480px)": {
+//     mr: "21px",
+//     mb: "21px",
+//   },
+// } as ThemeUIStyleObject;
+
+const grid = {
+  display: "grid",
+  gridTemplateColumns: "repeat(5, 100px)",
+  gap: "40px",
+  pt: "38px",
+  "@media screen and (max-width: 719px)": {
+    gridTemplateColumns: "repeat(3, 100px)",
+    gap: "21px",
   },
 } as ThemeUIStyleObject;
 
@@ -195,6 +206,6 @@ export {
   profile,
   badges,
   title,
+  grid,
   btn,
-  img,
 };
