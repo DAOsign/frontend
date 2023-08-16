@@ -82,6 +82,7 @@ export interface IconsMapper extends Record<string, unknown> {
   globe: Icon;
   frame: Icon;
   alert: Icon;
+  iicon: Icon;
   ipfs: Icon;
   plus: Icon;
   done: Icon;
