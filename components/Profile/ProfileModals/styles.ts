@@ -14,18 +14,17 @@ export const popup = {
   zIndex: 2,
   borderRadius: "12px",
   border: "1px solid #EDEDF3",
-  width: "829px",
-  height: "778px",
+  maxWidth: "500px",
+  width: "90%",
+  height: "max-content",
   backgroundColor: "#FFFFFF",
-  top: "10%",
+  top: "20%",
   left: "50%",
   transform: "translate(-50%,0)",
   position: "absolute",
-  "@media screen and (max-width: 780px )": {
-    "&": {
-      width: "343px",
-      height: "464px",
-    },
+  p: "60px",
+  "@media screen and (max-width: 480px)": {
+    p: "60px 20px",
   },
 } as ThemeUIStyleObject;
 
@@ -50,6 +49,9 @@ export const button = {
 export const titlePopup = {
   variant: "text.h2",
   mb: "8px",
+  "@media screen and (max-width: 375px)": {
+    variant: "text.h4",
+  },
 } as ThemeUIStyleObject;
 
 export const cardContainer = {
@@ -71,4 +73,31 @@ export const link = {
   alignItems: "center",
   pt: "16px",
   cursor: "pointer",
+} as ThemeUIStyleObject;
+
+export const cardBtn = {
+  p: "12px 24px",
+  width: "fit-content",
+} as ThemeUIStyleObject;
+
+export const userFoto = {
+  position: "relative",
+  width: "100px",
+  height: "100px",
+  borderRadius: "50%",
+  mt: "30px",
+  mb: "53px",
+  "@media screen and (max-width: 375px)": {
+    width: "120px",
+    height: "120px",
+  },
+} as ThemeUIStyleObject;
+
+export const cardInput = {
+  borderRadius: "10px",
+  mb: "24px",
+  background: "#EDEDF3",
+  "@media screen and (max-width: 480px)": {
+    width: "100%",
+  },
 } as ThemeUIStyleObject;

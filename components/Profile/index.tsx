@@ -15,14 +15,15 @@ export default function Profile() {
   return (
     <>
       <Flex sx={profileSection}>
-        <UserFoto address={account || ""} setVisible={setVisible} />
-        {visible && <EditProfileModal setVisible={setVisible} />}
+        <UserFoto setVisible={setVisible} address={account || ""} />
+
         <Flex sx={profile}>
           <Container sx={{ ...infoSection, minWidth: "33%" }}>
             <UserName />
             <Info />
           </Container>
           <VerificationBadges />
+          {visible && <EditProfileModal setVisible={setVisible} address={account || ""} />}
         </Flex>
       </Flex>
       <Score />
