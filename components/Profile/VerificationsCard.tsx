@@ -3,9 +3,19 @@ import React from "react";
 import { Box, Container, Flex, Text, Button } from "theme-ui";
 import iconsObj from "../../assets/icons";
 import Icon from "../icon";
+import {} from "framer-motion";
+import Iicon from "../../img/svg/i-icon.svg";
 import { useWeb3 } from "../../hooks/useWeb3";
 import Image from "next/image";
-import { verificationCard, description, cardTitle, cardBtn, statusBtn } from "./styles";
+import {
+  socialVerificationCard,
+  verificationCard,
+  description,
+  cardTitle,
+  cardImage,
+  statusBtn,
+  cardBtn,
+} from "./styles";
 import WalletAddress from "./WalletAddress";
 
 interface Data {
@@ -23,6 +33,26 @@ const Data = [
     img: iconsObj.verificationPseudonymous,
     title: "Pseudonymous",
     description: "Verify your Email, ENS and add your name to receive this Verification Badge",
+  },
+];
+
+interface Social {
+  img: Icon;
+  title: string;
+  description: string;
+}
+const Social = [
+  {
+    img: iconsObj.iicon,
+    title: "Twitter Verification",
+    description:
+      "Donec sed nisl libero. Fusce dignissim luctus sem eu dapibus. Pellentesque vulputate quam a quam volutpat, sed ullamcorper.",
+  },
+  {
+    img: iconsObj.iicon,
+    title: "Github Verification",
+    description:
+      "Donec sed nisl libero. Fusce dignissim luctus sem eu dapibus. Pellentesque vulputate quam a quam volutpat, sed ullamcorper.",
   },
 ];
 
@@ -44,6 +74,20 @@ export const VerificationsCards = () => {
               <WalletAddress address={account || ""} sx={{ paddingTop: "0" }} />
             </Flex>
             <Button sx={cardBtn}>View Details</Button>
+          </Flex>
+        );
+      })}
+
+      {Social.map((el: any, i: number) => {
+        return (
+          <Flex sx={socialVerificationCard} key={i}>
+            <Flex sx={{ alignItems: "center" }}>
+              <Text sx={cardTitle}>{el.title}</Text>
+              <Box sx={cardImage}>
+                <Image src={el.img} width={24} height={24} alt="socialIcon" />
+              </Box>
+            </Flex>
+            <Text sx={description}>{el.description}</Text>
           </Flex>
         );
       })}

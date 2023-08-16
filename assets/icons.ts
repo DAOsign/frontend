@@ -89,6 +89,7 @@ import award from "../img/svg/award.svg";
 import frame from "../img/svg/frame.svg";
 import alert from "../img/svg/alert.svg";
 import cloud from "../img/svg/cloud.svg";
+import iicon from "../img/svg/iicon.svg";
 import ipfs from "../img/svg/ipfs.svg";
 import Bell from "../img/svg/Bell.svg";
 import user from "../img/svg/user.svg";
@@ -197,6 +198,7 @@ const iconsObj: IconsMapper = {
   xClose,
   frame,
   email,
+  iicon,
   ipfs,
   world,
   award,

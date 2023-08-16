@@ -1,5 +1,5 @@
 import React from "react";
-import { Flex, Text } from "theme-ui";
+import { Flex, Text, Box } from "theme-ui";
 import { useWeb3 } from "../../hooks/useWeb3";
 import { SocialLink } from "../PublicProfile/SocialLink";
 import WalletAddress from "./WalletAddress";
@@ -12,6 +12,7 @@ const UserName = () => {
       <Flex sx={containerName}>
         <Text sx={userName}>johndoe.eth</Text>
         <SocialLink />
+        <Box sx={{ height: "42px" }} />
         <Flex>
           <Text sx={{ ...title, minWidth: "55px" }}>Address</Text>
           <WalletAddress address={account || ""} />

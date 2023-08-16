@@ -55,6 +55,16 @@ export const walletContainer = {
   pb: "10px",
 } as ThemeUIStyleObject;
 
+// ======= UserName =========
+export const containerName = {
+  alignItems: "baseline",
+  flexDirection: "column",
+  "@media screen and (max-width: 480px)": {
+    alignItems: "center",
+    marginTop: "16px",
+  },
+};
+
 export const userName = {
   variant: "text.h2",
   display: "block",
@@ -104,16 +114,6 @@ export const references = {
   opacity: "0.5",
 };
 
-export const containerName = {
-  // flexDirection: "column",
-  alignItems: "baseline",
-  flexDirection: "column",
-  "@media screen and (max-width: 480px)": {
-    alignItems: "center",
-    marginTop: "16px",
-  },
-};
-
 export const verification = {
   ml: "73px",
   "@media screen and (max-width: 720px)": {
@@ -150,9 +150,27 @@ export const cardBtn = {
 };
 
 export const statusBtn = {
+  display: "flex",
+  alignItems: "center",
   p: "5px 16px",
   width: "fit-content",
   m: "0 0 0 12px",
   background: "#44F268",
   maxHeight: "32px",
+};
+
+// =======socialVerificationCard=====
+export const socialVerificationCard = {
+  maxWidth: "48%",
+  backgroundColor: "#fff",
+  p: "28px",
+  borderRadius: "12px",
+  border: "1px solid #EDEDF3",
+  mb: "21px",
+  flexWrap: "wrap",
+};
+
+export const cardImage = {
+  display: "block",
+  m: "0 0 0 auto",
 };
