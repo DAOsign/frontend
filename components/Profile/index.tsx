@@ -16,7 +16,6 @@ export default function Profile() {
     <>
       <Flex sx={profileSection}>
         <UserFoto setVisible={setVisible} address={account || ""} />
-
         <Flex sx={profile}>
           <Container sx={{ ...infoSection, minWidth: "33%" }}>
             <UserName />

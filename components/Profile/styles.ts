@@ -63,7 +63,7 @@ export const containerName = {
     alignItems: "center",
     marginTop: "16px",
   },
-};
+} as ThemeUIStyleObject;
 
 export const userName = {
   variant: "text.h2",
@@ -112,7 +112,7 @@ export const references = {
   variant: "text.normalTextBold",
   display: "block",
   opacity: "0.5",
-};
+} as ThemeUIStyleObject;
 
 export const verification = {
   ml: "73px",
@@ -122,7 +122,7 @@ export const verification = {
   "@media screen and (max-width: 480px)": {
     ml: "0px",
   },
-};
+} as ThemeUIStyleObject;
 
 // ========= verificationCard ===========
 export const verificationCard = {
@@ -132,7 +132,7 @@ export const verificationCard = {
   borderRadius: "12px",
   border: "1px solid #EDEDF3",
   mb: "21px",
-};
+} as ThemeUIStyleObject;
 
 export const description = {
   variant: "text.smallTextMediumUser",
@@ -141,13 +141,13 @@ export const description = {
 export const cardTitle = {
   variant: "text.h4",
   pb: "13.5px",
-};
+} as ThemeUIStyleObject;
 
 export const cardBtn = {
   p: "12px 24px",
   width: "fit-content",
   m: "2% 0 0 auto",
-};
+} as ThemeUIStyleObject;
 
 export const statusBtn = {
   display: "flex",
@@ -157,7 +157,7 @@ export const statusBtn = {
   m: "0 0 0 12px",
   background: "#44F268",
   maxHeight: "32px",
-};
+} as ThemeUIStyleObject;
 
 // =======socialVerificationCard=====
 export const socialVerificationCard = {
@@ -168,9 +168,9 @@ export const socialVerificationCard = {
   border: "1px solid #EDEDF3",
   mb: "21px",
   flexWrap: "wrap",
-};
+} as ThemeUIStyleObject;
 
 export const cardImage = {
   display: "block",
   m: "0 0 0 auto",
-};
+} as ThemeUIStyleObject;
