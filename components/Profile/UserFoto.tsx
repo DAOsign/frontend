@@ -4,7 +4,7 @@ import Identicon from "../Identicon/Identicon";
 import useWindowDimensions from "../../hooks/useWindowDimensions";
 import { userFoto, btnUserFoto, userName } from "./styles";
 
-export default function UserFoto({ address }: any) {
+export default function UserFoto({ address }: any, { setVisible }: any) {
   const { width } = useWindowDimensions();
   return (
     <Flex
@@ -15,7 +15,9 @@ export default function UserFoto({ address }: any) {
       }}
     >
       <Identicon account={address} size={width && width > 375 ? 180 : 120} sx={userFoto} />
-      <Button sx={btnUserFoto}>Edit Profile</Button>
+      <Button sx={btnUserFoto} onClick={setVisible}>
+        Edit Profile
+      </Button>
     </Flex>
   );
 }
