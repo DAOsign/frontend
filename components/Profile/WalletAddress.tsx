@@ -23,6 +23,7 @@ const WalletAddress = ({ address }: any) => {
             sx={{
               variant: "text.smallTextMediumUser",
               cursor: "default",
+              paddingRight: "4px",
             }}
           >
             {address ? formatAddress(address) : "\u00A0"}

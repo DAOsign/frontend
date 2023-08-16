@@ -40,11 +40,13 @@ export interface IconsMapper extends Record<string, unknown> {
   uploadIcon: Icon;
   checkboxOn: Icon;
   plusCircle: Icon;
+  greenArrow: Icon;
   chevronUp: Icon;
   pinkArrow: Icon;
   published: Icon;
   lightning: Icon;
   errorSign: Icon;
+  iconArrow: Icon;
   iconExit: Icon;
   settings: Icon;
   telegram: Icon;

@@ -1,6 +1,6 @@
 /* eslint-disable @next/next/no-img-element */
 import React from "react";
-import { Box, Flex, Link } from "theme-ui";
+import { Flex, Link } from "theme-ui";
 import iconsObj from "../../assets/icons";
 import Icon from "../icon";
 import Image from "next/image";
