@@ -58,4 +58,18 @@ const cardContainer = {
   border: "1px solid var(--grey-2, #EDEDF3)",
 } as ThemeUIStyleObject;
 
-export { cardContainer, titlePopup, background, iconCopy, button, popup };
+const socialTitle = {
+  pl: "4px",
+  variant: "text.largeTextBold",
+  fontStyle: "normal",
+} as ThemeUIStyleObject;
+
+const link = {
+  color: "pink",
+  display: "flex",
+  alignItems: "center",
+  pt: "16px",
+  cursor: "pointer",
+} as ThemeUIStyleObject;
+
+export { cardContainer, socialTitle, titlePopup, background, iconCopy, button, popup, link };

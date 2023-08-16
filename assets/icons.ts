@@ -52,6 +52,7 @@ import publicIcon from "../img/svg/public.svg";
 import greenArrow from "../img/svg/greenArrow.svg";
 import iconExit from "../img/svg/IconExit.svg";
 import lightning from "../img/svg/lightning.svg";
+import iconArrow from "../img/svg/iconArrow.svg";
 import calendar from "../img/svg/calendar.svg";
 import settings from "../img/svg/settings.svg";
 import download from "../img/svg/download.svg";
@@ -161,6 +162,7 @@ const iconsObj: IconsMapper = {
   pinkArrow,
   greenArrow,
   lightning,
+  iconArrow,
   published,
   pinkPlus,
   portfile,
