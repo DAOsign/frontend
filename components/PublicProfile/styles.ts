@@ -132,6 +132,7 @@ const btn = {
   backgroundColor: "transparent",
   borderRadius: 0,
   width: "fit-content",
+  pl: "0",
   borderBottom: "2px solid #EDEDF3",
   "&:hover": { background: "transparent", boxShadow: "unset" },
   "&:focus": { background: "transparent", boxShadow: "unset" },

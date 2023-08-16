@@ -10,7 +10,6 @@ const WalletAddress = ({ address }: any) => {
   return (
     <>
       <Flex sx={walletContainer}>
-        <Text sx={{ ...title, minWidth: "55px" }}>Address</Text>
         <Tooltip
           top="-164%"
           left="-95px"

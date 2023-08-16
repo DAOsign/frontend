@@ -4,6 +4,7 @@ import { userName, badges, references, profileSection } from "./styles";
 
 import { btn } from "../PublicProfile/styles";
 import { VerificationBadges } from "./VerificationBadges";
+import { VerificationsCards } from "./VerificationsCard";
 
 export default function Score() {
   const [isBadges, setIsBadges] = useState(true);
@@ -16,16 +17,19 @@ export default function Score() {
   return (
     <Flex sx={{ ...profileSection, marginTop: "40px", flexDirection: "column" }}>
       <Box>
-        <Text sx={{ ...userName, textAlign: "start" }}>Score</Text>
+        <Text sx={{ ...userName, textAlign: "start" }}>Verifications</Text>
       </Box>
 
-      <Flex sx={{ width: "fit-content", paddingBottom: "38px" }}>
+      <Flex sx={{ width: "fit-content" }}>
         <Button sx={{ ...btn, ...getBorder(isBadges) }} onClick={() => setIsBadges(true)}>
-          Verifications
+          Badges
         </Button>
         <Button sx={{ ...btn, ...getBorder(!isBadges) }} onClick={() => setIsBadges(false)}>
           References
         </Button>
+      </Flex>
+      <Flex>
+        <VerificationsCards />
       </Flex>
     </Flex>
   );
