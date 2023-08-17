@@ -1,8 +1,7 @@
 import React from "react";
 import { Container, Flex, Text, Box, Button, Input, Textarea } from "theme-ui";
-import { useWeb3 } from "../../../hooks/useWeb3";
 import useWindowDimensions from "../../../hooks/useWindowDimensions";
-import { titlePopup, background, cardInput, userFoto, cardBtn, popup } from "./styles";
+import { titlePopup, background, cardInput, userFoto, cardBtn, popup, xClose } from "./styles";
 import Icon from "../../icon";
 import Identicon from "../../Identicon/Identicon";
 import iconsObj from "../../../assets/icons";
@@ -13,18 +12,25 @@ export default function EditProfileModal({ address, setVisible }: any) {
   return (
     <Container sx={background}>
       <Container sx={popup}>
-        <Box
-          onClick={() => {
-            setVisible(false);
+        <Flex
+          sx={{
+            justifyContent: "center",
+            flexDirection: "column",
+            alignItems: "center",
+            padding: "60px",
           }}
-          sx={{ ml: "auto", width: "20px", cursor: "pointer" }}
         >
-          <Icon width={24} height={24} src={iconsObj.xClose} />
-        </Box>
-        <Flex sx={{ flexDirection: "column", alignItems: "center", justifyContent: "center" }}>
+          <Box
+            onClick={() => {
+              setVisible(false);
+            }}
+            sx={xClose}
+          >
+            <Icon width={24} height={24} src={iconsObj.xClose} />
+          </Box>
           <Text sx={titlePopup}>Edit Profile</Text>
           <Identicon account={address} size={width && width > 375 ? 100 : 90} sx={userFoto} />
-          <Flex sx={{ flexDirection: "column" }}>
+          <Flex sx={{ flexDirection: "column", width: "100%" }}>
             <Text sx={{ variant: "forms.label" }}>Name</Text>
             <Input sx={cardInput} />
             <Text sx={{ variant: "forms.label" }}>Bio</Text>

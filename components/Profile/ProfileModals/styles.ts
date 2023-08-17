@@ -3,7 +3,7 @@ import { ThemeUIStyleObject } from "theme-ui";
 export const background = {
   position: "absolute",
   height: "100%",
-  zIndex: 1,
+  zIndex: 99,
   width: "100%",
   top: 0,
   left: 0,
@@ -22,9 +22,20 @@ export const popup = {
   left: "50%",
   transform: "translate(-50%,0)",
   position: "absolute",
-  p: "60px",
   "@media screen and (max-width: 480px)": {
     p: "60px 20px",
+  },
+} as ThemeUIStyleObject;
+
+export const xClose = {
+  position: "absolute",
+  top: "24px",
+  right: "24px",
+  marginLeft: "auto",
+  width: "20px",
+  cursor: "pointer",
+  "&:hover > svg > path": {
+    stroke: "#AE4FD0",
   },
 } as ThemeUIStyleObject;
 
@@ -97,7 +108,40 @@ export const cardInput = {
   borderRadius: "10px",
   mb: "24px",
   background: "#EDEDF3",
-  "@media screen and (max-width: 480px)": {
-    width: "100%",
+  width: "100%",
+} as ThemeUIStyleObject;
+
+// =========== EmailVerificationModal =================
+export const titleEmail = {
+  variant: "text.h2",
+  mb: "16px",
+  "@media screen and (max-width: 375px)": {
+    variant: "text.h4",
   },
+} as ThemeUIStyleObject;
+
+export const resentBtn = {
+  color: "#CA5CF2",
+  background: "transparent",
+  border: "none",
+  width: "fit-content",
+  height: "fit-content",
+  variant: "normalTextMedium",
+  p: "0",
+  m: "0 auto 0 0",
+} as ThemeUIStyleObject;
+
+export const formEmail = {
+  justifyContent: "center",
+  flexDirection: "column",
+  alignItems: "center",
+  textAlign: "center",
+  padding: "60px",
+} as ThemeUIStyleObject;
+
+// ========= SuccessModal =============
+export const greenArrow = {
+  width: "100px",
+  height: "100px",
+  mb: "24px",
 } as ThemeUIStyleObject;

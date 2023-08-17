@@ -22,7 +22,7 @@ export default function Score() {
 
       <Flex sx={{ width: "fit-content" }}>
         <Button sx={{ ...btn, ...getBorder(isBadges) }} onClick={() => setIsBadges(true)}>
-          Badges
+          Verification Badges
         </Button>
         <Button sx={{ ...btn, ...getBorder(!isBadges) }} onClick={() => setIsBadges(false)}>
           References

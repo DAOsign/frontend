@@ -4,16 +4,17 @@ import { Box, Container, Flex, Text, Button } from "theme-ui";
 import iconsObj from "../../assets/icons";
 import Icon from "../icon";
 import {} from "framer-motion";
-import Iicon from "../../img/svg/i-icon.svg";
 import { useWeb3 } from "../../hooks/useWeb3";
 import Image from "next/image";
 import {
   socialVerificationCard,
   verificationCard,
+  progressBox,
   description,
   cardTitle,
   cardImage,
   statusBtn,
+  progress,
   cardBtn,
 } from "./styles";
 import WalletAddress from "./WalletAddress";
@@ -32,6 +33,21 @@ const Data = [
   {
     img: iconsObj.verificationPseudonymous,
     title: "Pseudonymous",
+    description: "Verify your Email, ENS and add your name to receive this Verification Badge",
+  },
+  {
+    img: iconsObj.verificationDigital,
+    title: "Digital Identify",
+    description: "Verify your Email, ENS and add your name to receive this Verification Badge",
+  },
+  {
+    img: iconsObj.verificationReal,
+    title: "Real Identify",
+    description: "Verify your Email, ENS and add your name to receive this Verification Badge",
+  },
+  {
+    img: iconsObj.verificationNotarized,
+    title: "Notarized Identify",
     description: "Verify your Email, ENS and add your name to receive this Verification Badge",
   },
 ];
@@ -65,13 +81,16 @@ export const VerificationsCards = () => {
         return (
           <Flex sx={verificationCard} key={i}>
             <Image src={el.img} width={100} height={100} alt="socialIcon" />
-            <Flex sx={{ marginLeft: "28px", flexDirection: "column" }}>
+            <Flex sx={{ marginLeft: "28px", flexDirection: "column", width: "70%" }}>
               <Flex>
                 <Text sx={cardTitle}>{el.title}</Text>
                 <Button sx={statusBtn}>Verified</Button>
               </Flex>
               <Text sx={description}>{el.description}</Text>
               <WalletAddress address={account || ""} sx={{ paddingTop: "0" }} />
+              <Box sx={progressBox}>
+                <Box sx={progress}>3 of 4</Box>
+              </Box>
             </Flex>
             <Button sx={cardBtn}>View Details</Button>
           </Flex>

@@ -6,7 +6,19 @@ export const profileSection = {
   pl: "140px",
   pr: "140px",
   backgroundColor: "#F7F7FB",
-  "@media screen and (max-width: 1000px)": {
+  // ".status-icon": {
+  //   display: "block",
+  //   " @media screen and (max-width: 767px)": {
+  //     display: "none",
+  //   },
+  // },
+  // ".status-badges": {
+  //   display: "none",
+  //   "@media screen and (max-width: 767px)": {
+  //     display: "block",
+  //   },
+  // },
+  "@media screen and (max-width: 1200px)": {
     pl: "24px",
     pr: "24px",
   },
@@ -26,6 +38,11 @@ export const infoSection = {
   },
 } as ThemeUIStyleObject;
 
+export const title = {
+  variant: "text.overscript",
+} as ThemeUIStyleObject;
+
+// ========= UserFoto =============
 export const userFoto = {
   position: "relative",
   width: "180px",
@@ -37,6 +54,14 @@ export const userFoto = {
   },
 } as ThemeUIStyleObject;
 
+export const btnUserFoto = {
+  variant: "buttons.userBtn",
+  height: "46px",
+  padding: "10px 22px",
+  mt: "24px",
+} as ThemeUIStyleObject;
+
+// ========= Info ===========
 export const container = {
   flexDirection: "column",
   "@media screen and (max-width: 480px)": {
@@ -44,10 +69,13 @@ export const container = {
   },
 } as ThemeUIStyleObject;
 
-export const profile = {
-  "@media screen and (max-width: 720px)": {
-    flexDirection: "column",
-  },
+export const infoContainer = {
+  pb: "13px",
+} as ThemeUIStyleObject;
+
+export const subTitle = {
+  variant: "text.smallTextMediumUser",
+  width: "400px",
 } as ThemeUIStyleObject;
 
 // ======= walletContainer =========
@@ -78,30 +106,6 @@ export const userName = {
   },
 } as ThemeUIStyleObject;
 
-export const infoContainer = {
-  pb: "13px",
-} as ThemeUIStyleObject;
-
-export const title = {
-  variant: "text.overscript",
-} as ThemeUIStyleObject;
-
-export const titleVerif = {
-  variant: "text.normalTextBold",
-} as ThemeUIStyleObject;
-
-export const subTitle = {
-  variant: "text.smallTextMediumUser",
-  width: "400px",
-} as ThemeUIStyleObject;
-
-export const btnUserFoto = {
-  variant: "buttons.userBtn",
-  height: "46px",
-  padding: "10px 22px",
-  mt: "24px",
-} as ThemeUIStyleObject;
-
 export const badges = {
   variant: "text.normalTextBold",
   display: "block",
@@ -114,14 +118,11 @@ export const references = {
   opacity: "0.5",
 } as ThemeUIStyleObject;
 
+// ======== VerificationBadges =======
 export const verification = {
-  ml: "73px",
-  "@media screen and (max-width: 720px)": {
-    ml: "40px",
-  },
-  "@media screen and (max-width: 480px)": {
-    ml: "0px",
-  },
+  ml: "auto",
+  minWidth: "232px",
+  width: "20%",
 } as ThemeUIStyleObject;
 
 // ========= verificationCard ===========
@@ -141,6 +142,23 @@ export const description = {
 export const cardTitle = {
   variant: "text.h4",
   pb: "13.5px",
+} as ThemeUIStyleObject;
+
+export const progressBox = {
+  position: "relative",
+  width: "100%",
+  height: "24px",
+  backgroundColor: "#EDEDF3",
+  borderRadius: "12px",
+} as ThemeUIStyleObject;
+
+export const progress = {
+  position: "absolute",
+  width: "77%",
+  height: "24px",
+  backgroundColor: "#44F268",
+  borderRadius: "12px",
+  textAlign: "center",
 } as ThemeUIStyleObject;
 
 export const cardBtn = {
