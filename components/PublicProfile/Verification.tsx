@@ -32,8 +32,12 @@ export const Verification = ({ setVisible }: any) => {
     <Container sx={{ paddingTop: "60px" }}>
       <Text sx={title}>Verifications</Text>
       <Flex sx={{ width: "fit-content" }}>
-        <Button sx={{ ...btn, ...getBorder(isBadges) }} onClick={() => setIsBadges(true)}>
-          Badges
+        <Button
+          sx={{ ...btn, ...getBorder(isBadges), minWidth: "fit-content" }}
+          onClick={() => setIsBadges(true)}
+        >
+          Verification Badges
+          <Image src={iconsObj.iicon} width={16} height={16} alt="socialIcon" />
         </Button>
         <Button sx={{ ...btn, ...getBorder(!isBadges) }} onClick={() => setIsBadges(false)}>
           References

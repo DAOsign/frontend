@@ -71,6 +71,7 @@ import preview from "../img/svg/preview.svg";
 import errorSvg from "../img/svg/error.svg";
 import search from "../img/svg/search.svg";
 import logoIcon from "../img/svg/logo.svg";
+import website from "../img/svg/website.svg";
 import github from "../img/svg/github.svg";
 import wallet from "../img/svg/wallet.svg";
 import xClose from "../img/svg/xClose.svg";
@@ -187,6 +188,7 @@ const iconsObj: IconsMapper = {
   iconSix,
   warning,
   pending,
+  website,
   logOut,
   cloud,
   verify,

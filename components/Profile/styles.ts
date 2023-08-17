@@ -38,6 +38,8 @@ export const userFoto = {
 } as ThemeUIStyleObject;
 
 export const container = {
+  flexBasis: " 45%",
+
   flexDirection: "column",
   "@media screen and (max-width: 480px)": {
     maxWidth: "343px",
