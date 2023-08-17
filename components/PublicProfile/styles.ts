@@ -29,13 +29,15 @@ const infoContainer = {
   justifyContent: "space-between",
   ml: "40px",
   "@media screen and (max-width: 1000px)": {
-    width: "100%",
+    width: "70%",
     flexDirection: "column",
     marginLeft: "40px",
   },
-  "@media screen and (max-width: 480px)": {
+  "@media screen and (max-width: 719px)": {
+    width: "100%",
     marginLeft: "0",
     alignItems: "center",
+    pt: "16px",
   },
 } as ThemeUIStyleObject;
 
@@ -48,6 +50,9 @@ const profile = {
   },
   "@media screen and (max-width: 720px)": {
     paddingBottom: "40px",
+  },
+  "@media screen and (max-width: 719px)": {
+    alignItems: "center",
   },
   "@media screen and (max-width: 480px)": {
     alignItems: "center",
@@ -74,7 +79,7 @@ const userFoto = {
   height: "180px",
   borderRadius: "50%",
   maxWidth: "25%",
-  "@media screen and (max-width: 480px)": {
+  "@media screen and (max-width: 719px)": {
     mr: "0",
     maxWidth: "100%",
   },
@@ -90,7 +95,7 @@ const userContainer = {
   mt: "4px",
   alignItems: "center",
   "@media screen and (min-width: 1200px)": {
-    mb: "40px",
+    mb: "24px",
     "& > div > div > .arrowTooltip": {
       marginLeft: "46.5%",
     },
@@ -117,6 +122,9 @@ const title = {
   variant: "text.h2",
   display: "block",
   pb: "16px",
+  "@media screen and (max-width: 480px)": {
+    variant: "text.h3",
+  },
 } as ThemeUIStyleObject;
 
 const badges = {
@@ -128,7 +136,8 @@ const badges = {
 
 const btn = {
   variant: "text.normalTextBold",
-  display: "block",
+  display: "flex",
+  alignItems: "center",
   opacity: "0.5",
   cursor: "pointer",
   backgroundColor: "transparent",
@@ -170,21 +179,11 @@ const noContent = {
 
 const container = {
   width: "100%",
-  "@media screen and (max-width: 480px)": {
+  "@media screen and (max-width: 719px)": {
     flexDirection: "column",
     alignItems: "center",
   },
 } as ThemeUIStyleObject;
-
-// const img = {
-//   width: "100px",
-//   height: "100px",
-//   mr: "40px",
-//   "@media screen and (max-width: 480px)": {
-//     mr: "21px",
-//     mb: "21px",
-//   },
-// } as ThemeUIStyleObject;
 
 const grid = {
   display: "grid",

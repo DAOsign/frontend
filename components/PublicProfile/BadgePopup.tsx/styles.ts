@@ -2,7 +2,7 @@ import { ThemeUIStyleObject } from "theme-ui";
 const background = {
   position: "absolute",
   height: "100%",
-  zIndex: 1,
+  zIndex: 99,
   width: "100%",
   top: 0,
   left: 0,
@@ -13,26 +13,17 @@ const popup = {
   zIndex: 2,
   borderRadius: "12px",
   border: "1px solid #EDEDF3",
-  width: "829px",
-  height: "778px",
+  maxWidth: "829px",
+  height: "fit-content",
   backgroundColor: "#FFFFFF",
-  top: "10%",
+  top: "5%",
   left: "50%",
   transform: "translate(-50%,0)",
   position: "absolute",
   "@media screen and (max-width: 780px )": {
     "&": {
       width: "343px",
-      height: "464px",
     },
-  },
-} as ThemeUIStyleObject;
-
-const iconCopy = {
-  marginLeft: "5px",
-  cursor: "pointer",
-  "&:hover > svg > path": {
-    stroke: "#AE4FD0",
   },
 } as ThemeUIStyleObject;
 
@@ -52,7 +43,7 @@ const titlePopup = {
 } as ThemeUIStyleObject;
 
 const cardContainer = {
-  width: "344px",
+  maxWidth: "344px",
   height: "114px",
   borderRadius: "12px",
   border: "1px solid var(--grey-2, #EDEDF3)",
@@ -72,4 +63,16 @@ const link = {
   cursor: "pointer",
 } as ThemeUIStyleObject;
 
-export { cardContainer, socialTitle, titlePopup, background, iconCopy, button, popup, link };
+const cardBlock = {
+  display: "grid",
+  gridTemplateColumns: "repeat(2, 344px)",
+  gap: "20px",
+  padding: "60px",
+  "@media screen and (max-width: 768px )": {
+    padding: "20px",
+    gap: "10px",
+    gridTemplateColumns: "repeat(1, 1fr)",
+  },
+} as ThemeUIStyleObject;
+
+export { cardContainer, socialTitle, titlePopup, cardBlock, background, button, popup, link };

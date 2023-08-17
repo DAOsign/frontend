@@ -66,6 +66,7 @@ export interface IconsMapper extends Record<string, unknown> {
   iconSix: Icon;
   pending: Icon;
   preview: Icon;
+  website: Icon;
   verify: Icon;
   logOut: Icon;
   github: Icon;
