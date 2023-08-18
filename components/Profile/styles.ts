@@ -6,24 +6,14 @@ export const profileSection = {
   pl: "140px",
   pr: "140px",
   backgroundColor: "#F7F7FB",
-  // ".status-icon": {
-  //   display: "block",
-  //   " @media screen and (max-width: 767px)": {
-  //     display: "none",
-  //   },
-  // },
-  // ".status-badges": {
-  //   display: "none",
-  //   "@media screen and (max-width: 767px)": {
-  //     display: "block",
-  //   },
-  // },
   "@media screen and (max-width: 1200px)": {
     pl: "24px",
     pr: "24px",
   },
-  "@media screen and (max-width: 480px)": {
+  "@media screen and (max-width: 768px)": {
     flexDirection: "column",
+  },
+  "@media screen and (max-width: 480px)": {
     margin: "16px auto 0",
     pl: "16px",
     pr: "16px",
@@ -31,10 +21,8 @@ export const profileSection = {
 } as ThemeUIStyleObject;
 
 export const infoSection = {
-  pl: "40px",
-  backgroundColor: "#F7F7FB",
   "@media screen and (max-width: 480px)": {
-    pl: "0px",
+    flexDirection: "column",
   },
 } as ThemeUIStyleObject;
 
@@ -64,7 +52,7 @@ export const btnUserFoto = {
 // ========= Info ===========
 export const container = {
   flexBasis: " 45%",
-
+  maxWidth: "100%",
   flexDirection: "column",
   "@media screen and (max-width: 480px)": {
     maxWidth: "343px",
@@ -89,7 +77,9 @@ export const walletContainer = {
 export const containerName = {
   alignItems: "baseline",
   flexDirection: "column",
+  pl: "40px",
   "@media screen and (max-width: 480px)": {
+    pl: "0",
     alignItems: "center",
     marginTop: "16px",
   },
@@ -122,9 +112,13 @@ export const references = {
 
 // ======== VerificationBadges =======
 export const verification = {
-  ml: "auto",
   minWidth: "232px",
   width: "20%",
+  ml: "auto",
+  mr: "0",
+  "@media screen and (max-width: 768px)": {
+    m: "auto",
+  },
 } as ThemeUIStyleObject;
 
 // ========= verificationCard ===========
@@ -135,6 +129,9 @@ export const verificationCard = {
   borderRadius: "12px",
   border: "1px solid #EDEDF3",
   mb: "21px",
+  "@media screen and (max-width: 768px)": {
+    flexDirection: "column",
+  },
 } as ThemeUIStyleObject;
 
 export const description = {
@@ -163,10 +160,18 @@ export const progress = {
   textAlign: "center",
 } as ThemeUIStyleObject;
 
+// =======socialVerificationCard=====
 export const cardBtn = {
   p: "12px 24px",
   width: "fit-content",
+  minWidth: "150px",
   m: "2% 0 0 auto",
+  "@media screen and (max-width: 768px)": {
+    mt: "24px",
+  },
+  "@media screen and (max-width: 480px)": {
+    width: "100%",
+  },
 } as ThemeUIStyleObject;
 
 export const statusBtn = {
@@ -177,9 +182,11 @@ export const statusBtn = {
   m: "0 0 0 12px",
   background: "#44F268",
   maxHeight: "32px",
+  "@media screen and (max-width: 480px)": {
+    m: "0 0 8px 0",
+  },
 } as ThemeUIStyleObject;
 
-// =======socialVerificationCard=====
 export const socialVerificationCard = {
   maxWidth: "48%",
   backgroundColor: "#fff",
@@ -193,4 +200,10 @@ export const socialVerificationCard = {
 export const cardImage = {
   display: "block",
   m: "0 0 0 auto",
+} as ThemeUIStyleObject;
+
+export const infoCard = {
+  "@media screen and (max-width: 480px)": {
+    flexDirection: "column-reverse",
+  },
 } as ThemeUIStyleObject;

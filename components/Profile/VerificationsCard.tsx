@@ -15,6 +15,7 @@ import {
   cardImage,
   statusBtn,
   progress,
+  infoCard,
   cardBtn,
 } from "./styles";
 import WalletAddress from "./WalletAddress";
@@ -80,24 +81,26 @@ export const VerificationsCards = () => {
       {Data.map((el: any, i: number) => {
         return (
           <Flex sx={verificationCard} key={i}>
-            <Image src={el.img} width={100} height={100} alt="socialIcon" />
-            <Flex sx={{ marginLeft: "28px", flexDirection: "column", width: "70%" }}>
-              <Flex>
-                <Text sx={cardTitle}>{el.title}</Text>
-                <Button sx={statusBtn}>Verified</Button>
+            <Flex>
+              <Image src={el.img} width={100} height={100} alt="socialIcon" />
+              <Flex sx={{ marginLeft: "28px", flexDirection: "column", width: "70%" }}>
+                <Flex sx={infoCard}>
+                  <Text sx={cardTitle}>{el.title}</Text>
+                  <Button sx={statusBtn}>Verified</Button>
+                </Flex>
+                <Text sx={description}>{el.description}</Text>
+                <WalletAddress address={account || ""} sx={{ paddingTop: "0" }} />
+                <Box sx={progressBox}>
+                  <Box sx={progress}>3 of 4</Box>
+                </Box>
               </Flex>
-              <Text sx={description}>{el.description}</Text>
-              <WalletAddress address={account || ""} sx={{ paddingTop: "0" }} />
-              <Box sx={progressBox}>
-                <Box sx={progress}>3 of 4</Box>
-              </Box>
             </Flex>
             <Button sx={cardBtn}>View Details</Button>
           </Flex>
         );
       })}
 
-      {Social.map((el: any, i: number) => {
+      {/* {Social.map((el: any, i: number) => {
         return (
           <Flex sx={socialVerificationCard} key={i}>
             <Flex sx={{ alignItems: "center" }}>
@@ -109,7 +112,7 @@ export const VerificationsCards = () => {
             <Text sx={description}>{el.description}</Text>
           </Flex>
         );
-      })}
+      })} */}
     </Container>
   );
 };

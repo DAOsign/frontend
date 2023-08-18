@@ -17,13 +17,11 @@ export default function Profile() {
   return (
     <>
       <Flex sx={profileSection}>
-        <UserFoto setVisible={setVisible} address={account || ""} />
-        <Container sx={{ ...infoSection, minWidth: "33%" }}>
+        <Flex sx={infoSection}>
+          <UserFoto setVisible={setVisible} address={account || ""} />
           <UserName />
-          {/* <VerificationBadges className="status-badges" /> */}
-          <Info />
-        </Container>
-        <VerificationBadges className="status-icon" />
+        </Flex>
+        <VerificationBadges />
         {visible && <EditProfileModal setVisible={setVisible} address={account || ""} />}
         {/* {visible && <EmailVerificationModal setVisible={setVisible} address={account || ""} />} */}
         {/* {visible && <SuccessModal setVisible={setVisible} address={account || ""} />} */}

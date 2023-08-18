@@ -946,21 +946,3 @@ body {
   background-color: #EDEDF3;
   padding-top: 4px;
 }
-
-.status-icon {
-  display: "block",
-} 
-@media screen and (max-width: 767px) {
-  .status-icon {
-    display: "none !important",
-}
-}
-
-.status-badges {
-  display: "none",
-} 
-@media screen and (max-width: 767px) {
-  .status-badges {
-    display: "block",
-}
-}

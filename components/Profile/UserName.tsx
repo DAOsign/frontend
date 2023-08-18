@@ -4,6 +4,7 @@ import { useWeb3 } from "../../hooks/useWeb3";
 import { SocialLink } from "../PublicProfile/SocialLink";
 import WalletAddress from "./WalletAddress";
 import { title, userName, containerName } from "./styles";
+import Info from "./Info";
 
 const UserName = () => {
   const { account } = useWeb3();
@@ -17,6 +18,7 @@ const UserName = () => {
           <Text sx={{ ...title, minWidth: "55px" }}>Address</Text>
           <WalletAddress address={account || ""} />
         </Flex>
+        <Info />
       </Flex>
     </>
   );

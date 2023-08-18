@@ -1,5 +1,7 @@
 import React, { useState } from "react";
 import { Flex, Text, Button, Link, Box } from "theme-ui";
+import Image from "next/image";
+import iconsObj from "../../assets/icons";
 import { userName, badges, references, profileSection } from "./styles";
 
 import { btn } from "../PublicProfile/styles";
@@ -23,6 +25,7 @@ export default function Score() {
       <Flex sx={{ width: "fit-content" }}>
         <Button sx={{ ...btn, ...getBorder(isBadges) }} onClick={() => setIsBadges(true)}>
           Verification Badges
+          <Image src={iconsObj.iicon} width={16} height={16} alt="socialIcon" />
         </Button>
         <Button sx={{ ...btn, ...getBorder(!isBadges) }} onClick={() => setIsBadges(false)}>
           References
