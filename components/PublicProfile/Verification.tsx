@@ -12,10 +12,10 @@ interface Social {
 }
 const verificationIcon: Social[] = [
   { img: iconsObj.verificationAnonymous },
-  { img: iconsObj.verificationPseudonymous },
-  { img: iconsObj.verificationDigital },
-  { img: iconsObj.verificationReal },
-  { img: iconsObj.verificationNotarized },
+  // { img: iconsObj.verificationPseudonymous },
+  // { img: iconsObj.verificationDigital },
+  // { img: iconsObj.verificationReal },
+  // { img: iconsObj.verificationNotarized },
 ];
 
 export const Verification = ({ setVisible }: any) => {

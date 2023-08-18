@@ -22,9 +22,9 @@ export default function UserInFoProfile({ address }: any) {
           <Flex sx={userContainer}>
             <WalletAddress address={account || ""} />
           </Flex>
-          <SocialLink />
+          {/* <SocialLink /> */}
         </Flex>
-        <Info />
+        {/* <Info /> */}
       </Flex>
     </Flex>
   );
