@@ -5,7 +5,7 @@ const profileContainer = {
   pl: "140px",
   pr: "140px",
   backgroundColor: "#F7F7FB",
-  "@media screen and (max-width: 1000px)": {
+  "@media screen and (max-width: 1200px)": {
     margin: "40px auto 0",
     pl: "24px",
     pr: "24px",
