@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Flex, Text, Box, Container } from "theme-ui";
-import { noContentContainer, noContent, title } from "./styles";
+import { noContentContainer, noContent, title, agreementSection } from "./styles";
 import useInfiniteScroll from "react-infinite-scroll-hook";
 import { useLoadItems } from "../../utils/infiniteScroll";
 import AgreementItem from "../AgreementsList/AgreementItem";
@@ -27,7 +27,7 @@ export default function Agreements() {
   });
 
   return (
-    <Flex sx={{ paddingTop: "104px", flexDirection: "column" }}>
+    <Flex sx={{ ...agreementSection, paddingTop: "104px", flexDirection: "column" }}>
       <Text sx={title}>Agreements</Text>
       {!!agreements.length ? (
         <div>

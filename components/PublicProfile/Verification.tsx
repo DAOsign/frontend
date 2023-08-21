@@ -5,7 +5,7 @@ import { Box, Button, Container, Flex, Link, Text } from "theme-ui";
 import iconsObj from "../../assets/icons";
 import Icon from "../icon";
 import Image from "next/image";
-import { title, btn, grid } from "./styles";
+import { title, btn, grid, verificationContainer } from "./styles";
 
 interface Social {
   img: Icon;
@@ -29,14 +29,14 @@ export const Verification = ({ setVisible }: any) => {
   };
 
   return (
-    <Container sx={{ paddingTop: "60px" }}>
+    <Container sx={verificationContainer}>
       <Text sx={title}>Verifications</Text>
       <Flex sx={{ width: "fit-content" }}>
         <Button
           sx={{ ...btn, ...getBorder(isBadges), minWidth: "fit-content" }}
           onClick={() => setIsBadges(true)}
         >
-          Verification Badges
+          <Text sx={{ marginRight: "2px" }}>Verification Badges</Text>
           <Image src={iconsObj.iicon} width={16} height={16} alt="socialIcon" />
         </Button>
         <Button sx={{ ...btn, ...getBorder(!isBadges) }} onClick={() => setIsBadges(false)}>

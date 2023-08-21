@@ -71,12 +71,7 @@ const HeaderMenu = ({
           </Container>
         </Flex>
         <NextLink href={"/profile"}>
-          <Button
-            onClick={() => notifComingSoon("My Profile is coming soon")}
-            sx={{ variant: "buttons.grey", mt: "32px", width: "100%" }}
-          >
-            My Profile
-          </Button>
+          <Button sx={{ variant: "buttons.grey", mt: "32px", width: "100%" }}>My Profile</Button>
         </NextLink>
         <Button
           onClick={() => {

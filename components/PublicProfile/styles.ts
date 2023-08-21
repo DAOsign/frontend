@@ -24,6 +24,19 @@ const iconCopy = {
   },
 } as ThemeUIStyleObject;
 
+const verificationContainer = {
+  pt: "60px",
+  "@media screen and (max-width: 719px)": {
+    pt: "0",
+  },
+} as ThemeUIStyleObject;
+
+const agreementSection = {
+  "@media screen and (max-width: 719px)": {
+    pt: "34px !important",
+  },
+} as ThemeUIStyleObject;
+
 const infoContainer = {
   width: "80%",
   justifyContent: "space-between",
@@ -197,8 +210,10 @@ const grid = {
 } as ThemeUIStyleObject;
 
 export {
+  verificationContainer,
   noContentContainer,
   profileContainer,
+  agreementSection,
   userContainer,
   infoContainer,
   container,
