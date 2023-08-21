@@ -16,6 +16,7 @@ import styles, {
   btnBack,
   icon,
 } from "./styles";
+import ArrowLeftPink from "../../ArrowLeftPink";
 
 const MDEditor = dynamic(() => import("@uiw/react-md-editor"), {
   ssr: false,
@@ -109,8 +110,8 @@ const TextEditor = ({
             Preview
           </Button>
           <Button sx={btnBack} className="backBtn" onClick={handleChooseAnotherMethod}>
-            <Box sx={{ width: "20px" }}>
-              <Icon style={{ display: "block" }} src={iconsObj.arrowLeftPink} />
+            <Box sx={{ width: "20px", marginTop: "5px" }}>
+              <ArrowLeftPink />
             </Box>
             <Text sx={{ display: "block" }}>Choose another method</Text>
           </Button>

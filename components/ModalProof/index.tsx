@@ -28,6 +28,7 @@ import CopyIcon from "../CopyIcon";
 import { informationRowIcon, tableAddressCell } from "../ViewAgreement/styles";
 import Tooltip from "../Tooltip";
 import { notifSuccess } from "../../utils/notification";
+import ArrowLeftPink from "../ArrowLeftPink";
 
 const ReactJson = dynamic(() => import("react-json-view"), { ssr: false });
 
@@ -119,7 +120,7 @@ export default function ModalProof({ isOpen, onExit, title, proof }: Props) {
                 <Spinner width="20px" />
               ) : (
                 <Box onClick={handleShowDetails} sx={arrowContainer}>
-                  <Icon src={iconsObj.arrowLeftPink} />
+                  <ArrowLeftPink />
                 </Box>
               )}
             </Box>

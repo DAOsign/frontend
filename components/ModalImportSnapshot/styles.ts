@@ -79,6 +79,12 @@ export const textContainer = {
   textAlign: "center",
 } as ThemeUIStyleObject;
 
+export const hoverIcon = {
+  "&:hover input >svg >path": {
+    stroke: "#AE4FD0",
+  },
+} as ThemeUIStyleObject;
+
 export const subBtn = {
   variant: "buttons.primary",
   width: "fit-content",
