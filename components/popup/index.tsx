@@ -2,6 +2,7 @@ import React from "react";
 import { Container, Flex, Text, Box } from "theme-ui";
 import { backgroundPopap, popap, popapTitle, popapText } from "./styles";
 import Icon from "../icon";
+import CloseIcon from "../CloseIcon";
 import iconsObj from "../../assets/icons";
 
 export default function Popup({ setVisible }: any) {
@@ -14,7 +15,7 @@ export default function Popup({ setVisible }: any) {
           }}
           sx={{ mt: "24px", ml: "auto", width: "20px", mr: "24px", cursor: "pointer" }}
         >
-          <Icon width={24} height={24} src={iconsObj.xClose} />
+          <CloseIcon />
         </Box>
         <Flex sx={{ flexDirection: "column", alignItems: "center" }}>
           <Box sx={{ width: "165px", height: "160px", mb: "24px" }}>

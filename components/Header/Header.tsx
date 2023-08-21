@@ -2,6 +2,7 @@ import React from "react";
 import { Container, Flex, Text, Button, Link, Box } from "theme-ui";
 import iconsObj from "../../assets/icons";
 import { formatAddress } from "../../utils/formats";
+import CloseIcon from "../CloseIcon";
 import {
   container,
   addresContainer,
@@ -64,7 +65,7 @@ export default function Header({ visible, setVisible, visibleLogOut }: any) {
             >
               {visible ? (
                 <Box sx={iconBell}>
-                  <Icon src={iconsObj.xClose} />
+                  <CloseIcon />
                 </Box>
               ) : (
                 <Box sx={iconBell}>

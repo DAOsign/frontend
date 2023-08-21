@@ -9,6 +9,7 @@ import {
   mainText,
   textContainer,
 } from "../ModalIpfsWarning/styles";
+import CloseIcon from "../CloseIcon";
 import { Portal } from "../Portal/Portal";
 import { ModalBase } from "../ModalBase/ModalBase";
 
@@ -32,7 +33,7 @@ export default function ModalSignStatus({
       <ModalBase width={undefined} height={error ? "382px" : "360px"}>
         <Flex sx={flexContainer}>
           <Box onClick={onExit} sx={closeIcon}>
-            <Icon src={iconsObj.xClose} />
+            <CloseIcon />
           </Box>
           <Box sx={{ ...containerIcon, backgroundColor: error ? "#FF5269" : "#44F268", p: "32px" }}>
             {error ? (

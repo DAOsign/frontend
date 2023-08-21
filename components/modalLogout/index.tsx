@@ -14,6 +14,7 @@ import {
   bg,
 } from "./styles";
 import { useMutation } from "urql";
+import CloseIcon from "../CloseIcon";
 import { logoutMutation } from "../../modules/graphql/mutations";
 import { useWeb3 } from "../../hooks/useWeb3";
 import { clearToken } from "../../utils/token";
@@ -37,7 +38,7 @@ export default function LogOutPopap({ setVisible }: { setVisible: any }) {
       <Flex sx={container}>
         <Flex sx={flexContainer}>
           <Box onClick={() => setVisible(false)} sx={closeIcon}>
-            <Icon src={iconsObj.xClose} />
+            <CloseIcon />
           </Box>
           <Box sx={containerIcon}>
             <Icon width={"44px"} height={"44px"} src={iconsObj.frame} />

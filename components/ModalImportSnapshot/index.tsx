@@ -86,6 +86,7 @@ import { notifError } from "../../utils/notification";
 import { useMutation } from "urql";
 import { saveAgreementMutation } from "../../modules/graphql/mutations";
 import Tooltip from "../Tooltip";
+import CloseIcon from "../CloseIcon";
 
 interface Props {
   isOpen: boolean;
@@ -477,7 +478,7 @@ export default function ModalImportSnapshot({ isOpen, page, onExit, setMethod }:
       <ModalBase height="auto" sx={modalBase}>
         <Flex sx={flexContent}>
           <Box onClick={onExit} sx={closeIcon}>
-            <Icon src={iconsObj.xClose} />
+            <CloseIcon />
           </Box>
           <Text sx={{ ...mainText, mb: "40px" }}>Import From Snapshot</Text>
           <Flex sx={{ ...flexContent, ...overflowContentStyles }}>

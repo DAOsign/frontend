@@ -30,6 +30,7 @@ import {
   validateAddress,
   validateEnsDomains,
 } from "../CreateAgreement/Steps/StepThree/validationUtils";
+import CloseIcon from "../CloseIcon";
 import { toAgreementWithParticipants } from "../../utils/typeUtils";
 import { useMutation } from "urql";
 import { editObservers as editObserversMutation } from "../../modules/graphql/mutations";
@@ -146,7 +147,7 @@ export default function ModalEditObservers({ agreement, isOpen, onExit, onSucces
       >
         <Flex sx={flexContainer}>
           <Box onClick={onExit} sx={closeIcon}>
-            <Icon src={iconsObj.xClose} />
+            <CloseIcon />
           </Box>
           <Text sx={mainText}>Edit Observers</Text>
           <Box sx={content}>

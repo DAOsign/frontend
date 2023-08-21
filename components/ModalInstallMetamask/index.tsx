@@ -2,6 +2,7 @@ import React from "react";
 import Icon from "../icon";
 import iconsObj from "../../assets/icons";
 import { Container, Flex, Text, Box, Link, Button } from "theme-ui";
+import CloseIcon from "../CloseIcon";
 import {
   flexContainer,
   textContainer,
@@ -20,7 +21,7 @@ export default function ModalInstallMetamask({ setVisible }: any) {
       <Flex sx={container}>
         <Flex sx={flexContainer}>
           <Box onClick={() => setVisible(false)} sx={closeIcon}>
-            <Icon src={iconsObj.xClose} />
+            <CloseIcon />
           </Box>
           <Box sx={containerIcon}>
             <Icon width={"44px"} height={"44px"} src={iconsObj.frame} />

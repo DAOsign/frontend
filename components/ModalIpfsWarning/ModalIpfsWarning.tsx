@@ -10,6 +10,7 @@ import {
   mainText,
   closeIcon,
 } from "./styles";
+import CloseIcon from "../CloseIcon";
 import { Portal } from "../Portal/Portal";
 import { ModalBase } from "../ModalBase/ModalBase";
 
@@ -24,7 +25,7 @@ export default function ModalIpfsWarning({ isOpen, onExit }: Props) {
       <ModalBase height="442px" sx={{ width: ["80%", "fit-content"] }}>
         <Flex sx={flexContainer}>
           <Box onClick={onExit} sx={closeIcon}>
-            <Icon src={iconsObj.xClose} />
+            <CloseIcon />
           </Box>
           <Box sx={containerIcon}>
             <Icon width={"44px"} height={"44px"} src={iconsObj.frame} />

@@ -2,6 +2,7 @@ import React from "react";
 import { Flex, Text, Button, Box } from "theme-ui";
 import Icon from "../icon/index";
 import iconsObj from "../../assets/icons";
+import CloseIcon from "../CloseIcon";
 import {
   flexContainer,
   textContainer,
@@ -24,7 +25,7 @@ export default function ModalAuthorNotAdded({ isOpen, onExit }: Props) {
       <ModalBase height="442px">
         <Flex sx={flexContainer}>
           <Box onClick={onExit} sx={closeIcon}>
-            <Icon src={iconsObj.xClose} />
+            <CloseIcon />
           </Box>
           <Box sx={containerIcon}>
             <Icon width={"44px"} height={"44px"} src={iconsObj.frame} />

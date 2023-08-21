@@ -14,6 +14,7 @@ import {
   spinnerContainer,
   deletingText,
 } from "./styles";
+import CloseIcon from "../CloseIcon";
 import { Portal } from "../Portal/Portal";
 import { ModalBase } from "../ModalBase/ModalBase";
 import { useMutation } from "urql";
@@ -71,7 +72,7 @@ export default function ModalConfirmAgreementDeletion({
         ) : (
           <Flex sx={flexContainer}>
             <Box onClick={onExit} sx={closeIcon}>
-              <Icon src={iconsObj.xClose} />
+              <CloseIcon />
             </Box>
             <Box sx={containerIcon}>
               <Icon width={"44px"} height={"44px"} src={iconsObj.frame} />

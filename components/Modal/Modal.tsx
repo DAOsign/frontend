@@ -1,7 +1,6 @@
 import React from "react";
 import { Button, Container, Flex, Heading, Text } from "theme-ui";
-import iconsObj from "../../assets/icons";
-import Icon from "../icon";
+import CloseIcon from "../CloseIcon";
 import styles, { btnCancel } from "./styles";
 
 export default function Modal() {
@@ -28,7 +27,7 @@ export default function Modal() {
             backgroundColor: "unset",
           }}
         >
-          <Icon src={iconsObj.xClose} />
+          <CloseIcon />
         </Button>
         <Heading sx={{ variant: "text.h2", mb: "16px" }} as="h1">
           Are You Sure?
