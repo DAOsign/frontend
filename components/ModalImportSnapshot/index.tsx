@@ -86,7 +86,7 @@ import { notifError } from "../../utils/notification";
 import { useMutation } from "urql";
 import { saveAgreementMutation } from "../../modules/graphql/mutations";
 import Tooltip from "../Tooltip";
-import CloseIcon from "../CloseIcon";
+import CloseIcon from "../IconComponent/CloseIcon";
 
 interface Props {
   isOpen: boolean;

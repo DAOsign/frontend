@@ -1,6 +1,6 @@
 import React from "react";
 import { Button, Container, Flex, Heading, Text } from "theme-ui";
-import CloseIcon from "../CloseIcon";
+import CloseIcon from "../IconComponent/CloseIcon";
 import styles, { btnCancel } from "./styles";
 
 export default function Modal() {

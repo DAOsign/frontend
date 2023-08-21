@@ -14,7 +14,7 @@ import {
   bg,
 } from "./styles";
 import { useMutation } from "urql";
-import CloseIcon from "../CloseIcon";
+import CloseIcon from "../IconComponent/CloseIcon";
 import { logoutMutation } from "../../modules/graphql/mutations";
 import { useWeb3 } from "../../hooks/useWeb3";
 import { clearToken } from "../../utils/token";

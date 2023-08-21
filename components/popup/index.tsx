@@ -2,7 +2,7 @@ import React from "react";
 import { Container, Flex, Text, Box } from "theme-ui";
 import { backgroundPopap, popap, popapTitle, popapText } from "./styles";
 import Icon from "../icon";
-import CloseIcon from "../CloseIcon";
+import CloseIcon from "../IconComponent/CloseIcon";
 import iconsObj from "../../assets/icons";
 
 export default function Popup({ setVisible }: any) {

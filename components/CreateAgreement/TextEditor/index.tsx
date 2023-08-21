@@ -4,6 +4,7 @@ import "@uiw/react-md-editor/markdown-editor.css";
 import "@uiw/react-markdown-preview/markdown.css";
 import iconsObj from "../../../assets/icons";
 import Icon from "../../icon";
+import Preview from "../../IconComponent/Preview";
 import { Text, Button, Flex, Box, ButtonProps, Spinner } from "theme-ui";
 import { useCreateAgreement } from "../../../hooks/useCreateAgreement";
 import { useEditAgreement } from "../../../hooks/useEditAgreement";
@@ -104,7 +105,7 @@ const TextEditor = ({
             {...buttonPropsByStatus(state, "preview")}
           >
             <Box sx={icon}>
-              <Icon src={iconsObj.preview} />
+              <Preview />
             </Box>
             Preview
           </Button>

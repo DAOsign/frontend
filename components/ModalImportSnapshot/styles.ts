@@ -97,6 +97,9 @@ export const closeIcon = {
   width: "24px",
   height: "24px",
   cursor: "pointer",
+  "&:hover": {
+    opacity: "1",
+  },
   "@media screen and (max-width: 480px)": {
     top: "12px",
     right: "12px",
@@ -384,3 +387,5 @@ export const labelInputTellMore = {
     mt: "24px",
   },
 } as ThemeUIStyleObject;
+
+export const hoverIcon = {} as ThemeUIStyleObject;

@@ -13,7 +13,7 @@ import {
 } from "../ModalAuthorNotAdded/styles";
 import { Portal } from "../Portal/Portal";
 import { ModalBase } from "../ModalBase/ModalBase";
-import CloseIcon from "../CloseIcon";
+import CloseIcon from "../IconComponent/CloseIcon";
 
 interface Props {
   isOpen: boolean;

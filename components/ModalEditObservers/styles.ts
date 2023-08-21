@@ -18,6 +18,9 @@ export const closeIcon = {
   width: "20px",
   height: "20px",
   cursor: "pointer",
+  "&:hover": {
+    opacity: "1",
+  },
   "@media screen and (max-width: 720px)": {
     display: "none",
   },

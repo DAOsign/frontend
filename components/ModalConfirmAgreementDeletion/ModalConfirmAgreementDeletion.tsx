@@ -14,7 +14,7 @@ import {
   spinnerContainer,
   deletingText,
 } from "./styles";
-import CloseIcon from "../CloseIcon";
+import CloseIcon from "../IconComponent/CloseIcon";
 import { Portal } from "../Portal/Portal";
 import { ModalBase } from "../ModalBase/ModalBase";
 import { useMutation } from "urql";

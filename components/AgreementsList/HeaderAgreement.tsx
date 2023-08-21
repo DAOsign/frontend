@@ -15,7 +15,6 @@ import {
   delBth,
   titleItem,
 } from "./styles";
-import CloseIcon from "../CloseIcon";
 
 export default function HeaderAgreement({
   filterOptions,
@@ -120,7 +119,7 @@ export default function HeaderAgreement({
             <Flex onClick={() => onChange(el.id)} sx={filterItem} key={el.id}>
               <Text sx={titleItem}>{el.name}</Text>
               <Box sx={delBth}>
-                <CloseIcon />
+                <Icon src={iconsObj.xClose} />
               </Box>
             </Flex>
           );

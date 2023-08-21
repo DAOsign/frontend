@@ -9,7 +9,7 @@ import {
   mainText,
   textContainer,
 } from "../ModalIpfsWarning/styles";
-import CloseIcon from "../CloseIcon";
+import CloseIcon from "../IconComponent/CloseIcon";
 import { Portal } from "../Portal/Portal";
 import { ModalBase } from "../ModalBase/ModalBase";
 

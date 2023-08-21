@@ -2,7 +2,7 @@ import React from "react";
 import { Flex, Text, Button, Box } from "theme-ui";
 import Icon from "../icon/index";
 import iconsObj from "../../assets/icons";
-import CloseIcon from "../CloseIcon";
+import CloseIcon from "../IconComponent/CloseIcon";
 import {
   flexContainer,
   textContainer,

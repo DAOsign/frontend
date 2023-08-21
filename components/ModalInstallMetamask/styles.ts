@@ -56,6 +56,9 @@ const closeIcon = {
   width: "20px",
   cursor: "pointer",
   height: "20px",
+  "&:hover": {
+    opacity: "1",
+  },
 } as ThemeUIStyleObject;
 
 const bg = {

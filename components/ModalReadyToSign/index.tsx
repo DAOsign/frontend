@@ -12,7 +12,7 @@ import {
   mainText,
   btnContainer,
 } from "../ModalIpfsWarning/styles";
-import CloseIcon from "../CloseIcon";
+import CloseIcon from "../IconComponent/CloseIcon";
 import ModalSignStatus from "../ModalSignStatus";
 import { Portal } from "../Portal/Portal";
 

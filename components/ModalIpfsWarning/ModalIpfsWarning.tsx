@@ -10,7 +10,7 @@ import {
   mainText,
   closeIcon,
 } from "./styles";
-import CloseIcon from "../CloseIcon";
+import CloseIcon from "../IconComponent/CloseIcon";
 import { Portal } from "../Portal/Portal";
 import { ModalBase } from "../ModalBase/ModalBase";
 

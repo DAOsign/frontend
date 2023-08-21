@@ -50,6 +50,9 @@ export const closeIcon = {
   width: "20px",
   height: "20px",
   cursor: "pointer",
+  "&:hover": {
+    opacity: "1",
+  },
 } as ThemeUIStyleObject;
 
 export const containerIcon = {

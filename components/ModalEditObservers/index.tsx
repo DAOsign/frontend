@@ -30,7 +30,7 @@ import {
   validateAddress,
   validateEnsDomains,
 } from "../CreateAgreement/Steps/StepThree/validationUtils";
-import CloseIcon from "../CloseIcon";
+import CloseIcon from "../IconComponent/CloseIcon";
 import { toAgreementWithParticipants } from "../../utils/typeUtils";
 import { useMutation } from "urql";
 import { editObservers as editObserversMutation } from "../../modules/graphql/mutations";

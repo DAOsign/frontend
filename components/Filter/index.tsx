@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Container, Flex, Input, Text, Box, Checkbox, Button } from "theme-ui";
 import iconsObj from "../../assets/icons";
 import CheckboxComponent from "../Checkbox";
-import CloseIcon from "../CloseIcon";
+import CloseIcon from "../IconComponent/CloseIcon";
 import Icon from "../icon";
 import {
   container,

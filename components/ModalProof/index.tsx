@@ -27,8 +27,9 @@ import { AGREEMENT_PROOF, IDENTITY_PROOF } from "../ViewAgreement/AgreementInfor
 import CopyIcon from "../CopyIcon";
 import { informationRowIcon, tableAddressCell } from "../ViewAgreement/styles";
 import Tooltip from "../Tooltip";
-import CloseIcon from "../CloseIcon";
+import CloseIcon from "../IconComponent/CloseIcon";
 import { notifSuccess } from "../../utils/notification";
+import LinkIcon from "../IconComponent/LincIcon";
 
 const ReactJson = dynamic(() => import("react-json-view"), { ssr: false });
 
@@ -99,7 +100,7 @@ export default function ModalProof({ isOpen, onExit, title, proof }: Props) {
               <Flex sx={{ alignItems: "center", cursor: "pointer" }}>
                 <Text sx={text}>{showDetails ? proof?.cid : formatAddress(proof?.cid || "")}</Text>
                 <Box sx={linkContainer}>
-                  <Icon src={iconsObj.link} />
+                  <LinkIcon />
                 </Box>
               </Flex>
             </Link>
