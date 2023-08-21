@@ -69,6 +69,7 @@ import {
   titleSelect,
   labelInput,
   flexSelect,
+  hoverIcon,
   stylesBtn,
   switchBtn,
   closeIcon,
@@ -87,6 +88,7 @@ import { useMutation } from "urql";
 import { saveAgreementMutation } from "../../modules/graphql/mutations";
 import Tooltip from "../Tooltip";
 import CloseIcon from "../IconComponent/CloseIcon";
+import ArrowLeftPink from "../ArrowLeftPink";
 
 interface Props {
   isOpen: boolean;
@@ -359,7 +361,13 @@ export default function ModalImportSnapshot({ isOpen, page, onExit, setMethod }:
             boxShadow: selectsOpen[name] ? "0px 4px 32px rgba(33, 33, 33, 0.16)" : "none",
           }}
         >
-          <Flex sx={{ ...flexSelect, borderRadius: selectsOpen[name] ? "8px 8px 0 0" : "8px" }}>
+          <Flex
+            sx={{
+              ...flexSelect,
+              borderRadius: selectsOpen[name] ? "8px 8px 0 0" : "8px",
+              // inputIsHidden ? ...hoverIcon : ""
+            }}
+          >
             {inputIsHidden ? (
               <Input
                 onChange={e => setSearchValue(e.target.value)}
@@ -388,7 +396,7 @@ export default function ModalImportSnapshot({ isOpen, page, onExit, setMethod }:
                 }
                 sx={icon}
               >
-                <Icon src={iconsObj.arrowLeftPink} />
+                <ArrowLeftPink />
               </Box>
             </motion.div>
           </Flex>
