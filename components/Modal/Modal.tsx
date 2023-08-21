@@ -22,7 +22,6 @@ export default function Modal() {
             top: "10px",
             zIndex: 3,
             right: "9px",
-            opacity: 0.5,
             width: "55px",
             backgroundColor: "unset",
           }}

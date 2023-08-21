@@ -51,7 +51,6 @@ const secondText = {
 } as ThemeUIStyleObject;
 
 const closeIcon = {
-  opacity: "0.5",
   ml: "auto",
   mr: "30px",
   width: "20px",

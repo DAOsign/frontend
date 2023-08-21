@@ -1,9 +1,8 @@
 import React from "react";
-import styles from "./index.module.css";
 
 const CloseIcon = () => {
   return (
-    <div className={styles.closeIcon}>
+    <div className="closeIcon">
       <svg
         width="24"
         height="24"

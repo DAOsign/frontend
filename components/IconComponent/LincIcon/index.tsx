@@ -1,9 +1,8 @@
 import React from "react";
-import styles from "../CloseIcon/index.module.css";
 
 const LinkIcon = () => {
   return (
-    <div className={styles.previewIcon}>
+    <div className="previewIcon">
       <svg
         width="14"
         height="14"

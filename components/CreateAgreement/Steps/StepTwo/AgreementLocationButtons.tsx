@@ -65,7 +65,7 @@ export default function AgreementLocationRadioButtons({ page }: { page: string }
           title=" Select where you want to store your agreement."
         >
           <Box sx={{ width: "12px", height: "12px", display: "inline-block" }}>
-            <Icon style={{ opacity: 0.5 }} src={iconsObj.infoCircle} />
+            <Icon src={iconsObj.infoCircle} />
           </Box>
         </Tooltip>
       </Flex>

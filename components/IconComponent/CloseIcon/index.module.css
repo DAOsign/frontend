@@ -1,8 +1,0 @@
-.closeIcon:hover >svg >path {
-    stroke: #AE4FD0;
-    opacity: 1;
-}
-.previewIcon:hover >svg >g >path {
-    stroke: #AE4FD0;
-    opacity: 1;
-}

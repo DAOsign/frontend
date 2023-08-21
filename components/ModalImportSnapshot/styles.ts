@@ -79,12 +79,6 @@ export const textContainer = {
   textAlign: "center",
 } as ThemeUIStyleObject;
 
-export const hoverIcon = {
-  "&:hover input >svg >path": {
-    stroke: "#AE4FD0",
-  },
-} as ThemeUIStyleObject;
-
 export const subBtn = {
   variant: "buttons.primary",
   width: "fit-content",
@@ -97,7 +91,6 @@ export const subBtn = {
 
 export const closeIcon = {
   position: "absolute",
-  opacity: "0.5",
   top: "24px",
   right: "24px",
   width: "24px",
@@ -393,5 +386,3 @@ export const labelInputTellMore = {
     mt: "24px",
   },
 } as ThemeUIStyleObject;
-
-export const hoverIcon = {} as ThemeUIStyleObject;

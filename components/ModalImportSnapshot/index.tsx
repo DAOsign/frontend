@@ -69,7 +69,6 @@ import {
   titleSelect,
   labelInput,
   flexSelect,
-  hoverIcon,
   stylesBtn,
   switchBtn,
   closeIcon,
@@ -365,7 +364,9 @@ export default function ModalImportSnapshot({ isOpen, page, onExit, setMethod }:
             sx={{
               ...flexSelect,
               borderRadius: selectsOpen[name] ? "8px 8px 0 0" : "8px",
-              // inputIsHidden ? ...hoverIcon : ""
+              "&:hover > div  svg > path": {
+                stroke: "#AE4FD0",
+              },
             }}
           >
             {inputIsHidden ? (
