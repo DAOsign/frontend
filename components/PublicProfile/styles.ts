@@ -1,4 +1,5 @@
 import { ThemeUIStyleObject } from "theme-ui";
+
 const profileContainer = {
   maxWidth: "1440px",
   margin: "80px auto 0",
@@ -151,8 +152,8 @@ const btn = {
   variant: "text.normalTextBold",
   display: "flex",
   alignItems: "center",
-  opacity: "0.5",
-  cursor: "pointer",
+  opacity: "0.7",
+  pointerEvents: "none",
   backgroundColor: "transparent",
   borderRadius: 0,
   width: "fit-content",

@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Flex, Text, Button, Link, Box } from "theme-ui";
 import Image from "next/image";
+import Tooltip from "../Tooltip";
 import iconsObj from "../../assets/icons";
 import { userName, badges, references, profileSection } from "./styles";
 
@@ -25,7 +26,16 @@ export default function Score() {
       <Flex sx={{ width: "fit-content" }}>
         <Button sx={{ ...btn, ...getBorder(isBadges) }} onClick={() => setIsBadges(true)}>
           <Text sx={{ marginRight: "2px" }}>Verification Badges</Text>
-          <Image src={iconsObj.iicon} width={16} height={16} alt="socialIcon" />
+          <Tooltip
+            title="User's badges received based on a verification"
+            transform="translate(-58%, -11%)"
+            minWidth="170px"
+            left="120%"
+            top="-330%"
+            height="0"
+          >
+            <Image src={iconsObj.iicon} width={16} height={16} alt="socialIcon" />
+          </Tooltip>
         </Button>
         <Button sx={{ ...btn, ...getBorder(!isBadges) }} onClick={() => setIsBadges(false)}>
           References

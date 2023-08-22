@@ -4,18 +4,21 @@ import React, { useState } from "react";
 import { Box, Button, Container, Flex, Link, Text } from "theme-ui";
 import iconsObj from "../../assets/icons";
 import Icon from "../icon";
+import Tooltip from "../Tooltip";
+import { notifComingSoon } from "../../utils/notification";
 import Image from "next/image";
 import { title, btn, grid, verificationContainer } from "./styles";
 
-interface Social {
+interface Status {
   img: Icon;
+  name: string;
 }
-const verificationIcon: Social[] = [
-  { img: iconsObj.verificationAnonymous },
-  // { img: iconsObj.verificationPseudonymous },
-  // { img: iconsObj.verificationDigital },
-  // { img: iconsObj.verificationReal },
-  // { img: iconsObj.verificationNotarized },
+const verificationIcon: Status[] = [
+  { img: iconsObj.anonymous, name: "Anonymous" },
+  // { img: iconsObj.pseudonymous },
+  // { img: iconsObj.digital },
+  // { img: iconsObj.real },
+  // { img: iconsObj.notarized },
 ];
 
 export const Verification = ({ setVisible }: any) => {
@@ -37,9 +40,22 @@ export const Verification = ({ setVisible }: any) => {
           onClick={() => setIsBadges(true)}
         >
           <Text sx={{ marginRight: "2px" }}>Verification Badges</Text>
-          <Image src={iconsObj.iicon} width={16} height={16} alt="socialIcon" />
+          <Tooltip
+            title="User's badges received based on a verification"
+            transform="translate(-58%, -11%)"
+            minWidth="170px"
+            left="120%"
+            top="-330%"
+            height="0"
+          >
+            <Image src={iconsObj.iicon} width={16} height={16} alt="infoIcon" />
+          </Tooltip>
         </Button>
-        <Button sx={{ ...btn, ...getBorder(!isBadges) }} onClick={() => setIsBadges(false)}>
+        <Button
+          sx={{ ...btn, ...getBorder(!isBadges) }}
+          onClick={() => setIsBadges(false)}
+          disabled={true}
+        >
           References
         </Button>
       </Flex>
@@ -47,8 +63,14 @@ export const Verification = ({ setVisible }: any) => {
         <Flex sx={grid}>
           {verificationIcon.map((el: any, i: number) => {
             return (
-              <Box key={i} onClick={setVisible}>
-                <Image src={el.img} width={100} height={100} alt="socialIcon" />
+              <Box
+                key={i}
+                // onClick={setVisible}
+                onClick={() => {
+                  notifComingSoon(`${el.name} verification is coming soon`);
+                }}
+              >
+                <Image src={el.img} width={100} height={100} alt="statusIcon" />
               </Box>
             );
           })}

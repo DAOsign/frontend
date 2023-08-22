@@ -25,6 +25,7 @@ import arrowTooltip from "../img/svg/arrowTooltip.svg";
 import bookmarkVote from "../img/svg/bookmarkVote.svg";
 import trashPrimary from "../img/svg/trashPrimary.svg";
 import ellipseGreen from "../img/svg/EllipseGreen.svg";
+import pseudonymous from "../img/svg/pseudonymous.svg";
 import chevronDown from "../img/svg/chevronDown.svg";
 import heartViolet from "../img/svg/heartViolet.svg";
 import chevronLeft from "../img/svg/chevronLeft.svg";
@@ -43,6 +44,8 @@ import uploadIcon from "../img/svg/uploadIcon.svg";
 import logoHeader from "../img/svg/logoHeader.svg";
 import checkboxOn from "../img/svg/checkboxOn.svg";
 import closedEye from "../img/svg/closedEye.svg";
+import notarized from "../img/svg/notarized.svg";
+import anonymous from "../img/svg/anonymous.svg";
 import chevronUp from "../img/svg/chevronUp.svg";
 import published from "../img/svg/published.svg";
 import errorSign from "../img/svg/errorSign.svg";
@@ -64,6 +67,7 @@ import pinkPlus from "../img/svg/pinkPlus.svg";
 import radioOff from "../img/svg/radioOff.svg";
 import fileSvg from "../img/svg/file_svg.svg";
 import radioOn from "../img/svg/radioOn.svg";
+import digital from "../img/svg/digital.svg";
 import pending from "../img/svg/pending.svg";
 import twitter from "../img/svg/twitter.svg";
 import success from "../img/svg/success.svg";
@@ -93,6 +97,7 @@ import cloud from "../img/svg/cloud.svg";
 import iicon from "../img/svg/iicon.svg";
 import ipfs from "../img/svg/ipfs.svg";
 import Bell from "../img/svg/Bell.svg";
+import real from "../img/svg/real.svg";
 import user from "../img/svg/user.svg";
 import done from "../img/svg/done.svg";
 import edit from "../img/svg/edit.svg";
@@ -135,6 +140,7 @@ const iconsObj: IconsMapper = {
   alertTriangle,
   calendarCheck,
   arrowLeftPink,
+  pseudonymous,
   arrowTooltip,
   trashPrimary,
   whitoutUser,
@@ -161,6 +167,8 @@ const iconsObj: IconsMapper = {
   publicIcon,
   closedEye,
   chevronUp,
+  anonymous,
+  notarized,
   pinkArrow,
   greenArrow,
   lightning,
@@ -189,6 +197,7 @@ const iconsObj: IconsMapper = {
   warning,
   pending,
   website,
+  digital,
   logOut,
   cloud,
   verify,
@@ -214,6 +223,7 @@ const iconsObj: IconsMapper = {
   good,
   done,
   edit,
+  real,
   ink,
   prof,
   send,

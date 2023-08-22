@@ -1,12 +1,17 @@
 export interface IconsMapper extends Record<string, unknown> {
   verificationPseudonymous: Icon;
+  verificationNotarized: Icon;
+  verificationAnonymous: Icon;
+  verificationDigital: Icon;
   uploadCloudPrimary: Icon;
   codeSnippetPrimary: Icon;
   togglePrimaryRight: Icon;
   snapshotImportIcon: Icon;
+  defaultUserPicture: Icon;
   enterAgreementIcon: Icon;
   togglePrimaryLeft: Icon;
   fileSecondarysvg: Icon;
+  verificationReal: Icon;
   arrowNarrowLeft: Icon;
   proofSecondary: Icon;
   phoneSecondary: Icon;
@@ -19,6 +24,7 @@ export interface IconsMapper extends Record<string, unknown> {
   trashPrimary: Icon;
   bookmarkVote: Icon;
   chevronRight: Icon;
+  pseudonymous: Icon;
   ellipseGreen: Icon;
   arrowTooltip: Icon;
   greyPercent: Icon;
@@ -45,6 +51,9 @@ export interface IconsMapper extends Record<string, unknown> {
   pinkArrow: Icon;
   published: Icon;
   lightning: Icon;
+  anonymous: Icon;
+  notarized: Icon;
+  closedEye: Icon;
   errorSign: Icon;
   iconArrow: Icon;
   iconExit: Icon;
@@ -65,6 +74,9 @@ export interface IconsMapper extends Record<string, unknown> {
   radioOn: Icon;
   iconSix: Icon;
   pending: Icon;
+  digital: Icon;
+  fileSvg: Icon;
+  warning: Icon;
   preview: Icon;
   website: Icon;
   verify: Icon;
@@ -97,19 +109,12 @@ export interface IconsMapper extends Record<string, unknown> {
   menu: Icon;
   good: Icon;
   user: Icon;
-  ink: Icon;
-  m: Icon;
   drag: Icon;
-  fileSvg: Icon;
-  verificationAnonymous: Icon;
-  verificationDigital: Icon;
-  verificationReal: Icon;
-  verificationNotarized: Icon;
-  defaultUserPicture: Icon;
-  closedEye: Icon;
+  real: Icon;
   soon: Icon;
   link: Icon;
-  warning: Icon;
+  ink: Icon;
+  m: Icon;
 }
 
 interface Icon {
