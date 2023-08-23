@@ -91,12 +91,14 @@ export const subBtn = {
 
 export const closeIcon = {
   position: "absolute",
-  opacity: "0.5",
   top: "24px",
   right: "24px",
   width: "24px",
   height: "24px",
   cursor: "pointer",
+  "&:hover": {
+    opacity: "1",
+  },
   "@media screen and (max-width: 480px)": {
     top: "12px",
     right: "12px",

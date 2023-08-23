@@ -27,12 +27,14 @@ export const mainText = {
 
 export const closeIcon = {
   position: "absolute",
-  opacity: "0.5",
   top: "30px",
   right: "30px",
   width: "20px",
   height: "20px",
   cursor: "pointer",
+  "&:hover": {
+    opacity: "1",
+  },
 } as ThemeUIStyleObject;
 
 export const btnContainer = {

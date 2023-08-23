@@ -462,7 +462,6 @@ const delBth = {
   borderRadius: "50%",
   border: "1px solid black",
   ml: "5px",
-  cursor: "pointer",
 } as ThemeUIStyleObject;
 
 const titleItem = {

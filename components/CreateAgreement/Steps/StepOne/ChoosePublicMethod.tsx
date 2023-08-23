@@ -14,6 +14,7 @@ import {
   PRIVACY_PUBLIC_PUBLISHED,
   PRIVACY_PUBLIC_WITH_LINK,
 } from "../../../../types";
+import ArrowLeftPink from "../../../ArrowLeftPink";
 
 export type AnimateContainer = () => void;
 
@@ -55,7 +56,7 @@ export default function PublicMethod({ animateContainer, setPublic, page }: Publ
             sx={btnBack}
           >
             <Box sx={{ width: "18px" }}>
-              <Icon style={{ display: "block" }} width="14px" src={iconsObj.arrowLeftPink} />
+              <ArrowLeftPink />
             </Box>
             <Text sx={{ display: "block" }}>Choose another privacy</Text>
           </Button>

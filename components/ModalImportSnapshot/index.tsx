@@ -86,6 +86,8 @@ import { notifError } from "../../utils/notification";
 import { useMutation } from "urql";
 import { saveAgreementMutation } from "../../modules/graphql/mutations";
 import Tooltip from "../Tooltip";
+import CloseIcon from "../IconComponent/CloseIcon";
+import ArrowLeftPink from "../ArrowLeftPink";
 
 interface Props {
   isOpen: boolean;
@@ -358,7 +360,15 @@ export default function ModalImportSnapshot({ isOpen, page, onExit, setMethod }:
             boxShadow: selectsOpen[name] ? "0px 4px 32px rgba(33, 33, 33, 0.16)" : "none",
           }}
         >
-          <Flex sx={{ ...flexSelect, borderRadius: selectsOpen[name] ? "8px 8px 0 0" : "8px" }}>
+          <Flex
+            sx={{
+              ...flexSelect,
+              borderRadius: selectsOpen[name] ? "8px 8px 0 0" : "8px",
+              "&:hover > div  svg > path": {
+                stroke: "#AE4FD0",
+              },
+            }}
+          >
             {inputIsHidden ? (
               <Input
                 onChange={e => setSearchValue(e.target.value)}
@@ -387,7 +397,7 @@ export default function ModalImportSnapshot({ isOpen, page, onExit, setMethod }:
                 }
                 sx={icon}
               >
-                <Icon src={iconsObj.arrowLeftPink} />
+                <ArrowLeftPink />
               </Box>
             </motion.div>
           </Flex>
@@ -477,7 +487,7 @@ export default function ModalImportSnapshot({ isOpen, page, onExit, setMethod }:
       <ModalBase height="auto" sx={modalBase}>
         <Flex sx={flexContent}>
           <Box onClick={onExit} sx={closeIcon}>
-            <Icon src={iconsObj.xClose} />
+            <CloseIcon />
           </Box>
           <Text sx={{ ...mainText, mb: "40px" }}>Import From Snapshot</Text>
           <Flex sx={{ ...flexContent, ...overflowContentStyles }}>

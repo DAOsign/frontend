@@ -27,7 +27,10 @@ import { AGREEMENT_PROOF, IDENTITY_PROOF } from "../ViewAgreement/AgreementInfor
 import CopyIcon from "../CopyIcon";
 import { informationRowIcon, tableAddressCell } from "../ViewAgreement/styles";
 import Tooltip from "../Tooltip";
+import CloseIcon from "../IconComponent/CloseIcon";
 import { notifSuccess } from "../../utils/notification";
+import LinkIcon from "../IconComponent/LincIcon";
+import ArrowLeftPink from "../ArrowLeftPink";
 
 const ReactJson = dynamic(() => import("react-json-view"), { ssr: false });
 
@@ -83,7 +86,7 @@ export default function ModalProof({ isOpen, onExit, title, proof }: Props) {
       <ModalBase height={"fit-content"} width={undefined}>
         <Flex sx={container}>
           <Box onClick={onClose} sx={closeIcon}>
-            <Icon src={iconsObj.xClose} />
+            <CloseIcon />
           </Box>
           <Text sx={mainText}>Proof-of-{nameTitle()}</Text>
           <Flex sx={box}>
@@ -98,7 +101,7 @@ export default function ModalProof({ isOpen, onExit, title, proof }: Props) {
               <Flex sx={{ alignItems: "center", cursor: "pointer" }}>
                 <Text sx={text}>{showDetails ? proof?.cid : formatAddress(proof?.cid || "")}</Text>
                 <Box sx={linkContainer}>
-                  <Icon src={iconsObj.link} />
+                  <LinkIcon />
                 </Box>
               </Flex>
             </Link>
@@ -119,7 +122,7 @@ export default function ModalProof({ isOpen, onExit, title, proof }: Props) {
                 <Spinner width="20px" />
               ) : (
                 <Box onClick={handleShowDetails} sx={arrowContainer}>
-                  <Icon src={iconsObj.arrowLeftPink} />
+                  <ArrowLeftPink />
                 </Box>
               )}
             </Box>
