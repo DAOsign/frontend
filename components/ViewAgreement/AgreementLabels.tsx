@@ -30,7 +30,6 @@ import SignatureIcon from "../icon/editable/SignatureIcon";
 import ShareIcon from "../icon/editable/ShareIcon";
 import DownloadIcon from "../icon/editable/DownloadIcon";
 import { notifSuccess } from "../../utils/notification";
-import { notifComingSoon } from "../../utils/notification";
 import loader from "../../img/json/loader.json";
 import Tooltip from "../Tooltip";
 import { downloadPdf } from "../../modules/rest";
@@ -90,7 +89,6 @@ export const AgreementLabels = ({
     downloadPdf(agreementId, agreementTitle).then(() => {
       setDownloadInProgress(false);
     });
-    //notifComingSoon("Download PDF Document is coming soon");
   };
 
   const titleTooltip = (value: string | undefined) => {
@@ -128,14 +126,10 @@ export const AgreementLabels = ({
             top="-62px"
             left="66%"
             transform={
-              //@ts-ignore
               agreementPrivacy !== "With Link" ? "translate(-65%, 0px)" : "translate(-60%, -3%)"
             }
             title={titleTooltip(agreementPrivacy)}
-            minWidth={
-              //@ts-ignore
-              agreementPrivacy !== "With Link" ? "135px" : "135px"
-            }
+            minWidth={agreementPrivacy !== "With Link" ? "135px" : "135px"}
           >
             <Flex sx={baseLabel}>
               {agreementPrivacy ? (
@@ -180,7 +174,6 @@ export const AgreementLabels = ({
               sx={greyLabelWithHover}
               onClick={() => {
                 handleDownloadDocument();
-                //notifComingSoon("Download Document is coming soon");
               }}
             >
               <Box sx={labelIcon}>
