@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   baseLabel,
   blueLabel,
@@ -11,7 +11,7 @@ import {
   needSigningIcon,
   yellowLabel,
 } from "./styles";
-import { Box, Flex, ThemeUIStyleObject } from "theme-ui";
+import { Box, Flex, Text, ThemeUIStyleObject } from "theme-ui";
 import { formatAgreementStatus, onCopyClick } from "../../utils/formats";
 import Icon from "../icon";
 import {
@@ -30,9 +30,22 @@ import SignatureIcon from "../icon/editable/SignatureIcon";
 import ShareIcon from "../icon/editable/ShareIcon";
 import DownloadIcon from "../icon/editable/DownloadIcon";
 import { notifSuccess } from "../../utils/notification";
-import { notifComingSoon } from "../../utils/notification";
+import loader from "../../img/json/loader.json";
 import Tooltip from "../Tooltip";
 import { downloadPdf } from "../../modules/rest";
+import { ModalBase } from "../ModalBase/ModalBase";
+import {
+  bg,
+  closeIcon,
+  flexContent,
+  flexLoader,
+  importingText,
+  mainText,
+  modalBase,
+  overflowContentStyles,
+} from "../ModalImportSnapshot/styles";
+import Lottie from "lottie-react";
+import { Portal } from "../Portal/Portal";
 
 const getAgreementStatusLabelStyle = (agreementStatus: string | undefined): ThemeUIStyleObject => {
   switch (agreementStatus) {
@@ -68,11 +81,14 @@ export const AgreementLabels = ({
     onCopyClick(window?.location?.href);
     notifSuccess("Link Copied");
   };
+  const [downloadInProgress, setDownloadInProgress] = useState(false);
 
   // TODO: download document
   const handleDownloadDocument = () => {
-    downloadPdf(agreementId, agreementTitle);
-    //notifComingSoon("Download PDF Document is coming soon");
+    setDownloadInProgress(true);
+    downloadPdf(agreementId, agreementTitle).then(() => {
+      setDownloadInProgress(false);
+    });
   };
 
   const titleTooltip = (value: string | undefined) => {
@@ -89,88 +105,101 @@ export const AgreementLabels = ({
   };
 
   return (
-    <Flex sx={labelsContainer}>
-      <Flex sx={labelsRow}>
-        <Tooltip
-          top="-46px"
-          height="0"
-          className="statusViews"
-          left="58%"
-          transform={"translate(-60%, -3%)"}
-          title={"Agreement Status"}
-          minWidth="135px"
-        >
-          <Flex sx={getAgreementStatusLabelStyle(agreementStatus)}>
-            {formatAgreementStatus(agreementStatus)}
-          </Flex>
-        </Tooltip>
-        <Tooltip
-          height="0"
-          top="-62px"
-          left="66%"
-          transform={
-            //@ts-ignore
-            agreementPrivacy !== "With Link" ? "translate(-65%, 0px)" : "translate(-60%, -3%)"
-          }
-          title={titleTooltip(agreementPrivacy)}
-          minWidth={
-            //@ts-ignore
-            agreementPrivacy !== "With Link" ? "135px" : "135px"
-          }
-        >
-          <Flex sx={baseLabel}>
-            {agreementPrivacy ? (
-              <Box sx={labelIcon}>
-                <Icon
-                  src={
-                    agreementPrivacy === PRIVACY_PRIVATE
-                      ? iconsObj.privateIcon
-                      : iconsObj.publicIcon
-                  }
-                />
-              </Box>
-            ) : null}
-            {agreementPrivacy}
-          </Flex>
-        </Tooltip>
-        {isWaitingForMySignature ? (
+    <>
+      <Flex sx={labelsContainer}>
+        <Flex sx={labelsRow}>
           <Tooltip
-            title="Your signature is missing"
-            transform="translate(-58%, -11%)"
-            minWidth="170px"
-            left="61%"
-            top="-142%"
+            top="-46px"
             height="0"
+            className="statusViews"
+            left="58%"
+            transform={"translate(-60%, -3%)"}
+            title={"Agreement Status"}
+            minWidth="135px"
           >
-            <Box sx={needSigningIcon}>
-              <SignatureIcon />
-            </Box>
+            <Flex sx={getAgreementStatusLabelStyle(agreementStatus)}>
+              {formatAgreementStatus(agreementStatus)}
+            </Flex>
           </Tooltip>
-        ) : null}
-      </Flex>
-      <Flex sx={labelsRow}>
-        <Flex sx={greyLabelWithHover} onClick={handleShareLink}>
-          <Box sx={labelIcon}>
-            <ShareIcon />
-          </Box>
-          Share Link
-        </Flex>
-        {agreementPrivacy !== PRIVACY_PUBLIC_PROOF_ONLY &&
-        agreementPrivacy !== PRIVACY_PUBLIC_PROOF_ONLY_FULL_NAME ? (
-          <Flex
-            sx={greyLabelWithHover}
-            onClick={() => {
-              // handleDownloadDocument();
-              notifComingSoon("Download Document is coming soon");
-            }}
+          <Tooltip
+            height="0"
+            top="-62px"
+            left="66%"
+            transform={
+              agreementPrivacy !== "With Link" ? "translate(-65%, 0px)" : "translate(-60%, -3%)"
+            }
+            title={titleTooltip(agreementPrivacy)}
+            minWidth={agreementPrivacy !== "With Link" ? "135px" : "135px"}
           >
+            <Flex sx={baseLabel}>
+              {agreementPrivacy ? (
+                <Box sx={labelIcon}>
+                  <Icon
+                    src={
+                      agreementPrivacy === PRIVACY_PRIVATE
+                        ? iconsObj.privateIcon
+                        : iconsObj.publicIcon
+                    }
+                  />
+                </Box>
+              ) : null}
+              {agreementPrivacy}
+            </Flex>
+          </Tooltip>
+          {isWaitingForMySignature ? (
+            <Tooltip
+              title="Your signature is missing"
+              transform="translate(-58%, -11%)"
+              minWidth="170px"
+              left="61%"
+              top="-142%"
+              height="0"
+            >
+              <Box sx={needSigningIcon}>
+                <SignatureIcon />
+              </Box>
+            </Tooltip>
+          ) : null}
+        </Flex>
+        <Flex sx={labelsRow}>
+          <Flex sx={greyLabelWithHover} onClick={handleShareLink}>
             <Box sx={labelIcon}>
-              <DownloadIcon />
+              <ShareIcon />
             </Box>
-            Download Document
+            Share Link
           </Flex>
-        ) : null}
+          {agreementPrivacy !== PRIVACY_PUBLIC_PROOF_ONLY &&
+          agreementPrivacy !== PRIVACY_PUBLIC_PROOF_ONLY_FULL_NAME ? (
+            <Flex
+              sx={greyLabelWithHover}
+              onClick={() => {
+                handleDownloadDocument();
+              }}
+            >
+              <Box sx={labelIcon}>
+                <DownloadIcon />
+              </Box>
+              Download Document
+            </Flex>
+          ) : null}
+        </Flex>
       </Flex>
-    </Flex>
+      <Portal sx={bg} isOpen={downloadInProgress}>
+        <ModalBase height="auto" sx={{ ...modalBase, zIndex: "100" }}>
+          <Flex sx={flexContent}>
+            <Box onClick={() => setDownloadInProgress(false)} sx={closeIcon}>
+              <Icon src={iconsObj.xClose} />
+            </Box>
+            <Text sx={{ ...mainText, mb: "40px" }}>Generate Pdf</Text>
+            <Flex sx={{ ...flexContent, ...overflowContentStyles }}>
+              <Flex sx={flexLoader}>
+                <Lottie style={{ height: "80px" }} animationData={loader} loop={true} />
+                <Text sx={importingText}>Generating...</Text>
+              </Flex>
+            </Flex>
+          </Flex>
+        </ModalBase>
+      </Portal>
+    </>
   );
 };
