@@ -96,7 +96,8 @@ export default function UserCard({ address }: any) {
       </Flex>
       <Container sx={improveBtnContainer}>
         <Button onClick={() => notifComingSoon("More Verification coming soon")} sx={improveBtn}>
-          Add Verifications
+          {/* Add Verifications */}
+          My Profile
         </Button>
       </Container>
     </Flex>
