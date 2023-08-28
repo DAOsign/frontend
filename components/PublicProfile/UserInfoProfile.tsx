@@ -18,7 +18,7 @@ export default function UserInFoProfile({ address }: any) {
       <Identicon account={address} size={width && width > 375 ? 180 : 120} sx={userFoto} />
       <Flex sx={infoContainer}>
         <Flex sx={profile}>
-          <Text sx={nameTitle}>John Doe</Text>
+          <Text sx={nameTitle}>Anonymous</Text>
           <Flex sx={userContainer}>
             <WalletAddress address={account || ""} />
           </Flex>

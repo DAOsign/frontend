@@ -11,7 +11,7 @@ import EditProfileModal from "./ProfileModals/EditProfileModal";
 import EmailVerificationModal from "./ProfileModals/EmailVerificationModal";
 import SuccessModal from "./ProfileModals/SuccessModal";
 
-export default function Profile() {
+export default function Profile({ page }: { page: string }) {
   const [visible, setVisible] = useState(false);
   const { account } = useWeb3();
   return (

@@ -20,6 +20,8 @@ import SignedIcon from "../icon/editable/SignedIcon";
 import SignatureIcon from "../icon/editable/SignatureIcon";
 import CopyIcon from "../CopyIcon";
 import Tooltip from "../Tooltip";
+import NextLink from "next/link";
+import { useWeb3 } from "../../hooks/useWeb3";
 
 interface Props {
   signer: Signer;
@@ -47,7 +49,7 @@ export const SignerRow = ({ signer, signProof, viewProof }: Props) => {
     () => signer?.ens?.name || signer?.wallet?.user?.name || "Anonymous",
     []
   );
-
+  const { account } = useWeb3();
   return (
     <tr>
       <td>
@@ -59,7 +61,9 @@ export const SignerRow = ({ signer, signProof, viewProof }: Props) => {
               <Icon src={iconsObj.defaultUserPicture} />
             )}
           </Box>
-          <Box sx={usernameText}>{signerName}</Box>
+          <NextLink href={`/profile/${address}`}>
+            <Box sx={usernameText}>{signerName}</Box>
+          </NextLink>
         </Flex>
       </td>
       <td>

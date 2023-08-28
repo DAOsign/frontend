@@ -73,6 +73,10 @@ export const walletContainer = {
   pb: "10px",
 } as ThemeUIStyleObject;
 
+export const copyIcon = {
+  cursor: "pointer",
+} as ThemeUIStyleObject;
+
 // ======= UserName =========
 export const containerName = {
   alignItems: "baseline",
@@ -108,6 +112,12 @@ export const references = {
   variant: "text.normalTextBold",
   display: "block",
   opacity: "0.5",
+} as ThemeUIStyleObject;
+
+export const verificationBtn = {
+  display: "flex",
+  alignItems: "initial",
+  paddingRight: "0",
 } as ThemeUIStyleObject;
 
 // ======== VerificationBadges =======

@@ -7,7 +7,7 @@ import Icon from "../icon";
 import Tooltip from "../Tooltip";
 import { notifComingSoon } from "../../utils/notification";
 import Image from "next/image";
-import { title, btn, grid, verificationContainer } from "./styles";
+import { title, btn, grid, verificationContainer, verificationBtn, labelSigners } from "./styles";
 
 interface Status {
   img: Icon;
@@ -34,14 +34,14 @@ export const Verification = ({ setVisible }: any) => {
   return (
     <Container sx={verificationContainer}>
       <Text sx={title}>Verifications</Text>
-      <Flex sx={{ width: "fit-content" }}>
+      <Flex sx={{ alignItems: "baseline", width: "fit-content" }}>
         <Button
-          sx={{ ...btn, ...getBorder(isBadges), minWidth: "fit-content" }}
+          sx={{ ...btn, ...verificationBtn, ...getBorder(isBadges), minWidth: "fit-content" }}
           onClick={() => setIsBadges(true)}
         >
           <Text sx={{ marginRight: "2px" }}>Verification Badges</Text>
           <Tooltip
-            title="User's badges received based on a verification"
+            title={"User's badges received based on a verification"}
             transform="translate(-58%, -11%)"
             minWidth="170px"
             left="120%"
@@ -52,7 +52,7 @@ export const Verification = ({ setVisible }: any) => {
           </Tooltip>
         </Button>
         <Button
-          sx={{ ...btn, ...getBorder(!isBadges) }}
+          sx={{ ...btn, ...getBorder(!isBadges), paddingLeft: "16px" }}
           onClick={() => setIsBadges(false)}
           disabled={true}
         >

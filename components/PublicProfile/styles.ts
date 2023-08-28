@@ -210,11 +210,27 @@ const grid = {
   },
 } as ThemeUIStyleObject;
 
+const verificationBtn = {
+  display: "flex",
+  alignItems: "initial",
+  paddingRight: "0",
+} as ThemeUIStyleObject;
+
+const labelSigners = {
+  variant: "forms.label",
+  ml: "3px",
+  mr: "5px",
+  maxWidth: "unset",
+  minHeight: "25px",
+} as ThemeUIStyleObject;
+
 export {
+  labelSigners,
   verificationContainer,
   noContentContainer,
   profileContainer,
   agreementSection,
+  verificationBtn,
   userContainer,
   infoContainer,
   container,

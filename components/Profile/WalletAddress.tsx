@@ -5,7 +5,7 @@ import CopyIcon from "../CopyIcon";
 import { notifSucces } from "../../utils/notification";
 import useWindowDimensions from "../../hooks/useWindowDimensions";
 import { formatAddress, onCopyClick } from "../../utils/formats";
-import { title, walletContainer } from "./styles";
+import { title, walletContainer, copyIcon } from "./styles";
 
 const WalletAddress = ({ address }: any) => {
   const { width } = useWindowDimensions();
@@ -33,6 +33,7 @@ const WalletAddress = ({ address }: any) => {
           </Text>
         </Tooltip>
         <Box
+          sx={copyIcon}
           onClick={() => {
             onCopyClick(address);
             notifSucces("Link copied");

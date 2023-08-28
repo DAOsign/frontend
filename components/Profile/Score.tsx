@@ -3,7 +3,7 @@ import { Flex, Text, Button, Link, Box } from "theme-ui";
 import Image from "next/image";
 import Tooltip from "../Tooltip";
 import iconsObj from "../../assets/icons";
-import { userName, badges, references, profileSection } from "./styles";
+import { userName, badges, references, profileSection, verificationBtn } from "./styles";
 
 import { btn } from "../PublicProfile/styles";
 import { VerificationBadges } from "./VerificationBadges";
@@ -24,7 +24,10 @@ export default function Score() {
       </Box>
 
       <Flex sx={{ width: "fit-content" }}>
-        <Button sx={{ ...btn, ...getBorder(isBadges) }} onClick={() => setIsBadges(true)}>
+        <Button
+          sx={{ ...btn, ...verificationBtn, ...getBorder(isBadges) }}
+          onClick={() => setIsBadges(true)}
+        >
           <Text sx={{ marginRight: "2px" }}>Verification Badges</Text>
           <Tooltip
             title="User's badges received based on a verification"
@@ -37,7 +40,10 @@ export default function Score() {
             <Image src={iconsObj.iicon} width={16} height={16} alt="socialIcon" />
           </Tooltip>
         </Button>
-        <Button sx={{ ...btn, ...getBorder(!isBadges) }} onClick={() => setIsBadges(false)}>
+        <Button
+          sx={{ ...btn, ...getBorder(!isBadges), paddingLeft: "16px" }}
+          onClick={() => setIsBadges(false)}
+        >
           References
         </Button>
       </Flex>

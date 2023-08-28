@@ -18,6 +18,12 @@
     "useUnknownInCatchVariables": false
   },
 
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "pages/profile/.index.tsx"],
+  "include": [
+    "next-env.d.ts",
+    "**/*.ts",
+    "**/*.tsx",
+    "pages/profile/.index.tsx",
+    "components/Identicon/[Identicon].ts"
+  ],
   "exclude": ["node_modules"]
 }
