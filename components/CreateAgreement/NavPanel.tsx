@@ -420,9 +420,15 @@ export default function NavPanel({ setLoading, page }: { setLoading: any; page: 
           onClick={() => {
             return step > 1 ? changeStep(1) : null;
           }}
-          sx={{ ...stepStyle, mt: 0, cursor: step > 1 ? "pointer" : "initial" }}
+          sx={{
+            ...stepStyle,
+            mt: 0,
+            cursor: step > 1 ? "pointer" : "initial",
+          }}
         >
-          <Box sx={stepNumber}>
+          <Box
+            sx={{ ...stepNumber, "&:hover": { backgroundColor: step > 1 ? "#AE4FD0" : "inherit" } }}
+          >
             {(step > 1 && page === "create") || page === "edit" ? (
               <Box sx={iconNavMenu}>
                 <Icon src={iconsObj.done} />

@@ -70,7 +70,7 @@ const HeaderMenu = ({
             </Flex>
           </Container>
         </Flex>
-        <NextLink href={`/user/${address}`}>
+        <NextLink href={`/public-profile/${address}`}>
           <Button sx={{ variant: "buttons.grey", mt: "32px", width: "100%" }}>My Profile</Button>
         </NextLink>
         <Button

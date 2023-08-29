@@ -8,6 +8,7 @@ import Lottie from "lottie-react";
 import loader from "../../img/json/loader.json";
 import Icon from "../icon/index";
 import iconsObj from "../../assets/icons";
+import agreement from "../../pages/agreement/[agreementId]";
 
 export default function Agreements() {
   const {

@@ -41,7 +41,7 @@ export const Verification = ({ setVisible }: any) => {
         >
           <Text sx={{ marginRight: "2px" }}>Verification Badges</Text>
           <Tooltip
-            title={"User's badges received based on a verification"}
+            title="User's badges received based on a verification"
             transform="translate(-58%, -11%)"
             minWidth="170px"
             left="120%"
