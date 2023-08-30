@@ -945,3 +945,11 @@ body {
   }
   
 }
+.line{
+  content: '""';
+  display: block;
+  width: 172px;
+  height: 2px;
+  background-color: #EDEDF3;
+  padding-top: 4px;
+}

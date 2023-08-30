@@ -72,6 +72,9 @@ const logoWithoutAnimate = {
   width: "130px",
   height: "48px",
   cursor: "pointer",
+  "&:hover > svg > path:nth-child(n+15)": {
+    fill: "#AE4FD0",
+  },
   "@media screen and (max-width: 768px)": {
     width: "96px",
     height: "36px",
