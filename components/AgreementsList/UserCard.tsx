@@ -94,7 +94,7 @@ export default function UserCard({ address }: any) {
         </Flex>
       </Flex>
       <Container sx={improveBtnContainer}>
-        <NextLink href={`/public-profile/${address}`}>
+        <NextLink href={`/user/${address}`}>
           <Button sx={improveBtn}>My Profile</Button>
         </NextLink>
       </Container>
