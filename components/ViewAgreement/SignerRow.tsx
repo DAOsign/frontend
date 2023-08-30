@@ -61,8 +61,8 @@ export const SignerRow = ({ signer, signProof, viewProof }: Props) => {
               <Icon src={iconsObj.defaultUserPicture} />
             )}
           </Box>
-          <NextLink href={`/profile/${address}`}>
-            <Box sx={usernameText}>{signerName}</Box>
+          <NextLink href={`/public-profile/${address}`}>
+            <Box sx={{ ...usernameText, cursor: "pointer" }}>{signerName}</Box>
           </NextLink>
         </Flex>
       </td>
