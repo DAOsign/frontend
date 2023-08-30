@@ -86,6 +86,8 @@ import { notifError } from "../../utils/notification";
 import { useMutation } from "urql";
 import { saveAgreementMutation } from "../../modules/graphql/mutations";
 import Tooltip from "../Tooltip";
+import CloseIcon from "../IconComponent/CloseIcon";
+import ArrowLeftPink from "../ArrowLeftPink";
 
 interface Props {
   isOpen: boolean;
@@ -326,14 +328,16 @@ export default function ModalImportSnapshot({ isOpen, page, onExit, setMethod }:
 
   const selectContent = (name: string) => {
     const { options, value } = selectsValue[name];
+    const isCountry = name === LEGAL_JURISDICTION_COUNTRY;
+    const isState = name === LEGAL_JURISDICTION_STATE;
+
     const inputIsHidden =
-      (name === LEGAL_JURISDICTION_COUNTRY && selectsOpen[name]) ||
-      (name === LEGAL_JURISDICTION_STATE && selectsOpen[name]) ||
-      (name === LEGAL_JURISDICTION_COUNTRY && !values.proposal[LEGAL_JURISDICTION_COUNTRY]);
+      (isCountry && selectsOpen[name]) ||
+      (isState && selectsOpen[name]) ||
+      (isCountry && !values.proposal[LEGAL_JURISDICTION_COUNTRY]);
 
     const optionsFilter =
-      (searchValue !== "" && name === LEGAL_JURISDICTION_COUNTRY) ||
-      (searchValue !== "" && name === LEGAL_JURISDICTION_STATE)
+      (searchValue !== "" && isCountry) || (searchValue !== "" && isState)
         ? options.filter((el: string) => el.toLowerCase().includes(searchValue.toLowerCase()))
         : options.filter((el: string) => el !== values.proposal[name]);
 
@@ -356,12 +360,20 @@ export default function ModalImportSnapshot({ isOpen, page, onExit, setMethod }:
             boxShadow: selectsOpen[name] ? "0px 4px 32px rgba(33, 33, 33, 0.16)" : "none",
           }}
         >
-          <Flex sx={{ ...flexSelect, borderRadius: selectsOpen[name] ? "8px 8px 0 0" : "8px" }}>
+          <Flex
+            sx={{
+              ...flexSelect,
+              borderRadius: selectsOpen[name] ? "8px 8px 0 0" : "8px",
+              "&:hover > div  svg > path": {
+                stroke: "#AE4FD0",
+              },
+            }}
+          >
             {inputIsHidden ? (
               <Input
                 onChange={e => setSearchValue(e.target.value)}
                 onClick={onInputSearchClick}
-                placeholder="Choose country"
+                placeholder={isCountry ? "Choose country" : "Choose state"}
                 value={searchValue}
                 sx={inputSearch}
               />
@@ -385,14 +397,14 @@ export default function ModalImportSnapshot({ isOpen, page, onExit, setMethod }:
                 }
                 sx={icon}
               >
-                <Icon src={iconsObj.arrowLeftPink} />
+                <ArrowLeftPink />
               </Box>
             </motion.div>
           </Flex>
           <Container
             sx={{ ...itemOption, maxHeight: name === STATEMENT_OF_WORK ? "138px" : "178px" }}
           >
-            {name === LEGAL_JURISDICTION_COUNTRY && (
+            {isCountry && (
               <Flex
                 onClick={() => onChangeSelect(name, UNITED_STATES)}
                 sx={{ ...flexSelectItem, borderRadius: "0 !important" }}
@@ -475,7 +487,7 @@ export default function ModalImportSnapshot({ isOpen, page, onExit, setMethod }:
       <ModalBase height="auto" sx={modalBase}>
         <Flex sx={flexContent}>
           <Box onClick={onExit} sx={closeIcon}>
-            <Icon src={iconsObj.xClose} />
+            <CloseIcon />
           </Box>
           <Text sx={{ ...mainText, mb: "40px" }}>Import From Snapshot</Text>
           <Flex sx={{ ...flexContent, ...overflowContentStyles }}>

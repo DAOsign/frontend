@@ -12,6 +12,7 @@ import {
   mainText,
   btnContainer,
 } from "../ModalIpfsWarning/styles";
+import CloseIcon from "../IconComponent/CloseIcon";
 import ModalSignStatus from "../ModalSignStatus";
 import { Portal } from "../Portal/Portal";
 
@@ -39,7 +40,7 @@ export default function ModalReadyToSign({ isOpen, onSubmit, onExit }: Props) {
     <ModalSignStatus
       isOpen={isOpen}
       onExit={onExit}
-      content={<p>You have successfully generated Proof-of-authority</p>}
+      content={<p>You have successfully generated Proof-of-Identity</p>}
       error={false}
     />
   ) : (
@@ -47,7 +48,7 @@ export default function ModalReadyToSign({ isOpen, onSubmit, onExit }: Props) {
       <ModalBase height="auto" sx={{ py: "32px", width: ["80%", "500px"] }}>
         <Flex sx={{ display: "flex", flexDirection: "column" }}>
           <Box onClick={onExit} sx={closeIcon}>
-            <Icon src={iconsObj.xClose} />
+            <CloseIcon />
           </Box>
           <Box sx={containerIcon}>
             <Icon width={"44px"} height={"44px"} src={iconsObj.frame} />

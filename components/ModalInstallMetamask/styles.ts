@@ -4,8 +4,8 @@ const container = {
   position: "fixed",
   left: "50%",
   transform: "translate(-50%, 50%)",
-  width: "500px",
-  height: "466px",
+  maxWidth: "600px",
+  height: "450px",
   borderRadius: "12px",
   backgroundColor: "white",
 } as ThemeUIStyleObject;
@@ -25,13 +25,12 @@ const mainText = {
 
 const textContainer = {
   variant: "text.smallTextMediumUser",
-  pt: "16px",
+  p: "16px",
   textAlign: "center",
 } as ThemeUIStyleObject;
 
 const btnContainer = {
-  mt: "40px",
-  width: "110px",
+  width: "170px",
 } as ThemeUIStyleObject;
 
 const secondText = {

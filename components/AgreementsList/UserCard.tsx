@@ -20,7 +20,7 @@ import {
 } from "./styles";
 import useWindowDimensions from "../../hooks/useWindowDimensions";
 import Identicon from "../Identicon/Identicon";
-import { notifComingSoon, notifSucces } from "../../utils/notification";
+import { notifComingSoon, notifSuccess } from "../../utils/notification";
 import Tooltip from "../Tooltip";
 import CopyIcon from "../CopyIcon";
 export default function UserCard({ address }: any) {
@@ -71,7 +71,7 @@ export default function UserCard({ address }: any) {
             <Box
               onClick={() => {
                 onCopyClick(address);
-                notifSucces("Link copied");
+                notifSuccess("Link copied");
               }}
               sx={iconCopy}
             >

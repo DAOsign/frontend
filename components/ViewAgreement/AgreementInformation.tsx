@@ -35,7 +35,7 @@ import NextLink from "next/link";
 import ModalConfirmAgreementDeletion from "../ModalConfirmAgreementDeletion/ModalConfirmAgreementDeletion";
 import { sleep } from "../../utils/common";
 import { useRouter } from "next/router";
-import { notifError, notifSucces } from "../../utils/notification";
+import { notifError, notifSuccess } from "../../utils/notification";
 import ModalSignStatus from "../ModalSignStatus";
 import ModalProof from "../ModalProof";
 import { toAgreementWithParticipants } from "../../utils/typeUtils";
@@ -69,7 +69,7 @@ interface Props {
 }
 
 export const AGREEMENT_PROOF = "Agreement Proof";
-export const AUTHORITY_PROOF = "Authority Proof";
+export const IDENTITY_PROOF = "Identity Proof";
 
 export const AgreementInformation = ({
   onSetAgreementReadyToSign = () => {},
@@ -101,7 +101,7 @@ export const AgreementInformation = ({
 
   const handleCopyAddress = () => {
     onCopyClick(authorWalletAddress || "");
-    notifSucces("Address Copied");
+    notifSuccess("Address Copied");
   };
 
   // TODO: edit observers
@@ -128,9 +128,9 @@ export const AgreementInformation = ({
       setSuccessModalContent({
         content: (
           <>
-            <p>You have successfully generated Proof-of-signature </p>
+            <p>You have successfully generated Proof-of-Signature</p>
             {isLastSignature && (
-              <p> Proof-of-agreement was generated because all signers signed the Agreement.</p>
+              <p> Proof-of-Agreement was generated because all signers signed the Agreement.</p>
             )}
           </>
         ),
@@ -151,13 +151,13 @@ export const AgreementInformation = ({
     push("/agreements", "/agreements", { shallow: false });
   };
 
-  const onShowProof = (type: typeof AGREEMENT_PROOF | typeof AUTHORITY_PROOF) => {
+  const onShowProof = (type: typeof AGREEMENT_PROOF | typeof IDENTITY_PROOF) => {
     if (type === AGREEMENT_PROOF && agreement.agreementProof) {
       showProof({ title: AGREEMENT_PROOF, proof: agreement.agreementProof });
     }
-    if (type === AUTHORITY_PROOF && agreement.agreementFileProof) {
+    if (type === IDENTITY_PROOF && agreement.agreementFileProof) {
       //@ts-ignore
-      showProof({ title: AUTHORITY_PROOF, proof: agreement.agreementFileProof });
+      showProof({ title: IDENTITY_PROOF, proof: agreement.agreementFileProof });
     }
   };
 
@@ -210,7 +210,7 @@ export const AgreementInformation = ({
           }
         />
         <InformationRow
-          name="Agreement proof"
+          name="Agreement Proof"
           tooltipValue={agreement?.agreementProof?.cid}
           value={
             agreement.agreementProof ? (
@@ -228,12 +228,12 @@ export const AgreementInformation = ({
         />
 
         <InformationRow
-          name="Authority proof"
+          name="Identity Proof"
           tooltipValue={agreement?.agreementFileProof?.cid || undefined}
           value={
             agreement.agreementFileProof ? (
               <Box
-                onClick={() => (agreement.agreementFileProof ? onShowProof(AUTHORITY_PROOF) : {})}
+                onClick={() => (agreement.agreementFileProof ? onShowProof(IDENTITY_PROOF) : {})}
                 sx={{ cursor: "pointer", display: "flex", alignItems: "center", gap: "4px" }}
                 className="signature_icon"
               >
@@ -245,6 +245,7 @@ export const AgreementInformation = ({
             )
           }
         />
+        <InformationRow name="Authority Proof" value="<Not required>" />
         <InformationRow name="Location" value={agreementLocation || ""} />
         <InformationRow
           name="Access"

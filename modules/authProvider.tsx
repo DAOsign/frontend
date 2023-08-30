@@ -62,31 +62,44 @@ const AuthProvider = (props?: Partial<ProviderProps<AuthProps>>) => {
   }
 
   async function login(connector?: ConnectorType, email?: string, emailVerificationSalt?: string) {
+    console.log("Started login process.");
+    console.log(`Connected with: ${connector}`);
     // Prevent double loginRequest due to react dev useEffect[] runs twice
     if (loginStarted.current) return;
     loginStarted.current = true;
 
     try {
       const hasToken = Boolean(getToken());
+      console.log(`User has auth token: ${hasToken ? "yes" : "no"}`);
       if (!connector) {
         const loadedConnector = await auth.getConnector();
+        console.log(`Loaded connector: ${loadedConnector}`);
         if ((!loadedConnector || !hasToken) && pathname !== "/connect") {
+          console.log(1);
           clearToken();
           await push("/connect");
           loginStarted.current = false;
           return;
         }
+        console.log(2);
+        if (!loadedConnector) return;
         connector = loadedConnector || "injected";
       }
       setState(state => ({ ...state, authLoading: true }));
 
+      console.log("Detecting Web3 provider");
       const provider = await auth.login(connector);
 
+      // console.log({ isMetaMask: provider?.isMetaMask });
+      // console.log({ isCoinbaseWallet: provider?.isCoinbaseWallet });
+      // console.log({ provider });
       if (!provider) {
+        console.log("> No Web3 provider");
         const newState = { ...state, authLoading: false };
         setState(state => ({ ...state, newState }));
         return newState;
       }
+      console.log("> Web3 provider detected");
 
       web3ProviderRef.current = new Web3Provider(provider, "any");
 
@@ -109,7 +122,7 @@ const AuthProvider = (props?: Partial<ProviderProps<AuthProps>>) => {
   async function onAfterConnect(account: string, email?: string, emailVerificationSalt?: string) {
     if (!account) return;
     if (getToken()) return; // user already has a token
-
+    console.log("Get payload to sign");
     const res = (await loginRequest({ address: account })) as OperationResult<{
       login: LoginResponse;
     }>;
@@ -121,19 +134,27 @@ const AuthProvider = (props?: Partial<ProviderProps<AuthProps>>) => {
 
     const payload = res?.data?.login?.payload;
     if (!payload) return;
+    console.log("> Get payload success");
 
+    console.log("Signing payload");
     const signature = await sign(payload);
+    if (!signature) return;
+    console.log(`> Signing payload success. Signature: ${signature}`);
+
+    console.log("Obtaining auth token");
     const tokenRes = (await loginRequest({
       address: account,
-      signature: signature,
+      signature,
     })) as OperationResult<{ login: LoginResponse }>;
 
     if (tokenRes?.data?.login?.error) {
+      console.log("> Get auth token error");
       notifError(tokenRes?.data?.login?.error || "Login error");
       return;
     }
 
     const token = tokenRes?.data?.login?.token;
+    console.log(`> Auth token success: ${token}`);
     if (!token) return;
 
     setToken(token);
@@ -149,6 +170,8 @@ const AuthProvider = (props?: Partial<ProviderProps<AuthProps>>) => {
         return;
       }
     }
+
+    console.log("Redirecting to the home page");
 
     push("/");
   }

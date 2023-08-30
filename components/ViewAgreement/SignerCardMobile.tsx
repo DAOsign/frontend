@@ -19,7 +19,7 @@ import { formatAddress, onCopyClick } from "../../utils/formats";
 import useWindowDimensions from "../../hooks/useWindowDimensions";
 import { AgreementSignProof, Signer } from "../../modules/graphql/gql/graphql";
 import PendingIcon from "../icon/editable/PendingIcon";
-import { notifSucces } from "../../utils/notification";
+import { notifSuccess } from "../../utils/notification";
 import SignatureIcon from "../icon/editable/SignatureIcon";
 import SignedIcon from "../icon/editable/SignedIcon";
 
@@ -32,7 +32,7 @@ const SignerCardMobile = ({ signer, signProof, viewProof }: Props) => {
   const { width } = useWindowDimensions();
   const handleCopyAddress = (address: string) => {
     onCopyClick(address);
-    notifSucces("Address copied");
+    notifSuccess("Address copied");
   };
   const address = useMemo<string>(
     () =>
@@ -96,7 +96,7 @@ const SignerCardMobile = ({ signer, signProof, viewProof }: Props) => {
         </Box>
       </Flex>
       <Flex sx={tableSignatureCell}>
-        <Box sx={textMobile}>Proof of signature</Box>
+        <Box sx={textMobile}>Signature Proof</Box>
         <Box onClick={() => viewProof(signProof)}>
           {signProof?.cid && (
             <>

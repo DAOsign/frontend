@@ -11,6 +11,7 @@ import {
 import { Lock } from "../lib/lock";
 import options, { ConnectorType } from "../lib/snapshot/options";
 import { getInjected } from "../lib/lock/utils";
+import { MetaMaskInpageProvider } from "@metamask/providers";
 import type WalletConnectProvider from "@walletconnect/web3-provider";
 import type { CoinbaseWalletProvider } from "@coinbase/wallet-sdk/dist/provider/CoinbaseWalletProvider";
 
@@ -46,10 +47,9 @@ const LockProvider = (props?: Partial<ProviderProps<LockContextInterface>>) => {
 
   const providerRef = useRef<ProviderType>();
 
-  async function login(
-    connector: ConnectorType = "injected"
-  ): Promise<MutableRefObject<ProviderType>> {
+  async function login(connector: ConnectorType = "injected"): Promise<MutableRefObject<any>> {
     const lockConnector = lockInstanceRef.current.getConnector(connector);
+    console.log({ lockConnector });
 
     const localProvider = (await lockConnector.connect()) as null | any;
 
@@ -80,7 +80,7 @@ const LockProvider = (props?: Partial<ProviderProps<LockContextInterface>>) => {
     }
   }
 
-  async function getSignerAddress() {
+  async function getSignerAddress(): Promise<string> {
     const connector = await getConnector();
 
     if (!connector) return ""; //TODO throw error
@@ -88,7 +88,7 @@ const LockProvider = (props?: Partial<ProviderProps<LockContextInterface>>) => {
     switch (connector) {
       // Metamask
       case "injected": {
-        return providerRef.current?.selectedAddress;
+        return (providerRef.current as MetaMaskInpageProvider)?.selectedAddress ?? "";
       }
       // Walletconnect
       case "walletconnect": {
@@ -96,9 +96,11 @@ const LockProvider = (props?: Partial<ProviderProps<LockContextInterface>>) => {
       }
       // Coinbase
       case "walletlink": {
-        return (providerRef.current as CoinbaseWalletProvider)?.request({
-          method: "eth_requestAccounts",
-        })[0];
+        return (
+          (providerRef.current as CoinbaseWalletProvider)?.request({
+            method: "eth_requestAccounts",
+          })[0] ?? ""
+        );
       }
     }
     return "";

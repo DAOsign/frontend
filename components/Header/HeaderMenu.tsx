@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Container, Flex, Text, Box, Button } from "theme-ui";
-import { notifComingSoon, notifSucces } from "../../utils/notification";
+import { notifComingSoon, notifSuccess } from "../../utils/notification";
 import {
   menuContainer,
   fotoContainer,
@@ -61,7 +61,7 @@ const HeaderMenu = ({
               <Box
                 onClick={() => {
                   onCopyClick(address);
-                  notifSucces("Link copied");
+                  notifSuccess("Link copied");
                 }}
                 sx={copyIcon}
               >
@@ -76,7 +76,7 @@ const HeaderMenu = ({
         <Button
           onClick={() => {
             onCopyClick(address);
-            notifSucces("Link copied");
+            notifSuccess("Link copied");
           }}
           sx={{ variant: "buttons.grey", mt: "16px", width: "100%" }}
         >

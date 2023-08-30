@@ -22,7 +22,14 @@ a {
 .Toastify__close-button.Toastify__close-button--light {
   display: none;
 }
-
+.closeIcon:hover > svg > path {
+  stroke: #AE4FD0;
+  opacity: 1;
+}
+.previewIcon:hover >svg >g >path {
+  stroke: #AE4FD0;
+  opacity: 1;
+}
 .chooseFileText {
   pointer-events: none;
   font-family: "InterBold";

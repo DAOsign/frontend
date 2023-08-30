@@ -1,0 +1,7 @@
+.arrowLeftPink{
+    display: block;
+}
+
+.arrowLeftPink:hover >svg >path{
+    stroke: #AE4FD0;
+}

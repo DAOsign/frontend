@@ -57,10 +57,12 @@ const title = {
 } as ThemeUIStyleObject;
 
 const hiddenInMobile = {
-  "@media screen and (max-width: 700px) and (orientation: portrait)": {
+  /* For iOS devices and Mozilla on Android */
+  "@media only screen and (hover: none) and (pointer: coarse)": {
     display: "none",
   },
-  "@media screen and (max-height: 600px) and (orientation: landscape)": {
+  /* For Chromium on Android */
+  "@media only screen and (hover: hover) and (pointer: coarse)": {
     display: "none",
   },
 } as ThemeUIStyleObject;

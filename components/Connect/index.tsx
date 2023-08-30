@@ -8,23 +8,24 @@ import { useRouter } from "next/router";
 import { useLock } from "../../hooks/useLock";
 import Lottie from "lottie-react";
 import loader from "../../img/json/loader.json";
+import ModalInstallMetamask from "../ModalInstallMetamask";
+import { ConnectorType } from "../../lib/snapshot/options";
 
 export default function Connect() {
   const [loadingConnect, setLoadingConnect] = useState(false);
-  const [windowSize, setWindowSize] = useState<{
-    width?: number;
-    height?: number;
-  }>({
-    width: undefined,
-    height: undefined,
-  });
+  const [isVisible, setIsVisible] = useState(false);
   const { login } = useWeb3();
   const { getConnector } = useLock();
   const { push, query } = useRouter();
 
-  const connect = async (name: any) => {
+  const connect = async (name: ConnectorType) => {
     setLoadingConnect(true);
-    await login(name, query.email as string, query.salt as string);
+
+    const loginState = await login(name, query.email as string, query.salt as string);
+
+    if (name === "injected" && loginState?.account === null) {
+      setIsVisible(true);
+    }
     setLoadingConnect(false);
   };
 
@@ -108,6 +109,7 @@ export default function Connect() {
           </Link>
         </Text>
       </Container>
+      {isVisible && <ModalInstallMetamask setVisible={setIsVisible} />}
     </span>
   );
 }

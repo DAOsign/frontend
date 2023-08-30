@@ -6,6 +6,7 @@ import iconsObj from "../../../../assets/icons";
 import { useCreateAgreement } from "../../../../hooks/useCreateAgreement";
 import { useEditAgreement } from "../../../../hooks/useEditAgreement";
 import Upload from "./Upload";
+import ArrowLeftPink from "../../../ArrowLeftPink";
 
 export default function UploadLocalAgreement({
   page,
@@ -31,7 +32,7 @@ export default function UploadLocalAgreement({
         <Text sx={labelUpload}>Upload agreement *</Text>
         <Button onClick={handleChooseAnotherMethod} sx={uploadBtn}>
           <Box sx={{ width: "20px" }}>
-            <Icon style={{ display: "block" }} src={iconsObj.arrowLeftPink} />
+            <ArrowLeftPink />
           </Box>
           <Text sx={backBtn}>Choose another method</Text>
         </Button>

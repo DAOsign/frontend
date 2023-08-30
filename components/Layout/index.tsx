@@ -24,8 +24,8 @@ function Layout({ children }: React.PropsWithChildren) {
       }}
     >
       <Head>
-        <title>Dao-Sign</title>
-        <meta name="description" content="Dao-Sign" />
+        <title>DAOsign App</title>
+        <meta name="description" content="DAOsign App" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <Header

@@ -22,8 +22,15 @@ import { ModalBase } from "../ModalBase/ModalBase";
 import dynamic from "next/dynamic";
 import { AgreementSignProof } from "../../modules/graphql/gql/graphql";
 import { getFileFromIPFS } from "../../modules/rest";
-import { formatAddress } from "../../utils/formats";
-import { AGREEMENT_PROOF, AUTHORITY_PROOF } from "../ViewAgreement/AgreementInformation";
+import { formatAddress, onCopyClick } from "../../utils/formats";
+import { AGREEMENT_PROOF, IDENTITY_PROOF } from "../ViewAgreement/AgreementInformation";
+import CopyIcon from "../CopyIcon";
+import { informationRowIcon, tableAddressCell } from "../ViewAgreement/styles";
+import Tooltip from "../Tooltip";
+import CloseIcon from "../IconComponent/CloseIcon";
+import { notifSuccess } from "../../utils/notification";
+import LinkIcon from "../IconComponent/LincIcon";
+import ArrowLeftPink from "../ArrowLeftPink";
 
 const ReactJson = dynamic(() => import("react-json-view"), { ssr: false });
 
@@ -47,14 +54,19 @@ export default function ModalProof({ isOpen, onExit, title, proof }: Props) {
     proofJSON: undefined,
   });
 
-  const nameTite = () => {
+  const nameTitle = () => {
     if (title === AGREEMENT_PROOF) return "Agreement";
-    if (title === AUTHORITY_PROOF) return "Authority";
+    if (title === IDENTITY_PROOF) return "Identity";
     return "Signature";
   };
 
   const handleShowDetails = async () => {
     setShowDetails(prev => !prev);
+  };
+
+  const handleCopyIPFSProofLink = (link: string) => {
+    onCopyClick(link);
+    notifSuccess("Link to IPFS Proof Copied");
   };
 
   useEffect(() => {
@@ -74,12 +86,12 @@ export default function ModalProof({ isOpen, onExit, title, proof }: Props) {
       <ModalBase height={"fit-content"} width={undefined}>
         <Flex sx={container}>
           <Box onClick={onClose} sx={closeIcon}>
-            <Icon src={iconsObj.xClose} />
+            <CloseIcon />
           </Box>
-          <Text sx={mainText}>Proof-of-{nameTite()}</Text>
+          <Text sx={mainText}>Proof-of-{nameTitle()}</Text>
           <Flex sx={box}>
             <Box>
-              <Text sx={secondaryTitle}>Proof of {nameTite()}</Text>
+              <Text sx={secondaryTitle}>Proof of {nameTitle()}</Text>
             </Box>
             <Link
               onClick={() =>
@@ -89,16 +101,28 @@ export default function ModalProof({ isOpen, onExit, title, proof }: Props) {
               <Flex sx={{ alignItems: "center", cursor: "pointer" }}>
                 <Text sx={text}>{showDetails ? proof?.cid : formatAddress(proof?.cid || "")}</Text>
                 <Box sx={linkContainer}>
-                  <Icon src={iconsObj.link} />
+                  <LinkIcon />
                 </Box>
               </Flex>
             </Link>
+            <Flex
+              className="signature_icon"
+              sx={tableAddressCell}
+              onClick={() => handleCopyIPFSProofLink(`ipfs://${proof.cid}`)}
+            >
+              <Tooltip top="-45px" left="-115px" title={`ipfs://${proof.cid}`}>
+                <Box sx={{ cursor: "pointer" }}></Box>
+              </Tooltip>
+              <Box sx={informationRowIcon}>
+                <CopyIcon />
+              </Box>
+            </Flex>
             <Box sx={hideOnMobile}>
               {loading ? (
                 <Spinner width="20px" />
               ) : (
                 <Box onClick={handleShowDetails} sx={arrowContainer}>
-                  <Icon src={iconsObj.arrowLeftPink} />
+                  <ArrowLeftPink />
                 </Box>
               )}
             </Box>

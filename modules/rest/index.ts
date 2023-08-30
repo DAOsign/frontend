@@ -101,7 +101,7 @@ export const downloadPdf = async (agreementId: string, fileName = agreementId) =
       },
     })
     .then(res => {
-      fileDownload(res.data, `${fileName}.pdf`);
+      return fileDownload(res.data, `${fileName}.pdf`);
     })
     .catch(e => console.error(e));
 };
