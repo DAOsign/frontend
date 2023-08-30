@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { Flex, Text, Box, Container } from "theme-ui";
 import { noContentContainer, noContent, title, agreementSection } from "./styles";
 import useInfiniteScroll from "react-infinite-scroll-hook";
@@ -28,6 +28,8 @@ export default function Agreements() {
     disabled: loading,
   });
 
+  const [loadingFilter, setLoadingFilter] = useState(true);
+
   const updateStatus = (arr: any, id: number) =>
     arr.map((el: any) => {
       if (el.id === id) {
@@ -38,17 +40,24 @@ export default function Agreements() {
     });
 
   useEffect(() => {
-    setFilterOptions({
-      ...filterOptions,
-      status: updateStatus(filterOptions.status, 4),
-      permission: updateStatus(filterOptions.permission, 5),
-    });
+    changeFilterOptions();
   }, []);
+
+  const changeFilterOptions = () => {
+    setTimeout(() => {
+      setFilterOptions({
+        ...filterOptions,
+        status: updateStatus(filterOptions.status, 4),
+        permission: updateStatus(filterOptions.permission, 5),
+      });
+      setLoadingFilter(false);
+    }, 2000);
+  };
 
   return (
     <Flex sx={{ ...agreementSection, paddingTop: "104px", flexDirection: "column" }}>
       <Text sx={title}>Agreements</Text>
-      {!!agreements.length ? (
+      {!!agreements.length && !loadingFilter ? (
         <div>
           {agreements.map((agr: any, index: number) => (
             <AgreementItem key={index} {...agr} />
@@ -63,7 +72,7 @@ export default function Agreements() {
             </div>
           )}
         </div>
-      ) : loading ? (
+      ) : loading || loadingFilter ? (
         <Box
           sx={{
             minHeight: "400px",
