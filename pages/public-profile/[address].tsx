@@ -1,7 +1,7 @@
-import React, { useState } from "react";
+import React from "react";
 
 import PublicProfile from "../../components/PublicProfile";
 
 export default function publicProfile() {
-  return <PublicProfile page="public-profile" />;
+  return <PublicProfile />;
 }

@@ -2,8 +2,7 @@
 import React from "react";
 import { Container, Box, Text, Button, Flex } from "theme-ui";
 import iconsObj from "../../assets/icons";
-import Image from "next/image";
-import Icon from "../icon";
+import NextLink from "next/link";
 import { formatAddress, onCopyClick } from "../../utils/formats";
 import {
   verificationIconContainer,
@@ -95,10 +94,9 @@ export default function UserCard({ address }: any) {
         </Flex>
       </Flex>
       <Container sx={improveBtnContainer}>
-        <Button onClick={() => notifComingSoon("More Verification coming soon")} sx={improveBtn}>
-          {/* Add Verifications */}
-          My Profile
-        </Button>
+        <NextLink href={`/public-profile/${address}`}>
+          <Button sx={improveBtn}>My Profile</Button>
+        </NextLink>
       </Container>
     </Flex>
   );

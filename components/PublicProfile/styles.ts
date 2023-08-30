@@ -153,7 +153,6 @@ const btn = {
   display: "flex",
   alignItems: "center",
   opacity: "0.7",
-  pointerEvents: "none",
   backgroundColor: "transparent",
   borderRadius: 0,
   width: "fit-content",

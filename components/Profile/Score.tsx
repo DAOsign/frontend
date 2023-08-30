@@ -6,8 +6,8 @@ import iconsObj from "../../assets/icons";
 import { userName, badges, references, profileSection, verificationBtn } from "./styles";
 
 import { btn } from "../PublicProfile/styles";
-import { VerificationBadges } from "./VerificationBadges";
 import { VerificationsCards } from "./VerificationsCard";
+import { notifComingSoon } from "../../utils/notification";
 
 export default function Score() {
   const [isBadges, setIsBadges] = useState(true);
@@ -29,20 +29,21 @@ export default function Score() {
           onClick={() => setIsBadges(true)}
         >
           <Text sx={{ marginRight: "2px" }}>Verification Badges</Text>
-          <Tooltip
-            title="User's badges received based on a verification"
-            transform="translate(-58%, -11%)"
-            minWidth="170px"
-            left="120%"
-            top="-330%"
-            height="0"
-          >
-            <Image src={iconsObj.iicon} width={16} height={16} alt="socialIcon" />
-          </Tooltip>
         </Button>
+        <Tooltip
+          title="User's badges received based on a verification"
+          transform="translate(-58%, -11%)"
+          minWidth="170px"
+          left="120%"
+          top="-330%"
+          height="0"
+        >
+          <Image src={iconsObj.iicon} width={16} height={16} alt="socialIcon" />
+        </Tooltip>
         <Button
-          sx={{ ...btn, ...getBorder(!isBadges), paddingLeft: "16px" }}
-          onClick={() => setIsBadges(false)}
+          sx={{ ...btn, ...getBorder(!isBadges), paddingLeft: "16px", cursor: "pointer" }}
+          // onClick={() => setIsBadges(false)}
+          onClick={() => notifComingSoon("References is coming soon")}
         >
           References
         </Button>

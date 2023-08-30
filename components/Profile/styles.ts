@@ -30,8 +30,8 @@ export const title = {
   variant: "text.overscript",
 } as ThemeUIStyleObject;
 
-// ========= UserFoto =============
-export const userFoto = {
+// ========= UserPhoto =============
+export const userPhoto = {
   position: "relative",
   width: "180px",
   height: "180px",
@@ -42,7 +42,7 @@ export const userFoto = {
   },
 } as ThemeUIStyleObject;
 
-export const btnUserFoto = {
+export const btnUserPhoto = {
   variant: "buttons.userBtn",
   height: "46px",
   padding: "10px 22px",

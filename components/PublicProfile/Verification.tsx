@@ -35,26 +35,29 @@ export const Verification = ({ setVisible }: any) => {
     <Container sx={verificationContainer}>
       <Text sx={title}>Verifications</Text>
       <Flex sx={{ alignItems: "baseline", width: "fit-content" }}>
-        <Button
-          sx={{ ...btn, ...verificationBtn, ...getBorder(isBadges), minWidth: "fit-content" }}
-          onClick={() => setIsBadges(true)}
-        >
-          <Text sx={{ marginRight: "2px" }}>Verification Badges</Text>
+        <Flex sx={{ ...getBorder(isBadges) }}>
+          <Button
+            sx={{ ...btn, ...verificationBtn, minWidth: "fit-content" }}
+            onClick={() => setIsBadges(true)}
+          >
+            <Text sx={{ marginRight: "2px" }}>Verification Badges</Text>
+          </Button>
           <Tooltip
             title="User's badges received based on a verification"
-            transform="translate(-58%, -11%)"
+            transform="translate(-59%, -11%)"
             minWidth="170px"
-            left="120%"
-            top="-330%"
+            left="100%"
+            top="-110%"
             height="0"
           >
             <Image src={iconsObj.iicon} width={16} height={16} alt="infoIcon" />
           </Tooltip>
-        </Button>
+        </Flex>
         <Button
-          sx={{ ...btn, ...getBorder(!isBadges), paddingLeft: "16px" }}
-          onClick={() => setIsBadges(false)}
-          disabled={true}
+          sx={{ ...btn, ...getBorder(!isBadges), paddingLeft: "16px", cursor: "pointer" }}
+          // onClick={() => setIsBadges(false)}
+          onClick={() => notifComingSoon("References is coming soon")}
+          // disabled={true}
         >
           References
         </Button>

@@ -2,9 +2,9 @@ import React from "react";
 import { Flex, Button, Container, Text, Link } from "theme-ui";
 import Identicon from "../Identicon/Identicon";
 import useWindowDimensions from "../../hooks/useWindowDimensions";
-import { userFoto, btnUserFoto, userName } from "./styles";
+import { userPhoto, btnUserPhoto, userName } from "./styles";
 
-export default function UserFoto({ address, setVisible }: any) {
+export default function UserPhoto({ address, setVisible }: any) {
   const { width } = useWindowDimensions();
   return (
     <Flex
@@ -14,8 +14,8 @@ export default function UserFoto({ address, setVisible }: any) {
         minWidth: "fit-content",
       }}
     >
-      <Identicon account={address} size={width && width > 375 ? 180 : 120} sx={userFoto} />
-      <Button onClick={setVisible} sx={btnUserFoto}>
+      <Identicon account={address} size={width && width > 375 ? 180 : 120} sx={userPhoto} />
+      <Button onClick={setVisible} sx={btnUserPhoto}>
         Edit Profile
       </Button>
     </Flex>

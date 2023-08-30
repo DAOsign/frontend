@@ -7,7 +7,7 @@ import { profileContainer } from "./styles";
 import { Container } from "theme-ui";
 import BadgePopup from "./BadgePopup.tsx/index";
 
-export default function PublicProfile({ page }: { page: string }) {
+export default function PublicProfile() {
   const [visible, setVisible] = useState(false);
   const { account } = useWeb3();
 

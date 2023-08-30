@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect } from "react";
 import { Flex, Text, Box, Container } from "theme-ui";
 import { noContentContainer, noContent, title, agreementSection } from "./styles";
 import useInfiniteScroll from "react-infinite-scroll-hook";
@@ -8,13 +8,14 @@ import Lottie from "lottie-react";
 import loader from "../../img/json/loader.json";
 import Icon from "../icon/index";
 import iconsObj from "../../assets/icons";
-import agreement from "../../pages/agreement/[agreementId]";
 
 export default function Agreements() {
   const {
     filterValues,
     hasNextPage,
     valueSearch,
+    filterOptions,
+    setFilterOptions,
     loadMore,
     loading,
     data: agreements,
@@ -26,6 +27,23 @@ export default function Agreements() {
     onLoadMore: loadMore,
     disabled: loading,
   });
+
+  const updateStatus = (arr: any, id: number) =>
+    arr.map((el: any) => {
+      if (el.id === id) {
+        return { ...el, value: !el.value };
+      } else {
+        return el;
+      }
+    });
+
+  useEffect(() => {
+    setFilterOptions({
+      ...filterOptions,
+      status: updateStatus(filterOptions.status, 4),
+      permission: updateStatus(filterOptions.permission, 5),
+    });
+  }, []);
 
   return (
     <Flex sx={{ ...agreementSection, paddingTop: "104px", flexDirection: "column" }}>
@@ -64,8 +82,8 @@ export default function Agreements() {
             </Box>
           </Flex>
           <Text sx={{ variant: "text.normalTextBold" }}>
-            {`Sorry, no results found.`}
-            <br /> {`Please adjust your search/filter criteria and try again.`}
+            {`User doesn't have any public and signed`}
+            <br /> {`agreements yet`}
           </Text>
         </Container>
       ) : (
