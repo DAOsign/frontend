@@ -160,6 +160,9 @@ const btn = {
   borderBottom: "2px solid #EDEDF3",
   "&:hover": { background: "transparent", boxShadow: "unset" },
   "&:focus": { background: "transparent", boxShadow: "unset" },
+  "@media screen and (max-width: 375px)": {
+    width: "fit-content",
+  },
 } as ThemeUIStyleObject;
 
 const noContentContainer = {
@@ -192,6 +195,7 @@ const noContent = {
 
 const container = {
   width: "100%",
+  position: "relative",
   "@media screen and (max-width: 719px)": {
     flexDirection: "column",
     alignItems: "center",
@@ -221,6 +225,14 @@ const labelSigners = {
   mr: "5px",
   maxWidth: "unset",
   minHeight: "25px",
+} as ThemeUIStyleObject;
+
+export const backBtnPropfile = {
+  "@media screen and (max-width: 720px)": {
+    position: "absolute",
+    top: 0,
+    left: 0,
+  },
 } as ThemeUIStyleObject;
 
 export {
