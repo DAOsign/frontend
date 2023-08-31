@@ -4,9 +4,9 @@ import { myAgreementsQuery } from "../modules/graphql/queries";
 import { useWeb3 } from "../hooks/useWeb3";
 import { Agreement as AgreementResponse } from "../modules/graphql/gql/graphql";
 import {
-  initialPermission,
+  initialPermissionProfile,
   initialSignature,
-  initialStatus,
+  initialStatusProfile,
 } from "../components/AgreementsList/initialState";
 import { toAgreement } from "./typeUtils";
 import { Agreement } from "../types";
@@ -20,7 +20,7 @@ interface Response {
   dataArray: Array<Agreement>;
 }
 
-export function useLoadItems() {
+export function useLoadItemsProfile() {
   const client = useClient();
 
   const [hasNextPage, setHasNextPage] = React.useState<boolean>(true);
@@ -39,8 +39,8 @@ export function useLoadItems() {
   });
 
   const [filterOptions, setFilterOptions] = React.useState({
-    status: initialStatus,
-    permission: initialPermission,
+    status: initialStatusProfile,
+    permission: initialPermissionProfile,
     signature: initialSignature,
   });
 

@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Flex, Text, Box, Container } from "theme-ui";
 import { noContentContainer, noContent, title, agreementSection } from "./styles";
 import useInfiniteScroll from "react-infinite-scroll-hook";
-import { useLoadItems } from "../../utils/infiniteScroll";
+import { useLoadItemsProfile } from "../../utils/infiniteScrollProfile";
 import AgreementItem from "../AgreementsList/AgreementItem";
 import Lottie from "lottie-react";
 import loader from "../../img/json/loader.json";
@@ -19,7 +19,7 @@ export default function Agreements() {
     loadMore,
     loading,
     data: agreements,
-  } = useLoadItems();
+  } = useLoadItemsProfile();
 
   const [infiniteRef] = useInfiniteScroll({
     loading,
@@ -28,36 +28,10 @@ export default function Agreements() {
     disabled: loading,
   });
 
-  const [loadingFilter, setLoadingFilter] = useState(true);
-
-  const updateStatus = (arr: any, id: number) =>
-    arr.map((el: any) => {
-      if (el.id === id) {
-        return { ...el, value: !el.value };
-      } else {
-        return el;
-      }
-    });
-
-  useEffect(() => {
-    changeFilterOptions();
-  }, []);
-
-  const changeFilterOptions = () => {
-    setTimeout(() => {
-      setFilterOptions({
-        ...filterOptions,
-        status: updateStatus(filterOptions.status, 4),
-        permission: updateStatus(filterOptions.permission, 5),
-      });
-      setLoadingFilter(false);
-    }, 2000);
-  };
-
   return (
     <Flex sx={{ ...agreementSection, paddingTop: "104px", flexDirection: "column" }}>
       <Text sx={title}>Agreements</Text>
-      {!!agreements.length && !loadingFilter ? (
+      {!!agreements.length ? (
         <div>
           {agreements.map((agr: any, index: number) => (
             <AgreementItem key={index} {...agr} />
@@ -72,7 +46,7 @@ export default function Agreements() {
             </div>
           )}
         </div>
-      ) : loading || loadingFilter ? (
+      ) : loading ? (
         <Box
           sx={{
             minHeight: "400px",
