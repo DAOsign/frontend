@@ -65,11 +65,10 @@ jobs:
         run: doctl kubernetes cluster kubeconfig save daosign-kubernetes-cluster-prod
       - name: Helm deploy the latest image
         env:
-          NAMESPACE: "prod"
           HELM_VERSION: 1.1.0
         run: |
           doctl registry login --expiry-seconds 600 && \
-          kubectl get pods -n ${{ env.NAMESPACE }} && helm ls -n ${{ env.NAMESPACE }} && \
-          helm upgrade helm-frontend -i -n ${{ env.NAMESPACE }} --atomic -f .env.yaml oci://registry.digitalocean.com/${{ env.DO_CONTAINER_REGISTRY }}/helm-frontend  --version $HELM_VERSION \
+          kubectl get pods && helm ls && \
+          helm upgrade helm-frontend -i --atomic -f .env.yaml oci://registry.digitalocean.com/${{ env.DO_CONTAINER_REGISTRY }}/helm-frontend  --version $HELM_VERSION \
           --set=frontend.image.repository=registry.digitalocean.com/${{ env.DO_CONTAINER_REGISTRY }}/prod-frontend,frontend.image.tag=${{needs.build.outputs.image_tag}} && \
-          helm ls -n ${{ env.NAMESPACE }} && kubectl get pods -n ${{ env.NAMESPACE }}
+          helm ls && kubectl get pods
