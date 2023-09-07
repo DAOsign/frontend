@@ -14,6 +14,7 @@ import LogOutPopap from "../modalLogout";
 import Identicon from "../Identicon/Identicon";
 import Tooltip from "../Tooltip";
 import CopyIcon from "../CopyIcon";
+import NextLink from "next/link";
 
 const HeaderMenu = ({
   setVisibleLogOut,
@@ -69,12 +70,9 @@ const HeaderMenu = ({
             </Flex>
           </Container>
         </Flex>
-        <Button
-          onClick={() => notifComingSoon("My Profile is coming soon")}
-          sx={{ variant: "buttons.grey", mt: "32px", width: "100%" }}
-        >
-          My Profile
-        </Button>
+        <NextLink href={`/user/${address}`}>
+          <Button sx={{ variant: "buttons.grey", mt: "32px", width: "100%" }}>My Profile</Button>
+        </NextLink>
         <Button
           onClick={() => {
             onCopyClick(address);

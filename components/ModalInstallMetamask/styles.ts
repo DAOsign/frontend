@@ -50,12 +50,14 @@ const secondText = {
 } as ThemeUIStyleObject;
 
 const closeIcon = {
-  opacity: "0.5",
   ml: "auto",
   mr: "30px",
   width: "20px",
   cursor: "pointer",
   height: "20px",
+  "&:hover": {
+    opacity: "1",
+  },
 } as ThemeUIStyleObject;
 
 const bg = {

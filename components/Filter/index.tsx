@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Container, Flex, Input, Text, Box, Checkbox, Button } from "theme-ui";
 import iconsObj from "../../assets/icons";
 import CheckboxComponent from "../Checkbox";
-
+import CloseIcon from "../IconComponent/CloseIcon";
 import Icon from "../icon";
 import {
   container,
@@ -34,7 +34,7 @@ export default function Filter({ setVisible, onChange, reset, filterOptions }: a
           }}
           sx={{ ...iconClose }}
         >
-          <Icon src={iconsObj.xClose} />
+          <CloseIcon />
         </Box>
       </Flex>
       <Container>

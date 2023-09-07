@@ -5,7 +5,6 @@ import { btnClear } from "./styles";
 import Filter from "../Filter";
 import Icon from "../icon";
 import { initialPermission, initialSignature, initialStatus } from "./initialState";
-
 import {
   iconSearchContainer,
   inputMyAgreement,

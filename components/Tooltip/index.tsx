@@ -18,7 +18,7 @@ type Props = {
 const Tooltip = ({ children, left, top, transform, minWidth, title, height, className }: Props) => {
   return (
     <div style={{ paddingTop: 0 }} className={`${styles.tooltip} tooltip`}>
-      <button className={`${styles.tooltip_button} tooltip_button`}> {children} </button>
+      <span className={`${styles.tooltip_button} tooltip_button`}> {children} </span>
       <div
         style={{
           zIndex: 4,

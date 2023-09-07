@@ -13,6 +13,7 @@ import {
 } from "../ModalAuthorNotAdded/styles";
 import { Portal } from "../Portal/Portal";
 import { ModalBase } from "../ModalBase/ModalBase";
+import CloseIcon from "../IconComponent/CloseIcon";
 
 interface Props {
   isOpen: boolean;
@@ -40,7 +41,7 @@ export default function ModalAttention({ isOpen, onExit, onSubmit, method }: Pro
       <ModalBase height="442px">
         <Flex sx={flexContainer}>
           <Box onClick={onExit} sx={closeIcon}>
-            <Icon src={iconsObj.xClose} />
+            <CloseIcon />
           </Box>
           <Box sx={containerIcon}>
             <Icon width={"44px"} height={"44px"} src={iconsObj.frame} />

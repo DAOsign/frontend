@@ -48,7 +48,7 @@ export default function TagList<T = any>({ items, type, onDelete }: TagListProps
               onClick={() => onDelete(el, type)}
               sx={{ width: "13px", height: "11px", cursor: "pointer" }}
             >
-              <Icon style={{ opacity: 0.5 }} src={iconsObj.plusCircle} />
+              <Icon src={iconsObj.plusCircle} />
             </Box>
           </Box>
         );

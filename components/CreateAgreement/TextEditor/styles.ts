@@ -129,14 +129,14 @@ export const expandBtn = {
   fontSize: "14px",
   mr: "12px",
   mb: "5px",
-  opacity: 0.7,
+  color: "#CA5CF2",
   "&:disabled": {
     cursor: "no-drop",
   },
   "&:hover, &:focus": {
     backgroundColor: "transparent",
     background: "unset",
-    opacity: 1,
+    color: "#AE4FD0",
   },
   "@media screen and (max-width: 580px)": {
     position: "static",
