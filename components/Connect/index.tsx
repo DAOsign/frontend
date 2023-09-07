@@ -88,7 +88,7 @@ export default function Connect() {
             </Button>
 
             <Button type="button" variant="primary" onClick={() => connect("walletconnect")}>
-              Wallet Connect
+              Wallet Connect!
             </Button>
             <Button
               onClick={() => connect("walletlink")}
