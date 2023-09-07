@@ -14,6 +14,7 @@ import {
   PRIVACY_PUBLIC_PUBLISHED,
   PRIVACY_PUBLIC_WITH_LINK,
 } from "../../../../types";
+import ArrowLeftPink from "../../../ArrowLeftPink";
 
 export type AnimateContainer = () => void;
 
@@ -55,7 +56,7 @@ export default function PublicMethod({ animateContainer, setPublic, page }: Publ
             sx={btnBack}
           >
             <Box sx={{ width: "18px" }}>
-              <Icon style={{ display: "block" }} width="14px" src={iconsObj.arrowLeftPink} />
+              <ArrowLeftPink />
             </Box>
             <Text sx={{ display: "block" }}>Choose another privacy</Text>
           </Button>
@@ -74,7 +75,7 @@ export default function PublicMethod({ animateContainer, setPublic, page }: Publ
               Available on{" "}
               <NextLink href={"/"} passHref legacyBehavior prefetch={false}>
                 <Link
-                  sx={{ variant: "text.linkUnderline" }}
+                  sx={{ variant: "text.linkUnderline", "&:hover": { color: "#AE4FD0" } }}
                   target="_blank"
                   rel="noopener noreferrer"
                   onClick={event => {
@@ -102,7 +103,7 @@ export default function PublicMethod({ animateContainer, setPublic, page }: Publ
               Available on{" "}
               <NextLink href={"/"} passHref legacyBehavior prefetch={false}>
                 <Link
-                  sx={{ variant: "text.linkUnderline" }}
+                  sx={{ variant: "text.linkUnderline", "&:hover": { color: "#AE4FD0" } }}
                   target="_blank"
                   rel="noopener noreferrer"
                   onClick={event => {
@@ -132,7 +133,7 @@ export default function PublicMethod({ animateContainer, setPublic, page }: Publ
               NOT published on{" "}
               <NextLink href={"/"} passHref legacyBehavior prefetch={false}>
                 <Link
-                  sx={{ variant: "text.linkUnderline" }}
+                  sx={{ variant: "text.linkUnderline", "&:hover": { color: "#AE4FD0" } }}
                   target="_blank"
                   rel="noopener noreferrer"
                   onClick={event => {

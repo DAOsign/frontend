@@ -510,7 +510,7 @@ const showMoreLabel = {
   opacity: 0.7,
   transition: "opacity 0.3s",
   "&:hover": {
-    opacity: 1,
+    color: "#AE4FD0",
   },
 } as ThemeUIStyleObject;
 

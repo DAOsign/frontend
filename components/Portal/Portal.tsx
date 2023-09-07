@@ -7,7 +7,7 @@ import { Container, ThemeUIStyleObject } from "theme-ui";
 interface Props {
   children: ReactNode;
   isOpen: boolean;
-  onClose: () => any;
+  onClose?: () => any;
   sx?: ThemeUIStyleObject;
 }
 

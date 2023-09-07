@@ -1,24 +1,13 @@
 /* eslint-disable no-console */
 import LockConnector from "./connector";
+import {EthereumProvider} from "@walletconnect/ethereum-provider";
 
 export default class Connector extends LockConnector {
   async connect() {
-    let provider;
-    try {
-      let WalletConnectProvider = await import(
-        "@walletconnect/web3-provider/dist/umd/index.min.js"!
-      );
-      if (WalletConnectProvider?.default)
-        WalletConnectProvider = WalletConnectProvider.default;
-      if (WalletConnectProvider?.default)
-        WalletConnectProvider = WalletConnectProvider.default;
-      provider = new WalletConnectProvider(this.options);
-      await provider.enable();
-    } catch (e) {
-      console.error(e);
-      return;
-    }
+    console.log("Connect:", this.options, "!!!!");
+    const provider: any = await EthereumProvider.init(this.options);
     provider.connectorName = "walletconnect";
+    provider.enable();
     return provider;
   }
 

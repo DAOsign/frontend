@@ -8,12 +8,15 @@
     "name": "WalletConnect",
     "network": "1",
     "options": {
-      "rpc": {
+      "projectId": "b4070341218f003c0d0f4469af230a61",
+      "chains": [1, 4, 42, 10],
+      "rpcMap": {
         "1": "https://mainnet.infura.io/v3/a2bdb60cad374dbc9a560323a6222e62",
         "4": "https://rpc.brovider.xyz/4",
         "42": "https://rpc.brovider.xyz/42",
         "10": "https://rpc.brovider.xyz/10"
-      }
+      },
+      "showQrModal": true
     },
     "icon": "ipfs://QmZRVqHpgRemw13aoovP2EaQdVtjzXRaQGQZsCLXWaNn9x"
   },

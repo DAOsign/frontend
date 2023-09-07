@@ -4,6 +4,7 @@ import "@uiw/react-md-editor/markdown-editor.css";
 import "@uiw/react-markdown-preview/markdown.css";
 import iconsObj from "../../../assets/icons";
 import Icon from "../../icon";
+import Preview from "../../IconComponent/Preview";
 import { Text, Button, Flex, Box, ButtonProps, Spinner } from "theme-ui";
 import { useCreateAgreement } from "../../../hooks/useCreateAgreement";
 import { useEditAgreement } from "../../../hooks/useEditAgreement";
@@ -16,6 +17,7 @@ import styles, {
   btnBack,
   icon,
 } from "./styles";
+import ArrowLeftPink from "../../ArrowLeftPink";
 
 const MDEditor = dynamic(() => import("@uiw/react-md-editor"), {
   ssr: false,
@@ -104,13 +106,13 @@ const TextEditor = ({
             {...buttonPropsByStatus(state, "preview")}
           >
             <Box sx={icon}>
-              <Icon src={iconsObj.preview} />
+              <Preview />
             </Box>
             Preview
           </Button>
           <Button sx={btnBack} className="backBtn" onClick={handleChooseAnotherMethod}>
-            <Box sx={{ width: "20px" }}>
-              <Icon style={{ display: "block" }} src={iconsObj.arrowLeftPink} />
+            <Box sx={{ width: "20px", marginTop: "5px" }}>
+              <ArrowLeftPink />
             </Box>
             <Text sx={{ display: "block" }}>Choose another method</Text>
           </Button>

@@ -12,7 +12,7 @@ import { Lock } from "../lib/lock";
 import options, { ConnectorType } from "../lib/snapshot/options";
 import { getInjected } from "../lib/lock/utils";
 import { MetaMaskInpageProvider } from "@metamask/providers";
-import type WalletConnectProvider from "@walletconnect/web3-provider";
+import type WalletConnectProvider from "@walletconnect/ethereum-provider";
 import type { CoinbaseWalletProvider } from "@coinbase/wallet-sdk/dist/provider/CoinbaseWalletProvider";
 
 type ProviderType = WalletConnectProvider | any;
@@ -49,7 +49,7 @@ const LockProvider = (props?: Partial<ProviderProps<LockContextInterface>>) => {
 
   async function login(connector: ConnectorType = "injected"): Promise<MutableRefObject<any>> {
     const lockConnector = lockInstanceRef.current.getConnector(connector);
-    console.log({ lockConnector });
+    console.error("lockConnector, login", { lockConnector });
 
     const localProvider = (await lockConnector.connect()) as null | any;
 

@@ -50,8 +50,6 @@ const iconMenu = {
   width: "42px",
   height: "42px",
   borderRadius: "50%",
-  backgroundColor: "#F7F7FB",
-  background: "#F7F7FB",
   textAlign: "center",
   padding: 0,
   cursor: "poiner",
