@@ -11,7 +11,6 @@ import Info from "../Profile/Info";
 
 export default function UserInFoProfile({ address }: any) {
   const { width } = useWindowDimensions();
-  const { account } = useWeb3();
 
   return (
     <Flex sx={container}>
@@ -20,7 +19,7 @@ export default function UserInFoProfile({ address }: any) {
         <Flex sx={profile}>
           <Text sx={nameTitle}>Anonymous</Text>
           <Flex sx={userContainer}>
-            <WalletAddress address={account || ""} />
+            <WalletAddress address={address || ""} />
           </Flex>
           {/* <SocialLink /> */}
         </Flex>

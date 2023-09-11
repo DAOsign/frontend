@@ -6,14 +6,15 @@ import Agreements from "./Agreements";
 import { profileContainer } from "./styles";
 import { Container } from "theme-ui";
 import BadgePopup from "./BadgePopup.tsx/index";
+import { useRouter } from "next/router";
 
 export default function PublicProfile() {
   const [visible, setVisible] = useState(false);
-  const { account } = useWeb3();
+  const { query } = useRouter();
 
   return (
     <Container sx={profileContainer}>
-      <UserInFoProfile address={account || ""} />
+      <UserInFoProfile address={query.address || ""} />
       <Verification setVisible={setVisible} />
       <Agreements />
       {visible && <BadgePopup setVisible={setVisible} />}

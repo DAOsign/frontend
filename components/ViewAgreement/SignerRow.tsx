@@ -74,7 +74,7 @@ export const SignerRow = ({ signer, signProof, viewProof }: Props) => {
             onClick={() => handleCopyAddress(address)}
           >
             <Tooltip top="-45px" left="-115px" title={address}>
-              <Box sx={{ cursor: "pointer" }}>{formatAddress(address)}</Box>
+              <Box sx={{ cursor: "pointer", color: "#000" }}>{formatAddress(address)}</Box>
             </Tooltip>
             <Box sx={informationRowIcon}>
               <CopyIcon />

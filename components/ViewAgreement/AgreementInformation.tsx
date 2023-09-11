@@ -204,7 +204,11 @@ export const AgreementInformation = ({
           left="-195px"
           tooltipValue={authorWalletAddress}
           value={
-            <Box className="signature_icon" sx={{ cursor: "pointer" }} onClick={handleCopyAddress}>
+            <Box
+              className="signature_icon"
+              sx={{ cursor: "pointer", color: "#000" }}
+              onClick={handleCopyAddress}
+            >
               {formatAddress(authorWalletAddress!)} <CopyIcon />
             </Box>
           }
