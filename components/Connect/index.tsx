@@ -67,7 +67,7 @@ export default function Connect() {
           mb: loadingConnect ? "226px" : "0",
         }}
       >
-        <Heading sx={title}>Connect a Wallet!!!</Heading>
+        <Heading sx={title}>Connect a Wallet</Heading>
         {loadingConnect ? (
           <>
             <Lottie
@@ -88,7 +88,7 @@ export default function Connect() {
             </Button>
 
             <Button type="button" variant="primary" onClick={() => connect("walletconnect")}>
-              Wallet Connect!
+              Wallet Connect
             </Button>
             <Button
               onClick={() => connect("walletlink")}
