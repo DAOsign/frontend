@@ -459,7 +459,7 @@ export default function NavPanel({ setLoading, page }: { setLoading: any; page: 
             sx={{
               ...stepNumber,
               backgroundColor: step > 1 ? "#CA5CF2" : "#EDEDF3",
-              "&:hover": { backgroundColor: step > 1 ? "#AE4FD0" : "#CA5CF2" },
+              "&:hover": { backgroundColor: step >= 2 ? "#AE4FD0" : "#EDEDF3" },
             }}
           >
             {(step > 2 && page === "create") || page === "edit" ? (
