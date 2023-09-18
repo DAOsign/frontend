@@ -54,9 +54,15 @@ export const Verification = ({ setVisible }: any) => {
           </Tooltip>
         </Flex>
         <Button
-          sx={{ ...btn, ...getBorder(!isBadges), paddingLeft: "16px", cursor: "pointer" }}
+          sx={{
+            ...btn,
+            ...getBorder(!isBadges),
+            paddingLeft: "16px",
+            cursor: "pointer",
+            width: "fit-content",
+          }}
           // onClick={() => setIsBadges(false)}
-          onClick={() => notifComingSoon("References is coming soon")}
+          onClick={() => notifComingSoon("References are coming soon")}
           // disabled={true}
         >
           References
