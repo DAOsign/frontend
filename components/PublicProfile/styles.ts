@@ -192,6 +192,7 @@ const noContent = {
 
 const container = {
   width: "100%",
+  position: "relative",
   "@media screen and (max-width: 719px)": {
     flexDirection: "column",
     alignItems: "center",
@@ -222,6 +223,14 @@ const labelSigners = {
   mr: "5px",
   maxWidth: "unset",
   minHeight: "25px",
+} as ThemeUIStyleObject;
+
+export const backProfile = {
+  "@media screen and (max-width: 719px)": {
+    position: "absolute",
+    top: 0,
+    left: 0,
+  },
 } as ThemeUIStyleObject;
 
 export {
