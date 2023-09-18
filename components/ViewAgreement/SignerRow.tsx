@@ -53,18 +53,19 @@ export const SignerRow = ({ signer, signProof, viewProof }: Props) => {
   return (
     <tr>
       <td>
-        <Flex sx={tableUserNameCell}>
-          <Box sx={userPicture}>
-            {address ? (
-              <Identicon account={address} size={20} />
-            ) : (
-              <Icon src={iconsObj.defaultUserPicture} />
-            )}
-          </Box>
-          <NextLink href={`/user/${address}`}>
+        <NextLink href={`/user/${address}`}>
+          <Flex sx={tableUserNameCell}>
+            <Box sx={{ ...userPicture, cursor: "pointer" }}>
+              {address ? (
+                <Identicon account={address} size={20} />
+              ) : (
+                <Icon src={iconsObj.defaultUserPicture} />
+              )}
+            </Box>
+
             <Box sx={{ ...usernameText, cursor: "pointer" }}>{signerName}</Box>
-          </NextLink>
-        </Flex>
+          </Flex>
+        </NextLink>
       </td>
       <td>
         {address ? (
