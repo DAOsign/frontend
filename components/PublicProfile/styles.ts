@@ -206,6 +206,7 @@ const grid = {
   "@media screen and (max-width: 719px)": {
     gridTemplateColumns: "repeat(3, 100px)",
     gap: "21px",
+    display: "none",
   },
 } as ThemeUIStyleObject;
 

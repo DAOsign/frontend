@@ -59,7 +59,7 @@ export const Verification = ({ setVisible }: any) => {
             ...getBorder(!isBadges),
             paddingLeft: "16px",
             cursor: "pointer",
-            width: "fit-content",
+            width: "fit-content  !important",
           }}
           // onClick={() => setIsBadges(false)}
           onClick={() => notifComingSoon("References are coming soon")}
