@@ -41,9 +41,15 @@ export default function Score() {
           <Image src={iconsObj.iicon} width={16} height={16} alt="socialIcon" />
         </Tooltip>
         <Button
-          sx={{ ...btn, ...getBorder(!isBadges), paddingLeft: "16px", cursor: "pointer" }}
+          sx={{
+            ...btn,
+            ...getBorder(!isBadges),
+            paddingLeft: "16px",
+            cursor: "pointer",
+            width: "fit-content !important",
+          }}
           // onClick={() => setIsBadges(false)}
-          onClick={() => notifComingSoon("References is coming soon")}
+          onClick={() => notifComingSoon("References are coming soon")}
         >
           References
         </Button>

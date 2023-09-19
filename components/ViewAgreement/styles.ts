@@ -507,8 +507,7 @@ const showMoreLabel = {
   fontSize: "16px",
   lineHeight: "160%",
   cursor: "pointer",
-  opacity: 0.7,
-  transition: "opacity 0.3s",
+  transition: "color 0.3s",
   "&:hover": {
     color: "#AE4FD0",
   },

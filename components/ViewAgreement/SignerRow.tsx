@@ -53,18 +53,19 @@ export const SignerRow = ({ signer, signProof, viewProof }: Props) => {
   return (
     <tr>
       <td>
-        <Flex sx={tableUserNameCell}>
-          <Box sx={userPicture}>
-            {address ? (
-              <Identicon account={address} size={20} />
-            ) : (
-              <Icon src={iconsObj.defaultUserPicture} />
-            )}
-          </Box>
-          <NextLink href={`/user/${address}`}>
+        <NextLink href={`/user/${address}`}>
+          <Flex sx={tableUserNameCell}>
+            <Box sx={{ ...userPicture, cursor: "pointer" }}>
+              {address ? (
+                <Identicon account={address} size={20} />
+              ) : (
+                <Icon src={iconsObj.defaultUserPicture} />
+              )}
+            </Box>
+
             <Box sx={{ ...usernameText, cursor: "pointer" }}>{signerName}</Box>
-          </NextLink>
-        </Flex>
+          </Flex>
+        </NextLink>
       </td>
       <td>
         {address ? (
@@ -74,7 +75,7 @@ export const SignerRow = ({ signer, signProof, viewProof }: Props) => {
             onClick={() => handleCopyAddress(address)}
           >
             <Tooltip top="-45px" left="-115px" title={address}>
-              <Box sx={{ cursor: "pointer" }}>{formatAddress(address)}</Box>
+              <Box sx={{ cursor: "pointer", color: "#000" }}>{formatAddress(address)}</Box>
             </Tooltip>
             <Box sx={informationRowIcon}>
               <CopyIcon />

@@ -366,7 +366,7 @@ export default function StepTwo({ page }: { page: string }) {
               </Tooltip>
             </Flex>
           </Flex>
-          <Box sx={{ display: "flex", flexDirection: "column", gap: "12px" }}>
+          <Box sx={{ display: "flex", flexDirection: "column", gap: "12px", marginBottom: "40px" }}>
             {verifications.map((verification, index) => (
               <VerificationCard
                 key={verification.title}

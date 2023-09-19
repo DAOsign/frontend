@@ -73,7 +73,7 @@ export default function StepThree({ page, animateContainer, loading }: Props) {
           )}
           <FieldErrorMessage error={values?.errors.agreementPrivacy} />
           <AgreementLocationRadioButtons page={page} />
-          <Flex sx={{ ...switchContainer, width: "fit-content", mt: "45px" }}>
+          <Flex sx={{ ...switchContainer, width: "fit-content", mt: "45px", mb: "40px" }}>
             <Label htmlFor="storeBlockchain" sx={labelSwitch}>
               Store Proofs on Blockchain
             </Label>
