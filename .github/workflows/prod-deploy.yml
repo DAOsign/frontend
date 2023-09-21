@@ -1,8 +1,8 @@
-name: Build & Push UAT Release
+name: Build & Push Production Release
 
 on:
   push:
-    tags: ["uat-v*.*.*"]
+    tags: ["v*.*.*"]
 
 env:
   DO_CONTAINER_REGISTRY: "daosign-container-registry"
@@ -20,9 +20,9 @@ jobs:
         run: echo "tag=$(echo ${GITHUB_REF#refs/tags/})" >> $GITHUB_OUTPUT
       - name: Build the Docker image
         run: |
-          docker build -t uat-frontend:${{steps.vars.outputs.tag}} \
-            --build-arg NEXT_PUBLIC_REST_ENDPOINT="https://api-uat.daosign.org" \
-            --build-arg NEXT_PUBLIC_GRAPHQL_ENDPOINT="https://api-uat.daosign.org/graphql" \
+          docker build -t prod-frontend:${{steps.vars.outputs.tag}} \
+            --build-arg NEXT_PUBLIC_REST_ENDPOINT="https://api.daosign.org" \
+            --build-arg NEXT_PUBLIC_GRAPHQL_ENDPOINT="https://api.daosign.org/graphql" \
             --build-arg NEXT_PUBLIC_PINATA_GATEWAY="https://daosign.mypinata.cloud" \
             .
       - name: Install doctl
@@ -33,18 +33,18 @@ jobs:
         run: doctl registry login --expiry-seconds 600
       - name: Tag image
         run: |
-          docker tag uat-frontend:${{ steps.vars.outputs.tag }} \
-          registry.digitalocean.com/${{ env.DO_CONTAINER_REGISTRY }}/uat-frontend:${{ steps.vars.outputs.tag }}
+          docker tag prod-frontend:${{ steps.vars.outputs.tag }} \
+          registry.digitalocean.com/${{ env.DO_CONTAINER_REGISTRY }}/prod-frontend:${{ steps.vars.outputs.tag }}
       - name: Push to DigitalOcean Container Registry
         run: |
-          docker push registry.digitalocean.com/${{ env.DO_CONTAINER_REGISTRY }}/uat-frontend:${{ steps.vars.outputs.tag }}
+          docker push registry.digitalocean.com/${{ env.DO_CONTAINER_REGISTRY }}/prod-frontend:${{ steps.vars.outputs.tag }}
   deploy:
     name: Run helm upgrade
     runs-on: ubuntu-latest
     needs: [build]
     env:
       # Ingress
-      HOST: "app-uat.daosign.org"
+      HOST: "app.daosign.org"
     steps:
       - uses: actions/checkout@v3
       - name: Create & View .env.yaml file
@@ -62,14 +62,13 @@ jobs:
         with:
           token: ${{ secrets.DO_ACCESS_TOKEN }}
       - name: Save DigitalOcean kubeconfig
-        run: doctl kubernetes cluster kubeconfig save daosign-kubernetes-cluster-dev
+        run: doctl kubernetes cluster kubeconfig save daosign-kubernetes-cluster-prod
       - name: Helm deploy the latest image
         env:
-          NAMESPACE: "uat"
           HELM_VERSION: 1.3.0
         run: |
           doctl registry login --expiry-seconds 600 && \
-          kubectl get pods -n ${{ env.NAMESPACE }} && helm ls -n ${{ env.NAMESPACE }} && \
-          helm upgrade helm-frontend -i -n ${{ env.NAMESPACE }} --atomic -f .env.yaml oci://registry.digitalocean.com/${{ env.DO_CONTAINER_REGISTRY }}/helm-frontend  --version $HELM_VERSION \
-          --set=frontend.image.repository=registry.digitalocean.com/${{ env.DO_CONTAINER_REGISTRY }}/uat-frontend,frontend.image.tag=${{needs.build.outputs.image_tag}} && \
-          helm ls -n ${{ env.NAMESPACE }} && kubectl get pods -n ${{ env.NAMESPACE }}
+          kubectl get pods && helm ls && \
+          helm upgrade helm-frontend -i --atomic -f .env.yaml oci://registry.digitalocean.com/${{ env.DO_CONTAINER_REGISTRY }}/helm-frontend  --version $HELM_VERSION \
+          --set=frontend.image.repository=registry.digitalocean.com/${{ env.DO_CONTAINER_REGISTRY }}/prod-frontend,frontend.image.tag=${{needs.build.outputs.image_tag}} && \
+          helm ls && kubectl get pods
