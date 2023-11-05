@@ -1,7 +1,12 @@
 import React from "react";
 import { Box, Container, Flex, Text } from "theme-ui";
 import Tooltip from "../Tooltip";
-import { informationRow, informationRowName, informationRowValue } from "./styles";
+import {
+  informationRow,
+  informationRowName,
+  informationRowValue,
+  informationRowValueText,
+} from "./styles";
 
 interface Props {
   name: string;
@@ -11,22 +16,27 @@ interface Props {
   className?: string;
 }
 
-export const InformationRow = ({ name, value, tooltipValue, left, className }: Props) => {
+export const InformationRow = ({
+  name,
+  value,
+  tooltipValue,
+  left = "-195px",
+  className,
+}: Props) => {
   return (
     <Container>
       <Flex sx={informationRow}>
         <Box sx={informationRowName}>{name}</Box>
         <Flex className="rowInformation" sx={informationRowValue}>
-          {left && tooltipValue ? (
+          {tooltipValue ? (
             <Tooltip
               className={className}
               title={tooltipValue}
-              height={undefined}
               minWidth="300px"
               left={left}
               top="-46px"
             >
-              <Text sx={{ fontSize: "16px" }}>{value}</Text>
+              {value}
             </Tooltip>
           ) : (
             value

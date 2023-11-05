@@ -304,6 +304,11 @@ const informationRowValue = {
   alignItems: "center",
 } as ThemeUIStyleObject;
 
+const informationRowValueText = {
+  color: "#000",
+  fontSize: "16px",
+} as ThemeUIStyleObject;
+
 const informationRowIcon = {
   marginLeft: "4px",
   width: "14px",
@@ -736,6 +741,7 @@ export {
   informationRow,
   informationRowName,
   informationRowValue,
+  informationRowValueText,
   needSigningIcon,
   informationRowIcon,
   contentCard,
