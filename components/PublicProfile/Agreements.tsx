@@ -44,14 +44,12 @@ export default function Agreements() {
   }, []);
 
   const changeFilterOptions = () => {
-    setTimeout(() => {
-      setFilterOptions({
-        ...filterOptions,
-        status: updateStatus(filterOptions.status, 4),
-        permission: updateStatus(filterOptions.permission, 5),
-      });
-      setLoadingFilter(false);
-    }, 2000);
+    setFilterOptions({
+      ...filterOptions,
+      status: updateStatus(filterOptions.status, 4),
+      permission: updateStatus(filterOptions.permission, 5),
+    });
+    setLoadingFilter(false);
   };
 
   return (
