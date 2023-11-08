@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { Flex, Text, Box, Container } from "theme-ui";
 import { noContentContainer, noContent, title, agreementSection } from "./styles";
 import useInfiniteScroll from "react-infinite-scroll-hook";
@@ -8,6 +8,7 @@ import Lottie from "lottie-react";
 import loader from "../../img/json/loader.json";
 import Icon from "../icon/index";
 import iconsObj from "../../assets/icons";
+import { Agreement } from "../../types";
 
 export default function Agreements() {
   const {
@@ -18,7 +19,7 @@ export default function Agreements() {
     setFilterOptions,
     loadMore,
     loading,
-    data: agreements,
+    data,
   } = useLoadItems();
 
   const [infiniteRef] = useInfiniteScroll({
@@ -29,6 +30,8 @@ export default function Agreements() {
   });
 
   const [loadingFilter, setLoadingFilter] = useState(true);
+  const [agreements, setAgreements] = useState<Agreement[]>([]);
+  const loadingCountRef = useRef(0);
 
   const updateStatus = (arr: any, id: number) =>
     arr.map((el: any) => {
@@ -43,6 +46,17 @@ export default function Agreements() {
     changeFilterOptions();
   }, []);
 
+  useEffect(() => {
+    if (loading) {
+      // Якщо відбувається завантаження, інкрементуємо лічильник
+      loadingCountRef.current++;
+    } else if (loadingCountRef.current > 1) {
+      // Якщо завантаження закінчилось і це не перше завантаження
+      setAgreements(data);
+      setLoadingFilter(false);
+    }
+  }, [loading, data]);
+
   const changeFilterOptions = () => {
     setTimeout(() => {
       setFilterOptions({
@@ -50,7 +64,6 @@ export default function Agreements() {
         status: updateStatus(filterOptions.status, 4),
         permission: updateStatus(filterOptions.permission, 5),
       });
-      setLoadingFilter(false);
     }, 2000);
   };
 
