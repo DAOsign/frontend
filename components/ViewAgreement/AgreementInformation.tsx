@@ -42,6 +42,7 @@ import { toAgreementWithParticipants } from "../../utils/typeUtils";
 import SignatureIcon from "../icon/editable/SignatureIcon";
 import CopyIcon from "../CopyIcon";
 import Icon from "../icon";
+import { InformationRowValue } from "./InformationRowValue";
 
 const formatAgreementPrivacy = (agreementPrivacy: string | undefined) => {
   if (!agreementPrivacy) return "";
@@ -169,31 +170,36 @@ export const AgreementInformation = ({
       <Flex sx={briefInformationData}>
         <InformationRow
           name="Creation Date"
-          value={createdAt ? formatAgreementCreationDate(createdAt) : ""}
+          value={
+            <InformationRowValue text={createdAt ? formatAgreementCreationDate(createdAt) : ""} />
+          }
         />
         <InformationRow
           name="Signed Date"
           value={
-            <Box>
-              {agreement?.agreementProof?.signedAt
-                ? formatAgreementCreationDate(agreement?.agreementProof?.signedAt)
-                : "-"}
-            </Box>
+            <InformationRowValue
+              text={
+                agreement?.agreementProof?.signedAt
+                  ? formatAgreementCreationDate(agreement?.agreementProof?.signedAt)
+                  : "-"
+              }
+            />
           }
         />
         {agreement?.snapshotProposalUrl && (
           <InformationRow
             className="proposalId"
-            left="-329px"
             tooltipValue={extractProposalId(agreement.snapshotProposalUrl)!}
             value={
               <Link href={agreement?.snapshotProposalUrl} target="_blank">
-                <Flex>
-                  <Text>{formatAddress(extractProposalId(agreement.snapshotProposalUrl)!)}</Text>
-                  <Box sx={{ width: "16px", height: "16px", ml: "4px" }}>
-                    <Icon src={iconsObj.lightning} />
-                  </Box>
-                </Flex>
+                <InformationRowValue
+                  text={"ddd"}
+                  icon={
+                    <Box sx={{ width: "16px", height: "16px" }}>
+                      <Icon src={iconsObj.lightning} />
+                    </Box>
+                  }
+                />
               </Link>
             }
             name="Snapshot proposal"
@@ -201,16 +207,13 @@ export const AgreementInformation = ({
         )}
         <InformationRow
           name="Creator"
-          left="-195px"
           tooltipValue={authorWalletAddress}
           value={
-            <Box
-              className="signature_icon"
-              sx={{ cursor: "pointer", color: "#000" }}
+            <InformationRowValue
+              text={formatAddress(authorWalletAddress!)}
               onClick={handleCopyAddress}
-            >
-              {formatAddress(authorWalletAddress!)} <CopyIcon />
-            </Box>
+              icon={<CopyIcon />}
+            />
           }
         />
         <InformationRow
@@ -218,13 +221,11 @@ export const AgreementInformation = ({
           tooltipValue={agreement?.agreementProof?.cid}
           value={
             agreement.agreementProof ? (
-              <Box
+              <InformationRowValue
+                text={formatAddress(agreement.agreementProof!.cid)}
                 onClick={() => (agreement.agreementProof ? onShowProof(AGREEMENT_PROOF) : {})}
-                sx={{ cursor: "pointer", display: "flex", alignItems: "center", gap: "4px" }}
-                className="signature_icon"
-              >
-                {formatAddress(agreement.agreementProof!.cid)} <SignatureIcon color="#CA5CF2" />
-              </Box>
+                icon={<SignatureIcon color="#CA5CF2" />}
+              />
             ) : (
               "-"
             )
@@ -236,24 +237,31 @@ export const AgreementInformation = ({
           tooltipValue={agreement?.agreementFileProof?.cid || undefined}
           value={
             agreement.agreementFileProof ? (
-              <Box
+              <InformationRowValue
+                text={formatAddress(agreement.agreementFileProof!.cid!)}
                 onClick={() => (agreement.agreementFileProof ? onShowProof(IDENTITY_PROOF) : {})}
-                sx={{ cursor: "pointer", display: "flex", alignItems: "center", gap: "4px" }}
-                className="signature_icon"
-              >
-                {formatAddress(agreement.agreementFileProof!.cid!)}{" "}
-                <SignatureIcon color="#CA5CF2" />
-              </Box>
+                icon={<SignatureIcon color="#CA5CF2" />}
+              />
             ) : (
               "-"
             )
           }
         />
-        <InformationRow name="Authority Proof" value="<Not required>" />
-        <InformationRow name="Location" value={agreementLocation || ""} />
+        <InformationRow
+          name="Authority Proof"
+          value={<InformationRowValue text="<Not required>" />}
+        />
+        <InformationRow
+          name="Location"
+          value={<InformationRowValue text={agreementLocation || ""} />}
+        />
         <InformationRow
           name="Access"
-          value={agreementPrivacy ? formatAgreementPrivacy(agreementPrivacy) : ""}
+          value={
+            <InformationRowValue
+              text={agreementPrivacy ? formatAgreementPrivacy(agreementPrivacy) : ""}
+            />
+          }
         />
       </Flex>
       <Flex sx={verificationsContainer}>
