@@ -87,9 +87,16 @@ const defaultState: CreationState = {
   proposal: initialStateProposal,
 };
 
-const base64ToFile = (base64String, filename) => {
+const base64ToFile = (base64String: string, filename: string): File | null => {
   const arr = base64String.split(",");
-  const mime = arr[0].match(/:(.*?);/)[1];
+  const match = arr[0].match(/:(.*?);/);
+
+  if (match === null) {
+    console.error("Invalid base64 string");
+    return null;
+  }
+
+  const mime = match[1];
   const bstr = atob(arr[1]);
   let n = bstr.length;
   const u8arr = new Uint8Array(n);
