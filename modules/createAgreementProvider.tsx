@@ -128,11 +128,16 @@ const saveDraft = async (state: CreationState) => {
     if (state.file && state.file instanceof File) {
       const reader = new FileReader();
       reader.onload = function (e) {
+        if (!e.target) {
+          console.error("FileReader event target is null");
+          return;
+        }
+
         const fileBase64 = e.target.result;
         const newState = {
           ...state,
           file: {
-            name: state.file.name,
+            name: state.file?.name,
             data: fileBase64,
           },
         };
