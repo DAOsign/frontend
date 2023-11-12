@@ -246,13 +246,13 @@ export default function NavPanel({ setLoading, page }: { setLoading: any; page: 
   };
 
   const preuploadFile = async () => {
-    if (step === 3) return;
     try {
       let uploadedFileData: { filePath?: string; agreementHash?: string; error?: any } = {};
       if (
         values.agreementMethod === METHOD_UPLOAD &&
         values.file &&
-        (!values.filePath || !values.agreementHash)
+        ((values.agreementLocation === LOCATION_CLOUD && !values.filePath) ||
+          (values.agreementLocation === LOCATION_PUBLIC_IPFS && values.filePath))
       ) {
         uploadedFileData = await uploadNewFile(values.file);
         if (!uploadedFileData || uploadedFileData.error) {
@@ -351,7 +351,7 @@ export default function NavPanel({ setLoading, page }: { setLoading: any; page: 
           const areFieldsValid = validateFields({ ...values, ...uploadedFileData });
           if (areFieldsValid) {
             if (isFinishButton) {
-              await handleCreateAgreement();
+              await handleSaveDraft();
             } else {
               handleNextStep();
             }

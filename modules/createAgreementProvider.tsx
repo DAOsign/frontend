@@ -87,19 +87,54 @@ const defaultState: CreationState = {
   proposal: initialStateProposal,
 };
 
+const base64ToFile = (base64String, filename) => {
+  const arr = base64String.split(",");
+  const mime = arr[0].match(/:(.*?);/)[1];
+  const bstr = atob(arr[1]);
+  let n = bstr.length;
+  const u8arr = new Uint8Array(n);
+
+  while (n--) {
+    u8arr[n] = bstr.charCodeAt(n);
+  }
+
+  return new File([u8arr], filename, { type: mime });
+};
+
 const recoverDraft = (): CreationState => {
   if (typeof window !== "undefined") {
     const draft = localStorage.getItem(DRAFT_STORAGE_KEY);
     if (draft) {
-      return { ...defaultState, ...JSON.parse(draft) };
+      const parsedDraft = JSON.parse(draft);
+      if (parsedDraft.file && parsedDraft.file.data) {
+        const fileData = base64ToFile(parsedDraft.file.data, parsedDraft.file.name);
+        parsedDraft.file = fileData;
+      }
+      return { ...defaultState, ...parsedDraft };
     }
   }
   return defaultState;
 };
 
-const saveDraft = (state: CreationState) => {
+const saveDraft = async (state: CreationState) => {
   if (typeof window !== "undefined") {
-    localStorage.setItem(DRAFT_STORAGE_KEY, JSON.stringify(state));
+    if (state.file && state.file instanceof File) {
+      const reader = new FileReader();
+      reader.onload = function (e) {
+        const fileBase64 = e.target.result;
+        const newState = {
+          ...state,
+          file: {
+            name: state.file.name,
+            data: fileBase64,
+          },
+        };
+        localStorage.setItem(DRAFT_STORAGE_KEY, JSON.stringify(newState));
+      };
+      reader.readAsDataURL(state.file);
+    } else {
+      localStorage.setItem(DRAFT_STORAGE_KEY, JSON.stringify(state));
+    }
   }
 };
 
@@ -125,20 +160,8 @@ const CreateAgreementProvider = (props?: Partial<ProviderProps<CreateAgrementCon
       const newState: CreationState = {
         ...state,
         [key]: value,
-        agreementLocation:
-          key === "agreementPrivacy"
-            ? LOCATION_CLOUD
-            : key === "agreementLocation"
-            ? value
-            : state.agreementLocation,
-        agreementHash:
-          key === "agreementLocation" || key === "agreementMethod"
-            ? ""
-            : key === "agreementHash"
-            ? value
-            : state.agreementHash,
       };
-      saveDraft({ ...newState, file: undefined, errors: {} });
+      saveDraft({ ...newState, errors: {} });
       return newState;
     });
   };
