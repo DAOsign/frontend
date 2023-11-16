@@ -44,6 +44,7 @@ import { uploadFile, uploadToIpfs } from "../../modules/rest";
 import { notifError } from "../../utils/notification";
 import ModalConfirmAgreementDeletion from "../ModalConfirmAgreementDeletion/ModalConfirmAgreementDeletion";
 import { getToken } from "../../utils/token";
+import useRestoreFile from "../../hooks/useRestoreFile";
 
 const FILE_UPLOAD_ERROR_DEFAULT_MESSAGE = "Failed to upload file";
 
@@ -61,6 +62,7 @@ export default function NavPanel({ setLoading, page }: { setLoading: any; page: 
   const { push, query } = useRouter();
   const { account } = useWeb3();
   const step = query?.step ? Number(query.step) : 1;
+  const { restoreFile } = useRestoreFile();
 
   const [isLoadingNextStep, setIsLoadingNextStep] = useState<boolean>(false);
   const [isAuthorNotAddedPopupVisible, setIsAuthorNotAddedPopupVisible] = useState<boolean>(false);
@@ -246,7 +248,10 @@ export default function NavPanel({ setLoading, page }: { setLoading: any; page: 
   };
 
   const preuploadFile = async () => {
-    if (step === 3) return;
+    if (step === 3) {
+      const res = await restoreFile(values, changeValue);
+      return res && (await uploadNewFile(res));
+    }
     try {
       let uploadedFileData: { filePath?: string; agreementHash?: string; error?: any } = {};
       if (
@@ -351,7 +356,7 @@ export default function NavPanel({ setLoading, page }: { setLoading: any; page: 
           const areFieldsValid = validateFields({ ...values, ...uploadedFileData });
           if (areFieldsValid) {
             if (isFinishButton) {
-              await handleCreateAgreement();
+              await handleSaveDraft();
             } else {
               handleNextStep();
             }

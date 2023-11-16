@@ -7,6 +7,7 @@ import { restoreCloudFile, restoreIpfsFile } from "../../../../../modules/rest";
 import { LOCATION_CLOUD, LOCATION_PUBLIC_IPFS } from "../../../../../types";
 import { withFade } from "../../..";
 import { UploadScreen, FileLoading } from "./Parts";
+import useRestoreFile from "../../../../../hooks/useRestoreFile";
 
 export interface FileState {
   file: File | undefined;
@@ -17,48 +18,14 @@ export default function Upload({ page }: { page: string }) {
   const create = useCreateAgreement();
   const edit = useEditAgreement();
   const { values, changeValue } = page === "create" ? create : edit;
-  const [fileLoading, setFileLoading] = useState(false);
-
-  const restoreFileStarted = useRef(false);
+  const { restoreFile, fileLoading } = useRestoreFile();
 
   //Restore file
   useEffect(() => {
     if (!values.file && (values.filePath || values.agreementHash)) {
-      if (restoreFileStarted.current) return;
-      restoreFileStarted.current = true;
-      setFileLoading(true);
-      restoreFile().then(res => {
-        restoreFileStarted.current = false;
-        setFileLoading(false);
-      });
+      restoreFile(values, changeValue);
     }
-  }, []);
-
-  const restoreFile = async () => {
-    if (!values.file && (values.filePath || values.agreementHash)) {
-      if (values.agreementLocation === LOCATION_CLOUD && values.filePath) {
-        return restoreCloudFile(values.filePath)
-          .then(file => changeValue("file", file))
-          .then(console.error);
-      }
-
-      if (values.agreementLocation === LOCATION_PUBLIC_IPFS && values.agreementHash) {
-        return restoreIpfsFile(values.agreementHash)
-          .then(file => changeValue("file", file))
-          .catch(e => {
-            console.error(e);
-          });
-      }
-
-      if (values.agreementLocation === LOCATION_PUBLIC_IPFS && values.filePath) {
-        return restoreIpfsFile(values.filePath)
-          .then(file => changeValue("file", file))
-          .catch(e => {
-            console.error(e);
-          });
-      }
-    }
-  };
+  }, [values, changeValue, restoreFile]);
 
   return (
     <form id="upload-container">
