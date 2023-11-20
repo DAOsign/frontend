@@ -139,6 +139,7 @@ export default function NavPanel({ setLoading, page }: { setLoading: any; page: 
     file: File
   ): Promise<{ filePath?: string; agreementHash?: string; error?: any }> => {
     let calculatedIpfsHash: any;
+    const isTemp = step === 3;
     try {
       const hash = await calculateIpfsHash(file);
       if (hash) {
@@ -156,12 +157,13 @@ export default function NavPanel({ setLoading, page }: { setLoading: any; page: 
       if (!uploadResult.IpfsHash) {
         return { error: uploadResult };
       }
+      isTemp && changeValue("filePath", "");
       return { agreementHash: calculatedIpfsHash };
     }
 
     if (values.agreementLocation === LOCATION_CLOUD) {
       try {
-        const res = await uploadFile(token!, file);
+        const res = await uploadFile(token!, file, isTemp);
         if (res && "fileLink" in res) {
           changeValue("filePath", res.fileLink);
           return { filePath: res.fileLink, agreementHash: calculatedIpfsHash };

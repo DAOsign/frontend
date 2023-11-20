@@ -4,13 +4,14 @@ import { getToken } from "../../utils/token";
 
 export const uploadFile = async (
   authToken: string,
-  file: File
+  file: File,
+  isTemp: boolean
 ): Promise<{ fileLink: string } | AxiosError> => {
   const formData = new FormData();
   formData.append("data", file);
   const res = await axios<AxiosResponse<{ fileLink: string }>>({
     method: "post",
-    url: `${process.env.NEXT_PUBLIC_REST_ENDPOINT}/files/upload`,
+    url: `${process.env.NEXT_PUBLIC_REST_ENDPOINT}/files/upload?isTemp=${isTemp}`,
     data: formData,
     headers: {
       "Content-Type": "multipart/form-data",
