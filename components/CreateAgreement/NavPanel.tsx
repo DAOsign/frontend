@@ -139,7 +139,7 @@ export default function NavPanel({ setLoading, page }: { setLoading: any; page: 
     file: File
   ): Promise<{ filePath?: string; agreementHash?: string; error?: any }> => {
     let calculatedIpfsHash: any;
-    const isTemp = step === 3;
+    const isTemp = step !== 3;
     try {
       const hash = await calculateIpfsHash(file);
       if (hash) {
@@ -152,7 +152,7 @@ export default function NavPanel({ setLoading, page }: { setLoading: any; page: 
 
     const token = getToken();
 
-    if (values.agreementLocation === LOCATION_PUBLIC_IPFS) {
+    if (values.agreementLocation === LOCATION_PUBLIC_IPFS && !isTemp) {
       const uploadResult = await uploadToIpfs(token!, file);
       if (!uploadResult.IpfsHash) {
         return { error: uploadResult };
@@ -161,7 +161,7 @@ export default function NavPanel({ setLoading, page }: { setLoading: any; page: 
       return { agreementHash: calculatedIpfsHash };
     }
 
-    if (values.agreementLocation === LOCATION_CLOUD) {
+    if (values.agreementLocation === LOCATION_CLOUD || isTemp) {
       try {
         const res = await uploadFile(token!, file, isTemp);
         if (res && "fileLink" in res) {
@@ -197,7 +197,8 @@ export default function NavPanel({ setLoading, page }: { setLoading: any; page: 
       signers: values.signers.map(s => s.value),
       observers: values.observers.map(o => o.value),
       agreementHash: agreementHash || values.agreementHash,
-      agreementFilePath: filePath || values.filePath,
+      agreementFilePath:
+        values.agreementLocation === LOCATION_PUBLIC_IPFS ? "" : filePath || values.filePath,
       isReadyToSign: false,
     }).then(res => {
       if (res.error) {
