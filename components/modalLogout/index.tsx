@@ -20,11 +20,18 @@ import { useWeb3 } from "../../hooks/useWeb3";
 import { clearToken } from "../../utils/token";
 import { useRouter } from "next/router";
 
-export default function LogOutPopap({ setVisible }: { setVisible: any }) {
+export default function LogOutPopap({
+  setVisible,
+  onLogout,
+}: {
+  setVisible: any;
+  onLogout?: () => void;
+}) {
   const [, logoutRequest] = useMutation(logoutMutation);
   const { push } = useRouter();
   const { logout } = useWeb3();
-  const handleLogout = async () => {
+
+  const defaultLogout = async () => {
     const result = await logoutRequest({});
     if (result.data && !result.error) {
       logout();
@@ -32,6 +39,8 @@ export default function LogOutPopap({ setVisible }: { setVisible: any }) {
     }
     push("/connect");
   };
+
+  const handleLogout = onLogout || defaultLogout;
 
   return (
     <Container sx={bg}>
