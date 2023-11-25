@@ -10,6 +10,11 @@ export const variantsSelect: Variants = {
   enter: { height: "fit-content", overflow: "auto" },
 };
 
+export const variantsCustomSelect: Variants = {
+  hidden: { height: "40px", overflowY: "hidden" },
+  enter: { height: "fit-content", overflowY: "auto" },
+};
+
 export const iconsRotate: Variants = {
   hidden: { rotate: "0deg", x: 0, marginLeft: "auto" },
   enter: { rotate: "-180deg", x: 10, marginLeft: "auto" },

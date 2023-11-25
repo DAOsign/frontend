@@ -9,6 +9,7 @@ import {
   LOCATION_CLOUD,
   METHOD_ENTER,
   METHOD_UPLOAD,
+  NetworkName,
 } from "../types";
 
 export interface CreateAgreementFieldErrors {
@@ -33,6 +34,8 @@ export interface CreationState {
   file: File | undefined;
   errors: CreateAgreementFieldErrors;
   proposal: ProposalState;
+  isStoreProofsOnBlockchain: boolean;
+  storeProofsNetwork: NetworkName | undefined;
 }
 interface CreateAgrementContext {
   values: CreationState;
@@ -55,6 +58,8 @@ const defaultState: CreationState = {
   file: undefined,
   errors: {},
   proposal: initialStateProposal,
+  isStoreProofsOnBlockchain: false,
+  storeProofsNetwork: undefined,
 };
 
 const recoverDraft = (): CreationState => {
