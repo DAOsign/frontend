@@ -46,6 +46,7 @@ import {
 } from "../ModalImportSnapshot/styles";
 import Lottie from "lottie-react";
 import { Portal } from "../Portal/Portal";
+import NetworkIcon from "../NetworkIcon";
 
 const getAgreementStatusLabelStyle = (agreementStatus: string | undefined): ThemeUIStyleObject => {
   switch (agreementStatus) {
@@ -146,6 +147,7 @@ export const AgreementLabels = ({
               {agreementPrivacy}
             </Flex>
           </Tooltip>
+          <NetworkIcon name={"sui"} /> {/*TODO: name is current network from Agreement*/}
           {isWaitingForMySignature ? (
             <Tooltip
               title="Your signature is missing"

@@ -1,3 +1,6 @@
+import React from "react";
+import { StaticImageData } from "next/image";
+
 export const LOCATION_CLOUD = "Cloud";
 export const LOCATION_PUBLIC_IPFS = "IPFS";
 export const LOCATION_PRIVATE_IPFS = "Private IPFS";
@@ -104,3 +107,14 @@ interface AgreementFile {
 }
 
 export type FieldError = string | null | undefined;
+
+export interface SelectOption {
+  title: string;
+  icon?: string | StaticImageData;
+}
+
+export type NetworkName =
+  | "Ethereum Mainnet"
+  | "SUI Mainnet"
+  | "Polkadot Mainnet"
+  | "Ethereum Testnet";

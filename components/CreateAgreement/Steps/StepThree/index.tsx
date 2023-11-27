@@ -2,21 +2,24 @@ import React, { useEffect, useState, useRef } from "react";
 import { Container, Text, Flex, Label, Switch } from "theme-ui";
 import { textLoading } from "../../styles";
 import {
+  NetworkName,
   PRIVACY_PUBLIC_PROOF_ONLY,
   PRIVACY_PUBLIC_PUBLISHED,
   PRIVACY_PUBLIC_WITH_LINK,
   Props,
+  SelectOption,
 } from "../../../../types";
 import ChooseMethod from "../StepOne/ChooseMethod";
 import Lottie from "lottie-react";
 import PublicMethod from "../StepOne/ChoosePublicMethod";
 import { useCreateAgreement } from "../../../../hooks/useCreateAgreement";
-import { notifComingSoon } from "../../../../utils/notification";
 import { labelSwitch, switchBtn, switchContainer } from "../../../ModalImportSnapshot/styles";
 import { useEditAgreement } from "../../../../hooks/useEditAgreement";
 import loader from "../../../../img/json/loader.json";
 import FieldErrorMessage from "../../../Form/FieldErrorMessage";
 import AgreementLocationRadioButtons from "../StepTwo/AgreementLocationButtons";
+import CustomSelect from "../../../CustomSelect";
+import { networkOptions } from "../../../../utils/mockData";
 
 const defaultIsPublic = (agreementPrivacy: string) => {
   return [PRIVACY_PUBLIC_PROOF_ONLY, PRIVACY_PUBLIC_PUBLISHED, PRIVACY_PUBLIC_WITH_LINK].some(
@@ -29,7 +32,6 @@ export default function StepThree({ page, animateContainer, loading }: Props) {
   const edit = useEditAgreement();
   const { values, changeValue } = page === "create" ? create : edit;
   const [isPublic, setIsPublic] = useState(defaultIsPublic(values.agreementPrivacy));
-  const [checked, setChecked] = useState(false);
   const initiated = useRef(false);
 
   useEffect(() => {
@@ -46,6 +48,10 @@ export default function StepThree({ page, animateContainer, loading }: Props) {
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [values]);
+
+  const changeStoreProofsNetwork = (value: string) => {
+    changeValue("storeProofsNetwork", value);
+  };
 
   return (
     <Container>
@@ -79,17 +85,25 @@ export default function StepThree({ page, animateContainer, loading }: Props) {
             </Label>
             <Switch
               onChange={e => {
-                if (e.target.checked) {
-                  notifComingSoon(`Store Proofs on Blockchain is coming soon`);
-                }
+                changeValue("isStoreProofsOnBlockchain", e.target.checked);
+                !e.target.checked && changeValue("storeProofsNetwork", undefined);
               }}
               id="storeBlockchain"
               disabled={false}
               className="switch"
-              checked={checked}
+              checked={values.isStoreProofsOnBlockchain}
               sx={switchBtn}
             />
           </Flex>
+
+          {values.isStoreProofsOnBlockchain && (
+            <CustomSelect
+              value={values.storeProofsNetwork}
+              label={"Network"}
+              options={networkOptions}
+              onChange={changeStoreProofsNetwork}
+            />
+          )}
         </>
       ) : (
         <>

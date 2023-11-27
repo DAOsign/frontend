@@ -28,6 +28,9 @@ import {
 import { formatAgreementCreationDate, formatAgreementStatus } from "../../utils/formats";
 import SignatureIcon from "../icon/editable/SignatureIcon";
 import { greenLabel, yellowLabel } from "../ViewAgreement/styles";
+import Image from "next/image";
+import EtherImg from "../../img/mainnet/small/ethereum.png";
+import NetworkIcon from "../NetworkIcon";
 
 export default function AgreementItem({
   agreementPrivacy,
@@ -86,7 +89,7 @@ export default function AgreementItem({
               </Text>
             </Flex>
             <Flex sx={agreementLabels}>
-              {isWaitingForMySignature ? (
+              {!isWaitingForMySignature ? (
                 <Tooltip
                   className="signatureTooltip"
                   title="Your signature is missing"
@@ -102,6 +105,7 @@ export default function AgreementItem({
                   </Box>
                 </Tooltip>
               ) : null}
+              <NetworkIcon name={"ethereum"} /> {/*TODO: name is current network from Agreement*/}
               <Tooltip
                 className="statusTooltip"
                 top="-46px"
