@@ -57,11 +57,7 @@ export const sendSignedAgreementFileData = graphql(`
 `);
 
 export const sendSignedAgreementSignData = graphql(`
-  mutation sendSignedSignProofData(
-    $data: AgreementSignProofDataInput!
-    $signature: String!
-    $agreementId: String!
-  ) {
+  mutation sendSignedSignProofData($data: JSONObject!, $signature: String!, $agreementId: String!) {
     sendSignedSignProofData(data: $data, signature: $signature, agreementId: $agreementId) {
       cid
     }

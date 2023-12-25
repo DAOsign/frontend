@@ -37,7 +37,7 @@ const useSignAgreement = (agreementId: string) => {
         if (res.error || !signingPayload) {
           throw new Error("No file proof payload");
         }
-        return clearPayload(signingPayload);
+        return signingPayload;
       });
   };
 

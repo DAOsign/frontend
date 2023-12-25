@@ -160,27 +160,7 @@ export const getAgreementFileProofData = graphql(`
 
 export const getAgreementSignProofData = graphql(`
   query GetAgreementSignProofData($agreementId: String!) {
-    getAgreementSignProofData(agreementId: $agreementId) {
-      domain {
-        name
-        version
-      }
-      primaryType
-      types {
-        Agreement {
-          name
-          type
-        }
-      }
-      message {
-        name
-        agreementFileProofCID
-        app
-        metadata
-        signer
-        timestamp
-      }
-    }
+    getAgreementSignProofData(agreementId: $agreementId)
   }
 `);
 
