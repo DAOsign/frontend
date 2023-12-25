@@ -5,6 +5,7 @@ export const agreementById = graphql(`
     agreement(agreementId: $agreementId) {
       agreementId
       snapshotProposalUrl
+      storeOnBlockchain
       agreementFile {
         agreementFileId
         agreementHash
@@ -97,6 +98,7 @@ export const myAgreementsQuery = graphql(`
         content
         isWaitingForMySignature
         createdAt
+        storeOnBlockchain
         agreementLocation {
           name
           isActive
@@ -152,35 +154,7 @@ export const myAgreementsQuery = graphql(`
 
 export const getAgreementFileProofData = graphql(`
   query GetAgreementFileProofData($agreementId: String!) {
-    getAgreementFileProofData(agreementId: $agreementId) {
-      domain {
-        name
-        version
-      }
-      primaryType
-      types {
-        Agreement {
-          name
-          type
-        }
-        Signers {
-          name
-          type
-        }
-      }
-      message {
-        name
-        agreementFileCID
-        app
-        from
-        metadata
-        signers {
-          address
-          metadata
-        }
-        timestamp
-      }
-    }
+    getAgreementFileProofData(agreementId: $agreementId)
   }
 `);
 

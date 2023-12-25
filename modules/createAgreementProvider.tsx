@@ -48,6 +48,7 @@ export interface CreationState {
   file: File | undefined;
   errors: CreateAgreementFieldErrors;
   proposal: ProposalState;
+  storeOnBlockchain?: number | null;
 }
 interface CreateAgrementContext {
   values: CreationState;
@@ -85,6 +86,7 @@ const defaultState: CreationState = {
   file: undefined,
   errors: {},
   proposal: initialStateProposal,
+  storeOnBlockchain: null,
 };
 
 const recoverDraft = (): CreationState => {

@@ -29,7 +29,7 @@ export default function StepThree({ page, animateContainer, loading }: Props) {
   const edit = useEditAgreement();
   const { values, changeValue } = page === "create" ? create : edit;
   const [isPublic, setIsPublic] = useState(defaultIsPublic(values.agreementPrivacy));
-  const [checked, setChecked] = useState(false);
+  const [checked, setChecked] = useState(Boolean(values.storeOnBlockchain));
   const initiated = useRef(false);
 
   useEffect(() => {
@@ -46,6 +46,12 @@ export default function StepThree({ page, animateContainer, loading }: Props) {
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [values]);
+
+  useEffect(() => {
+    //TODO change to network select
+    changeValue("storeOnBlockchain", checked ? 1 : null); // 1 is for ethereum
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [checked]);
 
   return (
     <Container>
@@ -79,9 +85,7 @@ export default function StepThree({ page, animateContainer, loading }: Props) {
             </Label>
             <Switch
               onChange={e => {
-                if (e.target.checked) {
-                  notifComingSoon(`Store Proofs on Blockchain is coming soon`);
-                }
+                setChecked(e.target.checked);
               }}
               id="storeBlockchain"
               disabled={false}
