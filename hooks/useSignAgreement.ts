@@ -37,35 +37,7 @@ const useSignAgreement = (agreementId: string) => {
         if (res.error || !signingPayload) {
           throw new Error("No file proof payload");
         }
-        // return clearPayload(signingPayload);
-        return {
-          domain: { name: "daosign", version: "0.1.0" },
-          types: {
-            /*       EIP712Domain: [
-              { name: "name", type: "string" },
-              { name: "version", type: "string" },
-              { name: "chainId", type: "uint256" },
-              { name: "verifyingContract", type: "address" },
-            ], */
-            ProofOfSignature: [
-              { name: "name", type: "string" },
-              { name: "signer", type: "address" },
-              { name: "agreementCID", type: "string" },
-              { name: "app", type: "string" },
-              { name: "timestamp", type: "uint256" },
-              { name: "metadata", type: "string" },
-            ],
-          },
-          primaryType: "ProofOfSignature",
-          message: {
-            name: "Proof-of-Signature",
-            signer: "0xd405aebF7b60eD2cb2Ac4497Bddd292DEe534E82",
-            agreementCID: "QmaV4x1uwEvfpoec6AkCcs3Rt2iQrCrtyofxLC7RabZ733",
-            app: "daosign",
-            timestamp: 1702982560608,
-            metadata: "{}",
-          },
-        };
+        return clearPayload(signingPayload);
       });
   };
 
@@ -148,7 +120,6 @@ export function clearPayload(payload: any) {
 
   typeKeys.forEach(t => types[t].forEach((k: any) => removeTypeName(k)));
 
-  console.log(payload);
   return payload;
 }
 
