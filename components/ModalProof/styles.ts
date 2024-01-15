@@ -88,25 +88,19 @@ export const box = {
   borderRadius: "8px",
   p: "20px 20px",
   alignItems: "center",
-  "@media screen and (max-width: 768px)": {
-    justifyContent: "center",
-  },
 } as ThemeUIStyleObject;
 
-export const linkContainer = {
-  width: "14px",
-  height: "14px",
+export const iconContainer = {
   opacity: "0.7",
   cursor: "pointer",
   "&:hover": { opacity: 1 },
 } as ThemeUIStyleObject;
 
 export const arrowContainer = {
-  width: "20px",
-  height: "20px",
   rotate: "270deg",
-  ml: "auto",
+  opacity: "0.7",
   cursor: "pointer",
+  "&:hover": { opacity: 1 },
 } as ThemeUIStyleObject;
 
 export const containerProof = {
