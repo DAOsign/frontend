@@ -111,7 +111,7 @@ export const SignerRow = ({ signer, signProof, viewProof }: Props) => {
           className="signature_icon"
         >
           <Tooltip top="-45px" left="-130px" title={signProof.cid}>
-            <Box sx={{ cursor: "pointer" }}>
+            <Box sx={{ cursor: "pointer", color: "#000" }}>
               {formatAddress(signProof.cid)} <SignatureIcon color="#CA5CF2" />
             </Box>
           </Tooltip>
