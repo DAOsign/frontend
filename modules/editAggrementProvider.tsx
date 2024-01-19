@@ -33,6 +33,7 @@ export interface CreationState {
   file: File | undefined;
   errors: CreateAgreementFieldErrors;
   proposal: ProposalState;
+  storeOnBlockchain?: number | null;
 }
 interface CreateAgrementContext {
   values: CreationState;

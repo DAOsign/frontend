@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useRef } from "react";
-import { Container, Text, Flex, Label, Switch } from "theme-ui";
+import { Container, Text, Flex, Label, Switch, Box } from "theme-ui";
 import { textLoading } from "../../styles";
 import {
   PRIVACY_PUBLIC_PROOF_ONLY,
@@ -17,6 +17,7 @@ import { useEditAgreement } from "../../../../hooks/useEditAgreement";
 import loader from "../../../../img/json/loader.json";
 import FieldErrorMessage from "../../../Form/FieldErrorMessage";
 import AgreementLocationRadioButtons from "../StepTwo/AgreementLocationButtons";
+import Select, { Option } from "../../../Select";
 
 const defaultIsPublic = (agreementPrivacy: string) => {
   return [PRIVACY_PUBLIC_PROOF_ONLY, PRIVACY_PUBLIC_PUBLISHED, PRIVACY_PUBLIC_WITH_LINK].some(
@@ -24,12 +25,18 @@ const defaultIsPublic = (agreementPrivacy: string) => {
   );
 };
 
+const blockChainOptions: Option[] = [
+  { label: "Ethereum", value: 1, icon: "" },
+  { label: "Sui", value: 2, icon: "" },
+  { label: "Polkadot", value: 3, icon: "" },
+];
+
 export default function StepThree({ page, animateContainer, loading }: Props) {
   const create = useCreateAgreement();
   const edit = useEditAgreement();
   const { values, changeValue } = page === "create" ? create : edit;
   const [isPublic, setIsPublic] = useState(defaultIsPublic(values.agreementPrivacy));
-  const [checked, setChecked] = useState(false);
+  const [checked, setChecked] = useState(Boolean(values.storeOnBlockchain));
   const initiated = useRef(false);
 
   useEffect(() => {
@@ -47,8 +54,14 @@ export default function StepThree({ page, animateContainer, loading }: Props) {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [values]);
 
+  useEffect(() => {
+    //TODO change to network select
+    changeValue("storeOnBlockchain", checked ? 1 : null); // 1 is for ethereum
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [checked]);
+
   return (
-    <Container>
+    <Container sx={{ pb: "24px" }}>
       {!loading ? (
         <>
           <Text
@@ -73,23 +86,30 @@ export default function StepThree({ page, animateContainer, loading }: Props) {
           )}
           <FieldErrorMessage error={values?.errors.agreementPrivacy} />
           <AgreementLocationRadioButtons page={page} />
-          <Flex sx={{ ...switchContainer, width: "fit-content", mt: "45px", mb: "40px" }}>
-            <Label htmlFor="storeBlockchain" sx={labelSwitch}>
-              Store Proofs on Blockchain
-            </Label>
-            <Switch
-              onChange={e => {
-                if (e.target.checked) {
-                  notifComingSoon(`Store Proofs on Blockchain is coming soon`);
-                }
-              }}
-              id="storeBlockchain"
-              disabled={false}
-              className="switch"
-              checked={checked}
-              sx={switchBtn}
-            />
-          </Flex>
+          <Box>
+            <Flex sx={{ ...switchContainer, width: "fit-content", mt: "45px", mb: "40px" }}>
+              <Label htmlFor="storeBlockchain" sx={labelSwitch}>
+                Store Proofs on Blockchain
+              </Label>
+              <Switch
+                onChange={e => {
+                  setChecked(e.target.checked);
+                }}
+                id="storeBlockchain"
+                disabled={false}
+                className="switch"
+                checked={checked}
+                sx={switchBtn}
+              />
+            </Flex>
+            {values.storeOnBlockchain && (
+              <Select
+                options={blockChainOptions}
+                selected={blockChainOptions.find(o => o.value === values.storeOnBlockchain)!}
+                onSelect={option => changeValue("storeOnBlockchain", option.value)}
+              />
+            )}
+          </Box>
         </>
       ) : (
         <>
