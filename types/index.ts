@@ -108,11 +108,6 @@ interface AgreementFile {
 
 export type FieldError = string | null | undefined;
 
-export interface SelectOption {
-  title: string;
-  icon?: string | StaticImageData;
-}
-
 export type NetworkName =
   | "Ethereum Mainnet"
   | "SUI Mainnet"

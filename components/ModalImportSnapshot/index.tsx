@@ -242,6 +242,7 @@ export default function ModalImportSnapshot({ isOpen, page, onExit, setMethod }:
       agreementHash: "",
       agreementFilePath: "",
       isReadyToSign: false,
+      storeOnBlockchain: values.storeOnBlockchain,
     }).then((res: any) => {
       if (res.error) {
         notifError(res.error.message);
