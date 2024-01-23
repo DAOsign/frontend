@@ -5,6 +5,12 @@ export const formatAddress = (address: string) => {
   return address?.length > 14 ? `${address.slice(0, 6)}...${address.slice(-4)}` : address;
 };
 
+export const formatStoredAddress = (url: string) => {
+  if (!url) return "";
+  const split = url.split("/"); //TODO
+  return formatAddress(split[split.length - 1]); 
+};
+
 export function extractProposalId(url: string) {
   const regex = /0x[a-fA-F0-9]{64}/;
   const match = url?.match(regex);
