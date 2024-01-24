@@ -61,15 +61,18 @@ export const agreementById = graphql(`
         signerWallet {
           address
         }
+        blockchainStored
       }
       agreementFileProof {
         cid
         signature
         signers
+        blockchainStored
       }
       agreementProof {
         cid
         signedAt
+        blockchainStored
       }
     }
   }
