@@ -44,6 +44,7 @@ import { uploadFile, uploadToIpfs } from "../../modules/rest";
 import { notifError } from "../../utils/notification";
 import ModalConfirmAgreementDeletion from "../ModalConfirmAgreementDeletion/ModalConfirmAgreementDeletion";
 import { getToken } from "../../utils/token";
+import useRestoreFile from "../../hooks/useRestoreFile";
 
 const FILE_UPLOAD_ERROR_DEFAULT_MESSAGE = "Failed to upload file";
 
@@ -61,6 +62,7 @@ export default function NavPanel({ setLoading, page }: { setLoading: any; page: 
   const { push, query } = useRouter();
   const { account } = useWeb3();
   const step = query?.step ? Number(query.step) : 1;
+  const { restoreFile } = useRestoreFile();
 
   const [isLoadingNextStep, setIsLoadingNextStep] = useState<boolean>(false);
   const [isAuthorNotAddedPopupVisible, setIsAuthorNotAddedPopupVisible] = useState<boolean>(false);
@@ -137,6 +139,7 @@ export default function NavPanel({ setLoading, page }: { setLoading: any; page: 
     file: File
   ): Promise<{ filePath?: string; agreementHash?: string; error?: any }> => {
     let calculatedIpfsHash: any;
+    const isTemp = step !== 3;
     try {
       const hash = await calculateIpfsHash(file);
       if (hash) {
@@ -149,17 +152,18 @@ export default function NavPanel({ setLoading, page }: { setLoading: any; page: 
 
     const token = getToken();
 
-    if (values.agreementLocation === LOCATION_PUBLIC_IPFS) {
+    if (values.agreementLocation === LOCATION_PUBLIC_IPFS && !isTemp) {
       const uploadResult = await uploadToIpfs(token!, file);
       if (!uploadResult.IpfsHash) {
         return { error: uploadResult };
       }
+      isTemp && changeValue("filePath", "");
       return { agreementHash: calculatedIpfsHash };
     }
 
-    if (values.agreementLocation === LOCATION_CLOUD) {
+    if (values.agreementLocation === LOCATION_CLOUD || isTemp) {
       try {
-        const res = await uploadFile(token!, file);
+        const res = await uploadFile(token!, file, isTemp);
         if (res && "fileLink" in res) {
           changeValue("filePath", res.fileLink);
           return { filePath: res.fileLink, agreementHash: calculatedIpfsHash };
@@ -193,7 +197,8 @@ export default function NavPanel({ setLoading, page }: { setLoading: any; page: 
       signers: values.signers.map(s => s.value),
       observers: values.observers.map(o => o.value),
       agreementHash: agreementHash || values.agreementHash,
-      agreementFilePath: filePath || values.filePath,
+      agreementFilePath:
+        values.agreementLocation === LOCATION_PUBLIC_IPFS ? "" : filePath || values.filePath,
       isReadyToSign: false,
       storeOnBlockchain: values.storeOnBlockchain,
     }).then(res => {
@@ -247,7 +252,10 @@ export default function NavPanel({ setLoading, page }: { setLoading: any; page: 
   };
 
   const preuploadFile = async () => {
-    if (step === 3) return;
+    if (step === 3) {
+      const res = await restoreFile(values, changeValue);
+      return res && (await uploadNewFile(res));
+    }
     try {
       let uploadedFileData: { filePath?: string; agreementHash?: string; error?: any } = {};
       if (
@@ -352,7 +360,7 @@ export default function NavPanel({ setLoading, page }: { setLoading: any; page: 
           const areFieldsValid = validateFields({ ...values, ...uploadedFileData });
           if (areFieldsValid) {
             if (isFinishButton) {
-              await handleCreateAgreement();
+              await handleSaveDraft();
             } else {
               handleNextStep();
             }

@@ -128,18 +128,6 @@ const CreateAgreementProvider = (props?: Partial<ProviderProps<CreateAgrementCon
       const newState: CreationState = {
         ...state,
         [key]: value,
-        agreementLocation:
-          key === "agreementPrivacy"
-            ? LOCATION_CLOUD
-            : key === "agreementLocation"
-            ? value
-            : state.agreementLocation,
-        agreementHash:
-          key === "agreementLocation" || key === "agreementMethod"
-            ? ""
-            : key === "agreementHash"
-            ? value
-            : state.agreementHash,
       };
       saveDraft({ ...newState, file: undefined, errors: {} });
       return newState;
