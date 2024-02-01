@@ -7,7 +7,7 @@ import SUIImg from "../../img/svg/mainnet/sui.svg";
 import PolkadotImg from "../../img/svg/mainnet/polkadot.svg";
 
 interface Props {
-  name: "ethereum" | "sui" | "polkadot";
+  networkId: number;
 }
 
 const network = {
@@ -16,7 +16,11 @@ const network = {
   polkadot: PolkadotImg,
 };
 
-function NetworkIcon({ name }: Props) {
+const networkName = [null, "ethereum", "sui", "polkadot"];
+
+function NetworkIcon({ networkId }: Props) {
+  const name = networkName[networkId] as string;
+
   if (!network[name]) {
     return null;
   }

@@ -94,6 +94,7 @@ export interface Agreement {
   agreementFile?: AgreementFile;
   signProofAmount: number;
   snapshotProposalUrl?: string;
+  storedOnBlockchain?: number;
 }
 
 export interface DataProposalProps {

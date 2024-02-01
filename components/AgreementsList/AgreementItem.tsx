@@ -42,6 +42,7 @@ export default function AgreementItem({
   isWaitingForMySignature,
   createdAt,
   signProofAmount,
+  storedOnBlockchain,
 }: Agreement) {
   const { width } = useWindowDimensions();
   const titleTooltip = (value: string) => {
@@ -105,7 +106,8 @@ export default function AgreementItem({
                   </Box>
                 </Tooltip>
               ) : null}
-              <NetworkIcon name={"ethereum"} /> {/*TODO: name is current network from Agreement*/}
+
+              {storedOnBlockchain && <NetworkIcon networkId={storedOnBlockchain} />}
               <Tooltip
                 className="statusTooltip"
                 top="-46px"

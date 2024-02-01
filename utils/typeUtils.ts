@@ -24,6 +24,7 @@ export const toAgreement = (agreement: AgreementResponse): Agreement => {
           createdAt: agreement?.agreementFile?.createdAt,
         }
       : undefined,
+    storedOnBlockchain: agreement.storeOnBlockchain as number,
   };
 };
 
