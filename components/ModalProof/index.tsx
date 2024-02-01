@@ -56,7 +56,7 @@ export default function ModalProof({ isOpen, onExit, title, proof }: Props) {
 
   const nameTitle = () => {
     if (title === AGREEMENT_PROOF) return "Agreement";
-    if (title === IDENTITY_PROOF) return "Identity";
+    if (title === IDENTITY_PROOF) return "Authority";
     return "Signature";
   };
 

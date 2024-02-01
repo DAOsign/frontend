@@ -235,7 +235,7 @@ export const AgreementInformation = ({
         />
 
         <InformationRow
-          name="Identity Proof"
+          name="Authority Proof"
           tooltipValue={agreement?.agreementFileProof?.cid || undefined}
           value={
             agreement.agreementFileProof ? (
@@ -250,7 +250,7 @@ export const AgreementInformation = ({
           }
         />
         <InformationRow
-          name="Authority Proof"
+          name="Identity Proof"
           value={<InformationRowValue text="<Not required>" />}
         />
         <InformationRow
