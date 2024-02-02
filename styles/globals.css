@@ -2,8 +2,8 @@ html,
 body {
   padding: 0;
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen, Ubuntu, Cantarell,
-    Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen, Ubuntu, Cantarell, Fira Sans, Droid Sans,
+    Helvetica Neue, sans-serif;
 }
 
 a {
@@ -23,11 +23,11 @@ a {
   display: none;
 }
 .closeIcon:hover > svg > path {
-  stroke: #AE4FD0;
+  stroke: #ae4fd0;
   opacity: 1;
 }
-.previewIcon:hover >svg >g >path {
-  stroke: #AE4FD0;
+.previewIcon:hover > svg > g > path {
+  stroke: #ae4fd0;
   opacity: 1;
 }
 .chooseFileText {
@@ -39,7 +39,7 @@ a {
   opacity: 0.7;
 }
 input {
-  font-family: 'InterMedium' !important;
+  font-family: "InterMedium" !important;
   font-style: normal;
   font-weight: 500 !important;
   font-size: 16px !important;
@@ -147,7 +147,6 @@ input {
 .w-md-editor-bar svg {
   display: none !important;
 }
-
 
 @font-face {
   font-family: "InterRegular";
@@ -796,8 +795,6 @@ body {
   }
 }
 
-
-
 .object-key-val,
 .variable-row {
   border-left: none !important;
@@ -850,6 +847,9 @@ body {
   color: #212121 !important;
 }
 
+.signature_icon {
+  color: black;
+}
 .signature_icon:hover * {
   stroke: #ae4fd0;
 }
@@ -857,35 +857,36 @@ body {
   width: 0;
 }
 /* tooltip mobile */
-@media screen and (max-width: 480px)  { 
-   .legalJurisdictionToltip .arrowTooltip {
-  margin-left: 59.5% !important;
-}
-.addIndemnificationClauseToltip ,.arrowTooltip {
-  margin-left: 53.5% !important;
-}
+@media screen and (max-width: 480px) {
+  .legalJurisdictionToltip .arrowTooltip {
+    margin-left: 59.5% !important;
+  }
+  .addIndemnificationClauseToltip,
+  .arrowTooltip {
+    margin-left: 53.5% !important;
+  }
 }
 @media screen and (max-width: 550px) {
   .proposalId {
-     display: none;
+    display: none;
   }
-  .userCardAddress { 
+  .userCardAddress {
     left: -112px !important;
   }
-  .statusTooltip { 
+  .statusTooltip {
     left: 102% !important;
   }
   .publicOrPrivate {
     left: 214% !important;
   }
   .signatureTooltip {
-    left: 204% !important; 
+    left: 204% !important;
   }
   .statusViews {
     left: 125% !important;
   }
-  .statusViews .arrowTooltip { 
-    margin-left: 22.5% !important; 
+  .statusViews .arrowTooltip {
+    margin-left: 22.5% !important;
   }
   .anonymousTooltip {
     top: -83% !important;
@@ -900,7 +901,7 @@ body {
   .enableTransformToltip .arrowTooltip {
     margin-left: 78.5% !important;
   }
-  .contractTypeToltip { 
+  .contractTypeToltip {
     top: -69px !important;
     left: -119px !important;
     min-width: 206px !important;
@@ -943,13 +944,12 @@ body {
   .addNonSolicitationClauseToltip .arrowTooltip {
     margin-left: 74.5% !important;
   }
-  
 }
-.line{
+.line {
   content: '""';
   display: block;
   width: 172px;
   height: 2px;
-  background-color: #EDEDF3;
+  background-color: #ededf3;
   padding-top: 4px;
 }
