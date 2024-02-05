@@ -100,7 +100,7 @@ const EditAgreemntProvider = (props?: Partial<ProviderProps<CreateAgrementContex
             : state.agreementLocation,
         agreementHash:
           key === "agreementLocation" || key === "agreementMethod"
-            ? ""
+            ? state.agreementHash
             : key === "agreementHash"
             ? value
             : state.agreementHash,
