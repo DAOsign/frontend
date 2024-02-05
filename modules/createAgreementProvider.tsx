@@ -136,7 +136,7 @@ const CreateAgreementProvider = (props?: Partial<ProviderProps<CreateAgrementCon
             : state.agreementLocation,
         agreementHash:
           key === "agreementLocation" || key === "agreementMethod"
-            ? ""
+            ? state.agreementHash
             : key === "agreementHash"
             ? value
             : state.agreementHash,
