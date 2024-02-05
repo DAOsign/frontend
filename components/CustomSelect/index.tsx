@@ -6,33 +6,32 @@ import { iconsRotate, iconsRotateMobile, variantsCustomSelect } from "../../util
 import { containerSelect, flexSelect, icon, inputSearch, itemOption, titleSelect } from "./styles";
 import useWindowDimensions from "../../hooks/useWindowDimensions";
 import Image from "next/image";
-import { SelectOption } from "../../types";
+
+import { Option } from "../Select";
 
 interface Props {
-  value: string | undefined;
+  selected: Option;
   label?: string;
-  onChange: (value: string) => void;
-  options: SelectOption[];
+  onChange: (option: Option) => void;
+  options: Option[];
 }
 
-const CustomSelect = ({ value, options, label, onChange }: Props) => {
+const CustomSelect = ({ selected, options, label, onChange }: Props) => {
   const { width }: any = useWindowDimensions();
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const [searchValue, setSearchValue] = useState("");
 
-  const handleSelectClick = (el: SelectOption) => {
-    onChange(el.title);
+  const handleSelectClick = (el: Option) => {
+    onChange(el);
     setSearchValue("");
     setIsOpen(false);
   };
 
-  const valuesIcon = value
-    ? options.find(el => el.title.toLowerCase() === value.toLowerCase())?.icon
-    : null;
+  const valuesIcon = selected?.icon;
 
   const optionsFilter =
     searchValue !== ""
-      ? options.filter(el => el.title.toLowerCase().includes(searchValue.toLowerCase()))
+      ? options.filter(el => el.label.toLowerCase().includes(searchValue.toLowerCase()))
       : options;
 
   const onInputSearchClick = () => {
@@ -74,7 +73,7 @@ const CustomSelect = ({ value, options, label, onChange }: Props) => {
                 onChange={e => setSearchValue(e.target.value)}
                 onClick={onInputSearchClick}
                 value={searchValue}
-                placeholder={value}
+                placeholder={selected.label}
                 sx={inputSearch}
               />
             ) : (
@@ -87,7 +86,7 @@ const CustomSelect = ({ value, options, label, onChange }: Props) => {
                   {valuesIcon && <Image src={valuesIcon} width={"24px"} height={"24px"} />}
                 </Box>
                 <Text onClick={() => setIsOpen(true)} sx={titleSelect}>
-                  {value}
+                  {selected.label}
                 </Text>
               </Flex>
             )}
@@ -111,7 +110,7 @@ const CustomSelect = ({ value, options, label, onChange }: Props) => {
                 key={i}
               >
                 {el.icon && <Image src={el.icon} width={"24px"} height={"24px"} />}
-                <Text sx={titleSelect}>{el.title}</Text>
+                <Text sx={titleSelect}>{el.label}</Text>
               </Flex>
             ))}
           </Container>

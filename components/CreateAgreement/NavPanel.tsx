@@ -195,6 +195,7 @@ export default function NavPanel({ setLoading, page }: { setLoading: any; page: 
       agreementHash: agreementHash || values.agreementHash,
       agreementFilePath: filePath || values.filePath,
       isReadyToSign: false,
+      storeOnBlockchain: values.storeOnBlockchain,
     }).then(res => {
       if (res.error) {
         notifError(res.error.message);

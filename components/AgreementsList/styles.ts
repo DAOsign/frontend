@@ -119,7 +119,7 @@ const containerSides = {
   maxWidth: "1200px",
   justifyContent: "space-between",
   margin: "0 auto 0",
-  paddingTop: "24px",
+  paddingY: "24px",
   "@media screen and (max-width: 1200px)": {
     flexDirection: "column",
     px: "24px",

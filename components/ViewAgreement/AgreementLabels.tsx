@@ -69,6 +69,7 @@ interface Props {
   agreementStatus?: AgreementStatus;
   agreementPrivacy?: AgreementPrivacy | string;
   isWaitingForMySignature: boolean;
+  storedOnNetwork?: number;
 }
 
 export const AgreementLabels = ({
@@ -77,6 +78,7 @@ export const AgreementLabels = ({
   agreementStatus,
   agreementPrivacy,
   isWaitingForMySignature,
+  storedOnNetwork,
 }: Props) => {
   const handleShareLink = () => {
     onCopyClick(window?.location?.href);
@@ -147,7 +149,7 @@ export const AgreementLabels = ({
               {agreementPrivacy}
             </Flex>
           </Tooltip>
-          <NetworkIcon name={"sui"} /> {/*TODO: name is current network from Agreement*/}
+          {storedOnNetwork && <NetworkIcon networkId={storedOnNetwork} />}
           {isWaitingForMySignature ? (
             <Tooltip
               title="Your signature is missing"

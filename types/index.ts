@@ -94,6 +94,7 @@ export interface Agreement {
   agreementFile?: AgreementFile;
   signProofAmount: number;
   snapshotProposalUrl?: string;
+  storedOnBlockchain?: number;
 }
 
 export interface DataProposalProps {
@@ -107,11 +108,6 @@ interface AgreementFile {
 }
 
 export type FieldError = string | null | undefined;
-
-export interface SelectOption {
-  title: string;
-  icon?: string | StaticImageData;
-}
 
 export type NetworkName =
   | "Ethereum Mainnet"

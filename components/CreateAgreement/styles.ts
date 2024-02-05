@@ -4,6 +4,7 @@ const containerSides = {
   justifyContent: "space-between",
   margin: "40px auto 0",
   textAlign: "center",
+  paddingBottom: "24px",
   "@media screen and (max-width: 1200px)": {
     flexDirection: "column",
     mt: "270px",
@@ -235,7 +236,7 @@ const rightSide = {
 export const navContainer = {
   background: "#FFFFFF",
   border: "1px solid #EDEDF3",
-  minHeight: "550px",
+  minHeight: "500px",
   borderRadius: "12px",
   paddingX: "52px",
   maxHeight: "636px",

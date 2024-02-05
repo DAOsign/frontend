@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useRef } from "react";
-import { Container, Text, Flex, Label, Switch } from "theme-ui";
+import { Container, Text, Flex, Label, Switch, Box } from "theme-ui";
 import { textLoading } from "../../styles";
 import {
   NetworkName,
@@ -7,7 +7,6 @@ import {
   PRIVACY_PUBLIC_PUBLISHED,
   PRIVACY_PUBLIC_WITH_LINK,
   Props,
-  SelectOption,
 } from "../../../../types";
 import ChooseMethod from "../StepOne/ChooseMethod";
 import Lottie from "lottie-react";
@@ -20,6 +19,7 @@ import FieldErrorMessage from "../../../Form/FieldErrorMessage";
 import AgreementLocationRadioButtons from "../StepTwo/AgreementLocationButtons";
 import CustomSelect from "../../../CustomSelect";
 import { networkOptions } from "../../../../utils/mockData";
+import Select, { Option } from "../../../Select";
 
 const defaultIsPublic = (agreementPrivacy: string) => {
   return [PRIVACY_PUBLIC_PROOF_ONLY, PRIVACY_PUBLIC_PUBLISHED, PRIVACY_PUBLIC_WITH_LINK].some(
@@ -32,6 +32,7 @@ export default function StepThree({ page, animateContainer, loading }: Props) {
   const edit = useEditAgreement();
   const { values, changeValue } = page === "create" ? create : edit;
   const [isPublic, setIsPublic] = useState(defaultIsPublic(values.agreementPrivacy));
+  const [checked, setChecked] = useState(Boolean(values.storeOnBlockchain));
   const initiated = useRef(false);
 
   useEffect(() => {
@@ -49,12 +50,14 @@ export default function StepThree({ page, animateContainer, loading }: Props) {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [values]);
 
-  const changeStoreProofsNetwork = (value: string) => {
-    changeValue("storeProofsNetwork", value);
-  };
+  useEffect(() => {
+    //TODO change to network select
+    changeValue("storeOnBlockchain", checked ? 1 : null); // 1 is for ethereum
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [checked]);
 
   return (
-    <Container>
+    <Container sx={{ pb: "24px" }}>
       {!loading ? (
         <>
           <Text
@@ -79,31 +82,39 @@ export default function StepThree({ page, animateContainer, loading }: Props) {
           )}
           <FieldErrorMessage error={values?.errors.agreementPrivacy} />
           <AgreementLocationRadioButtons page={page} />
-          <Flex sx={{ ...switchContainer, width: "fit-content", mt: "45px", mb: "40px" }}>
-            <Label htmlFor="storeBlockchain" sx={labelSwitch}>
-              Store Proofs on Blockchain
-            </Label>
-            <Switch
-              onChange={e => {
-                changeValue("isStoreProofsOnBlockchain", e.target.checked);
-                !e.target.checked && changeValue("storeProofsNetwork", undefined);
-              }}
-              id="storeBlockchain"
-              disabled={false}
-              className="switch"
-              checked={values.isStoreProofsOnBlockchain}
-              sx={switchBtn}
-            />
-          </Flex>
-
-          {values.isStoreProofsOnBlockchain && (
-            <CustomSelect
-              value={values.storeProofsNetwork}
-              label={"Network"}
-              options={networkOptions}
-              onChange={changeStoreProofsNetwork}
-            />
-          )}
+          <Box>
+            <Flex sx={{ ...switchContainer, width: "fit-content", mt: "45px", mb: "40px" }}>
+              <Label htmlFor="storeBlockchain" sx={labelSwitch}>
+                Store Proofs on Blockchain
+              </Label>
+              <Switch
+                onChange={e => {
+                  setChecked(e.target.checked);
+                }}
+                id="storeBlockchain"
+                disabled={false}
+                className="switch"
+                checked={checked}
+                sx={switchBtn}
+              />
+            </Flex>
+            {
+              values.storeOnBlockchain && (
+                <CustomSelect
+                  selected={networkOptions.find(o => o.value === values.storeOnBlockchain)!}
+                  label={"Network"}
+                  options={networkOptions}
+                  onChange={option => changeValue("storeOnBlockchain", option.value)}
+                />
+              ) /* || (
+              <Select
+                options={networkOptions}
+                selected={networkOptions.find(o => o.value === values.storeOnBlockchain)!}
+                onSelect={option => changeValue("storeOnBlockchain", option.value)}
+              />
+            ) */
+            }
+          </Box>
         </>
       ) : (
         <>

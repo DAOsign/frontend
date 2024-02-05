@@ -34,8 +34,7 @@ export interface CreationState {
   file: File | undefined;
   errors: CreateAgreementFieldErrors;
   proposal: ProposalState;
-  isStoreProofsOnBlockchain: boolean;
-  storeProofsNetwork: NetworkName | undefined;
+  storeOnBlockchain?: number | null;
 }
 interface CreateAgrementContext {
   values: CreationState;
@@ -58,8 +57,7 @@ const defaultState: CreationState = {
   file: undefined,
   errors: {},
   proposal: initialStateProposal,
-  isStoreProofsOnBlockchain: false,
-  storeProofsNetwork: undefined,
+  storeOnBlockchain: null,
 };
 
 const recoverDraft = (): CreationState => {
