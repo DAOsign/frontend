@@ -13,24 +13,19 @@ import {
 } from "./styles";
 import { Portal } from "../Portal/Portal";
 import { ModalBase } from "../ModalBase/ModalBase";
-
 import dynamic from "next/dynamic";
 import { AgreementSignProof } from "../../modules/graphql/gql/graphql";
 import { getFileFromIPFS } from "../../modules/rest";
 import { formatAddress, onCopyClick, formatStoredAddress } from "../../utils/formats";
 import { AGREEMENT_PROOF, IDENTITY_PROOF } from "../ViewAgreement/AgreementInformation";
 import CopyIcon from "../CopyIcon";
-import {  tableAddressCell } from "../ViewAgreement/styles";
+import { tableAddressCell } from "../ViewAgreement/styles";
 import Tooltip from "../Tooltip";
 import CloseIcon from "../IconComponent/CloseIcon";
 import { notifSuccess } from "../../utils/notification";
 import LinkIcon from "../IconComponent/LincIcon";
 import ArrowLeftPink from "../ArrowLeftPink";
-import {
-  bg,
-  flexContent,
-  modalBase,
-} from "../ModalImportSnapshot/styles";
+import { bg, flexContent, modalBase } from "../ModalImportSnapshot/styles";
 
 const ReactJson = dynamic(() => import("react-json-view"), { ssr: false });
 
@@ -42,9 +37,10 @@ interface Props {
   onExit: () => void;
   title: string;
   proof: { cid: string; signature?: string; blockchainStored?: string } | AgreementSignProof;
+  storedOnBlockchain?: number;
 }
 
-export default function ModalProof({ isOpen, onExit, title, proof }: Props) {
+export default function ModalProof({ isOpen, onExit, title, proof, storedOnBlockchain }: Props) {
   const [showDetails, setShowDetails] = useState(false);
   const [{ proofJSON, loading }, setProofJSON] = useState<{
     proofJSON: Record<string, any> | undefined;
@@ -81,23 +77,24 @@ export default function ModalProof({ isOpen, onExit, title, proof }: Props) {
     setShowDetails(false);
     onExit();
   };
+
   return (
     <Portal sx={bg} isOpen={isOpen && !!proof} onClose={onClose}>
-      <ModalBase height='auto' sx={modalBase}>
+      <ModalBase height="auto" sx={modalBase}>
         <Flex sx={flexContent}>
           <Box onClick={onClose} sx={closeIcon}>
             <CloseIcon />
           </Box>
           <Text sx={mainText}>Proof-of-{nameTitle()}</Text>
-          <Flex sx={{...box, justifyContent: 'space-between'}}>
+          <Flex sx={{ ...box, justifyContent: "space-between" }}>
             <Flex>
               <Box>
                 <Text sx={secondaryTitle}>Proof of {nameTitle()}</Text>
               </Box>
               <Link
-                  onClick={() =>
-                      window.open(`${IPFS_GATEWAY_URL}/${proof.cid}`, "_blank", "noreferrer")
-                  }
+                onClick={() =>
+                  window.open(`${IPFS_GATEWAY_URL}/${proof.cid}`, "_blank", "noreferrer")
+                }
               >
                 <Flex sx={{ alignItems: "center", cursor: "pointer" }}>
                   <Text sx={text}>{formatAddress(proof?.cid || "")}</Text>
@@ -107,9 +104,9 @@ export default function ModalProof({ isOpen, onExit, title, proof }: Props) {
                 </Flex>
               </Link>
               <Flex
-                  className="signature_icon"
-                  sx={{...tableAddressCell, marginLeft: '8px'}}
-                  onClick={() => handleCopyIPFSProofLink(`ipfs://${proof.cid}`)}
+                className="signature_icon"
+                sx={{ ...tableAddressCell, marginLeft: "8px" }}
+                onClick={() => handleCopyIPFSProofLink(`ipfs://${proof.cid}`)}
               >
                 <Tooltip top="-45px" left="-115px" title={`ipfs://${proof.cid}`}>
                   <Box sx={{ cursor: "pointer" }}></Box>
@@ -120,7 +117,7 @@ export default function ModalProof({ isOpen, onExit, title, proof }: Props) {
               </Flex>
             </Flex>
 
-            <Box >
+            <Box>
               {loading ? (
                 <Spinner width="20px" />
               ) : (
@@ -130,21 +127,7 @@ export default function ModalProof({ isOpen, onExit, title, proof }: Props) {
               )}
             </Box>
           </Flex>
-          {proof?.blockchainStored && (
-            <Flex sx={{ ...box, mt: "12px" }}>
-              <Box>
-                <Text sx={secondaryTitle}>Blockchain</Text>
-              </Box>
-              <Link onClick={() => window.open(proof.blockchainStored!, "_blank", "noreferrer")}>
-                <Flex sx={{ alignItems: "center", cursor: "pointer" }}>
-                  <Text sx={text}>{formatStoredAddress(proof?.blockchainStored)}</Text>
-                  <Box sx={iconContainer}>
-                    <LinkIcon />
-                  </Box>
-                </Flex>
-              </Link>
-            </Flex>
-          )}
+
           {showDetails && proofJSON ? (
             <>
               <Container sx={containerProof}>
@@ -155,6 +138,30 @@ export default function ModalProof({ isOpen, onExit, title, proof }: Props) {
               {/*></Box>*/}
             </>
           ) : null}
+
+          {storedOnBlockchain && (
+            <Flex sx={{ ...box, mt: "12px" }}>
+              <Box>
+                <Text sx={secondaryTitle}>Blockchain</Text>
+              </Box>
+
+              {proof.blockchainStored ? (
+                <Link onClick={() => window.open(proof.blockchainStored!, "_blank", "noreferrer")}>
+                  <Flex sx={{ alignItems: "center", cursor: "pointer" }}>
+                    <Text sx={text}>{formatStoredAddress(proof?.blockchainStored)}</Text>
+                    <Box sx={iconContainer}>
+                      <LinkIcon />
+                    </Box>
+                  </Flex>
+                </Link>
+              ) : (
+                <Flex>
+                  <Text>Processing..</Text>
+                </Flex>
+              )}
+            </Flex>
+          )}
+
           {title !== AGREEMENT_PROOF && proof.cid && (
             <a
               href={`https://signator.io/view?ipfs=${proof?.cid}`}
