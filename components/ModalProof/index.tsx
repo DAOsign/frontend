@@ -4,15 +4,12 @@ import {
   secondaryTitle,
   arrowContainer,
   containerProof,
-  linkContainer,
-  proofPadding,
   btnContainer,
   closeIcon,
-  container,
   mainText,
   text,
   box,
-  hideOnMobile, iconContainer,
+  iconContainer,
 } from "./styles";
 import { Portal } from "../Portal/Portal";
 import { ModalBase } from "../ModalBase/ModalBase";
@@ -141,7 +138,7 @@ export default function ModalProof({ isOpen, onExit, title, proof }: Props) {
               <Link onClick={() => window.open(proof.blockchainStored!, "_blank", "noreferrer")}>
                 <Flex sx={{ alignItems: "center", cursor: "pointer" }}>
                   <Text sx={text}>{formatStoredAddress(proof?.blockchainStored)}</Text>
-                  <Box sx={linkContainer}>
+                  <Box sx={iconContainer}>
                     <LinkIcon />
                   </Box>
                 </Flex>
