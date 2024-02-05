@@ -21,8 +21,8 @@ jobs:
       - name: Build the Docker image
         run: |
           docker build -t uat-frontend:${{steps.vars.outputs.tag}} \
-            --build-arg NEXT_PUBLIC_REST_ENDPOINT="https://api-uat.daosign.org" \
-            --build-arg NEXT_PUBLIC_GRAPHQL_ENDPOINT="https://api-uat.daosign.org/graphql" \
+            --build-arg NEXT_PUBLIC_REST_ENDPOINT="https://api.uat.daosign.org" \
+            --build-arg NEXT_PUBLIC_GRAPHQL_ENDPOINT="https://api.uat.daosign.org/graphql" \
             --build-arg NEXT_PUBLIC_PINATA_GATEWAY="https://daosign.mypinata.cloud" \
             .
       - name: Install doctl
@@ -44,7 +44,7 @@ jobs:
     needs: [build]
     env:
       # Ingress
-      HOST: "app-uat.daosign.org"
+      HOST: "uat.daosign.org"
     steps:
       - uses: actions/checkout@v3
       - name: Create & View .env.yaml file

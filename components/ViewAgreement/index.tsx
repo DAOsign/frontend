@@ -152,6 +152,7 @@ export const ViewAgreement = () => {
               agreementStatus={agreement?.agreementStatus}
               agreementPrivacy={agreement?.agreementPrivacy}
               isWaitingForMySignature={agreement?.isWaitingForMySignature || false}
+              storedOnNetwork={agreement?.storedOnBlockchain}
             />
             <AgreementContentPreview
               agreement={agreement}

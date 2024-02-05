@@ -119,6 +119,10 @@ export default function EditAgreement({ page }: { page: string }) {
         return { value: value?.ens?.name || value?.email || value?.wallet?.address };
       });
       changeValue("signers", signers);
+
+      if (data.agreement.storeOnBlockchain) {
+        changeValue("storeOnBlockchain", data.agreement.storeOnBlockchain);
+      }
     }
     setLoaded(true);
   }, [data]);

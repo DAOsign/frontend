@@ -13,6 +13,7 @@ export const saveAgreementMutation = graphql(`
     $agreementFilePath: String
     $isReadyToSign: Boolean!
     $snapshotProposalUrl: String
+    $storeOnBlockchain: Int
   ) {
     saveAgreement(
       agreementId: $agreementId
@@ -26,6 +27,7 @@ export const saveAgreementMutation = graphql(`
       agreementFilePath: $agreementFilePath
       isReadyToSign: $isReadyToSign
       snapshotProposalUrl: $snapshotProposalUrl
+      storeOnBlockchain: $storeOnBlockchain
     ) {
       agreementId
       title
@@ -47,11 +49,7 @@ export const deleteAgreementMutation = graphql(`
 `);
 
 export const sendSignedAgreementFileData = graphql(`
-  mutation sendSignedFileProofData(
-    $data: AgreementFileProofDataInput!
-    $signature: String!
-    $agreementId: String!
-  ) {
+  mutation sendSignedFileProofData($data: JSONObject!, $signature: String!, $agreementId: String!) {
     sendSignedFileProofData(data: $data, signature: $signature, agreementId: $agreementId) {
       cid
     }
@@ -59,11 +57,7 @@ export const sendSignedAgreementFileData = graphql(`
 `);
 
 export const sendSignedAgreementSignData = graphql(`
-  mutation sendSignedSignProofData(
-    $data: AgreementSignProofDataInput!
-    $signature: String!
-    $agreementId: String!
-  ) {
+  mutation sendSignedSignProofData($data: JSONObject!, $signature: String!, $agreementId: String!) {
     sendSignedSignProofData(data: $data, signature: $signature, agreementId: $agreementId) {
       cid
     }

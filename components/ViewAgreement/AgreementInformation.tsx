@@ -97,7 +97,8 @@ export const AgreementInformation = ({
   >();
 
   const [proofToShow, showProof] = useState<
-    { title: string; proof: { cid: string; signature?: string } } | undefined
+    | { title: string; proof: { cid: string; signature?: string; blockchainStored?: string } }
+    | undefined
   >();
 
   const handleCopyAddress = () => {
@@ -154,6 +155,7 @@ export const AgreementInformation = ({
 
   const onShowProof = (type: typeof AGREEMENT_PROOF | typeof IDENTITY_PROOF) => {
     if (type === AGREEMENT_PROOF && agreement.agreementProof) {
+      //@ts-ignore
       showProof({ title: AGREEMENT_PROOF, proof: agreement.agreementProof });
     }
     if (type === IDENTITY_PROOF && agreement.agreementFileProof) {
@@ -233,7 +235,7 @@ export const AgreementInformation = ({
         />
 
         <InformationRow
-          name="Identity Proof"
+          name="Authority Proof"
           tooltipValue={agreement?.agreementFileProof?.cid || undefined}
           value={
             agreement.agreementFileProof ? (
@@ -248,7 +250,7 @@ export const AgreementInformation = ({
           }
         />
         <InformationRow
-          name="Authority Proof"
+          name="Identity Proof"
           value={<InformationRowValue text="<Not required>" />}
         />
         <InformationRow

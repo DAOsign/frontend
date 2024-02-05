@@ -22,7 +22,7 @@ import { ModalBase } from "../ModalBase/ModalBase";
 import dynamic from "next/dynamic";
 import { AgreementSignProof } from "../../modules/graphql/gql/graphql";
 import { getFileFromIPFS } from "../../modules/rest";
-import { formatAddress, onCopyClick } from "../../utils/formats";
+import { formatAddress, onCopyClick, formatStoredAddress } from "../../utils/formats";
 import { AGREEMENT_PROOF, IDENTITY_PROOF } from "../ViewAgreement/AgreementInformation";
 import CopyIcon from "../CopyIcon";
 import { informationRowIcon, tableAddressCell } from "../ViewAgreement/styles";
@@ -41,7 +41,7 @@ interface Props {
   isOpen: boolean;
   onExit: () => void;
   title: string;
-  proof: { cid: string; signature?: string } | AgreementSignProof;
+  proof: { cid: string; signature?: string; blockchainStored?: string } | AgreementSignProof;
 }
 
 export default function ModalProof({ isOpen, onExit, title, proof }: Props) {
@@ -56,7 +56,7 @@ export default function ModalProof({ isOpen, onExit, title, proof }: Props) {
 
   const nameTitle = () => {
     if (title === AGREEMENT_PROOF) return "Agreement";
-    if (title === IDENTITY_PROOF) return "Identity";
+    if (title === IDENTITY_PROOF) return "Authority";
     return "Signature";
   };
 
@@ -127,6 +127,21 @@ export default function ModalProof({ isOpen, onExit, title, proof }: Props) {
               )}
             </Box>
           </Flex>
+          {proof?.blockchainStored && (
+            <Flex sx={{ ...box, mt: "12px" }}>
+              <Box>
+                <Text sx={secondaryTitle}>Blockchain</Text>
+              </Box>
+              <Link onClick={() => window.open(proof.blockchainStored!, "_blank", "noreferrer")}>
+                <Flex sx={{ alignItems: "center", cursor: "pointer" }}>
+                  <Text sx={text}>{formatStoredAddress(proof?.blockchainStored)}</Text>
+                  <Box sx={linkContainer}>
+                    <LinkIcon />
+                  </Box>
+                </Flex>
+              </Link>
+            </Flex>
+          )}
           {showDetails && proofJSON ? (
             <>
               <Container sx={containerProof}>
