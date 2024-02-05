@@ -153,7 +153,6 @@ export default function ModalProof({ isOpen, onExit, title, proof }: Props) {
               <Container sx={containerProof}>
                 <ReactJson src={proofJSON} name={null} />
               </Container>
-              // TODO revert if needed
               {/*<Box*/}
               {/*  sx={{ ...proofPadding, bottom: title !== AGREEMENT_PROOF ? "113px" : "30px" }}*/}
               {/*></Box>*/}
