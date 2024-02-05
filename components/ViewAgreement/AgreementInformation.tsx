@@ -340,6 +340,7 @@ export const AgreementInformation = ({
           isOpen={!!proofToShow}
           onExit={() => showProof(undefined)}
           proof={proofToShow.proof}
+          storedOnBlockchain={agreement?.storedOnBlockchain}
         />
       )}
     </Flex>
