@@ -162,7 +162,10 @@ export const ViewAgreement = () => {
               agreementLocation={agreement?.agreementLocation}
               agreementPrivacy={agreement?.agreementPrivacy}
             />
-            <AgreementSignersList signers={agreement?.signers || []} />
+            <AgreementSignersList
+              storedOnBlockchain={agreement?.storedOnBlockchain}
+              signers={agreement?.signers || []}
+            />
             <AgreementObserversList observers={agreement?.observers || []} />
           </Flex>
           {agreement && (
