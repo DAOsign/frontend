@@ -10,9 +10,10 @@ import iconsObj from "../../assets/icons";
 
 interface Props {
   signers: Signer[];
+  storedOnBlockchain?: number;
 }
 
-export const AgreementSignersList = ({ signers }: Props) => {
+export const AgreementSignersList = ({ signers, storedOnBlockchain }: Props) => {
   const [proofToShow, showProof] = useState<AgreementSignProof>();
   return (
     <Container>
@@ -85,6 +86,7 @@ export const AgreementSignersList = ({ signers }: Props) => {
       </Flex>
       {proofToShow && (
         <ModalProof
+          storedOnBlockchain={storedOnBlockchain}
           isOpen={!!proofToShow}
           onExit={() => showProof(undefined)}
           title="signature"
