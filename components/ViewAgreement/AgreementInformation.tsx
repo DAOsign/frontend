@@ -193,7 +193,7 @@ export const AgreementInformation = ({
             className="proposalId"
             tooltipValue={extractProposalId(agreement.snapshotProposalUrl)!}
             value={
-              <Link href={JSON.parse(agreement?.snapshotProposalUrl)} target="_blank">
+              <Link href={agreement?.snapshotProposalUrl} target="_blank">
                 <InformationRowValue
                   text={formatAddress(extractProposalId(agreement.snapshotProposalUrl)!)!}
                   icon={
