@@ -193,9 +193,9 @@ export const AgreementInformation = ({
             className="proposalId"
             tooltipValue={extractProposalId(agreement.snapshotProposalUrl)!}
             value={
-              <Link href={agreement?.snapshotProposalUrl} target="_blank">
+              <Link href={JSON.parse(agreement?.snapshotProposalUrl)} target="_blank">
                 <InformationRowValue
-                  text={"ddd"}
+                  text={formatAddress(extractProposalId(agreement.snapshotProposalUrl)!)!}
                   icon={
                     <Box sx={{ width: "16px", height: "16px" }}>
                       <Icon src={iconsObj.lightning} />

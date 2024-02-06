@@ -18,7 +18,7 @@ export const InformationRowValue = ({
     <Box
       className={className}
       sx={{
-        cursor: onClick ? "pointer" : "default",
+        cursor: onClick && "pointer",
         color: "#000",
         display: "flex",
         alignItems: "center",
