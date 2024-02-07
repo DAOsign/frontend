@@ -58,6 +58,9 @@ const briefInformation = {
     position: "fixed",
     ml: "750px",
   },
+  "@media screen and (max-height: 900px)": {
+    position: "absolute",
+  },
 } as ThemeUIStyleObject;
 
 const backContainer = {
