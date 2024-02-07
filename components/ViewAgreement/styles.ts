@@ -58,7 +58,7 @@ const briefInformation = {
     position: "fixed",
     ml: "750px",
   },
-  "@media screen and (max-height: 900px)": {
+  "@media screen and (max-height: 900px) and (min-width: 1300px)": {
     position: "absolute",
   },
 } as ThemeUIStyleObject;
