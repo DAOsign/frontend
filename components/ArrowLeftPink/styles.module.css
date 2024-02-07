@@ -1,5 +1,5 @@
 .arrowLeftPink{
-    display: block;
+    display: flex;
 }
 
 .arrowLeftPink:hover >svg >path{
