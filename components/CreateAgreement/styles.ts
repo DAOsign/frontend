@@ -809,8 +809,8 @@ const uploadBtn = {
     background: "unset",
     backgroundColor: "transparent",
   },
-  "@media screen and (max-width: 480px)": {
-    width: "fit-content",
+  "@media screen and (max-width: 375px)": {
+    width: "unset",
   },
 } as ThemeUIStyleObject;
 
@@ -840,6 +840,9 @@ const plus = {
   width: "24px",
   m: "0 auto",
   zIndex: 1,
+  "@media screen and (max-width: 768px)": {
+    top: "33px",
+  },
 } as ThemeUIStyleObject;
 
 const btnBack = {
@@ -904,6 +907,10 @@ const delBtn = {
 
 const labelUpload = {
   variant: "forms.label",
+  "@media screen and (max-width: 376px)": {
+    height: "unset",
+    fontSize: "11px",
+  },
 } as ThemeUIStyleObject;
 
 export const uploadHeader = {
@@ -914,6 +921,9 @@ export const uploadHeader = {
   "@media screen and (max-width: 720px)": {
     width: "100%",
     mb: "2px",
+  },
+  "@media screen and (max-width: 372px)": {
+    height: "unset",
   },
 } as ThemeUIStyleObject;
 
@@ -957,6 +967,9 @@ export const backBtn = {
   fontSize: "14px",
   "&:hover": {
     color: "#AE4FD0",
+  },
+  "@media screen and (max-width: 372px)": {
+    fontSize: "12px",
   },
 } as ThemeUIStyleObject;
 

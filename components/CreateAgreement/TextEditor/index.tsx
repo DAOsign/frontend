@@ -111,7 +111,7 @@ const TextEditor = ({
             Preview
           </Button>
           <Button sx={btnBack} className="backBtn" onClick={handleChooseAnotherMethod}>
-            <Box sx={{ width: "20px", marginTop: "5px" }}>
+            <Box sx={{ width: "20px" }}>
               <ArrowLeftPink />
             </Box>
             <Text sx={{ display: "block" }}>Choose another method</Text>
