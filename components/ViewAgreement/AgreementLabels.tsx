@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useMemo, useState } from "react";
 import {
   baseLabel,
   blueLabel,
@@ -18,8 +18,6 @@ import {
   AgreementPrivacy,
   AgreementStatus,
   PRIVACY_PRIVATE,
-  PRIVACY_PUBLIC_PROOF_ONLY,
-  PRIVACY_PUBLIC_PROOF_ONLY_FULL_NAME,
   STATUS_DRAFT,
   STATUS_PARTIALLY_SIGNED,
   STATUS_READY_TO_SIGN,
@@ -47,6 +45,7 @@ import {
 import Lottie from "lottie-react";
 import { Portal } from "../Portal/Portal";
 import NetworkIcon from "../NetworkIcon";
+import { Signer } from "../../modules/graphql/gql/graphql";
 
 const getAgreementStatusLabelStyle = (agreementStatus: string | undefined): ThemeUIStyleObject => {
   switch (agreementStatus) {
@@ -70,6 +69,9 @@ interface Props {
   agreementPrivacy?: AgreementPrivacy | string;
   isWaitingForMySignature: boolean;
   storedOnNetwork?: number;
+  userIsAuthor: boolean;
+  account: string | null;
+  agreementSigners: Array<Signer>;
 }
 
 export const AgreementLabels = ({
@@ -79,6 +81,9 @@ export const AgreementLabels = ({
   agreementPrivacy,
   isWaitingForMySignature,
   storedOnNetwork,
+  agreementSigners,
+  userIsAuthor,
+  account,
 }: Props) => {
   const handleShareLink = () => {
     onCopyClick(window?.location?.href);
@@ -105,6 +110,17 @@ export const AgreementLabels = ({
     } else {
       return `Agreement Privacy: ${value} `;
     }
+  };
+
+  const userIsSigner = useMemo(
+    () =>
+      account &&
+      agreementSigners?.some((signer: any) => signer?.wallet.address === account.toLowerCase()),
+    [agreementSigners, account]
+  );
+
+  const isShowDownload = () => {
+    return userIsAuthor || userIsSigner;
   };
 
   return (
@@ -172,8 +188,7 @@ export const AgreementLabels = ({
             </Box>
             Share Link
           </Flex>
-          {agreementPrivacy !== PRIVACY_PUBLIC_PROOF_ONLY &&
-          agreementPrivacy !== PRIVACY_PUBLIC_PROOF_ONLY_FULL_NAME ? (
+          {isShowDownload() && (
             <Flex
               sx={greyLabelWithHover}
               onClick={() => {
@@ -185,7 +200,7 @@ export const AgreementLabels = ({
               </Box>
               Download Document
             </Flex>
-          ) : null}
+          )}
         </Flex>
       </Flex>
       <Portal sx={bg} isOpen={downloadInProgress}>

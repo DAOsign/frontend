@@ -147,6 +147,9 @@ export const ViewAgreement = () => {
             )}
             <Box sx={title}>{agreement?.title}</Box>
             <AgreementLabels
+              agreementSigners={agreement?.signers}
+              account={account}
+              userIsAuthor={userIsAuthor}
               agreementTitle={agreement?.title}
               agreementId={String(agreement?.agreementId)}
               agreementStatus={agreement?.agreementStatus}
