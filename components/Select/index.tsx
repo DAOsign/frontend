@@ -7,6 +7,7 @@ export interface Option {
   label: string;
   value: unknown;
   icon?: string;
+  disabled?: boolean;
 }
 
 type Props = { options: Option[]; selected: Option; onSelect: (option: Option) => void };

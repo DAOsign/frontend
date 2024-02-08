@@ -4,8 +4,12 @@ import PolkadotImg from "../img/svg/mainnet/polkadot.svg";
 import { Option } from "../components/Select";
 
 export const networkOptions: Option[] = [
-  { label: "Ethereum Mainnet", value: 1, icon: EtherImg },
-  { label: "SUI Mainnet", value: 2, icon: SUIImg },
-  { label: "Polkadot Mainnet", value: 3, icon: PolkadotImg },
+  { label: "Goerli (ETH Testnet)", value: 1, icon: EtherImg, disabled: false },
+  { label: "SUI Testnet", value: 2, icon: SUIImg, disabled: false },
+  { label: "Polkadot Testnet", value: 3, icon: PolkadotImg, disabled: false },
+
+  { label: "Ethereum Mainnet", value: 5, icon: EtherImg, disabled: true },
+  { label: "SUI Mainnet", value: 6, icon: SUIImg, disabled: true },
+  { label: "Polkadot Mainnet", value: 7, icon: PolkadotImg, disabled: true },
   //{ title: "Ethereum Testnet", value: 4, icon: EtherImg },
 ];
