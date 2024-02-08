@@ -24,8 +24,11 @@ function Layout({ children }: React.PropsWithChildren) {
       }}
     >
       <Head>
-        <title>DAOsign App</title>
-        <meta name="description" content="DAOsign App" />
+        <title>DAOsign - Decentralized Workflow Management with Smart Signature Protocol</title>
+        <meta
+          name="description"
+          content="DAOsign - Decentralized Workflow Management with Smart Signature Protocol"
+        />
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <Header
