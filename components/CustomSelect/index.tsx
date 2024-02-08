@@ -104,8 +104,13 @@ const CustomSelect = ({ selected, options, label, onChange }: Props) => {
           <Container sx={{ ...itemOption, maxHeight: "178px" }}>
             {optionsFilter.map((el: any, i: number) => (
               <Flex
-                sx={{ ...flexSelect, "&:hover": { backgroundColor: "#D8D8E2" } }}
-                onClick={() => handleSelectClick(el)}
+                sx={{
+                  ...flexSelect,
+                  "&:hover": { backgroundColor: "#D8D8E2" },
+                  opacity: el.disabled ? 0.5 : 1,
+                  cursor: el.disabled ? "not-allowed" : "pointer",
+                }}
+                onClick={() => (el.disabled ? null : handleSelectClick(el))}
                 className="itemSelect"
                 key={i}
               >
