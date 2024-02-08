@@ -18,6 +18,7 @@ export interface CreateAgreementFieldErrors {
   agreementFile?: FieldError;
   observers?: FieldError;
   signers?: FieldError;
+  agreementLocation?: FieldError;
 }
 
 export interface ProposalState {
@@ -78,7 +79,7 @@ const defaultState: CreationState = {
   agreementPrivacy: "",
   title: "",
   textEditorValue: "",
-  agreementLocation: LOCATION_CLOUD,
+  agreementLocation: "",
   agreementMethod: "",
   agreementHash: "",
   filePath: "",

@@ -13,6 +13,7 @@ import {
 } from "../types";
 
 export interface CreateAgreementFieldErrors {
+  agreementLocation?: FieldError;
   title?: FieldError;
   agreementPrivacy?: FieldError;
   agreementFile?: FieldError;
@@ -48,7 +49,7 @@ const defaultState: CreationState = {
   agreementPrivacy: "",
   title: "",
   textEditorValue: "",
-  agreementLocation: LOCATION_CLOUD,
+  agreementLocation: "",
   agreementMethod: "",
   agreementHash: "",
   filePath: "",

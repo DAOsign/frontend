@@ -40,6 +40,7 @@ export default function AgreementLocationRadioButtons({ page }: { page: string }
       setIsIpfsWarningVisible(true);
     }
     changeValue("agreementLocation", location);
+    changeValue("errors", { ...values.errors, agreementLocation: null });
   };
 
   return (
