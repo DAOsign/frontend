@@ -94,7 +94,7 @@ const EditAgreemntProvider = (props?: Partial<ProviderProps<CreateAgrementContex
         [key]: value,
         agreementLocation:
           key === "agreementPrivacy"
-            ? LOCATION_CLOUD
+            ? state.agreementLocation
             : key === "agreementLocation"
             ? value
             : state.agreementLocation,
