@@ -125,6 +125,9 @@ export default function NavPanel({ setLoading, page }: { setLoading: any; page: 
           if (!values.agreementPrivacy) {
             errors.agreementPrivacy = "Agreement Privacy is a required selection";
           }
+          if (!values.agreementLocation) {
+            errors.agreementLocation = "Agreement Location is a required selection";
+          }
           break;
       }
     }
@@ -149,29 +152,17 @@ export default function NavPanel({ setLoading, page }: { setLoading: any; page: 
 
     const token = getToken();
 
-    if (values.agreementLocation === LOCATION_PUBLIC_IPFS) {
-      const uploadResult = await uploadToIpfs(token!, file);
-      if (!uploadResult.IpfsHash) {
-        return { error: uploadResult };
+    try {
+      const res = await uploadFile(token!, file);
+      if (res && "fileLink" in res) {
+        changeValue("filePath", res.fileLink);
+        return { filePath: res.fileLink, agreementHash: calculatedIpfsHash };
+      } else {
+        return { error: res };
       }
-      return { agreementHash: calculatedIpfsHash };
+    } catch (error) {
+      return { error };
     }
-
-    if (values.agreementLocation === LOCATION_CLOUD) {
-      try {
-        const res = await uploadFile(token!, file);
-        if (res && "fileLink" in res) {
-          changeValue("filePath", res.fileLink);
-          return { filePath: res.fileLink, agreementHash: calculatedIpfsHash };
-        } else {
-          return { error: res };
-        }
-      } catch (error) {
-        return { error };
-      }
-    }
-
-    return { error: { message: "Invalid agreement location" } };
   };
 
   const [{ fetching: savingAgreement }, saveAgreement] = useMutation(saveAgreementMutation);
@@ -359,6 +350,7 @@ export default function NavPanel({ setLoading, page }: { setLoading: any; page: 
           }
         } catch (error) {
           console.error(error);
+
           notifError(
             formatFileUploadErrorMessage(
               error?.response?.data?.error || error?.message || FILE_UPLOAD_ERROR_DEFAULT_MESSAGE

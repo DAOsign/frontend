@@ -2,7 +2,6 @@ import React, { useEffect, useState, useRef } from "react";
 import { Container, Text, Flex, Label, Switch, Box } from "theme-ui";
 import { textLoading } from "../../styles";
 import {
-  NetworkName,
   PRIVACY_PUBLIC_PROOF_ONLY,
   PRIVACY_PUBLIC_PUBLISHED,
   PRIVACY_PUBLIC_WITH_LINK,
@@ -19,7 +18,6 @@ import FieldErrorMessage from "../../../Form/FieldErrorMessage";
 import AgreementLocationRadioButtons from "../StepTwo/AgreementLocationButtons";
 import CustomSelect from "../../../CustomSelect";
 import { networkOptions } from "../../../../utils/mockData";
-import Select, { Option } from "../../../Select";
 
 const defaultIsPublic = (agreementPrivacy: string) => {
   return [PRIVACY_PUBLIC_PROOF_ONLY, PRIVACY_PUBLIC_PUBLISHED, PRIVACY_PUBLIC_WITH_LINK].some(
@@ -82,6 +80,7 @@ export default function StepThree({ page, animateContainer, loading }: Props) {
           )}
           <FieldErrorMessage error={values?.errors.agreementPrivacy} />
           <AgreementLocationRadioButtons page={page} />
+          <FieldErrorMessage error={values?.errors.agreementLocation} />
           <Box>
             <Flex sx={{ ...switchContainer, width: "fit-content", mt: "45px", mb: "40px" }}>
               <Label htmlFor="storeBlockchain" sx={labelSwitch}>
