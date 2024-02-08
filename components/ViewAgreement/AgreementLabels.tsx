@@ -1,16 +1,4 @@
 import React, { useMemo, useState } from "react";
-import {
-  baseLabel,
-  blueLabel,
-  greenLabel,
-  greyLabel,
-  greyLabelWithHover,
-  labelIcon,
-  labelsContainer,
-  labelsRow,
-  needSigningIcon,
-  yellowLabel,
-} from "./styles";
 import { Box, Flex, Text, ThemeUIStyleObject } from "theme-ui";
 import { formatAgreementStatus, onCopyClick } from "../../utils/formats";
 import Icon from "../icon";
@@ -45,7 +33,20 @@ import {
 import Lottie from "lottie-react";
 import { Portal } from "../Portal/Portal";
 import NetworkIcon from "../NetworkIcon";
-import { Signer } from "../../modules/graphql/gql/graphql";
+import { Observer, Signer } from "../../modules/graphql/gql/graphql";
+
+import {
+  baseLabel,
+  blueLabel,
+  greenLabel,
+  greyLabel,
+  greyLabelWithHover,
+  labelIcon,
+  labelsContainer,
+  labelsRow,
+  needSigningIcon,
+  yellowLabel,
+} from "./styles";
 
 const getAgreementStatusLabelStyle = (agreementStatus: string | undefined): ThemeUIStyleObject => {
   switch (agreementStatus) {
@@ -72,6 +73,7 @@ interface Props {
   userIsAuthor: boolean;
   account: string | null;
   agreementSigners: Array<Signer> | undefined;
+  agreementObservers: Array<Observer> | undefined;
 }
 
 export const AgreementLabels = ({
@@ -84,6 +86,7 @@ export const AgreementLabels = ({
   agreementSigners,
   userIsAuthor,
   account,
+  agreementObservers,
 }: Props) => {
   const handleShareLink = () => {
     onCopyClick(window?.location?.href);
@@ -119,8 +122,17 @@ export const AgreementLabels = ({
     [agreementSigners, account]
   );
 
+  const userIsObserver = useMemo(
+    () =>
+      account &&
+      agreementObservers?.some(
+        (observer: any) => observer?.wallet.address === account.toLowerCase()
+      ),
+    [agreementSigners, account]
+  );
+
   const isShowDownload = () => {
-    return userIsAuthor || userIsSigner;
+    return userIsAuthor || userIsSigner || userIsObserver;
   };
 
   return (

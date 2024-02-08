@@ -3,18 +3,7 @@ import React, { useCallback, useEffect, useMemo, useState } from "react";
 import { Box, Button, Flex } from "theme-ui";
 import { useRouter } from "next/router";
 import { useClient } from "urql";
-
 import { agreementById } from "../../modules/graphql/queries";
-import {
-  backContainer,
-  backIcon,
-  container,
-  errorBackButton,
-  errorContainer,
-  errorMessage,
-  mainData,
-  title,
-} from "./styles";
 import iconsObj from "../../assets/icons";
 import Icon from "../icon";
 import { toAgreementWithParticipants } from "../../utils/typeUtils";
@@ -27,10 +16,20 @@ import { AgreementSignersList } from "./AgreementSignersList";
 import { AgreementObserversList } from "./AgreementObserversList";
 import { AgreementContentPreview } from "./AgreementContentPreview";
 import ModalEditObservers from "../../components/ModalEditObservers";
-
 import useSignAgreement from "../../hooks/useSignAgreement";
 import ModalReadyToSign from "../ModalReadyToSign";
 import { ZERO_ADDRESS } from "../../constants/common";
+
+import {
+  backContainer,
+  backIcon,
+  container,
+  errorBackButton,
+  errorContainer,
+  errorMessage,
+  mainData,
+  title,
+} from "./styles";
 
 export const ViewAgreement = () => {
   const { push, query } = useRouter();
@@ -148,6 +147,7 @@ export const ViewAgreement = () => {
             <Box sx={title}>{agreement?.title}</Box>
             <AgreementLabels
               agreementSigners={agreement?.signers}
+              agreementObservers={agreement?.observers}
               account={account}
               userIsAuthor={userIsAuthor}
               agreementTitle={agreement?.title}
