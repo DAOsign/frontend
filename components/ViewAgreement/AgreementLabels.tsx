@@ -1,16 +1,4 @@
-import React, { useState } from "react";
-import {
-  baseLabel,
-  blueLabel,
-  greenLabel,
-  greyLabel,
-  greyLabelWithHover,
-  labelIcon,
-  labelsContainer,
-  labelsRow,
-  needSigningIcon,
-  yellowLabel,
-} from "./styles";
+import React, { useMemo, useState } from "react";
 import { Box, Flex, Text, ThemeUIStyleObject } from "theme-ui";
 import { formatAgreementStatus, onCopyClick } from "../../utils/formats";
 import Icon from "../icon";
@@ -18,8 +6,6 @@ import {
   AgreementPrivacy,
   AgreementStatus,
   PRIVACY_PRIVATE,
-  PRIVACY_PUBLIC_PROOF_ONLY,
-  PRIVACY_PUBLIC_PROOF_ONLY_FULL_NAME,
   STATUS_DRAFT,
   STATUS_PARTIALLY_SIGNED,
   STATUS_READY_TO_SIGN,
@@ -47,6 +33,20 @@ import {
 import Lottie from "lottie-react";
 import { Portal } from "../Portal/Portal";
 import NetworkIcon from "../NetworkIcon";
+import { Observer, Signer } from "../../modules/graphql/gql/graphql";
+
+import {
+  baseLabel,
+  blueLabel,
+  greenLabel,
+  greyLabel,
+  greyLabelWithHover,
+  labelIcon,
+  labelsContainer,
+  labelsRow,
+  needSigningIcon,
+  yellowLabel,
+} from "./styles";
 
 const getAgreementStatusLabelStyle = (agreementStatus: string | undefined): ThemeUIStyleObject => {
   switch (agreementStatus) {
@@ -70,6 +70,10 @@ interface Props {
   agreementPrivacy?: AgreementPrivacy | string;
   isWaitingForMySignature: boolean;
   storedOnNetwork?: number;
+  userIsAuthor: boolean;
+  account: string | null;
+  agreementSigners: Array<Signer> | undefined;
+  agreementObservers: Array<Observer> | undefined;
 }
 
 export const AgreementLabels = ({
@@ -79,6 +83,10 @@ export const AgreementLabels = ({
   agreementPrivacy,
   isWaitingForMySignature,
   storedOnNetwork,
+  agreementSigners,
+  userIsAuthor,
+  account,
+  agreementObservers,
 }: Props) => {
   const handleShareLink = () => {
     onCopyClick(window?.location?.href);
@@ -105,6 +113,26 @@ export const AgreementLabels = ({
     } else {
       return `Agreement Privacy: ${value} `;
     }
+  };
+
+  const userIsSigner = useMemo(
+    () =>
+      account &&
+      agreementSigners?.some((signer: any) => signer?.wallet.address === account.toLowerCase()),
+    [agreementSigners, account]
+  );
+
+  const userIsObserver = useMemo(
+    () =>
+      account &&
+      agreementObservers?.some(
+        (observer: any) => observer?.wallet.address === account.toLowerCase()
+      ),
+    [agreementObservers, account]
+  );
+
+  const isShowDownload = () => {
+    return userIsAuthor || userIsSigner || userIsObserver;
   };
 
   return (
@@ -172,8 +200,7 @@ export const AgreementLabels = ({
             </Box>
             Share Link
           </Flex>
-          {agreementPrivacy !== PRIVACY_PUBLIC_PROOF_ONLY &&
-          agreementPrivacy !== PRIVACY_PUBLIC_PROOF_ONLY_FULL_NAME ? (
+          {isShowDownload() && (
             <Flex
               sx={greyLabelWithHover}
               onClick={() => {
@@ -185,7 +212,7 @@ export const AgreementLabels = ({
               </Box>
               Download Document
             </Flex>
-          ) : null}
+          )}
         </Flex>
       </Flex>
       <Portal sx={bg} isOpen={downloadInProgress}>
