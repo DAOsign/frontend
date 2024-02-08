@@ -71,7 +71,7 @@ interface Props {
   storedOnNetwork?: number;
   userIsAuthor: boolean;
   account: string | null;
-  agreementSigners: Array<Signer>;
+  agreementSigners: Array<Signer> | undefined;
 }
 
 export const AgreementLabels = ({
