@@ -128,7 +128,7 @@ export const AgreementLabels = ({
       agreementObservers?.some(
         (observer: any) => observer?.wallet.address === account.toLowerCase()
       ),
-    [agreementSigners, account]
+    [agreementObservers, account]
   );
 
   const isShowDownload = () => {
