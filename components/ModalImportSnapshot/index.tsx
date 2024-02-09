@@ -80,6 +80,7 @@ import {
   input,
   icon,
   bg,
+  loadingState,
 } from "./styles";
 import useWindowDimensions from "../../hooks/useWindowDimensions";
 import { notifError } from "../../utils/notification";
@@ -88,6 +89,7 @@ import { saveAgreementMutation } from "../../modules/graphql/mutations";
 import Tooltip from "../Tooltip";
 import CloseIcon from "../IconComponent/CloseIcon";
 import ArrowLeftPink from "../ArrowLeftPink";
+import client from "@mailchimp/mailchimp_marketing";
 
 interface Props {
   isOpen: boolean;
@@ -124,6 +126,10 @@ export default function ModalImportSnapshot({ isOpen, page, onExit, setMethod }:
   });
   const [selectsOpen, setSelectsOpen] = useState(initialStateSelects);
   const [searchValue, setSearchValue] = useState("");
+  const [isPaused, setIsPaused] = useState<boolean>(false);
+  const [abortController, setAbortController] = useState<any>(null);
+  const client = useClient();
+
   const { query } = useClient();
 
   const validationproposalLink = () => {
@@ -192,13 +198,21 @@ export default function ModalImportSnapshot({ isOpen, page, onExit, setMethod }:
     const getIdRes = extractProposalId(values.proposal.snapshotProposalUrl);
     if (!!getIdRes) {
       setLoading(true);
+
       return query(
         snapshotProposal,
         { proposalId: getIdRes },
-        { url: snapshotUrl, requestPolicy: "network-only" }
+        {
+          url: snapshotUrl,
+          requestPolicy: "network-only",
+          pause: isPaused,
+        }
       )
         .toPromise()
-        .then(r => r?.data?.proposal);
+        .then(r => {
+          return r?.data?.proposal;
+        })
+        .finally(() => setLoading(false));
     }
   };
 
@@ -483,6 +497,14 @@ export default function ModalImportSnapshot({ isOpen, page, onExit, setMethod }:
     });
   };
 
+  const cancelRequest = () => {
+    // if (abortController) {
+    //   abortController.abort(); // Отменяем запрос
+    //   setAbortController(null); // Сбрасываем контроллер
+    // }
+    setIsPaused(true);
+  };
+
   return (
     <Portal sx={bg} isOpen={isOpen} onClose={onExit}>
       <ModalBase height="auto" sx={modalBase}>
@@ -581,9 +603,14 @@ export default function ModalImportSnapshot({ isOpen, page, onExit, setMethod }:
                 </Flex>
               </>
             ) : (
-              <Flex sx={flexLoader}>
-                <Lottie style={{ height: "80px" }} animationData={loader} loop={true} />
+              <Flex sx={loadingState}>
+                <Lottie style={{ height: "80px" }} animationData={loader} loop />
                 <Text sx={importingText}>Importing...</Text>
+                <Flex sx={stylesBtn}>
+                  <Button onClick={cancelRequest} sx={loading ? btnCancelLoading : btnCancel}>
+                    Cancel
+                  </Button>
+                </Flex>
               </Flex>
             )}
           </Flex>
