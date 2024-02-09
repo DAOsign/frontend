@@ -32,7 +32,7 @@ import {
 } from "../ModalImportSnapshot/styles";
 import Lottie from "lottie-react";
 import { Portal } from "../Portal/Portal";
-import NetworkIcon from "../NetworkIcon";
+import NetworkIcon, { networkName } from "../NetworkIcon";
 import { Observer, Signer } from "../../modules/graphql/gql/graphql";
 
 import {
@@ -47,6 +47,7 @@ import {
   needSigningIcon,
   yellowLabel,
 } from "./styles";
+import { networksTitle } from "../../constants/common";
 
 const getAgreementStatusLabelStyle = (agreementStatus: string | undefined): ThemeUIStyleObject => {
   switch (agreementStatus) {
@@ -135,6 +136,8 @@ export const AgreementLabels = ({
     return userIsAuthor || userIsSigner || userIsObserver;
   };
 
+  const name = storedOnNetwork && networkName[storedOnNetwork];
+
   return (
     <>
       <Flex sx={labelsContainer}>
@@ -177,7 +180,19 @@ export const AgreementLabels = ({
               {agreementPrivacy}
             </Flex>
           </Tooltip>
-          {storedOnNetwork && <NetworkIcon networkId={storedOnNetwork} />}
+          {storedOnNetwork && (
+            <Tooltip
+              top="-46px"
+              height="0"
+              className="statusViews"
+              left="60%"
+              transform={"translate(-58%, 0%)"}
+              title={name && networksTitle[name]}
+              minWidth="150px"
+            >
+              <NetworkIcon networkId={storedOnNetwork} />
+            </Tooltip>
+          )}
           {isWaitingForMySignature ? (
             <Tooltip
               title="Your signature is missing"

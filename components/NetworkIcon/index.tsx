@@ -16,7 +16,7 @@ const network = {
   polkadot: PolkadotImg,
 };
 
-const networkName = [null, "ethereum", "sui", "polkadot"];
+export const networkName = [null, "ethereum", "sui", "polkadot"];
 
 function NetworkIcon({ networkId }: Props) {
   const name = networkName[networkId] as string;
