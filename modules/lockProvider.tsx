@@ -14,6 +14,7 @@ import { getInjected } from "../lib/lock/utils";
 import { MetaMaskInpageProvider } from "@metamask/providers";
 import type WalletConnectProvider from "@walletconnect/web3-provider";
 import type { CoinbaseWalletProvider } from "@coinbase/wallet-sdk/dist/provider/CoinbaseWalletProvider";
+import { useRouter } from "next/router";
 
 type ProviderType = WalletConnectProvider | any;
 
@@ -42,6 +43,8 @@ const LockProvider = (props?: Partial<ProviderProps<LockContextInterface>>) => {
     isLoading: true,
     isAuthenticated: false,
   });
+
+  const { push, pathname } = useRouter();
 
   const lockInstanceRef = useRef<Lock>(new Lock(options.connectors));
 
@@ -77,6 +80,10 @@ const LockProvider = (props?: Partial<ProviderProps<LockContextInterface>>) => {
       //isAuthenticatedRef.current = false;
       setState(state => ({ ...state, isAuthenticated: false }));
       providerRef.current = undefined;
+
+      // workaround for connect different wallet
+      await push("/connect");
+      window.location.reload();
     }
   }
 
