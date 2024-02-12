@@ -63,7 +63,6 @@ import {
   importingText,
   labelSwitch,
   inputSearch,
-  flexLoader,
   itemOption,
   flexContent,
   titleSelect,
@@ -80,6 +79,7 @@ import {
   input,
   icon,
   bg,
+  loadingState,
 } from "./styles";
 import useWindowDimensions from "../../hooks/useWindowDimensions";
 import { notifError } from "../../utils/notification";
@@ -124,6 +124,7 @@ export default function ModalImportSnapshot({ isOpen, page, onExit, setMethod }:
   });
   const [selectsOpen, setSelectsOpen] = useState(initialStateSelects);
   const [searchValue, setSearchValue] = useState("");
+
   const { query } = useClient();
 
   const validationproposalLink = () => {
@@ -192,13 +193,20 @@ export default function ModalImportSnapshot({ isOpen, page, onExit, setMethod }:
     const getIdRes = extractProposalId(values.proposal.snapshotProposalUrl);
     if (!!getIdRes) {
       setLoading(true);
+
       return query(
         snapshotProposal,
         { proposalId: getIdRes },
-        { url: snapshotUrl, requestPolicy: "network-only" }
+        {
+          url: snapshotUrl,
+          requestPolicy: "network-only",
+        }
       )
         .toPromise()
-        .then(r => r?.data?.proposal);
+        .then(r => {
+          return r?.data?.proposal;
+        })
+        .finally(() => setLoading(false));
     }
   };
 
@@ -581,9 +589,14 @@ export default function ModalImportSnapshot({ isOpen, page, onExit, setMethod }:
                 </Flex>
               </>
             ) : (
-              <Flex sx={flexLoader}>
-                <Lottie style={{ height: "80px" }} animationData={loader} loop={true} />
+              <Flex sx={loadingState}>
+                <Lottie style={{ height: "80px" }} animationData={loader} loop />
                 <Text sx={importingText}>Importing...</Text>
+                <Flex sx={stylesBtn}>
+                  <Button onClick={onExit} sx={loading ? btnCancelLoading : btnCancel}>
+                    Cancel
+                  </Button>
+                </Flex>
               </Flex>
             )}
           </Flex>

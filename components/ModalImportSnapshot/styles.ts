@@ -280,6 +280,13 @@ export const flexLoader = {
   pb: "65px",
 } as ThemeUIStyleObject;
 
+export const loadingState = {
+  justifyContent: "center",
+  flexDirection: "column",
+  alignItems: "center",
+  pt: "20px",
+} as ThemeUIStyleObject;
+
 export const modalBase = {
   width: "756px",
   pt: "40px",
