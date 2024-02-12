@@ -63,7 +63,6 @@ import {
   importingText,
   labelSwitch,
   inputSearch,
-  flexLoader,
   itemOption,
   flexContent,
   titleSelect,
@@ -89,7 +88,6 @@ import { saveAgreementMutation } from "../../modules/graphql/mutations";
 import Tooltip from "../Tooltip";
 import CloseIcon from "../IconComponent/CloseIcon";
 import ArrowLeftPink from "../ArrowLeftPink";
-import client from "@mailchimp/mailchimp_marketing";
 
 interface Props {
   isOpen: boolean;
@@ -126,9 +124,6 @@ export default function ModalImportSnapshot({ isOpen, page, onExit, setMethod }:
   });
   const [selectsOpen, setSelectsOpen] = useState(initialStateSelects);
   const [searchValue, setSearchValue] = useState("");
-  const [isPaused, setIsPaused] = useState<boolean>(false);
-  const [abortController, setAbortController] = useState<any>(null);
-  const client = useClient();
 
   const { query } = useClient();
 
