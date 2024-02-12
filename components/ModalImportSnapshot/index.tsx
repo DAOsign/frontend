@@ -205,7 +205,6 @@ export default function ModalImportSnapshot({ isOpen, page, onExit, setMethod }:
         {
           url: snapshotUrl,
           requestPolicy: "network-only",
-          pause: isPaused,
         }
       )
         .toPromise()
@@ -497,14 +496,6 @@ export default function ModalImportSnapshot({ isOpen, page, onExit, setMethod }:
     });
   };
 
-  const cancelRequest = () => {
-    // if (abortController) {
-    //   abortController.abort(); // Отменяем запрос
-    //   setAbortController(null); // Сбрасываем контроллер
-    // }
-    setIsPaused(true);
-  };
-
   return (
     <Portal sx={bg} isOpen={isOpen} onClose={onExit}>
       <ModalBase height="auto" sx={modalBase}>
@@ -607,7 +598,7 @@ export default function ModalImportSnapshot({ isOpen, page, onExit, setMethod }:
                 <Lottie style={{ height: "80px" }} animationData={loader} loop />
                 <Text sx={importingText}>Importing...</Text>
                 <Flex sx={stylesBtn}>
-                  <Button onClick={cancelRequest} sx={loading ? btnCancelLoading : btnCancel}>
+                  <Button onClick={onExit} sx={loading ? btnCancelLoading : btnCancel}>
                     Cancel
                   </Button>
                 </Flex>
