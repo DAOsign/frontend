@@ -11,5 +11,4 @@ export const networkOptions: Option[] = [
   { label: "Ethereum Mainnet", value: 5, icon: EtherImg, disabled: true },
   { label: "SUI Mainnet", value: 6, icon: SUIImg, disabled: true },
   { label: "Polkadot Mainnet", value: 7, icon: PolkadotImg, disabled: true },
-  //{ title: "Ethereum Testnet", value: 4, icon: EtherImg },
 ];
