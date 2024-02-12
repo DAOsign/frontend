@@ -120,7 +120,7 @@ const TextEditor = ({
         <Box>
           {expand ? (
             <MDEditor
-              onChange={val => changeValue("textEditorValue", val || "")}
+              onChange={val => changeValue("textEditorValue", val || "", true)}
               hideToolbar={state === "preview"}
               minHeight={minHeightTextEditor}
               value={textEditorValue}
@@ -130,7 +130,7 @@ const TextEditor = ({
             />
           ) : (
             <MDEditor
-              onChange={val => changeValue("textEditorValue", val || "")}
+              onChange={val => changeValue("textEditorValue", val || "", true)}
               hideToolbar={state === "preview"}
               value={textEditorValue}
               preview={state}

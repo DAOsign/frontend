@@ -54,7 +54,7 @@ export interface CreationState {
 }
 interface CreateAgrementContext {
   values: CreationState;
-  changeValue: (key: keyof CreationState, value: any) => void;
+  changeValue: (key: keyof CreationState, value: any, skipLocalStorage?: boolean) => void;
 }
 
 const DRAFT_STORAGE_KEY = "draftAgreement";
@@ -124,7 +124,7 @@ const CreateAgreementProvider = (props?: Partial<ProviderProps<CreateAgrementCon
   const { query, push } = useRouter();
   const valuesLoadedRef = useRef(false);
 
-  const changeValue = (key: keyof CreationState, value: any) => {
+  const changeValue = (key: keyof CreationState, value: any, skipLocalStorage?: boolean) => {
     setValues(state => {
       const newState: CreationState = {
         ...state,
@@ -142,7 +142,7 @@ const CreateAgreementProvider = (props?: Partial<ProviderProps<CreateAgrementCon
             ? value
             : state.agreementHash,
       };
-      saveDraft({ ...newState, file: undefined, errors: {} });
+      !skipLocalStorage && saveDraft({ ...newState, file: undefined, errors: {} });
       return newState;
     });
   };

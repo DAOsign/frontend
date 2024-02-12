@@ -37,7 +37,7 @@ export default function StepOne({
           <Text sx={{ variant: "forms.label", ml: "3px" }}>Title *</Text>
           <Input
             value={values.title}
-            onChange={e => changeValue("title", e.target.value)}
+            onChange={e => changeValue("title", e.target.value, true)}
             sx={{ variant: "forms.input", ...inputCreactAgreement, ...titleInputErrorStyles }}
           />{" "}
         </>

@@ -23,9 +23,9 @@ const UploadScreen = ({ page }: { page: string }) => {
     }
 
     if (file) {
-      changeValue("filePath", "");
-      changeValue("agreementHash", "");
-      changeValue("file", file);
+      changeValue("filePath", "", true);
+      changeValue("agreementHash", "", true);
+      changeValue("file", file, true);
     }
   };
 

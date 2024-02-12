@@ -72,7 +72,7 @@ export default function ChooseAgreementMethod({
     if (values.title.trim()?.length > 120) {
       errors.title = "Title should be 120 characters max";
     }
-    changeValue("errors", errors);
+    changeValue("errors", errors, true);
     return isEmpty(errors);
   };
 
@@ -115,11 +115,11 @@ export default function ChooseAgreementMethod({
     const validateRes = validateTitle();
 
     if (beforeModal) {
-      changeValue("textEditorValue", "");
-      changeValue("proposal", initialStateProposal);
-      changeValue("filePath", "");
-      changeValue("errors", { ...values.errors, agreementFile: null });
-      changeValue("file", undefined);
+      changeValue("textEditorValue", "", true);
+      changeValue("proposal", initialStateProposal, true);
+      changeValue("filePath", "", true);
+      changeValue("errors", { ...values.errors, agreementFile: null }, true);
+      changeValue("file", undefined, true);
       setModalAttention({ isOpen: false, method });
     }
     if (!!values.agreementMethod && isSameMethod && !beforeModal && validateRes) {
@@ -133,11 +133,11 @@ export default function ChooseAgreementMethod({
     if (validateRes) {
       if (method === METHOD_IMPORT_SHAPSHOT && (!values.textEditorValue || beforeModal)) {
         setIsOpenModalImport(true);
-        changeValue(name, method);
+        changeValue(name, method, true);
         return;
       }
-      changeValue("agreementMethod", modalAttention.method);
-      changeValue(name, method);
+      changeValue("agreementMethod", modalAttention.method, true);
+      changeValue(name, method, true);
       setMethod(method);
     }
   };

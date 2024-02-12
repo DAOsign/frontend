@@ -205,8 +205,7 @@ export default function ModalImportSnapshot({ isOpen, page, onExit, setMethod }:
         .toPromise()
         .then(r => {
           return r?.data?.proposal;
-        })
-        .finally(() => setLoading(false));
+        });
     }
   };
 
@@ -232,8 +231,8 @@ export default function ModalImportSnapshot({ isOpen, page, onExit, setMethod }:
 
   const setData = (text: string) => {
     onExit();
-    changeValue("proposal", { ...values.proposal, propousalText: text });
-    changeValue("textEditorValue", text);
+    changeValue("proposal", { ...values.proposal, propousalText: text }, true);
+    changeValue("textEditorValue", text, true);
     setMethod(METHOD_IMPORT_SHAPSHOT);
   };
 
@@ -258,13 +257,13 @@ export default function ModalImportSnapshot({ isOpen, page, onExit, setMethod }:
       }
       return res.data.saveAgreement.agreementId;
     });
-    changeValue("agreementId", agreementId);
+    changeValue("agreementId", agreementId, true);
     return agreementId;
   };
 
   const generate = async (proposalText: string) => {
     const id = !!values.agreementId ? values.agreementId : await handleCreateAgreement();
-    changeValue("agreementId", id);
+    changeValue("agreementId", id, true);
     let dataGenerateAggrement: any = {
       addIntellectualPropertyClause,
       addNonSolicitationClause,
@@ -316,10 +315,10 @@ export default function ModalImportSnapshot({ isOpen, page, onExit, setMethod }:
         : "errorContractType";
     setErrors({ ...errors, [field]: initialErrorObj });
     if (name === LEGAL_JURISDICTION_COUNTRY && el !== UNITED_STATES) {
-      changeValue("proposal", { ...values.proposal, LEGAL_JURISDICTION_STATE: undefined });
-      changeValue("proposal", { ...values.proposal, [name]: el });
+      changeValue("proposal", { ...values.proposal, LEGAL_JURISDICTION_STATE: undefined }, true);
+      changeValue("proposal", { ...values.proposal, [name]: el }, true);
     } else {
-      changeValue("proposal", { ...values.proposal, [name]: el });
+      changeValue("proposal", { ...values.proposal, [name]: el }, true);
     }
     setSelectsOpen({ ...selectsOpen, [name]: !selectsOpen[name] });
     setSearchValue("");
@@ -452,7 +451,7 @@ export default function ModalImportSnapshot({ isOpen, page, onExit, setMethod }:
           </Label>
           <Switch
             onChange={({ target }) => {
-              changeValue("proposal", { ...values.proposal, [name]: target.checked });
+              changeValue("proposal", { ...values.proposal, [name]: target.checked }, true);
               if (name !== ENABLE_TRANSFORM) setErrors({ ...errors, [field]: initialErrorObj });
             }}
             checked={values.proposal[name]}
@@ -485,10 +484,14 @@ export default function ModalImportSnapshot({ isOpen, page, onExit, setMethod }:
 
   const onChangeInputProposal = (e: React.ChangeEvent<HTMLInputElement>) => {
     setErrors({ ...errors, errorProposalLink: initialErrorObj });
-    changeValue("proposal", {
-      ...values.proposal,
-      [SNAPSHOT_PROPOSAL_URL]: e.target.value,
-    });
+    changeValue(
+      "proposal",
+      {
+        ...values.proposal,
+        [SNAPSHOT_PROPOSAL_URL]: e.target.value,
+      },
+      true
+    );
   };
 
   return (
@@ -559,10 +562,14 @@ export default function ModalImportSnapshot({ isOpen, page, onExit, setMethod }:
                       }
                       value={additionalDetails}
                       onChange={e =>
-                        changeValue("proposal", {
-                          ...values.proposal,
-                          [ADDITIONAL_DETAILS]: e.target.value,
-                        })
+                        changeValue(
+                          "proposal",
+                          {
+                            ...values.proposal,
+                            [ADDITIONAL_DETAILS]: e.target.value,
+                          },
+                          true
+                        )
                       }
                       sx={input}
                     />
