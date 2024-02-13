@@ -80,6 +80,7 @@ import {
   icon,
   bg,
   loadingState,
+  importButton,
 } from "./styles";
 import useWindowDimensions from "../../hooks/useWindowDimensions";
 import { notifError } from "../../utils/notification";
@@ -88,6 +89,7 @@ import { saveAgreementMutation } from "../../modules/graphql/mutations";
 import Tooltip from "../Tooltip";
 import CloseIcon from "../IconComponent/CloseIcon";
 import ArrowLeftPink from "../ArrowLeftPink";
+import { fW } from "../CreateAgreement/styles";
 
 interface Props {
   isOpen: boolean;
@@ -600,7 +602,7 @@ export default function ModalImportSnapshot({ isOpen, page, onExit, setMethod }:
                 <Lottie style={{ height: "80px" }} animationData={loader} loop />
                 <Text sx={importingText}>Importing...</Text>
                 <Flex sx={stylesBtn}>
-                  <Button onClick={onExit} sx={loading ? btnCancelLoading : btnCancel}>
+                  <Button variant="secondary" onClick={onExit} sx={{ ...fW, padding: "10px 22px" }}>
                     Cancel
                   </Button>
                 </Flex>
