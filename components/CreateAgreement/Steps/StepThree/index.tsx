@@ -34,13 +34,11 @@ export default function StepThree({ page, animateContainer, loading }: Props) {
   const initiated = useRef(false);
 
   useEffect(() => {
-    if (true) {
-      initiated.current = true;
+    initiated.current = true;
 
-      if (defaultIsPublic(values.agreementPrivacy)) {
-        animateContainer();
-        setIsPublic(isPublic);
-      }
+    if (defaultIsPublic(values.agreementPrivacy)) {
+      animateContainer();
+      setIsPublic(isPublic);
     }
     return () => {
       initiated.current = false;
@@ -49,10 +47,12 @@ export default function StepThree({ page, animateContainer, loading }: Props) {
   }, [values]);
 
   useEffect(() => {
-    //TODO change to network select
-    changeValue("storeOnBlockchain", checked ? 1 : null); // 1 is for ethereum
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [checked]);
+    if (checked && values.storeOnBlockchain) {
+      changeValue("storeOnBlockchain", values.storeOnBlockchain);
+    } else {
+      changeValue("storeOnBlockchain", checked ? 1 : null);
+    }
+  }, [checked, values.storeOnBlockchain]);
 
   return (
     <Container sx={{ pb: "24px" }}>
