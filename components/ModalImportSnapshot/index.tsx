@@ -80,7 +80,6 @@ import {
   icon,
   bg,
   loadingState,
-  importButton,
 } from "./styles";
 import useWindowDimensions from "../../hooks/useWindowDimensions";
 import { notifError } from "../../utils/notification";
