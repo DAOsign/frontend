@@ -194,7 +194,8 @@ const AuthProvider = (props?: Partial<ProviderProps<AuthProps>>) => {
         });
         provider.on("accountsChanged", async (accounts: string[]) => {
           clearToken();
-          await login();
+          await push("/connect");
+          window.location.reload();
         });
       }
 
