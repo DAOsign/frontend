@@ -93,7 +93,7 @@ export default function AgreementItem({
               </Text>
             </Flex>
             <Flex sx={agreementLabels}>
-              {!isWaitingForMySignature ? (
+              {isWaitingForMySignature ? (
                 <Tooltip
                   className="signatureTooltip"
                   title="Your signature is missing"
