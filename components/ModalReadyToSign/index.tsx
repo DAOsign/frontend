@@ -40,7 +40,7 @@ export default function ModalReadyToSign({ isOpen, onSubmit, onExit }: Props) {
     <ModalSignStatus
       isOpen={isOpen}
       onExit={onExit}
-      content={<p>You have successfully generated Proof-of-Identity</p>}
+      content={<p>You have successfully generated Proof-of-Authority</p>}
       error={false}
     />
   ) : (
