@@ -848,11 +848,9 @@ body {
 }
 
 .signature_icon {
-  color: black;
+  color: white;
 }
-.signature_icon:hover * {
-  stroke: #ae4fd0;
-}
+
 .settingImportSnapshotProposal::-webkit-scrollbar {
   width: 0;
 }
