@@ -10,6 +10,7 @@ import {
   text,
   box,
   iconContainer,
+  progressLabel,
 } from "./styles";
 import { Portal } from "../Portal/Portal";
 import { ModalBase } from "../ModalBase/ModalBase";
@@ -89,7 +90,7 @@ export default function ModalProof({ isOpen, onExit, title, proof, storedOnBlock
           <Flex sx={{ ...box, justifyContent: "space-between" }}>
             <Flex>
               <Box>
-                <Text sx={secondaryTitle}>Proof of {nameTitle()}</Text>
+                <Text sx={secondaryTitle}>IPFS</Text>
               </Box>
               <Link
                 onClick={() =>
@@ -116,7 +117,35 @@ export default function ModalProof({ isOpen, onExit, title, proof, storedOnBlock
                 </Box>
               </Flex>
             </Flex>
+          </Flex>
 
+          {storedOnBlockchain && (
+            <Flex sx={{ ...box, mt: "12px", position: "relative" }}>
+              <Box>
+                <Text sx={secondaryTitle}>Blockchain</Text>
+              </Box>
+
+              {proof.blockchainStored ? (
+                <Link onClick={() => window.open(proof.blockchainStored!, "_blank", "noreferrer")}>
+                  <Flex sx={{ alignItems: "center", cursor: "pointer" }}>
+                    <Text sx={text}>{formatStoredAddress(proof?.blockchainStored)}</Text>
+                    <Box sx={iconContainer}>
+                      <LinkIcon />
+                    </Box>
+                  </Flex>
+                </Link>
+              ) : (
+                <Box>
+                  <Text sx={progressLabel}>In progress</Text>
+                </Box>
+              )}
+            </Flex>
+          )}
+
+          <Flex sx={{ ...box, mt: "12px", position: "relative", justifyContent: "space-between" }}>
+            <Box>
+              <Text sx={secondaryTitle}>Proof of {nameTitle()}</Text>
+            </Box>
             <Box>
               {loading ? (
                 <Spinner width="20px" />
@@ -138,29 +167,6 @@ export default function ModalProof({ isOpen, onExit, title, proof, storedOnBlock
               {/*></Box>*/}
             </>
           ) : null}
-
-          {storedOnBlockchain && (
-            <Flex sx={{ ...box, mt: "12px" }}>
-              <Box>
-                <Text sx={secondaryTitle}>Blockchain</Text>
-              </Box>
-
-              {proof.blockchainStored ? (
-                <Link onClick={() => window.open(proof.blockchainStored!, "_blank", "noreferrer")}>
-                  <Flex sx={{ alignItems: "center", cursor: "pointer" }}>
-                    <Text sx={text}>{formatStoredAddress(proof?.blockchainStored)}</Text>
-                    <Box sx={iconContainer}>
-                      <LinkIcon />
-                    </Box>
-                  </Flex>
-                </Link>
-              ) : (
-                <Flex>
-                  <Text>Processing..</Text>
-                </Flex>
-              )}
-            </Flex>
-          )}
 
           {title !== AGREEMENT_PROOF && proof.cid && (
             <a
