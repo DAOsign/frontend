@@ -71,6 +71,7 @@ export const hideOnMobile = {
     display: "none",
   },
 };
+
 export const text = {
   fontFamily: "InterMedium",
   fontEeight: 500,
@@ -80,11 +81,22 @@ export const text = {
   color: "#212121;",
 } as ThemeUIStyleObject;
 
+export const progressLabel = {
+  position: "absolute",
+  top: 0,
+  right: 0,
+  backgroundColor: "#D8D8E2",
+  borderTopRightRadius: 8,
+  borderBottomLeftRadius: 8,
+  padding: "5px 10px",
+  fontSize: "12px",
+  fontFamily: "InterRegular",
+} as ThemeUIStyleObject;
+
 export const box = {
   display: "flex",
   flexWrap: "wrap",
   background: "#F7F7FB",
-  border: "2px solid #F7F7FB",
   borderRadius: "8px",
   p: "20px 20px",
   alignItems: "center",

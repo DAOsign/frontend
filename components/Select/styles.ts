@@ -21,7 +21,7 @@ export const option = {
   px: "16px",
   position: "relative",
   zIndex: 2,
-  fontFamily: "InterMedium",
+  fontFamily: "InterRegular",
   fontWeight: 500,
   fontSize: "16px",
   lineHeight: " 160%",
