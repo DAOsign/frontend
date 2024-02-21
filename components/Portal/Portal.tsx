@@ -34,7 +34,11 @@ export const Portal = ({ children, isOpen, onClose, sx }: Props) => {
     } else {
       document.removeEventListener("click", handleClickOutside);
     }
-  }, [isOpen]);
+
+    return () => {
+      document.removeEventListener("click", handleClickOutside);
+    };
+  }, [isOpen, onClose]);
 
   return mounted && ref.current && isOpen
     ? createPortal(
