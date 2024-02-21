@@ -18,7 +18,11 @@ import dynamic from "next/dynamic";
 import { AgreementSignProof } from "../../modules/graphql/gql/graphql";
 import { getFileFromIPFS } from "../../modules/rest";
 import { formatAddress, onCopyClick, formatStoredAddress } from "../../utils/formats";
-import { AGREEMENT_PROOF, IDENTITY_PROOF } from "../ViewAgreement/AgreementInformation";
+import {
+  AGREEMENT_PROOF,
+  CANCEL_PROOF,
+  IDENTITY_PROOF,
+} from "../ViewAgreement/AgreementInformation";
 import CopyIcon from "../CopyIcon";
 import { tableAddressCell } from "../ViewAgreement/styles";
 import Tooltip from "../Tooltip";
@@ -54,6 +58,7 @@ export default function ModalProof({ isOpen, onExit, title, proof, storedOnBlock
   const nameTitle = () => {
     if (title === AGREEMENT_PROOF) return "Agreement";
     if (title === IDENTITY_PROOF) return "Authority";
+    if (title === CANCEL_PROOF) return "Authority";
     return "Signature";
   };
 

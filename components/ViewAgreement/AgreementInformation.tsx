@@ -71,6 +71,7 @@ interface Props {
 
 export const AGREEMENT_PROOF = "Agreement Proof";
 export const IDENTITY_PROOF = "Identity Proof";
+export const CANCEL_PROOF = "Cancel Proof";
 
 export const AgreementInformation = ({
   onSetAgreementReadyToSign = () => {},
