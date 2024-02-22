@@ -100,7 +100,7 @@ export default function ModalProof({ isOpen, onExit, title, proof, storedOnBlock
           <Box onClick={onClose} sx={closeIcon}>
             <CloseIcon />
           </Box>
-          <Text sx={mainText}>Proof-of-{nameTitle()}</Text>
+          <Text sx={mainText}>Proof of {nameTitle()}</Text>
           <Flex sx={{ ...box, justifyContent: "space-between" }}>
             <Flex>
               <Box>
