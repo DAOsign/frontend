@@ -22,6 +22,7 @@ import {
   AGREEMENT_PROOF,
   CANCEL_PROOF,
   IDENTITY_PROOF,
+  VOID_PROOF,
 } from "../ViewAgreement/AgreementInformation";
 import CopyIcon from "../CopyIcon";
 import { tableAddressCell } from "../ViewAgreement/styles";
@@ -56,10 +57,18 @@ export default function ModalProof({ isOpen, onExit, title, proof, storedOnBlock
   });
 
   const nameTitle = () => {
-    if (title === AGREEMENT_PROOF) return "Agreement";
-    if (title === IDENTITY_PROOF) return "Authority";
-    if (title === CANCEL_PROOF) return "Cancel";
-    return "Signature";
+    switch (title) {
+      case AGREEMENT_PROOF:
+        return "Agreement";
+      case IDENTITY_PROOF:
+        return "Authority";
+      case CANCEL_PROOF:
+        return "Cancel";
+      case VOID_PROOF:
+        return "Void";
+      default:
+        return "Signature";
+    }
   };
 
   const handleShowDetails = async () => {
