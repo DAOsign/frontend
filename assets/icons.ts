@@ -34,6 +34,7 @@ import iconSetting from "../img/svg/iconSetting.svg";
 import shareFourth from "../img/svg/shareFourth.svg";
 import layersThree from "../img/svg/layersThree.svg";
 import whitoutUser from "../img/svg/withoutUser.svg";
+import accessDenied from "../img/svg/accessDenied.svg";
 import checkboxOff from "../img/svg/checkboxOff.svg";
 import checkCircle from "../img/svg/checkCircle.svg";
 import greyPercent from "../img/svg/greyPercent.svg";
@@ -234,6 +235,7 @@ const iconsObj: IconsMapper = {
   user,
   drag,
   m,
+  accessDenied,
 };
 
 export default iconsObj;

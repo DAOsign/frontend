@@ -16,6 +16,7 @@ export interface IconsMapper extends Record<string, unknown> {
   proofSecondary: Icon;
   phoneSecondary: Icon;
   LostConnection: Icon;
+  accessDenied: Icon;
   uploadFileIcon: Icon;
   alertTriangle: Icon;
   arrowLeftPink: Icon;

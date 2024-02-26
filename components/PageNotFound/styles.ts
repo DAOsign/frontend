@@ -15,8 +15,25 @@ const leftSideContainer = {
   },
 } as ThemeUIStyleObject;
 
-const rightSideContainer = {
+const notFoundRightSideContainer = {
   paddingTop: "35px",
+  width: "495px",
+  height: "442px",
+  "@media screen and (max-width: 1024px)": {
+    mt: "50px",
+    mr: "auto",
+    width: "356px",
+    height: "253px",
+  },
+  "@media screen and (max-width: 768px)": {
+    pt: "0",
+    mt: "40px",
+    width: "332px",
+    height: "300px",
+  },
+} as ThemeUIStyleObject;
+
+const accessDeniedRightSideContainer = {
   width: "495px",
   height: "442px",
   "@media screen and (max-width: 1024px)": {
@@ -51,12 +68,18 @@ const pageText = {
 
 const secondText = {
   pb: "60px",
+  fontSize: "20px",
   variant: "text.largeTextMedium",
   "@media screen and (max-width: 768px)": {
     variant: "text.normalTextMedium",
     pb: "40px",
     maxWidth: "246px",
   },
+} as ThemeUIStyleObject;
+
+const pageName = {
+  fontSize: "147px",
+  fontFamily: "InterBold",
 } as ThemeUIStyleObject;
 
 const iconContainer = {
@@ -93,7 +116,8 @@ const footerNotFoundPage = {
 } as ThemeUIStyleObject;
 export {
   leftSideContainer,
-  rightSideContainer,
+  notFoundRightSideContainer,
+  accessDeniedRightSideContainer,
   footerNotFoundPage,
   buttonContainer,
   pageContainer,
@@ -101,4 +125,5 @@ export {
   iconContainer,
   secondText,
   pageText,
+  pageName,
 };

@@ -7,7 +7,7 @@ import { footerNotFoundPage } from "../components/PageNotFound/styles";
 export default function NotFoundPage() {
   return (
     <>
-      <PageNotFound />
+      <PageNotFound pageType="accessDenied" />
       <Container sx={footerNotFoundPage}>
         <Footer animationNotVisible={true} />
       </Container>
