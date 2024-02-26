@@ -9,10 +9,12 @@ enum NetworksEnum {
   ETHEREUM = "ethereum",
   SUI = "sui",
   POLKADOT = "polkadot",
+  OASIS = "oasis",
 }
 
 export const networksTitle = {
   [NetworksEnum.ETHEREUM]: "Goerli (ETH Testnet)",
   [NetworksEnum.SUI]: "SUI Testnet",
   [NetworksEnum.POLKADOT]: "Polkadot Testnet",
+  [NetworksEnum.OASIS]: "Oasis Testnet",
 };

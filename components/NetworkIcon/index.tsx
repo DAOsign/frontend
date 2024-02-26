@@ -5,6 +5,7 @@ import { networkIcon } from "./styles";
 import EtherImg from "../../img/svg/mainnet/ethereum.svg";
 import SUIImg from "../../img/svg/mainnet/sui.svg";
 import PolkadotImg from "../../img/svg/mainnet/polkadot.svg";
+import OasisImg from "../../img/svg/mainnet/oasis.svg";
 
 interface Props {
   networkId: number;
@@ -14,9 +15,10 @@ const network = {
   ethereum: EtherImg,
   sui: SUIImg,
   polkadot: PolkadotImg,
+  oasis: OasisImg,
 };
 
-export const networkName = [null, "ethereum", "sui", "polkadot"];
+export const networkName = [null, "ethereum", "sui", "polkadot", "oasis"];
 
 function NetworkIcon({ networkId }: Props) {
   const name = networkName[networkId] as string;
@@ -24,6 +26,7 @@ function NetworkIcon({ networkId }: Props) {
   if (!network[name]) {
     return null;
   }
+
   return (
     <Box sx={networkIcon}>
       <Image src={network[name]} />
