@@ -26,7 +26,7 @@ export default function EditProfileModal({ address, setVisible }: any) {
             }}
             sx={xClose}
           >
-            <Icon width={24} height={24} src={iconsObj.xClose} />
+            <Icon width={24} height={24} src={iconsObj.pencil} />
           </Box>
           <Text sx={titlePopup}>Edit Profile</Text>
           <Identicon account={address} size={width && width > 375 ? 100 : 90} sx={userFoto} />

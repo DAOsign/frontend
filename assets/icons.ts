@@ -115,6 +115,7 @@ import link from "../img/svg/link.svg";
 import ink from "../img/svg/ink.svg";
 import m from "../img/svg/m.svg";
 import warning from "../img/svg/warning.svg";
+import pencil from "../img/svg/pencil.svg";
 
 import { IconsMapper } from "./icons.types";
 
@@ -236,6 +237,7 @@ const iconsObj: IconsMapper = {
   drag,
   m,
   accessDenied,
+  pencil,
 };
 
 export default iconsObj;
