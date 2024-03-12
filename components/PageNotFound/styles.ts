@@ -70,6 +70,7 @@ const secondText = {
   pb: "60px",
   fontSize: "20px",
   variant: "text.largeTextMedium",
+  fontFamily: "InterMedium",
   "@media screen and (max-width: 768px)": {
     variant: "text.normalTextMedium",
     pb: "40px",
