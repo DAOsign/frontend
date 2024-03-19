@@ -1,7 +1,7 @@
 import { ThemeUIStyleObject } from "theme-ui";
 
 const container = {
-  position: "fixed",
+  position: "absolute",
   left: "50%",
   transform: "translate(-50%, 50%)",
   width: "500px",
@@ -63,7 +63,8 @@ const closeIcon = {
 
 const bg = {
   width: "100%",
-  position: "fixed",
+  position: "absolute",
+  overflow: "auto",
   top: 0,
   height: "100vh",
   backgroundColor: "#00000090",
