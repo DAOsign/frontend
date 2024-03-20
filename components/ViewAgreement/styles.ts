@@ -432,6 +432,7 @@ const tableSignatureCell = {
 const pendingIcon = {
   color: "#D8D8E2",
   width: "16px",
+  display: "flex",
 } as ThemeUIStyleObject;
 
 const userPicture = {
