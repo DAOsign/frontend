@@ -27,6 +27,8 @@ export default class Connector extends LockConnector {
     if (!window["ethereum"]) return false;
 
     const accounts = await window["ethereum"].request({ method: "eth_accounts" });
+    console.log('window["ethereum"]', window["ethereum"]);
+    console.log('accounts', accounts);
     await new Promise((r) => setTimeout(r, 400));
 
     return accounts.length > 0;
