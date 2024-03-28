@@ -118,7 +118,9 @@ const LockProvider = (props?: Partial<ProviderProps<LockContextInterface>>) => {
     if (connector) {
       const lockConnector = lockInstanceRef.current.getConnector(connector);
       const isLoggedIn = await lockConnector.isLoggedIn();
-
+      console.log("[isLoggedIn]", isLoggedIn);
+      console.log("[lockConnector]", lockConnector);
+      console.log("[connector]", connector);
       return isLoggedIn ? connector : false;
     }
     return false;
