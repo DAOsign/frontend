@@ -1,4 +1,3 @@
-/* eslint-disable no-console */
 import LockConnector from "./connector";
 
 export default class Connector extends LockConnector {
@@ -6,7 +5,13 @@ export default class Connector extends LockConnector {
     let provider;
     if (window["ethereum"]) {
       provider = window["ethereum"];
+
       try {
+        const accounts = await window["ethereum"].request({ method: "eth_accounts" });
+        if (accounts.length > 0) {
+          return provider;
+        }
+
         await window["ethereum"].request({ method: "eth_requestAccounts" });
       } catch (e) {
         console.error(e);
@@ -20,8 +25,10 @@ export default class Connector extends LockConnector {
 
   async isLoggedIn() {
     if (!window["ethereum"]) return false;
-    if (window["ethereum"].selectedAddress) return true;
+
+    const accounts = await window["ethereum"].request({ method: "eth_accounts" });
     await new Promise((r) => setTimeout(r, 400));
-    return !!window["ethereum"].selectedAddress;
+
+    return accounts.length > 0;
   }
 }
