@@ -29,7 +29,6 @@ const tabStyles: ThemeUIStyleObject = {
     button: {
       transition: ".3s all",
       fontFamily: "InterBold",
-      fontWeight: 700,
       fontSize: "14px",
       lineHeight: "160%",
       color: "#CA5CF2",
@@ -43,7 +42,6 @@ const tabStyles: ThemeUIStyleObject = {
       opacity: "1",
       bg: "#F7F7FB",
       fontFamily: "InterBold",
-      fontWeight: 700,
       fontSize: "14px",
       lineHeight: "160%",
       color: "#CA5CF2",
@@ -125,7 +123,6 @@ export const icon = {
 export const expandBtn = {
   ...btnBack,
   fontFamily: "InterBold",
-  fontWeight: 700,
   fontSize: "14px",
   mr: "12px",
   mb: "5px",

@@ -36,7 +36,6 @@ const title = {
   fontFamily: "InterBold",
   fontSize: "20px",
   lineHeight: "24px",
-  fontWeight: 700,
   "@media screen and (max-width: 768px)": {
     fontStyle: "normal",
     fontSize: "28px",
@@ -48,7 +47,6 @@ const title = {
 
 const secondaryTitle = {
   variant: "text.normalTextBold",
-  fontWeight: 700,
   fontSize: "16px",
   display: "inline-block",
   lineHeight: "25.6px",

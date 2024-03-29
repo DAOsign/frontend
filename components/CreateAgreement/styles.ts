@@ -848,7 +848,6 @@ const plus = {
 const btnBack = {
   fontFamily: "InterBold",
   fontStyle: "normal",
-  fontWeight: 700,
   fontSize: "12px",
   color: " #CA5CF2",
   display: "flex",
@@ -890,7 +889,6 @@ const textLoading = {
 const delBtn = {
   fontFamily: "InterBold",
   fontStyle: "normal",
-  fontWeight: 700,
   fontSize: "16px",
   lineHeight: "160%",
   textAlign: "center",
@@ -936,7 +934,6 @@ const removeContainer = {
   variant: "text.normalTextBold",
   fontSize: "12px",
   lineHeight: "160%",
-  fontWeight: 700,
   color: "#CA5CF2",
   alignItems: "flex-start",
   cursor: "pointer",
@@ -962,7 +959,6 @@ export const backBtn = {
   display: "block",
   fontFamily: "InterBold",
   fontStyle: "normal",
-  fontWeight: 700,
   lineHeight: "22.4px",
   fontSize: "14px",
   "&:hover": {
@@ -991,7 +987,6 @@ const containerFlex = {
 
 export const titleBottom = {
   fontFamily: "InterBold",
-  fontWeight: 700,
   fontSize: "20px",
   lineHeight: "120%",
   textAlign: "center",
