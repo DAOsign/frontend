@@ -10,6 +10,7 @@ enum NetworksEnum {
   SUI = "sui",
   POLKADOT = "polkadot",
   OASIS = "oasis",
+  NEAR = "near"
 }
 
 export const networksTitle = {
@@ -17,4 +18,5 @@ export const networksTitle = {
   [NetworksEnum.SUI]: "SUI Testnet",
   [NetworksEnum.POLKADOT]: "Polkadot Testnet",
   [NetworksEnum.OASIS]: "Oasis Testnet",
+  [NetworksEnum.NEAR]: "NEAR Testnet",
 };

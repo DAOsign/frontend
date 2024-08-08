@@ -6,6 +6,7 @@ import EtherImg from "../../img/svg/mainnet/ethereum.svg";
 import SUIImg from "../../img/svg/mainnet/sui.svg";
 import PolkadotImg from "../../img/svg/mainnet/polkadot.svg";
 import OasisImg from "../../img/svg/mainnet/oasis.svg";
+import NearImg from "../../img/svg/mainnet/near.svg";
 
 interface Props {
   networkId: number;
@@ -16,9 +17,10 @@ const network = {
   sui: SUIImg,
   polkadot: PolkadotImg,
   oasis: OasisImg,
+  near: NearImg
 };
 
-export const networkName = [null, "ethereum", "sui", "polkadot", "oasis"];
+export const networkName = [null, "ethereum", "sui", "polkadot", "oasis", null, "near"];
 
 function NetworkIcon({ networkId }: Props) {
   const name = networkName[networkId] as string;
