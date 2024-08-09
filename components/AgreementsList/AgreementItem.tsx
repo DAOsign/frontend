@@ -4,7 +4,6 @@ import NextLink from "next/link";
 import Icon from "../icon/index";
 import iconsObj from "../../assets/icons";
 import Tooltip from "../Tooltip";
-
 import {
   agreementConteinerRelative,
   agreementConteiner,
@@ -28,10 +27,9 @@ import {
 import { formatAgreementCreationDate, formatAgreementStatus } from "../../utils/formats";
 import SignatureIcon from "../icon/editable/SignatureIcon";
 import { greenLabel, yellowLabel } from "../ViewAgreement/styles";
-import Image from "next/image";
-import EtherImg from "../../img/mainnet/small/ethereum.png";
-import NetworkIcon, { networkName } from "../NetworkIcon";
-import { networksTitle } from "../../constants/common";
+import NetworkIcon from "../NetworkIcon";
+import {networkOptions} from "../../constants/common";
+
 
 export default function AgreementItem({
   agreementPrivacy,
@@ -74,7 +72,7 @@ export default function AgreementItem({
     }
   };
 
-  const name = storedOnBlockchain && networkName[storedOnBlockchain];
+  const currentNetwork = networkOptions?.find(el=> el.value === storedOnBlockchain)
 
   return (
     <NextLink href={`/agreement/${agreementId}`}>
@@ -110,10 +108,10 @@ export default function AgreementItem({
                 </Tooltip>
               ) : null}
 
-              {storedOnBlockchain && (
+              {storedOnBlockchain && currentNetwork && (
                 <Tooltip
                   className="signatureTooltip"
-                  title={name && networksTitle[name]}
+                  title={currentNetwork.title}
                   transform="translate(-58%, -3%)"
                   minWidth="170px"
                   //@ts-ignore
@@ -121,7 +119,7 @@ export default function AgreementItem({
                   top="-45px"
                   height="0"
                 >
-                  <NetworkIcon networkId={storedOnBlockchain} />
+                  <NetworkIcon icon={currentNetwork.icon} />
                 </Tooltip>
               )}
               <Tooltip

@@ -17,7 +17,7 @@ import loader from "../../../../img/json/loader.json";
 import FieldErrorMessage from "../../../Form/FieldErrorMessage";
 import AgreementLocationRadioButtons from "../StepTwo/AgreementLocationButtons";
 import CustomSelect from "../../../CustomSelect";
-import { networkOptions } from "../../../../utils/mockData";
+import {networkOptions} from "../../../../constants/common";
 
 const defaultIsPublic = (agreementPrivacy: string) => {
   return [PRIVACY_PUBLIC_PROOF_ONLY, PRIVACY_PUBLIC_PUBLISHED, PRIVACY_PUBLIC_WITH_LINK].some(
