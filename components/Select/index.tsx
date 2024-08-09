@@ -5,8 +5,9 @@ import ArrowLeftPink from "../ArrowLeftPink";
 
 export interface Option {
   label: string;
+  title: string;
   value: unknown;
-  icon?: string;
+  icon: string;
   disabled?: boolean;
 }
 

@@ -6,10 +6,8 @@ import {
   AgreementMethod,
   AgreementPrivacy,
   FieldError,
-  LOCATION_CLOUD,
   METHOD_ENTER,
   METHOD_UPLOAD,
-  NetworkName,
 } from "../types";
 
 export interface CreateAgreementFieldErrors {
