@@ -17,9 +17,9 @@ export const networkOptions: Option[] = [
   { label: "Sepolia (ETH Testnet)", title: "Goerli (ETH Testnet)", value: 1, icon: EtherImg, disabled: false },
   { label: "NEAR Testnet", value: 6, title: "NEAR Testnet", icon: NearImg, disabled: false },
   { label: "SUI Testnet", value: 2, title: "SUI Testnet", icon: SUIImg, disabled: false },
-  { label: "Polkadot Testnet", value: 3, title: "Polkadot Testnet", icon: PolkadotImg, disabled: true },
+  { label: "Polkadot Testnet", value: 5, title: "Polkadot Testnet", icon: PolkadotImg, disabled: false },
   { label: "Oasis Testnet", value: 4, title: "Oasis Testnet", icon: OasisImg, disabled: false },
-  { label: "Ethereum Mainnet", title: "ETH Mainnet", value: 5, icon: EtherImg, disabled: true },
+  { label: "Ethereum Mainnet", title: "ETH Mainnet", value: 3, icon: EtherImg, disabled: true },
   { label: "SUI Mainnet", title: "SUI Mainnet", value: 7, icon: SUIImg, disabled: true },
   { label: "Polkadot Mainnet", title: "Polkadot Mainnet", value: 8, icon: PolkadotImg, disabled: true },
 ];
